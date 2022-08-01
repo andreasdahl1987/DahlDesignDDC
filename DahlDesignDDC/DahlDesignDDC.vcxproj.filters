@@ -28,6 +28,15 @@
     <None Include="40_Matrix.ino" />
     <None Include="50_Pushbuttons.ino" />
     <None Include="51_Toggle.ino" />
+    <None Include="52_FunctionButtons.ino" />
+    <None Include="60_Rotary4Bit.ino" />
+    <None Include="62_Rotary2Bit.ino" />
+    <None Include="64_RotaryAnalog.ino" />
+    <None Include="70_FunkyPush.ino" />
+    <None Include="71_FunkyDirections.ino" />
+    <None Include="74_FunkyRotary.ino" />
+    <None Include="80_Clutch.ino" />
+    <None Include="98_PresetSwitch.ino" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.DahlDesignDDC.vsarduino.h">
