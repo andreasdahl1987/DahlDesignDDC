@@ -101,5 +101,7 @@ typedef void *__builtin_va_list;
 #include "20_Setup.ino"
 #include "30_Switches.ino"
 #include "40_Matrix.ino"
+#include "50_Pushbuttons.ino"
+#include "51_Toggle.ino"
 #endif
 #endif
