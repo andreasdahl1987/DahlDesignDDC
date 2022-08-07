@@ -1,4 +1,4 @@
-void multiFunction24(int analogPin, int switchNumber, int row, int column, bool reverse, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12)
+void multiFunction2Bit24(int analogPin, int switchNumber, int row, int column, bool reverse, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12)
 {
     int Pin = analogPin;
     int Pos1 = pos1;
@@ -126,7 +126,7 @@ void multiFunction24(int analogPin, int switchNumber, int row, int column, bool 
 }
 
 
-void multiFunction36(int analogPin, int switchNumber, int row, int column, bool reverse, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12)
+void multiFunction2Bit36(int analogPin, int switchNumber, int row, int column, bool reverse, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12)
 {
     int Pin = analogPin;
     int Pos1 = pos1;
