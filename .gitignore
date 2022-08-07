@@ -363,7 +363,6 @@ MigrationBackup/
 FodyWeavers.xsd
 
 # Arduino bloat
-Compile.vmps.xml
-Upload.vmps.xml
 __vm/
 src/
+test/
