@@ -361,3 +361,9 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Arduino bloat
+Compile.vmps.xml
+Upload.vmps.xml
+__vm/
+src/
