@@ -107,6 +107,7 @@ typedef void *__builtin_va_list;
 #include "60_Rotary4Bit.ino"
 #include "62_Rotary2Bit.ino"
 #include "64_RotaryAnalog.ino"
+#include "66_MultiComplex.ino"
 #include "70_FunkyPush.ino"
 #include "71_FunkyDirections.ino"
 #include "74_FunkyRotary.ino"
