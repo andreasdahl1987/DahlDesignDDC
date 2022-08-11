@@ -26,8 +26,6 @@ void setup()
         analogLatchLock[u] = 0;
         analogTimer1[u] = 0;
         analogTimer2[u] = 0;
-        analogSwitchMode1[u] = 0;
-        analogSwitchMode2[u] = 0;
         analogRotaryCount[u] = 0;
         readIndex[u] = 0;
         total[u] = 0;

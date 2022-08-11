@@ -23,6 +23,8 @@ int8_t switchPreset = 0;
 unsigned long globalClock;
 
 //Debouncing
+#define pulseEncCD 20
+#define pulseEncDuration 50
 #define buttonCooldown 25
 #define analogWait 50
 #define analogPulse 100
