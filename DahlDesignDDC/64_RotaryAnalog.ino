@@ -304,7 +304,7 @@ void rotaryAnalog2Mode(int analogPin, int switchNumber, int fieldPlacement, int 
                     Joystick.releaseButton(i - 1 + Number);
                 }
 
-                analogSwitchMode1[N] = ~analogSwitchMode1[N]; //SWAP MODE
+                analogSwitchMode1[N] = !analogSwitchMode1[N]; //SWAP MODE
             }
 
             if (!biteButtonBit1 && !biteButtonBit2) //Standard
