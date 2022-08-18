@@ -117,6 +117,7 @@
     <None Include="52_FunctionButtons.ino" />
     <None Include="60_Rotary4Bit.ino" />
     <None Include="62_Rotary2Bit.ino" />
+    <None Include="63_RotaryPEC11.ino" />
     <None Include="64_RotaryAnalog.ino" />
     <None Include="66_MultiComplex.ino" />
     <None Include="70_FunkyPush.ino" />

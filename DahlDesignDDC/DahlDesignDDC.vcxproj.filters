@@ -38,6 +38,7 @@
     <None Include="80_Clutch.ino" />
     <None Include="98_PresetSwitch.ino" />
     <None Include="66_MultiComplex.ino" />
+    <None Include="63_RotaryPEC11.ino" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.DahlDesignDDC.vsarduino.h">

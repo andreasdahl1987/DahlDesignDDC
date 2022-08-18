@@ -23,6 +23,8 @@ int8_t switchPreset = 0;
 unsigned long globalClock;
 
 //Debouncing
+#define PEC11Cooldown 50
+#define PEC11Pulse 50
 #define pulseEncCD 20
 #define pulseEncDuration 50
 #define buttonCooldown 25
