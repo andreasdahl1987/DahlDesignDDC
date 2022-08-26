@@ -6,49 +6,66 @@ void PEC11(int row, int col, bool reverse) {
 
     int Reverse = reverse;
 
-    if (!rawState[Row][Column] && !rawState[Row][Column + 1])
+    switchTimer[Row][Column + 1] = (rawState[Row][Column] | rawState[Row][Column + 1] << 1); //Assigning numbers to all switch states 0-3
+
+    if //switch has been turned and is not cooling down, and no rotation direction has been engaged
+        (switchTimer[Row][Column + 1] > 0
+            &&
+            (globalClock - switchTimer[Row][Column] > PEC11Cooldown)
+            &&
+            pushState[Row][Column] == 0
+            &&
+            pushState[Row][Column + 1] == 0)
     {
-        pushState[Row][Column] = 1;
-    }
-    else if (!rawState[Row][Column] && rawState[Row][Column + 1])
-    {
-        pushState[Row][Column] = 2;
-        if ((globalClock - switchTimer[Row][Column] > PEC11Cooldown) && (globalClock - switchTimer[Row][Column + 1] > PEC11Cooldown))
+        switchTimer[Row][Column] = globalClock;
+        if (switchTimer[Row][Column + 1] == 2) //CW turn started
         {
-            latchLock[Row][Column] = 1; //Fetching 01 only if we're not cooling down
+            pushState[Row][Column] = 1;
+        }
+        else if (switchTimer[Row][Column + 1] == 1) //CCW turn started
+        {
+            pushState[Row][Column + 1] = 1;
         }
     }
-    else if (rawState[Row][Column] && rawState[Row][Column + 1])
+
+    //CW check gates
+    if (pushState[Row][Column] == 1 && rawState[Row][Column])
+    {
+        pushState[Row][Column] = 2;
+    }
+    if (pushState[Row][Column] == 2 && switchTimer[Row][Column + 1] == 0)
     {
         pushState[Row][Column] = 3;
     }
-    else if (rawState[Row][Column] && !rawState[Row][Column + 1])
-    {
-        pushState[Row][Column] = 4;
-        if ((globalClock - switchTimer[Row][Column] > PEC11Cooldown) && (globalClock - switchTimer[Row][Column + 1] > PEC11Cooldown))
-        {
-            latchLock[Row][Column + 1] = 1; //Fetching 10 only if we're not cooling down
-        }
 
+    //CW check gates
+    if (pushState[Row][Column + 1] == 1 && rawState[Row][Column + 1])
+    {
+        pushState[Row][Column + 1] = 2;
+    }
+    if (pushState[Row][Column + 1] == 2 && switchTimer[Row][Column + 1] == 0)
+    {
+        pushState[Row][Column + 1] = 3;
     }
 
-    if ((globalClock - switchTimer[Row][Column] > PEC11Cooldown) && (globalClock - switchTimer[Row][Column + 1] > PEC11Cooldown))
-    {
-        if ((latchLock[Row][Column + 1] && pushState[Row][Column] == 1) || (latchLock[Row][Column] && pushState[Row][Column] == 3))
-        {
-            switchTimer[Row][Column] = globalClock;
-            latchLock[Row][Column + 1] = 0;
-            latchLock[Row][Column] = 0;
-        }
+    //Pushing successfully recorded rotations
 
-        else if ((latchLock[Row][Column + 1] && pushState[Row][Column] == 3) || (latchLock[Row][Column] && pushState[Row][Column] == 1))
-        {
-            switchTimer[Row][Column + 1] = globalClock;
-            latchLock[Row][Column + 1] = 0;
-            latchLock[Row][Column] = 0;
-        }
+    if (pushState[Row][Column] == 3)
+    {
+        toggleTimer[Row][Column] = globalClock;
+    }
+    else if (pushState[Row][Column + 1] == 3)
+    {
+        toggleTimer[Row][Column + 1] = globalClock;
     }
 
-    Joystick.setButton(Number + Reverse, (globalClock - switchTimer[Row][Column] < PEC11Pulse));
-    Joystick.setButton(Number + 1 - Reverse, (globalClock - switchTimer[Row][Column + 1] < PEC11Pulse));
+    if (switchTimer[Row][Column + 1] == 0)
+    {
+        pushState[Row][Column + 1] = 0;
+        pushState[Row][Column] = 0;
+    }
+
+
+    Joystick.setButton(Number + Reverse, (globalClock - toggleTimer[Row][Column] < PEC11Pulse));
+    Joystick.setButton(Number + 1 - Reverse, (globalClock - toggleTimer[Row][Column + 1] < PEC11Pulse));
 }
