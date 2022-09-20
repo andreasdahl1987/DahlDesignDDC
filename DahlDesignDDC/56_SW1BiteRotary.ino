@@ -145,7 +145,7 @@ void SW1BiteRotary(int analogPin, int switchNumber, int fieldPlacement, int pos1
         uint8_t value = analogLastCounter[N];
         if (quickSwitchState)
         {
-            value = leftQuickValue;
+            value = quickValue2;
         }
 
         for (int i = 0; i < 12; i++)

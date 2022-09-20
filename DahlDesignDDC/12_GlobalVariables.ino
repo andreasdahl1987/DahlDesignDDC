@@ -13,8 +13,8 @@ bool brakeMagicOn;
 float brakeMagicValue;
 float throttleHoldValue;
 float bitePoint;
-uint8_t leftQuickValue;
-uint8_t rightQuickValue;
+uint8_t quickValue1;
+uint8_t quickValue2;
 bool quickSwitchState;
 
 //Function buttons

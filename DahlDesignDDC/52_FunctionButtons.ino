@@ -23,6 +23,31 @@ void modButton(int row, int column)
     Joystick.setButton(Number, pushState[Row][Column]);
 }
 
+//PRESET BUTTON
+
+void presetButton(int row, int column)
+{
+    presetButtonRow = row;
+    presetButtonCol = column;
+
+    int Row = row - 1;
+    int Column = column - 1;
+    int Number = buttonNumber[Row][Column];
+
+    if (pushState[Row][Column] != rawState[Row][Column] && (globalClock - switchTimer[Row][Column]) > buttonCooldown)
+    {
+        switchTimer[Row][Column] = globalClock;
+        pushState[Row][Column] = rawState[Row][Column];
+    }
+
+    if ((globalClock - switchTimer[Row][Column]) > buttonCooldown)
+    {
+        pushState[Row][Column] = rawState[Row][Column];
+    }
+
+    Joystick.setButton(Number, pushState[Row][Column]);
+}
+
 
 //HYBRID and DDBUTTON.
 

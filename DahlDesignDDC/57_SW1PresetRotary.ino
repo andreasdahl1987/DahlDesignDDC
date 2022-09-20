@@ -111,7 +111,7 @@ void SW1PresetRotary(int analogPin, int switchNumber, int fieldPlacement, int po
         uint8_t value = analogLastCounter[N];
         if (quickSwitchState)
         {
-            value = rightQuickValue;
+            value = quickValue1;
         }
 
         for (int i = 0; i < 12; i++)

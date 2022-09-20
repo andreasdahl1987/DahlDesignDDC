@@ -1,11 +1,11 @@
 //-----------------------------------
-//--BIT FIELDS FOR MODE PROPERTIES---
+//--BIT FIELDS FOR SIMHUB PROPERTIES---
 //-----------------------------------
 
 int encoderField = 0;
 
 /*
- * Encoder field, pushed to joysick axis Rx
+ * First field, pushed to joysick axis Z
 
  Most significant
  16 - DDS switch
@@ -31,7 +31,7 @@ int encoderField = 0;
 int buttonField = 0;
 
 /*
- * Button field, pushed to joysick axis Ry
+ * Second field, pushed to joysick axis Y
 
  Most significant
  16 - Neutral active
