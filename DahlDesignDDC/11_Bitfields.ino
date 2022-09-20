@@ -17,8 +17,8 @@ int encoderField = 0;
  10 - Handbrake active
  9 - QuickSwitch active
  8 - QuickSwitch mode
- 7
- 6
+ 7 - Magic button active
+ 6 - Throttle Hold active
  5
  4
  3
