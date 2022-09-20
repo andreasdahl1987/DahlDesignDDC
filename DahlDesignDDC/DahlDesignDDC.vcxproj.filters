@@ -46,6 +46,7 @@
     <None Include="57_SW1PresetRotary.ino" />
     <None Include="93_BrakeMagic.ino" />
     <None Include="94_ThrottleHold.ino" />
+    <None Include="42_MatrixInject.ino" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.DahlDesignDDC.vsarduino.h">

@@ -43,18 +43,33 @@ void setup()
     }
 
 
-
     //Ready the matrix
-
     for (int i = 0; i < colCount; i++)
     { //  All pins pulled up unless told otherwise
-        pinMode(col[i], INPUT_PULLUP);
+        if (col[i] != 99)
+        {
+            pinMode(col[i], INPUT_PULLUP);
+        }
+        
     }
 
     for (int i = 0; i < rowCount; i++)
     { //  All pins pulled up unless told otherwise
-        pinMode(row[i], INPUT_PULLUP);
+        if (row[i] != 99)
+        {
+            pinMode(row[i], INPUT_PULLUP);
+        }  
     }
+
+    //Pull up non-Matrix pins
+    if (nonMatrixIncluded)
+    {
+        for (int i = 0; i < nonMatrixCount; i++)
+        {
+            pinMode(nonMatrix[i], INPUT_PULLUP);
+        }
+    }
+
 
     Joystick.begin(0); //Start joystick library magic
 
