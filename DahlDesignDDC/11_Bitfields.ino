@@ -8,21 +8,21 @@ int encoderField = 0;
  * Encoder field, pushed to joysick axis Rx
 
  Most significant
- 8 - DDS switch
- 8 - DDS switch
- 7 - Dual clutches
- 7 - Dual clutches
- 6 - Bite point setting
- 6 - Bite point setting
- 5
+ 16 - DDS switch
+ 15 - DDS switch
+ 14 - Dual clutches
+ 13 - Dual clutches
+ 12 - Bite point setting
+ 11 - Bite point setting
+ 10 - Handbrake active
+ 9 - QuickSwitch active
+ 8 - QuickSwitch mode
+ 7
+ 6
  5
  4
- 4
- 3
  3
  2
- 2
- 1
  1
  Least significant
 
