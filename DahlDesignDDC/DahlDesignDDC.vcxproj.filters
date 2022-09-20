@@ -39,10 +39,11 @@
     <None Include="98_PresetSwitch.ino" />
     <None Include="66_MultiComplex.ino" />
     <None Include="63_RotaryPEC11.ino" />
-    <None Include="66_SW1BiteRotary.ino" />
+    <None Include="56_SW1BiteRotary.ino" />
     <None Include="41_Presets.ino" />
     <None Include="54_PushPull.ino" />
     <None Include="55_QuickSwitch.ino" />
+    <None Include="57_SW1PresetRotary.ino" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.DahlDesignDDC.vsarduino.h">
