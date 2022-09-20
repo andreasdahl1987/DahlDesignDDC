@@ -14,11 +14,11 @@ int encoderField = 0;
  13 - Dual clutches
  12 - Bite point setting
  11 - Bite point setting
- 10 - Handbrake active
- 9 - QuickSwitch active
- 8 - QuickSwitch mode
- 7 - Magic button active
- 6 - Throttle Hold active
+ 10
+ 9
+ 8
+ 7
+ 6
  5
  4
  3
@@ -40,11 +40,11 @@ int buttonField = 0;
  13 - Presets 3rd bit
  12 - Presets 2nd bit
  11 - Presets 1st bit
- 10
- 9
- 8
- 7
- 6
+ 10 - Handbrake active
+ 9 - QuickSwitch active
+ 8 - QuickSwitch mode
+ 7 - Magic button active
+ 6 - Throttle Hold active
  5
  4
  3

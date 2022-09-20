@@ -34,7 +34,7 @@ void quickSwitch(int8_t row, int8_t column)
     long pesh = 0;
     pesh = pesh | switchMode[Row][Column];
     pesh = pesh << 7;
-    encoderField = encoderField | pesh;
+    buttonField = buttonField | pesh;
 
     //SWITCH MODE 2: MOMENTARY BUTTON
     if (switchMode[Row][Column])
@@ -63,6 +63,6 @@ void quickSwitch(int8_t row, int8_t column)
     long push = 0;
     push = push | quickSwitchState;
     push = push << 8;
-    encoderField = encoderField | push;
+    buttonField = buttonField | push;
 }
 

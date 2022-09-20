@@ -63,7 +63,7 @@ void brakeMagic(int row, int column, int fieldPlacement)
 
             long push = 1;
             push = push << 6;
-            encoderField = encoderField | push;
+            buttonField = buttonField | push;
         }
 
         if (pushState[Row][Column] == 0 && latchState[Row][Column])
@@ -74,7 +74,7 @@ void brakeMagic(int row, int column, int fieldPlacement)
 
             long push = 0;
             push = push << 6;
-            encoderField = encoderField | push;
+            buttonField = buttonField | push;
         }
     }
 

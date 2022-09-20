@@ -129,6 +129,6 @@ void throttleHold(int8_t buttonRow, int8_t buttonCol, int8_t rotaryRow, int8_t r
 
     long push = pushState[ButtonRow][ButtonCol];
     push = push << 5;
-    encoderField = encoderField | push;
+    buttonField = buttonField | push;
 }
 

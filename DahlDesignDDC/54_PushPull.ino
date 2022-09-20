@@ -164,6 +164,6 @@ void pushPull(int rightPullRow, int rightPullCol, int rightPushRow, int rightPus
     long pesh = 0;
     pesh = pesh | handbrake;
     pesh = pesh << 9;
-    encoderField = encoderField | pesh;
+    buttonField = buttonField | pesh;
 }
 
