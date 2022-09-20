@@ -35,12 +35,12 @@ void singleClutch(int analogPin, int switchNumber, int releasedValue, int fullyP
 
     readIndex[N]++;
 
-    if (readIndex[N] > reads)
+    if (readIndex[N] > (reads-1))
     {
         readIndex[N] = 0;
     }
 
-    average[N] = total[N] / (reads + 1);
+    average[N] = total[N] / reads;
 
     if (latchState[neutralButtonRow - 1][neutralButtonCol - 1])
     {
@@ -101,12 +101,12 @@ void dualClutch(int masterPin, int masterSwitchNumber, int masterReleasedValue, 
 
     readIndex[M]++;
 
-    if (readIndex[M] > reads)
+    if (readIndex[M] > (reads-1))
     {
         readIndex[M] = 0;
     }
 
-    average[M] = total[M] / (reads + 1);
+    average[M] = total[M] / reads;
     if (average[M] > 1000)
     {
         average[M] = 1000;
@@ -158,12 +158,12 @@ void dualClutch(int masterPin, int masterSwitchNumber, int masterReleasedValue, 
 
     readIndex[S]++;
 
-    if (readIndex[S] > reads)
+    if (readIndex[S] > (reads-1))
     {
         readIndex[S] = 0;
     }
 
-    average[S] = total[S] / (reads + 1);
+    average[S] = total[S] / reads;
     if (average[S] > 1000)
     {
         average[S] = 1000;
