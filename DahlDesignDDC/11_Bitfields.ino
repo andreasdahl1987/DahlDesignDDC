@@ -36,10 +36,10 @@ int buttonField = 0;
  Most significant
  16 - Neutral active
  15 - Neutral mode
- 14 - Presets 3rd bit
- 13 - Presetes 2nd bit
- 12 - Presets 1st bit
- 11
+ 14 - Presets 4th bit
+ 13 - Presets 3rd bit
+ 12 - Presets 2nd bit
+ 11 - Presets 1st bit
  10
  9
  8

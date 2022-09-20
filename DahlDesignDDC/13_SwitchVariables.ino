@@ -7,6 +7,7 @@ bool latchState[rowCount][colCount];
 bool switchModeLock[rowCount][colCount];
 long switchTimer[rowCount][colCount];
 long toggleTimer[rowCount][colCount];
+bool switchMode[rowCount][colCount];
 
 //Analog variables
 
@@ -16,12 +17,13 @@ bool analogLatchLock[10];
 long analogTimer1[10];
 long analogTimer2[10];
 int8_t analogRotaryCount[10];
-
+int8_t analogSwitchMode1[10];
+int8_t analogSwitchMode2[10];
 
 //Smoothing of analog signal
 
 #define reads 10
-int readings[10][reads];         // the readings from the analog input
-int8_t readIndex[10];              // the index of the current reading
+int readings[10][reads];        // the readings from the analog input
+int8_t readIndex[10];           // the index of the current reading
 int total[10];                  // the running total
 int average[10];

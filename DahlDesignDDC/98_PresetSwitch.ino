@@ -8,7 +8,6 @@ void presetSwitch(int row, int column, bool reverse)
     int Row = row - 1;
     int Column = column - 1;
     int Number = buttonNumber[Row][Column];
-    int FieldPlacement = 11;
     int Reverse = reverse;
 
     //Find switch absolute position
@@ -69,157 +68,14 @@ void presetSwitch(int row, int column, bool reverse)
                 }
                 if (switchPreset < 0)
                 {
-                    switchPreset = 7;
+                    switchPreset = 11;
                 }
-                if (switchPreset > 7)
+                if (switchPreset > 11)
                 {
                     switchPreset = 0;
                 }
 
-                //Clearing all buttons
-                for (int i = 0; i < BUTTONCOUNT; i++)
-                {
-                    Joystick.releaseButton(i);
-                }
-
-                //LOADING THE PRESETS
-
-        //1
-                if (switchPreset == 0)
-                {
-                    for (int e = 0; e < rowCount; e++)
-                    {
-
-                        for (int a = 0; a < colCount; a++)
-                        {
-                            switchMode[e][a] = preset1[e][a];
-                        }
-                    }
-                    for (int o = 0; o < 10; o++)
-                    {
-                        analogSwitchMode1[o] = analogMode1Preset1[o];
-                        analogSwitchMode2[o] = analogMode2Preset1[o];
-                    }
-                }
-                //2
-                else if (switchPreset == 1)
-                {
-                    for (int e = 0; e < rowCount; e++)
-                    {
-
-                        for (int a = 0; a < colCount; a++)
-                        {
-                            switchMode[e][a] = preset2[e][a];
-                        }
-                    }
-                    for (int o = 0; o < 10; o++)
-                    {
-                        analogSwitchMode1[o] = analogMode1Preset2[o];
-                        analogSwitchMode2[o] = analogMode2Preset2[o];
-                    }
-                }
-                //3
-                else if (switchPreset == 2)
-                {
-                    for (int e = 0; e < rowCount; e++)
-                    {
-
-                        for (int a = 0; a < colCount; a++)
-                        {
-                            switchMode[e][a] = preset3[e][a];
-                        }
-                    }
-                    for (int o = 0; o < 10; o++)
-                    {
-                        analogSwitchMode1[o] = analogMode1Preset3[o];
-                        analogSwitchMode2[o] = analogMode2Preset3[o];
-                    }
-                }
-                //4
-                else if (switchPreset == 3)
-                {
-                    for (int e = 0; e < rowCount; e++)
-                    {
-
-                        for (int a = 0; a < colCount; a++)
-                        {
-                            switchMode[e][a] = preset4[e][a];
-                        }
-                    }
-                    for (int o = 0; o < 10; o++)
-                    {
-                        analogSwitchMode1[o] = analogMode1Preset4[o];
-                        analogSwitchMode2[o] = analogMode2Preset4[o];
-                    }
-                }
-                //5
-                else if (switchPreset == 4)
-                {
-                    for (int e = 0; e < rowCount; e++)
-                    {
-
-                        for (int a = 0; a < colCount; a++)
-                        {
-                            switchMode[e][a] = preset5[e][a];
-                        }
-                    }
-                    for (int o = 0; o < 10; o++)
-                    {
-                        analogSwitchMode1[o] = analogMode1Preset5[o];
-                        analogSwitchMode2[o] = analogMode2Preset5[o];
-                    }
-                }
-                //6
-                else if (switchPreset == 5)
-                {
-                    for (int e = 0; e < rowCount; e++)
-                    {
-
-                        for (int a = 0; a < colCount; a++)
-                        {
-                            switchMode[e][a] = preset6[e][a];
-                        }
-                    }
-                    for (int o = 0; o < 10; o++)
-                    {
-                        analogSwitchMode1[o] = analogMode1Preset6[o];
-                        analogSwitchMode2[o] = analogMode2Preset6[o];
-                    }
-                }
-                //7
-                else if (switchPreset == 6)
-                {
-                    for (int e = 0; e < rowCount; e++)
-                    {
-
-                        for (int a = 0; a < colCount; a++)
-                        {
-                            switchMode[e][a] = preset7[e][a];
-                        }
-                    }
-                    for (int o = 0; o < 10; o++)
-                    {
-                        analogSwitchMode1[o] = analogMode1Preset7[o];
-                        analogSwitchMode2[o] = analogMode2Preset7[o];
-                    }
-                }
-                //8
-                else if (switchPreset == 7)
-                {
-                    for (int e = 0; e < rowCount; e++)
-                    {
-
-                        for (int a = 0; a < colCount; a++)
-                        {
-                            switchMode[e][a] = preset8[e][a];
-                        }
-                    }
-                    for (int o = 0; o < 10; o++)
-                    {
-                        analogSwitchMode1[o] = analogMode1Preset8[o];
-                        analogSwitchMode2[o] = analogMode2Preset8[o];
-                    }
-                }
+                presets(switchPreset);
             }
 
             //Give new value to pushState
@@ -258,11 +114,10 @@ void presetSwitch(int row, int column, bool reverse)
         }
     }
 
-
     //Push preset
 
     long push = 0;
-    push = push | (switchPreset << 11);
+    push = push | (switchPreset << 10);
     buttonField = buttonField | push;
 
 

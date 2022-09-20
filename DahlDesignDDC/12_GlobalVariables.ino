@@ -2,6 +2,21 @@
 //--------OTHER VARIABLES-------
 //------------------------------
 
+//Handbrake
+bool handbrake = false;
+bool handbrakeLock = false;
+bool handbrakeRelease = false;
+long handbrakeTimer = 0;
+
+//Specials
+bool brakeMagicOn;
+float brakeMagicValue;
+float throttleHoldValue;
+float bitePoint;
+uint8_t leftQuickValue;
+uint8_t rightQuickValue;
+bool quickSwitchState;
+
 //Function buttons
 int8_t hybridButtonRow;
 int8_t hybridButtonCol;
@@ -13,11 +28,16 @@ int8_t neutralButtonRow;
 int8_t neutralButtonCol;
 int8_t biteButtonRow;
 int8_t biteButtonCol;
+int8_t presetButtonRow;
+int8_t presetButtonCol;
 
 bool biteButtonBit1 = false;
 bool biteButtonBit2 = false;
+uint8_t first = 0;
+uint8_t second = 0;
 
 int8_t switchPreset = 0;
+bool bootPreset = true;
 
 //Clock and counter
 unsigned long globalClock;
@@ -38,11 +58,6 @@ unsigned long globalClock;
 #define togglePulse 50
 #define funkyPulse 60
 #define funkyCooldown 70
-
-//--------------------------------
-//----DEFAULT BITE POINT----------
-float bitePoint = 400;
-//--------------------------------
 
 //Clutch deadzones
 #define clutchTopDeadzone 10
