@@ -2,8 +2,7 @@
 //-------PRESET SWITCH------
 //--------------------------
 
-
-void presetSwitch(int row, int column, bool reverse)
+void preset2Bit(int row, int column, bool reverse)
 {
     int Row = row - 1;
     int Column = column - 1;
@@ -86,31 +85,35 @@ void presetSwitch(int row, int column, bool reverse)
     }
 
     int8_t difference = pushState[Row][Column + 1];
-    if (difference != 0)
+
+    if (pushState[modButtonRow - 1][modButtonCol - 1] == 0)
     {
-        if (globalClock - switchTimer[Row][Column + 1] < encoder2Pulse + encoder2Wait)
+        if (difference != 0)
         {
-            if ((difference > 0 && difference < 2) || difference < -2)
+            if (globalClock - switchTimer[Row][Column + 1] < encoder2Pulse + encoder2Wait)
             {
-                Joystick.setButton(Number + Reverse, 1);
-                Joystick.setButton(Number + 1 - Reverse, 0);
-            }
-            else if ((difference < 0 && difference > -2) || difference > 2)
-            {
-                Joystick.setButton(Number + Reverse, 0);
-                Joystick.setButton(Number + 1 - Reverse, 1);
+                if ((difference > 0 && difference < 2) || difference < -2)
+                {
+                    Joystick.setButton(Number + Reverse, 1);
+                    Joystick.setButton(Number + 1 - Reverse, 0);
+                }
+                else if ((difference < 0 && difference > -2) || difference > 2)
+                {
+                    Joystick.setButton(Number + Reverse, 0);
+                    Joystick.setButton(Number + 1 - Reverse, 1);
+                }
+                else
+                {
+                    pushState[Row][Column + 1] = 0;
+                }
             }
             else
             {
                 pushState[Row][Column + 1] = 0;
+                pushState[Row][Column] = result;
+                Joystick.setButton(Number, 0);
+                Joystick.setButton(Number + 1, 0);
             }
-        }
-        else
-        {
-            pushState[Row][Column + 1] = 0;
-            pushState[Row][Column] = result;
-            Joystick.setButton(Number, 0);
-            Joystick.setButton(Number + 1, 0);
         }
     }
 
