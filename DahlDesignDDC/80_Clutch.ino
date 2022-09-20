@@ -53,10 +53,6 @@ void singleClutch(int analogPin, int switchNumber, int releasedValue, int fullyP
 void dualClutch(int masterPin, int masterSwitchNumber, int masterReleasedValue, int masterFullyPressedValue, int slavePin, int slaveSwitchNumber, int slaveReleasedValue, int slaveFullyPressedValue, bool throttleMaster)
 {
 
-    Joystick.setXAxisRange(0, 1000);
-    Joystick.setThrottleRange(0, 1000);
-    Joystick.setBrakeRange(0, 1000);
-
     //--------------------------------
     //---Master paddle calculations----
     //--------------------------------

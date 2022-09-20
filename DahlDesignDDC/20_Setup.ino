@@ -4,6 +4,11 @@
 
 void setup()
 {
+    //Set up joystick axis
+    Joystick.setXAxisRange(0, 1000);
+    Joystick.setThrottleRange(0, 1000);
+    Joystick.setBrakeRange(0, 1000);
+
     //Filling some arrays
     for (int i = 0; i < rowCount; i++)
     {
