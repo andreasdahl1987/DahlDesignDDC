@@ -27,8 +27,8 @@ void loop()
 	//------------------------------------
 
 
-	Joystick.setZAxis(encoderField - 32767);
-	Joystick.setYAxis(buttonField - 32767);
+	Joystick.setZAxis(encoderField - 32768);
+	Joystick.setYAxis(buttonField - 32768);
 
 	Joystick.sendState();
 }
