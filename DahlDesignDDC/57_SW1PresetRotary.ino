@@ -109,7 +109,7 @@ void SW1PresetRotary(int analogPin, int switchNumber, int fieldPlacement, int po
         analogTempState[N] = 0; //Refreshing encoder mode difference
 
         uint8_t value = analogLastCounter[N];
-        if (quickSwitchState)
+        if (quickSwitchState || quickSwitch12State)
         {
             value = quickValue1;
         }

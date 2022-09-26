@@ -124,6 +124,7 @@
     <None Include="62_Rotary2Bit.ino" />
     <None Include="63_RotaryPEC11.ino" />
     <None Include="64_RotaryAnalog.ino" />
+    <None Include="65_QuickRotary.ino" />
     <None Include="66_MultiComplex.ino" />
     <None Include="56_SW1BiteRotary.ino" />
     <None Include="70_FunkyPush.ino" />

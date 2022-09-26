@@ -15,7 +15,11 @@ float throttleHoldValue;
 float bitePoint;
 uint8_t quickValue1;
 uint8_t quickValue2;
+uint8_t quickValue3;
+uint8_t quickValue4;
 bool quickSwitchState;
+bool quickSwitch12State;
+bool quickSwitch34State;
 
 //Function buttons
 int8_t hybridButtonRow;

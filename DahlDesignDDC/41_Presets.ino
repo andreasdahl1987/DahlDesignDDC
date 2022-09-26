@@ -27,6 +27,8 @@ void presets(int8_t presetNumber)
     bitePoint = 300;
     brakeMagicValue = 50;
     throttleHoldValue = 1000;
+    quickValue4 = 11;
+    quickValue3 = 11;
     quickValue2 = 11;
     quickValue1 = 11;
 
