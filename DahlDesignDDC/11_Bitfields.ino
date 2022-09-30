@@ -2,7 +2,7 @@
 //--BIT FIELDS FOR SIMHUB PROPERTIES---
 //-----------------------------------
 
-int encoderField = 0;
+int rotaryField = 0;
 
 /*
  * First field, pushed to joysick axis Z

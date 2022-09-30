@@ -308,6 +308,6 @@ void DDSfunky(int Arow, int Acol, int Bcol) {
 
     long push = 0;
     push = push | toggleTimer[Row][bCol];
-    push = push << (2 * (FieldPlacement - 1));
-    encoderField = encoderField | push;
+    push = push << (2*(FieldPlacement - 1));
+    rotaryField = rotaryField | push;
 }

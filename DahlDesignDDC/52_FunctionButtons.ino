@@ -235,8 +235,8 @@ void biteButton(int row, int column)
     long push = 0;
     push = push | biteButtonBit1;
     push = push | (biteButtonBit2 << 1);
-    push = push << (2 * (FieldPlacement - 1));
-    encoderField = encoderField | push;
+    push = push << (2*(FieldPlacement - 1));
+    rotaryField = rotaryField | push;
 
     Joystick.setRyAxis(bitePoint);
     Joystick.setButton(Number, pushState[Row][Column]);

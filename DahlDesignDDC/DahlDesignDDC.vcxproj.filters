@@ -48,6 +48,7 @@
     <None Include="94_ThrottleHold.ino" />
     <None Include="42_MatrixInject.ino" />
     <None Include="65_QuickRotary.ino" />
+    <None Include="31_RunningPresets.ino" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.DahlDesignDDC.vsarduino.h">

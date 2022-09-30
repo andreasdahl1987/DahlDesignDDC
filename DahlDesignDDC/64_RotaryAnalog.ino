@@ -215,8 +215,8 @@ void rotaryAnalog(int analogPin, int switchNumber, int fieldPlacement, int hybri
     long push = 0;
     push = push | analogSwitchMode1[N];
     push = push | (analogSwitchMode2[N] << 1);
-    push = push << (2 * (FieldPlacement - 1));
-    encoderField = encoderField | push;
+    push = push << (FieldPlacement - 1);
+    rotaryField = rotaryField | push;
 }
 void rotaryAnalog2Mode(int analogPin, int switchNumber, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
 {
@@ -441,8 +441,8 @@ void rotaryAnalog2Mode(int analogPin, int switchNumber, int fieldPlacement, int 
     //Push switch mode
     long push = 0;
     push = push | analogSwitchMode1[N];
-    push = push << (2 * (FieldPlacement - 1));
-    encoderField = encoderField | push;
+    push = push << (FieldPlacement - 1);
+    rotaryField = rotaryField | push;
 }
 void DDSanalog(int analogPin, int switchNumber, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
 {
@@ -758,6 +758,6 @@ void DDSanalog(int analogPin, int switchNumber, int pos1, int pos2, int pos3, in
     long push = 0;
     push = push | analogSwitchMode1[N];
     push = push | (analogSwitchMode2[N] << 1);
-    push = push << (2 * (FieldPlacement - 1));
-    encoderField = encoderField | push;
+    push = push << (2*(FieldPlacement - 1));
+    rotaryField = rotaryField | push;
 }

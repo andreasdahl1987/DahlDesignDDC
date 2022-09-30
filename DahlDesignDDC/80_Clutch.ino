@@ -300,7 +300,7 @@ void dualClutch(int masterPin, int masterSwitchNumber, int masterReleasedValue, 
     long push = 0;
     push = push | analogSwitchMode1[M];
     push = push | (analogSwitchMode2[M] << 1);
-    push = push << (2 * (FieldPlacement - 1));
-    encoderField = encoderField | push;
+    push = push << (2*(FieldPlacement - 1));
+    rotaryField = rotaryField | push;
 
 }

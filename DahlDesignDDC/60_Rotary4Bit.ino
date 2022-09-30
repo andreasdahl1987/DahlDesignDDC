@@ -201,8 +201,8 @@ void rotary4Modes(int row, int column, int fieldPlacement, int hybridPositions, 
     long push = 0;
     push = push | switchMode[Row][Column];
     push = push | (switchMode[Row][Column + 1] << 1);
-    push = push << (2 * (FieldPlacement - 1));
-    encoderField = encoderField | push;
+    push = push << (FieldPlacement - 1);
+    rotaryField = rotaryField | push;
 }
 
 void rotary4Inc(int row, int column, bool reverse)
@@ -517,8 +517,8 @@ void rotary4Multis(int row, int column, int fieldPlacement, int positions1, int 
     long push = 0;
     push = push | switchMode[Row][Column];
     push = push | (switchMode[Row][Column + 1] << 1);
-    push = push << (2 * (FieldPlacement - 1));
-    encoderField = encoderField | push;
+    push = push << (FieldPlacement - 1);
+    rotaryField = rotaryField | push;
 }
 
 void DDS4bit(int row, int column, bool reverse)
@@ -831,6 +831,6 @@ void DDS4bit(int row, int column, bool reverse)
     long push = 0;
     push = push | switchMode[Row][Column];
     push = push | (switchMode[Row][Column + 1] << 1);
-    push = push << (2 * (FieldPlacement - 1));
-    encoderField = encoderField | push;
+    push = push << (2*(FieldPlacement - 1));
+    rotaryField = rotaryField | push;
 }

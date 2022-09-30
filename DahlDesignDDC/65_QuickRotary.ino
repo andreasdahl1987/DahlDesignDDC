@@ -229,7 +229,7 @@ void quickRotary1bite(int analogPin, int switchNumber, int fieldPlacement, int p
     long push = 0;
     push = push | analogSwitchMode1[N];
     push = push << (FieldPlacement - 1);
-    encoderField = encoderField | push;
+    rotaryField = rotaryField | push;
 }
 
 void quickRotary2(int analogPin, int switchNumber, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
@@ -380,7 +380,7 @@ void quickRotary2(int analogPin, int switchNumber, int fieldPlacement, int pos1,
     long push = 0;
     push = push | analogSwitchMode1[N];
     push = push << (FieldPlacement - 1);
-    encoderField = encoderField | push;
+    rotaryField = rotaryField | push;
 }
 
 void quickRotary3(int analogPin, int switchNumber, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
@@ -531,7 +531,7 @@ void quickRotary3(int analogPin, int switchNumber, int fieldPlacement, int pos1,
     long push = 0;
     push = push | analogSwitchMode1[N];
     push = push << (FieldPlacement - 1);
-    encoderField = encoderField | push;
+    rotaryField = rotaryField | push;
 }
 
 void quickRotary4(int analogPin, int switchNumber, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
@@ -682,5 +682,5 @@ void quickRotary4(int analogPin, int switchNumber, int fieldPlacement, int pos1,
     long push = 0;
     push = push | analogSwitchMode1[N];
     push = push << (FieldPlacement - 1);
-    encoderField = encoderField | push;
+    rotaryField = rotaryField | push;
 }
