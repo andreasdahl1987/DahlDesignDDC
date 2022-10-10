@@ -63,7 +63,7 @@ void DDSfunky(int Arow, int Acol, int Bcol) {
     {
         Number = Number + 12;
     }
-    int FieldPlacement = 8;
+    int FieldPlacement = 5;
 
     int bCol = Bcol - 1;
 

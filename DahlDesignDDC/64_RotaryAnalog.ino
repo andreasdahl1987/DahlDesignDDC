@@ -465,7 +465,7 @@ void DDSanalog(int analogPin, int switchNumber, int pos1, int pos2, int pos3, in
     int HyPos = 12;
 
     int Number = analogButtonNumber[N];
-    int FieldPlacement = 8;
+    int FieldPlacement = 5;
     bool Reverse = reverse;
 
     if (latchState[ddButtonRow - 1][ddButtonCol - 1] && !analogSwitchMode2[N])  //Jumping 

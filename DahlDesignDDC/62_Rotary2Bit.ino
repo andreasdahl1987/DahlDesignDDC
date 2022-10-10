@@ -794,7 +794,7 @@ void DDS2bit(int row, int column, bool reverse)
     int Row = row - 1;
     int Column = column - 1;
     int Number = buttonNumber[Row][Column];
-    int FieldPlacement = 8;
+    int FieldPlacement = 5;
     int HyPos = 12;
     int Reverse = reverse;
 

@@ -283,7 +283,7 @@ void multiFunction2Button24(int analogPin, int switchNumber, int rowButton1, int
 
     int N = switchNumber - 1;
 
-    int Number;
+    int Number = analogButtonNumber[N];
 
     int RowButton1 = rowButton1 - 1;
     int ColumnButton1 = columnButton1 - 1;
@@ -362,7 +362,7 @@ void multiFunction2Button36(int analogPin, int switchNumber, int rowButton1, int
 
     int N = switchNumber - 1;
 
-    int Number;
+    int Number = analogButtonNumber[N];
 
     int RowButton1 = rowButton1 - 1;
     int ColumnButton1 = columnButton1 - 1;
