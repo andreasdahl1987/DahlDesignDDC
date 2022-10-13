@@ -2,6 +2,8 @@
 
 Universal controller firmware creation tool
 
-[Wiki](https://github.com/andreasdahl1987/DahlDesignDDC/wiki) is under construction. See my webpage www.dahldesign.eu for more info.
+[Wiki](https://github.com/andreasdahl1987/DahlDesignDDC/wiki) is under construction, but has come a long way. It should be enough to get you started. 
 
-Demo video on YouTube: https://www.youtube.com/watch?v=z6dcbQDbx7A 
+See my webpage www.dahldesign.eu for more info.
+
+Demo video on YouTube: https://www.youtube.com/watch?v=LvadQq7CFOc
