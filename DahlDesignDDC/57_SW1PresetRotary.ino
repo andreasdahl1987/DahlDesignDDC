@@ -104,7 +104,7 @@ void SW1PresetRotary(int analogPin, int switchNumber, int fieldPlacement, int po
 
     //SWITCH MODE 1: 12 - position switch
 
-    if (!analogSwitchMode1[N] && !biteButtonBit1 && !biteButtonBit2)
+    if (!analogSwitchMode1[N] && !biteButtonBit1 && !biteButtonBit2 && !pushState[presetButtonRow - 1][presetButtonCol - 1])
     {
         analogTempState[N] = 0; //Refreshing encoder mode difference
 
@@ -129,7 +129,7 @@ void SW1PresetRotary(int analogPin, int switchNumber, int fieldPlacement, int po
 
     //SWITCH MODE 2: Incremental switch
 
-    else if (analogSwitchMode1[N] && !biteButtonBit1 && !biteButtonBit2)
+    else if (analogSwitchMode1[N] && !biteButtonBit1 && !biteButtonBit2 && !pushState[presetButtonRow - 1][presetButtonCol - 1])
     {
         Number = analogButtonNumberIncMode[N];
         int difference = analogTempState[N];
