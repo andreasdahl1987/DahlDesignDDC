@@ -1,4 +1,15 @@
 # Table of contents
 
 * [Welcome](README.md)
-* [1. Getting started](1.-getting-started.md)
+* [1. Introduction](1.-getting-started.md)
+* [2. Project planning](2.-project-planning/README.md)
+  * [Matrix](2.-project-planning/matrix.md)
+  * [Non-matrix switches](2.-project-planning/non-matrix-switches.md)
+  * [Analog inputs](2.-project-planning/analog-inputs.md)
+* [3. Wiring](3.-wiring/README.md)
+  * [Matrix wiring](3.-wiring/matrix-wiring.md)
+  * [Non-matrix wiring](3.-wiring/non-matrix-wiring.md)
+  * [Analog wiring](3.-wiring/analog-wiring.md)
+  * [Shift registers](3.-wiring/shift-registers.md)
+* [4. Coding](4.-coding/README.md)
+  * [DahlDesignDDC.ino](4.-coding/dahldesignddc.ino.md)

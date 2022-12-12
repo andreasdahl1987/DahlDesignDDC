@@ -1,6 +1,6 @@
 # Welcome
 
-## DDC
+### DDC
 
 Welcome this wiki page on DDC.
 
