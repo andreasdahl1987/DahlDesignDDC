@@ -1,6 +1,6 @@
 # Field placement
 
-This refers to the `int fieldPlacement` that you'll find in many of the switch functions. This is a system for sending information about switch modes to SimHub. The way it works:
+This refers to the `int fieldPlacement` that you'll find in many of the switch functions. This is a system for sending information about the controller to SimHub. The way it works:
 
 * Each joystick axis can hold a 16-bit value. Two of the controllers joystick axis (axis Y and Z) are used as a way of sending information about to wheel to the computer through this axis value, thus not being used as real joystick axis. In total 16 + 16 bits of information.
 * The 16 bit value is constructed by 16 1's and 0's. Basically 16 slots being on/off. In DDC, you can map things to these slots. You could say that the 4th bit represents the switch mode for one of your 12-position switches. So if the switch is in 12-position mode, the 4th bit should be 0, if it is in incremental mode the 4th bit will be 1. The algorithm takes care of this, but you have to decide which bits you are going to use for each switch. We say that this joysick axis represents a `bit field`.
@@ -8,7 +8,7 @@ This refers to the `int fieldPlacement` that you'll find in many of the switch f
 
 ### `11_BitFields.ino`
 
-This file introcudes these fields into the sketch. There is no code to be written here, but you can use this file to plan/organize your matrix.
+This file introcudes these fields into the sketch. There is no code to be written here, but you can use this file to plan/organize your switches that has modes.
 
 ```
 //-------------------------------------
@@ -85,6 +85,8 @@ A switch function that uses the `rotaryField`:
 Example: `rotary2Modes(3,1,4,12,true)`
 
 This will set up an incremental encoder with 3 different modes on row 3, column 1. What these modes do can be read up on in the function library for this specific function, but the point here is that it has more than 2 modes. The mode number can not be described with a single bit, it needs two bits. Field placement is set to the 4th bit in `rotaryField`, but it will also use the 5th bit. Functions that use more than one bit in the bitfield will have this information in its description in the function library.
+
+It is important to note that a switch with modes will work as intended even if it hasnt been given a field placement. The field placement is just for sending information about the switch mode to SimHub.&#x20;
 
 ### Under the hood
 

@@ -7,7 +7,7 @@ Every switch needs a function to work. There are simple and more complex functio
 * The function usually requires you to give it a matrix adress
 * It will have a look at this adress to see if the button is pressed or not
 * It will squeeze whatever information it gets through some debouncing algorithms
-* Some more algorithms will give the desired effect of the button press, wether it be a simple button press, a toggle, modifying other switches, overriding clutch paddles, etc.
+* Some more algorithms will give the desired effect of the button press, whether it be a simple button press, a toggle, modifying other switches, overriding clutch paddles, etc.
 
 The simplest function might be for a pushbutton:
 
@@ -43,7 +43,16 @@ All of the switch functions are found in the various .ino files, somewhat catego
 
 While you could go look for functions in the .ino files, it might be hard to see what they do unless you have some experience with coding. This library will list all the functions, what they do and how to use them.
 
-Many of the switch functions ask for a `fieldPlacement`, see [here](https://github.com/andreasdahl1987/DahlDesignDDC/wiki/5.-Advanced-features) for the use of field placement and switch modes.
+Many of the switch functions ask for a `fieldPlacement`, see [here](../5.-advanced-features/field-placement.md) for the use of field placement.
+
+### Switch modes
+
+Many of the function will give a switch 2 or more _**modes.**_ An example is `toggleM(int row, int column, int fieldPlacement)`This switch will have two modes:
+
+* 0 : Toggle on/off
+* 1: Pulse -> A short button press when the toggle is flicked on or off
+
+Another example would be `void DDSfunky(int Arow, int Acol, int Bcol)`&#x20;
 
 
 
