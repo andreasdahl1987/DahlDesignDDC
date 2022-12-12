@@ -12,4 +12,8 @@ Now that the electronics are sorted, time to build the firmware. You might alrea
 
 Download the repository. You only need the folder called `DahlDesignDDC`. The firmware is organized in many .ino files. The way this works is that Arduino IDE will read these files as a single, big file, starting with the main file `DahlDesignDDC.ino`, and then reading the rest in alphabetical order. Hence the numbering of all the other .ino files.
 
-To open the sketch, open the `DahlDesignDDC.ino` file, Arduino IDE will automatically include all the other files. All the files are now available as **tabs** in Arduino IDE. Only some of these tabs are relevant to building your controller firmware, in fact only 3 of them are needed to adjust, and a few more are optional. We'll go through it step by step, **first the three mandatory ones.**
+To open the sketch, open the `DahlDesignDDC.ino` file, Arduino IDE will automatically include all the other files. All the files are now available as **tabs** in Arduino IDE.
+
+<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+&#x20;Only some of these tabs are relevant to building your controller firmware, in fact only 3 of them are needed to adjust, and a few more are optional.&#x20;
