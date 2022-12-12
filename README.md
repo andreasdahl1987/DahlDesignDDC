@@ -7,7 +7,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-    <img src="images/sw1.png" alt="sw1" height=150 >
+    <img src="images/sw1.PNG" alt="sw1" height=150 >
   </a>
 
   <h2 align="center">DAHL DESIGN <br /> DDC</h2>
