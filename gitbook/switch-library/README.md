@@ -52,7 +52,24 @@ Many of the function will give a switch 2 or more _**modes.**_ An example is `to
 * 0 : Toggle on/off
 * 1: Pulse -> A short button press when the toggle is flicked on or off
 
-Another example would be `void DDSfunky(int Arow, int Acol, int Bcol)`&#x20;
+A more complex example would be `void DDS2bit(int row, int col, bool reverse),` which has 4 modes:
 
+* 0: Open DDS -> 24 position switch, which has two layers of 12 positions that can be swapped between with a different button.
+* 1: Closed DDS -> The position of the switch is locked, but the switch now works as an incremental encoder while still holding the button press from one of the 24 positions.
+* 2: 4-position switch -> The switch is now an absolute 4-position encoder.
+* 3: Incremental -> The switch works as a regular incremental encoder, producing a short button press on CW/CCW rotation
 
+To change a switch mode you need to have a designated **mode button,** which is set with `modButton(int row, int column).` Typically you will just hold the mode button and use the press/rotate the switch that you want to change the mode for.&#x20;
+
+The information about a switch mode can be found and set in the variable `switchMode.` As mentioned before, when reading/writing directly from/to variables of the matrix, the column and row numbers start with 0, so row 4 in that case is "3", and column 5 is "4". The switch mode for a switch on row 1 column 4 is found in switchMode\[0]\[3]. Most relevant use of this is when making [presets](../5.-advanced-features/presets.md). All switches default to starting mode 0 on boot.&#x20;
+
+When using the above examples:
+
+* I want my toggle using toggleM(3,1,5); to start in mode 1 in preset 4 . I'll write `switchMode[2][0]  = 1;` in the slot for preset 4.&#x20;
+* I want my `DDS2bit(3,2,true);` to boot in mode 2. I'll write `switchMode[2][2] = 1;` in the slot for preset 1.  This might be confusing, but I'll explain:
+  * Switches with 4 modes uses two switchMode adresses in order to get enough bits to make a number going from 0-3. In this case the switch is on row 3 column 2. Meaning also column 3 is used by this encoder (A and B pin of an encoder are always on columns next to eachother on the row, only the first column used in included in the function, the second is just assumed to be there).&#x20;
+  * The two bits can make numbers 00 = 0, 01 = 1, 10 = 2, 11 = 3. This representing the modes.&#x20;
+  * The bit for the last column comes first. The bit for the first colum comes last. So in order to get to mode 2 (10), the first bit needs to be 1, the last bit needs to be zero. The last bit is already 0, so we just need to change the first bit. This is the switchMode for row 3 column 3, which is switchMode\[2]\[2].&#x20;
+
+When using switches with modes available, the mode of the switch can be communicated to SimHub using the[ field placements](../5.-advanced-features/field-placement.md).&#x20;
 
