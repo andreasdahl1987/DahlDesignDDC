@@ -1,21 +1,66 @@
 # Pushbutton
 
-#### Simple pushbutton
+#### pushButton()
 
+{% tabs %}
+{% tab title="Description" %}
+A simple, momentary pushbutton. The buttonnumer is the one you set in your matrix setup.
+{% endtab %}
+
+{% tab title="Example" %}
 `void pushButton(int row, int col)`
 
-A simple, momentary pushbutton. The buttonnumer is the one you set in your matrix setup.
 
-#### Toggle button
+{% endtab %}
 
+{% tab title="Requirements" %}
+None
+{% endtab %}
+{% endtabs %}
+
+#### pushButtonL()
+
+{% tabs %}
+{% tab title="Description" %}
+The button will become a latching button, so hitting it once will turn it on, hitting again will turn it off.
+{% endtab %}
+
+{% tab title="Example" %}
 `void pushButtonL(int row, int col)`
 
-The button will become a latching button, so hitting it once will turn it on, hitting again will turn it off.
+For a switch on row 3 column 5 -> `pushButtonL(3,5);`
+{% endtab %}
 
-#### Button with modes
+{% tab title="Requirements" %}
+None
+{% endtab %}
+{% endtabs %}
 
+#### pushButtonM()
+
+{% tabs %}
+{% tab title="Description" %}
+Pushbutton with two modes:
+
+* 0: Momentary
+* 1: Latching
+
+Uses the button field.&#x20;
+{% endtab %}
+
+{% tab title="Example" %}
 `void pushButtonM(int row, int col, int fieldPlacement)`
 
-Pushbutton that can swap between being momentary (mode 0) and latching (mode 1).
+For a switch on row 3 column 5 -> `pushButtonL(3,5,1);`
 
-_Project requirements: Function button_
+Here the field placement is set to 1. So you'll find the mode of this switch in the 1st bit of the button field. Corresponding SimHub property is \[DahlDesign.DDCB1].&#x20;
+{% endtab %}
+
+{% tab title="Requirements" %}
+modButton()
+{% endtab %}
+{% endtabs %}
+
+__
+
+__
