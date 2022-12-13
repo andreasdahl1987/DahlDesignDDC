@@ -18,7 +18,7 @@
   * [Upload](4.-coding/upload.md)
 * [5. Advanced features](5.-advanced-features/README.md)
   * [Field placement](5.-advanced-features/field-placement.md)
-  * [Presets](5.-advanced-features/presets/README.md)
+  * [Presets](5.-advanced-features/presets.md)
     * [31\_RunningPresets.ino](5.-advanced-features/presets/31\_runningpresets.ino.md)
     * [41\_Presets.ino](5.-advanced-features/presets/41\_presets.ino.md)
     * [Example](5.-advanced-features/presets/example.md)

@@ -68,6 +68,8 @@ The two fields are named `rotaryField` and `buttonField`. Typically, a button sw
 
 You can see this file is mosly just comments; a list of the available bits and what they are used for. A lot of the bits are already reserved, only bits 1-4 are available in the `buttonField` and bits 1-8 + 15 in the `rotaryField`. However, the reserved bits are for switches that you're likely to include in your project, and they have defined properties in SimHub. A reseved slot like bit 5 on `buttonField`, is presented as `DahlDesign.DDCNeutralActive`. The non-reserved bits have properties with less descriptive naming; `DahlDesign.DDCB1` to `DahlDesign.DDCB4` for the `buttonField` bits 1 - 4 and `DahlDesign.DDCR1` etc. for the `rotaryField`.
 
+The switch functions for switches which have reserved slots in the bit fields doest not require you to set a field placement. This is done automatically.&#x20;
+
 If your project is running out of bits to use, you can use the bits that are reserved for functions that are not used in your project. So if you're not using neutral button, both bit 5 and bit 15 can be used for something else. Keep in mind though, that the properties representing these bits will be _named as before_; `DahlDesign.DDCNeutralMode`, etc.
 
 A switch function that uses the `buttonField`:

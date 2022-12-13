@@ -61,7 +61,7 @@ A more complex example would be `void DDS2bit(int row, int col, bool reverse),` 
 
 To change a switch mode you need to have a designated **mode button,** which is set with `modButton(int row, int column).` Typically you will just hold the mode button and use the press/rotate the switch that you want to change the mode for.&#x20;
 
-The information about a switch mode can be found and set in the variable `switchMode.` As mentioned before, when reading/writing directly from/to variables of the matrix, the column and row numbers start with 0, so row 4 in that case is "3", and column 5 is "4". The switch mode for a switch on row 1 column 4 is found in switchMode\[0]\[3]. Most relevant use of this is when making [presets](../5.-advanced-features/presets/). All switches default to starting mode 0 on boot.&#x20;
+The information about a switch mode can be found and set in the variable `switchMode.` As mentioned before, when reading/writing directly from/to variables of the matrix, the column and row numbers start with 0, so row 4 in that case is "3", and column 5 is "4". The switch mode for a switch on row 1 column 4 is found in switchMode\[0]\[3]. Most relevant use of this is when making [presets](../5.-advanced-features/presets.md). All switches default to starting mode 0 on boot.&#x20;
 
 When using the above examples:
 
