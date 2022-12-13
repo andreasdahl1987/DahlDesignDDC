@@ -4,13 +4,13 @@
 
 {% tabs %}
 {% tab title="Description" %}
-A simple, momentary pushbutton. The buttonnumer is the one you set in your matrix setup.
+A simple, momentary pushbutton. The button numer is the one you set in your matrix setup.
 {% endtab %}
 
 {% tab title="Example" %}
 `void pushButton(int row, int col)`
 
-
+For a switch on row 3 column 5 -> `pushButton(3,5);`
 {% endtab %}
 
 {% tab title="Requirements" %}
@@ -51,7 +51,7 @@ Uses the button field.&#x20;
 {% tab title="Example" %}
 `void pushButtonM(int row, int col, int fieldPlacement)`
 
-For a switch on row 3 column 5 -> `pushButtonL(3,5,1);`
+For a switch on row 3 column 5 -> `pushButtonM(3,5,1);`
 
 Here the field placement is set to 1. So you'll find the mode of this switch in the 1st bit of the button field. Corresponding SimHub property is \[DahlDesign.DDCB1].&#x20;
 {% endtab %}

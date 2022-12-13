@@ -25,3 +25,4 @@
 * [6. Connect to SimHub](6.-connect-to-simhub.md)
 * [Switch library](switch-library/README.md)
   * [Pushbutton](switch-library/pushbutton.md)
+  * [Function button](switch-library/function-button.md)
