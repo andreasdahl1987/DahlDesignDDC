@@ -4,7 +4,7 @@
 
 Welcome to the manual!
 
-Here you'll find the information you'll need to start using DDC for your controller. It is written av a step-by-step guide, from 1. to 5., where step 4. and 5. are optional. &#x20;
+Here you'll find the information you'll need to start using DDC for your controller. It is written av a step-by-step guide, from #1 to #4, where step #4 is optional. &#x20;
 
 The topics that naturally fall into the manual for the [Dashboard](https://github.com/andreasdahl1987/DahlDesignDash), [LED plugin](https://github.com/andreasdahl1987/DahlDesignLED) and [Properties Plugin](https://github.com/andreasdahl1987/DahlDesignProperties) will not be covered here.
 

@@ -22,7 +22,7 @@
     * [31\_RunningPresets.ino](4.-advanced-features/presets/31\_runningpresets.ino.md)
     * [41\_Presets.ino](4.-advanced-features/presets/41\_presets.ino.md)
     * [Example](4.-advanced-features/presets/example.md)
-* [5. Connect to SimHub](5.-connect-to-simhub.md)
+  * [Connect to SimHub](4.-advanced-features/connect-to-simhub.md)
 * [Switch library](switch-library/README.md)
   * [Pushbutton](switch-library/pushbutton.md)
   * [Function button](switch-library/function-button.md)
