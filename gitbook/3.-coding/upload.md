@@ -8,4 +8,4 @@ Since the Windows USB device interface just shows the first 32 buttons, I sugges
 
 ## Additional coding
 
-So far we've looked at a basic, working setup. For more advanced features move on to [5. Advanced features](https://github.com/andreasdahl1987/DahlDesignDDC/wiki/5.-Coding-advanced)
+So far we've looked at a basic, working setup. For more advanced features move on to [Advanced features](../4.-advanced-features/).

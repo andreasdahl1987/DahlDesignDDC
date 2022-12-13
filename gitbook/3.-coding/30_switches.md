@@ -1,6 +1,6 @@
 # 30\_Switches
 
-This is where you add all your switches. Go to the [Switch Library](https://github.com/andreasdahl1987/DahlDesignDDC/wiki/Switch-functions#library) and find something that suits your needs. Anything you write here should be between the hard-to-miss warnings **"SWITCHES START HERE"** and **"SWITCHES END HERE"**
+This is where you add all your switches. Go to the [Switch Library](../switch-library/) and find something that suits your needs. Anything you write here should be between the hard-to-miss warnings **"SWITCHES START HERE"** and **"SWITCHES END HERE"**
 
 ```
 //------------------------------
@@ -41,7 +41,7 @@ void loop()
 }
 ```
 
-* A full steering wheel could look like this:
+* A full (and rather feature rich) steering wheel could look like this:
 
 ```
 //------------------------------
