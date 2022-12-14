@@ -1,12 +1,19 @@
-# 4. Coding
+# 3. Coding
 
 Now that the electronics are sorted, time to build the firmware. You might already have a project where the wiring is set and you're looking to change your firmware to DDC. Then this is where you start.
 
 ## Software requirements
 
 * [Arduino IDE](https://www.arduino.cc/en/software)
-* [MHeironimus's joystick library](https://github.com/MHeironimus/ArduinoJoystickLibrary/tree/v2.0.8)
-  * The link above is for version 2.0.8, which is before a bug was introduced to the joystick axis values. At the time of writing this, the bug has not been fixed. Version 2.0.8 works.
+*   [MHeironimus's joystick library](https://github.com/MHeironimus/ArduinoJoystickLibrary/tree/v2.0.8)
+
+    * The link above is for version 2.0.8, which is before a bug was introduced to the joystick axis values. At the time of writing this, the bug has not been fixed. Version 2.0.8 works.
+    * If you're using and SAMD21/51 board, use [this branch](https://github.com/gdsports/ArduinoJoystickLibrary/tree/samd\_patch) of  the same library.
+    * For SAMD 21/51 boards, the latest board core does not work with the joystick library. Downgrade to board core **1.6.19.**
+
+
+
+    <figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 ## The sketch
 
