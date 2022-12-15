@@ -7,10 +7,10 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-    <img src="images/sw1.PNG" alt="sw1" height=400 >
+    <img src="images/DDC.PNG" alt="DDC" height=300 >
   </a>
 
-  <h2 align="center">DAHL DESIGN <br /> DDC</h2>
+  <b><h2 align="center">DAHL DESIGN DDC</h2></b>
 
 
   <h3 <p align="center"> Universal controller firmware</h3>
