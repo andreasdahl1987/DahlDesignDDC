@@ -1,6 +1,8 @@
 # Welcome
 
-#### Dahl Design DDC Manual
+<figure><img src=".gitbook/assets/DDC.PNG" alt=""><figcaption></figcaption></figure>
+
+## Dahl Design DDC Manual
 
 Welcome to the manual!
 

@@ -13,7 +13,7 @@ Now that the electronics are sorted, time to build the firmware. You might alrea
 
 
 
-    <figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 ## The sketch
 
