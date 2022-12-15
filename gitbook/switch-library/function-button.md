@@ -34,6 +34,8 @@ Defaults to bit 11 and 12 in the rotary field, you dont have to assign a field p
 * 1: Bite point setting active. Adjust with steps of +/- 10
 * 2: Bite point setting active. Adjust with steps of +/- 1
 * 3: Bite point setting active. Adjust with steps of +/- 0.1
+
+As stated above, this button's modes are not changed by using a modButton(), but by the biteButton() itself.&#x20;
 {% endtab %}
 
 {% tab title="Example" %}
