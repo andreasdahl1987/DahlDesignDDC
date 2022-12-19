@@ -25,4 +25,6 @@
   * [Connect to SimHub](4.-advanced-features/connect-to-simhub.md)
 * [Switch library](switch-library/README.md)
   * [Pushbutton](switch-library/pushbutton.md)
+  * [Toggle switches](switch-library/pushbutton-1.md)
   * [Function button](switch-library/function-button.md)
+  * [Shifter](switch-library/pushbutton-2.md)
