@@ -12,6 +12,45 @@ In the example above, the switch has button numbers 1 to 26. It works like this:
   * The state when the position is locked is refered to as "**closed hybrid**".
   * The state when position can move is refered to as "**open hybrid**".&#x20;
 
-The DDS switches all have 4 modes, and this is automatically pushed to the bit fields for SimHub communication. It is available as the property \[DahlDesign.DDCDDSMode]
+The DDS switches all have 4 modes, and this is automatically pushed to the bit fields for SimHub communication. It is available as the property \[DahlDesign.DDCDDSMode]:
+
+* 0: Open hybrid
+* 1: Closed hybrid
+* 2 and 3 depends on the type of DDS function you use.
 
 If your controller uses a DDS switch, you have to check for this in the properties [plugin menu](https://app.gitbook.com/s/d2E1GdYd97jTQlTu0Drn/introduction/plugin-menu).
+
+The video below you can see how the DDS switch works together with the dashboard. Here, a funky switch alone has all the switches needed for the complex; including the rotary, DDButton and hybridButton.&#x20;
+
+{% embed url="https://www.youtube.com/watch?t=372s&v=LvadQq7CFOc" %}
+
+#### DDS2bit()
+
+{% tabs %}
+{% tab title="Description" %}
+DDS for an encoder in the rotary2bit category.&#x20;
+
+Modes:
+
+* 0: Open hybrid
+* 1: Closed hybrid
+* 3: 4-position switch
+* 4: Incremental encoder
+{% endtab %}
+
+{% tab title="Example" %}
+`void DDS2bit(int row, int column, bool reverse)`
+
+For a encoder on row 2 column 4+5 -> `DDS2bit(2,4, true);`
+
+This switch has "reverese" set to true, since it is placed on the rear of the controller. Turning it CCW will not increase the count instead of reducing.&#x20;
+{% endtab %}
+
+{% tab title="Requirements" %}
+* modButton() if you want to change modes freely. modButton() not needed to change modes across presets.&#x20;
+* DDButton() to swap between "layers" of 12 positions.
+* hybridButton() to lock position and use rotary as incremental switch.
+{% endtab %}
+{% endtabs %}
+
+#### b
