@@ -12,6 +12,8 @@ In the example above, the switch has button numbers 1 to 26. It works like this:
   * The state when the position is locked is refered to as "**closed hybrid**".
   * The state when position can move is refered to as "**open hybrid**".&#x20;
 
+In the open hybrid mode the switch is a **counting** multiposition switch, as opposed to being an **absolute** multiposition switch. So phyisical position of the switch will be out of sync with button numbers. This is to allow the switch to continue where it stopped after being rotated in closed hybrid.&#x20;
+
 The DDS switches all have 4 modes, and this is automatically pushed to the bit fields for SimHub communication. It is available as the property \[DahlDesign.DDCDDSMode]:
 
 * 0: Open hybrid
@@ -34,7 +36,7 @@ Modes:
 
 * 0: Open hybrid
 * 1: Closed hybrid
-* 2: 4-position switch
+* e: 4-position switch
 * 3: Incremental encoder
 {% endtab %}
 
