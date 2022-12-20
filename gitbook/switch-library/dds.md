@@ -34,8 +34,8 @@ Modes:
 
 * 0: Open hybrid
 * 1: Closed hybrid
-* 3: 4-position switch
-* 4: Incremental encoder
+* 2: 4-position switch
+* 3: Incremental encoder
 {% endtab %}
 
 {% tab title="Example" %}
@@ -43,7 +43,7 @@ Modes:
 
 For a encoder on row 2 column 4+5 -> `DDS2bit(2,4, true);`
 
-This switch has "reverese" set to true, since it is placed on the rear of the controller. Turning it CCW will not increase the count instead of reducing.&#x20;
+This switch has "reverese" set to true, since it is placed on the rear of the controller. Turning it CCW will now increase the count instead of reducing.&#x20;
 {% endtab %}
 
 {% tab title="Requirements" %}
@@ -53,4 +53,104 @@ This switch has "reverese" set to true, since it is placed on the rear of the co
 {% endtab %}
 {% endtabs %}
 
-#### b
+#### DDS4bit()
+
+{% tabs %}
+{% tab title="Description" %}
+DDS for an encoder in the rotary4bit category.&#x20;
+
+Modes:
+
+* 0: Open hybrid
+* 1: Closed hybrid
+* 2: 16-position switch
+* 3: Incremental encoder
+{% endtab %}
+
+{% tab title="Example" %}
+`void DDS4bit(int row, int column, bool reverse)`
+
+For a encoder on row 2 column 2+3+4+5 -> `DDS4bit(2,4, true);`
+
+This switch has "reverese" set to true, since it is placed on the rear of the controller. Turning it CCW will now increase the count instead of reducing.&#x20;
+{% endtab %}
+
+{% tab title="Requirements" %}
+* modButton() if you want to change modes freely. modButton() not needed to change modes across presets.&#x20;
+* DDButton() to swap between "layers" of 12 positions.
+* hybridButton() to lock position and use rotary as incremental switch.
+{% endtab %}
+{% endtabs %}
+
+#### DDSfunky()
+
+{% tabs %}
+{% tab title="Description" %}
+DDS for an encoder in the funky category.&#x20;
+
+Modes:
+
+* 0: Open hybrid
+* 1: Closed hybrid
+* 2: Incremental encoder
+* 3: Toggle mode. Rotating CW/CCW will turn the button numbers for incremental mode on/off and hold them.&#x20;
+{% endtab %}
+
+{% tab title="Example" %}
+`void DDSfunky(int Arow, int Acol, int Bcol)`
+
+For a encoder on row 2 column 2 + 4 -> `DDS4bit(2, 2, 4);`
+
+As you can see, this encoder doesn't require the encoder A and B pins to be on columns next to eachother.&#x20;
+{% endtab %}
+
+{% tab title="Requirements" %}
+* modButton() if you want to change modes freely. modButton() not needed to change modes across presets.&#x20;
+* DDButton() to swap between "layers" of 12 positions.
+* hybridButton() to lock position and use rotary as incremental switch.
+{% endtab %}
+{% endtabs %}
+
+#### DDSanalog()
+
+{% tabs %}
+{% tab title="Description" %}
+DDS for a resistor ladder switch.
+
+Modes:
+
+* 0: Open hybrid
+* 1: Closed hybrid
+* 2: 12-position switch
+* 3: Incremental switch
+{% endtab %}
+
+{% tab title="Example" %}
+`void DDSanalog(int analogPin, int switchNumber, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)`
+
+\
+Switch setup with explainations:
+
+DDSanalog(
+
+A3, <- The analog pin this switch is connected to
+
+2, <- The switch number this analog switch is assigned
+
+16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023, <- Switch position values
+
+false); <- Direction is not reversed, so CW rotation increasese button number.
+
+
+
+So typed out in 30\_Switches.ino:
+
+`DDSanalog(A3, 2, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023,false);`
+{% endtab %}
+
+{% tab title="Requirements" %}
+* modButton() if you want to change modes freely. modButton() not needed to change modes across presets.&#x20;
+* DDButton() to swap between "layers" of 12 positions.
+* hybridButton() to lock position and use rotary as incremental switch.
+{% endtab %}
+{% endtabs %}
