@@ -16,3 +16,25 @@ This means that in the example above:
 
 * Switch #1 will use button numbers 69-80 in 12-position mode and button numbers 81 and 82 in incremental mode.
 * Switch #2 will use button numbers 83-94 in 12-position mode and button numbers 95 and 96 in incremental mode.
+
+### Reading a value
+
+A lot of the functions handeling analog switches need some reference values, these will have to be read from the switch before the firmware will work. I suggest reading the values when the swith is mounted to the controller in the correct position. A test setup on a breadboard will always give different values.
+
+Use this code and read out the values from the serial monitor:
+
+```
+#define pinNumber A3 //Change the pin number here to the actual pin you're using.
+
+void setup()
+{
+  Serial.begin(9600);
+}
+
+void loop() 
+{
+  int sensorValue = analogRead(pinNumber);
+  Serial.println(sensorValue);
+  delay(1);
+}
+```
