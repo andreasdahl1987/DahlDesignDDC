@@ -57,7 +57,7 @@ Here the field placement is set to 1. So you'll find the mode of this switch in 
 {% endtab %}
 
 {% tab title="Requirements" %}
-modButton()
+* modButton() if you want to change modes freely. modButton() not needed to change modes across presets.
 {% endtab %}
 {% endtabs %}
 

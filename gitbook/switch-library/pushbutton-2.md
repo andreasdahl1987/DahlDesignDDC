@@ -1,6 +1,6 @@
 # Shifter
 
-Normally, you'll just use pushButton() for shifters. Here I'll list special shifter functions which have some added features.
+Normally, you'll just use pushButton() for shifters. Here are special shifter functions which have some added features.
 
 #### pushPull()
 
@@ -17,67 +17,26 @@ The button numbers will start with whatever is set up in the slot for the right 
 In addition, it has a **handbrake feature.** Pressing left and right **pull** buttons together for 1 second will engage "handbrake", which is 100% brake force from the controllers brake axis. Works great with sims that allow you to map a secondary brake axis (iRacing). The controller doesn't need clutch paddles for this to work. To **release** the handbrake, simply hold the left and right **push** buttons for 1 second.&#x20;
 
 * If handbrake is active or not is shown in property \[DahlDesign.DDChandbrakeActive]
-* The mode uses the button field.&#x20;
+* The mode uses the button field. \
+  `void pushPull(int rightPullRow, int rightPullCol, int rightPushRow, int rightPushCol, int leftPullRow, int leftPullCol, int leftPushRow, int leftPushCol, int fieldPlacement)`
 {% endtab %}
 
 {% tab title="Example" %}
-`void pushButton(int row, int col)`
+`void pushPull(int rightPullRow, int rightPullCol, int rightPushRow, int rightPushCol, int leftPullRow, int leftPullCol, int leftPushRow, int leftPushCol, int fieldPlacement)`
 
-For a switch on row 3 column 5 -> `pushButton(3,5);`
+The buttons we're planning to use:
+
+* Right shifter pull: Row 2 Column 1
+* Right shifter push: Row 3 Column 3
+* Left shifter pull: Row 3 Column 5
+* Left shifter push: Row 1 Coumn 2
+
+Resulting in -> `pushPull(2, 1, 3, 3, 3, 5, 1, 2, 4);`
+
+As you can see, the fieldPlacement is set to 4. This function uses the button field, so you'll find the mode of your push/pull complex in the property \[DahlDesign.DDCB4].&#x20;
 {% endtab %}
 
 {% tab title="Requirements" %}
-None
+* modButton() if you want to change modes freely. modButton() not needed to change modes across presets.
 {% endtab %}
 {% endtabs %}
-
-
-
-
-
-#### pushButtonL()
-
-{% tabs %}
-{% tab title="Description" %}
-The button will become a latching button, so hitting it once will turn it on, hitting again will turn it off.
-{% endtab %}
-
-{% tab title="Example" %}
-`void pushButtonL(int row, int col)`
-
-For a switch on row 3 column 5 -> `pushButtonL(3,5);`
-{% endtab %}
-
-{% tab title="Requirements" %}
-None
-{% endtab %}
-{% endtabs %}
-
-#### pushButtonM()
-
-{% tabs %}
-{% tab title="Description" %}
-Pushbutton with two modes:
-
-* 0: Momentary
-* 1: Latching
-
-Uses the button field.&#x20;
-{% endtab %}
-
-{% tab title="Example" %}
-`void pushButtonM(int row, int col, int fieldPlacement)`
-
-For a switch on row 3 column 5 -> `pushButtonM(3,5,1);`
-
-Here the field placement is set to 1. So you'll find the mode of this switch in the 1st bit of the button field. Corresponding SimHub property is \[DahlDesign.DDCB1].&#x20;
-{% endtab %}
-
-{% tab title="Requirements" %}
-modButton()
-{% endtab %}
-{% endtabs %}
-
-__
-
-__
