@@ -70,13 +70,15 @@ A3, <- The analog pin this switch is connected to
 
 2, <- The first of the two columns the encoder is connected to (2 and 3 in this case)
 
+false, <- The effect of rotary rotation is not reversed
+
 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023); <- Switch position values
 
 
 
 So for a 12-way connected to A3, assigned analog switch# 4 and an encoder on row 5 column 2+3 could look like:
 
-`multiFunction2Bit24(A3, 4, 5, 2, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023);`
+`multiFunction2Bit24(A3, 4, 5, 2, false, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023);`
 {% endtab %}
 
 {% tab title="Requirements" %}
@@ -84,3 +86,134 @@ So for a 12-way connected to A3, assigned analog switch# 4 and an encoder on row
 {% endtab %}
 {% endtabs %}
 
+#### multiFunction2bit36()
+
+{% tabs %}
+{% tab title="Description" %}
+Multifunction complex using a 12-way switch and an encoder in the rotary2Bit category.
+
+Also gives button numbers to the 12-way switch.
+{% endtab %}
+
+{% tab title="Example" %}
+`void multiFunction2Bit36(int analogPin, int switchNumber, int row, int column, bool reverse, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12)`
+
+
+
+Switch setup with explainations:
+
+multiFunction2Bit24(
+
+A3, <- The analog pin this switch is connected to
+
+4, <- The switch number this analog switch is assigned
+
+5, <- The row the encoder is connected to
+
+2, <- The first of the two columns the encoder is connected to (2 and 3 in this case)
+
+false, <- The effect of rotary rotation is not reversed
+
+16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023); <- Switch position values
+
+
+
+So for a 12-way connected to A3, assigned analog switch# 4 and an encoder on row 5 column 2+3 could look like:
+
+`multiFunction2Bit36(A3, 4, 5, 2, false, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023);`
+{% endtab %}
+
+{% tab title="Requirements" %}
+* 36 button numbers
+{% endtab %}
+{% endtabs %}
+
+#### multiFunction2Button24()
+
+{% tabs %}
+{% tab title="Description" %}
+Multifunction complex using a 12-way switch and two pushbuttons.
+{% endtab %}
+
+{% tab title="Example" %}
+`void multiFunction2Button24(int analogPin, int switchNumber,int rowButton1, int columnButton1, int rowButton2, int columnButton2, bool reverse, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12)`
+
+
+
+Switch setup with explainations:
+
+multiFunction2Bit24(
+
+A3, <- The analog pin this switch is connected to
+
+4, <- The switch number this analog switch is assigned
+
+5, <- The row of button 1
+
+3, <- The column of button 1
+
+2, <- The row of button 2
+
+4, <- The column of button 2
+
+false, <- The effect of rotary rotation is not reversed
+
+16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023); <- Switch position values
+
+
+
+So for a 12-way connected to A3, assigned analog switch# 4 and two buttons on row5/col3 and row2/col4 could look like this:
+
+`multiFunction2Button24(A3, 4, 5, 3, 2, 4, false, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023);`
+{% endtab %}
+
+{% tab title="Requirements" %}
+* 24 button numbers
+{% endtab %}
+{% endtabs %}
+
+#### multiFunction2Button36()
+
+{% tabs %}
+{% tab title="Description" %}
+Multifunction complex using a 12-way switch and two pushbuttons.
+{% endtab %}
+
+{% tab title="Example" %}
+`void multiFunction2Button36(int analogPin, int switchNumber,int rowButton1, int columnButton1, int rowButton2, int columnButton2, bool reverse, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12)`
+
+
+
+Switch setup with explainations:
+
+multiFunction2Bit24(
+
+A3, <- The analog pin this switch is connected to
+
+4, <- The switch number this analog switch is assigned
+
+5, <- The row of button 1
+
+3, <- The column of button 1
+
+2, <- The row of button 2
+
+4, <- The column of button 2
+
+false, <- The effect of rotary rotation is not reversed
+
+16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023); <- Switch position values
+
+
+
+So for a 12-way connected to A3, assigned analog switch# 4 and two buttons on row5/col3 and row2/col4 could look like this:
+
+`multiFunction2Button36(A3, 4, 5, 3, 2, 4, false, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023);`
+{% endtab %}
+
+{% tab title="Requirements" %}
+* 24 button numbers
+{% endtab %}
+{% endtabs %}
+
+b
