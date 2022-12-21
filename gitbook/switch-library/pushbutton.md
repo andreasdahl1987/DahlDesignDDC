@@ -14,7 +14,7 @@ For a switch on row 3 column 5 -> `pushButton(3,5);`
 {% endtab %}
 
 {% tab title="Requirements" %}
-None
+* 1 button number
 {% endtab %}
 {% endtabs %}
 
@@ -32,7 +32,7 @@ For a switch on row 3 column 5 -> `pushButtonL(3,5);`
 {% endtab %}
 
 {% tab title="Requirements" %}
-None
+* 1 button number
 {% endtab %}
 {% endtabs %}
 
@@ -58,6 +58,7 @@ Here the field placement is set to 1. So you'll find the mode of this switch in 
 
 {% tab title="Requirements" %}
 * modButton() if you want to change modes freely. modButton() not needed to change modes across presets.
+* 1 button number
 {% endtab %}
 {% endtabs %}
 

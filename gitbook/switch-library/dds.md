@@ -2,7 +2,7 @@
 
 DDS (Dahl Design Switch) switches are tailored for the Dahl Design iRacing [Dashboard](https://app.gitbook.com/o/Gk9mLLIOB4bOKrDCqIdJ/s/49tDWuDHhTQtCQdHWIW5/), but can of course be used any way you like, if it fits your projects. It is a function that takes a rotary switch and two pushbuttons to create a 26-position switch complex that is ideal for a menu system.&#x20;
 
-<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 In the example above, the switch has button numbers 1 to 26. It works like this:
 
@@ -52,6 +52,7 @@ This switch has "reverese" set to true, since it is placed on the rear of the co
 * modButton() if you want to change modes freely. modButton() not needed to change modes across presets.&#x20;
 * DDButton() to swap between "layers" of 12 positions.
 * hybridButton() to lock position and use rotary as incremental switch.
+* 26 button numbers
 {% endtab %}
 {% endtabs %}
 
@@ -81,6 +82,7 @@ This switch has "reverese" set to true, since it is placed on the rear of the co
 * modButton() if you want to change modes freely. modButton() not needed to change modes across presets.&#x20;
 * DDButton() to swap between "layers" of 12 positions.
 * hybridButton() to lock position and use rotary as incremental switch.
+* 26 button numbers
 {% endtab %}
 {% endtabs %}
 
@@ -110,6 +112,7 @@ As you can see, this encoder doesn't require the encoder A and B pins to be on c
 * modButton() if you want to change modes freely. modButton() not needed to change modes across presets.&#x20;
 * DDButton() to swap between "layers" of 12 positions.
 * hybridButton() to lock position and use rotary as incremental switch.
+* 26 button numbers
 {% endtab %}
 {% endtabs %}
 
@@ -154,5 +157,6 @@ So typed out in 30\_Switches.ino:
 * modButton() if you want to change modes freely. modButton() not needed to change modes across presets.&#x20;
 * DDButton() to swap between "layers" of 12 positions.
 * hybridButton() to lock position and use rotary as incremental switch.
+* 26 button numbers
 {% endtab %}
 {% endtabs %}

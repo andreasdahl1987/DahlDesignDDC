@@ -14,7 +14,7 @@ For a switch on row 2 column 4 -> `modButton(2,4);`
 {% endtab %}
 
 {% tab title="Requirements" %}
-None
+* 1 button number
 {% endtab %}
 {% endtabs %}
 
@@ -47,7 +47,7 @@ For a switch on row 2 column 4 -> `biteButton(2,4);`
 {% endtab %}
 
 {% tab title="Requirements" %}
-None
+* 1 button number
 {% endtab %}
 {% endtabs %}
 
@@ -76,7 +76,8 @@ For a switch on row 2 column 4 -> `neutralButton(2,4);`
 {% endtab %}
 
 {% tab title="Requirements" %}
-modButton() if you want to swap modes.
+* modButton() if you want to swap modes.
+* 1 button number
 {% endtab %}
 {% endtabs %}
 
@@ -140,7 +141,7 @@ For a switch on row 2 column 4 -> `presetButton(2,4);`
 {% endtab %}
 
 {% tab title="Requirements" %}
-None
+* 1 button number
 {% endtab %}
 {% endtabs %}
 

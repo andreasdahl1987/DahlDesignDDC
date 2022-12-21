@@ -18,7 +18,7 @@ In addition, it has a **handbrake feature.** Pressing left and right **pull** bu
 
 * If handbrake is active or not is shown in property \[DahlDesign.DDChandbrakeActive]
 * The mode uses the button field. \
-  `void pushPull(int rightPullRow, int rightPullCol, int rightPushRow, int rightPushCol, int leftPullRow, int leftPullCol, int leftPushRow, int leftPushCol, int fieldPlacement)`
+  `void pushPull(int rightPullRow, int rightPullCol, int rightPushRow, int rightPushCol, int leftPullRow, int leftPullCol, int leftPushRow, int leftPushCol, int fieldPlacement);`
 {% endtab %}
 
 {% tab title="Example" %}
@@ -38,5 +38,6 @@ As you can see, the fieldPlacement is set to 4. This function uses the button fi
 
 {% tab title="Requirements" %}
 * modButton() if you want to change modes freely. modButton() not needed to change modes across presets.
+* 4 button numbers
 {% endtab %}
 {% endtabs %}
