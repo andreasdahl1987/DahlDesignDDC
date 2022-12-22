@@ -16,7 +16,7 @@ void presets(int8_t presetNumber)
             switchMode[i][a] = 0;
         }
     }
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < 10; i++)
     {
         analogSwitchMode1[i] = 0;
         analogSwitchMode2[i] = 0;
