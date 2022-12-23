@@ -70,6 +70,7 @@ void setup()
         }
     }
 
+    presets(0); //Start up in preset 1. 
 
     Joystick.begin(0); //Start joystick library magic
 
