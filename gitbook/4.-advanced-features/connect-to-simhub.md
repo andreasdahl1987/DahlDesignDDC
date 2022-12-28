@@ -16,13 +16,13 @@ A DDC controller can send information about switch modes, bite point, and really
 
 #### 4: Find your controller name
 
-<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 #### 5: Type controller name in the plugin menu
 
 Just the name of the controller, don't include the ending "\_". Also check for DDC Enabled, and also DDS and clutch if relevant.
 
-<figure><img src="../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
 ## Known issues
 
@@ -30,7 +30,7 @@ Just the name of the controller, don't include the ending "\_". Also check for D
   * Make sure you wrote the controller name correctly.
   *   Make sure none of the wheels axis have been calibrated by Windows. Got to USB controller settings and reset controller to default.
 
-      <figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
   * Try flashing with a different board core. For instance, some boards like Pro Micro I've seen just wont be registered by Simhub. Try selecting Arduino Leonardo board when uploading the sketch
   * Make sure "SW1 Enabled" isn't checked under LED plugin settings. Unless you're actually using an SW1.&#x20;
   * Make sure you have the latest version of the plugin.

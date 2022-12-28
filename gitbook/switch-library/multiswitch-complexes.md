@@ -20,7 +20,7 @@ As you can see, both have their strengths and weaknesses. Below are the function
 
 ### Hybrid
 
-<figure><img src="../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 * The idea if the hybrid system is a rotary that holds a button number. Rotating CW or CCW will increase or decrease the button number. The In the case above, it counts to 15, but any number of positions can be set. Then, a button set up with a hybridButton() function can be pressed to lock the position of the rotary, and then the rotary can be used to make button pulses on CW and CCW rotation - while still holding the button number it was holding before hybridButton was pressed.&#x20;
 * In the example above, the rotary has been rotated to position 4, then hybrid button pressed. The switch is still producing a continous button 4 press, but will in addition give pulses of button number 16 on CCW rotation and 17 on CW rotation.&#x20;
@@ -41,7 +41,7 @@ The various hybrid functions are listed under their respective encoder/rotary ca
   * There are no simulatneous button presses, so all kinds of sims are supported.
   *   The physical position of the switch matches the button numbers, so you can go ahead and label your controller accordingly, as below.&#x20;
 
-      <figure><img src="../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 *   There are 24 button and **36 button** variants. Really, the product of both are 24 functional buttons. The difference is that in the 36 button variant the 12-position switch is also given button numbers to reflect its position, which is useful if you want information about the switch position in SimHub for dashboard purposes.
 
     <figure><img src="../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
