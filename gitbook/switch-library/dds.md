@@ -24,6 +24,8 @@ If your controller uses a DDS switch, you have to check for this in the properti
 
 The video below you can see how the DDS switch works together with the dashboard. Here, a funky switch alone has all the switches needed for the complex; including the rotary, DDButton and hybridButton.&#x20;
 
+**All DDS switches can also set the bite point of your clutches.**&#x20;
+
 {% embed url="https://www.youtube.com/watch?t=372s&v=LvadQq7CFOc" %}
 
 #### DDS2bit()
@@ -36,8 +38,10 @@ Modes:
 
 * 0: Open hybrid
 * 1: Closed hybrid
-* e: 4-position switch
+* 2: 4-position switch
 * 3: Incremental encoder
+
+Set the bite point using a [biteButton().](function-button.md#bitebutton)
 {% endtab %}
 
 {% tab title="Example" %}
@@ -52,6 +56,7 @@ This switch has "reverese" set to true, since it is placed on the rear of the co
 * modButton() if you want to change modes freely. modButton() not needed to change modes across presets.&#x20;
 * DDButton() to swap between "layers" of 12 positions.
 * hybridButton() to lock position and use rotary as incremental switch.
+* biteButton() to set the bite point of clutches.
 * 26 button numbers
 {% endtab %}
 {% endtabs %}
@@ -68,6 +73,8 @@ Modes:
 * 1: Closed hybrid
 * 2: 16-position switch
 * 3: Incremental encoder
+
+Set the bite point using a [biteButton().](function-button.md#bitebutton)
 {% endtab %}
 
 {% tab title="Example" %}
@@ -82,6 +89,7 @@ This switch has "reverese" set to true, since it is placed on the rear of the co
 * modButton() if you want to change modes freely. modButton() not needed to change modes across presets.&#x20;
 * DDButton() to swap between "layers" of 12 positions.
 * hybridButton() to lock position and use rotary as incremental switch.
+* biteButton() to set the bite point of clutches.
 * 26 button numbers
 {% endtab %}
 {% endtabs %}
@@ -112,7 +120,10 @@ As you can see, this encoder doesn't require the encoder A and B pins to be on c
 * modButton() if you want to change modes freely. modButton() not needed to change modes across presets.&#x20;
 * DDButton() to swap between "layers" of 12 positions.
 * hybridButton() to lock position and use rotary as incremental switch.
+* biteButton() to set the bite point of clutches.
 * 26 button numbers
+
+Set the bite point using a [biteButton().](function-button.md#bitebutton)
 {% endtab %}
 {% endtabs %}
 
@@ -157,6 +168,9 @@ So typed out in 30\_Switches.ino:
 * modButton() if you want to change modes freely. modButton() not needed to change modes across presets.&#x20;
 * DDButton() to swap between "layers" of 12 positions.
 * hybridButton() to lock position and use rotary as incremental switch.
+* biteButton() to set the bite point of clutches.
 * 26 button numbers
+
+Set the bite point using a [biteButton().](function-button.md#bitebutton)
 {% endtab %}
 {% endtabs %}
