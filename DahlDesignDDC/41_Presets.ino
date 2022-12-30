@@ -22,7 +22,9 @@ void presets(int8_t presetNumber)
         analogSwitchMode2[i] = 0;
     }
 
-    //Default values set
+    //----------------------------------------
+    //-----------GLOBAL VALUES----------------
+    //----------------------------------------
 
     bitePoint = 300;
     brakeMagicValue = 50;
@@ -33,7 +35,7 @@ void presets(int8_t presetNumber)
     quickValue1 = 11;
 
     //----------------------------------------
-    //-----BUILD YOUR PRESETS HERE------------
+    //---------INDIVIDUAL VALUES--------------
     //----------------------------------------
 
     switch (presetNumber)
