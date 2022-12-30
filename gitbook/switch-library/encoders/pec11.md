@@ -24,7 +24,7 @@ The button numbers used is determined by the number written in the block for the
 {% endtab %}
 {% endtabs %}
 
-#### PEC11Bite()
+#### <mark style="background-color:orange;">PEC11Bite()</mark>
 
 {% tabs %}
 {% tab title="Description" %}

@@ -24,7 +24,7 @@ The button numbers used is determined by the number written in the block for the
 {% endtab %}
 {% endtabs %}
 
-#### rotary2Bite()
+#### <mark style="background-color:orange;">rotary2Bite()</mark>
 
 {% tabs %}
 {% tab title="Description" %}
@@ -49,7 +49,7 @@ The button numbers used is determined by the number written in the block for the
 {% endtab %}
 {% endtabs %}
 
-#### rotary2Modes()
+#### <mark style="background-color:blue;">rotary2Modes()</mark>
 
 {% tabs %}
 {% tab title="Description" %}

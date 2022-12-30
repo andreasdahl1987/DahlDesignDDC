@@ -18,10 +18,12 @@ For a switch on row 2 column 4 -> `modButton(2,4);`
 {% endtab %}
 {% endtabs %}
 
-#### biteButton()
+#### <mark style="background-color:orange;">biteButton()</mark>
 
 {% tabs %}
 {% tab title="Description" %}
+Any switch function that uses a bite button will be <mark style="background-color:orange;">highlighted orange.</mark>
+
 Normally works as a simple pushbutton. In addition, when held, the controller is primed to enter bite point setting. Hold + rotate a bite point compatible rotary (a roatry using a function that includes bite point setting) to enter bite point setting mode. At this point, you can release the bite button. Further presses of the button will go through the stages of setting the bite point (mode 1-3), before in the end going out of bite point setting (back to mode 0).&#x20;
 
 SimHub property -> \[DahlDesign.DDCbiteSetting]
@@ -81,10 +83,12 @@ For a switch on row 2 column 4 -> `neutralButton(2,4);`
 {% endtab %}
 {% endtabs %}
 
-#### hybridButton()
+#### <mark style="background-color:blue;">hybridButton()</mark>
 
 {% tabs %}
 {% tab title="Description" %}
+Any switch function that uses a hybrid button will be <mark style="background-color:blue;">highlighted blue.</mark>
+
 A switch dedicated to opening/closing switches with hybrid features, such as DDS functions, rotaryAnalog(), rotary2Modes(), and a few more.
 
 Does not have a button number.

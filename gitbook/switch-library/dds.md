@@ -28,7 +28,7 @@ The video below you can see how the DDS switch works together with the dashboard
 
 {% embed url="https://www.youtube.com/watch?t=372s&v=LvadQq7CFOc" %}
 
-#### DDS2bit()
+#### <mark style="background-color:orange;">DDS2bit()</mark>
 
 {% tabs %}
 {% tab title="Description" %}
@@ -61,7 +61,7 @@ This switch has "reverese" set to true, since it is placed on the rear of the co
 {% endtab %}
 {% endtabs %}
 
-#### DDS4bit()
+#### <mark style="background-color:orange;">DDS4bit()</mark>
 
 {% tabs %}
 {% tab title="Description" %}
@@ -71,7 +71,7 @@ Modes:
 
 * 0: Open hybrid
 * 1: Closed hybrid
-* 2: 16-position switch
+* 2: 16-position switch. Absolute.
 * 3: Incremental encoder
 
 Set the bite point using a [biteButton().](function-button.md#bitebutton)
@@ -94,7 +94,7 @@ This switch has "reverese" set to true, since it is placed on the rear of the co
 {% endtab %}
 {% endtabs %}
 
-#### DDSfunky()
+#### <mark style="background-color:orange;">DDSfunky()</mark>
 
 {% tabs %}
 {% tab title="Description" %}
@@ -127,7 +127,7 @@ Set the bite point using a [biteButton().](function-button.md#bitebutton)
 {% endtab %}
 {% endtabs %}
 
-#### DDSanalog()
+#### <mark style="background-color:orange;">DDSanalog()</mark>
 
 {% tabs %}
 {% tab title="Description" %}
@@ -137,7 +137,7 @@ Modes:
 
 * 0: Open hybrid
 * 1: Closed hybrid
-* 2: 12-position switch
+* 2: 12-position switch. Absolute.
 * 3: Incremental switch
 {% endtab %}
 

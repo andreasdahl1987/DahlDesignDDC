@@ -22,7 +22,7 @@ The button numbers used is determined by the number written in the block for the
 {% endtab %}
 {% endtabs %}
 
-#### rotary4Modes()
+#### <mark style="background-color:blue;">rotary4Modes()</mark>
 
 {% tabs %}
 {% tab title="Description" %}
