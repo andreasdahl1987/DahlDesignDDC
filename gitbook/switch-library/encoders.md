@@ -1,6 +1,6 @@
 # Encoders
 
-There are thousands of encoders out there. DDC supports a bunch of them. So far in my tests I've identified and added support for 5 categories of encoders, that have different mechanical properties and thus need different algorithms to determine the direction of rotation. These categories should cover MOST encoders. You'll have to figure out which category your encoder belongs to, and use the switch functions for that encoder. If none of the categories work for you, contact me and we'll find a way to add support.&#x20;
+There are thousands of encoders out there. DDC supports most of them. So far in my tests I've identified and added support for 5 categories of encoders, that have different mechanical properties and thus need different algorithms to determine the direction of rotation. These categories should cover MOST encoders. You'll have to figure out which category your encoder belongs to, and use the switch functions for that encoder. If none of the categories work for you, contact me and we'll find a way to add support.&#x20;
 
 Common to almost all encoders is that the switch has 2 or more paths to a common.&#x20;
 
@@ -45,8 +45,20 @@ Encoders:
 
 These functions are for encoders that mechanically works the way that the software usually tries to make an encoder work. Rotating CW will briefly close A->C and rotating CCW will briefly close B ->C. The switch is steady at 00 and can never be 11 since you can't turn it CW and CCW at the same time. It would actually work to code this switch as two pushbuttons. The switch very bounce-proof and only needs a lightweight algorithm to work.&#x20;
 
+Encoders:
+
 * Alps SRBM
 
 ### rotary4Bit
 
-These functions are for 4-bit encoders. The way they work are identical to the rotary2Bit encoders, but they have 4 paths to a common
+These functions are for 4-bit encoders. The way they work are identical to the rotary2Bit encoders, but they have 4 paths to a common. So they will typically scroll through 0000 -> 0001 -> 0011 -> 0010 -> 0110 -> etc. In total 16 different configurations for 16 switch positions. These are _absolute encoders,_ meaning each position of the switch has a different signal output, and the actual physical position of the switch can be determined by reading the signal.&#x20;
+
+All rotary4Bit() functions are for 16-position switches, but can be modified for 4-bit switches that have 8, 10 and 12 positions. With less than 16 positions, some of the 4-bit combinations are simply skipped. To go from 16 to 12 positions, the switch might skip 0100, 0010, 1110 and 0111, as an example.&#x20;
+
+The main advantage of these switches is that they are absolute, so you can label the switch on your controller. In addition, they generally have a heavier detent feel to them. The disadvantage is the space they take in the matrix; 4 blocks.&#x20;
+
+Encoders:
+
+* Bourns PAC18R
+* Grayhill 26 series
+* Panasonic EVQV9
