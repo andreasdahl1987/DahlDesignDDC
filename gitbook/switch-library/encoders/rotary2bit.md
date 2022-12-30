@@ -72,13 +72,13 @@ For a encoder on row 2 column 4+5 -> `rotary2Modes(2,4,2,18,true);`
 
 * Field placement to 2. Uses two slots in the bit field (2 and 3). So \[DahlDesign.DDCR2] and \[DahlDesign.DDCR3] and will show the modes.
 * Hybrid switch has 18 positions. The starting number of the hybrid switch is determined by the number set in the block for encoder pin A. The number for incremental mode is determined by the number set in the block for encoder pin B. So "10" in pin A block will give numbers 10-27 for the hybrid switch. "28" in pin B block will give numbers 28 and 29 for incremental mode.&#x20;
-* This switch has "reverse" set to true, which can be a good idea if it is placed horizontally on the left side. Turning it CCW will now increase the count instead of reducing.&#x20;
+* This switch has "reverse" set to true, which can be a good idea if it is placed horizontally on the right side. Turning it CCW will now increase the count instead of reducing.&#x20;
 {% endtab %}
 
 {% tab title="Requirements" %}
 * modButton() if you want to change modes freely. modButton() not needed to change modes across presets.&#x20;
 * hybridButton() to lock position and use rotary as incremental switch.
-* X button numbers, minimum 4, determined my the hybrid switch positions.
+* X button numbers, minimum 4, determined by the hybrid switch positions.
 * Two slots in the rotary field.&#x20;
 {% endtab %}
 {% endtabs %}
@@ -132,7 +132,7 @@ For a encoder on row 2 column 4+5 -> `rotary2Multis(2,4,2,8,12,18,true);`&#x20;
 * Mode 3 -> 18 position switch
 * The starting number is determined by the number set in the block for encoder pin A.&#x20;
 * Field placement to 2. Uses two slots in the bit field (2 and 3). So \[DahlDesign.DDCR2] and \[DahlDesign.DDCR3] and will show the modes.
-* This switch has "reverse" set to true, which can be a good idea if it is placed horizontally on the left side. Turning it CCW will now increase the count instead of reducing.
+* This switch has "reverse" set to true, which can be a good idea if it is placed horizontally on the right side. Turning it CCW will now increase the count instead of reducing.
 {% endtab %}
 
 {% tab title="Requirements" %}

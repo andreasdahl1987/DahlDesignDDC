@@ -28,6 +28,7 @@
   * [Toggle switches](switch-library/pushbutton-1.md)
   * [Encoders](switch-library/encoders/README.md)
     * [rotary2Bit](switch-library/encoders/rotary2bit.md)
+    * [rotary4Bit](switch-library/encoders/rotary4bit.md)
   * [Function button](switch-library/function-button.md)
   * [Shifter](switch-library/pushbutton-2.md)
   * [DDS](switch-library/dds.md)
