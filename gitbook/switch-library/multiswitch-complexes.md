@@ -32,7 +32,7 @@ The various hybrid functions are listed under their respective encoder/rotary ca
 
 ### Multifunction
 
-<figure><img src="../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 * The idea of the multifunction system is that a 12-position switch controls  the button numbers of two buttons (or an encoder that pulses button presses on CW/CCW rotation). The system produces 24 button numbers.
 * In the example above, the 12-position switch is in position 8, meaning button 1 is button number 15 and button 2 is button number 16. Flicking the rotary to position 9 will give you different button number outputs from the two buttons; 17 and 18.&#x20;

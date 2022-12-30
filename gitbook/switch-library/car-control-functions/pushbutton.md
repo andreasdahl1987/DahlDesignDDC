@@ -14,7 +14,7 @@ A function that sets up 4 buttons as a pair of push/pull shifters. Can also of c
 
 The button numbers will start with whatever is set up in the slot for the right side pull button in the matrix, and count 3 more from there. So for the other 3 buttons used you dont need to set up a button number in the matrix (can be set to 0, or anything else, it wont be read).&#x20;
 
-In addition, it has a **handbrake feature.** Pressing left and right **pull** buttons together for 1 second will engage "handbrake", which is 100% brake force from the controllers brake axis. Works great with sims that allow you to map a secondary brake axis (iRacing). The controller doesn't need clutch paddles for this to work. To **release** the handbrake, simply hold the left and right **push** buttons for 1 second.&#x20;
+In addition, it has a **handbrake feature.** Pressing left and right **pull** buttons together for 1 second will engage "handbrake", which is 100% brake force from the controllers brake axis. <mark style="background-color:red;">Works great with sims that allow you to map a secondary brake axis (iRacing)</mark>. The controller doesn't need clutch paddles for this to work. To **release** the handbrake, simply hold the left and right **push** buttons for 1 second.&#x20;
 
 * If handbrake is active or not is shown in property \[DahlDesign.DDChandbrakeActive]
 * The mode uses the button field. \

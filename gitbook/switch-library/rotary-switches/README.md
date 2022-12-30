@@ -15,7 +15,7 @@ The weakness of these switches are the size and the number of pins, but there ar
 
 A voltage divider circuit in its simples form below:
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Typically, "Vin" will be your +5V or +3.3V from the microcontroller. The ground symbol to "GND" on the microcontroller. "Vout" is the voltage level that you'll measure. The idea here is to divide a portion of the voltage to ground and a portion to be measured. The voltage at "Vout" depends on the size ratio of the two resistors Z1 and Z2. If Z2 is really big and Z1 small, a higher voltage is meassured at "Vout". If Z1 is big and Z2 small, a lower voltage is measured at "Vout".&#x20;
 
