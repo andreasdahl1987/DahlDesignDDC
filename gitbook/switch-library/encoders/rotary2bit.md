@@ -72,7 +72,7 @@ For a encoder on row 2 column 4+5 -> `rotary2Modes(2,4,2,18,true);`
 
 * Field placement to 2. Uses two slots in the bit field (2 and 3). So \[DahlDesign.DDCR2] and \[DahlDesign.DDCR3] and will show the modes.
 * Hybrid switch has 18 positions. The starting number of the hybrid switch is determined by the number set in the block for encoder pin A. The number for incremental mode is determined by the number set in the block for encoder pin B. So "10" in pin A block will give numbers 10-27 for the hybrid switch. "28" in pin B block will give numbers 28 and 29 for incremental mode.&#x20;
-* This switch has "reverese" set to true, which can be a good idea if it is placed horizontally on the left side. Turning it CCW will now increase the count instead of reducing.&#x20;
+* This switch has "reverse" set to true, which can be a good idea if it is placed horizontally on the left side. Turning it CCW will now increase the count instead of reducing.&#x20;
 {% endtab %}
 
 {% tab title="Requirements" %}
@@ -83,4 +83,61 @@ For a encoder on row 2 column 4+5 -> `rotary2Modes(2,4,2,18,true);`
 {% endtab %}
 {% endtabs %}
 
-#### D
+#### rotary2Multi()
+
+{% tabs %}
+{% tab title="Description" %}
+A counting multiposition switch. You can set the amount of positions to any number. The physical position of the switch will not be in sync with button number.
+{% endtab %}
+
+{% tab title="Example" %}
+`void rotary2Multi(int row, int column, int positions, bool reverse)`
+
+For a encoder on row 2 column 4+5 -> `rotary2Multi(2,4,9,false);`
+
+* This will make a 9-position switch. Starting number is the number set in the block for encoder A pin.
+* &#x20;The `reverse` refers to increasing/decreasing button number on CW/CCW rotation, can be flipped by setting to `true.`&#x20;
+{% endtab %}
+
+{% tab title="Requirements" %}
+* X button numbers.
+
+
+{% endtab %}
+{% endtabs %}
+
+#### rotary2Multis()
+
+{% tabs %}
+{% tab title="Description" %}
+Switch with several multiposition modes, including a 4-position switch and 3 instances of rotary2Multi().&#x20;
+
+Modes:
+
+* 0: 4-position switch. Absolute, but the 4 positions are repeated several times during a full 360 degree rotation of the switch.
+* 1: Counting multiposition switch, any amount of positions.
+* 2: Counting multiposition switch, any amount of positions.
+* 3: Counting multiposition switch, any amount of positions.
+
+Uses the rotary field for [field placement.](../../4.-advanced-features/field-placement.md) Since is has 4 modes it uses 2 slots in the field.
+{% endtab %}
+
+{% tab title="Example" %}
+`void rotary2Multis(int row, int column, int fieldPlacement, int positions1, int positions2, int positions3, bool reverse)`
+
+For a encoder on row 2 column 4+5 -> `rotary2Multis(2,4,2,8,12,18,true);`&#x20;
+
+* Mode 1 -> 8 position switch
+* Mode 2 -> 12 position switch
+* Mode 3 -> 18 position switch
+* The starting number is determined by the number set in the block for encoder pin A.&#x20;
+* Field placement to 2. Uses two slots in the bit field (2 and 3). So \[DahlDesign.DDCR2] and \[DahlDesign.DDCR3] and will show the modes.
+* This switch has "reverse" set to true, which can be a good idea if it is placed horizontally on the left side. Turning it CCW will now increase the count instead of reducing.
+{% endtab %}
+
+{% tab title="Requirements" %}
+* X button numbers, minumum 4. Determined by the highest number of positions used.
+* modButton() to change switch modes.
+* Two slots in the rotary field.
+{% endtab %}
+{% endtabs %}

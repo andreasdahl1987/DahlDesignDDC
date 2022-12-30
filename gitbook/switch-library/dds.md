@@ -2,7 +2,7 @@
 
 DDS (Dahl Design Switch) switches are tailored for the Dahl Design iRacing [Dashboard](https://app.gitbook.com/o/Gk9mLLIOB4bOKrDCqIdJ/s/49tDWuDHhTQtCQdHWIW5/), but can of course be used any way you like, if it fits your projects. It is a function that takes a rotary switch and two pushbuttons to create a 26-position switch complex that is ideal for a menu system.&#x20;
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 In the example above, the switch has button numbers 1 to 26. It works like this:
 
