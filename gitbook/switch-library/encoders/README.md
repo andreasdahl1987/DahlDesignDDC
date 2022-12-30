@@ -6,7 +6,7 @@ Common to almost all encoders is that the switch has 2 or more paths to a common
 
 You can measure the continuity between A->C and B->C and get the following outcomes:
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (2).png" alt=""><figcaption></figcaption></figure>
 
 As you rotate the switch, it will scroll through these states: 00, 10, 11, 01, 00, 10, 11, 01, 00, and so on. Rotating the other way and the order will be different: 00, 01, 11, 10, 00, etc. That way we can tell CW from CCW rotation.&#x20;
 
