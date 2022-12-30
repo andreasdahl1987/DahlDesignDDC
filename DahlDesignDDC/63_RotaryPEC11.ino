@@ -70,7 +70,7 @@ void PEC11(int row, int col, bool reverse) {
     Joystick.setButton(Number + 1 - Reverse, (globalClock - toggleTimer[Row][Column + 1] < PEC11Pulse));
 }
 
-void PEC11bite(int row, int col, bool reverse) {
+void PEC11Bite(int row, int col, bool reverse) {
 
     int Row = row - 1;
     int Column = col - 1;
