@@ -49,6 +49,8 @@
     <None Include="42_MatrixInject.ino" />
     <None Include="65_QuickRotary.ino" />
     <None Include="31_RunningPresets.ino" />
+    <None Include="92_Handbrake.ino" />
+    <None Include="72_FunkyHat.ino" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.DahlDesignDDC.vsarduino.h">

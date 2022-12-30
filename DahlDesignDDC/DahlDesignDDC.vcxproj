@@ -130,8 +130,10 @@
     <None Include="56_SW1BiteRotary.ino" />
     <None Include="70_FunkyPush.ino" />
     <None Include="71_FunkyDirections.ino" />
+    <None Include="72_FunkyHat.ino" />
     <None Include="74_FunkyRotary.ino" />
     <None Include="80_Clutch.ino" />
+    <None Include="92_Handbrake.ino" />
     <None Include="93_BrakeMagic.ino" />
     <None Include="94_ThrottleHold.ino" />
     <None Include="98_PresetSwitch.ino" />

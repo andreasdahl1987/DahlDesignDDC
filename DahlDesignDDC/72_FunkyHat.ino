@@ -16,7 +16,7 @@ void funkyHat(int8_t row, int8_t colPush, int8_t colUp, int8_t colRight, int8_t 
 
     //Debouncing + hat set
 
-    for (int i = 0; i < 4, i++)
+    for (int i = 0; i < 4; i++)
     {
         if (pushState[Row][hatCols[i]] != rawState[Row][hatCols[i]] && (globalClock - switchTimer[Row][hatCols[i]]) > buttonCooldown)
         {
@@ -52,4 +52,3 @@ void funkyHat(int8_t row, int8_t colPush, int8_t colUp, int8_t colRight, int8_t 
 
     Joystick.setHatSwitch(HatNumber, hatValue);
 }
-
