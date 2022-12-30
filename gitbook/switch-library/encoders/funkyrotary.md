@@ -25,5 +25,3 @@ The button numbers used is determined by the number written in the block for the
 * 2 button numbers
 {% endtab %}
 {% endtabs %}
-
-#### r

@@ -41,7 +41,7 @@ Encoders:
 * Bourns PEC11H
 * TT Electronics EN11 (15 pulse)
 
-### rotary2Pulse
+### rotaryPulse
 
 These functions are for encoders that mechanically works the way that the software usually tries to make an encoder work. Rotating CW will briefly close A->C and rotating CCW will briefly close B ->C. The switch is steady at 00 and can never be 11 since you can't turn it CW and CCW at the same time. It would actually work to code this switch as two pushbuttons. The switch very bounce-proof and only needs a lightweight algorithm to work.&#x20;
 
