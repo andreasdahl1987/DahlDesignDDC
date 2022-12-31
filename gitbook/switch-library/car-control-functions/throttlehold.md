@@ -13,21 +13,7 @@ This feature was designed for the SW1 steering wheel, so the functions so far on
 
 {% tabs %}
 {% tab title="Description" %}
-Use a toggle switch to turn throttleHold on/off. Paired with an encoder of the[ rotary2Bit ](../encoders/#rotary2bit)category. .
-
-The amount of throttle application given can be read from the controllers throttle axis. Throttle hold on/off defaults to button field 6 for SimHub communication. It is returned as property \[DahlDesign.DDCthrottleHoldActive].&#x20;
-
-Throttle hold % is defined by the variable `throttleHoldValue` found in 41\_Presets.ino. It defaults to all presets with 1000, which is 100%.&#x20;
-
-The rotary encoder will adjust the throttle hold % when throttle hold is active.&#x20;
-{% endtab %}
-{% endtabs %}
-
-#### throttleHoldT()
-
-{% tabs %}
-{% tab title="Description" %}
-Use a toggle switch to turn throttleHold on/off. Paired with an encoder of the[ rotary2Bit ](../encoders/#rotary2bit)category. .
+Use a toggle switch to turn throttleHold on/off. Paired with an encoder of the[ rotary2Bit ](../encoders/#rotary2bit)category. Neither button nor encoder will produce any button number press.&#x20;
 
 The amount of throttle application given can be read from the controllers throttle axis. Throttle hold on/off defaults to button field 6 for SimHub communication. It is returned as property \[DahlDesign.DDCthrottleHoldActive].&#x20;
 
@@ -37,15 +23,44 @@ The rotary encoder will adjust the throttle hold % when throttle hold is active.
 {% endtab %}
 
 {% tab title="Example" %}
-`void throttleHoldT(int row, int col)`
+`throttleHoldT(int8_t buttonRow, int8_t buttonCol, int8_t rotaryRow, int8_t rotaryCol, bool reverse)`
 
-For a switch on row 3 column 5 -> `brakeMagic(3,5);`
+For a button on row 2 column 3 and encoder on row 3 column 2+3:
+
+`throttleHoldT(2, 3, 3, 2, true);`
+
+In this case, "reverse" is set to true, so the actions of CW and CCW rotation will be flipped.&#x20;
 {% endtab %}
 
 {% tab title="Requirements" %}
-* Sim that supports secondary brake input
-* 1 button number
+* Sim that supports secondary throttle input
 {% endtab %}
 {% endtabs %}
 
-d
+#### throttleHoldM()
+
+{% tabs %}
+{% tab title="Description" %}
+Use a momentary switch to toggle throttleHold on/off. Paired with an encoder of the[ rotary2Bit ](../encoders/#rotary2bit)category. Neither button nor encoder will produce any button number press.&#x20;
+
+The amount of throttle application given can be read from the controllers throttle axis. Throttle hold on/off defaults to button field 6 for SimHub communication. It is returned as property \[DahlDesign.DDCthrottleHoldActive].&#x20;
+
+Throttle hold % is defined by the variable `throttleHoldValue` found in 41\_Presets.ino. It defaults to all presets with 1000, which is 100%.&#x20;
+
+The rotary encoder will adjust the throttle hold % when throttle hold is active.&#x20;
+{% endtab %}
+
+{% tab title="Example" %}
+`throttleHoldM(int8_t buttonRow, int8_t buttonCol, int8_t rotaryRow, int8_t rotaryCol, bool reverse)`
+
+For a button on row 2 column 3 and encoder on row 3 column 2+3:
+
+`throttleHoldM(2, 3, 3, 2, true);`
+
+In this case, "reverse" is set to true, so the actions of CW and CCW rotation will be flipped.&#x20;
+{% endtab %}
+
+{% tab title="Requirements" %}
+* Sim that supports secondary throttle input
+{% endtab %}
+{% endtabs %}

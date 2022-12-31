@@ -2,7 +2,7 @@
 
 Have you noticed the toggles at the back of F1 wheels? &#x20;
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (3).png" alt=""><figcaption></figcaption></figure>
 
 Drives use these to quickly change a number of settings. For instance engine braking and bias before a hard braking zone, or differential settings before a corner complex.&#x20;
 
