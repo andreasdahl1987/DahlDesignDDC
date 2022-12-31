@@ -93,7 +93,8 @@ In order to make the algorithms more memory- and processing friendly, they will 
 * The following special buttons will not need a button number:
   * Hybrid button
   * DDButton
-  * Throttle Hold button
+  * ThrottleHold button
+  * Handbrake button
 * Any unused button/open slot in the matrix, can safely be assigned 0.
 * Buttons and toggles that uses a single block simply uses the number assigned to that block.
 * Encoders:
