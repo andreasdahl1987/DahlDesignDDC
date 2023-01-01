@@ -26,16 +26,9 @@
     <a href="https://github.com/andreasdahl1987/DahlDesignDDC">DDC</a>
   </p>
 </div>
-
-  <h5 align="center">Welcome to the repository!  <br /> <br /> 
-
-[Wiki](https://github.com/andreasdahl1987/DahlDesignDDC/wiki) is under construction, but has come a long way. It should be enough to get you started. 
-
-See my webpage www.dahldesign.eu for more info.
-
-Demo video on YouTube: https://www.youtube.com/watch?v=LvadQq7CFOc
-
-The old, and a bit outdated .pdf manual found [here](https://drive.google.com/drive/folders/1nRIrunK4o9ceeFzw6Bxu9pcchanQ1Gem).
+  <h5 align="center">Welcome to the repository!  <br /> I highly recommend checking out the manual.</h5>
+ <h2 <p align="center"> <a href=https://dahl-design.gitbook.io/ddc//>MANUAL</a>
+</h2>
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
