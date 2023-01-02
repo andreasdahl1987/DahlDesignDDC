@@ -13,6 +13,8 @@ void loop()
 
 	rotaryField = 0;
 	buttonField = 0;
+
+	shiftRegisterScan();
 	matrix();
 
 	runningPresets();

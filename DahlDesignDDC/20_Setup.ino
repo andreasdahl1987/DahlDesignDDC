@@ -2,12 +2,19 @@
 //-----------SETUP--------------
 //------------------------------
 
+
 void setup()
 {
     //Set up joystick axis
     Joystick.setXAxisRange(0, 1000);
     Joystick.setThrottleRange(0, 1000);
     Joystick.setBrakeRange(0, 1000);
+
+    //Shift register setup
+    if (SRCOUNT > 0)
+    {
+        shiftRegisterSetup();
+    }
 
     //Filling some arrays
     for (int i = 0; i < rowCount; i++)
@@ -50,7 +57,7 @@ void setup()
         {
             pinMode(col[i], INPUT_PULLUP);
         }
-        
+
     }
 
     for (int i = 0; i < rowCount; i++)
@@ -58,13 +65,14 @@ void setup()
         if (row[i] != 99)
         {
             pinMode(row[i], INPUT_PULLUP);
-        }  
+        }
     }
 
     //Pull up non-Matrix pins
-    if (nonMatrixIncluded)
+
+    for (int i = 0; i < nonMatrixCount; i++)
     {
-        for (int i = 0; i < nonMatrixCount; i++)
+        if (nonMatrix[i] < 99)
         {
             pinMode(nonMatrix[i], INPUT_PULLUP);
         }
