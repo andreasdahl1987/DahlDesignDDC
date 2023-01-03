@@ -6,7 +6,7 @@ This refers to the `int fieldPlacement` that you'll find in many of the switch f
 * The 16 bit value is constructed by 16 1's and 0's. Basically 16 slots being on/off. In DDC, you can map things to these slots. You could say that the 4th bit represents the switch mode for one of your 12-position switches. So if the switch is in 12-position mode, the 4th bit should be 0, if it is in incremental mode the 4th bit will be 1. The algorithm takes care of this, but you have to decide which bits you are going to use for each switch. We say that this joysick axis represents a `bit field`.
 * The value of these joystick axis are read by SimHub, and then picked up by my plugin. The plugin then splits up all the 16 bits and looks which bits are 0 and which are 1. It creates properties based on this, that you can use in the dashboard editor.
 
-### `11_BitFields.ino`
+### `14_BitFields.ino`
 
 This file introcudes these fields into the sketch. There is no code to be written here, but you can use this file to plan/organize your switches that has modes.
 
