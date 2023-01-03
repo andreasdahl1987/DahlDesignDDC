@@ -68,13 +68,13 @@ void setup()
         }
     }
 
-    //Pull up non-Matrix pins
+    //Pull up direct pins
 
-    for (int i = 0; i < nonMatrixCount; i++)
+    for (int i = 0; i < directPinsCount; i++)
     {
-        if (nonMatrix[i] < 99)
+        if (directPins[i] < 99)
         {
-            pinMode(nonMatrix[i], INPUT_PULLUP);
+            pinMode(directPins[i], INPUT_PULLUP);
         }
     }
 

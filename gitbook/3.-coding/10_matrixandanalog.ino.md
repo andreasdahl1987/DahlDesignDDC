@@ -7,16 +7,11 @@
 //-------MATRIX VARIABLES-------
 //------------------------------
 
-uint8_t row[] = {0};
+uint8_t row[] = { 0, 0, 0, 0, 0 };
 const uint8_t rowCount = sizeof(row) / sizeof(row[0]);
 
-uint8_t col[] = {0};
+uint8_t col[] = { 0, 0, 0, 0, 0 };
 const uint8_t colCount = sizeof(col) / sizeof(col[0]);
-
-bool nonMatrixIncluded = false;
-
-uint8_t nonMatrix[] = {0};
-const uint8_t nonMatrixCount = sizeof(nonMatrix) / sizeof(nonMatrix[0]);
 
 //---------------------------------------
 //--------MATRIX DESCRIPTION-------------
@@ -32,6 +27,15 @@ const uint8_t buttonNumber[rowCount][colCount] =
 };
 
 //---------------------------------------
+//------------DIRECT WIRING--------------
+//---------------------------------------
+
+
+uint8_t directPins[] = { 99 };
+const uint8_t directPinsCount = sizeof(directPins) / sizeof(directPins[0]);
+
+
+//---------------------------------------
 //--------ANALOG DESCRIPTION-------------
 //---------------------------------------
 
@@ -40,36 +44,36 @@ const uint8_t analogButtonNumber[10] =         //ANALOG BUTTONS 1
 
 const uint8_t analogButtonNumberIncMode[10] =  //ANALOG BUTTONS 2
 { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
 ```
 
 #### Pins
 
 We start by describing the pins used in the matrix.
 
-* `uint8_t row[] = {0};` Insert pin numbers for your rows, starting with first row.
+* `uint8_t row[] = {0,0,0,0,0};` Insert pin numbers for your rows, starting with first row.Should contain as many elemets as you have rows.
 
 If wired like the board at the top of [3.Wiring](https://github.com/andreasdahl1987/DahlDesignDDC/wiki/3.-Wiring), you'd write it like this:
 
 `uint8_t row[] = {15,14,16,10};`
 
-_If you're using non-matrix switches, use the number `99` instead of a row pin._
+_If you're using direct wiring or shift registers switches, use the number `99` instead of a row pin._
 
-* `uint8_t col[] = {0};` The same as above. For the example picture this will be `uint8_t col[] = {3,4,5,6,7};`
+* `uint8_t col[] = {0,0,0,0,0};` The same as above. For the example picture this will be `uint8_t col[] = {3,4,5,6,7};`
 
-_If you're using non-matrix switches exclusively, you don't even have any column pins. In that case, use the number `99` for column pins as well._ A setup for 4 x 4 matrix including only non-matrix switches would look like this:
+_If you're using non-matrix wiring exclusively, you don't even have any column pins. In that case, use the number `99` for column pins as well._ A setup for 4 x 4 matrix including only non-matrix switches would look like this:
 
 `uint8_t row[] = {99,99,99,99};`
 
 `uint8_t col[] = {99,99,99,99};`
 
-* A hybrid system with the first two rows reserved for non-matrix switches could look like this:
+* A hybrid system with the first two rows reserved for direct wired switches could look like this:
 
 `uint8_t row[] = {99,99,4,5};`
 
 `uint8_t col[] = {15,10,14,7};`
 
-* `bool nonMatrixIncluded = false;` Is set to `true` if you're using switches non-matrix switches.
-* `uint8_t nonMatrix[] = {0};` Only relevant if using switches not wired in matrix. List the actual pin numbers that these switches are connected to. The order doesn't matter, this is just used for pulling up the pins.
+* `uint8_t directPins[] = {99};` Only relevant if using switches with direct wiring. List the actual pin numbers that these switches are connected to. The order doesn't matter, this is just used for pulling up the pins. Default just one element of 99, which is just as dummy to fill the array with something.
 
 #### Matrix description
 
