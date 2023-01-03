@@ -8,9 +8,6 @@ const uint8_t rowCount = sizeof(row) / sizeof(row[0]);
 uint8_t col[] = { 0, 0, 0, 0, 0 };
 const uint8_t colCount = sizeof(col) / sizeof(col[0]);
 
-uint8_t directPins[] = { 99 };
-const uint8_t directPinsCount = sizeof(directPins) / sizeof(directPins[0]);
-
 //---------------------------------------
 //--------MATRIX DESCRIPTION-------------
 //---------------------------------------
@@ -23,6 +20,15 @@ const uint8_t buttonNumber[rowCount][colCount] =
   {0, 0, 0, 0, 0},     //ROW 4
   {0, 0, 0, 0, 0}      //ROW 5
 };
+
+//---------------------------------------
+//------------DIRECT WIRING--------------
+//---------------------------------------
+
+
+uint8_t directPins[] = { 99 };
+const uint8_t directPinsCount = sizeof(directPins) / sizeof(directPins[0]);
+
 
 //---------------------------------------
 //--------ANALOG DESCRIPTION-------------
