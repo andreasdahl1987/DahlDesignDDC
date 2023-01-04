@@ -2,7 +2,7 @@
 
 Rotary switches refers to switches with several, isolated switch positions, each with its own pin. The switch has one path in and several paths out, the position of the rotary knob will determine which way the signal goes.&#x20;
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (3).png" alt=""><figcaption></figcaption></figure>
 
 The major strength of these switches is that the physical position of the switch rotation will match the button number. So you can label a switch with ABS 1-12, map it the same way in-game, and the ABS will be 3 when the switch points to 3. Also, they usually have great feel, with solid clicks.&#x20;
 
@@ -27,4 +27,4 @@ Here is the same voltage divider circuit, now with the rotary switch weaved into
 
 <figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption><p>The resistor ladder</p></figcaption></figure>
 
-All that is left is to [read](../../1.-project-planning/analog-inputs.md#reading-a-value) "Vout" with an analog pin.&#x20;
+All that is left is to [read](../../1.-project-planning/analog-inputs.md#reading-a-value) "Vout" with an analog pin in each position of the switch. These values will go into the rotary switch functions. You'll notice the readout isn't 100% stable, it will fluctuate a little bit. It doesn't matter, the functions just need an approximate value. &#x20;
