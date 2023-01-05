@@ -64,28 +64,35 @@ void singleClutch(int analogPin, int switchNumber, int releasedValue, int fullyP
     int inputPin = analogPin;
     int pinValue = analogRead(inputPin);
     int N = switchNumber - 1;
+    float normalized = 0;
 
     if (fullyPressedValue > releasedValue)
     {
         fullyPressedValue = fullyPressedValue - clutchTopDeadzone;
         releasedValue = releasedValue + clutchBottomDeadzone;
-        Joystick.setXAxisRange(releasedValue, fullyPressedValue);
+        float gap = fullyPressedValue - releasedValue;
+        float normFactor = 1000 / gap;
+        normalized = normFactor * (pinValue - releasedValue);
+        if (normalized < 0)
+        {
+            normalized = 0;
+        }
     }
     else if (fullyPressedValue < releasedValue)
     {
         fullyPressedValue = fullyPressedValue + clutchTopDeadzone;
         releasedValue = releasedValue - clutchBottomDeadzone;
-        int gap = releasedValue - fullyPressedValue;
-        pinValue = releasedValue - pinValue;
-        if (pinValue < 0)
+        float gap = releasedValue - fullyPressedValue;
+        float normFactor = 1000 / gap;
+        normalized = normFactor * (releasedValue - pinValue);
+        if (normalized < 0)
         {
-            pinValue = 0;
+            normalized = 0;
         }
-        Joystick.setXAxisRange(0, gap);
     }
 
     total[N] = total[N] - readings[N][readIndex[N]];
-    readings[N][readIndex[N]] = pinValue;
+    readings[N][readIndex[N]] = normalized;
     total[N] = total[N] + readings[N][readIndex[N]];
 
     readIndex[N]++;
@@ -96,13 +103,18 @@ void singleClutch(int analogPin, int switchNumber, int releasedValue, int fullyP
     }
 
     average[N] = total[N] / reads;
+    if (average[N] > 1000)
+    {
+        average[N] = 1000;
+    }
     
+    //Launch button
+
     if (launchButtonLatch)
     {
-        average[N] * bitePoint / 1000;
+        average[N] = average[N] * bitePoint / 1000;
     }
 
-    //Launch button
     if (average[N] == 0)
     {
         analogLatchLock[N] = true;
@@ -179,7 +191,6 @@ void dualClutch(int masterPin, int masterSwitchNumber, int masterReleasedValue, 
         average[M] = 1000;
     }
 
-    //Serial.println(average[M]);
       //--------------------------------
       //---Slave paddle calculations----
       //--------------------------------
@@ -214,10 +225,6 @@ void dualClutch(int masterPin, int masterSwitchNumber, int masterReleasedValue, 
             slaveNormalized = 0;
         }
     }
-
-
-    //Serial.println(slaveNormalized);
-
 
     total[S] = total[S] - readings[S][readIndex[S]];
     readings[S][readIndex[S]] = slaveNormalized;
@@ -288,8 +295,8 @@ void dualClutch(int masterPin, int masterSwitchNumber, int masterReleasedValue, 
     //Launch button logic
     if (launchButtonLatch)
     {
-        average[M] * bitePoint / 1000;
-        average[S] * bitePoint / 1000;
+        average[M] = average[M] * bitePoint / 1000;
+        average[S] = average[S] * bitePoint / 1000;
     }
 
     //------------------------
