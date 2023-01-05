@@ -2,7 +2,62 @@
 //----------------------------
 //----ANALOG CLUTCH-----------
 //----------------------------
+float corrected(int input, int releasedValue, int pressedValue, int linearFix, float expFactor)
+{
+    float Input = input;
+    int PressedValue = pressedValue;
+    int ReleasedValue = releasedValue;
 
+    if (linearFix == 0)
+    {
+        return Input;
+    }
+
+    if (linearFix < 0)
+    {
+        if (releasedValue < pressedValue)
+        {
+            PressedValue = PressedValue - clutchTopDeadzone;
+            ReleasedValue = ReleasedValue + clutchBottomDeadzone;
+            if (Input < ReleasedValue)
+            {
+                Input = ReleasedValue;
+            }
+            Input = (Input - ReleasedValue) * pow((1 + Input - ReleasedValue), expFactor);
+        }
+        else if (pressedValue < releasedValue)
+        {
+            PressedValue = PressedValue + clutchTopDeadzone;
+            ReleasedValue = ReleasedValue - clutchBottomDeadzone;
+            if (Input > ReleasedValue)
+            {
+                Input = ReleasedValue;
+            }
+            Input = (ReleasedValue - Input) * pow((1 + ReleasedValue - Input), expFactor);
+        }
+    }
+    else if (linearFix > 0)
+    {
+        if (ReleasedValue < PressedValue)
+        {
+            if (Input < ReleasedValue)
+            {
+                Input = ReleasedValue;
+            }
+            Input = (PressedValue - Input) * pow((1 + PressedValue - Input), expFactor);
+        }
+        else if (PressedValue < ReleasedValue)
+        {
+            if (Input > ReleasedValue)
+            {
+                Input = ReleasedValue;
+            }
+            Input = (Input - PressedValue) * pow((1 + Input - PressedValue), expFactor);
+        }
+    }
+
+    return Input;
+}
 
 void singleClutch(int analogPin, int switchNumber, int releasedValue, int fullyPressedValue)
 {
@@ -41,13 +96,18 @@ void singleClutch(int analogPin, int switchNumber, int releasedValue, int fullyP
     }
 
     average[N] = total[N] / reads;
+    
+    if (launchButtonLatch)
+    {
+        average[N] * bitePoint / 1000;
+    }
 
     if (latchState[neutralButtonRow - 1][neutralButtonCol - 1])
     {
         Joystick.setXAxis(1000);
     }
 
-    Joystick.setXAxis(pinValue);
+    Joystick.setXAxis(average[N]);
 }
 
 void dualClutch(int masterPin, int masterSwitchNumber, int masterReleasedValue, int masterFullyPressedValue, int slavePin, int slaveSwitchNumber, int slaveReleasedValue, int slaveFullyPressedValue, bool throttleMaster)
@@ -212,6 +272,13 @@ void dualClutch(int masterPin, int masterSwitchNumber, int masterReleasedValue, 
                 Joystick.setBrake(0);
             }
         }
+    }
+
+    //Launch button logic
+    if (launchButtonLatch)
+    {
+        average[M] * bitePoint / 1000;
+        average[S] * bitePoint / 1000;
     }
 
     //------------------------

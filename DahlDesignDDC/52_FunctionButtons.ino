@@ -241,3 +241,40 @@ void biteButton(int row, int column)
     Joystick.setRyAxis(bitePoint);
     Joystick.setButton(Number, pushState[Row][Column]);
 }
+
+void launchButton(int row, int column, int switchNumberAffected)
+{
+    Joystick.setRyAxisRange(0, 1000);
+
+    launchButtonRow = row;
+    launchButtonCol = column;
+
+    int Row = row - 1;
+    int Column = column - 1;
+    int Number = buttonNumber[Row][Column];
+
+    if (pushState[Row][Column] != rawState[Row][Column] && (globalClock - switchTimer[Row][Column]) > buttonCooldown)
+    {
+        switchTimer[Row][Column] = globalClock;
+        pushState[Row][Column] = rawState[Row][Column];
+    }
+
+    if ((globalClock - switchTimer[Row][Column]) > buttonCooldown)
+    {
+        pushState[Row][Column] = rawState[Row][Column];
+    }
+
+    if (!analogLatchLock[switchNumberAffected - 1] && pushState[Row][Column] == 1)
+    {
+        launchButtonLatch = true;
+    }
+    else if (analogLatchLock[switchNumberAffected - 1])
+    {
+        launchButtonLatch = false;
+    }
+    if (!launchButtonLatch)
+    {
+        Joystick.setButton(Number, pushState[Row][Column]);
+    }
+
+}
