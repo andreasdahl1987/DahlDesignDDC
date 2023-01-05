@@ -102,11 +102,22 @@ void singleClutch(int analogPin, int switchNumber, int releasedValue, int fullyP
         average[N] * bitePoint / 1000;
     }
 
+    //Launch button
+    if (average[N] == 0)
+    {
+        analogLatchLock[N] = true;
+    }
+
+    if (average[N] == 1000 && analogLatchLock[N])
+    {
+        analogLatchLock[N] = false;
+    }
+
     if (latchState[neutralButtonRow - 1][neutralButtonCol - 1])
     {
         Joystick.setXAxis(1000);
     }
-
+    //Set axis
     Joystick.setXAxis(average[N]);
 }
 
