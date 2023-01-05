@@ -246,9 +246,6 @@ void launchButton(int row, int column, int switchNumberAffected)
 {
     Joystick.setRyAxisRange(0, 1000);
 
-    launchButtonRow = row;
-    launchButtonCol = column;
-
     int Row = row - 1;
     int Column = column - 1;
     int Number = buttonNumber[Row][Column];

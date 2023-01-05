@@ -32,8 +32,6 @@ int8_t neutralButtonRow;
 int8_t neutralButtonCol;
 int8_t biteButtonRow;
 int8_t biteButtonCol;
-int8_t launchButtonRow;
-int8_t launchButtonCol;
 int8_t presetButtonRow;
 int8_t presetButtonCol;
 

@@ -107,8 +107,17 @@ void singleClutch(int analogPin, int switchNumber, int releasedValue, int fullyP
     {
         average[N] = 1000;
     }
+
+
+    //----SETTING BITE POINT WITH BUTTON------
+
+    if (average[N] > 0 && pushState[biteButtonRow - 1][biteButtonCol - 1] == 1)
+    {
+        bitePoint = average[N];
+    }
+
     
-    //Launch button
+    //----------LAUNCH BUTTON------------------
 
     if (launchButtonLatch)
     {
@@ -129,7 +138,8 @@ void singleClutch(int analogPin, int switchNumber, int releasedValue, int fullyP
     {
         Joystick.setXAxis(1000);
     }
-    //Set axis
+
+    //----------------SET AXIS----------------
     Joystick.setXAxis(average[N]);
 }
 
@@ -241,6 +251,15 @@ void dualClutch(int masterPin, int masterSwitchNumber, int masterReleasedValue, 
     if (average[S] > 1000)
     {
         average[S] = 1000;
+    }
+
+    //------------------------------------------
+    //------SETTING BITE POINT WITH BUTTON------
+    //------------------------------------------
+
+    if (max(average[S], average[M]) > 0 && pushState[biteButtonRow-1][biteButtonCol-1] == 1)
+    {
+        bitePoint = max(average[S], average[M]);
     }
 
 
