@@ -4,8 +4,7 @@ void dualClutch(int masterPin, int masterSwitchNumber, int masterReleasedValue, 
     //---Master paddle calculations----
     //--------------------------------
 
-    int MasterPin = masterPin;
-    int masterValue = analogRead(MasterPin);
+    int masterValue = analogRead(masterPin);
     int M = masterSwitchNumber - 1;
     float masterNormalized = 0;
     int FieldPlacement = 7;
@@ -59,8 +58,7 @@ void dualClutch(int masterPin, int masterSwitchNumber, int masterReleasedValue, 
     //---Slave paddle calculations----
     //--------------------------------
 
-    int SlavePin = slavePin;
-    int slaveValue = analogRead(SlavePin);
+    int slaveValue = analogRead(slavePin);
     int S = slaveSwitchNumber - 1;
     float slaveNormalized = 0;
 
@@ -271,8 +269,8 @@ void filteredDualClutch(int masterPin, int masterSwitchNumber, int masterRelease
     //--------------------------------
     //---Master paddle calculations----
     //--------------------------------
-    int inputPin = masterPin;
-    int masterRaw = analogRead(inputPin);
+
+    int masterRaw = analogRead(masterPin);
     int M = masterSwitchNumber - 1;
     float masterNormalized = 0;
     float MasterFullyPressedValue = curveFilter(masterFullyPressedValue, masterReleasedValue, masterFullyPressedValue, masterCurvePush, masterExpFactor);
@@ -323,8 +321,7 @@ void filteredDualClutch(int masterPin, int masterSwitchNumber, int masterRelease
     //---Slave paddle calculations----
     //--------------------------------
 
-    int inputPin = slavePin;
-    int slaveRaw = analogRead(inputPin);
+    int slaveRaw = analogRead(slavePin);
     int S = slaveSwitchNumber - 1;
     float slaveNormalized = 0;
 
