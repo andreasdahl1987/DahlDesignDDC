@@ -35,7 +35,7 @@
     <None Include="70_FunkyPush.ino" />
     <None Include="71_FunkyDirections.ino" />
     <None Include="74_FunkyRotary.ino" />
-    <None Include="80_Clutch.ino" />
+    <None Include="80_SingleClutch.ino" />
     <None Include="98_PresetSwitch.ino" />
     <None Include="66_MultiComplex.ino" />
     <None Include="63_RotaryPEC11.ino" />
@@ -51,6 +51,11 @@
     <None Include="31_RunningPresets.ino" />
     <None Include="92_Handbrake.ino" />
     <None Include="72_FunkyHat.ino" />
+    <None Include="85_BitePot.ino" />
+    <None Include="83_Brake.ino" />
+    <None Include="82_Throttle.ino" />
+    <None Include="39_Calculations.ino" />
+    <None Include="81_DualClutch.ino" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.DahlDesignDDC.vsarduino.h">
