@@ -37,6 +37,7 @@ int8_t presetButtonCol;
 
 bool biteButtonBit1 = false;
 bool biteButtonBit2 = false;
+bool launchButtonLatch = false;
 uint8_t first = 0;
 uint8_t second = 0;
 
