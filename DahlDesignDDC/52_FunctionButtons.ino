@@ -273,3 +273,63 @@ void launchButton(int row, int column, int switchNumberAffected)
     }
 
 }
+
+void bitePotLockButton(int8_t row, int8_t column, int fieldPlacement)
+{
+    int8_t Row = row - 1;
+    int8_t Column = column - 1;
+    int Fieldplacement = fieldPlacement;
+
+    if (pushState[Row][Column] != rawState[Row][Column] && (globalClock - switchTimer[Row][Column]) > buttonCooldown)
+    {
+        switchTimer[Row][Column] = globalClock;
+        pushState[Row][Column] = rawState[Row][Column];
+    }
+
+    if ((globalClock - switchTimer[Row][Column]) > buttonCooldown)
+    {
+        pushState[Row][Column] = rawState[Row][Column];
+    }
+
+    if (pushState[Row][Column] == 0)
+    {
+        latchLock[Row][Column] = false;
+    }
+
+    if (pushState[Row][Column] == 1 && !latchLock[Row][Column])
+    {
+        latchLock[Row][Column] = true;
+        bitePointLock = !bitePointLock;
+    }
+
+    //Push lock
+    long push = 0;
+    push = push | bitePointLock;
+    push = push << (FieldPlacement - 1);
+    buttonField = buttonField | push;
+}
+
+void bitePotLockToggle(int row, int column, int fieldPlacement)
+{
+    int Row = row - 1;
+    int Column = column - 1;
+    int Fieldplacement = fieldplacement;
+
+    if (pushState[Row][Column] != rawState[Row][Column] && (globalClock - switchTimer[Row][Column]) > buttonCooldown)
+    {
+        switchTimer[Row][Column] = globalClock;
+        pushState[Row][Column] = rawState[Row][Column];
+    }
+
+    if ((globalClock - switchTimer[Row][Column]) > buttonCooldown)
+    {
+        pushState[Row][Column] = rawState[Row][Column];
+    }
+
+    bitePointLock = pushState[Row][Column];
+    //Push lock
+    long push = 0;
+    push = push | bitePointLock;
+    push = push << (FieldPlacement - 1);
+    buttonField = buttonField | push;
+}
