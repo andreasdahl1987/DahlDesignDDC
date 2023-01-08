@@ -41,7 +41,7 @@
     <None Include="63_RotaryPEC11.ino" />
     <None Include="56_SW1BiteRotary.ino" />
     <None Include="41_Presets.ino" />
-    <None Include="54_PushPull.ino" />
+    <None Include="54_Shifter.ino" />
     <None Include="55_QuickSwitch.ino" />
     <None Include="57_SW1PresetRotary.ino" />
     <None Include="93_BrakeMagic.ino" />
@@ -56,6 +56,8 @@
     <None Include="82_Throttle.ino" />
     <None Include="39_Calculations.ino" />
     <None Include="81_DualClutch.ino" />
+    <None Include="61_RotaryPulse.ino" />
+    <None Include="53_Launch.ino" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.DahlDesignDDC.vsarduino.h">
