@@ -1,4 +1,4 @@
-void dualClutch(int masterPin, int masterSwitchNumber, int masterReleasedValue, int masterFullyPressedValue, int slavePin, int slaveSwitchNumber, int slaveReleasedValue, int slaveFullyPressedValue, int slaveCurvePush, float slaveExpFactor, bool throttleMaster)
+void dualClutch(int masterPin, int masterSwitchNumber, int masterReleasedValue, int masterFullyPressedValue, int slavePin, int slaveSwitchNumber, int slaveReleasedValue, int slaveFullyPressedValue, bool throttleMaster)
 {
     //--------------------------------
     //---Master paddle calculations----
@@ -184,7 +184,7 @@ void dualClutch(int masterPin, int masterSwitchNumber, int masterReleasedValue, 
     else if (analogSwitchMode1[M] && !analogSwitchMode2[M])
     {
 
-        if ((average[S] == 0 || average[M] == 0 || average[S] > bitePoint && average[M] < bitePoint) || (average[M] > bitePoint && average[S] < bitePoint))
+        if ((average[S] == 0 || average[M] == 0 || (average[S] > bitePoint && average[M] < bitePoint)) || (average[M] > bitePoint && average[S] < bitePoint))
         {
             average[S] = average[S] * bitePoint / 1000;
             average[M] = average[M] * bitePoint / 1000;
@@ -448,7 +448,7 @@ void filteredDualClutch(int masterPin, int masterSwitchNumber, int masterRelease
     else if (analogSwitchMode1[M] && !analogSwitchMode2[M])
     {
 
-        if ((average[S] == 0 || average[M] == 0 || average[S] > bitePoint && average[M] < bitePoint) || (average[M] > bitePoint && average[S] < bitePoint))
+        if ((average[S] == 0 || average[M] == 0 || (average[S] > bitePoint && average[M] < bitePoint)) || (average[M] > bitePoint && average[S] < bitePoint))
         {
             average[S] = average[S] * bitePoint / 1000;
             average[M] = average[M] * bitePoint / 1000;

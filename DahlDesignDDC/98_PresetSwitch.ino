@@ -181,7 +181,7 @@ void presetPrevious(int8_t row, int8_t column)
     if (pushState[Row][Column] == 1 && !latchLock[Row][Column])
     {
         latchLock[Row][Column] = true;
-        switchPreset++;
+        switchPreset--;
         if (switchPreset < 0)
         {
           switchPreset = 11;

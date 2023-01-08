@@ -743,7 +743,6 @@ void rotary2Pulse(int row, int column, bool reverse)
     int Row = row - 1;
     int Column = column - 1;
     int Number = buttonNumber[Row][Column];
-    int Reverse = reverse;
 
     bool Pin1 = rawState[Row][Column];
     bool Pin2 = rawState[Row][Column + 1];

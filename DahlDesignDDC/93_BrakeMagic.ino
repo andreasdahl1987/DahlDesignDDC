@@ -1,4 +1,4 @@
-void brakeMagic(int row, int column, int fieldPlacement)
+void brakeMagic(int row, int column)
 {
     int Row = row - 1;
     int Column = column - 1;

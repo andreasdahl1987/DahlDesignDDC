@@ -52,7 +52,7 @@ void bitePot(int analogPin, int switchNumber, int startValue, int endValue)
     //----------------SET AXIS----------------
     bitePoint = average[N];
 
-    if (!bitePointLock)
+    if (!bitePotLock)
     {
       Joystick.setRyAxis(bitePoint);
     }
@@ -114,7 +114,7 @@ void filteredBitePot(int analogPin, int8_t switchNumber, int startValue, int end
     //----------------SET AXIS----------------
     bitePoint = average[N];
     
-    if (!bitePointLock)
+    if (!bitePotLock)
     {
       Joystick.setRyAxis(bitePoint);
     }

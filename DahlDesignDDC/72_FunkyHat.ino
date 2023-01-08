@@ -1,8 +1,7 @@
-void funkyHat(int8_t row, int8_t colPush, int8_t colUp, int8_t colRight, int8_t colDown, int8_t colLeft, int8_t hatNumber)
+void funkyHat(int8_t row, int8_t colUp, int8_t colRight, int8_t colDown, int8_t colLeft, int8_t hatNumber)
 {
     int8_t Row = row - 1;
 
-    int8_t ColPush = colPush - 1;
     int8_t ColUp = colUp - 1;
     int8_t ColRight = colRight - 1;
     int8_t ColDown = colDown - 1;
