@@ -122,6 +122,70 @@ void preset2Bit(int row, int column, bool reverse)
     long push = 0;
     push = push | (switchPreset << 10);
     buttonField = buttonField | push;
+}
 
+void presetNext(int8_t row, int8_t column)
+{
+    int8_t Row = row - 1;
+    int8_t Column = column - 1;
 
+    if (pushState[Row][Column] != rawState[Row][Column] && (globalClock - switchTimer[Row][Column]) > buttonCooldown)
+    {
+        switchTimer[Row][Column] = globalClock;
+        pushState[Row][Column] = rawState[Row][Column];
+    }
+
+    if ((globalClock - switchTimer[Row][Column]) > buttonCooldown)
+    {
+        pushState[Row][Column] = rawState[Row][Column];
+    }
+
+    if (pushState[Row][Column] == 0)
+    {
+        latchLock[Row][Column] = false;
+    }
+
+    if (pushState[Row][Column] == 1 && !latchLock[Row][Column])
+    {
+        latchLock[Row][Column] = true;
+        switchPreset++;
+        if (switchPreset > 11)
+        {
+          switchPreset = 0;
+        }
+        presets(switchPreset);
+    }
+}
+
+void presetPrevious(int8_t row, int8_t column)
+{
+    int8_t Row = row - 1;
+    int8_t Column = column - 1;
+
+    if (pushState[Row][Column] != rawState[Row][Column] && (globalClock - switchTimer[Row][Column]) > buttonCooldown)
+    {
+        switchTimer[Row][Column] = globalClock;
+        pushState[Row][Column] = rawState[Row][Column];
+    }
+
+    if ((globalClock - switchTimer[Row][Column]) > buttonCooldown)
+    {
+        pushState[Row][Column] = rawState[Row][Column];
+    }
+
+    if (pushState[Row][Column] == 0)
+    {
+        latchLock[Row][Column] = false;
+    }
+
+    if (pushState[Row][Column] == 1 && !latchLock[Row][Column])
+    {
+        latchLock[Row][Column] = true;
+        switchPreset++;
+        if (switchPreset < 0)
+        {
+          switchPreset = 11;
+        }
+        presets(switchPreset);
+    }
 }
