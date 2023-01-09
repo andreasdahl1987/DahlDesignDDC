@@ -188,5 +188,3 @@ Here using fieldPlacement 1, meaning he 1st bit in the button field. If bite pot
 * A bitePot() switch
 {% endtab %}
 {% endtabs %}
-
-####

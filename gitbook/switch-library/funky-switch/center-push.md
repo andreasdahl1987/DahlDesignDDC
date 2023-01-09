@@ -115,5 +115,3 @@ None
 
 {% endtab %}
 {% endtabs %}
-
-d

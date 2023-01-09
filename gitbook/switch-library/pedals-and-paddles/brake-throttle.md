@@ -47,5 +47,3 @@ For a potentiometer with its center pin connected to A3, assigned switch# 4, it 
 
 {% endtab %}
 {% endtabs %}
-
-####

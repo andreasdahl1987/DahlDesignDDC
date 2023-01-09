@@ -120,7 +120,7 @@ With a curvePush of 1, this will flatten the response curve, meaning you'll get 
 {% endtab %}
 {% endtabs %}
 
-#### filtereDualClutch()
+#### filteredDualClutch()
 
 {% tabs %}
 {% tab title="Description" %}
@@ -145,4 +145,3 @@ In this example, both master and slave paddles have curvePush "1", which will fl
 * launchButton() if you want 1-handed launches.
 {% endtab %}
 {% endtabs %}
-
