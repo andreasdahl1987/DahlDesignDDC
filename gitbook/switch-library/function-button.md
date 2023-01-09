@@ -1,4 +1,4 @@
-# Function button
+# Function switches
 
 #### modButton()
 
@@ -38,6 +38,8 @@ Defaults to bit 11 and 12 in the rotary field, you dont have to assign a field p
 * 3: Bite point setting active. Adjust with steps of +/- 0.1
 
 As stated above, this button's modes are not changed by using a modButton(), but by the biteButton() itself.&#x20;
+
+* The bite button can also quickly and less accurately set the bite point by simply holding the clutch paddle at the desired bite point and then pressing the button.&#x20;
 {% endtab %}
 
 {% tab title="Example" %}
@@ -50,6 +52,29 @@ For a switch on row 2 column 4 -> `biteButton(2,4);`
 
 {% tab title="Requirements" %}
 * 1 button number
+{% endtab %}
+{% endtabs %}
+
+#### launchButton()
+
+{% tabs %}
+{% tab title="Description" %}
+Momentary pushbutton, should be assigned a button number. Works like a normal pushbutton, but when you hold a clutch paddle completely pressed and hit this button, it will drop the value of the clutch output to the set bite point. The button will not work as a pushbutton untill the clutch is completely released, so you can even map a shifter paddle as launchButton(), and it wont change gears when you use it to launch with.
+
+In esssense this makes it possible to do a single clutch launch and a 1-handed launch. Ideal for wheels with a single clutch paddle or for cars that also use handbrake on launch (rallycross and Supercar).&#x20;
+{% endtab %}
+
+{% tab title="Example" %}
+`void launchButton(int row, int column, int switchNumberAffected)`
+
+For a switch on row 2 column 4, coupling to clutch that has been assigned[ switch# 3 ](../1.-project-planning/analog-inputs.md)on master paddle:
+
+`launchButton(2,4,3);`
+{% endtab %}
+
+{% tab title="Requirements" %}
+* 1 button number
+* A analog switch to affect
 {% endtab %}
 {% endtabs %}
 

@@ -13,7 +13,7 @@ Now that the electronics are sorted, time to build the firmware. You might alrea
 
 
 
-    <figure><img src="../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## The sketch
 
@@ -21,6 +21,6 @@ Download the repository. You only need the folder called `DahlDesignDDC`. The fi
 
 To open the sketch, open the `DahlDesignDDC.ino` file, Arduino IDE will automatically include all the other files. All the files are now available as **tabs** in Arduino IDE.
 
-<figure><img src="../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 &#x20;Only some of these tabs are relevant to building your controller firmware, in fact only 3 of them are needed to adjust, and a few more are optional.&#x20;
