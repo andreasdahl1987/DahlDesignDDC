@@ -9,6 +9,7 @@ bool handbrakeRelease = false;
 long handbrakeTimer = 0;
 
 //Specials
+bool bitePotLock = false;
 bool brakeMagicOn;
 float brakeMagicValue;
 float throttleHoldValue;

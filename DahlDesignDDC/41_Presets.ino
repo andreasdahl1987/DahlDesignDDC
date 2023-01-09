@@ -1,6 +1,5 @@
 void presets(int8_t presetNumber)
 {
-    int8_t PresetNumber = presetNumber;
 
     //Clear all buttons
     for (int i = 0; i < BUTTONCOUNT; i++)

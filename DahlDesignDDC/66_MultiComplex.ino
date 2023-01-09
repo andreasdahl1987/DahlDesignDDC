@@ -309,6 +309,11 @@ void multiFunction2Button24(int analogPin, int switchNumber, int rowButton1, int
 
     resultAnalog--;
 
+    if (reverse)
+    {
+        resultAnalog = 11 - resultAnalog;
+    }
+
     //Update button number to use
 
     Number = analogButtonNumber[N] + (resultAnalog * 2);
@@ -387,6 +392,11 @@ void multiFunction2Button36(int analogPin, int switchNumber, int rowButton1, int
     }
 
     resultAnalog--;
+
+    if (reverse)
+    {
+        resultAnalog = 11 - resultAnalog;
+    }
 
     analogTempState[N] = 0; //Refreshing encoder mode difference
 

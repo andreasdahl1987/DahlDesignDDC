@@ -128,7 +128,7 @@ void DDSfunky(int Arow, int Acol, int Bcol) {
             }
             else
             {
-                if (!toggleTimer[Row][bCol] == 1)
+                if ((!toggleTimer[Row][bCol]) == 1)
                 {
                     toggleTimer[Row][Column] --; //Counter for position switch
                 }
@@ -201,7 +201,7 @@ void DDSfunky(int Arow, int Acol, int Bcol) {
             }
             else
             {
-                if (!toggleTimer[Row][bCol] == 1)
+                if ((!toggleTimer[Row][bCol]) == 1)
                 {
                     toggleTimer[Row][Column] ++;
                 }
