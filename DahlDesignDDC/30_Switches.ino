@@ -8,6 +8,7 @@ void loop()
 	//-------------------------
 	//-----ESSENTIALS----------
 	//-------------------------
+	processCommands();
 
 	globalClock = millis();
 

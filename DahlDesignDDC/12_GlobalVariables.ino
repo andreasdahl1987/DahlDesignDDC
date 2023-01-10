@@ -68,3 +68,8 @@ unsigned long globalClock;
 //Clutch deadzones
 #define clutchTopDeadzone 10
 #define clutchBottomDeadzone 10
+
+//LED setup
+
+#define ENABLE_UPLOAD_PROTECTION 0
+#define UPLOAD_AVAILABLE_DELAY 15000
