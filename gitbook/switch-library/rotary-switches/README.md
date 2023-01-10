@@ -25,6 +25,6 @@ The equation is like this:&#x20;
 
 Here is the same voltage divider circuit, now with the rotary switch weaved into it. All the resistors (R) have the same value. At this position, Z1 is 5R and Z2 is 6R. Changing the position of the switch will change the size of Z1 and Z2, and ultimately change the value of "Vout".&#x20;
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption><p>The resistor ladder</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (1).png" alt=""><figcaption><p>The resistor ladder</p></figcaption></figure>
 
 All that is left is to [read](../../1.-project-planning/analog-inputs.md#reading-a-value) "Vout" with an analog pin in each position of the switch. These values will go into the rotary switch functions. You'll notice the readout isn't 100% stable, it will fluctuate a little bit. It doesn't matter, the functions just need an approximate value. &#x20;
