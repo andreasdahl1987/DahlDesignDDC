@@ -1,7 +1,7 @@
-
 //-------------------------
 // ------- LED STRIP #1 Settings
 //-------------------------
+
 // How many leds on this strip? Set to 0 to disable.
 #define STRIP1_RGBLEDCOUNT 0
 // Data pin
