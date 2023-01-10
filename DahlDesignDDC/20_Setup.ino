@@ -4,6 +4,10 @@
 
 void setup()
 {
+    //LED setup
+    Serial.begin(115200);
+    setupLeds();
+
     //Set up joystick axis
     Joystick.setXAxisRange(0, 1000);
     Joystick.setThrottleRange(0, 1000);
