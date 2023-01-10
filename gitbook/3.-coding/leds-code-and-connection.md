@@ -1,6 +1,6 @@
 # LEDs code and connection
 
-You done need to do anything here if you're not planning to use LEDs with DDC.&#x20;
+You don't need to do anything here if you're not planning to use LEDs with DDC.&#x20;
 
 ## 14\_LEDsetup.ino
 
