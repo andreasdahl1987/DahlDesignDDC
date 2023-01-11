@@ -14,7 +14,11 @@ const uint8_t colCount = sizeof(col) / sizeof(col[0]);
 
 const uint8_t buttonNumber[rowCount][colCount] =
 {
-  {0}
+  {0, 0, 0, 0, 0},	//ROW 1
+  {0, 0, 0, 0, 0},	//ROW 2
+  {0, 0, 0, 0, 0},	//ROW 3
+  {0, 0, 0, 0, 0},	//ROW 4
+  {0, 0, 0, 0, 0}	//ROW 5
 };
 
 //---------------------------------------
