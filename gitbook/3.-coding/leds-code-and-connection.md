@@ -57,7 +57,7 @@ When you've [uploaded](upload.md) the code, you can connect to SimHub:
 
 * Go to devices and add a new device.
 
-<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
 
 * Select "Create oem leds test device"
 
