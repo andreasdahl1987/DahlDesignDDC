@@ -102,14 +102,18 @@ const uint8_t buttonNumber[rowCount][colCount] =
 
 #### Analog description
 
-The same way, your planned analog switches goes in here:
+First of all, state how many analog switches your project has. In this case 5.&#x20;
 
-![image](https://user-images.githubusercontent.com/40788634/194888245-9526befd-e44e-433a-a3fb-bf13d4e62100.png)
+`#define analogSwitchCount 5`
+
+The same way you set up the matrix button numbers, your planned analog switches goes in here:
+
+<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
-const uint8_t analogButtonNumber[10] =         
-{ 69, 83, 0, 0, 0, 0, 0, 0, 0, 0 };
+const uint8_t analogButtonNumber[analogSwitchCount] =         
+{ 69, 83, 0, 0, 97};
 
-const uint8_t analogButtonNumberIncMode[10] = 
-{ 81, 95, 0, 0, 0, 0, 0, 0, 0, 0 };
+const uint8_t analogButtonNumberIncMode[analogSwitchCount] = 
+{ 81, 95, 0, 0, 0};
 ```

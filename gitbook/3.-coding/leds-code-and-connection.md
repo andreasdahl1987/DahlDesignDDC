@@ -69,4 +69,4 @@ When you've [uploaded](upload.md) the code, you can connect to SimHub:
 
 * Reboot your controller for SimHub to find it, press "Edit profile" to get to the RGB editor. You're all set!
 
-<figure><img src="../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (4) (4).png" alt=""><figcaption></figcaption></figure>

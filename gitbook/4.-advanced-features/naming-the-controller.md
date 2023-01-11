@@ -8,7 +8,7 @@ Here is how you do it:
 
 * Move the folder "hardware" to your Arduino folder in "My Documents".&#x20;
 
-<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (5).png" alt=""><figcaption></figcaption></figure>
 
 * In this folder, the folder called __ named "My Controller" or similar, can be renamed to whatever you like.&#x20;
 * Find the `boards.txt` file:
