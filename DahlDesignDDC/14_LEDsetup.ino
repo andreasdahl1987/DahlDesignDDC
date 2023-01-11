@@ -37,5 +37,6 @@
 #define STRIP4_TYPE NEOPIXEL
 
 // Main simhub leds core code
-#include "ledscore.h"
-
+#if (STRIP1_RGBLEDCOUNT + STRIP2_RGBLEDCOUNT + STRIP3_RGBLEDCOUNT + STRIP4_RGBLEDCOUNT > 0)
+  #include "ledscore.h"
+#endif

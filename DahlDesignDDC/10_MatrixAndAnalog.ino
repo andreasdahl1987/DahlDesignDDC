@@ -19,19 +19,17 @@ const uint8_t nonMatrixCount = sizeof(nonMatrix) / sizeof(nonMatrix[0]);
 
 const uint8_t buttonNumber[rowCount][colCount] =
 {
-  {0, 0, 0, 0, 0},     //ROW 1
-  {0, 0, 0, 0, 0},     //ROW 2
-  {0, 0, 0, 0, 0},     //ROW 3
-  {0, 0, 0, 0, 0},     //ROW 4
-  {0, 0, 0, 0, 0}      //ROW 5
+  {0}
 };
 
 //---------------------------------------
 //--------ANALOG DESCRIPTION-------------
 //---------------------------------------
 
-const uint8_t analogButtonNumber[10] =         //ANALOG BUTTONS 1
-{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+#define analogSwitchCount 1
 
-const uint8_t analogButtonNumberIncMode[10] =  //ANALOG BUTTONS 2
-{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+const uint8_t analogButtonNumber[analogSwitchCount] =         //ANALOG BUTTONS 1
+{0};
+
+const uint8_t analogButtonNumberIncMode[analogSwitchCount] =  //ANALOG BUTTONS 2
+{0};
