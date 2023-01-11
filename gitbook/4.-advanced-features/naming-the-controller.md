@@ -1,6 +1,6 @@
 # Naming the controller
 
-If your controller is based on a ATMEGA32U4 chip, you can name our controller. If you're adding LEDs to the controller, this is a requirement.&#x20;
+If your controller is based on a Atmel 32U4 chip, you can name our controller using this guide. If you're adding LEDs to the controller, this is a requirement.&#x20;
 
 You do this by making a custom `boards.txt` file, which Arduino IDE will use to flash your controller instead of the Arduino Leonardo / Pro Micro board core.&#x20;
 
@@ -62,4 +62,8 @@ The number written here by default is a random number. You should edit this and 
 <figure><img src="../.gitbook/assets/image (9).png" alt=""><figcaption><p>I've made a custom board file for my SW1 wheel</p></figcaption></figure>
 
 Use this board when flashing your controller.
+
+#### Disclaimer
+
+VID/PIDs cost a lot of money. Using a random VID/PID for your private projects is fine, but if you're selling a product, you're not entirely lawful if you're using random IDs. What the risk is, I'm not sure, but I can't imagine there is a USB police sniffing out sim gear shops.&#x20;
 
