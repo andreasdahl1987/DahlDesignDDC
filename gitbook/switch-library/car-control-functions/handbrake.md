@@ -1,6 +1,6 @@
 # Handbrake
 
-The handbrake functions utilized a [secondary brake input](./) to control the brakes of the car. They will apply 100% brake application. The [push/pull shifter](pushbutton.md#pushpull) function also has a way to apply handbrake, but it not listed here.&#x20;
+The handbrake functions utilized a [secondary brake input](./) to control the brakes of the car. They will apply 100% brake application. The [push/pull shifter](../pedals-and-paddles/pushbutton.md#pushpull) function also has a way to apply handbrake, but it not listed here.&#x20;
 
 It is recommended to add the handbrake functions towards the end of your list of switch functions in 30\_Switches.ino for best performance.&#x20;
 

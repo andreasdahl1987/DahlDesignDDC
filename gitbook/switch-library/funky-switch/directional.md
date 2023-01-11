@@ -1,12 +1,4 @@
-# Funky switch
-
-<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
-
-Alps RKJXT1F42001, or just "funky switch". It has an encoder, covered under [funkyRotary](encoders/funkyrotary.md), 4 directional button presses and 1 center pushbutton.
-
-<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
-
-As you can see from the schematic above, no directional input (A,B,C,D) will find its way to common pin unless pushbutton also i pressed. This is how this switch works. The pushbutton is pressed in every directional input. It serves as a pushbutton, but is also designed to prevent bouncing, by only closing the circuit to common when the switch is properly in place. This gives us a problem to solve however, since the center pushbutton is always engaged. We'll need an algorithm that avoids producing a button press if the pushbutton is pressed together with a directional button press. That is why funky switches have their own pushbutton functions.&#x20;
+# Directional
 
 #### funkyButton()
 
@@ -119,5 +111,7 @@ Fill in the row all the funky pins go to, the column of the one you're making th
 
 {% tab title="Requirements" %}
 None
+
+
 {% endtab %}
 {% endtabs %}

@@ -95,10 +95,12 @@ In order to make the algorithms more memory- and processing friendly, they will 
   * DDButton
   * ThrottleHold button
   * Handbrake button
+  * Preset next/previous
+  * Bite pot locker
 * Any unused button/open slot in the matrix, can safely be assigned 0.
 * Buttons and toggles that uses a single block simply uses the number assigned to that block.
 * Encoders:
-  * An incremental encoder uses two button numbers (one for CW rotation, one for CCCW). You just need to write the first of these numbers in the first encoder block in the matrix (leftmost).
+  * An incremental encoder uses two button numbers (one for CW rotation, one for CCW). You just need to write the first of these numbers in the first encoder block in the matrix (leftmost).
 
 ![image](https://user-images.githubusercontent.com/40788634/191233513-278b9395-3fc9-4564-b6a8-f66b5f787926.png)
 

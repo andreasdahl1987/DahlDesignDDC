@@ -1,6 +1,6 @@
 # Shifter
 
-Normally, you'll just use pushButton() for shifters. Here are special shifter functions which have some added features.
+Normally, you'll just use [pushButton()](../pushbutton.md#pushbutton) for shifters. Here are special shifter functions which have some added features.
 
 #### pushPull()
 
@@ -39,5 +39,25 @@ As you can see, the fieldPlacement is set to 4. This function uses the button fi
 {% tab title="Requirements" %}
 * modButton() if you want to change modes freely. modButton() not needed to change modes across presets.
 * 4 button numbers
+{% endtab %}
+{% endtabs %}
+
+#### upshift()
+
+{% tabs %}
+{% tab title="Description" %}
+A simple, momentary pushbutton. It differs from pushButton() in that is has an adjustable cooldown. You can use this to prevent double upshift caused by holding/releasing the shifter paddle too slowly.&#x20;
+{% endtab %}
+
+{% tab title="Example" %}
+`void upshift(int row, int col, int cooldown)`
+
+For a switch on row 3 column 5 -> `upshift(3,5,250);`
+
+I this case, the button takes a 250 ms pause after being pushed.&#x20;
+{% endtab %}
+
+{% tab title="Requirements" %}
+* 1 button number
 {% endtab %}
 {% endtabs %}

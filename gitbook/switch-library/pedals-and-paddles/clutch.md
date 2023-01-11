@@ -2,28 +2,19 @@
 
 Both single clutch and dual clutch are supported. Dual clutch setup has a lot more features.&#x20;
 
-To calibrate the clutches, you'll have to read the values from the paddles when fully pressed and fully released, by using the [serial monitor. ](../1.-project-planning/analog-inputs.md#reading-a-value)
-
-The values will often be a bit erratic. Most reliable readings are when the paddles are properly mounted and all elements of the controller that consumes power are powered up. Your readings might still be a bit erratic. The general idea is:
-
-* Use the highest value that your read on your lowest value measurements
-* Use the lower value that you read on your highest value measurements
-
-So if your controller fluctuates between 864 - 873 when paddle is not pressed, and 436 - 444 when pressed, use the values 864 for not pressed and 444 for pressed.&#x20;
-
-If one paddle has higher value on pressed than released and the other paddle is the opposide - it does not matter.
-
-A [biteButton()](function-button.md#bitebutton) is used to set bite point in dual clutch systems.&#x20;
+A [biteButton()](../function-button.md#bitebutton) or [bitePot()](bite-point-and-launch.md) is used to set bite point.
 
 Clutches use the joystick X axis.&#x20;
-
-You can increase the deadzone of  the clutches by adjusting the deadzone in 12\_GlobalVariables.ino.
 
 #### singleClutch()
 
 {% tabs %}
 {% tab title="Description" %}
 A simple single-paddle clutch.
+
+Can be used to set the bite point together with a [biteButton()](../function-button.md#bitebutton)
+
+Can launch when coupled with launchButton()
 {% endtab %}
 
 {% tab title="Example" %}
@@ -33,11 +24,12 @@ Type in the pin that reads the signal, the analog switch number you've given it,
 
 Example:
 
-`void singleClutch(A2, 2, 1053, 799);`
+`void singleClutch(A2, 2, 105, 799);`
 {% endtab %}
 
 {% tab title="Requirements" %}
-* None
+* biteButton() or bitePot() to set bite point if desired
+* launchButton() to launch, if desired
 {% endtab %}
 {% endtabs %}
 
@@ -65,12 +57,12 @@ Type in the pin that reads the signal, the analog switch number you've given it,
 
 Example:
 
-`void dualClutch(A2, 1, 1053, 799, A3, 2, 436, 873, true);`
+`void dualClutch(A2, 1, 105, 799, A3, 2, 436, 873, true);`
 {% endtab %}
 
 {% tab title="Requirements" %}
 * modButton() to change modes
-* biteButton() to change the pite point.
+* biteButton() or bitePot() to change the pite point.
+* launchButton() if you want 1-handed launches.
 {% endtab %}
 {% endtabs %}
-

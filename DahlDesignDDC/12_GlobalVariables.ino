@@ -9,6 +9,7 @@ bool handbrakeRelease = false;
 long handbrakeTimer = 0;
 
 //Specials
+bool bitePotLock = false;
 bool brakeMagicOn;
 float brakeMagicValue;
 float throttleHoldValue;
@@ -37,6 +38,7 @@ int8_t presetButtonCol;
 
 bool biteButtonBit1 = false;
 bool biteButtonBit2 = false;
+bool launchButtonLatch = false;
 uint8_t first = 0;
 uint8_t second = 0;
 
@@ -66,3 +68,8 @@ unsigned long globalClock;
 //Clutch deadzones
 #define clutchTopDeadzone 10
 #define clutchBottomDeadzone 10
+
+//LED setup
+
+#define ENABLE_UPLOAD_PROTECTION 0
+#define UPLOAD_AVAILABLE_DELAY 15000

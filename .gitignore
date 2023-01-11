@@ -364,5 +364,4 @@ FodyWeavers.xsd
 
 # Arduino bloat
 __vm/
-src/
 test/

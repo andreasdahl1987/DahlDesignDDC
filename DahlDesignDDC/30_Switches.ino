@@ -4,10 +4,12 @@
 
 void loop()
 {
-
 	//-------------------------
 	//-----ESSENTIALS----------
 	//-------------------------
+  #if (STRIP1_RGBLEDCOUNT + STRIP2_RGBLEDCOUNT + STRIP3_RGBLEDCOUNT + STRIP4_RGBLEDCOUNT > 0)
+	processCommands();
+  #endif
 
 	globalClock = millis();
 

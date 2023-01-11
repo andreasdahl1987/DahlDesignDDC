@@ -167,3 +167,23 @@ void pushPull(int rightPullRow, int rightPullCol, int rightPushRow, int rightPus
     buttonField = buttonField | pesh;
 }
 
+void upshift(int8_t row, int8_t column, int cooldown)
+{
+    int8_t Row = row - 1;
+    int8_t Column = column - 1;
+    int8_t Number = buttonNumber[Row][Column];
+
+    if (pushState[Row][Column] != rawState[Row][Column] && (globalClock - switchTimer[Row][Column]) > cooldown)
+    {
+        switchTimer[Row][Column] = globalClock;
+        pushState[Row][Column] = rawState[Row][Column];
+    }
+
+    if ((globalClock - switchTimer[Row][Column]) > cooldown)
+    {
+        pushState[Row][Column] = rawState[Row][Column];
+    }
+
+    Joystick.setButton(Number, pushState[Row][Column]);
+}
+

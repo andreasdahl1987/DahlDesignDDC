@@ -5,6 +5,13 @@
 
 void setup()
 {
+    //LED setup
+    Serial.begin(115200);
+
+    #if (STRIP1_RGBLEDCOUNT + STRIP2_RGBLEDCOUNT + STRIP3_RGBLEDCOUNT + STRIP4_RGBLEDCOUNT > 0)
+    setupLeds();
+    #endif
+
     //Set up joystick axis
     Joystick.setXAxisRange(0, 1000);
     Joystick.setThrottleRange(0, 1000);
@@ -31,7 +38,7 @@ void setup()
         }
     }
 
-    for (int u = 0; u < 10; u++)
+    for (int u = 0; u < analogSwitchCount; u++)
     {
         analogLastCounter[u] = 0;
         analogTempState[u] = 0;

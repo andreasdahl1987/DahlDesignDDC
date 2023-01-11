@@ -1,5 +1,5 @@
 /*
- Name:		DahlDesignDDC.ino
+ Name:		DahlDesignDDC
  Author:	Andreas Dahl
 */
 
