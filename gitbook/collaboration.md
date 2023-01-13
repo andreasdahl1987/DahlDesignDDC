@@ -9,7 +9,7 @@ Likely, the most used MCU for this firmware will be the 32U4. There are two bott
 
 ### Support for new boards
 
-For now, I'd like to keep using the Joystick library from Matt Heironimus, as it works great for the supported microcontrollers. It would be difficult to add support for completely different boards to this library (for me at least). Such as ESP32, STM32 and RP2040. I believe the simplest approach would be to modify existing libraries for said boards to match the API naming of Heironimus' joystick library.&#x20;
+For now, I'd like to keep using the Joystick library from Matt Heironimus, as it works great for the supported microcontrollers. It would be difficult to add support for completely different boards to this library (for me at least). Such as ESP32, STM32 and RP2040. I believe the simplest approach would be to modify existing libraries for said boards to match the naming and execution of the APIs used in Heironimus' joystick library.&#x20;
 
 Here is a list of APIs used:
 
