@@ -106,16 +106,19 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="10_MatrixAndAnalog.ino" />
-    <None Include="11_Bitfields.ino" />
+    <None Include="11_ShiftRegisters.ino" />
+    <None Include="19_Bitfields.ino" />
     <None Include="12_GlobalVariables.ino" />
     <None Include="13_SwitchVariables.ino" />
     <None Include="14_LEDsetup.ino" />
     <None Include="20_Setup.ino" />
     <None Include="30_Switches.ino" />
     <None Include="31_RunningPresets.ino" />
-    <None Include="39_Calculations.ino" />
+    <None Include="35_Calculations.ino" />
+    <None Include="38_ShiftRegisterSetup.ino" />
+    <None Include="39_ShiftRegisterScan.ino" />
     <None Include="40_Matrix.ino" />
-    <None Include="41_Presets.ino" />
+    <None Include="32_Presets.ino" />
     <None Include="42_MatrixInject.ino" />
     <None Include="50_Pushbuttons.ino" />
     <None Include="51_Toggle.ino" />

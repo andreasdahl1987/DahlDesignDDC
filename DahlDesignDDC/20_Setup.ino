@@ -16,6 +16,12 @@ void setup()
     Joystick.setThrottleRange(0, 1000);
     Joystick.setBrakeRange(0, 1000);
 
+    //Shift register setup
+    if (SRCOUNT > 0)
+    {
+        shiftRegisterSetup();
+    }
+
     //Filling some arrays
     for (int i = 0; i < rowCount; i++)
     {
@@ -68,12 +74,13 @@ void setup()
         }  
     }
 
-    //Pull up non-Matrix pins
-    if (nonMatrixIncluded)
+    //Pull up direct pins
+
+    for (int i = 0; i < directPinsCount; i++)
     {
-        for (int i = 0; i < nonMatrixCount; i++)
+        if (directPins[i] < 99)
         {
-            pinMode(nonMatrix[i], INPUT_PULLUP);
+            pinMode(directPins[i], INPUT_PULLUP);
         }
     }
 
