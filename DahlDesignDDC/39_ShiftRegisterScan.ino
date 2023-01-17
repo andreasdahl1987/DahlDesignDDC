@@ -17,7 +17,7 @@ void shiftRegisterScan()
         {
             uint8_t rowNumber = i / 8; //Identify which row we're on
             uint8_t colNumber = 7 - (i % 8); //Identify which column we're on
-            rawState[rowNumber][colNumber] = ~digitalRead(SR1DATA); //Set the bit to rawState
+            rawState[rowNumber][colNumber] = !digitalRead(SR1DATA); //Set the bit to rawState
             digitalWrite(SR1CLOCK, 0); //Clock low to ready for new bit
             digitalWrite(SR1CLOCK, 1); //Clock high to get new bit to SR1DATA
         }
@@ -35,7 +35,7 @@ void shiftRegisterScan()
         {
             uint8_t rowNumber = i / 8 + SR1CHAIN; //Identify which row we're on
             uint8_t colNumber = 7 - (i % 8); //Identify which column we're on
-            rawState[rowNumber][colNumber] = ~digitalRead(SR2DATA); //Set the bit to rawState
+            rawState[rowNumber][colNumber] = !digitalRead(SR2DATA); //Set the bit to rawState
             digitalWrite(SR2CLOCK, 0); //Clock low to ready for new bit
             digitalWrite(SR2CLOCK, 1); //Clock high to get new bit to SR2DATA
         }
@@ -53,7 +53,7 @@ void shiftRegisterScan()
         {
             uint8_t rowNumber = i / 8 + SR1CHAIN + SR2CHAIN; //Identify which row we're on
             uint8_t colNumber = 7 - (i % 8); //Identify which column we're on
-            rawState[rowNumber][colNumber] = ~digitalRead(SR3DATA); //Set the bit to rawState
+            rawState[rowNumber][colNumber] = !digitalRead(SR3DATA); //Set the bit to rawState
             digitalWrite(SR3CLOCK, 0); //Clock low to ready for new bit
             digitalWrite(SR3CLOCK, 1); //Clock high to get new bit to SR3DATA
         }
@@ -71,7 +71,7 @@ void shiftRegisterScan()
         {
             uint8_t rowNumber = i / 8 + SR1CHAIN + SR2CHAIN + SR3CHAIN; //Identify which row we're on
             uint8_t colNumber = 7 - (i % 8); //Identify which column we're on
-            rawState[rowNumber][colNumber] = ~digitalRead(SR4DATA); //Set the bit to rawState
+            rawState[rowNumber][colNumber] = !digitalRead(SR4DATA); //Set the bit to rawState
             digitalWrite(SR4CLOCK, 0); //Clock low to ready for new bit
             digitalWrite(SR4CLOCK, 1); //Clock high to get new bit to SR4DATA
         }
