@@ -2,7 +2,7 @@
 
 All pedal/paddle functions that are used to make a joystick axis will have an alternative function with a curve filter included. The purpose of the filter is to adjust the rise of the output curve.
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (3).png" alt=""><figcaption></figcaption></figure>
 
 Particularily with hall sensors, it can be difficult to design a device that has a completely linear output. Either too much happens too soon (above to the left) or to much happens too late (above to the right).&#x20;
 
@@ -11,7 +11,7 @@ The filter functions have an **extra two values** to fill in, but appart from th
 * curvePush -> The direction of curve adjustments. "1" will push the curve flat, "-1" will lift the curve up. "0" wil disable the whole filter. There is nothing inbetween, so really "1" and "-1" are the only values you should be using.
 * expFactor -> How hard you're pushing the curve. Decimal values from 0 and up. In practice doesn't reach higher than 10 before the function stops working and you'll get no value at all from your paddle/pedal. This is because the numbers used in the calculations get too big for the arduino to handle. Anyways, expFactor set to 10 is an extreme adjustment. and will not be needed. Likely, you'll use a value between 0 and 1.5.
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (2).png" alt=""><figcaption></figcaption></figure>
 
 The figures above show how curvePush = 1 (left) and curvePush = -1 (right) worrks, and how different values of expFactor (0.5 - 5) will alter the curve. In the case, a value of 2 is needed to reach linearity, which is a pretty big adjustment.&#x20;
 

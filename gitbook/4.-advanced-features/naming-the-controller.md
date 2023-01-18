@@ -8,7 +8,7 @@ Here is how you do it:
 
 * Move the folder "hardware" to your Arduino folder in "My Documents".&#x20;
 
-<figure><img src="../.gitbook/assets/image (1) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 * In this folder, the folder called __ named "My Controller" or similar, can be renamed to whatever you like.&#x20;
 * Find the `boards.txt` file:
@@ -59,7 +59,7 @@ The number written here by default is a random number. You should edit this and 
 
 * Now, when you open Arduino IDE, your custom board should show up in the boards list:
 
-<figure><img src="../.gitbook/assets/image (9).png" alt=""><figcaption><p>I've made a custom board file for my SW1 wheel</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (9) (2).png" alt=""><figcaption><p>I've made a custom board file for my SW1 wheel</p></figcaption></figure>
 
 Use this board when flashing your controller.
 

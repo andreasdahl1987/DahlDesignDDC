@@ -11,17 +11,17 @@ The weakness of these switches are the size and the number of pins, but there ar
 * The size can be worked around by spending more money - Grayhill 56 series is a good example.&#x20;
 * The pin numbers can be reduced from 8/10/12/16 to **1** with voltage divider circuit, often referred to as a _"resistor ladder"_. This circuit can be layed out on a PCB which fits the switch pins, and doesn't add anything to the size of the switch.
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption><p>The Dahl Design SW1 with its two rotary switches. These utilizes a PCB with a resistor ladder circuit.</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption><p>The Dahl Design SW1 with its two rotary switches. These utilizes a PCB with a resistor ladder circuit.</p></figcaption></figure>
 
 A voltage divider circuit in its simples form below:
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (3).png" alt=""><figcaption></figcaption></figure>
 
 Typically, "Vin" will be your +5V or +3.3V from the microcontroller. The ground symbol to "GND" on the microcontroller. "Vout" is the voltage level that you'll measure. The idea here is to divide a portion of the voltage to ground and a portion to be measured. The voltage at "Vout" depends on the size ratio of the two resistors Z1 and Z2. If Z2 is really big and Z1 small, a higher voltage is meassured at "Vout". If Z1 is big and Z2 small, a lower voltage is measured at "Vout".&#x20;
 
 The equation is like this:&#x20;
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 Here is the same voltage divider circuit, now with the rotary switch weaved into it. All the resistors (R) have the same value. At this position, Z1 is 5R and Z2 is 6R. Changing the position of the switch will change the size of Z1 and Z2, and ultimately change the value of "Vout".&#x20;
 

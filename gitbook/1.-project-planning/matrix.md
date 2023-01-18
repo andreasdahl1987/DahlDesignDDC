@@ -1,10 +1,16 @@
-# Matrix
+# Matrix overview
+
+This section will explain how to plan the switch matrix. Often refered to as the "planned matrix" in this manual. No matter how you chose to wire your switches to the microcontroller, it will end up in a matrix in the firmware. You'll have to plan you controllers switches accordingly, so this chapter is always relevant. For matrix wiring, the wiring will naturally match the firmware matrix. &#x20;
+
+### Matrix wiring
 
 With the exception of analog inputs, all switches can be wired in a matrix. This is a technique often used in keyboards, keypads and other devices with many buttons. The basic idea is wiring the buttons in an array with rows and columns, and writing a code that “activates” each row at a time, checking all columns on that row for connection before closing the row and moving on to the next. Effectively scanning through the whole table of buttons. Instead of using 14 pins for 14 buttons, you can use 14 pins as a 7 x 7 matrix, allowing for 49 buttons. DDC can give a total of 128 button outputs.
 
 ### Planning the matrix
 
 I use a spreadsheet to plan the matrix for my projects, with the switches represented as **blocks**. I will refer to **blocks** for the remainder of this guide. I also give blocks different colors according to what I'm going to use the switch for; neutral button, bite point button, modifier button, etc. This is not need, it is just to get an overview.
+
+The numbers in the cells are [button numbers](../3.-coding/essentials/10\_matrixandanalog.ino.md#button-numbers), more on this later.&#x20;
 
 ![image](https://user-images.githubusercontent.com/40788634/191767001-6133685e-d7a5-4eef-9de6-aea218732961.png)
 
@@ -57,7 +63,7 @@ Every block is an **adress** in the matrix. Most switches just need 1 block. As 
 
 * Alps RKJXT1F42001 (5 + 2 blocks)
 
-#### Pins
+#### Pins (in case of matrix wiring)
 
 ![image](https://user-images.githubusercontent.com/40788634/191212291-7e49c0ff-8039-435d-b81b-752512a5e36d.png)
 

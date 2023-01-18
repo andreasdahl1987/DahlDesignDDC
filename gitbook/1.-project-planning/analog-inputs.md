@@ -2,7 +2,7 @@
 
 DDC supports an unlimited number of analog switches (clutches, potentiometer, multiposition switches). When adding an analog switch to your project, it has to be assigned a number. Starting at 0, each new switch one number higher. 5 switches should be numbered 1 - 5. **This has nothing to do with button numbers.** This number is the key to a package of variables that the switch need to function properly. So each switch needs its own number, no sharing with other switches.
 
-<figure><img src="../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (16) (1).png" alt=""><figcaption></figcaption></figure>
 
 The same way as with matrix buttons, I organise these in a spreadsheet. Here, switch #1 and #2 (the blue ones) are 12-position switches, and switch #3 and #4 are my left and right clutch paddles. Switch numbers 5 is also a 12-position switch, which I will use as an incremental encoder.
 
