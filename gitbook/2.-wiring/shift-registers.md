@@ -112,6 +112,6 @@ As described above, you can chain as many SRs as you like together by just conne
 
 The 74HC166 has a completely different pin setup:
 
-<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 The reversed serial data output from pin 7 on 165 does not exist on 166. Instead it has pin 9, MR#. This is a master reset. When this pin is low, the shift register is reset to all 0s. So this pin has to be pulled high with a pullup resistor to make the SR work.&#x20;

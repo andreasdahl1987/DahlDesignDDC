@@ -29,7 +29,7 @@ DDC will dictate how SRs fit in the matrix, so it is more a matter of moving all
       <figure><img src="../.gitbook/assets/image (35).png" alt=""><figcaption></figcaption></figure>
 * In case of a mix of different types of wiring, the matrix wired switches and direct wired switches are placed below the shift registers. Direct wired switches can share columns and rows with shift registers.&#x20;
 
-<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (2) (4).png" alt=""><figcaption></figcaption></figure>
 
 In the example above, the matrix wired switches are on row 6-8 and columns 5-8, note that even if the planned matrix is 8 columns wide, the switches in the wired matrix doesn't have to be. You can still shape the matrix to use the least amount of pins. The open slots in the planned matrix are filled with 4 direct wired switches (red).&#x20;
 
