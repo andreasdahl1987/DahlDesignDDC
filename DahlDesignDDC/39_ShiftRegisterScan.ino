@@ -7,10 +7,10 @@ void shiftRegisterScan()
     //SR1
     if (SRCOUNT >= 1)
     {
-        digitalWrite(SR1IO, 0); //Enable parallel inputs
+        digitalWrite(SR1LATCH, 0); //Enable parallel inputs
         digitalWrite(SR1CLOCK, 0); //Clock low to get ready to load data
         digitalWrite(SR1CLOCK, 1); //Clock high to load data to shift register
-        digitalWrite(SR1IO, 1); //Disable parallel inputs and enable serial output
+        digitalWrite(SR1LATCH, 1); //Disable parallel inputs and enable serial output
 
         //Scan through the serial output, set switch states a matrix with 8 columns and up to 4 rows. 
         for (uint8_t i = 0; i < 8 * SR1CHAIN; i++)
@@ -25,10 +25,10 @@ void shiftRegisterScan()
 
     if (SRCOUNT >= 2)
     {
-        digitalWrite(SR2IO, 0); //Enable parallel inputs
+        digitalWrite(SR2LATCH, 0); //Enable parallel inputs
         digitalWrite(SR2CLOCK, 0); //Clock low to get ready to load data
         digitalWrite(SR2CLOCK, 1); //Clock high to load data to shift register
-        digitalWrite(SR2IO, 1); //Disable parallel inputs and enable serial output
+        digitalWrite(SR2LATCH, 1); //Disable parallel inputs and enable serial output
 
         //Scan through the serial output, set switch states a matrix with 8 columns and up to 4 rows. 
         for (uint8_t i = 0; i < 8 * SR2CHAIN; i++)
@@ -43,10 +43,10 @@ void shiftRegisterScan()
 
     if (SRCOUNT >= 3)
     {
-        digitalWrite(SR3IO, 0); //Enable parallel inputs
+        digitalWrite(SR3LATCH, 0); //Enable parallel inputs
         digitalWrite(SR3CLOCK, 0); //Clock low to get ready to load data
         digitalWrite(SR3CLOCK, 1); //Clock high to load data to shift register
-        digitalWrite(SR3IO, 1); //Disable parallel inputs and enable serial output
+        digitalWrite(SR3LATCH, 1); //Disable parallel inputs and enable serial output
 
         //Scan through the serial output, set switch states a matrix with 8 columns and up to 4 rows. 
         for (uint8_t i = 0; i < 8 * SR3CHAIN; i++)
@@ -61,10 +61,10 @@ void shiftRegisterScan()
 
     if (SRCOUNT >= 4)
     {
-        digitalWrite(SR4IO, 0); //Enable parallel inputs
+        digitalWrite(SR4LATCH, 0); //Enable parallel inputs
         digitalWrite(SR4CLOCK, 0); //Clock low to get ready to load data
         digitalWrite(SR4CLOCK, 1); //Clock high to load data to shift register
-        digitalWrite(SR4IO, 1); //Disable parallel inputs and enable serial output
+        digitalWrite(SR4LATCH, 1); //Disable parallel inputs and enable serial output
 
         //Scan through the serial output, set switch states a matrix with 8 columns and up to 4 rows. 
         for (uint8_t i = 0; i < 8 * SR4CHAIN; i++)
