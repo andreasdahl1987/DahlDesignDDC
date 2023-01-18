@@ -14,7 +14,10 @@ void matrix()
 
             for (uint8_t u = 0; u < colCount; u++) //Checking all column pins on this row pin
             {
-                rawState[i][u] = !digitalRead(col[u]);
+                if (col[u] < 99)
+                {
+                    rawState[i][u] = !digitalRead(col[u]);
+                }
             }
             pinMode(row[i], INPUT_PULLUP); //Disengage the row pin
         }
