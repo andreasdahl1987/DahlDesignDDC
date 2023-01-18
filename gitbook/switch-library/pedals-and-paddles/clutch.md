@@ -39,11 +39,11 @@ Example:
 {% tab title="Description" %}
 A dual paddle clutch system. Has 4 modes:
 
-0: Static - The slave paddle is locked at bite point, the master paddle goes to 100%
+0: Static - The slave paddle only reaches bite point, the master paddle goes to 100%
 
-1: Dynamic low - Either paddle alone is at bite point, press both together to get to 100%
+1: Dynamic low - Either paddle alone only reaches bite point, press both together to reach 100%
 
-2: Dynamic high - Either paddle alone is at 100%. Press both and release one to get to bite point.
+2: Dynamic high - Either paddle alone reaches 100%. Press both and release one to get to bite point.
 
 3: Brake/throttle - Using the paddles as brake and throttle. Output now changes from joystick X axis to brake/throttle axis.&#x20;
 
