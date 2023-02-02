@@ -7,7 +7,7 @@ void loop()
 	//-------------------------
 	//-----ESSENTIALS----------
 	//-------------------------
-  #if (STRIP1_RGBLEDCOUNT + STRIP2_RGBLEDCOUNT + STRIP3_RGBLEDCOUNT + STRIP4_RGBLEDCOUNT > 0)
+  #if (STRIP1_RGBLEDCOUNT + STRIP2_RGBLEDCOUNT + STRIP3_RGBLEDCOUNT + STRIP4_RGBLEDCOUNT > 0 && BOARDTYPE == 0)
 	processCommands();
   #endif
 
@@ -26,9 +26,6 @@ void loop()
 	//---------SWITCHES START HERE--------
 	//------------------------------------
 
-
-
-
 	//------------------------------------
 	//----------SWITCHES END HERE---------
 	//------------------------------------
@@ -39,3 +36,10 @@ void loop()
 
 	Joystick.sendState();
 }
+
+#if (STRIP1_RGBLEDCOUNT + STRIP2_RGBLEDCOUNT + STRIP3_RGBLEDCOUNT + STRIP4_RGBLEDCOUNT > 0 && BOARDTYPE == 2)
+  void loop1()
+  {
+    processCommands();
+  }
+#endif

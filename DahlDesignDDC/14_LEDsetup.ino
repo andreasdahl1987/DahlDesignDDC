@@ -38,5 +38,9 @@
 
 // Main simhub leds core code
 #if (STRIP1_RGBLEDCOUNT + STRIP2_RGBLEDCOUNT + STRIP3_RGBLEDCOUNT + STRIP4_RGBLEDCOUNT > 0)
-  #include "ledscore.h"
+  #if(BOARDTYPE == 0)
+    #include <DDC32U4LEDcore.h>
+  #elif(BOARDTYPE == 2)
+    #include <DDCPILEDcore.h>
+  #endif
 #endif
