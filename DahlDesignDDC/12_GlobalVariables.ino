@@ -70,6 +70,4 @@ unsigned long globalClock;
 #define clutchBottomDeadzone 10
 
 //LED setup
-uint8_t LEDBrightness = 255;
-#define ENABLE_UPLOAD_PROTECTION 0
-#define UPLOAD_AVAILABLE_DELAY 15000
+uint8_t LEDBrightness = 100;

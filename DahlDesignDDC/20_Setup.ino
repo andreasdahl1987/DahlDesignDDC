@@ -21,6 +21,7 @@ void setup()
 
     #if (STRIP1_RGBLEDCOUNT + STRIP2_RGBLEDCOUNT + STRIP3_RGBLEDCOUNT + STRIP4_RGBLEDCOUNT > 0 && BOARDTYPE == 0)
     setupLeds();
+    LEDStartup();
     #endif
 
     //Set up joystick axis
@@ -108,5 +109,6 @@ void setup()
 void setup1()
 {
   setupLeds();
+  LEDStartup();
 }
 #endif

@@ -54,6 +54,8 @@ void setupLeds(){
 void readStrip() {
 	uint8_t r, g, b;
 
+	LEDPre();
+
 	#if(STRIP1_RGBLEDCOUNT > 0)
 	for (uint16_t i = 0; i < STRIP1_RGBLEDCOUNT; i++) {
 		r = WaitAndReadOneByte();
@@ -93,6 +95,8 @@ void readStrip() {
     pixels4.setPixelColor(i, pixels4.Color(r, g, b));
 	}
 	#endif
+
+	LEDPost();
 }
 
 

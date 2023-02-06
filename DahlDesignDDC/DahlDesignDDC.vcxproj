@@ -118,7 +118,10 @@
     <None Include="20_Setup.ino" />
     <None Include="30_Switches.ino" />
     <None Include="31_RunningPresets.ino" />
-    <None Include="35_Calculations.ino" />
+    <None Include="33_Calculations.ino" />
+    <None Include="34_LEDStartup.ino" />
+    <None Include="36_LEDRunning.ino" />
+    <None Include="37_LEDFunctions.ino" />
     <None Include="38_ShiftRegisterSetup.ino" />
     <None Include="39_ShiftRegisterScan.ino" />
     <None Include="40_Matrix.ino" />
