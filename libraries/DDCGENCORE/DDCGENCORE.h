@@ -5,8 +5,21 @@
 
 #define PROTOCOLVERSION "SIMHUB_1.0"
 
+#if(STRIP1_RGBLEDCOUNT > 0)
+Adafruit_NeoPixel pixels1(STRIP1_RGBLEDCOUNT, STRIP1_DATAPIN, NEO_GRB + NEO_KHZ800);
+#endif
 
-Adafruit_NeoPixel pixels(STRIP1_RGBLEDCOUNT, STRIP1_DATAPIN, NEO_GRB + NEO_KHZ800);
+#if(STRIP2_RGBLEDCOUNT > 0)
+Adafruit_NeoPixel pixels2(STRIP2_RGBLEDCOUNT, STRIP2_DATAPIN, NEO_GRB + NEO_KHZ800);
+#endif
+
+#if(STRIP3_RGBLEDCOUNT > 0)
+Adafruit_NeoPixel pixels3(STRIP3_RGBLEDCOUNT, STRIP3_DATAPIN, NEO_GRB + NEO_KHZ800);
+#endif
+
+#if(STRIP4_RGBLEDCOUNT > 0)
+Adafruit_NeoPixel pixels4(STRIP4_RGBLEDCOUNT, STRIP4_DATAPIN, NEO_GRB + NEO_KHZ800);
+#endif
 
 int messageend = 0;
 String command = "";
@@ -23,19 +36,63 @@ int WaitAndReadOneByte() {
 /// <summary>
 
 void setupLeds(){
-    pixels.begin(); 
+	#if(STRIP1_RGBLEDCOUNT > 0)
+    pixels1.begin(); 
+	#endif
+	#if(STRIP2_RGBLEDCOUNT > 0)
+    pixels2.begin(); 
+	#endif
+	#if(STRIP3_RGBLEDCOUNT > 0)
+    pixels13.begin(); 
+	#endif
+	#if(STRIP4_RGBLEDCOUNT > 0)
+    pixels14.begin(); 
+	#endif
 }
 
 
 void readStrip() {
 	uint8_t r, g, b;
+
+	#if(STRIP1_RGBLEDCOUNT > 0)
 	for (uint16_t i = 0; i < STRIP1_RGBLEDCOUNT; i++) {
 		r = WaitAndReadOneByte();
 		g = WaitAndReadOneByte();
 		b = WaitAndReadOneByte();
 
-    pixels.setPixelColor(i, pixels.Color(r, g, b));
+    pixels1.setPixelColor(i, pixels1.Color(r, g, b));
 	}
+	#endif
+
+	#if(STRIP2_RGBLEDCOUNT > 0)
+	for (uint16_t i = 0; i < STRIP2_RGBLEDCOUNT; i++) {
+		r = WaitAndReadOneByte();
+		g = WaitAndReadOneByte();
+		b = WaitAndReadOneByte();
+
+    pixels2.setPixelColor(i, pixels2.Color(r, g, b));
+	}
+	#endif
+
+	#if(STRIP3_RGBLEDCOUNT > 0)
+	for (uint16_t i = 0; i < STRIP3_RGBLEDCOUNT; i++) {
+		r = WaitAndReadOneByte();
+		g = WaitAndReadOneByte();
+		b = WaitAndReadOneByte();
+
+    pixels3.setPixelColor(i, pixels3.Color(r, g, b));
+	}
+	#endif
+
+	#if(STRIP4_RGBLEDCOUNT > 0)
+	for (uint16_t i = 0; i < STRIP4_RGBLEDCOUNT; i++) {
+		r = WaitAndReadOneByte();
+		g = WaitAndReadOneByte();
+		b = WaitAndReadOneByte();
+
+    pixels4.setPixelColor(i, pixels4.Color(r, g, b));
+	}
+	#endif
 }
 
 
@@ -49,7 +106,21 @@ void readLeds() {
 		valid = valid && (WaitAndReadOneByte() == 0xFF - i);
 	}
 	if (valid) {
-		pixels.show();
+		#if(STRIP1_RGBLEDCOUNT>0)
+		pixels1.show();
+		#endif
+
+		#if(STRIP2_RGBLEDCOUNT>0)
+		pixels2.show();
+		#endif
+
+		#if(STRIP3_RGBLEDCOUNT>0)
+		pixels3.show();
+		#endif
+
+		#if(STRIP4_RGBLEDCOUNT>0)
+		pixels4.show();
+		#endif
 	}
 }
 
@@ -57,7 +128,7 @@ void readLeds() {
 /// Sends leds count to the serial port.
 /// </summary>
 void getLedsCount() {
-	Serial.println(STRIP1_RGBLEDCOUNT);
+	Serial.println(STRIP1_RGBLEDCOUNT+STRIP2_RGBLEDCOUNT+STRIP3_RGBLEDCOUNT+STRIP4_RGBLEDCOUNT);
 }
 
 /// <summary>
