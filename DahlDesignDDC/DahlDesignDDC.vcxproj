@@ -105,6 +105,10 @@
     <DebuggerFlavor>VisualMicroDebugger</DebuggerFlavor>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="02_Board.ino" />
+    <None Include="04_USB.ino" />
+    <None Include="08_Joystick.ino" />
+    <None Include="11_ShiftRegisters.ino" />
     <None Include="10_MatrixAndAnalog.ino" />
     <None Include="11_ShiftRegisters.ino" />
     <None Include="19_Bitfields.ino" />
