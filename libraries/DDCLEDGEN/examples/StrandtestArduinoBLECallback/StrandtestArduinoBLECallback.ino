@@ -15,7 +15,7 @@
  * This example code is in the public domain.
  * 
  */
-#include <DDCPILED.h>
+#include <DDCLEDGEN.h>
 
 #define PIN 15 // Pin where NeoPixels are connected
 

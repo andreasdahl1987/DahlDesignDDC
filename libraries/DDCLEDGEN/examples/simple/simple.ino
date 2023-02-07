@@ -2,7 +2,7 @@
 // Released under the GPLv3 license to match the rest of the
 // Adafruit NeoPixel library
 
-#include <DDCPILED.h>
+#include <DDCLEDGEN.h>
 #ifdef __AVR__
  #include <avr/power.h> // Required for 16 MHz Adafruit Trinket
 #endif

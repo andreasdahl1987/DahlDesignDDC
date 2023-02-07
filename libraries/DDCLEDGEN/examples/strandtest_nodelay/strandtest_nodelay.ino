@@ -1,38 +1,4 @@
-/****************************************************************************
- * This example was developed by the Hackerspace San Salvador to demonstrate
- * the simultaneous use of the NeoPixel library and the Bluetooth SoftDevice.
- * To compile this example you'll need to add support for the NRF52 based
- * following the instructions at:
- *  https://github.com/sandeepmistry/arduino-nRF5
- * Or adding the following URL to the board manager URLs on Arduino preferences:
- *  https://sandeepmistry.github.io/arduino-nRF5/package_nRF5_boards_index.json
- * Then you can install the BLEPeripheral library avaiable at:
- *  https://github.com/sandeepmistry/arduino-BLEPeripheral
- * To test it, compile this example and use the UART module from the nRF
- * Toolbox App for Android. Edit the interface and send the characters
- * 'a' to 'i' to switch the animation.
- * There is a no delay because this example does not block the threads execution
- * so the change will be shown immediately and will not need to wait for the current 
- * animation to end.
- * For more info write us at: info _at- teubi.co
- */
-#include <SPI.h>
-#include <BLEPeripheral.h>
-#include "BLESerial.h"
-#include <DDCPILED.h>
-
-#define PIN 15 // Pin where NeoPixels are connected
-
-// Declare our NeoPixel strip object:
-Adafruit_NeoPixel strip(64, PIN, NEO_GRB + NEO_KHZ800);
-// Argument 1 = Number of pixels in NeoPixel strip
-// Argument 2 = Arduino pin number (most are valid)
-// Argument 3 = Pixel type flags, add together as needed:
-//   NEO_KHZ800  800 KHz bitstream (most NeoPixel products w/WS2812 LEDs)
-//   NEO_KHZ400  400 KHz (classic 'v1' (not v2) FLORA pixels, WS2811 drivers)
-//   NEO_GRB     Pixels are wired for GRB bitstream (most NeoPixel products)
-//   NEO_RGB     Pixels are wired for RGB bitstream (v1 FLORA pixels, not v2)
-//   NEO_RGBW    Pixels are wired for RGBW bitstream (NeoPixel RGBW products)
+// A non-blocking everyday NeoPixel strip test program.
 
 // NEOPIXEL BEST PRACTICES for most reliable operation:
 // - Add 1000 uF CAPACITOR between NeoPixel strip's + and - connections.
@@ -44,74 +10,96 @@ Adafruit_NeoPixel strip(64, PIN, NEO_GRB + NEO_KHZ800);
 //   a LOGIC-LEVEL CONVERTER on the data line is STRONGLY RECOMMENDED.
 // (Skipping these may work OK on your workbench but can fail in the field)
 
-// define pins (varies per shield/board)
-#define BLE_REQ   10
-#define BLE_RDY   2
-#define BLE_RST   9
+#include <DDCLEDGEN.h>
+#ifdef __AVR__
+ #include <avr/power.h> // Required for 16 MHz Adafruit Trinket
+#endif
 
-// create ble serial instance, see pinouts above
-BLESerial BLESerial(BLE_REQ, BLE_RDY, BLE_RST);
+// Which pin on the Arduino is connected to the NeoPixels?
+// On a Trinket or Gemma we suggest changing this to 1:
+#ifdef ESP32
+// Cannot use 6 as output for ESP. Pins 6-11 are connected to SPI flash. Use 16 instead.
+#define LED_PIN    16
+#else
+#define LED_PIN    6
+#endif
 
-uint8_t current_state = 0;
-uint8_t rgb_values[3];
+// How many NeoPixels are attached to the Arduino?
+#define LED_COUNT 60
 
+// Declare our NeoPixel strip object:
+Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
+// Argument 1 = Number of pixels in NeoPixel strip
+// Argument 2 = Arduino pin number (most are valid)
+// Argument 3 = Pixel type flags, add together as needed:
+//   NEO_KHZ800  800 KHz bitstream (most NeoPixel products w/WS2812 LEDs)
+//   NEO_KHZ400  400 KHz (classic 'v1' (not v2) FLORA pixels, WS2811 drivers)
+//   NEO_GRB     Pixels are wired for GRB bitstream (most NeoPixel products)
+//   NEO_RGB     Pixels are wired for RGB bitstream (v1 FLORA pixels, not v2)
+//   NEO_RGBW    Pixels are wired for RGBW bitstream (NeoPixel RGBW products)
+
+unsigned long pixelPrevious = 0;        // Previous Pixel Millis
+unsigned long patternPrevious = 0;      // Previous Pattern Millis
+int           patternCurrent = 0;       // Current Pattern Number
+int           patternInterval = 5000;   // Pattern Interval (ms)
+int           pixelInterval = 50;       // Pixel Interval (ms)
+int           pixelQueue = 0;           // Pattern Pixel Queue
+int           pixelCycle = 0;           // Pattern Pixel Cycle
+uint16_t      pixelCurrent = 0;         // Pattern Current Pixel Number
+uint16_t      pixelNumber = LED_COUNT;  // Total Number of Pixels
+
+// setup() function -- runs once at startup --------------------------------
 void setup() {
-  Serial.begin(115200);
-  Serial.println("Hello World!");
-  // custom services and characteristics can be added as well
-  BLESerial.setLocalName("UART_HS");
-  BLESerial.begin();
+  // These lines are specifically to support the Adafruit Trinket 5V 16 MHz.
+  // Any other board, you can remove this part (but no harm leaving it):
+#if defined(__AVR_ATtiny85__) && (F_CPU == 16000000)
+  clock_prescale_set(clock_div_1);
+#endif
+  // END of Trinket-specific code.
 
-  strip.begin(); // INITIALIZE NeoPixel strip object (REQUIRED)
-  strip.show();  // Turn OFF all pixels ASAP
-
-  //pinMode(PIN, OUTPUT);
-  //digitalWrite(PIN, LOW);
-
-  current_state = 'a';
+  strip.begin();           // INITIALIZE NeoPixel strip object (REQUIRED)
+  strip.show();            // Turn OFF all pixels ASAP
+  strip.setBrightness(50); // Set BRIGHTNESS to about 1/5 (max = 255)
 }
 
+// loop() function -- runs repeatedly as long as board is on ---------------
 void loop() {
-  while(BLESerial.available()) {
-    uint8_t character = BLESerial.read();
-    switch(character) {
-      case 'a':
-      case 'b':
-      case 'c':
-      case 'd':
-      case 'e':
-      case 'f':
-      case 'g':
-      case 'h':
-        current_state = character;
-        break;
-    };
+  unsigned long currentMillis = millis();                     //  Update current time
+  if((currentMillis - patternPrevious) >= patternInterval) {  //  Check for expired time
+    patternPrevious = currentMillis;
+    patternCurrent++;                                         //  Advance to next pattern
+    if(patternCurrent >= 7)
+      patternCurrent = 0;
   }
-  switch(current_state) {
-    case 'a':
-      colorWipe(strip.Color(255,   0,   0), 20);    // Red
-      break;
-    case 'b':
-      colorWipe(strip.Color(  0, 255,   0), 20);    // Green
-      break;
-    case 'c':
-      colorWipe(strip.Color(  0,   0, 255), 20);    // Blue
-      break;
-    case 'd':
-      theaterChase(strip.Color(255,   0,   0), 20); // Red
-      break;
-    case 'e':
-      theaterChase(strip.Color(  0, 255,   0), 20); // Green
-      break;
-    case 'f':
-      theaterChase(strip.Color(255,   0, 255), 20); // Cyan
-      break;
-    case 'g':
-      rainbow(10);
-      break;
-    case 'h':
-      theaterChaseRainbow(20);
-      break;
+  
+  if(currentMillis - pixelPrevious >= pixelInterval) {        //  Check for expired time
+    pixelPrevious = currentMillis;                            //  Run current frame
+    switch (patternCurrent) {
+      case 7:
+        theaterChaseRainbow(50); // Rainbow-enhanced theaterChase variant
+        break;
+      case 6:
+        rainbow(10); // Flowing rainbow cycle along the whole strip
+        break;     
+      case 5:
+        theaterChase(strip.Color(0, 0, 127), 50); // Blue
+        break;
+      case 4:
+        theaterChase(strip.Color(127, 0, 0), 50); // Red
+        break;
+      case 3:
+        theaterChase(strip.Color(127, 127, 127), 50); // White
+        break;
+      case 2:
+        colorWipe(strip.Color(0, 0, 255), 50); // Blue
+        break;
+      case 1:
+        colorWipe(strip.Color(0, 255, 0), 50); // Green
+        break;        
+      default:
+        colorWipe(strip.Color(255, 0, 0), 50); // Red
+        break;
+    }
   }
 }
 
@@ -142,7 +130,7 @@ void theaterChase(uint32_t color, int wait) {
     strip.setPixelColor(i + pixelQueue, color); //  Set pixel's color (in RAM)
   }
   strip.show();                             //  Update strip to match
-  for(int i=0; i < pixelNumber; i+3) {
+  for(int i=0; i < pixelNumber; i+=3) {
     strip.setPixelColor(i + pixelQueue, strip.Color(0, 0, 0)); //  Set pixel's color (in RAM)
   }
   pixelQueue++;                             //  Advance current pixel
@@ -167,11 +155,11 @@ void rainbow(uint8_t wait) {
 void theaterChaseRainbow(uint8_t wait) {
   if(pixelInterval != wait)
     pixelInterval = wait;                   //  Update delay time  
-  for(int i=0; i < pixelNumber; i+3) {
+  for(int i=0; i < pixelNumber; i+=3) {
     strip.setPixelColor(i + pixelQueue, Wheel((i + pixelCycle) % 255)); //  Update delay time  
   }
   strip.show();
-  for(int i=0; i < pixelNumber; i+3) {
+  for(int i=0; i < pixelNumber; i+=3) {
     strip.setPixelColor(i + pixelQueue, strip.Color(0, 0, 0)); //  Update delay time  
   }      
   pixelQueue++;                           //  Advance current queue  

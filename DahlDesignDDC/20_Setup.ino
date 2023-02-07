@@ -19,7 +19,7 @@ void setup()
     //LED setup
     Serial.begin(115200);
 
-    #if (STRIP1_RGBLEDCOUNT + STRIP2_RGBLEDCOUNT + STRIP3_RGBLEDCOUNT + STRIP4_RGBLEDCOUNT > 0 && BOARDTYPE == 0)
+    #if (LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT > 0 && BOARDTYPE == 0)
     setupLeds();
     LEDStartup();
     #endif
@@ -105,7 +105,7 @@ void setup()
     Joystick.setYAxisRange(-32768, 32767);
 }
 
-#if (STRIP1_RGBLEDCOUNT + STRIP2_RGBLEDCOUNT + STRIP3_RGBLEDCOUNT + STRIP4_RGBLEDCOUNT > 0 && BOARDTYPE == 2)
+#if (LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT > 0 && BOARDTYPE == 2)
 void setup1()
 {
   setupLeds();

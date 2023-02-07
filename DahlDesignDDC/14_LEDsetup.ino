@@ -1,29 +1,30 @@
 //-------------------------
-// ------- STRIP #1 Settings
+// ------- STRIP #1 Setup
 //-------------------------
 
-#define STRIP1_RGBLEDCOUNT 50 // LED count on the strip. 0 to disable
-#define STRIP1_DATAPIN 2 // Pin number
+#define LED1COUNT 50 // LED count on the strip. 0 to disable
+#define LED1PIN 9 // Pin number
+#define LED1INTERNAL 1 // This LED strip has firmware LED calls -> 1. Else 0. 
 
 //-------------------------
-// ------- STRIP #2 Settings
+// ------- STRIP #2 Setup
 //-------------------------
-#define STRIP2_RGBLEDCOUNT 0
-#define STRIP2_DATAPIN 2 
+#define LED2COUNT 0
+#define LED2PIN 2 
 
 //-------------------------
-// ------- STRIP #3 Settings
+// ------- STRIP #3 Setup
 //-------------------------
-#define STRIP3_RGBLEDCOUNT 0
-#define STRIP3_DATAPIN 2
+#define LED3COUNT 0
+#define LED3PIN 2
 
 //-------------------------
-// ------- STRIP #4 Settings
+// ------- STRIP #4 Setup
 //-------------------------
-#define STRIP4_RGBLEDCOUNT 0
-#define STRIP4_DATAPIN 2
+#define LED4COUNT 0
+#define LED4PIN 2
 
 
-#if (STRIP1_RGBLEDCOUNT + STRIP2_RGBLEDCOUNT + STRIP3_RGBLEDCOUNT + STRIP4_RGBLEDCOUNT > 0)
+#if (LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT > 0)
     #include <DDCGENCORE.h>
 #endif

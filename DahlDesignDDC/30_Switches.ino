@@ -7,7 +7,7 @@ void loop()
 	//-------------------------
 	//-----ESSENTIALS----------
 	//-------------------------
-  #if (STRIP1_RGBLEDCOUNT + STRIP2_RGBLEDCOUNT + STRIP3_RGBLEDCOUNT + STRIP4_RGBLEDCOUNT > 0 && BOARDTYPE == 0)
+  #if (LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT > 0 && BOARDTYPE == 0)
 	processCommands();
   #endif
 
@@ -37,7 +37,7 @@ void loop()
 	Joystick.sendState();
 }
 
-#if (STRIP1_RGBLEDCOUNT + STRIP2_RGBLEDCOUNT + STRIP3_RGBLEDCOUNT + STRIP4_RGBLEDCOUNT > 0 && BOARDTYPE == 2)
+#if (LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT > 0 && BOARDTYPE == 2)
   void loop1()
   {
     processCommands();

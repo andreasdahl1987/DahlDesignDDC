@@ -5,7 +5,7 @@
 // It's helpful if you don't know NeoPixel settings at compile time or
 // just want to store this settings in EEPROM or a file on an SD card.
 
-#include <DDCPILED.h>
+#include <DDCLEDGEN.h>
 #ifdef __AVR__
  #include <avr/power.h> // Required for 16 MHz Adafruit Trinket
 #endif

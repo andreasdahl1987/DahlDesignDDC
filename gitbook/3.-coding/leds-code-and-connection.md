@@ -9,24 +9,24 @@ You don't need to do anything here if you're not planning to use LEDs with DDC.&
 // ------- LED STRIP #1 Settings
 //-------------------------
 
-#define STRIP1_RGBLEDCOUNT 0
-#define STRIP1_DATAPIN 2
+#define LED1COUNT 0
+#define LED1PIN 2
 #define STRIP1_RIGHTTOLEFT 0
 #define STRIP1_TYPE NEOPIXEL
 
 //-------------------------
 // ------- STRIP #2 Settings
 //-------------------------
-#define STRIP2_RGBLEDCOUNT 0
-#define STRIP2_DATAPIN 2 
+#define LED2COUNT 0
+#define LED2PIN 2 
 #define STRIP2_RIGHTTOLEFT 0
 #define STRIP2_TYPE NEOPIXEL
 
 //-------------------------
 // ------- STRIP #3 Settings
 //-------------------------
-#define STRIP3_RGBLEDCOUNT 0
-#define STRIP3_DATAPIN 2
+#define LED3COUNT 0
+#define LED3PIN 2
 #define STRIP3_RIGHTTOLEFT 0
 #define STRIP3_TYPE NEOPIXEL
 
@@ -34,8 +34,8 @@ You don't need to do anything here if you're not planning to use LEDs with DDC.&
 // ------- STRIP #4 Settings
 //-------------------------
 
-#define STRIP4_RGBLEDCOUNT 0
-#define STRIP4_DATAPIN 2
+#define LED4COUNT 0
+#define LED4PIN 2
 #define STRIP4_RIGHTTOLEFT 0
 #define STRIP4_TYPE NEOPIXEL
 

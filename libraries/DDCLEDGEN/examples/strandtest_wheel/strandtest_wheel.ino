@@ -1,4 +1,4 @@
-#include <DDCPILED.h>
+#include <DDCLEDGEN.h>
 #ifdef __AVR__
   #include <avr/power.h>
 #endif

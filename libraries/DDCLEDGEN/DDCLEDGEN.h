@@ -1,5 +1,5 @@
 /*!
- * @file DDCPILED.h
+ * @file DDCLEDGEN.h
  *
  * This is part of Adafruit's NeoPixel library for the Arduino platform,
  * allowing a broad range of microcontroller boards (most AVR boards,

@@ -1,24 +1,24 @@
 //-------------------------
 // ------- DEFINES & Vars
 //-------------------------
-#include <DDCPILED.h>
+#include <DDCLEDGEN.h>
 
 #define PROTOCOLVERSION "SIMHUB_1.0"
 
-#if(STRIP1_RGBLEDCOUNT > 0)
-Adafruit_NeoPixel pixels1(STRIP1_RGBLEDCOUNT, STRIP1_DATAPIN, NEO_GRB + NEO_KHZ800);
+#if(LED1COUNT > 0)
+Adafruit_NeoPixel pixels1(LED1COUNT, LED1PIN, NEO_GRB + NEO_KHZ800);
 #endif
 
-#if(STRIP2_RGBLEDCOUNT > 0)
-Adafruit_NeoPixel pixels2(STRIP2_RGBLEDCOUNT, STRIP2_DATAPIN, NEO_GRB + NEO_KHZ800);
+#if(LED2COUNT > 0)
+Adafruit_NeoPixel pixels2(LED2COUNT, LED2PIN, NEO_GRB + NEO_KHZ800);
 #endif
 
-#if(STRIP3_RGBLEDCOUNT > 0)
-Adafruit_NeoPixel pixels3(STRIP3_RGBLEDCOUNT, STRIP3_DATAPIN, NEO_GRB + NEO_KHZ800);
+#if(LED3COUNT > 0)
+Adafruit_NeoPixel pixels3(LED3COUNT, LED3PIN, NEO_GRB + NEO_KHZ800);
 #endif
 
-#if(STRIP4_RGBLEDCOUNT > 0)
-Adafruit_NeoPixel pixels4(STRIP4_RGBLEDCOUNT, STRIP4_DATAPIN, NEO_GRB + NEO_KHZ800);
+#if(LED4COUNT > 0)
+Adafruit_NeoPixel pixels4(LED4COUNT, LED4PIN, NEO_GRB + NEO_KHZ800);
 #endif
 
 int messageend = 0;
@@ -36,16 +36,16 @@ int WaitAndReadOneByte() {
 /// <summary>
 
 void setupLeds(){
-	#if(STRIP1_RGBLEDCOUNT > 0)
+	#if(LED1COUNT > 0)
     pixels1.begin(); 
 	#endif
-	#if(STRIP2_RGBLEDCOUNT > 0)
+	#if(LED2COUNT > 0)
     pixels2.begin(); 
 	#endif
-	#if(STRIP3_RGBLEDCOUNT > 0)
+	#if(LED3COUNT > 0)
     pixels13.begin(); 
 	#endif
-	#if(STRIP4_RGBLEDCOUNT > 0)
+	#if(LED4COUNT > 0)
     pixels14.begin(); 
 	#endif
 }
@@ -54,10 +54,10 @@ void setupLeds(){
 void readStrip() {
 	uint8_t r, g, b;
 
-	LEDPre();
+	LEDBottom();
 
-	#if(STRIP1_RGBLEDCOUNT > 0)
-	for (uint16_t i = 0; i < STRIP1_RGBLEDCOUNT; i++) {
+	#if(LED1COUNT > 0)
+	for (uint16_t i = 0; i < LED1COUNT; i++) {
 		r = WaitAndReadOneByte();
 		g = WaitAndReadOneByte();
 		b = WaitAndReadOneByte();
@@ -66,8 +66,8 @@ void readStrip() {
 	}
 	#endif
 
-	#if(STRIP2_RGBLEDCOUNT > 0)
-	for (uint16_t i = 0; i < STRIP2_RGBLEDCOUNT; i++) {
+	#if(LED2COUNT > 0)
+	for (uint16_t i = 0; i < LED2COUNT; i++) {
 		r = WaitAndReadOneByte();
 		g = WaitAndReadOneByte();
 		b = WaitAndReadOneByte();
@@ -76,8 +76,8 @@ void readStrip() {
 	}
 	#endif
 
-	#if(STRIP3_RGBLEDCOUNT > 0)
-	for (uint16_t i = 0; i < STRIP3_RGBLEDCOUNT; i++) {
+	#if(LED3COUNT > 0)
+	for (uint16_t i = 0; i < LED3COUNT; i++) {
 		r = WaitAndReadOneByte();
 		g = WaitAndReadOneByte();
 		b = WaitAndReadOneByte();
@@ -86,8 +86,8 @@ void readStrip() {
 	}
 	#endif
 
-	#if(STRIP4_RGBLEDCOUNT > 0)
-	for (uint16_t i = 0; i < STRIP4_RGBLEDCOUNT; i++) {
+	#if(LED4COUNT > 0)
+	for (uint16_t i = 0; i < LED4COUNT; i++) {
 		r = WaitAndReadOneByte();
 		g = WaitAndReadOneByte();
 		b = WaitAndReadOneByte();
@@ -96,7 +96,8 @@ void readStrip() {
 	}
 	#endif
 
-	LEDPost();
+	LEDTop();
+
 }
 
 
@@ -110,29 +111,30 @@ void readLeds() {
 		valid = valid && (WaitAndReadOneByte() == 0xFF - i);
 	}
 	if (valid) {
-		#if(STRIP1_RGBLEDCOUNT>0)
+		#if(LED1COUNT>0)
 		pixels1.show();
 		#endif
 
-		#if(STRIP2_RGBLEDCOUNT>0)
+		#if(LED2COUNT>0)
 		pixels2.show();
 		#endif
 
-		#if(STRIP3_RGBLEDCOUNT>0)
+		#if(LED3COUNT>0)
 		pixels3.show();
 		#endif
 
-		#if(STRIP4_RGBLEDCOUNT>0)
+		#if(LED4COUNT>0)
 		pixels4.show();
 		#endif
 	}
+
 }
 
 /// <summary>
 /// Sends leds count to the serial port.
 /// </summary>
 void getLedsCount() {
-	Serial.println(STRIP1_RGBLEDCOUNT+STRIP2_RGBLEDCOUNT+STRIP3_RGBLEDCOUNT+STRIP4_RGBLEDCOUNT);
+	Serial.println(LED1COUNT+LED2COUNT+LED3COUNT+LED4COUNT);
 }
 
 /// <summary>

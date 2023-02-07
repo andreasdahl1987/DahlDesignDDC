@@ -1,30 +1,26 @@
-/****************************************************************************
- * This example was developed by the Hackerspace San Salvador to demonstrate
- * the simultaneous use of the NeoPixel library and the Bluetooth SoftDevice.
- * To compile this example you'll need to add support for the NRF52 based
- * following the instructions at:
- *  https://github.com/sandeepmistry/arduino-nRF5
- * Or adding the following URL to the board manager URLs on Arduino preferences:
- *  https://sandeepmistry.github.io/arduino-nRF5/package_nRF5_boards_index.json
- * Then you can install the BLEPeripheral library avaiable at:
- *  https://github.com/sandeepmistry/arduino-BLEPeripheral
- * To test it, compile this example and use the UART module from the nRF
- * Toolbox App for Android. Edit the interface and send the characters
- * 'a' to 'i' to switch the animation.
- * There is a delay because this example blocks the thread of execution but
- * the change will be shown after the current animation ends. (This might
- * take a couple of seconds)
- * For more info write us at: info _at- teubi.co
- */
-#include <SPI.h>
-#include <BLEPeripheral.h>
-#include "BLESerial.h"
-#include <DDCPILED.h>
+// Simple demonstration on using an input device to trigger changes on your
+// NeoPixels. Wire a momentary push button to connect from ground to a
+// digital IO pin. When the button is pressed it will change to a new pixel
+// animation. Initial state has all pixels off -- press the button once to
+// start the first animation. As written, the button does not interrupt an
+// animation in-progress, it works only when idle.
 
-#define PIN 15 // Pin where NeoPixels are connected
+#include <DDCLEDGEN.h>
+#ifdef __AVR__
+ #include <avr/power.h> // Required for 16 MHz Adafruit Trinket
+#endif
+
+// Digital IO pin connected to the button. This will be driven with a
+// pull-up resistor so the switch pulls the pin to ground momentarily.
+// On a high -> low transition the button press logic will execute.
+#define BUTTON_PIN   2
+
+#define PIXEL_PIN    6  // Digital IO pin connected to the NeoPixels.
+
+#define PIXEL_COUNT 16  // Number of NeoPixels
 
 // Declare our NeoPixel strip object:
-Adafruit_NeoPixel strip(64, PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip(PIXEL_COUNT, PIXEL_PIN, NEO_GRB + NEO_KHZ800);
 // Argument 1 = Number of pixels in NeoPixel strip
 // Argument 2 = Arduino pin number (most are valid)
 // Argument 3 = Pixel type flags, add together as needed:
@@ -34,85 +30,61 @@ Adafruit_NeoPixel strip(64, PIN, NEO_GRB + NEO_KHZ800);
 //   NEO_RGB     Pixels are wired for RGB bitstream (v1 FLORA pixels, not v2)
 //   NEO_RGBW    Pixels are wired for RGBW bitstream (NeoPixel RGBW products)
 
-// NEOPIXEL BEST PRACTICES for most reliable operation:
-// - Add 1000 uF CAPACITOR between NeoPixel strip's + and - connections.
-// - MINIMIZE WIRING LENGTH between microcontroller board and first pixel.
-// - NeoPixel strip's DATA-IN should pass through a 300-500 OHM RESISTOR.
-// - AVOID connecting NeoPixels on a LIVE CIRCUIT. If you must, ALWAYS
-//   connect GROUND (-) first, then +, then data.
-// - When using a 3.3V microcontroller with a 5V-powered NeoPixel strip,
-//   a LOGIC-LEVEL CONVERTER on the data line is STRONGLY RECOMMENDED.
-// (Skipping these may work OK on your workbench but can fail in the field)
-
-// define pins (varies per shield/board)
-#define BLE_REQ   10
-#define BLE_RDY   2
-#define BLE_RST   9
-
-// create ble serial instance, see pinouts above
-BLESerial BLESerial(BLE_REQ, BLE_RDY, BLE_RST);
-
-uint8_t current_state = 0;
-uint8_t rgb_values[3];
+boolean oldState = HIGH;
+int     mode     = 0;    // Currently-active animation mode, 0-9
 
 void setup() {
-  Serial.begin(115200);
-  Serial.println("Hello World!");
-  // custom services and characteristics can be added as well
-  BLESerial.setLocalName("UART_HS");
-  BLESerial.begin();
-
-  strip.begin(); // INITIALIZE NeoPixel strip object (REQUIRED)
-  strip.show();  // Turn OFF all pixels ASAP
-
-  //pinMode(PIN, OUTPUT);
-  //digitalWrite(PIN, LOW);
-
-  current_state = 'a';
+  pinMode(BUTTON_PIN, INPUT_PULLUP);
+  strip.begin(); // Initialize NeoPixel strip object (REQUIRED)
+  strip.show();  // Initialize all pixels to 'off'
 }
 
 void loop() {
-  while(BLESerial.available()) {
-    uint8_t character = BLESerial.read();
-    switch(character) {
-      case 'a':
-      case 'b':
-      case 'c':
-      case 'd':
-      case 'e':
-      case 'f':
-      case 'g':
-      case 'h':
-        current_state = character;
-        break;
-    };
+  // Get current button state.
+  boolean newState = digitalRead(BUTTON_PIN);
+
+  // Check if state changed from high to low (button press).
+  if((newState == LOW) && (oldState == HIGH)) {
+    // Short delay to debounce button.
+    delay(20);
+    // Check if button is still low after debounce.
+    newState = digitalRead(BUTTON_PIN);
+    if(newState == LOW) {      // Yes, still low
+      if(++mode > 8) mode = 0; // Advance to next mode, wrap around after #8
+      switch(mode) {           // Start the new animation...
+        case 0:
+          colorWipe(strip.Color(  0,   0,   0), 50);    // Black/off
+          break;
+        case 1:
+          colorWipe(strip.Color(255,   0,   0), 50);    // Red
+          break;
+        case 2:
+          colorWipe(strip.Color(  0, 255,   0), 50);    // Green
+          break;
+        case 3:
+          colorWipe(strip.Color(  0,   0, 255), 50);    // Blue
+          break;
+        case 4:
+          theaterChase(strip.Color(127, 127, 127), 50); // White
+          break;
+        case 5:
+          theaterChase(strip.Color(127,   0,   0), 50); // Red
+          break;
+        case 6:
+          theaterChase(strip.Color(  0,   0, 127), 50); // Blue
+          break;
+        case 7:
+          rainbow(10);
+          break;
+        case 8:
+          theaterChaseRainbow(50);
+          break;
+      }
+    }
   }
-  switch(current_state) {
-    case 'a':
-      colorWipe(strip.Color(255,   0,   0), 20);    // Red
-      break;
-    case 'b':
-      colorWipe(strip.Color(  0, 255,   0), 20);    // Green
-      break;
-    case 'c':
-      colorWipe(strip.Color(  0,   0, 255), 20);    // Blue
-      break;
-    case 'd':
-      theaterChase(strip.Color(255,   0,   0), 20); // Red
-      break;
-    case 'e':
-      theaterChase(strip.Color(  0, 255,   0), 20); // Green
-      break;
-    case 'f':
-      theaterChase(strip.Color(255,   0, 255), 20); // Cyan
-      break;
-    case 'g':
-      rainbow(10);
-      break;
-    case 'h':
-      theaterChaseRainbow(20);
-      break;
-  }
+
+  // Set the last-read button state to the old state.
+  oldState = newState;
 }
 
 // Fill strip pixels one after another with a color. Strip is NOT cleared
@@ -147,11 +119,11 @@ void theaterChase(uint32_t color, int wait) {
 
 // Rainbow cycle along whole strip. Pass delay time (in ms) between frames.
 void rainbow(int wait) {
-  // Hue of first pixel runs 5 complete loops through the color wheel.
+  // Hue of first pixel runs 3 complete loops through the color wheel.
   // Color wheel has a range of 65536 but it's OK if we roll over, so
-  // just count from 0 to 5*65536. Adding 256 to firstPixelHue each time
-  // means we'll make 5*65536/256 = 1280 passes through this outer loop:
-  for(long firstPixelHue = 0; firstPixelHue < 5*65536; firstPixelHue += 256) {
+  // just count from 0 to 3*65536. Adding 256 to firstPixelHue each time
+  // means we'll make 3*65536/256 = 768 passes through this outer loop:
+  for(long firstPixelHue = 0; firstPixelHue < 3*65536; firstPixelHue += 256) {
     for(int i=0; i<strip.numPixels(); i++) { // For each pixel in strip...
       // Offset pixel hue by an amount to make one full revolution of the
       // color wheel (range of 65536) along the length of the strip

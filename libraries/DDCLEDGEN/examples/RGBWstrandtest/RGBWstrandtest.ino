@@ -1,7 +1,7 @@
 // NeoPixel test program showing use of the WHITE channel for RGBW
 // pixels only (won't look correct on regular RGB NeoPixel strips).
 
-#include <DDCPILED.h>
+#include <DDCLEDGEN.h>
 #ifdef __AVR__
  #include <avr/power.h> // Required for 16 MHz Adafruit Trinket
 #endif

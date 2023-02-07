@@ -91,7 +91,7 @@ There are many examples implemented in this library. One of the examples is belo
 ### Simple
 
 ```Cpp
-#include <DDCPILED.h>
+#include <DDCLEDGEN.h>
 #ifdef __AVR__
   #include <avr/power.h>
 #endif

@@ -43,7 +43,7 @@
  *
  */
 
-#include "DDCPILED.h"
+#include "DDCLEDGEN.h"
 
 #if defined(TARGET_LPC1768)
 #include <time.h>
@@ -71,7 +71,7 @@
   @param   n  Number of NeoPixels in strand.
   @param   p  Arduino pin number which will drive the NeoPixel data in.
   @param   t  Pixel type -- add together NEO_* constants defined in
-              DDCPILED.h, for example NEO_GRB+NEO_KHZ800 for
+              DDCLEDGEN.h, for example NEO_GRB+NEO_KHZ800 for
               NeoPixels expecting an 800 KHz (vs 400 KHz) data stream
               with color bytes expressed in green, red, blue order per
               pixel.
@@ -164,7 +164,7 @@ void Adafruit_NeoPixel::updateLength(uint16_t n) {
            the old data will remain in RAM and is not reordered to the
            new format, so it's advisable to follow up with clear().
   @param   t  Pixel type -- add together NEO_* constants defined in
-              DDCPILED.h, for example NEO_GRB+NEO_KHZ800 for
+              DDCLEDGEN.h, for example NEO_GRB+NEO_KHZ800 for
               NeoPixels expecting an 800 KHz (vs 400 KHz) data stream
               with color bytes expressed in green, red, blue order per
               pixel.
