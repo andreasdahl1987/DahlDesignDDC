@@ -6,7 +6,7 @@ void LEDStartup()
 *This could be a startup animation sequence, or it could be backlighting from LEDs that will never change as longs as the wheel is powered. 
 *Any LED control that is done here instead of in LEDRunning will save a lot of processing power.
 */
-colorMe(10,19,255,0,0,15);
+colorMe(10,19,0x008b8b,15);
 pixels1.show();
 
 }

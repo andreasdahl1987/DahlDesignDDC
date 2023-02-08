@@ -71,3 +71,4 @@ unsigned long globalClock;
 
 //LED setup
 uint8_t LEDBrightness = 100;
+long LEDSerialDropout = 0;
