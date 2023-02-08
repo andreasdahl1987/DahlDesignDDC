@@ -127,7 +127,6 @@ void readLeds() {
 		pixels4.show();
 		#endif
 	}
-
 }
 
 /// <summary>
@@ -151,7 +150,11 @@ void getProtocolVersion() {
 void processCommands() {
 
 	// Read data
-	if (Serial.available()) {
+	if (Serial.available()) 
+	{
+
+		LEDSerialDropout = globalClock;
+		
 		char c = (char)Serial.read();
 
 		if (messageend < 6) {
@@ -192,5 +195,23 @@ void processCommands() {
 			command = "";
 			messageend = 0;
 		}
+	}
+	else if (globalClock - LEDSerialDropout > DROPOUTTIMER)
+	{
+		LEDBottom();
+		LEDTop();
+		#if(LED1COUNT>0 && LED1INTERNAL == 1)
+		pixels1.show();
+		#endif
+		#if(LED2COUNT>0 && LED2INTERNAL == 1)
+		pixels2.show();
+		#endif
+		#if(LED3COUNT>0 && LED3INTERNAL == 1)
+		pixels3.show();
+		#endif
+		#if(LED4COUNT>0 && LED4INTERNAL == 1)
+		pixels4.show();
+		#endif
+		return;
 	}
 }
