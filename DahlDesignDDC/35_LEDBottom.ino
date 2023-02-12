@@ -1,4 +1,8 @@
 void LEDBottom()
 {
-    colorMe(10,19,0xFF0000,15);
+  /*
+   * These LED calls will overwrite LEDStartup, but in turn will be overwritten by SimHub LED control and again by LEDTop.
+   * Whenever SimHub sends LED commands, the whole LED strip will be wiped black, not only the LEDs used by SimHub. 
+   * When SimHub hasnt send LED commands for 1 second, LEDBottom will start working again
+   */
 }

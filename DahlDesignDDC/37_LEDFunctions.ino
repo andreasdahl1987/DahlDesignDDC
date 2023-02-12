@@ -1,3 +1,5 @@
+#if(LED1COUNT > 0)
+
 void colorMe (uint8_t startLED, uint8_t stopLED, uint32_t color, uint8_t brightness)
 {
   int R = (color & 0xFF0000) >> 16;
@@ -17,3 +19,5 @@ void colorMe (uint8_t startLED, uint8_t stopLED, uint32_t color, uint8_t brightn
     pixels1.setPixelColor(i, R, G, B);
   }
 }
+
+#endif
