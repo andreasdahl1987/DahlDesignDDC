@@ -9,7 +9,7 @@ void LEDStartup()
 */
 
 #if(LED1COUNT > 0)
-pixels1.show();
+LED1.show();
 #endif
 
 }

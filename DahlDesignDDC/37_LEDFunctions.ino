@@ -16,7 +16,7 @@ void colorMe (uint8_t startLED, uint8_t stopLED, uint32_t color, uint8_t brightn
 
   for (int i = startLED; i < stopLED+1; i++)
   {
-    pixels1.setPixelColor(i, R, G, B);
+    LED1.setPixelColor(i, R, G, B);
   }
 }
 

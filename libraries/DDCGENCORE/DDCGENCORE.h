@@ -6,19 +6,19 @@
 #define PROTOCOLVERSION "SIMHUB_1.0"
 
 #if(LED1COUNT > 0)
-Adafruit_NeoPixel pixels1(LED1COUNT, LED1PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel LED1(LED1COUNT, LED1PIN, NEO_GRB + NEO_KHZ800);
 #endif
 
 #if(LED2COUNT > 0)
-Adafruit_NeoPixel pixels2(LED2COUNT, LED2PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel LED2(LED2COUNT, LED2PIN, NEO_GRB + NEO_KHZ800);
 #endif
 
 #if(LED3COUNT > 0)
-Adafruit_NeoPixel pixels3(LED3COUNT, LED3PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel LED3(LED3COUNT, LED3PIN, NEO_GRB + NEO_KHZ800);
 #endif
 
 #if(LED4COUNT > 0)
-Adafruit_NeoPixel pixels4(LED4COUNT, LED4PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel LED4(LED4COUNT, LED4PIN, NEO_GRB + NEO_KHZ800);
 #endif
 
 int messageend = 0;
@@ -37,16 +37,16 @@ int WaitAndReadOneByte() {
 
 void setupLeds(){
 	#if(LED1COUNT > 0)
-    pixels1.begin(); 
+    LED1.begin(); 
 	#endif
 	#if(LED2COUNT > 0)
-    pixels2.begin(); 
+    LED2.begin(); 
 	#endif
 	#if(LED3COUNT > 0)
-    pixels13.begin(); 
+    LED3.begin(); 
 	#endif
 	#if(LED4COUNT > 0)
-    pixels14.begin(); 
+    LED4.begin(); 
 	#endif
 }
 
@@ -62,7 +62,7 @@ void readStrip() {
 		g = WaitAndReadOneByte();
 		b = WaitAndReadOneByte();
 
-    pixels1.setPixelColor(i, pixels1.Color(r, g, b));
+    LED1.setPixelColor(i, LED1.Color(r, g, b));
 	}
 	#endif
 
@@ -72,7 +72,7 @@ void readStrip() {
 		g = WaitAndReadOneByte();
 		b = WaitAndReadOneByte();
 
-    pixels2.setPixelColor(i, pixels2.Color(r, g, b));
+    LED2.setPixelColor(i, LED2.Color(r, g, b));
 	}
 	#endif
 
@@ -82,7 +82,7 @@ void readStrip() {
 		g = WaitAndReadOneByte();
 		b = WaitAndReadOneByte();
 
-    pixels3.setPixelColor(i, pixels3.Color(r, g, b));
+    LED3.setPixelColor(i, LED3.Color(r, g, b));
 	}
 	#endif
 
@@ -92,7 +92,7 @@ void readStrip() {
 		g = WaitAndReadOneByte();
 		b = WaitAndReadOneByte();
 
-    pixels4.setPixelColor(i, pixels4.Color(r, g, b));
+    LED4.setPixelColor(i, LED4.Color(r, g, b));
 	}
 	#endif
 
@@ -112,19 +112,19 @@ void readLeds() {
 	}
 	if (valid) {
 		#if(LED1COUNT>0)
-		pixels1.show();
+		LED1.show();
 		#endif
 
 		#if(LED2COUNT>0)
-		pixels2.show();
+		LED2.show();
 		#endif
 
 		#if(LED3COUNT>0)
-		pixels3.show();
+		LED3.show();
 		#endif
 
 		#if(LED4COUNT>0)
-		pixels4.show();
+		LED4.show();
 		#endif
 	}
 }
@@ -201,16 +201,16 @@ void processCommands() {
 		LEDBottom();
 		LEDTop();
 		#if(LED1COUNT>0 && LED1INTERNAL == 1)
-		pixels1.show();
+		LED1.show();
 		#endif
 		#if(LED2COUNT>0 && LED2INTERNAL == 1)
-		pixels2.show();
+		LED2.show();
 		#endif
 		#if(LED3COUNT>0 && LED3INTERNAL == 1)
-		pixels3.show();
+		LED3.show();
 		#endif
 		#if(LED4COUNT>0 && LED4INTERNAL == 1)
-		pixels4.show();
+		LED4.show();
 		#endif
 		return;
 	}
