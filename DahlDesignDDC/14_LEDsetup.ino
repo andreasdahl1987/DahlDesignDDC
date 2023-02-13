@@ -2,15 +2,15 @@
 // ------- STRIP #1 Setup
 //-------------------------
 
-#define LED1COUNT 0 // LED count on the strip. 0 to disable
-#define LED1PIN 2 // Pin number
+#define LED1COUNT 100 // LED count on the strip. 0 to disable
+#define LED1PIN 28 // Pin number
 #define LED1INTERNAL 1 // This LED strip has firmware LED calls -> 1. Else 0. 
 
 //-------------------------
 // ------- STRIP #2 Setup
 //-------------------------
 #define LED2COUNT 0
-#define LED2PIN 2 
+#define LED2PIN 2
 #define LED2INTERNAL 0
 
 //-------------------------

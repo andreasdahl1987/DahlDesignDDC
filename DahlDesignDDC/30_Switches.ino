@@ -7,11 +7,11 @@ void loop()
 	//-------------------------
 	//-----ESSENTIALS----------
 	//-------------------------
+	globalClock = millis();
+
   #if (LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT > 0 && BOARDTYPE == 0)
 	processCommands();
   #endif
-
-	globalClock = millis();
 
 	rotaryField = 0;
 	buttonField = 0;
