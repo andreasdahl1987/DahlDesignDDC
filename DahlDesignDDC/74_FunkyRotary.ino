@@ -3,7 +3,7 @@
 //----------------------------
 
 
-void funkyRotary(int Arow, int Acol, int Bcol) {
+void funkyRotary(int Arow, int Acol, int Bcol, bool reverse) {
 
     int Row = Arow - 1;
     int Column = Acol - 1;
@@ -49,8 +49,8 @@ void funkyRotary(int Arow, int Acol, int Bcol) {
         latchLock[Row][Column] = 0;
     }
 
-    Joystick.setButton(Number, (globalClock - switchTimer[Row][Column] < funkyPulse));
-    Joystick.setButton(Number + 1, (globalClock - switchTimer[Row][bCol] < funkyPulse));
+    Joystick.setButton(Number + reverse, (globalClock - switchTimer[Row][Column] < funkyPulse));
+    Joystick.setButton(Number + 1 - reverse, (globalClock - switchTimer[Row][bCol] < funkyPulse));
 
 }
 
@@ -382,5 +382,4 @@ void funkyBrightness(int Arow, int Acol, int Bcol, bool reverse) {
     Joystick.setButton(Number + reverse, (globalClock - switchTimer[Row][Column] < funkyPulse));
     Joystick.setButton(Number + 1 - reverse, (globalClock - switchTimer[Row][bCol] < funkyPulse));
     }
-
 }
