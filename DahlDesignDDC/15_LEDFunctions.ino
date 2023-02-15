@@ -1,6 +1,6 @@
 #if(LED1COUNT > 0)
 
-void triggerLED(uint8_t startLED, uint8_t stopLED, bool condition, uint32_t color, uint8_t brightness, bool clearLEDs = true, bool blinkEnable = true, int blinkOnTimer = 500, int blinkOffTimer = 500)
+void triggerLED(uint8_t startLED, uint8_t stopLED, bool condition, uint32_t color, uint8_t brightness, bool clearLEDs = true, bool blinkEnable = false, int blinkOnTimer = 500, int blinkOffTimer = 500)
 {
   
   int R = (color & 0xFF0000) >> 16;
@@ -40,6 +40,7 @@ void triggerLED(uint8_t startLED, uint8_t stopLED, bool condition, uint32_t colo
     for (int i = startLED; i < stopLED+1; i++)
     {
       LED1.setPixelColor(i, 0, 0, 0);
+      Serial.println("wasnt here");
     }
   }
 }

@@ -8,8 +8,6 @@ void LEDStartup()
 *Any LED control that is done here instead of in LEDTop or LEDBottom will save a lot of processing power.
 */
 
-colorLED(10,19,0x00FF00,30);
-
 #if(LED1COUNT > 0)
 LED1.show();
 #endif
