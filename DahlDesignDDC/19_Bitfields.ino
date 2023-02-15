@@ -27,10 +27,6 @@ int rotaryField = 0;
  Least significant
 
  */
- bool rotaryFieldBit (int fieldPlacement)
- {
-    return (rotaryField >> (fieldPlacement-1))  & 0x1;
- }
  
 
 int buttonField = 0;
@@ -58,8 +54,3 @@ int buttonField = 0;
  Least significant
 
  */
-
- bool buttonFieldBit (int fieldPlacement)
- {
-    return (buttonField >> (fieldPlacement-1))  & 0x1;
- }
