@@ -73,5 +73,4 @@ unsigned long globalClock;
 //LED setup
 int8_t LEDBrightness = 100;
 long LEDSerialDropout = 0;
-bool topActive;
 #define DROPOUTTIMER 1000
