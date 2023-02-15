@@ -14,6 +14,7 @@ bool brakeMagicOn;
 float brakeMagicValue;
 float throttleHoldValue;
 float bitePoint;
+bool biteRefresh;
 uint8_t quickValue1;
 uint8_t quickValue2;
 uint8_t quickValue3;

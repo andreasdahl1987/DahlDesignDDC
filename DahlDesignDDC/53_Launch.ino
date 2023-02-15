@@ -9,6 +9,7 @@ void biteButton(int row, int column)
     int Column = column - 1;
     int Number = buttonNumber[Row][Column];
     int FieldPlacement = 6;
+    biteRefresh = false;
 
     if (pushState[Row][Column] != rawState[Row][Column] && (globalClock - switchTimer[Row][Column]) > buttonCooldown)
     {
@@ -43,6 +44,7 @@ void biteButton(int row, int column)
         {
             biteButtonBit2 = false;
             biteButtonBit1 = false;
+            biteRefresh = true;
         }
     }
     //Push bite setting level

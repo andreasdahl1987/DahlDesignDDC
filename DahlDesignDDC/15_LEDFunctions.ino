@@ -65,4 +65,133 @@ void colorLED (uint8_t startLED, uint8_t stopLED, uint32_t color, uint8_t bright
   }
 }
 
+void biteLED (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t biteChainStartLED, uint8_t brightness, uint32_t engageColor = 0xFFA500, uint32_t step1Color = 0x40E0D0, uint32_t step2Color = 0xFF00FF, uint32_t step3Color = 0xFFA500, bool engageBlink = true)
+{
+
+  int BitePoint = bitePoint;
+
+  if (biteButtonBit1 || biteButtonBit2)
+  {
+    int timer = globalClock % 1000;
+    
+    int R = (engageColor & 0xFF0000) >> 16;
+    R = R * brightness / 100;
+    R = R * LEDBrightness / 100;
+  
+    int G = (engageColor & 0x00FF00) >> 8;
+    G = G * brightness / 100;
+    G = G * LEDBrightness / 100;
+  
+    int B = engageColor & 0x0000FF;
+    B = B * brightness / 100;
+    B = B * LEDBrightness / 100;
+
+    if (!engageBlink || engageBlink && timer > 500)
+    {
+      for(int i = biteEngageStartLED; i < biteEngageStopLED+1; i++)
+      {
+        LED1.setPixelColor(i, R, G, B);
+      }
+    }
+    else if (engageBlink && timer < 500)
+    {
+       for(int i = biteEngageStartLED; i < biteEngageStopLED+1; i++)
+      {
+        LED1.setPixelColor(i ,0, 0, 0);
+      }
+    }
+
+    for(int i = biteChainStartLED; i < biteChainStartLED + 10; i++)
+    {
+      LED1.setPixelColor(i, 0,0,0);
+    }
+  }
+
+  if (biteButtonBit1 && !biteButtonBit2)
+  {
+    int R = (step1Color & 0xFF0000) >> 16;
+    R = R * brightness / 100;
+    R = R * LEDBrightness / 100;
+  
+    int G = (step1Color & 0x00FF00) >> 8;
+    G = G * brightness / 100;
+    G = G * LEDBrightness / 100;
+  
+    int B = step1Color & 0x0000FF;
+    B = B * brightness / 100;
+    B = B * LEDBrightness / 100;
+
+    uint8_t ledCount = BitePoint/100; 
+
+   if(ledCount != 0)
+   {
+    for(int i = biteChainStartLED; i < biteChainStartLED + ledCount; i++)
+    {
+      LED1.setPixelColor(i, R, G, B);
+    }
+   }
+  }
+
+  else if (!biteButtonBit1 && biteButtonBit2)
+  {
+    int R = (step2Color & 0xFF0000) >> 16;
+    R = R * brightness / 100;
+    R = R * LEDBrightness / 100;
+  
+    int G = (step2Color & 0x00FF00) >> 8;
+    G = G * brightness / 100;
+    G = G * LEDBrightness / 100;
+  
+    int B = step2Color & 0x0000FF;
+    B = B * brightness / 100;
+    B = B * LEDBrightness / 100;
+    
+    uint8_t ledCount = (BitePoint % 100)/10; 
+
+   if(ledCount != 0)
+   {
+    for(int i = biteChainStartLED; i < biteChainStartLED + ledCount; i++)
+    {
+      LED1.setPixelColor(i, R, G, B);
+    }
+   }
+  }
+
+    else if (biteButtonBit1 && biteButtonBit2)
+  {
+    int R = (step3Color & 0xFF0000) >> 16;
+    R = R * brightness / 100;
+    R = R * LEDBrightness / 100;
+  
+    int G = (step3Color & 0x00FF00) >> 8;
+    G = G * brightness / 100;
+    G = G * LEDBrightness / 100;
+  
+    int B = step3Color & 0x0000FF;
+    B = B * brightness / 100;
+    B = B * LEDBrightness / 100;
+    
+    uint8_t ledCount = BitePoint % 10; 
+
+   if(ledCount != 0)
+   {
+    for(int i = biteChainStartLED; i < biteChainStartLED + ledCount; i++)
+    {
+      LED1.setPixelColor(i, R, G, B);
+    }
+   }
+  }
+ //Resetting all LEDs in the end
+ if (biteRefresh)
+ {
+  for(int i = biteEngageStartLED; i < biteEngageStopLED+1; i++)
+    {
+      LED1.setPixelColor(i ,0, 0, 0);
+    }
+  for(int i = biteChainStartLED; i < biteChainStartLED + 10; i++)
+  {
+    LED1.setPixelColor(i, 0,0,0);
+  }
+ }
+}
 #endif
