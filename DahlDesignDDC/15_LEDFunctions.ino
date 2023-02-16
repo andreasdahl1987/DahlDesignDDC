@@ -40,7 +40,6 @@ void triggerLED(uint8_t startLED, uint8_t stopLED, bool condition, uint32_t colo
     for (int i = startLED; i < stopLED+1; i++)
     {
       LED1.setPixelColor(i, 0, 0, 0);
-      Serial.println("wasnt here");
     }
   }
 }

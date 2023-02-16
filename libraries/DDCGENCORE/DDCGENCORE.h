@@ -54,8 +54,6 @@ void setupLeds(){
 void readStrip() {
 	uint8_t r, g, b;
 
-	LEDBottom();
-
 	#if(LED1COUNT > 0)
 	for (uint16_t i = 0; i < LED1COUNT; i++) {
 		r = WaitAndReadOneByte();
@@ -96,10 +94,7 @@ void readStrip() {
 	}
 	#endif
 
-	LEDTop();
-
 }
-
 
 void readLeds() {
 
@@ -109,10 +104,11 @@ void readLeds() {
 	bool valid = true;
 	for (int i = 0; i < 3; i++) {
 		valid = valid && (WaitAndReadOneByte() == 0xFF - i);
+	
 	}
 	if (valid) {
 		#if(LED1COUNT>0)
-		LED1.show();
+		LEDTop();
 		#endif
 
 		#if(LED2COUNT>0)
@@ -152,9 +148,8 @@ void processCommands() {
 	// Read data
 	if (Serial.available()) 
 	{
-
 		LEDSerialDropout = globalClock;
-		
+
 		char c = (char)Serial.read();
 
 		if (messageend < 6) {
@@ -195,23 +190,5 @@ void processCommands() {
 			command = "";
 			messageend = 0;
 		}
-	}
-	else if (globalClock - LEDSerialDropout > DROPOUTTIMER)
-	{
-		LEDBottom();
-		LEDTop();
-		#if(LED1COUNT>0 && LED1INTERNAL == 1)
-		LED1.show();
-		#endif
-		#if(LED2COUNT>0 && LED2INTERNAL == 1)
-		LED2.show();
-		#endif
-		#if(LED3COUNT>0 && LED3INTERNAL == 1)
-		LED3.show();
-		#endif
-		#if(LED4COUNT>0 && LED4INTERNAL == 1)
-		LED4.show();
-		#endif
-		return;
 	}
 }
