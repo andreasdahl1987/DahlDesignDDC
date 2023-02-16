@@ -9,9 +9,8 @@ bool continousUpdate = true;
 // ------- STRIP #1 Setup ----
 //----------------------------
 
-#define LED1COUNT 8 // LED count on the strip. 0 to disable
-#define LED1PIN 28 // Pin number
-#define LED1INTERNAL 1 // Set to 1 if this LED strip has firmware LED calls. 0 if only SimHub uses it.  
+#define LED1COUNT 36 // LED count on the strip. 0 to disable
+#define LED1PIN A3 // Pin number
 
 //----------------------------
 // ------- STRIP #2 Setup ----

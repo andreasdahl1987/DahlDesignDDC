@@ -10,10 +10,23 @@ void LEDBottom()
    //LED CALLS STARTS HERE
 
 
-  colorLED(3,4,0x00F80F,30);
-  LED1.show();
+
 
 
   //LED CALLS STOP HERE
+
+  #if(LED1COUNT > 0)
+    LED1.show();
+  #endif
+  #if(LED2COUNT > 0)
+    LED2.show();
+  #endif
+  #if(LED3COUNT > 0)
+    LED3.show();
+  #endif
+  #if(LED4COUNT > 0)
+    LED4.show();
+  #endif
+  
   }
 }

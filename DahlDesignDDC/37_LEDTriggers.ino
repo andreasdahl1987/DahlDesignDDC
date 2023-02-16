@@ -23,5 +23,10 @@
     return (presetNumber == (switchPreset + 1));
  }
 
+ bool modButtonPressed (int row, int column)
+ {
+    return pushState[modButtonRow-1][modButtonCol-1];
+ }
+
 
  

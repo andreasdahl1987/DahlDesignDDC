@@ -6,7 +6,7 @@
 //---------BOARD----------
 //------------------------
 
-#define BOARDTYPE 2
+#define BOARDTYPE 0
 
 // 0 -> Atmel 32U4 based boards. (Leonardo, Pro Micro, Feather, Teensy 2.0, etc) SAM3X based boards. (Due)
 
