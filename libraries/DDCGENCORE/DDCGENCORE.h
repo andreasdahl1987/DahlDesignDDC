@@ -6,19 +6,19 @@
 #define PROTOCOLVERSION "SIMHUB_1.0"
 
 #if(LED1COUNT > 0)
-Adafruit_NeoPixel LED1(LED1COUNT, LED1PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel LED1(LED1COUNT, LED1PIN, LED1TYPE);
 #endif
 
 #if(LED2COUNT > 0)
-Adafruit_NeoPixel LED2(LED2COUNT, LED2PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel LED2(LED2COUNT, LED2PIN, LED2TYPE);
 #endif
 
 #if(LED3COUNT > 0)
-Adafruit_NeoPixel LED3(LED3COUNT, LED3PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel LED3(LED3COUNT, LED3PIN, LED3TYPE);
 #endif
 
 #if(LED4COUNT > 0)
-Adafruit_NeoPixel LED4(LED4COUNT, LED4PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel LED4(LED4COUNT, LED4PIN, LED4TYPE);
 #endif
 
 int messageend = 0;
@@ -55,32 +55,56 @@ void readStrip() {
 	uint8_t r, g, b;
 
 	#if(LED1COUNT > 0)
-	for (uint16_t i = 0; i < LED1COUNT; i++) {
+	for (uint16_t i = 0; i < LED1COUNT; i++) 
+	{
 		r = WaitAndReadOneByte();
 		g = WaitAndReadOneByte();
 		b = WaitAndReadOneByte();
 
-    LED1.setPixelColor(i, LED1.Color(r, g, b));
+		if (LED1REVERSE == 1)
+		{
+			LED1.setPixelColor(LED1COUNT - 1 - i, LED1.Color(r, g, b));
+		}
+		else 
+		{
+			LED1.setPixelColor(i, LED1.Color(r, g, b));
+		}
 	}
 	#endif
 
 	#if(LED2COUNT > 0)
-	for (uint16_t i = 0; i < LED2COUNT; i++) {
+	for (uint16_t i = 0; i < LED2COUNT; i++) 
+	{
 		r = WaitAndReadOneByte();
 		g = WaitAndReadOneByte();
 		b = WaitAndReadOneByte();
 
-    LED2.setPixelColor(i, LED2.Color(r, g, b));
+		if (LED2REVERSE == 1)
+		{
+			LED2.setPixelColor(LED2COUNT - 1 - i, LED2.Color(r, g, b));
+		}
+		else 
+		{
+			LED2.setPixelColor(i, LED2.Color(r, g, b));
+		}
 	}
 	#endif
 
 	#if(LED3COUNT > 0)
-	for (uint16_t i = 0; i < LED3COUNT; i++) {
+	for (uint16_t i = 0; i < LED3COUNT; i++) 
+	{
 		r = WaitAndReadOneByte();
 		g = WaitAndReadOneByte();
 		b = WaitAndReadOneByte();
 
-    LED3.setPixelColor(i, LED3.Color(r, g, b));
+		if (LED3REVERSE == 1)
+		{
+			LED3.setPixelColor(LED3COUNT - 1 - i, LED3.Color(r, g, b));
+		}
+		else 
+		{
+			LED3.setPixelColor(i, LED3.Color(r, g, b));
+		}
 	}
 	#endif
 
@@ -90,7 +114,14 @@ void readStrip() {
 		g = WaitAndReadOneByte();
 		b = WaitAndReadOneByte();
 
-    LED4.setPixelColor(i, LED4.Color(r, g, b));
+		if (LED4REVERSE == 1)
+		{
+			LED4.setPixelColor(LED4COUNT - 1 - i, LED4.Color(r, g, b));
+		}
+		else 
+		{
+			LED4.setPixelColor(i, LED4.Color(r, g, b));
+		}
 	}
 	#endif
 
@@ -107,20 +138,8 @@ void readLeds() {
 	
 	}
 	if (valid) {
-		#if(LED1COUNT>0)
+		#if(LED1COUNT+LED2COUNT+LED3COUNT+LED4COUNT > 0)
 		LEDTop();
-		#endif
-
-		#if(LED2COUNT>0)
-		LED2.show();
-		#endif
-
-		#if(LED3COUNT>0)
-		LED3.show();
-		#endif
-
-		#if(LED4COUNT>0)
-		LED4.show();
 		#endif
 	}
 }
