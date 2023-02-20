@@ -2,8 +2,13 @@
 //-----------LOOP---------------
 //------------------------------
 
+#if(BOARDTYPE == 2)
+void loop1()
+{
+#else
 void loop()
 {
+#endif
 	//-------------------------
 	//-----ESSENTIALS----------
 	//-------------------------
@@ -36,8 +41,6 @@ void loop()
 
 
 
-
-
 	//------------------------------------
 	//----------SWITCHES END HERE---------
 	//------------------------------------
@@ -50,7 +53,7 @@ void loop()
 }
 
 #if (LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT > 0 && BOARDTYPE == 2)
-  void loop1()
+  void loop()
   {
     processCommands();
   }

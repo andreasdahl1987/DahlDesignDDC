@@ -1,9 +1,14 @@
 //------------------------------
 //-----------SETUP--------------
 //------------------------------
-
+#if(BOARDTYPE == 2)
+void setup1()
+{
+#else
 void setup()
 {
+#endif
+ 
     //RP2040
     #if defined(ARDUINO_ARCH_MBED) && defined(ARDUINO_ARCH_RP2040)
     // Manual begin() is required on core without built-in support for TinyUSB such as mbed rp2040
@@ -106,7 +111,7 @@ void setup()
 }
 
 #if (LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT > 0 && BOARDTYPE == 2)
-void setup1()
+void setup()
 {
   setupLeds();
   LEDStartup();
