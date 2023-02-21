@@ -1,5 +1,5 @@
 //-----------------------------------------
-//------------MATRIX VARIABLES-------------
+//------------TABLE VARIABLES-------------
 //-----------------------------------------
 
 uint8_t row[] = { 0, 0, 0, 0, 0 };
@@ -9,7 +9,7 @@ uint8_t col[] = { 0, 0, 0, 0, 0 };
 const uint8_t colCount = sizeof(col) / sizeof(col[0]);
 
 //---------------------------------------
-//--------MATRIX DESCRIPTION-------------
+//--------TABLE DESCRIPTION-------------
 //---------------------------------------
 
 const uint8_t buttonNumber[rowCount][colCount] =

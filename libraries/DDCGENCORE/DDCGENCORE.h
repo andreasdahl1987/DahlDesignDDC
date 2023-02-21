@@ -54,7 +54,7 @@ void setupLeds(){
 void readStrip() {
 	uint8_t r, g, b;
 
-	#if(LED1COUNT > 0)
+	#if(LED1COUNT > 0 && LED1PRIVATE == 0)
 	for (uint16_t i = 0; i < LED1COUNT; i++) 
 	{
 		r = WaitAndReadOneByte();
@@ -72,7 +72,7 @@ void readStrip() {
 	}
 	#endif
 
-	#if(LED2COUNT > 0)
+	#if(LED2COUNT > 0  && LED2PRIVATE == 0)
 	for (uint16_t i = 0; i < LED2COUNT; i++) 
 	{
 		r = WaitAndReadOneByte();
@@ -90,7 +90,7 @@ void readStrip() {
 	}
 	#endif
 
-	#if(LED3COUNT > 0)
+	#if(LED3COUNT > 0  && LED3PRIVATE == 0)
 	for (uint16_t i = 0; i < LED3COUNT; i++) 
 	{
 		r = WaitAndReadOneByte();
@@ -108,7 +108,7 @@ void readStrip() {
 	}
 	#endif
 
-	#if(LED4COUNT > 0)
+	#if(LED4COUNT > 0 && LED4PRIVATE == 0)
 	for (uint16_t i = 0; i < LED4COUNT; i++) {
 		r = WaitAndReadOneByte();
 		g = WaitAndReadOneByte();
@@ -147,8 +147,24 @@ void readLeds() {
 /// <summary>
 /// Sends leds count to the serial port.
 /// </summary>
-void getLedsCount() {
-	Serial.println(LED1COUNT+LED2COUNT+LED3COUNT+LED4COUNT);
+void getLedsCount() 
+{
+	uint8_t ledTotal = LED1COUNT+LED2COUNT+LED3COUNT+LED4COUNT;
+	#if (LED1PRIVATE == 1)
+		ledTotal = ledTotal - LED1COUNT;
+	#endif
+		#if (LED2PRIVATE == 1)
+		ledTotal = ledTotal - LED2COUNT;
+	#endif
+		#if (LED3PRIVATE == 1)
+		ledTotal = ledTotal - LED3COUNT;
+	#endif
+		#if (LED4PRIVATE == 1)
+		ledTotal = ledTotal - LED4COUNT;
+	#endif
+
+
+	Serial.println(ledTotal);
 }
 
 /// <summary>
