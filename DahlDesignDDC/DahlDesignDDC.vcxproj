@@ -105,28 +105,31 @@
     <DebuggerFlavor>VisualMicroDebugger</DebuggerFlavor>
   </PropertyGroup>
   <ItemGroup>
+	<None Include="01_ColorPalette.ino" />
     <None Include="02_Board.ino" />
     <None Include="04_USB.ino" />
     <None Include="08_Joystick.ino" />
+    <None Include="10_TableAndAnalog.ino" />
     <None Include="11_ShiftRegisters.ino" />
-    <None Include="10_MatrixAndAnalog.ino" />
-    <None Include="11_ShiftRegisters.ino" />
-    <None Include="19_Bitfields.ino" />
     <None Include="12_GlobalVariables.ino" />
     <None Include="13_SwitchVariables.ino" />
     <None Include="14_LEDsetup.ino" />
+    <None Include="15_LEDFunctions.ino" />
+	<None Include="19_Bitfields.ino" />
     <None Include="20_Setup.ino" />
+    <None Include="29_LoopStarts.ino" />
     <None Include="30_Switches.ino" />
     <None Include="31_RunningPresets.ino" />
     <None Include="33_Calculations.ino" />
     <None Include="34_LEDStartup.ino" />
-    <None Include="36_LEDRunning.ino" />
+    <None Include="35_LEDBottom.ino" />
+    <None Include="36_LEDTop.ino" />
     <None Include="37_LEDFunctions.ino" />
     <None Include="38_ShiftRegisterSetup.ino" />
     <None Include="39_ShiftRegisterScan.ino" />
     <None Include="40_Matrix.ino" />
     <None Include="32_Presets.ino" />
-    <None Include="42_MatrixInject.ino" />
+    <None Include="42_Inject.ino" />
     <None Include="50_Pushbuttons.ino" />
     <None Include="51_Toggle.ino" />
     <None Include="52_FunctionButtons.ino" />
