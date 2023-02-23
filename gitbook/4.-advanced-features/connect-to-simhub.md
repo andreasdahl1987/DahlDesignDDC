@@ -1,4 +1,4 @@
-# Connect to SimHub
+# SimHub joystick communication
 
 This step is not at all necessary for controller function.
 
@@ -30,13 +30,10 @@ Just the name of the controller, don't include the ending "\_". Also check for D
   * Make sure you wrote the controller name correctly.
   *   Make sure none of the wheels axis have been calibrated by Windows. Got to USB controller settings and reset controller to default.
 
-      <figure><img src="../.gitbook/assets/image (5) (2).png" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../.gitbook/assets/image (5) (2) (1).png" alt=""><figcaption></figcaption></figure>
   * Try flashing with a different board core. For instance, some boards like Pro Micro I've seen just wont be registered by Simhub. Try selecting Arduino Leonardo board when uploading the sketch
   * Make sure "SW1 Enabled" isn't checked under LED plugin settings. Unless you're actually using an SW1.&#x20;
   * Make sure you have the latest version of the plugin.
 * Switch modes go crazy when changing switch more of a single switch.
-  * The latest version of the joystick library gives inaccurate values for integers using the 15th and 16 bit of the joystick axis. Even when stating that the joystick axis should be 60 708, it might be 60 707 in windows. This causes the whole communication system to collapse.&#x20;
-    * Make sure you're using Joystick library version 2.0.8 or older, where at least bit 15 is available.
-    * Don't ever map anything to bit field 16 (field placement 16).&#x20;
-  * Have a look at your switch functions, make sure you havent assigned a field placement higher than 15 anywhere.&#x20;
+  * Have a look at your switch functions, make sure you havent assigned a field placement higher than 15 anywhere, or that you've assigned a field placement of 15 to a switch that uses two bits (which will make it use bits 15 and 16). Bit 16 in the fields are super buggy.
 

@@ -2,98 +2,67 @@
 
 This is where you add all your switches. Go to the [Switch Library](../../switch-library/) and find something that suits your needs. Anything you write here should be between the hard-to-miss warnings **"SWITCHES START HERE"** and **"SWITCHES END HERE"**
 
+A simple pushbutton on row 3, column 1 would be written as `pushButton(3,1);`
+
 ### Direct wiring
 
-With matrix wiring or shift register wiring, you will just use the matrix adresses in the switch functions as explained [below.](30\_switches.md#setup) However, with [direct wiring](../../2.-wiring/non-matrix-wiring.md), you'll have to add some extra lines.
+With matrix wiring or shift register wiring, you will just use the switch table adresses in the switch functions as explained [below.](30\_switches.md#setup) However, with [direct wiring](../../2.-wiring/switches/non-matrix-wiring.md), you'll have to add some extra lines.
 
-* You might have asked yourself how your direct wired switches has found their way to the matrix so far. They haven't, they're still floating around. Your direct wired switches needs to have their values read and that value conveyed to a dedicated matrix adress. From there, the switch now behaves as any switch in the switch matrix, and allows you to use any fuction that works with a matrix wired or shift register wired button.
-* The `matrixInject()` function shold be used for every pin on the Arduino that is used for direct wired switches.
-* The function needs to know the pin number to read, the matrix row and the matrix column. Like this:
+* You might have asked yourself how your direct wired switches has found their way to the switch table so far. They haven't, they're still floating around. Your direct wired switches needs to have their values read and that value conveyed to a dedicated adress in the table. From there, the switch now behaves as any switch in the switch table, and allows you to use any fuction that works with a matrix wired or shift register wired button.
+* The `switchTableInject()` function shold be used for every pin on the Arduino that is used for direct wired switches.
+* The function needs to know the pin number to read, the table row and the table column. Like this:
 
-`matrixInject(pin, row, column);`
+`switchTableInject(pin, row, column);`
 
 * If you planned with an encoder on row 1, using column 1 and 2, and using physical Arduino pins 10 and 14, add this:
 
-`matrixInject(10, 1, 1);`
+`switchTableInject(10, 1, 1);`
 
-`matrixInject(14, 1, 2);`
+`switchTableInject(14, 1, 2);`
 
 * If you planned with a button on row 2, using column 5, and using physical Arduino pin 9, add this:
 
-`matrixInject(9, 2, 5);`
+`switchTableInject(9, 2, 5);`
 
-* All instances of `matrixInject()` should be called **before** any switch functions.
+* All instances of `switchTableInject()` should be called **before** any switch functions.
 
 ### Setup
 
+This is what the empty 30\_Switches looks like:
+
 ```
-//------------------------------
-//-----------LOOP---------------
-//------------------------------
-
-void loop()
-{
-
-    //-------------------------
-    //-----ESSENTIALS----------
-    //-------------------------
-
-    globalClock = millis();
-    
-    rotaryField = 0;
-    buttonField = 0;
-    
-    shiftRegisterScan();
-    matrix();
-
-    runningPresets();
-
-    //------------------------------------
-    //---------SWITCHES START HERE--------
-    //------------------------------------
+//------------------------------------
+//---------SWITCHES START HERE--------
+//------------------------------------
 
 
 
 
-    //------------------------------------
-    //----------SWITCHES END HERE---------
-    //------------------------------------
+//------------------------------------
+//----------SWITCHES END HERE---------
+//------------------------------------
 
+Joystick.setZAxis(rotaryField - 32767);
+Joystick.setYAxis(buttonField - 32767);
 
-    Joystick.setZAxis(rotaryField - 32768);
-    Joystick.setYAxis(buttonField - 32768);
+Joystick.sendState();
 
-    Joystick.sendState();
 }
+
+#if (LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT > 0 && BOARDTYPE == 2)
+  void loop()
+  {
+    processCommands();
+  }
+#endif
 ```
 
 * A full (and rather feature rich) steering wheel could look like this:
 
 ```
-//------------------------------
-//-----------LOOP---------------
-//------------------------------
-
-void loop()
-{
-
-    //-------------------------
-    //-----ESSENTIALS----------
-    //-------------------------
-
-    globalClock = millis();
-
-    encoderField = 0;
-    buttonField = 0;
-    
-    shiftRegisterScan();
-    matrix();
-
-    runningPresets();
-
-    //------------------------------------
-    //---------SWITCHES START HERE--------
-    //------------------------------------
+//------------------------------------
+//---------SWITCHES START HERE--------
+//------------------------------------
 
 
     //WHEEL BUTTONS
@@ -182,15 +151,23 @@ void loop()
         true);                                                        //True = Master/Slave paddle is Throttle/Brake in mode 4. False is opposite.
 
    
-    //------------------------------------
-    //----------SWITCHES END HERE---------
-    //------------------------------------
+//------------------------------------
+//----------SWITCHES END HERE---------
+//------------------------------------
 
+Joystick.setZAxis(rotaryField - 32767);
+Joystick.setYAxis(buttonField - 32767);
 
-    Joystick.setZAxis(encoderField - 32768);
-    Joystick.setYAxis(buttonField - 32768);
+Joystick.sendState();
 
-    Joystick.sendState();
+}
+
+#if (LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT > 0 && BOARDTYPE == 2)
+  void loop()
+  {
+    processCommands();
+  }
+#endif
 }
 ```
 

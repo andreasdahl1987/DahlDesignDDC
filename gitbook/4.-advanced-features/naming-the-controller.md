@@ -1,17 +1,44 @@
 # Naming the controller
 
-If your controller is based on a Atmel 32U4 chip, you can name our controller using this guide. If you're adding LEDs to the controller, this is a requirement.&#x20;
+Naming the controller, or more importantly assigning a VID and PID number to it, is required for SimHub LED control to work.&#x20;
 
-You do this by making a custom `boards.txt` file, which Arduino IDE will use to flash your controller instead of the Arduino Leonardo / Pro Micro board core.&#x20;
+Currently possible for:
 
-Here is how you do it:
+* ATMEGA32U4
+* RP2040
+
+#### VID/PID
+
+Vendor ID (VID) and Product ID (PID) are USB product indentifiers, where Windows already has a register to look at. If a product, such as a USB keyboard for instance, is registered with a VID/PID, Windows already knows its name when you plug it in. If your computer has never seen this VID/PID, it will take the name you have given it. If you then change the name and don't change the VID/PID, your computer will still remember it as the name you first gave it.&#x20;
+
+VID/PIDs cost a lot of money. Using a random VID/PID for your private projects is fine, but if you're selling a product, you're not entirely lawful if you're using random IDs. What the risk is, I'm not sure, but I can't imagine there is a USB police sniffing out sim gear shops.&#x20;
+
+Both VID and PID are 16-bit numbers. Commonly typed as a 4-digit hexadecimal number.&#x20;
+
+You're free to use the DDC VID/PID for your personal projects:
+
+* VID: 0x35f9
+* PID: 0xDDC
+
+SimHub uses the VID/PID to grab controllers for custom LED protocols, which is why knowing the VID/PID you give your controller is essential for LED setups. Next we'll look at how to do this for ATMEGA 32U4 boards and RP2040 boards.
+
+### ATMEGA 32U4
+
+The approach is using a custom `boards.txt` file, which Arduino IDE will use to flash your controller instead of the Arduino Leonardo / Pro Micro board core.&#x20;
+
+The DDC folder has these files, you'll have to move them to the right place:
 
 * Move the folder "hardware" to your Arduino folder in "My Documents".&#x20;
 
 <figure><img src="../.gitbook/assets/image (1) (5) (1).png" alt=""><figcaption></figcaption></figure>
 
-* In this folder, the folder called __ named "My Controller" or similar, can be renamed to whatever you like.&#x20;
-* Find the `boards.txt` file:
+* It includes two board files, MyController and DDC.&#x20;
+
+If you fire up Arduino IDE, you'll see that these are now available as board cores.
+
+<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+You can either use the DDC core, or you can customize your own. In that case, lets have a look at the `boards.txt` file in the MyController folder:
 
 ```
 MyController.name=My Controller
@@ -45,25 +72,35 @@ MyController.build.variant=arduino:leonardo
 MyController.build.extra_flags={build.usb_flags}
 ```
 
-* Here as well, anything called "MyController" or similar can be renamed to whatever you want your controller to be named
-* Two key parameters here is the vendor ID (VID) and the product ID (PID):
+* Anything called "MyController" or similar can be renamed to whatever you want your controller to be named. The actual name that your computer will display is set here:
+
+```
+MyController.build.usb_product="My Controller"
+```
+
+* VID and PID:
 
 ```
 MyController.build.vid=0x8123
 MyController.build.pid=0x8234
 ```
 
-These are USB product indentifiers, where Windows already has a register to look at. If a product, such as a USB keyboard for instance, is registered with a VID/PID, Windows already knows its name when you plug it in. If your computer has never seen this VID/PID, it will take the name you have given it. If you then change the name under `MyController.build.usb_product="My Controller"` and dont change the VID/PID, your computer will still remember it as the name you first gave it.&#x20;
 
-The number written here by default is a random number. You should edit this and keep track of the numbers you use if you have several controllers.&#x20;
 
-* Now, when you open Arduino IDE, your custom board should show up in the boards list:
+### RP2040
 
-<figure><img src="../.gitbook/assets/image (9) (2).png" alt=""><figcaption><p>I've made a custom board file for my SW1 wheel</p></figcaption></figure>
+Setting up name and VID/PID for RP2040 is quite simple. Go to `04_USB.ino`:
 
-Use this board when flashing your controller.
+```
+//This only relevant for RP2040 LED support
 
-#### Disclaimer
+#define VID_PI 0x35f9
+#define PID_PI 0x0DDC
+#define MAKER "Andreas Dahl"
+#define CONTROLLER_NAME "Dahl Design Controller"
+```
 
-VID/PIDs cost a lot of money. Using a random VID/PID for your private projects is fine, but if you're selling a product, you're not entirely lawful if you're using random IDs. What the risk is, I'm not sure, but I can't imagine there is a USB police sniffing out sim gear shops.&#x20;
+This is fairly self explainatory. Default is the DDC VID/PID. If you don't have your own, you can use this.&#x20;
+
+
 

@@ -10,7 +10,7 @@ An essential part of reading button states is using pull-up resistors. For direc
 
 This is how it works:
 
-<figure><img src="../.gitbook/assets/image (17).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (17) (1).png" alt=""><figcaption></figcaption></figure>
 
 * When the button is _**not pressed**_, there is no way for current to get to ground. The voltage at the level of RECIEVER, which in our case is the SR, is the same as VCC (typically +5 volt in Arduino projects).&#x20;
 * When the button is _**pressed,**_ current will flow to ground and voltage will drop from VCC before the 10K resistor to 0 at ground level. Pratically 100% of the voltage drop will be across the resistor. So measuring the voltage after the resistor, it will be essentially equal to ground.&#x20;
@@ -22,25 +22,25 @@ Below is the wiring explained for the **74HC165 chip.** The pin numbers are diff
 
 &#x20;The inputs are labeled D0 to D7, but can also be labeled "a" to "h". In the same way as the example above, every input pin has gotten its button which is connected to ground on one side and pulled up to VCC on the other side - via a 10K ohm resistor.&#x20;
 
-<figure><img src="../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
 
 For encoders, common pin goes to ground and A/B pins get each their input. As with the rules in the matrix planning, encoder inputs should be adjacent to each other.
 
 In the example below, the 3 buttons on D0-D2 has been replaced with an encoder with pushbutton. Note the C pin (common pin) of the encoder goes to ground, and the A/B pins goes to adjacent inputs on the SR.
 
-<figure><img src="../.gitbook/assets/image (30).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (30).png" alt=""><figcaption></figcaption></figure>
 
 Below is an example with a funky switch. It uses 7/8 inputs, so a pushbutton is added to the 8th input. Notice the common for the pushbuttons (pin 6) and the common for the encoder (9) are both connected to ground.&#x20;
 
-<figure><img src="../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
 
 To make it more structured and readable, we can use net flags (words instead of wires) and resistor arrays (basically a chip that is built up of many resistors of the same size side by side).
 
-<figure><img src="../.gitbook/assets/image (24).png" alt=""><figcaption><p>This is the same as the first example</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (24) (1).png" alt=""><figcaption><p>This is the same as the first example</p></figcaption></figure>
 
 ### VCC and GND
 
-<figure><img src="../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
 
 The chip needs power. So it needs to be connected to VCC and GND. Common practice with any power consuming IC that you add a small capacitor next to the VCC pin, connected to VCC and GND. This is called a "decoupling" capacitor, and works like a micro battery to ensure steady voltage and current to the VCC pin.&#x20;
 
@@ -62,13 +62,13 @@ PL#, SH, LD#, PE#. This pin has many names. It is referred to as **LATCH.** It i
 
 When this pin is **low** (connected to GND), the SR will read the inputs from every input port. Making up a 8-bit value. To read the input pins, the clock must toggle off/on once.
 
-<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 In this case, a button on pin D0, D1, D2, D5 and D7 is pressed. Recieving data from 8 inputs at the same time is what makes it "8-bit parallel in..."
 
 When this pin is **high** (connected to VCC), the SR will switch to sending serial data. In other words, a single bit of data is presented to the data pin to be read by the microcontroller. To present the next bit, the clock must toggle off/on once.&#x20;
 
-<figure><img src="../.gitbook/assets/image (21).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (21) (1).png" alt=""><figcaption></figcaption></figure>
 
 So in essence, there is a cycle of:
 
@@ -98,13 +98,13 @@ CE# or CLK INH can be used to inhibit the clock. If pulled high, the clock will 
 
 ### Put it together
 
-<figure><img src="../.gitbook/assets/image (28).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (28).png" alt=""><figcaption></figcaption></figure>
 
 All in all, it could look like this. Here, using a Pro Micro board and using pins 2, 3 and 4.&#x20;
 
 ### Chaining shift registers
 
-<figure><img src="../.gitbook/assets/image (32).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (32).png" alt=""><figcaption></figcaption></figure>
 
 As described above, you can chain as many SRs as you like together by just connecting pin 10 to pin 9 on the next SR. The first SR in the chain connects pin 9 to the microcontroller. The last SR has its pin 10 pulled low.&#x20;
 
@@ -112,6 +112,6 @@ As described above, you can chain as many SRs as you like together by just conne
 
 The 74HC166 has a completely different pin setup:
 
-<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (5).png" alt=""><figcaption></figcaption></figure>
 
 The reversed serial data output from pin 7 on 165 does not exist on 166. Instead it has pin 9, MR#. This is a master reset. When this pin is low, the shift register is reset to all 0s. So this pin has to be pulled high with a pullup resistor to make the SR work.&#x20;

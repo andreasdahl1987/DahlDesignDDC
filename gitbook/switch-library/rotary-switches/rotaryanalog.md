@@ -55,7 +55,7 @@ So typed out in 30\_Switches.ino:
 {% endtab %}
 {% endtabs %}
 
-#### rotaryAnalog2Mode()
+#### <mark style="background-color:orange;">rotaryAnalog2Mode()</mark>
 
 {% tabs %}
 {% tab title="Description" %}
@@ -100,5 +100,6 @@ So typed out in 30\_Switches.ino:
 * modButton() if you want to change modes freely. modButton() not needed to change modes across presets.&#x20;
 * Minimum 12 button numbers.
 * One slot in the rotary field.&#x20;
+* biteButton() to set the bite point
 {% endtab %}
 {% endtabs %}

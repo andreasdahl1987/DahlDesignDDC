@@ -1,9 +1,9 @@
-# 10\_MatrixAndAnalog.ino
+# 10\_TableAndAnalog.ino
 
 ```
-//------------------------------
-//-------MATRIX VARIABLES-------
-//------------------------------
+//-----------------------------------------
+//------------TABLE VARIABLES-------------
+//-----------------------------------------
 
 uint8_t row[] = { 0, 0, 0, 0, 0 };
 const uint8_t rowCount = sizeof(row) / sizeof(row[0]);
@@ -12,24 +12,26 @@ uint8_t col[] = { 0, 0, 0, 0, 0 };
 const uint8_t colCount = sizeof(col) / sizeof(col[0]);
 
 //---------------------------------------
-//--------MATRIX DESCRIPTION-------------
+//--------TABLE DESCRIPTION-------------
 //---------------------------------------
 
 const uint8_t buttonNumber[rowCount][colCount] =
 {
-  {0, 0, 0, 0, 0},     //ROW 1
-  {0, 0, 0, 0, 0},     //ROW 2
-  {0, 0, 0, 0, 0},     //ROW 3
-  {0, 0, 0, 0, 0},     //ROW 4
-  {0, 0, 0, 0, 0}      //ROW 5
+  {0, 0, 0, 0, 0},	//ROW 1
+  {0, 0, 0, 0, 0},	//ROW 2
+  {0, 0, 0, 0, 0},	//ROW 3
+  {0, 0, 0, 0, 0},	//ROW 4
+  {0, 0, 0, 0, 0}	//ROW 5
 };
 
 //---------------------------------------
 //------------DIRECT WIRING--------------
 //---------------------------------------
 
+
 uint8_t directPins[] = { 99 };
 const uint8_t directPinsCount = sizeof(directPins) / sizeof(directPins[0]);
+
 
 //---------------------------------------
 //--------ANALOG DESCRIPTION-------------
@@ -38,10 +40,10 @@ const uint8_t directPinsCount = sizeof(directPins) / sizeof(directPins[0]);
 #define analogSwitchCount 1
 
 const uint8_t analogButtonNumber[analogSwitchCount] =         //ANALOG BUTTONS 1
-{0};
+{ 0 };
 
 const uint8_t analogButtonNumberIncMode[analogSwitchCount] =  //ANALOG BUTTONS 2
-{0};
+{ 0 };
 ```
 
 ## Rows and columns
@@ -76,7 +78,7 @@ When using direct wiring or shift registers, the rows and columns aren't actual 
 
 Any row or column that only has direct wired switches or shift registers on them, should be written as "**99**". The reason we have to use a dummy is that we need to build a matrix in the firmware with the correct size. As mentioned earlier, each switch needs a slot in the firmware matrix to get memory to store switch states, timers for debouncing, etc.&#x20;
 
-* These examples from [1. Project planning](../../1.-project-planning/non-matrix-switches.md):
+* These examples from [1. Project planning](../../1.-project-planning/switches/non-matrix-switches.md):
 
 <figure><img src="../../.gitbook/assets/image (27).png" alt=""><figcaption></figcaption></figure>
 
@@ -84,7 +86,7 @@ Any row or column that only has direct wired switches or shift registers on them
 
 `uint8_t col[] = {99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99};`
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (2).png" alt=""><figcaption></figcaption></figure>
 
 `uint8_t row[] = {99,99,99,99};`
 
@@ -112,7 +114,7 @@ Here, the first 5 rows are dummy-rows. But also columns 5-8, since here are only
 
 ## Button numbers
 
-The reason why I set up my matrix in a spreadsheet is this:
+The reason why I set up my switch table in a spreadsheet is this:
 
 ![image](https://user-images.githubusercontent.com/40788634/194886077-1af05ab1-d62c-446a-ab3b-11fc3579d9d0.png)
 
@@ -127,7 +129,7 @@ const uint8_t buttonNumber[rowCount][colCount] =
 };
 ```
 
-You simply copy your planned matrix to this one. By default it is a 5 x 5 matrix. Adjust it accordingly. 4 x 7 would be like this:
+You simply copy your switch table to this one. By default it is a 5 x 5 table. Adjust it accordingly. 4 x 7 would be like this:
 
 ```
 const uint8_t buttonNumber[rowCount][colCount] =

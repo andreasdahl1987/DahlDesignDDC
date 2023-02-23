@@ -2,14 +2,13 @@
 
 ### **Microcontrollers**
 
-* Atmel 32U4 (Pro Micro, Leonardo, Micro, Yùn, etc.)
-* Atmel SAM3X8E (Arduino Due or similar)
+* Atmel 32U4 (Pro Micro, Leonardo, Feather, Micro, Yùn, and many more)
+* Atmel SAM3X8E\* (Arduino Due or similar)
 * Atmel SAMD21\* (Zero, MKR Zero, M0, SAMD21 Mini)
 * Atmel SAMD51\* (Adafruit Metro M4)
+* Raspberry Pi RP2040 (Raspberry Pi Pico, Pro Micro RP2040, Feather RP2040, and many more)
 
-\*These requires you to use a branch of the joystick library and roll back the code drivers for these boards.
-
-I am looking into RP2040, not supported yet. There is an existing library for using this chip, but the API naming is different from the joystick library DDC uses - requires a re-write of the whole sketch. So it will be easier to rewrite the library's API naming. This will be done when there is a motivation to do so.
+\*These microcontrollers currenly dont have LED support.
 
 ### Switches
 
@@ -19,9 +18,9 @@ If you have a switch that doesnt work with DDC, make an[ issue rapport ](https:/
 
 ### **LED**
 
-Any RGB LED that is supported by the [FastLED](https://github.com/FastLED/FastLED) library. Only 32U4 boards have SimHub LED support.
+Any RGB (not RGBW) LED that is supported by the [Adafruit Neopixel library. ](https://github.com/adafruit/Adafruit\_NeoPixel)
 
-### Shift registers
+### Shift registers/port expanders
 
 * 74HC165
 * 74HC166

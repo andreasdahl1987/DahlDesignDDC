@@ -1,10 +1,12 @@
 # Matrix
 
-Matrix wiring has the advantage of using few microcontroller inputs to gather input from many switches. For instance, you can wire up 64 buttons to 16 microcontroller inputs, as opposed to just 16 buttons with direct wiring. The disadvantage is the required diodes for every switch and more complex wiring.
+With the exception of analog inputs, all switches can be wired in a matrix. This is a technique often used in keyboards, keypads and other devices with many buttons. The basic idea is wiring the buttons in an array with rows and columns, and writing a code that “activates” each row at a time, checking all columns on that row for connection before closing the row and moving on to the next. Effectively scanning through the whole table of buttons. Instead of using 14 pins for 14 buttons, you can use 14 pins as a 7 x 7 matrix, allowing for 49 buttons.&#x20;
+
+The disadvantage is the required diodes for every switch and more complex wiring.
 
 ### Find your pins
 
-DDC is built around planning a matrix of switches, so naturally, when wiring the switches as a matrix, you'll just follow the the way you've planned it. Lets say your matrix consists of 4 rows and 5 columns. First thing is to determine which pins you're using. For these 4 rows and 5 columns, that's 9 pins.
+DDC is built around planning a table of switches, so naturally, when wiring the switches as a matrix, you'll just follow the the way you've planned it. Lets say your swktch table consists of 4 rows and 5 columns. First thing is to determine which pins you're using. For these 4 rows and 5 columns, that's 9 pins.
 
 ![image](https://user-images.githubusercontent.com/40788634/191264509-81f46a6d-717b-4161-877f-08c584dd9ce1.png)
 

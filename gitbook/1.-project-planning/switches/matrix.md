@@ -1,24 +1,20 @@
-# Matrix overview
+# Switch table
 
-This section will explain how to plan the switch matrix. Often refered to as the "planned matrix" in this manual. No matter how you chose to wire your switches to the microcontroller, it will end up in a matrix in the firmware. You'll have to plan you controllers switches accordingly, so this chapter is always relevant. For matrix wiring, the wiring will naturally match the firmware matrix. &#x20;
+This section will explain how to plan the switch table. No matter how you chose to wire your switches to the microcontroller, they have to end up in the table in the firmware. You'll have to plan you controllers switches accordingly, and there are some rules to follow. For matrix wiring, the wiring will naturally match the firmware table. For switches that are wired [directly](non-matrix-switches.md) to the microcontroller, or through [port expanders/shift registers](shift-registers.md), there are some additional things to pay attention to.&#x20;
 
-### Matrix wiring
+### Planning the switch table
 
-With the exception of analog inputs, all switches can be wired in a matrix. This is a technique often used in keyboards, keypads and other devices with many buttons. The basic idea is wiring the buttons in an array with rows and columns, and writing a code that “activates” each row at a time, checking all columns on that row for connection before closing the row and moving on to the next. Effectively scanning through the whole table of buttons. Instead of using 14 pins for 14 buttons, you can use 14 pins as a 7 x 7 matrix, allowing for 49 buttons. DDC can give a total of 128 button outputs.
+I use a spreadsheet to plan the switch table for my projects, with the switches represented as **blocks**. I will refer to **blocks** for the remainder of this guide. I also give blocks different colors according to what I'm going to use the switch for; neutral button, bite point button, modifier button, etc. This is not need, it is just to get an overview.
 
-### Planning the matrix
-
-I use a spreadsheet to plan the matrix for my projects, with the switches represented as **blocks**. I will refer to **blocks** for the remainder of this guide. I also give blocks different colors according to what I'm going to use the switch for; neutral button, bite point button, modifier button, etc. This is not need, it is just to get an overview.
-
-The numbers in the cells are [button numbers](../3.-coding/essentials/10\_matrixandanalog.ino.md#button-numbers), more on this later.&#x20;
+The numbers in the cells are [button numbers](../../3.-coding/essentials/10\_matrixandanalog.ino.md#button-numbers), more on this later.&#x20;
 
 ![image](https://user-images.githubusercontent.com/40788634/191767001-6133685e-d7a5-4eef-9de6-aea218732961.png)
 
-The numbers in the blocks represent the actual joystick button number, more on that later. This matrix is from an early edition of the Dahl Design SW1 steering wheel, which uses DDC to build its firmware.
+This table is from an early edition of the Dahl Design SW1 steering wheel, which uses DDC to build its firmware.
 
 ![image](https://user-images.githubusercontent.com/40788634/191212291-7e49c0ff-8039-435d-b81b-752512a5e36d.png)
 
-Every block is an **adress** in the matrix. Most switches just need 1 block. As an example, the brown block on Row 1, Column 5 represents a standard simple pushbutton used to set the bite point. Its adress is R1C5, or (1,5) in the code. _If you dive deeper into the algorithms, its adress in the matrix is actually \[0]\[4], since the tables in the code starts with 0, and not 1._ Along with this adress, the sketch gives this button a whole bunch of variables connected to this adress; used for debouncing, determining how the switch works, storing information, duration of trigger pulses and much more.
+Every block is an **adress** in the table. Most switches just need 1 block. As an example, the brown block on Row 1, Column 5 represents a standard simple pushbutton used to set the bite point. Its adress is R1C5, or (1,5) in the code. _If you dive deeper into the algorithms, its adress in the table is actually \[0]\[4], since the tables in the code starts with 0, and not 1._ Along with this adress, the sketch gives this button a whole bunch of variables connected to this adress; used for debouncing, determining how the switch works, storing information, duration of trigger pulses and much more.
 
 #### Block demand
 
@@ -63,7 +59,7 @@ Every block is an **adress** in the matrix. Most switches just need 1 block. As 
 
 * Alps RKJXT1F42001 (5 + 2 blocks)
 
-#### Pins (in case of matrix wiring)
+### Pins (in case of matrix wiring)
 
 ![image](https://user-images.githubusercontent.com/40788634/191212291-7e49c0ff-8039-435d-b81b-752512a5e36d.png)
 
@@ -73,9 +69,9 @@ Every block is an **adress** in the matrix. Most switches just need 1 block. As 
 
 In this example, the project has a bit fewer switches, and can do fine with a smaller matrix. 5 rows and 6 columns for a total of 11 pins needed.
 
-### Matrix rules
+### &#x20;Rules
 
-In order to make the algorithms more memory- and processing friendly, they will make some assumptions regarding switch placement in the matrix. This means you have to follow some rules:
+In order to make the algorithms more memory- and processing friendly, they will make some assumptions regarding switch placement in the table. This means you have to follow some rules:
 
 * As a general rule, a switch needs all its blocks on the same row.
 * Rotary encoders, 2-bit (2 blocks) or 4-bit (4 blocks) will require you to put all the switch blocks next to eachother. As in this example, 2-bit encoders marked in red.
@@ -91,7 +87,7 @@ In order to make the algorithms more memory- and processing friendly, they will 
 ![image](https://user-images.githubusercontent.com/40788634/191218912-43284af8-672b-4cc9-aefe-2ec046dae25d.png)
 
 * Encoders with pushbuttons can be regarded as two individual switches; an encoder and a simple pushbutton. This means the two can be placed on different rows. If you wired one of the pushbutton pins to the encoder common, they must be on the same row.
-* Unused spaces in the matrix is perfectly fine, but try to plan it so that you can use the smallest matrix possible - as this will take some load off the processor.
+* Unused spaces in the table is perfectly fine, but try to plan it so that you can use the smallest matrix possible - as these slots will still be processed and will take up memory.
 
 ### Assigning button numbers
 
@@ -103,7 +99,7 @@ In order to make the algorithms more memory- and processing friendly, they will 
   * Handbrake button
   * Preset next/previous
   * Bite pot locker
-* Any unused button/open slot in the matrix, can safely be assigned 0.
+* Any unused button/open slot in the table can safely be assigned 0.
 * Buttons and toggles that uses a single block simply uses the number assigned to that block.
 * Encoders:
   * An incremental encoder uses two button numbers (one for CW rotation, one for CCW). You just need to write the first of these numbers in the first encoder block in the matrix (leftmost).

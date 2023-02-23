@@ -1,10 +1,10 @@
 # Direct
 
-You can also include switches that are[ wired directly](../2.-wiring/non-matrix-wiring.md) to the microcontroller. The requirement here is that each switch has its own pin on the microcontroller. Or in the case of a 2-bit encoder -> two pins. For a funky switch -> 7 pins, you get the idea.
+You can also include switches that are[ wired directly](../../2.-wiring/switches/non-matrix-wiring.md) to the microcontroller. The requirement here is that each switch has its own pin on the microcontroller. Or in the case of a 2-bit encoder -> two pins. For a funky switch -> 7 pins, you get the idea.
 
 ### Planning with direct wiring
 
-While these switches won't be wired in a matrix, they still need a matrix adress in order to work. This means you **plan these switches as if they are part of the matrix.** Follow the guide and rules for [building a matrix.](matrix.md)
+These swiches will need switch table adress in order to work. This means you **plan these switches as if they are part of the table.** Follow the guide and rules for [building a switch table.](matrix.md)
 
 There are also some extra rules to follow:
 
@@ -16,19 +16,19 @@ The example below has three non-matrix 2-bit encoders (red) and a button matrix.
 
 ![CORRECT](https://user-images.githubusercontent.com/40788634/191730157-69d9b169-6e9b-4105-8dec-a67582de91f0.png)
 
-<figure><img src="../.gitbook/assets/image (22).png" alt=""><figcaption><p><mark style="color:green;"><strong>CORRECT</strong></mark></p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (22).png" alt=""><figcaption><p><mark style="color:green;"><strong>CORRECT</strong></mark></p></figcaption></figure>
 
 The rows or columns with direct wired switches aren't real matrix wired rows, and there is no microcontroller input pin associated with them. Putting matrix wired switches on these rows won't work, as they won't be registered.
 
 *   In the case of a project with only direct wiring, you might as well just make a single row with loads of columns, as that will give you the best fit without any open slots. However, that might not give you a very good overview.
 
-    <figure><img src="../.gitbook/assets/image (31).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (31) (1).png" alt=""><figcaption></figcaption></figure>
 
-The example above has three 2-bit encoders and 10 pushbuttons, none of them are wired in a matrix. It can be organized in a 1 x 16 or a 4 x 4 matrix, or anything in between. It doesn't matter much, as no actual pins are associated with this matrix.
+The example above has three 2-bit encoders and 10 pushbuttons, none of them are wired in a matrix. It can be organized in a 1 x 16 or a 4 x 4 table, or anything in between. It doesn't matter much, as no actual pins are associated with the rows and columns.
 
 #### Pins
 
-Direct wired switches require as many pins as blocks it uses in the matrix planning. In the example just above, 16 pins are needed. In a hybrid solution, you need the pins required for the matrix wired switches + a pin for each block of direct wired switches.
+Direct wired switches require as many pins as blocks it uses in the switch table. In the example just above, 16 pins are needed. In a hybrid solution, you need the pins required for the matrix wired switches + a pin for each block of direct wired switches.
 
 ![image](https://user-images.githubusercontent.com/40788634/191730157-69d9b169-6e9b-4105-8dec-a67582de91f0.png)
 
@@ -36,4 +36,4 @@ In this example, you need 2 + 2 + 2 pins for direct wired switches, and since ro
 
 ### Coding with direct wired switches
 
-A little bit of extra attention to the code is required, more on that[ here](../3.-coding/essentials/30\_switches.md#direct-wiring).
+A little bit of extra attention to the code is required, more on that[ here](../../3.-coding/essentials/30\_switches.md#direct-wiring).

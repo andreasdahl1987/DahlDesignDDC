@@ -212,6 +212,6 @@ So for a 12-way connected to A3, assigned analog switch# 4 and two buttons on ro
 {% endtab %}
 
 {% tab title="Requirements" %}
-* 24 button numbers
+* 36 button numbers
 {% endtab %}
 {% endtabs %}
