@@ -1,25 +1,12 @@
 /*
- Name:		DahlDesignDDC
- Author:	Andreas Dahl
-*/
-
-#include <Joystick.h>
-
-#define BUTTONCOUNT 0
-#define HATCOUNT 0
-//Defining joystick parameters
-
-Joystick_ Joystick(JOYSTICK_DEFAULT_REPORT_ID, JOYSTICK_TYPE_JOYSTICK,
-    BUTTONCOUNT,   //Button count
-    HATCOUNT,      //Hat switch count
-    true,          //X axis, used for clutch
-    true,          //Y axis, used for button mode field
-    true,          //Z axis, used for encoder mode field
-    false,         //Rx axis 
-    true,          //Ry axis, used for bite point posting
-    false,         //Rz axis 
-    false,         //Rudder
-    true,          //Throttle, used for dual clutch mode 4
-    false,         //Accelerator
-    true,          //Brake, used for dual clutch mode 4
-    false);        //Steering
+ * Welcome to DDC!
+ * 
+ * The manual on GitHub wil walk you through the setup in detal: https://dahl-design.gitbook.io/ddc/
+ * 
+ * For a quick setup with a Pro Micro board or similar, you only need to look through tabs 08, 10 and 30. 
+ * 
+ * Any questions, contact me on Discord: Andreas Dahl#9514
+ * 
+ * If you find this software helpful, feel free to make a donation: https://www.paypal.com/donate?hosted_button_id=GLYWGTDZNXURJ
+ */
+    

@@ -1,14 +1,32 @@
 //------------------------------
 //-----------SETUP--------------
 //------------------------------
-
+#if(BOARDTYPE == 2)
+void setup1()
+{
+#else
 void setup()
 {
+#endif
+ 
+    //RP2040
+    #if defined(ARDUINO_ARCH_MBED) && defined(ARDUINO_ARCH_RP2040)
+    // Manual begin() is required on core without built-in support for TinyUSB such as mbed rp2040
+      TinyUSB_Device_Init(0);
+    #endif
+
+    #if (BOARDTYPE == 2)
+      USBDevice.setID(VID_PI, PID_PI);
+      USBDevice.setManufacturerDescriptor(MAKER);
+      USBDevice.setProductDescriptor(CONTROLLER_NAME);
+    #endif
+  
     //LED setup
     Serial.begin(115200);
 
-    #if (STRIP1_RGBLEDCOUNT + STRIP2_RGBLEDCOUNT + STRIP3_RGBLEDCOUNT + STRIP4_RGBLEDCOUNT > 0)
+    #if (LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT > 0 && BOARDTYPE == 0)
     setupLeds();
+    LEDStartup();
     #endif
 
     //Set up joystick axis
@@ -90,5 +108,12 @@ void setup()
 
     Joystick.setZAxisRange(-32768, 32767); //Making bit fields 16 bit
     Joystick.setYAxisRange(-32768, 32767);
-
 }
+
+#if (LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT > 0 && BOARDTYPE == 2)
+void setup()
+{
+  setupLeds();
+  LEDStartup();
+}
+#endif

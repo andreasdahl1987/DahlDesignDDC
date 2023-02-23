@@ -1,42 +1,54 @@
-//-------------------------
-// ------- LED STRIP #1 Settings
-//-------------------------
+//----------------------------------------------------------------------------
+//-----------------------------LED COLOR AND TYPES----------------------------
+//----------------------------------------------------------------------------
+//   NEO_KHZ800  800 KHz bitstream (WS2812 LEDs and similar)
+//   NEO_KHZ400  400 KHz (classic 'v1' (not v2) FLORA pixels, WS2811 drivers)
+//   NEO_GRB     Pixels are wired for GRB bitstream (most NeoPixel products)
+//   NEO_RGB     Pixels are wired for RGB bitstream (v1 FLORA pixels, not v2)
+//----------------------------------------------------------------------------
 
-// How many leds on this strip? Set to 0 to disable.
-#define STRIP1_RGBLEDCOUNT 0
-// Data pin
-#define STRIP1_DATAPIN 2
-// 0 left to right, 1 right to left
-#define STRIP1_RIGHTTOLEFT 0
-// Strip type (NEOPIXEL = WS2812B compatible, PL9823 = PL9823)
-#define STRIP1_TYPE NEOPIXEL
+//----------------------------------------------------------------------------
+// ---------------------------- STRIP #1 SETUP -------------------------------
+//----------------------------------------------------------------------------
 
-//-------------------------
-// ------- STRIP #2 Settings
-//-------------------------
-#define STRIP2_RGBLEDCOUNT 0
-#define STRIP2_DATAPIN 2 
-#define STRIP2_RIGHTTOLEFT 0
-#define STRIP2_TYPE NEOPIXEL
+#define LED1COUNT 0
+#define LED1PIN 2  
+#define LED1TYPE NEO_GRB + NEO_KHZ800
+#define LED1REVERSE 0
+#define LED1PRIVATE 0
 
-//-------------------------
-// ------- STRIP #3 Settings
-//-------------------------
-#define STRIP3_RGBLEDCOUNT 0
-#define STRIP3_DATAPIN 2
-#define STRIP3_RIGHTTOLEFT 0
-#define STRIP3_TYPE NEOPIXEL
+//----------------------------------------------------------------------------
+// ---------------------------- STRIP #2 SETUP -------------------------------
+//----------------------------------------------------------------------------
 
-//-------------------------
-// ------- STRIP #4 Settings
-//-------------------------
+#define LED2COUNT 0
+#define LED2PIN 2
+#define LED2TYPE NEO_GRB + NEO_KHZ800
+#define LED2REVERSE 0
+#define LED2PRIVATE 0
 
-#define STRIP4_RGBLEDCOUNT 0
-#define STRIP4_DATAPIN 2
-#define STRIP4_RIGHTTOLEFT 0
-#define STRIP4_TYPE NEOPIXEL
+//----------------------------------------------------------------------------
+// ---------------------------- STRIP #3 SETUP -------------------------------
+//----------------------------------------------------------------------------
 
-// Main simhub leds core code
-#if (STRIP1_RGBLEDCOUNT + STRIP2_RGBLEDCOUNT + STRIP3_RGBLEDCOUNT + STRIP4_RGBLEDCOUNT > 0)
-  #include "ledscore.h"
+#define LED3COUNT 0
+#define LED3PIN 2
+#define LED3TYPE NEO_GRB + NEO_KHZ800
+#define LED3REVERSE 0
+#define LED3PRIVATE 0
+
+//----------------------------------------------------------------------------
+// ---------------------------- STRIP #4 SETUP -------------------------------
+//----------------------------------------------------------------------------
+
+#define LED4COUNT 0
+#define LED4PIN 2
+#define LED4TYPE NEO_GRB + NEO_KHZ800
+#define LED4REVERSE 0
+#define LED4PRIVATE 0
+
+//----------------------------------------------------------------------------
+
+#if (LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT > 0)
+    #include <DDCGENCORE.h>
 #endif

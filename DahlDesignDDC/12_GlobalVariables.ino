@@ -14,6 +14,7 @@ bool brakeMagicOn;
 float brakeMagicValue;
 float throttleHoldValue;
 float bitePoint;
+bool biteRefresh;
 uint8_t quickValue1;
 uint8_t quickValue2;
 uint8_t quickValue3;
@@ -29,8 +30,8 @@ int8_t modButtonRow;
 int8_t modButtonCol;
 int8_t ddButtonRow;
 int8_t ddButtonCol;
-int8_t neutralButtonRow;
-int8_t neutralButtonCol;
+int8_t neutralButtonRow = -1;
+int8_t neutralButtonCol = -1;
 int8_t biteButtonRow;
 int8_t biteButtonCol;
 int8_t presetButtonRow;
@@ -70,6 +71,7 @@ unsigned long globalClock;
 #define clutchBottomDeadzone 10
 
 //LED setup
-
-#define ENABLE_UPLOAD_PROTECTION 0
-#define UPLOAD_AVAILABLE_DELAY 15000
+int8_t LEDBrightness = 100;
+long LEDSerialDropout = 0;
+#define DROPOUTTIMER 1000
+#define SHCOOLDOWN 4

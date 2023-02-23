@@ -247,12 +247,14 @@ void dualClutch(int masterPin, int masterSwitchNumber, int masterReleasedValue, 
         }
     }
 
-    if (latchState[neutralButtonRow - 1][neutralButtonCol - 1])
+    if (neutralButtonRow != -1)
     {
-        Joystick.setXAxis(1000);
+        if (latchState[neutralButtonRow - 1][neutralButtonCol - 1])
+        {
+            Joystick.setXAxis(1000);
+        }
     }
-
-
+    
     long push = 0;
     push = push | analogSwitchMode1[M];
     push = push | (analogSwitchMode2[M] << 1);
@@ -524,4 +526,3 @@ void filteredDualClutch(int masterPin, int masterSwitchNumber, int masterRelease
     rotaryField = rotaryField | push;
 
 }
-

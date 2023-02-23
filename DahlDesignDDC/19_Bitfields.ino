@@ -27,6 +27,7 @@ int rotaryField = 0;
  Least significant
 
  */
+ 
 
 int buttonField = 0;
 
