@@ -15,7 +15,7 @@ int rotaryField = 0;
  12 - Bite point setting
  11 - Bite point setting
  10 - DDS switch
- 9 - DDS switch
+ 9 -- DDS switch
  8
  7
  6
@@ -42,11 +42,11 @@ int buttonField = 0;
  12 - Presets 2nd bit
  11 - Presets 1st bit
  10 - Handbrake active
- 9 - QuickSwitch active
- 8 - QuickSwitch mode
- 7 - Magic button active
- 6 - Throttle Hold active
- 5 - Neutral active
+ 9 -- QuickSwitch active
+ 8 -- QuickSwitch mode
+ 7 -- Magic button active
+ 6 -- Throttle Hold active
+ 5 -- Neutral active
  4
  3
  2
