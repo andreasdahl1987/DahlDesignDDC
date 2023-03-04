@@ -22,9 +22,11 @@
 
 } //LOOP ENDS HERE
 
-#if (LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT > 0 && BOARDTYPE == 2)
+#if (BOARDTYPE == 2)
   void loop()
   {
-    processCommands();
+	#if (LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT > 0)
+		processCommands();
+	#endif
   }
 #endif

@@ -110,10 +110,12 @@ void setup()
     Joystick.setYAxisRange(-32768, 32767);
 }
 
-#if (LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT > 0 && BOARDTYPE == 2)
+#if (BOARDTYPE == 2)
 void setup()
 {
-  setupLeds();
-  LEDStartup();
+    #if (LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT > 0)
+    setupLeds();
+    LEDStartup();
+    #endif
 }
 #endif
