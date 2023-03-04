@@ -27,4 +27,9 @@
   {
     processCommands();
   }
+#elif
+  void loop()
+  {
+
+  }
 #endif

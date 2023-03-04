@@ -116,4 +116,9 @@ void setup()
   setupLeds();
   LEDStartup();
 }
+#elif
+void setup()
+{
+
+}
 #endif
