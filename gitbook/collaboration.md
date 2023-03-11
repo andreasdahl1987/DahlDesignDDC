@@ -1,15 +1,10 @@
 # Collaboration
 
-Help to improve and develop is very welcome. Please submit any suggestions as pull requests on the [DDC GitHub](https://github.com/andreasdahl1987/DahlDesignDDC) page.&#x20;
-
-Likely, the most used MCU for this firmware will be the 32U4. There are two bottlenecks whne writing firmware to this controller.
-
-* The processor is slow, so adding calculations and libraries that require a lot of processing will slow down the code a lot and will make the contoller less responsive. Some of the functions, the encoder functions in particular, will stop working if the refresh rate is too slow. The loop should be run at at least 150 Hz to be safe, migh work as low as 100 Hz. Ideally > 300 Hz.&#x20;
-* There is storage memory limitations. Up to 100% of storage memory can be used safely. Dynamic memory should be below 80%, and I havent come close to that with the current version. Adding libraries or code with a lot of stored variables can cause limitations to project size. At the moment - a wheel with a large amount of inputs (50 buttons/encoders + LED support + 5 analog axis) will use close to 100% storage memory when using a wide variety of functions. Keep it simple and add new features in a way that it wont be compiled if it is not in use.
+Help to improve and develop is very welcome. Please submit any suggestions as issue rapports or pull requests on the [DDC GitHub](https://github.com/andreasdahl1987/DahlDesignDDC) page.&#x20;
 
 ### Support for new boards
 
-For now, I'd like to keep using the Joystick library from Matt Heironimus, as it works great for the supported microcontrollers. It would be difficult to add support for completely different boards to this library (for me at least). Such as ESP32, STM32 and RP2040. I believe the simplest approach would be to modify existing libraries for said boards to match the naming and execution of the APIs used in Heironimus' joystick library.&#x20;
+DDCs joystick rapport is made with libraries based on [Matt Heironimus's joystick library. ](https://github.com/MHeironimus/ArduinoJoystickLibrary)Some adjustments are made for the different boards and to avoid some existing bugs. Adding support for new boards will not require you to use this library, but will require you the use the same API naming.
 
 Here is a list of APIs used:
 

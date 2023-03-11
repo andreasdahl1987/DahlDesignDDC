@@ -15,7 +15,7 @@ Modes:
 * 0: 12 - position switch. Absolute.
 * 1: Incremental
 
-Uses the rotary field for [field placement.](../../4.-advanced-features/field-placement.md) Since is has 2 modes it uses 1 slot in the field.
+Uses the rotary field for [field placement.](../../3.-coding/advanced/field-placement.md) Since is has 2 modes it uses 1 slot in the field.
 
 In addition, this switch can set the bite point of your clutches. Works in combination with [biteButton().](../function-button.md#bitebutton) The button presses will not trigger when setting bite point.&#x20;
 
@@ -69,7 +69,7 @@ Modes:
 * 0: 12 - position switch. Absolute.
 * 1: Incremental
 
-Uses the rotary field for [field placement.](../../4.-advanced-features/field-placement.md) Since is has 2 modes it uses 1 slot in the field.
+Uses the rotary field for [field placement.](../../3.-coding/advanced/field-placement.md) Since is has 2 modes it uses 1 slot in the field.
 
 In addition, the switch can be used to change presets. When holding a [presetButton()](../function-button.md#presetbutton), the position of the switch will determine which preset you're selecting.&#x20;
 

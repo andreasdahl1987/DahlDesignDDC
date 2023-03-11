@@ -43,7 +43,7 @@ All of the switch functions are found in the various .ino files, somewhat catego
 
 While you could go look for functions in the .ino files, it might be hard to see what they do unless you have some experience with coding. This library will list all the functions, what they do and how to use them.
 
-Many of the switch functions ask for a `fieldPlacement`, see [here](../4.-advanced-features/field-placement.md) for the use of field placement.
+Many of the switch functions ask for a `fieldPlacement`, see [here](../3.-coding/advanced/field-placement.md) for the use of field placement.
 
 ### Switch modes
 
@@ -61,7 +61,7 @@ A more complex example would be `void DDS2bit(int row, int col, bool reverse),` 
 
 To change a switch mode you need to have a designated **mode button,** which is set with `modButton(int row, int column).` Typically you will just hold the mode button and use the press/rotate the switch that you want to change the mode for.&#x20;
 
-The information about a switch mode can be found and set in the variable `switchMode.` As mentioned before, when reading/writing directly from/to variables of the matrix, the column and row numbers start with 0, so row 4 in that case is "3", and column 5 is "4". The switch mode for a switch on row 1 column 4 is found in switchMode\[0]\[3]. Most relevant use of this is when making [presets](../4.-advanced-features/presets/). All switches default to starting mode 0 on boot.&#x20;
+The information about a switch mode can be found and set in the variable `switchMode.` As mentioned before, when reading/writing directly from/to variables of the matrix, the column and row numbers start with 0, so row 4 in that case is "3", and column 5 is "4". The switch mode for a switch on row 1 column 4 is found in switchMode\[0]\[3]. Most relevant use of this is when making [presets](../3.-coding/advanced/presets/). All switches default to starting mode 0 on boot.&#x20;
 
 When using the above examples:
 
@@ -71,5 +71,5 @@ When using the above examples:
   * The two bits can make numbers 00 = 0, 01 = 1, 10 = 2, 11 = 3. This representing the modes.&#x20;
   * The bit for the last column comes first. The bit for the first colum comes last. So in order to get to mode 2 (10), the first bit needs to be 1, the last bit needs to be zero. The last bit is already 0, so we just need to change the first bit. This is the switchMode for row 3 column 3, which is switchMode\[2]\[2].&#x20;
 
-When using switches with modes available, the mode of the switch can be communicated to SimHub using the[ field placements](../4.-advanced-features/field-placement.md).&#x20;
+When using switches with modes available, the mode of the switch can be communicated to SimHub using the[ field placements](../3.-coding/advanced/field-placement.md).&#x20;
 

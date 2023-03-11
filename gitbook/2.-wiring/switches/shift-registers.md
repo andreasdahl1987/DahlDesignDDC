@@ -62,7 +62,7 @@ PL#, SH, LD#, PE#. This pin has many names. It is referred to as **LATCH.** It i
 
 When this pin is **low** (connected to GND), the SR will read the inputs from every input port. Making up a 8-bit value. To read the input pins, the clock must toggle off/on once.
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 In this case, a button on pin D0, D1, D2, D5 and D7 is pressed. Recieving data from 8 inputs at the same time is what makes it "8-bit parallel in..."
 

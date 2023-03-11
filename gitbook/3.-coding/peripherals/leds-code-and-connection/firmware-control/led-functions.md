@@ -39,7 +39,7 @@ To make LED 5 to 9 plain blue with a brightnes of 50%:
 {% tab title="Description" %}
 Allows you to set the color and brightness of one or more LEDs under certain conditions. Also has the options of keeping all its LEDs cleared when not used, and to activate blinking.&#x20;
 
-To get access to things happening in the firmware and use this as a condition, there are [triggers](triggers.md) you can use. These will return `true` under certain conditions.&#x20;
+To get access to things happening in the firmware and use this as a condition, there are [triggers](../../../advanced/conditional-coding/triggers.md) you can use. These will return `true` under certain conditions.&#x20;
 {% endtab %}
 
 {% tab title="Example" %}
@@ -114,7 +114,7 @@ true);  //--------Engage indicator will blink
 
 {% tabs %}
 {% tab title="Description" %}
-Ties x amount of LEDs to a x-position [rotary switch](../../../switch-library/rotary-switches/). The idea being that the LED will indicate the position of the switch. As the option to offset and reverse the LED direction, so it should always be able to match the switch position.&#x20;
+Ties x amount of LEDs to a x-position [rotary switch](../../../../switch-library/rotary-switches/). The idea being that the LED will indicate the position of the switch. As the option to offset and reverse the LED direction, so it should always be able to match the switch position.&#x20;
 {% endtab %}
 
 {% tab title="Example" %}

@@ -36,7 +36,7 @@ The DDC folder has these files, you'll have to move them to the right place:
 
 If you fire up Arduino IDE, you'll see that these are now available as board cores.
 
-<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 You can either use the DDC core, or you can customize your own. In that case, lets have a look at the `boards.txt` file in the MyController folder:
 

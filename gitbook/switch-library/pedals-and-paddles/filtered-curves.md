@@ -11,7 +11,7 @@ The filter functions have an **extra two values** to fill in, but appart from th
 * curvePush -> The direction of curve adjustments. "1" will push the curve flat, "-1" will lift the curve up. "0" wil disable the whole filter. There is nothing inbetween, so really "1" and "-1" are the only values you should be using.
 * expFactor -> How hard you're pushing the curve. Decimal values from 0 and up. In practice doesn't reach higher than 10 before the function stops working and you'll get no value at all from your paddle/pedal. This is because the numbers used in the calculations get too big for the arduino to handle. Anyways, expFactor set to 10 is an extreme adjustment. and will not be needed. Likely, you'll use a value between 0 and 1.5.
 
-<figure><img src="../../.gitbook/assets/image (3) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 The figures above show how curvePush = 1 (left) and curvePush = -1 (right) worrks, and how different values of expFactor (0.5 - 5) will alter the curve. In the case, a value of 2 is needed to reach linearity, which is a pretty big adjustment.&#x20;
 
@@ -19,7 +19,7 @@ While this is useful for improving the linearity of a pedal output, there are ma
 
 * For a DIY handbrake, you might want it a bit more responsive, lift the curve a little
 * &#x20;You can use this on your DIY brake/throttle pedals to make them more/less responsive. Some prefer to not have a linear pedal response.
-* You can make [presets](../../4.-advanced-features/presets/) for your pedals, ranging from responsive throttle for high-grip conditions to less responsive (flatter curve) for wet conditions and a switch to togle though your throttle shapes.&#x20;
+* You can make [presets](../../3.-coding/advanced/presets/) for your pedals, ranging from responsive throttle for high-grip conditions to less responsive (flatter curve) for wet conditions and a switch to togle though your throttle shapes.&#x20;
 
 The filter algorithms have been written from bottom-up without using libraries to ensure as little processing power and memory usage as possible. However, these functions will use more memory and processing power than their filter-less versions. So if you don't need a filter, don't use a filter function.
 

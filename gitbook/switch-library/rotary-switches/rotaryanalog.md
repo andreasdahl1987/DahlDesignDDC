@@ -15,7 +15,7 @@ Modes:
 * 2: Open hybrid, X positions
 * 3: Closed hybrid
 
-Uses the rotary field for [field placement.](../../4.-advanced-features/field-placement.md) Since is has 4 modes it uses 2 slots in the field.
+Uses the rotary field for [field placement.](../../3.-coding/advanced/field-placement.md) Since is has 4 modes it uses 2 slots in the field.
 {% endtab %}
 
 {% tab title="Example" %}
@@ -55,6 +55,43 @@ So typed out in 30\_Switches.ino:
 {% endtab %}
 {% endtabs %}
 
+#### rotaryAnalogSimple()
+
+{% tabs %}
+{% tab title="Description" %}
+12 - position switch. Absolute.
+{% endtab %}
+
+{% tab title="Example" %}
+`void rotaryAnalogSimple(int analogPin, int switchNumber, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)`
+
+Switch setup with explainations:
+
+`rotaryAnalog2Mode(`
+
+`A3,` <- The analog pin this switch is connected to
+
+`2,` <- The switch number this analog switch is assigned
+
+`16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023,` <- Switch position values
+
+`false);` <- Direction is not reversed, so CW rotation increasese button number.
+
+* Field placement to 1 in the rotary field, so \[DahlDesign.DDCR1] will show the modes.
+* The starting number of the 12-position mode is determined by the number set in the block for `analogButtonNumber[]`. The number for incremental mode is determined by the number set in the block for `analogButtonNumberIncMode[]`.&#x20;
+* This switch has "reverse" set to true, which can be a good idea if it is placed horizontally on the right side. Turning it CCW will now increase the count instead of reducing.&#x20;
+
+\
+So typed out in 30\_Switches.ino:
+
+`rotaryAnalogSimple(A3, 2, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023, false);`
+{% endtab %}
+
+{% tab title="Requirements" %}
+* 12 button numbers
+{% endtab %}
+{% endtabs %}
+
 #### <mark style="background-color:orange;">rotaryAnalog2Mode()</mark>
 
 {% tabs %}
@@ -66,7 +103,7 @@ Modes:
 * 0: 12 - position switch. Absolute.
 * 1: Incremental
 
-Uses the rotary field for [field placement.](../../4.-advanced-features/field-placement.md) Since is has 2 modes it uses 1 slot in the field.
+Uses the rotary field for [field placement.](../../3.-coding/advanced/field-placement.md) Since is has 2 modes it uses 1 slot in the field.
 {% endtab %}
 
 {% tab title="Example" %}
@@ -103,3 +140,4 @@ So typed out in 30\_Switches.ino:
 * biteButton() to set the bite point
 {% endtab %}
 {% endtabs %}
+

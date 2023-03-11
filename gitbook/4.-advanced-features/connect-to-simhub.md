@@ -2,7 +2,7 @@
 
 This step is not at all necessary for controller function.
 
-A DDC controller can send information about switch modes, bite point, and really anything you put in the [bit fields](field-placement.md) to SimHub via the Dahl Design Properties plugin. Allthough the plugin is iRacing specific, this part of the plugin works regardless of which sim you are using.&#x20;
+A DDC controller can send information about switch modes, bite point, and really anything you put in the [bit fields](../3.-coding/advanced/field-placement.md) to SimHub via the Dahl Design Properties plugin. Allthough the plugin is iRacing specific, this part of the plugin works regardless of which sim you are using.&#x20;
 
 [Here is the list of available properties.](https://dahl-design.gitbook.io/properties/properties/ddc)
 
@@ -12,7 +12,7 @@ A DDC controller can send information about switch modes, bite point, and really
 
 **3: Enable controller input plugin**
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### 4: Find your controller name
 

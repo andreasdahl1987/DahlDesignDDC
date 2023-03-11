@@ -16,5 +16,5 @@ These are both relevant, and work in completely different ways.
 
 Presets are changed with a various switch functions. Examples are:
 
-* __[_preset2Bit()_](../../switch-library/encoders/rotary2bit.md#preset2bit)_,_ which works like any other incremental encoder, but scrolls through presets when mode button is held.
-* __[_SW1PresetRotary()_](../../switch-library/rotary-switches/sw1.md#sw1presetrotary), which has several modes, and therefore doesn't change preset when holding the mode button, but needs the controller to have a presetButton(), which is held to set the preset. This function is for a 12-position switch, so the preset will be set to the physical position of the switch. The boot preset will also be the physical position of this switch.
+* __[_preset2Bit()_](../../../switch-library/encoders/rotary2bit.md#preset2bit)_,_ which works like any other incremental encoder, but scrolls through presets when mode button is held.
+* __[_SW1PresetRotary()_](../../../switch-library/rotary-switches/sw1.md#sw1presetrotary), which has several modes, and therefore doesn't change preset when holding the mode button, but needs the controller to have a presetButton(), which is held to set the preset. This function is for a 12-position switch, so the preset will be set to the physical position of the switch. The boot preset will also be the physical position of this switch.

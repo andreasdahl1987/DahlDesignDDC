@@ -6,7 +6,7 @@ Have you noticed the toggles at the back of F1 wheels? &#x20;
 
 Drives use these to quickly change a number of settings. For instance engine braking and bias before a hard braking zone, or differential settings before a corner complex.&#x20;
 
-The QuickSwitch system uses a [quickRotary](../rotary-switches/quickrotary.md) and a quickSwitch to do the same thing. The quickRotary is a multiposition switch that you'll map to an in-car setting. Lets say you map it to traction control. If the quickSwitch is pressed, the position of the multiposition switch will be software overridden, and it will be set to the value you have set up the quickSwitch to. This can be adjusted per [preset. ](../../4.-advanced-features/presets/)Press again and you'll to back to the physical position of the quickRotary. In this example you can use the quickSwitch as a "WET" button.&#x20;
+The QuickSwitch system uses a [quickRotary](../rotary-switches/quickrotary.md) and a quickSwitch to do the same thing. The quickRotary is a multiposition switch that you'll map to an in-car setting. Lets say you map it to traction control. If the quickSwitch is pressed, the position of the multiposition switch will be software overridden, and it will be set to the value you have set up the quickSwitch to. This can be adjusted per [preset. ](../../3.-coding/advanced/presets/)Press again and you'll to back to the physical position of the quickRotary. In this example you can use the quickSwitch as a "WET" button.&#x20;
 
 #### quickSwitch()
 

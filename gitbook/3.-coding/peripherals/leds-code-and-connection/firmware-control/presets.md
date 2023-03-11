@@ -1,6 +1,6 @@
 # Presets
 
-Having LED control follow your [presets](../../../4.-advanced-features/presets/) is not included in DDC, because it will steal some memory from all those two arent using it, and it is very simple to add.&#x20;
+Having LED control follow your [presets](../../../advanced/presets/) is not included in DDC, because it will steal some memory from all those two arent using it, and it is very simple to add.&#x20;
 
 Simply copy some of the content of 32\_Presets.ino to the LED  tab that you'll use. Here, moved over to 36\_LEDTop:
 

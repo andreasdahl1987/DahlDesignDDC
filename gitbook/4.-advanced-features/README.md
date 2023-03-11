@@ -1,6 +1,3 @@
-# 4. Advanced features
+# 4. Connection
 
-This part is not needed for a basic setup. However, more advanced features such as setting up switch modes, presets, connection to SimHub and more will require you to read up on this topic.
-
-
-
+This chapter is about connection and communication from controller to and from computer, and particulary to SimHub.&#x20;

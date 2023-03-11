@@ -1,6 +1,8 @@
 # Analog inputs
 
-DDC supports an unlimited number of analog switches (clutches, potentiometer, multiposition switches). When adding an analog switch to your project, it has to be assigned a number. Starting at 0, each new switch one number higher. 5 switches should be numbered 1 - 5. **This has nothing to do with button numbers.** This number is the key to a package of variables that the switch need to function properly. So each switch needs its own number, no sharing with other switches.
+DDC supports an unlimited number of analog switches (clutches, potentiometer, multiposition switches). These switches work outside of the switch table.
+
+When adding an analog switch to your project, it has to be assigned a number. Starting at 0, each new switch one number higher. 5 switches should be numbered 1 - 5. **This has nothing to do with button numbers.** This number is the key to a package of variables that the switch need to function properly. So each switch needs its own number, no sharing with other switches.
 
 <figure><img src="../.gitbook/assets/image (16) (1).png" alt=""><figcaption></figcaption></figure>
 

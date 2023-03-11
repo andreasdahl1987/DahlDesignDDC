@@ -125,14 +125,14 @@ Joystick.sendState();
     //ANALOG INPUTS
 
 
-    rotaryLeft(
+    rotaryAnalog2Mode(
         A3,                                                           //Analog pin to read
         1,                                                            //Analog switch #
         3,                                                            //Field placement
         16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023,   //Switch position values
         false);                                                        //Rotation direction
 
-    rotaryRight(
+    rotaryAnalog2Mode(
         A1,                                                           //Analog pin to read
         2,                                                            //Analog switch #
         2,                                                            //Field placement

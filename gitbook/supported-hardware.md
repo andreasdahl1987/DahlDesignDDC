@@ -20,7 +20,7 @@ If you have a switch that doesnt work with DDC, make an[ issue rapport ](https:/
 
 Any RGB (not RGBW) LED that is supported by the [Adafruit Neopixel library. ](https://github.com/adafruit/Adafruit\_NeoPixel)
 
-### Shift registers/port expanders
+### Shift registers
 
 * 74HC165
 * 74HC166

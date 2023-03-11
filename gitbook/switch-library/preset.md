@@ -1,6 +1,6 @@
 # Preset
 
-Have a look at [this page](../4.-advanced-features/presets/) for info on the preset system.&#x20;
+Have a look at [this page](../3.-coding/advanced/presets/) for info on the preset system.&#x20;
 
 There are fuctions that can be used to change preset. Not included here is [SW1PresetRotary](rotary-switches/sw1.md#sw1presetrotary)(), which has a seperate page.&#x20;
 

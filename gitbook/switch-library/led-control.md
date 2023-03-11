@@ -1,6 +1,6 @@
 # LED control
 
-These functions control [LED brightness.](../3.-coding/leds-code-and-connection/firmware-control/brightness.md)
+These functions control [LED brightness.](../3.-coding/peripherals/leds-code-and-connection/firmware-control/brightness.md)
 
 #### rotary2Brightness()
 

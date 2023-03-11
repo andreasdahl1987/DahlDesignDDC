@@ -20,7 +20,7 @@ As you can see, both have their strengths and weaknesses. Below are the function
 
 ### Hybrid
 
-<figure><img src="../.gitbook/assets/image (2) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (2) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 * The idea if the hybrid system is a rotary that holds a button number. Rotating CW or CCW will increase or decrease the button number. The In the case above, it counts to 15, but any number of positions can be set. Then, a button set up with a hybridButton() function can be pressed to lock the position of the rotary, and then the rotary can be used to make button pulses on CW and CCW rotation - while still holding the button number it was holding before hybridButton was pressed.&#x20;
 * In the example above, the rotary has been rotated to position 4, then hybrid button pressed. The switch is still producing a continous button 4 press, but will in addition give pulses of button number 16 on CCW rotation and 17 on CW rotation.&#x20;
@@ -54,7 +54,7 @@ Multifunction complex using a 12-way switch and an encoder in the rotary2Bit cat
 {% endtab %}
 
 {% tab title="Example" %}
-`void multiFunction2Bit24(int analogPin, int switchNumber, int row, int column, bool reverse, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12)`
+`void multiFunction2Bit24(int analogPin, int switchNumber, int row, int column, bool reverseAnalog, bool reverse2Bit, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12)`
 
 
 
@@ -70,7 +70,9 @@ A3, <- The analog pin this switch is connected to
 
 2, <- The first of the two columns the encoder is connected to (2 and 3 in this case)
 
-false, <- The effect of rotary rotation is not reversed
+false, <- The effect of rotary switch rotation is not reversed
+
+true, <- The effect of the encoder rotation is reversed
 
 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023); <- Switch position values
 
@@ -78,7 +80,7 @@ false, <- The effect of rotary rotation is not reversed
 
 So for a 12-way connected to A3, assigned analog switch# 4 and an encoder on row 5 column 2+3 could look like:
 
-`multiFunction2Bit24(A3, 4, 5, 2, false, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023);`
+`multiFunction2Bit24(A3, 4, 5, 2, false, true, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023);`
 {% endtab %}
 
 {% tab title="Requirements" %}
@@ -96,7 +98,7 @@ Also gives button numbers to the 12-way switch.
 {% endtab %}
 
 {% tab title="Example" %}
-`void multiFunction2Bit36(int analogPin, int switchNumber, int row, int column, bool reverse, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12)`
+`void multiFunction2Bit36(int analogPin, int switchNumber, int row, int column, bool reverseAnalog, reverse2Bit, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12)`
 
 
 
@@ -114,13 +116,15 @@ A3, <- The analog pin this switch is connected to
 
 false, <- The effect of rotary rotation is not reversed
 
+true, <- The effect of the encoder rotation is reversed
+
 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023); <- Switch position values
 
 
 
 So for a 12-way connected to A3, assigned analog switch# 4 and an encoder on row 5 column 2+3 could look like:
 
-`multiFunction2Bit36(A3, 4, 5, 2, false, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023);`
+`multiFunction2Bit36(A3, 4, 5, 2, false, true, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023);`
 {% endtab %}
 
 {% tab title="Requirements" %}

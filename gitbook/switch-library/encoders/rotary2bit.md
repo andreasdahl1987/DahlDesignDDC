@@ -62,7 +62,7 @@ Modes:
 * 2: Open hybrid, X positions
 * 3: Closed hybrid
 
-Uses the rotary field for [field placement.](../../4.-advanced-features/field-placement.md) Since is has 4 modes it uses 2 slots in the field.
+Uses the rotary field for [field placement.](../../3.-coding/advanced/field-placement.md) Since is has 4 modes it uses 2 slots in the field.
 {% endtab %}
 
 {% tab title="Example" %}
@@ -119,7 +119,7 @@ Modes:
 * 2: Counting multiposition switch, any amount of positions.
 * 3: Counting multiposition switch, any amount of positions.
 
-Uses the rotary field for [field placement.](../../4.-advanced-features/field-placement.md) Since is has 4 modes it uses 2 slots in the field.
+Uses the rotary field for [field placement.](../../3.-coding/advanced/field-placement.md) Since is has 4 modes it uses 2 slots in the field.
 {% endtab %}
 
 {% tab title="Example" %}
@@ -166,3 +166,4 @@ The button numbers used is determined by the number written in the block for the
 * modButton() to be able to change presets
 {% endtab %}
 {% endtabs %}
+
