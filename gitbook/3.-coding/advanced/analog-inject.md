@@ -77,7 +77,8 @@ Joystick.sendState();
 
 This function gives a lot of freedom for creative solutions. Here are some ideas:
 
-* Push/pull shifter using a single hall sensor set up with two analogInject() functions,
+* Hall sensor button/paddle.
+* Push/pull shifter using a single hall sensor set up with two analogInject() functions.
 * Making a button that is pressed when your slave clutch is completely pressed. The button will toggle a launch screen on your dashboard. That way this will not trigger when only master clutch is pressed, and will only show up for launches.
 * Making buttons out of specific switch positions on a multiposition rotary switch. For instance having modButton on position 12, brake magic on position 11, etc.
 * Automatic launch with a single clutch, setting it up to fire a launch button at the end of the travel.
