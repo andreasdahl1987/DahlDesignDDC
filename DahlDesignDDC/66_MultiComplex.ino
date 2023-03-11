@@ -1,4 +1,4 @@
-void multiFunction2Bit24(int analogPin, int switchNumber, int row, int column, bool reverse, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12)
+void multiFunction2Bit24(int analogPin, int switchNumber, int row, int column, bool reverseAnalog, bool reverse2Bit, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12)
 {
     int Pin = analogPin;
     int Pos1 = pos1;
@@ -40,13 +40,18 @@ void multiFunction2Bit24(int analogPin, int switchNumber, int row, int column, b
 
     resultAnalog--;
 
+    if (reverseAnalog)
+    {
+      resultAnalog = 11 - resultAnalog;
+    }
+
+    analogLastCounter[N] = resultAnalog;
+
     //Update button number to use
 
     Number = analogButtonNumber[N] + (resultAnalog * 2);
 
     //ENCODER POSITION AND DEBOUNCE
-
-    int Reverse = reverse;
 
     //Find switch absolute position
 
@@ -101,13 +106,13 @@ void multiFunction2Bit24(int analogPin, int switchNumber, int row, int column, b
         {
             if ((difference > 0 && difference < 2) || difference < -2)
             {
-                Joystick.setButton(Number + Reverse, 1);
-                Joystick.setButton(Number + 1 - Reverse, 0);
+                Joystick.setButton(Number + reverse2Bit, 1);
+                Joystick.setButton(Number + 1 - reverse2Bit, 0);
             }
             else if ((difference < 0 && difference > -2) || difference > 2)
             {
-                Joystick.setButton(Number + Reverse, 0);
-                Joystick.setButton(Number + 1 - Reverse, 1);
+                Joystick.setButton(Number + reverse2Bit, 0);
+                Joystick.setButton(Number + 1 - reverse2Bit, 1);
             }
             else
             {
@@ -124,7 +129,7 @@ void multiFunction2Bit24(int analogPin, int switchNumber, int row, int column, b
     }
 
 }
-void multiFunction2Bit36(int analogPin, int switchNumber, int row, int column, bool reverse, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12)
+void multiFunction2Bit36(int analogPin, int switchNumber, int row, int column, bool reverseAnalog, bool reverse2Bit, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12)
 {
     int Pin = analogPin;
     int Pos1 = pos1;
@@ -166,6 +171,13 @@ void multiFunction2Bit36(int analogPin, int switchNumber, int row, int column, b
 
     resultAnalog--;
 
+    if (reverseAnalog)
+    {
+      resultAnalog = 11 - resultAnalog;
+    }
+
+    analogLastCounter[N] = resultAnalog;
+
     analogTempState[N] = 0; //Refreshing encoder mode difference
 
     for (int i = 0; i < 12; i++)
@@ -180,14 +192,11 @@ void multiFunction2Bit36(int analogPin, int switchNumber, int row, int column, b
         }
     }
 
-
     //Update button number to use
 
     Number = Number + (resultAnalog * 2);
 
     //ENCODER POSITION AND DEBOUNCE
-
-    int Reverse = reverse;
 
     //Find switch absolute position
 
@@ -242,13 +251,13 @@ void multiFunction2Bit36(int analogPin, int switchNumber, int row, int column, b
         {
             if ((difference > 0 && difference < 2) || difference < -2)
             {
-                Joystick.setButton(Number + Reverse, 1);
-                Joystick.setButton(Number + 1 - Reverse, 0);
+                Joystick.setButton(Number + reverse2Bit, 1);
+                Joystick.setButton(Number + 1 - reverse2Bit, 0);
             }
             else if ((difference < 0 && difference > -2) || difference > 2)
             {
-                Joystick.setButton(Number + Reverse, 0);
-                Joystick.setButton(Number + 1 - Reverse, 1);
+                Joystick.setButton(Number + reverse2Bit, 0);
+                Joystick.setButton(Number + 1 - reverse2Bit, 1);
             }
             else
             {
@@ -313,6 +322,8 @@ void multiFunction2Button24(int analogPin, int switchNumber, int rowButton1, int
     {
         resultAnalog = 11 - resultAnalog;
     }
+
+    analogLastCounter[N] = resultAnalog;
 
     //Update button number to use
 
@@ -397,6 +408,8 @@ void multiFunction2Button36(int analogPin, int switchNumber, int rowButton1, int
     {
         resultAnalog = 11 - resultAnalog;
     }
+        
+    analogLastCounter[N] = resultAnalog;
 
     analogTempState[N] = 0; //Refreshing encoder mode difference
 

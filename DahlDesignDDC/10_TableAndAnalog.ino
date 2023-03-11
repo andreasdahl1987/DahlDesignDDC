@@ -12,7 +12,7 @@ const uint8_t colCount = sizeof(col) / sizeof(col[0]);
 //--------TABLE DESCRIPTION-------------
 //---------------------------------------
 
-const uint8_t buttonNumber[rowCount][colCount] =
+uint8_t buttonNumber[rowCount][colCount] =
 {
   {0, 0, 0, 0, 0},	//ROW 1
   {0, 0, 0, 0, 0},	//ROW 2
@@ -36,8 +36,8 @@ const uint8_t directPinsCount = sizeof(directPins) / sizeof(directPins[0]);
 
 #define analogSwitchCount 1
 
-const uint8_t analogButtonNumber[analogSwitchCount] =         //ANALOG BUTTONS 1
+uint8_t analogButtonNumber[analogSwitchCount] =         //ANALOG BUTTONS 1
 { 0 };
 
-const uint8_t analogButtonNumberIncMode[analogSwitchCount] =  //ANALOG BUTTONS 2
+uint8_t analogButtonNumberIncMode[analogSwitchCount] =  //ANALOG BUTTONS 2
 { 0 };
