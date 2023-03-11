@@ -7,15 +7,15 @@ void switchTableInject(int8_t pin, int8_t row, int8_t column)
 	rawState[Row][Column] = !digitalRead(Pin);
 }
 
-void analogInject(int8_t pin, int8_t row, int8_t column, int pressed, int released, uint8_t threshold)
+void analogInject(int8_t pin, int8_t row, int8_t column, int startValue, int endValue, uint8_t threshold)
 {
   int value = analogRead(pin);
   int diff; 
 
-  if (pressed > released)
+  if (endValue > startValue)
   {
-    diff = pressed-released;
-    if (value > (released + (diff * threshold / 100)))
+    diff = endValue-startValue;
+    if (value > (startValue + (diff * threshold / 100)) && value <= endValue)
     {
       rawState[row-1][column-1] = 1;
     }
@@ -26,8 +26,8 @@ void analogInject(int8_t pin, int8_t row, int8_t column, int pressed, int releas
   }
   else
   {
-    diff = released - pressed;
-    if (value < (released - (diff * threshold / 100)))
+    diff = startValue - endValue;
+    if (value < (startValue - (diff * threshold / 100)) && value >= endValue)
     {
       rawState[row-1][column-1] = 1;
     }
