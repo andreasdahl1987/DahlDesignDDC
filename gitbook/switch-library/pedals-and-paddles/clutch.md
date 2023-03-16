@@ -1,10 +1,15 @@
 # Clutch
 
-Both single clutch and dual clutch are supported. Dual clutch setup has a lot more features.&#x20;
+Both single clutch and dual clutch are supported. Dual clutch setup has a lot more features. The hallmark feature of a dual clutch system is having quick access to the **bite point**, a predetermined percentage of clutch application that is ideal for a standing start.&#x20;
 
-A [biteButton()](../function-button.md#bitebutton) or [bitePot()](bite-point-and-launch.md) is used to set bite point.
+The bite point can be adjusted in many ways:
 
-Clutches use the joystick X axis.&#x20;
+* A [biteButton()](../function-button.md#bitebutton) alone
+* A [biteButton()](../function-button.md#bitebutton) with a supported rotary switch or encoder function
+* Using a [bitePot()](bite-point-and-launch.md)&#x20;
+* Using [presets](../../3.-coding/advanced/presets/).
+
+Clutches use the joystick X axis. The bite point is shown by the RY axis.&#x20;
 
 #### singleClutch()
 
@@ -46,6 +51,8 @@ A dual paddle clutch system. Has 4 modes:
 2: Dynamic high - Either paddle alone reaches 100%. Press both and release one to get to bite point.
 
 3: Brake/throttle - Using the paddles as brake and throttle. Output now changes from joystick X axis to brake/throttle axis.&#x20;
+
+Changing modes are done by holding the modButton and pressing either paddle all the way in and releasing. If this doesnt work, it is a good indication that your clutch doesnt reach a stable 100% or rest at a stable 0% - which means you should adjust your values.&#x20;
 
 The function defaults to bits 13 and 14 in the rotary field. Will be returned by SimHub as property \[DahlDesign.DDCclutchMode].
 {% endtab %}

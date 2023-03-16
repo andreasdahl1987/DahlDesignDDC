@@ -31,6 +31,7 @@ Encoders:
 * Alps EC11
 * TT Electronics EN11 (20 pulse)
 * Bourns PEC11R
+* Elma E33
 
 ### **PEC11**
 
