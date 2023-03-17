@@ -22,7 +22,7 @@ This will probably work with a small amount of LEDs on a board with little volta
 
 **Cheap pullup-resistor trick**
 
-* Power the LEDs with 5V from USB, use a pullup resistor on the LED data pin from microcontroller to pull the signal up to 5V. RP2040 is not rated for 5V on its GPIO pins, this has been tested with  good results over time.&#x20;
+* Power the LEDs with 5V from USB, use a pullup resistor on the LED data pin from microcontroller to pull the signal up to 5V. Though RP2040 is not rated for 5V on its GPIO pins, this has been tested with good results over time. I still wouldn't recommend this for a final design, it works well for testing/prototyping.&#x20;
 
 <figure><img src="../.gitbook/assets/image (17).png" alt=""><figcaption></figcaption></figure>
 
@@ -32,4 +32,4 @@ This will probably work with a small amount of LEDs on a board with little volta
 
 <figure><img src="../.gitbook/assets/image (31).png" alt=""><figcaption></figcaption></figure>
 
-The circuit above will take the 3.3V data line and increase the voltage to 5V. "LED5" is the lead that will connect to the first LED in the chain.&#x20;
+The circuit above will take the 3.3V data line and increase the voltage to 5V. "LED5" is the lead that will connect to the first LED in the chain. The resistor R13 is the recommended resistor on the data line before the first LED in the chain. Here at 33 ohm. Recommended for WS2812 is 330-500 ohm, but less will work well.&#x20;
