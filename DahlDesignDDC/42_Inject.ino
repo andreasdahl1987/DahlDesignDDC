@@ -37,3 +37,34 @@ void analogInject(int8_t pin, int8_t row, int8_t column, int startValue, int end
     }
   }
 }
+
+void analogInjectSingle(int8_t pin, int8_t row, int8_t column, int startValue, int endValue, uint8_t threshold)
+{
+  int value = analogRead(pin);
+  int diff; 
+
+  if (endValue > startValue)
+  {
+    diff = endValue-startValue;
+    if (value > (startValue + (diff * threshold / 100)))
+    {
+      rawState[row-1][column-1] = 1;
+    }
+    else
+    {
+      rawState[row-1][column-1] = 0;
+    }
+  }
+  else
+  {
+    diff = startValue - endValue;
+    if (value < (startValue - (diff * threshold / 100)))
+    {
+      rawState[row-1][column-1] = 1;
+    }
+    else
+    {
+      rawState[row-1][column-1] = 0;
+    }
+  }
+}
