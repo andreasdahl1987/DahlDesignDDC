@@ -16,7 +16,7 @@ A DDC controller can send information about switch modes, bite point, and really
 
 #### 4: Find your controller name
 
-<figure><img src="../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (2) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 #### 5: Type controller name in the plugin menu
 

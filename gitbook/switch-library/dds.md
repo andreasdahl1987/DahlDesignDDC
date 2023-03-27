@@ -1,6 +1,6 @@
 # DDS
 
-DDS (Dahl Design Switch) switches are tailored for the Dahl Design iRacing [Dashboard](https://app.gitbook.com/o/Gk9mLLIOB4bOKrDCqIdJ/s/49tDWuDHhTQtCQdHWIW5/), but can of course be used any way you like, if it fits your projects. It is a function that takes a rotary switch and two pushbuttons to create a 26-position switch complex that is ideal for a menu system.&#x20;
+DDS (Dahl Design Switch) switches are tailored for the Dahl Design iRacing [Dashboard](http://localhost:5000/o/Gk9mLLIOB4bOKrDCqIdJ/s/49tDWuDHhTQtCQdHWIW5/), but can of course be used any way you like, if it fits your projects. It is a function that takes a rotary switch and two pushbuttons to create a 26-position switch complex that is ideal for a menu system.&#x20;
 
 <figure><img src="../.gitbook/assets/image (1) (4).png" alt=""><figcaption></figcaption></figure>
 
@@ -20,7 +20,7 @@ The DDS switches all have 4 modes, and this is automatically pushed to the bit f
 * 1: Closed hybrid
 * 2 and 3 depends on the type of DDS function you use.
 
-If your controller uses a DDS switch, you have to check for this in the properties [plugin menu](https://app.gitbook.com/s/d2E1GdYd97jTQlTu0Drn/introduction/plugin-menu).
+If your controller uses a DDS switch, you have to check for this in the properties [plugin menu](http://localhost:5000/s/d2E1GdYd97jTQlTu0Drn/introduction/plugin-menu).
 
 The video below you can see how the DDS switch works together with the dashboard. Here, a funky switch alone has all the switches needed for the complex; including the rotary, DDButton and hybridButton.&#x20;
 

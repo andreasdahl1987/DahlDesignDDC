@@ -16,7 +16,7 @@ The example below has three non-matrix 2-bit encoders (red) and a button matrix.
 
 ![CORRECT](https://user-images.githubusercontent.com/40788634/191730157-69d9b169-6e9b-4105-8dec-a67582de91f0.png)
 
-<figure><img src="../../.gitbook/assets/image (22).png" alt=""><figcaption><p><mark style="color:green;"><strong>CORRECT</strong></mark></p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (22) (1).png" alt=""><figcaption><p><mark style="color:green;"><strong>CORRECT</strong></mark></p></figcaption></figure>
 
 The rows or columns with direct wired switches aren't real matrix wired rows, and there is no microcontroller input pin associated with them. Putting matrix wired switches on these rows won't work, as they won't be registered.
 

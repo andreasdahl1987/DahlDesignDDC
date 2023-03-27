@@ -104,7 +104,7 @@ The pin numbers used here are just examples.&#x20;
 
 * An extreme example with several bundles of shift registers, matrix wiring and direct wiring in the same project:
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (5).png" alt=""><figcaption></figcaption></figure>
 
 Here, the first 5 rows are dummy-rows. But also columns 5-8, since here are only shift registers and/or direct wired switches. In essence, only the matrix wired part (rows 6-8 and columns 1-4) should have real pin numbers, the rest are "99".&#x20;
 
