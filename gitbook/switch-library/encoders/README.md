@@ -49,6 +49,7 @@ These functions are for encoders that mechanically works the way that the softwa
 Encoders:
 
 * Alps SRBM
+* Alps EC16
 
 ### rotary4Bit
 
