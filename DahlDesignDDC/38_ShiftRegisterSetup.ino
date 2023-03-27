@@ -25,3 +25,13 @@ void shiftRegisterSetup()
         pinMode(SR4DATA, INPUT);
     }
 }
+
+void PCA9555Setup()
+{
+  pinMode(8, INPUT_PULLUP);
+  pinMode(16, INPUT_PULLUP);
+
+  Wire.setSDA(4);
+  Wire.setSCL(5);
+  Wire.begin();
+}

@@ -77,3 +77,40 @@ void shiftRegisterScan()
         }
     }
 }
+
+void PCA9555run()
+{
+  if (digitalRead(16) == 0)
+  {
+    Wire.beginTransmission(0x21);
+    Wire.write(0x01);
+    Wire.endTransmission();
+    
+    Wire.requestFrom(0x21,2);
+    int firstByte = Wire.read();
+    int lastByte = Wire.read();
+    
+    for ( int i = 0; i < 8; i++)
+    {
+      rawState[1][7-i] = !bitRead(firstByte,i);
+      rawState[0][i] = !bitRead(lastByte, i);
+    }
+  }
+  
+  if (digitalRead(8) == 0)
+  {
+    Wire.beginTransmission(0x20);
+    Wire.write(0x01);
+    Wire.endTransmission();
+    
+    Wire.requestFrom(0x20,2);
+    int firstByte = Wire.read();
+    int lastByte = Wire.read();
+    
+    for ( int i = 0; i < 8; i++)
+    {
+      rawState[3][7-i] = !bitRead(firstByte,i);
+      rawState[2][i] = !bitRead(lastByte, i);
+    }
+  }
+}
