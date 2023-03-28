@@ -40,6 +40,19 @@ void setup()
         shiftRegisterSetup();
     }
 
+    //I2C setup
+
+    #if (USING_CB1 == 1)
+      pinMode(8, INPUT_PULLUP);
+      pinMode(16, INPUT_PULLUP);
+      Wire.setSDA(4);
+      Wire.setSCL(5);
+      wire0Init = true;
+    #else
+      PCA9555Setup();
+    #endif
+    startI2C();
+
     //Filling some arrays
     for (int i = 0; i < rowCount; i++)
     {

@@ -30,3 +30,8 @@ void loop()
   matrix();
 
   runningPresets();
+
+  #if (USING_CB1 == 1)
+    PCA9555Run(0x21, 16, 1, false, true);
+    PCA9555Run(0x20, 8, 3, false, true);
+  #endif

@@ -78,39 +78,53 @@ void shiftRegisterScan()
     }
 }
 
-void PCA9555run()
+void PCA9555Run(int address, int interruptPin, int row, bool firstReversed, bool secondReversed)
 {
-  if (digitalRead(16) == 0)
+  if (digitalRead(interruptPin) == 0)
   {
-    Wire.beginTransmission(0x21);
+    Wire.beginTransmission(address);
     Wire.write(0x01);
     Wire.endTransmission();
     
-    Wire.requestFrom(0x21,2);
+    Wire.requestFrom(address,2);
     int firstByte = Wire.read();
     int lastByte = Wire.read();
     
     for ( int i = 0; i < 8; i++)
     {
-      rawState[1][7-i] = !bitRead(firstByte,i);
-      rawState[0][i] = !bitRead(lastByte, i);
+      uint8_t col1 = i;
+      uint8_t col2 = i;
+
+      if (secondReversed)
+      {
+        col1 = 7-col1;
+      }
+      if (firstReversed)
+      {
+        col2 = 7-col2;
+      }
+      rawState[row][col1] = !bitRead(firstByte,i);
+      rawState[row-1][col2] = !bitRead(lastByte, i);
     }
   }
-  
-  if (digitalRead(8) == 0)
+}
+
+void PCA9555run1(int address, int interruptPin, int row, bool firstReversed, bool secondReversed)
+{
+  if (digitalRead(interruptPin) == 0)
   {
-    Wire.beginTransmission(0x20);
-    Wire.write(0x01);
-    Wire.endTransmission();
+    Wire1.beginTransmission(address);
+    Wire1.write(0x01);
+    Wire1.endTransmission();
     
-    Wire.requestFrom(0x20,2);
-    int firstByte = Wire.read();
-    int lastByte = Wire.read();
+    Wire1.requestFrom(address,2);
+    int firstByte = Wire1.read();
+    int lastByte = Wire1.read();
     
     for ( int i = 0; i < 8; i++)
     {
-      rawState[3][7-i] = !bitRead(firstByte,i);
-      rawState[2][i] = !bitRead(lastByte, i);
+      rawState[row][(7*secondReversed)-i] = !bitRead(firstByte,i);
+      rawState[row-1][(7*firstReversed)-i] = !bitRead(lastByte, i);
     }
   }
 }
