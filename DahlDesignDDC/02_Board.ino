@@ -32,16 +32,31 @@
 #define SCL1PIN 3
 
 
+//PORT EXPANDER PCA9555
 #define USING_PCA9555 1
 #define PCA9555_I2C_NUMBER 0
 uint8_t PCA9555interruptPins [] = {8, 16};
 
+//16-BIT ADC ADS1115
+#define USING_ADS1115 1
+#define ADS1115_I2C_NUMBER 1
+#define ADS1115_CHIPS 2
 
 
 
+//VARIABLES
 bool wire1Init = false;
 bool wire0Init = false;
 
+#if(USING_CB1 == 1)
+  bool ADS1115sentReq[2] = {false, false};
+  uint16_t ADS1115value[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+  uint8_t ADS1115channelCounter[2] = {0,0};  
+#elif(ADS1115_CHIPS > 0)
+  bool ADS1115sentReq[ADS1115_CHIPS];
+  uint16_t ADS1115value[4*ADS1115_CHIPS];
+  uint8_t ADS1115channelCounter[ADS1115_CHIPS];
+#endif
 
 
 

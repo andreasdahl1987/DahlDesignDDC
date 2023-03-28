@@ -47,9 +47,17 @@ void setup()
       pinMode(16, INPUT_PULLUP);
       Wire.setSDA(4);
       Wire.setSCL(5);
+      Wire1.setSDA(6);
+      Wire1.setSCL(7);
       wire0Init = true;
+      wire1Init = true;
     #else
-      PCA9555Setup();
+      #if (USING_ADS1115 == 1)
+        ADS1115Setup();
+      #endif
+      #if (USING_PCA9555 == 1)
+        PCA9555Setup();
+      #endif
     #endif
     startI2C();
 

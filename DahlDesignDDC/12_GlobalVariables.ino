@@ -2,6 +2,8 @@
 //--------OTHER VARIABLES-------
 //------------------------------
 
+long counter = 0;
+
 //Handbrake
 bool handbrake = false;
 bool handbrakeLock = false;

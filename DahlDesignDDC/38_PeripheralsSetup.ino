@@ -45,7 +45,40 @@ void PCA9555Setup()
       Wire.setSCL(SCL0PIN);
       wire0Init = true;
     }
-  #elif (USING_PCA9555 == 1)
+  #else
+    wire0Init = true;
+  #endif
+}
+
+void AD1115Setup()
+{
+
+  for(int i = 0; i<ADS1115_CHIPS; i++)
+  {
+    ADS1115sentReq[i] = false;  
+    ADS1115channelCounter[i] = 0;
+  }
+
+  for(int i = 0 ; i<4*ADS1115_CHIPS; i++)
+  {
+    ADS1115value[i] = 0;  
+  }
+  
+  
+  #if (BOARDTYPE == 2)
+    if (ADS1115_I2C_NUMBER == 1)
+    {
+      Wire1.setSDA(SDA1PIN);
+      Wire1.setSCL(SCL1PIN);
+      wire1Init = true;
+    }
+    else
+    {
+      Wire.setSDA(SDA0PIN);
+      Wire.setSCL(SCL0PIN);
+      wire0Init = true;
+    }
+  #else
     wire0Init = true;
   #endif
 }

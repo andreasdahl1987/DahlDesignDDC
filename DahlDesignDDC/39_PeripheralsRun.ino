@@ -109,7 +109,7 @@ void PCA9555Run(int address, int interruptPin, int row, bool firstReversed, bool
   }
 }
 
-void PCA9555run1(int address, int interruptPin, int row, bool firstReversed, bool secondReversed)
+void PCA9555Run1(int address, int interruptPin, int row, bool firstReversed, bool secondReversed)
 {
   if (digitalRead(interruptPin) == 0)
   {
@@ -125,6 +125,53 @@ void PCA9555run1(int address, int interruptPin, int row, bool firstReversed, boo
     {
       rawState[row][(7*secondReversed)-i] = !bitRead(firstByte,i);
       rawState[row-1][(7*firstReversed)-i] = !bitRead(lastByte, i);
+    }
+  }
+}
+
+void ADS1115Run(int address,int chipNumber, int channelCount, int rate)
+{
+  uint8_t Chip = chipNumber - 1;
+  
+  if (!ADS1115sentReq[Chip])
+  {
+    Wire1.beginTransmission(address);
+    Wire1.write(0b00000001);
+    Wire1.write(0b11000011 | (ADS1115channelCounter[Chip] << 4));
+    Wire1.write(0b00000011 | (rate << 5));
+    Wire1.endTransmission();
+    
+    Wire1.beginTransmission(address);
+    Wire1.write(0b00000001);
+    Wire1.endTransmission();
+
+    ADS1115sentReq[Chip] = true;
+  }
+
+  if (ADS1115sentReq[Chip])
+  {
+    Wire1.requestFrom(address, 2);
+    int convStatus = (Wire1.read()>>7);
+    if (convStatus == 1)
+    {
+      Wire1.beginTransmission(address);
+      Wire1.write(0b00000000);
+      Wire1.endTransmission();
+
+      uint8_t valAddress = (4*Chip)+ADS1115channelCounter[Chip];
+      
+      Wire1.requestFrom(address, 2);
+      ADS1115value[valAddress]= Wire1.read()<<8;
+      ADS1115value[valAddress] |= Wire1.read();
+      ADS1115sentReq[Chip] = false;
+
+      ADS1115channelCounter[Chip] ++;
+
+      if (ADS1115channelCounter[Chip] >= channelCount)
+      {
+        ADS1115channelCounter[Chip] = 0;
+      }
+      
     }
   }
 }

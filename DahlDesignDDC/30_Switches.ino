@@ -38,8 +38,15 @@
   pushButton(4,7);
   pushButton(4,8);
 
+  ADS1115Run(0x48, 1, 4, 7);
+  ADS1115Run(0x49, 2, 4, 6);
+  Serial.print("Refresh rate: ");
+  Serial.println(1000000/(micros()-counter));
+  
+  counter = micros();
 
 
+  Serial.println(ADS1115value[0]);
 
 	//------------------------------------
 	//----------SWITCHES END HERE---------
