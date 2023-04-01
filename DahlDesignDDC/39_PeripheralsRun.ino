@@ -189,30 +189,30 @@ void ADS1115Run(int address,int chipNumber, int channelCount, int rate)
   
   if (!ADS1115sentReq[Chip])
   {
-    Wire1.beginTransmission(address);
-    Wire1.write(0b00000001);
-    Wire1.write(0b11000011 | (ADS1115channelCounter[Chip] << 4));
-    Wire1.write(0b00000011 | (rate << 5));
-    Wire1.endTransmission();
+    Wire.beginTransmission(address);
+    Wire.write(0b00000001);
+    Wire.write(0b11000011 | (ADS1115channelCounter[Chip] << 4));
+    Wire.write(0b00000011 | (rate << 5));
+    Wire.endTransmission();
 
     ADS1115sentReq[Chip] = true;
   }
 
   if (ADS1115sentReq[Chip])
   {
-    Wire1.requestFrom(address, 2);
-    int convStatus = (Wire1.read()>>7);
+    Wire.requestFrom(address, 2);
+    int convStatus = (Wire.read()>>7);
     if (convStatus == 1)
     {
-      Wire1.beginTransmission(address);
-      Wire1.write(0b00000000);
-      Wire1.endTransmission();
+      Wire.beginTransmission(address);
+      Wire.write(0b00000000);
+      Wire.endTransmission();
 
       uint8_t valAddress = (4*Chip)+ADS1115channelCounter[Chip];
       
-      Wire1.requestFrom(address, 2);
-      ADS1115value[valAddress]= Wire1.read()<<8;
-      ADS1115value[valAddress] |= Wire1.read();
+      Wire.requestFrom(address, 2);
+      ADS1115value[valAddress]= Wire.read()<<8;
+      ADS1115value[valAddress] |= Wire.read();
       ADS1115sentReq[Chip] = false;
 
       ADS1115channelCounter[Chip] ++;

@@ -92,10 +92,12 @@ void ADS1115Setup()
 #if (USING_CB1 == 1 || USING_PCA9555 == 1 || USING_ADS1115 == 1)
 void startI2C()
 {
+  #if(BOARDTYPE == 2)
   if(wire1Init)
   {
     Wire1.begin();
   }
+  #endif
   if(wire0Init)
   {
     Wire.begin();

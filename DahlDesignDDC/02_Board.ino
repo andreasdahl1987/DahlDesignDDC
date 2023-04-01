@@ -6,7 +6,7 @@
 //-----------BOARD------------
 //----------------------------
 
-#define BOARDTYPE 2
+#define BOARDTYPE 0
 
 // 0 -> Atmel 32U4 based boards. (Leonardo, Pro Micro, Feather, Teensy 2.0, etc) SAM3X based boards. (Due)
 
@@ -20,7 +20,7 @@
 //------------------------------
 
 
-#define USING_CB1 1
+#define USING_CB1 0
 
 
 //------------------------------
@@ -38,9 +38,9 @@
 uint8_t PCA9555interruptPins [] = {99};
 
 //16-BIT ADC ADS1115
-#define USING_ADS1115 0
+#define USING_ADS1115 1
 #define ADS1115_I2C_NUMBER 0
-#define ADS1115_CHIPS 0
+#define ADS1115_CHIPS 1
 
 //VARIABLES
 bool wire1Init = false;

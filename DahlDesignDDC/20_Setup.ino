@@ -41,6 +41,7 @@ void setup()
     }
 
     //I2C setup
+    pinMode(16,INPUT);
 
     #if (USING_CB1 == 1)
       pinMode(8, INPUT_PULLUP);
