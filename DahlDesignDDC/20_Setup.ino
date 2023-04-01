@@ -51,6 +51,7 @@ void setup()
       Wire1.setSCL(7);
       wire0Init = true;
       wire1Init = true;
+      startI2C();
     #else
       #if (USING_ADS1115 == 1)
         ADS1115Setup();
@@ -58,8 +59,11 @@ void setup()
       #if (USING_PCA9555 == 1)
         PCA9555Setup();
       #endif
+      #if (USING_ADS1115 == 1 || USING_PCA9555 == 1)
+      startI2C();
+      #endif
     #endif
-    startI2C();
+
 
     //Filling some arrays
     for (int i = 0; i < rowCount; i++)

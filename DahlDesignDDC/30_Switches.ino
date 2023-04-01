@@ -1,6 +1,15 @@
-	//------------------------------------
-	//---------SWITCHES START HERE--------
-	//------------------------------------
+	//--------------------------------------
+  //---------PERIPHERALS START HERE-------
+  //--------------------------------------
+	  
+	
+  //--------------------------------------
+  //---------PERIPHERALS END HERE---------
+  //--------------------------------------	
+	
+  //--------------------------------------
+  //---------SWITCHES START HERE----------
+  //--------------------------------------
 
   pushButton(1,1);
   pushButton(1,2);
@@ -20,8 +29,8 @@
   pushButton(2,7);
   pushButton(2,8);
 
-  pushButton(3,1);
-  pushButton(3,2);
+  PEC11(3,1,false);
+  
   pushButton(3,3);
   pushButton(3,4);
   pushButton(3,5);
@@ -38,19 +47,16 @@
   pushButton(4,7);
   pushButton(4,8);
 
-  ADS1115Run(0x48, 1, 4, 7);
-  ADS1115Run(0x49, 2, 4, 6);
-  Serial.print("Refresh rate: ");
-  Serial.println(1000000/(micros()-counter));
-  
-  counter = micros();
+
+  refreshRate();
+  checkValue(A0);
 
 
   Serial.println(ADS1115value[0]);
-
-	//------------------------------------
-	//----------SWITCHES END HERE---------
-	//------------------------------------
+  
+  //--------------------------------------
+  //---------SWITCHES END HERE------------
+  //--------------------------------------
 
 	Joystick.setZAxis(rotaryField - 32767);
 	Joystick.setYAxis(buttonField - 32767);

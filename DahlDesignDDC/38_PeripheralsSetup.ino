@@ -26,6 +26,8 @@ void shiftRegisterSetup()
     }
 }
 
+
+#if (USING_PCA9555 == 1)
 void PCA9555Setup()
 {
   for (int i = 0; i < sizeof(PCA9555interruptPins)/sizeof(PCA9555interruptPins[0]); i++)
@@ -33,24 +35,27 @@ void PCA9555Setup()
     pinMode(PCA9555interruptPins[i], INPUT_PULLUP);
   }
   #if (BOARDTYPE == 2)
-    if (PCA9555_I2C_NUMBER == 1)
+    #if (PCA9555_I2C_NUMBER == 1 && USING_PCA9555 == 1)
     {
       Wire1.setSDA(SDA1PIN);
       Wire1.setSCL(SCL1PIN);
       wire1Init = true;
     }
-    else
+    #elif (USING_PCA9555 == 1)
     {
       Wire.setSDA(SDA0PIN);
       Wire.setSCL(SCL0PIN);
       wire0Init = true;
     }
+    #endif
   #else
     wire0Init = true;
   #endif
 }
+#endif
 
-void AD1115Setup()
+#if (USING_ADS1115 == 1)
+void ADS1115Setup()
 {
 
   for(int i = 0; i<ADS1115_CHIPS; i++)
@@ -66,23 +71,25 @@ void AD1115Setup()
   
   
   #if (BOARDTYPE == 2)
-    if (ADS1115_I2C_NUMBER == 1)
-    {
+    #if (ADS1115_I2C_NUMBER == 1 && USING_ADS1115 == 1)
       Wire1.setSDA(SDA1PIN);
       Wire1.setSCL(SCL1PIN);
       wire1Init = true;
-    }
-    else
+    #elif(USING_ADS1115 == 1)
     {
       Wire.setSDA(SDA0PIN);
       Wire.setSCL(SCL0PIN);
       wire0Init = true;
     }
+    #endif
   #else
     wire0Init = true;
   #endif
 }
+#endif
 
+
+#if (USING_CB1 == 1 || USING_PCA9555 == 1 || USING_ADS1115 == 1)
 void startI2C()
 {
   if(wire1Init)
@@ -94,3 +101,4 @@ void startI2C()
     Wire.begin();
   }
 }
+#endif

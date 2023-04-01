@@ -32,6 +32,6 @@ void loop()
   runningPresets();
 
   #if (USING_CB1 == 1)
-    PCA9555Run(0x21, 16, 1, false, true);
-    PCA9555Run(0x20, 8, 3, false, true);
+    PCA9555CB1(0x21, 16, 1);
+    PCA9555CB1(0x20, 8, 3);
   #endif

@@ -33,16 +33,14 @@
 
 
 //PORT EXPANDER PCA9555
-#define USING_PCA9555 1
+#define USING_PCA9555 0
 #define PCA9555_I2C_NUMBER 0
-uint8_t PCA9555interruptPins [] = {8, 16};
+uint8_t PCA9555interruptPins [] = {99};
 
 //16-BIT ADC ADS1115
-#define USING_ADS1115 1
-#define ADS1115_I2C_NUMBER 1
-#define ADS1115_CHIPS 2
-
-
+#define USING_ADS1115 0
+#define ADS1115_I2C_NUMBER 0
+#define ADS1115_CHIPS 0
 
 //VARIABLES
 bool wire1Init = false;
@@ -58,8 +56,6 @@ bool wire0Init = false;
   uint8_t ADS1115channelCounter[ADS1115_CHIPS];
 #endif
 
-
-
 //------------------------------
 //---------LIBRARIES------------
 //------------------------------
@@ -72,6 +68,6 @@ bool wire0Init = false;
   #include <DDCPI.h>
 #endif
 
-#if (USING_CB1 == 1 || USING_PCA9555 == 1)
+#if (USING_CB1 == 1 || USING_PCA9555 == 1 || USING_ADS1115 == 1)
   #include <Wire.h>
 #endif

@@ -70,3 +70,22 @@ float curveFilter(int input, int releasedValue, int pressedValue, int curvePush,
 
     return Input;
 }
+
+void checkValue(int pin)
+{
+  if(pin < 50)
+  {
+    Serial.print("Pin ");
+    Serial.print(String(pin));
+    Serial.print(" reading: ");
+    Serial.println(analogRead(pin));
+  }
+}
+
+void refreshRate()
+{
+  Serial.print("Refresh rate: ");
+  Serial.print(1000000/(micros()-counter));
+  Serial.println(" Hz");
+  counter = micros();
+}

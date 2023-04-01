@@ -78,7 +78,49 @@ void shiftRegisterScan()
     }
 }
 
-void PCA9555Run(int address, int interruptPin, int row, bool firstReversed, bool secondReversed)
+#if (USING_PCA9555 == 1)
+void PCA9555Run(int address, int interruptPin, int row)
+{
+  #if (PCA9555_I2C_NUMBER == 0)
+  if (digitalRead(interruptPin) == 0)
+  {
+    Wire.beginTransmission(address);
+    Wire.write(0x01);
+    Wire.endTransmission();
+    
+    Wire.requestFrom(address,2);
+    int firstByte = Wire.read();
+    int lastByte = Wire.read();
+    
+    for ( int i = 0; i < 8; i++)
+    {
+      rawState[row][i] = !bitRead(firstByte,i);
+      rawState[row-1][i] = !bitRead(lastByte, i);
+    }
+  }
+  #else
+  if (digitalRead(interruptPin) == 0)
+  {
+    Wire1.beginTransmission(address);
+    Wire1.write(0x01);
+    Wire1.endTransmission();
+    
+    Wire1.requestFrom(address,2);
+    int firstByte = Wire1.read();
+    int lastByte = Wire1.read();
+    
+    for ( int i = 0; i < 8; i++)
+    {
+      rawState[row][i] = !bitRead(firstByte,i);
+      rawState[row-1][i] = !bitRead(lastByte, i);
+    }
+  }
+  #endif
+}
+#endif
+
+#if (USING_CB1 == 1)
+void PCA9555CB1(int address, int interruptPin, int row)
 {
   if (digitalRead(interruptPin) == 0)
   {
@@ -92,45 +134,18 @@ void PCA9555Run(int address, int interruptPin, int row, bool firstReversed, bool
     
     for ( int i = 0; i < 8; i++)
     {
-      uint8_t col1 = i;
-      uint8_t col2 = i;
-
-      if (secondReversed)
-      {
-        col1 = 7-col1;
-      }
-      if (firstReversed)
-      {
-        col2 = 7-col2;
-      }
-      rawState[row][col1] = !bitRead(firstByte,i);
-      rawState[row-1][col2] = !bitRead(lastByte, i);
+      rawState[row][7-i] = !bitRead(firstByte,i);
+      rawState[row-1][i] = !bitRead(lastByte, i);
     }
   }
 }
+#endif
 
-void PCA9555Run1(int address, int interruptPin, int row, bool firstReversed, bool secondReversed)
-{
-  if (digitalRead(interruptPin) == 0)
-  {
-    Wire1.beginTransmission(address);
-    Wire1.write(0x01);
-    Wire1.endTransmission();
-    
-    Wire1.requestFrom(address,2);
-    int firstByte = Wire1.read();
-    int lastByte = Wire1.read();
-    
-    for ( int i = 0; i < 8; i++)
-    {
-      rawState[row][(7*secondReversed)-i] = !bitRead(firstByte,i);
-      rawState[row-1][(7*firstReversed)-i] = !bitRead(lastByte, i);
-    }
-  }
-}
 
+#if (USING_ADS1115 == 1)
 void ADS1115Run(int address,int chipNumber, int channelCount, int rate)
 {
+  #if (ADS1115_I2C_NUMBER == 1)
   uint8_t Chip = chipNumber - 1;
   
   if (!ADS1115sentReq[Chip])
@@ -139,10 +154,6 @@ void ADS1115Run(int address,int chipNumber, int channelCount, int rate)
     Wire1.write(0b00000001);
     Wire1.write(0b11000011 | (ADS1115channelCounter[Chip] << 4));
     Wire1.write(0b00000011 | (rate << 5));
-    Wire1.endTransmission();
-    
-    Wire1.beginTransmission(address);
-    Wire1.write(0b00000001);
     Wire1.endTransmission();
 
     ADS1115sentReq[Chip] = true;
@@ -171,7 +182,48 @@ void ADS1115Run(int address,int chipNumber, int channelCount, int rate)
       {
         ADS1115channelCounter[Chip] = 0;
       }
-      
     }
   }
+  #else
+  uint8_t Chip = chipNumber - 1;
+  
+  if (!ADS1115sentReq[Chip])
+  {
+    Wire1.beginTransmission(address);
+    Wire1.write(0b00000001);
+    Wire1.write(0b11000011 | (ADS1115channelCounter[Chip] << 4));
+    Wire1.write(0b00000011 | (rate << 5));
+    Wire1.endTransmission();
+
+    ADS1115sentReq[Chip] = true;
+  }
+
+  if (ADS1115sentReq[Chip])
+  {
+    Wire1.requestFrom(address, 2);
+    int convStatus = (Wire1.read()>>7);
+    if (convStatus == 1)
+    {
+      Wire1.beginTransmission(address);
+      Wire1.write(0b00000000);
+      Wire1.endTransmission();
+
+      uint8_t valAddress = (4*Chip)+ADS1115channelCounter[Chip];
+      
+      Wire1.requestFrom(address, 2);
+      ADS1115value[valAddress]= Wire1.read()<<8;
+      ADS1115value[valAddress] |= Wire1.read();
+      ADS1115sentReq[Chip] = false;
+
+      ADS1115channelCounter[Chip] ++;
+
+      if (ADS1115channelCounter[Chip] >= channelCount)
+      {
+        ADS1115channelCounter[Chip] = 0;
+      }
+    }
+  }
+  #endif
 }
+
+#endif
