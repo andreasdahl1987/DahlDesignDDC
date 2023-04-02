@@ -65,6 +65,19 @@ void setup()
       #endif
     #endif
 
+//ALERT PIN SETUP
+    Wire.beginTransmission(0x48);
+    Wire.write(0b00000011); //Write to high shreshold
+    Wire.write(0b10000000);
+    Wire.write(0b00000000);
+    Wire.endTransmission();
+
+    Wire.beginTransmission(0x48);
+    Wire.write(0b00000010); //Write to high shreshold
+    Wire.write(0b00000000);
+    Wire.write(0b00000000);
+    Wire.endTransmission();
+
 
     //Filling some arrays
     for (int i = 0; i < rowCount; i++)
