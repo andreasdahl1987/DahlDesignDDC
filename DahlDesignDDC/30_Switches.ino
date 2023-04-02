@@ -2,7 +2,8 @@
   //---------PERIPHERALS START HERE-------
   //--------------------------------------
 
-  ADS1115Run(1,4,7,1);
+ADS1115Run(1,4,7,2);
+ADS1115Run(2,4,7,1);
 	
   //--------------------------------------
   //---------PERIPHERALS END HERE---------
@@ -12,11 +13,31 @@
   //---------SWITCHES START HERE----------
   //--------------------------------------
 
-  singleClutch(ADC1,1,17350, 6900);
+if (ADS1115value[0] < 2)
+{
+  rawState[0][0] = 1;
+}
+else
+{
+  rawState[0][0] = 0;
+}
+if (ADS1115value[1] < 2)
+{
+  rawState[0][1] = 1;
+}
+else
+{
+  rawState[0][1] = 0;
+}
+
+funkyRotary(1,1,2,false);
+
+  singleClutch(ADC1,1,23240,13450);
 
   refreshRate();
 
-  Serial.println(ADS1115value[0]);
+  Serial.print( rawState[0][0]);
+    Serial.println(rawState[0][1]);
 
 
 

@@ -6,7 +6,7 @@
 //-----------BOARD------------
 //----------------------------
 
-#define BOARDTYPE 0
+#define BOARDTYPE 2
 
 // 0 -> Atmel 32U4 based boards. (Leonardo, Pro Micro, Feather, Teensy 2.0, etc) SAM3X based boards. (Due)
 
@@ -22,14 +22,22 @@
 
 #define USING_CB1 0
 
+#define CB1_ADC1 1
+#define CB1_ADC1_CHANNELS 4
+#define CB1_ADC2 1
+#define CB1_ADC2_CHANNELS 4
+
+#define CB1_PE1 1
+#define CB1_PE2 1
+
 
 //------------------------------
 //---------I2C DEVICES----------
 //------------------------------
 #define SDA0PIN 0
 #define SCL0PIN 1
-#define SDA1PIN 2
-#define SCL1PIN 3
+#define SDA1PIN 6
+#define SCL1PIN 7
 
 
 //PORT EXPANDER PCA9555
@@ -39,11 +47,11 @@ uint8_t PCA9555interruptPins [] = {99};
 
 //16-BIT ADC ADS1115
 #define USING_ADS1115 1
-#define ADS1115_I2C_NUMBER 0
-#define ADS1115_CHIPS 1
-uint8_t ADS1115_chipAddress [] = {0x48};
+#define ADS1115_I2C_NUMBER 1
+#define ADS1115_CHIPS 2
+uint8_t ADS1115_chipAddress [] = {0x48, 0x49};
 
-#define ADS1115_ALERT 1
+#define ADS1115_ALERT 0
 
 #if (ADS1115_ALERT == 1)
 uint8_t ADS1115_alertPins [] = {8};

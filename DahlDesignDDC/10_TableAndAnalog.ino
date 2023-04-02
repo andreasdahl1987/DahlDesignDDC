@@ -2,10 +2,10 @@
 //------------TABLE VARIABLES-------------
 //-----------------------------------------
 
-uint8_t row[] = { 0, 0, 0, 0, 0 };
+uint8_t row[] = { 99 };
 const uint8_t rowCount = sizeof(row) / sizeof(row[0]);
 
-uint8_t col[] = { 0, 0, 0, 0, 0 };
+uint8_t col[] = { 99,99 };
 const uint8_t colCount = sizeof(col) / sizeof(col[0]);
 
 //---------------------------------------
@@ -14,11 +14,7 @@ const uint8_t colCount = sizeof(col) / sizeof(col[0]);
 
 uint8_t buttonNumber[rowCount][colCount] =
 {
-  {0, 0, 0, 0, 0},      //ROW 1
-  {0, 0, 0, 0, 0},      //ROW 2
-  {0, 0, 0, 0, 0},      //ROW 3
-  {0, 0, 0, 0, 0},      //ROW 4
-  {0, 0, 0, 0, 0}       //ROW 5
+  {0, 0}
 };
 
 //---------------------------------------
