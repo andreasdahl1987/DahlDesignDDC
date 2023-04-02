@@ -41,8 +41,13 @@ uint8_t PCA9555interruptPins [] = {99};
 #define USING_ADS1115 1
 #define ADS1115_I2C_NUMBER 0
 #define ADS1115_CHIPS 1
-#define USING_ALERT 1
-uint8_t ADS1115_alertPins [] = {16};
+uint8_t ADS1115_chipAddress [] = {0x48};
+
+#define ADS1115_ALERT 1
+
+#if (ADS1115_ALERT == 1)
+uint8_t ADS1115_alertPins [] = {8};
+#endif
 
 //VARIABLES
 bool wire1Init = false;

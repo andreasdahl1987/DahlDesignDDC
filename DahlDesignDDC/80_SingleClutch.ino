@@ -1,11 +1,28 @@
 
 void singleClutch(int analogPin, int switchNumber, int releasedValue, int fullyPressedValue)
 {
-    int inputPin = analogPin;
-    int pinValue = analogRead(inputPin);
+    #if(USING_ADS1115 == 1)
+
+    int pinValue;
+    if (analogPin > 49)
+    {
+      pinValue = ADS1115value[analogPin - ADC_CORR];
+    }
+    else
+    {
+      pinValue = analogRead(analogPin);
+    }
+    
+    #else
+
+    int pinValue = analogRead(analogPin);
+    
+    #endif
+    
     int N = switchNumber - 1;
     float normalized = 0;
 
+    
     if (fullyPressedValue > releasedValue)
     {
         fullyPressedValue = fullyPressedValue - clutchTopDeadzone;
@@ -172,4 +189,3 @@ void filteredSingleClutch(int analogPin, int8_t switchNumber, int releasedValue,
     //----------------SET AXIS----------------
     Joystick.setXAxis(average[N]);
 }
-

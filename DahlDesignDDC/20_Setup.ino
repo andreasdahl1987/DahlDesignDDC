@@ -40,9 +40,6 @@ void setup()
         shiftRegisterSetup();
     }
 
-    //I2C setup
-    pinMode(16,INPUT);
-
     #if (USING_CB1 == 1)
       pinMode(8, INPUT_PULLUP);
       pinMode(16, INPUT_PULLUP);
@@ -54,30 +51,25 @@ void setup()
       wire1Init = true;
       startI2C();
     #else
+    
       #if (USING_ADS1115 == 1)
         ADS1115Setup();
       #endif
+      
       #if (USING_PCA9555 == 1)
         PCA9555Setup();
       #endif
+      
       #if (USING_ADS1115 == 1 || USING_PCA9555 == 1)
       startI2C();
       #endif
+
+      //I2C that required .begin first
+      #if (USING_ADS1115 == 1 && ADS1115_ALERT == 1)
+        ADS1115Alert();
+      #endif
+      
     #endif
-
-//ALERT PIN SETUP
-    Wire.beginTransmission(0x48);
-    Wire.write(0b00000011); //Write to high shreshold
-    Wire.write(0b10000000);
-    Wire.write(0b00000000);
-    Wire.endTransmission();
-
-    Wire.beginTransmission(0x48);
-    Wire.write(0b00000010); //Write to high shreshold
-    Wire.write(0b00000000);
-    Wire.write(0b00000000);
-    Wire.endTransmission();
-
 
     //Filling some arrays
     for (int i = 0; i < rowCount; i++)

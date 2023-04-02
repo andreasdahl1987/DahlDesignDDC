@@ -143,87 +143,183 @@ void PCA9555CB1(int address, int interruptPin, int row)
 
 
 #if (USING_ADS1115 == 1)
-void ADS1115Run(int address,int chipNumber, int channelCount, int rate)
+void ADS1115Run(int chipNumber, int channelCount, int rate, int gain)
 {
   #if (ADS1115_I2C_NUMBER == 1)
   uint8_t Chip = chipNumber - 1;
+  uint8_t address = ADS1115_chipAddress[Chip];
+  #if (ADS1115_ALERT == 1)
+    
+    if (!ADS1115sentReq[Chip])
+    {
+      Wire1.beginTransmission(address);
+      Wire1.write(0b00000001);
+      Wire1.write(0b11000001 | (ADS1115channelCounter[Chip] << 4) | gain << 1);
+      Wire1.write(0b00000100 | (rate << 5));
+      Wire1.endTransmission();
   
-  if (!ADS1115sentReq[Chip])
-  {
-    Wire1.beginTransmission(address);
-    Wire1.write(0b00000001);
-    Wire1.write(0b11000011 | (ADS1115channelCounter[Chip] << 4));
-    Wire1.write(0b00000011 | (rate << 5));
-    Wire1.endTransmission();
-
-    ADS1115sentReq[Chip] = true;
-  }
-
-  if (ADS1115sentReq[Chip])
-  {
-    Wire1.requestFrom(address, 2);
-    int convStatus = (Wire1.read()>>7);
-    if (convStatus == 1)
+      ADS1115sentReq[Chip] = true;
+    }
+ 
+    if (ADS1115sentReq[Chip] && digitalRead(ADS1115_alertPins[Chip]) == 0)
     {
       Wire1.beginTransmission(address);
       Wire1.write(0b00000000);
       Wire1.endTransmission();
-
+  
       uint8_t valAddress = (4*Chip)+ADS1115channelCounter[Chip];
       
       Wire1.requestFrom(address, 2);
       ADS1115value[valAddress]= Wire1.read()<<8;
       ADS1115value[valAddress] |= Wire1.read();
+      if (ADS1115value[valAddress] > 32767)
+      {
+        ADS1115value[valAddress] = 0;
+      }
       ADS1115sentReq[Chip] = false;
-
+  
       ADS1115channelCounter[Chip] ++;
-
+  
       if (ADS1115channelCounter[Chip] >= channelCount)
       {
         ADS1115channelCounter[Chip] = 0;
       }
     }
-  }
+
   #else
-  uint8_t Chip = chipNumber - 1;
+
+    if (!ADS1115sentReq[Chip])
+    {
+      Wire1.beginTransmission(address);
+      Wire1.write(0b00000001);
+      Wire1.write(0b11000001 | (ADS1115channelCounter[Chip] << 4) | gain << 1);
+      Wire1.write(0b00000011 | (rate << 5));
+      Wire1.endTransmission();
   
-  if (!ADS1115sentReq[Chip])
-  {
-    Wire.beginTransmission(address);
-    Wire.write(0b00000001);
-    Wire.write(0b11000011 | (ADS1115channelCounter[Chip] << 4));
-    Wire.write(0b00000011 | (rate << 5));
-    Wire.endTransmission();
-
-    ADS1115sentReq[Chip] = true;
-  }
-
-  if (ADS1115sentReq[Chip])
-  {
-    Wire.requestFrom(address, 2);
-    int convStatus = (Wire.read()>>7);
-    if (convStatus == 1)
+      ADS1115sentReq[Chip] = true;
+    }
+  
+    if (ADS1115sentReq[Chip])
+    {
+      Wire1.requestFrom(address, 2);
+      int convStatus = (Wire1.read()>>7);
+      if (convStatus == 1)
+      {
+        Wire1.beginTransmission(address);
+        Wire1.write(0b00000000);
+        Wire1.endTransmission();
+  
+        uint8_t valAddress = (4*Chip)+ADS1115channelCounter[Chip];
+        
+        Wire1.requestFrom(address, 2);
+        ADS1115value[valAddress]= Wire1.read()<<8;
+        ADS1115value[valAddress] |= Wire1.read();
+        if (ADS1115value[valAddress] > 32767)
+        {
+          ADS1115value[valAddress] = 0;
+        }
+        ADS1115sentReq[Chip] = false;
+  
+        ADS1115channelCounter[Chip] ++;
+  
+        if (ADS1115channelCounter[Chip] >= channelCount)
+        {
+          ADS1115channelCounter[Chip] = 0;
+        }
+      }
+    }
+  #endif
+  
+ #else
+  
+  uint8_t Chip = chipNumber - 1;
+  uint8_t address = ADS1115_chipAddress[Chip];
+  
+  #if (ADS1115_ALERT == 1)
+  
+    if (!ADS1115sentReq[Chip])
+    {
+      Wire.beginTransmission(address);
+      Wire.write(0b00000001);
+      Wire.write(0b11000001 | (ADS1115channelCounter[Chip] << 4) | gain << 1);
+      Wire.write(0b00000100 | (rate << 5));
+      Wire.endTransmission();
+  
+      ADS1115sentReq[Chip] = true;
+    }
+ 
+    if (ADS1115sentReq[Chip] && digitalRead(ADS1115_alertPins[Chip]) == 0)
     {
       Wire.beginTransmission(address);
       Wire.write(0b00000000);
       Wire.endTransmission();
-
+  
       uint8_t valAddress = (4*Chip)+ADS1115channelCounter[Chip];
       
       Wire.requestFrom(address, 2);
       ADS1115value[valAddress]= Wire.read()<<8;
       ADS1115value[valAddress] |= Wire.read();
+      if (ADS1115value[valAddress] > 32767)
+      {
+        ADS1115value[valAddress] = 0;
+      }
       ADS1115sentReq[Chip] = false;
-
+  
       ADS1115channelCounter[Chip] ++;
-
+  
       if (ADS1115channelCounter[Chip] >= channelCount)
       {
         ADS1115channelCounter[Chip] = 0;
       }
     }
-  }
-  #endif
+
+  #else
+
+    if (!ADS1115sentReq[Chip])
+    {
+      Wire.beginTransmission(address);
+      Wire.write(0b00000001);
+      Wire.write(0b11000001 | (ADS1115channelCounter[Chip] << 4) | gain << 1);
+      Wire.write(0b00000011 | (rate << 5));
+      Wire.endTransmission();
+  
+      ADS1115sentReq[Chip] = true;
+    }
+  
+    if (ADS1115sentReq[Chip])
+    {
+      Wire.requestFrom(address, 2);
+      int convStatus = (Wire.read()>>7);
+      if (convStatus == 1)
+      {
+        Wire.beginTransmission(address);
+        Wire.write(0b00000000);
+        Wire.endTransmission();
+  
+        uint8_t valAddress = (4*Chip)+ADS1115channelCounter[Chip];
+        
+        Wire.requestFrom(address, 2);
+        ADS1115value[valAddress]= Wire.read()<<8;
+        ADS1115value[valAddress] |= Wire.read();
+        if (ADS1115value[valAddress] > 32767)
+        {
+          ADS1115value[valAddress] = 0;
+        }
+        ADS1115sentReq[Chip] = false;
+  
+        ADS1115channelCounter[Chip] ++;
+  
+        if (ADS1115channelCounter[Chip] >= channelCount)
+        {
+          ADS1115channelCounter[Chip] = 0;
+        }
+      }
+    }
+    
+  #endif //Alert versions
+  
+#endif //I2C lines
+
 }
 
-#endif
+#endif //Using ADS1115
