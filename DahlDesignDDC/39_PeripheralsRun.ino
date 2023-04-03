@@ -309,6 +309,54 @@ void ADC2_CB1(int alertPin)
   }
   #endif
 }
+
+void CB1switchTable()
+{
+  //Row 5 & 6
+  for(int i = 0; i < 8; i++)
+  {
+    if (ROW5_ACTIVE == 1)
+    {
+      rawState[4][i] = !digitalRead(row5Pins[i]);
+    }
+    if (ROW6_ACTIVE == 1)
+    {
+      rawState[5][i] = !digitalRead(row6Pins[i]);
+    }
+  }
+  //Row 7
+  if(CB1_ADC1 == 1)
+  {
+    for (int i = 0; i<CB1_ADC1_CHANNELS; i++)
+    {
+      if (ADS1115value[i] < 2)
+      {
+        rawState[6][i] = 1;
+      }
+      else
+      {
+        rawState[6][i] = 0;
+      }
+    }
+  }
+  
+  if(CB1_ADC2 == 1)
+  {
+    for (int i = 4; i<4+CB1_ADC2_CHANNELS; i++)
+    {
+      if (ADS1115value[i] < 2)
+      {
+        rawState[6][i] = 1;
+      }
+      else
+      {
+        rawState[6][i] = 0;
+      }
+    }
+  }
+  
+}
+
 #endif
 
 
