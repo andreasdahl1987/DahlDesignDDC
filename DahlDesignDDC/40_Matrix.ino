@@ -1,7 +1,7 @@
 
 void matrix()
 {
-
+    #if (USING_CB1 == 0)
     //Beginning with matrix logics, checking status on all button connectors.
     //Based on monitoring the flow to each row pin, setting the pin to GND
 
@@ -22,4 +22,5 @@ void matrix()
             pinMode(row[i], INPUT_PULLUP); //Disengage the row pin
         }
     }
+   #endif
 }

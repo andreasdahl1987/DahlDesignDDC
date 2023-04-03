@@ -41,15 +41,9 @@ void setup()
     }
 
     #if (USING_CB1 == 1)
-      pinMode(8, INPUT_PULLUP);
-      pinMode(16, INPUT_PULLUP);
-      Wire.setSDA(4);
-      Wire.setSCL(5);
-      Wire1.setSDA(6);
-      Wire1.setSCL(7);
-      wire0Init = true;
-      wire1Init = true;
+      CB1Setup();
       startI2C();
+      CB1Alert();
     #else
     
       #if (USING_ADS1115 == 1)
@@ -106,6 +100,7 @@ void setup()
 
 
     //Ready the matrix
+    #if (USING_CB1 == 0)
     for (int i = 0; i < colCount; i++)
     { //  All pins pulled up unless told otherwise
         if (col[i] != 99)
@@ -132,7 +127,8 @@ void setup()
             pinMode(directPins[i], INPUT_PULLUP);
         }
     }
-
+    #endif
+    
     presets(0); //Start up in preset 1. 
 
     Joystick.begin(0); //Start joystick library magic

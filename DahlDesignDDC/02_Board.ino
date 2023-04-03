@@ -19,37 +19,51 @@
 //---------DAHL DESIGN----------
 //------------------------------
 
+#define USING_CB1 1
 
-#define USING_CB1 0
-
+//ADC setup
 #define CB1_ADC1 1
 #define CB1_ADC1_CHANNELS 4
+#define CB1_ADC1_RATE 7
+#define CB1_ADC1_GAIN 1
+
 #define CB1_ADC2 1
 #define CB1_ADC2_CHANNELS 4
+#define CB1_ADC2_RATE 7
+#define CB1_ADC2_GAIN 1
 
+//Port expander setup
 #define CB1_PE1 1
 #define CB1_PE2 1
 
+//ROW5 and ROW6
+#define ROW5_ACTIVE 1
+#define ROW6_ACTIVE 1
+
+//ROW8 setup
+#define DISABLE_ALERT_PINS 0  //Gives access to COL2 and COL3. Disables ALERT pins for the ADCs, making them heavier to run.
+#define DISABLE_ANALOG 0      //Gives access to COL4 - COL 7 by using A0-A3.
+#define DISABLE_LED_PIN 0     //Gives access to COL8 by using the LED pin.
 
 //------------------------------
 //---------I2C DEVICES----------
 //------------------------------
 #define SDA0PIN 0
 #define SCL0PIN 1
-#define SDA1PIN 6
-#define SCL1PIN 7
+#define SDA1PIN 2
+#define SCL1PIN 3
 
 
 //PORT EXPANDER PCA9555
 #define USING_PCA9555 0
 #define PCA9555_I2C_NUMBER 0
-uint8_t PCA9555interruptPins [] = {99};
+uint8_t PCA9555interruptPins [] = {0};
 
 //16-BIT ADC ADS1115
-#define USING_ADS1115 1
-#define ADS1115_I2C_NUMBER 1
-#define ADS1115_CHIPS 2
-uint8_t ADS1115_chipAddress [] = {0x48, 0x49};
+#define USING_ADS1115 0
+#define ADS1115_I2C_NUMBER 0
+#define ADS1115_CHIPS 1
+uint8_t ADS1115_chipAddress [] = {0x48};
 
 #define ADS1115_ALERT 0
 

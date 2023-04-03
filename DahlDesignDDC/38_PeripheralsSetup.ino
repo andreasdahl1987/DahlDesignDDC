@@ -1,3 +1,86 @@
+#if (USING_CB1 == 1)
+void CB1Setup()
+{
+//ROW 5
+if (ROW5_ACTIVE == 1)
+{
+  for(int i = 0; i<8;i++)
+  {
+    pinMode(row5Pins[i],INPUT_PULLUP);
+  }
+}
+
+//ROW 6
+if (ROW6_ACTIVE == 1)
+{
+  for(int i = 0; i<8;i++)
+  {
+    pinMode(row6Pins[i],INPUT_PULLUP);
+  }
+}
+
+//PE interrupt pins
+  pinMode(8, INPUT_PULLUP);
+  pinMode(16, INPUT_PULLUP);
+
+//ADC alert pins
+  pinMode(2, INPUT_PULLUP);
+  pinMode(0, INPUT_PULLUP);
+
+//I2C setup
+  Wire.setSDA(4);
+  Wire.setSCL(5);
+  Wire1.setSDA(6);
+  Wire1.setSCL(7);
+  wire0Init = true;
+  wire1Init = true;
+
+//ROW8
+  if (DISABLE_ANALOG == 1)
+  {
+    pinMode(A0, INPUT_PULLUP);
+    pinMode(A1, INPUT_PULLUP);
+    pinMode(A2, INPUT_PULLUP);
+    pinMode(A3, INPUT_PULLUP);
+  }
+  if (DISABLE_LED_PIN == 1)
+  {
+    pinMode(25, INPUT_PULLUP);
+  }
+}
+
+void CB1Alert()
+{   
+  if(DISABLE_ALERT_PINS == 0)
+  {
+    int addr = 0x48;
+    Wire1.beginTransmission(addr);
+    Wire1.write(0b00000011); //Write to high threshold register
+    Wire1.write(0b10000000);
+    Wire1.write(0b00000000);
+    Wire1.endTransmission();
+
+    Wire1.beginTransmission(addr);
+    Wire1.write(0b00000010); //Write to low threshold register
+    Wire1.write(0b00000000);
+    Wire1.write(0b00000000);
+    Wire1.endTransmission();
+
+    addr = 0x49;
+    Wire1.beginTransmission(addr);
+    Wire1.write(0b00000011); //Write to high threshold register
+    Wire1.write(0b10000000);
+    Wire1.write(0b00000000);
+    Wire1.endTransmission();
+
+    Wire1.beginTransmission(addr);
+    Wire1.write(0b00000010); //Write to low threshold register
+    Wire1.write(0b00000000);
+    Wire1.write(0b00000000);
+    Wire1.endTransmission();
+  }
+}
+#endif
 void shiftRegisterSetup()
 {
     if (SRCOUNT >= 1)
@@ -60,7 +143,7 @@ void ADS1115Alert()
 {
   for(int i = 0; i < ADS1115_CHIPS; i++)
   {
-    pinMode(ADS1115_alertPins[i], INPUT);
+    pinMode(ADS1115_alertPins[i], INPUT_PULLUP);
     int addr = ADS1115_chipAddress[i];
     Wire.beginTransmission(addr);
     Wire.write(0b00000011); //Write to high threshold register

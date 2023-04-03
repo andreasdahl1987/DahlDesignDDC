@@ -24,7 +24,7 @@ void loop()
 
   rotaryField = 0;
   buttonField = 0;
-
+  
   shiftRegisterScan();
 
   matrix();
@@ -34,4 +34,6 @@ void loop()
   #if (USING_CB1 == 1)
     PCA9555CB1(0x21, 16, 1);
     PCA9555CB1(0x20, 8, 3);
+    ADS1115Run(1,4,7,2);
+    ADS1115Run(2,4,7,1);
   #endif

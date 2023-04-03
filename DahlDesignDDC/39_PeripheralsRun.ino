@@ -139,7 +139,91 @@ void PCA9555CB1(int address, int interruptPin, int row)
     }
   }
 }
+
+void ADC1_CB1(int alertPin)
+{
+#if (DISABLE_ALERT_PINS == 0)
+    
+  if (!sentReq1)
+  {
+    Wire1.beginTransmission(0x48);
+    Wire1.write(0b00000001);
+    Wire1.write(0b11000001 | (channelCount1 << 4) | CB1_ADC1_GAIN << 1);
+    Wire1.write(0b00000100 | (CB1_ADC1_RATE << 5));
+    Wire1.endTransmission();
+
+    sentReq1 = true;
+  }
+
+  if (sentReq1 && digitalRead(alertPin]) == 0)
+  {
+    Wire1.beginTransmission(0x48);
+    Wire1.write(0b00000000);
+    Wire1.endTransmission();
+
+    uint8_t valAddress = channelCount1;
+    
+    Wire1.requestFrom(address, 2);
+    ADS1115value[valAddress]= Wire1.read()<<8;
+    ADS1115value[valAddress] |= Wire1.read();
+    if (ADS1115value[valAddress] > 32767)
+    {
+      ADS1115value[valAddress] = 0;
+    }
+    ADS1115sentReq[Chip] = false;
+
+    ADS1115channelCounter[Chip] ++;
+
+    if (ADS1115channelCounter[Chip] >= channelCount)
+    {
+      ADS1115channelCounter[Chip] = 0;
+    }
+  }
+
+  #else
+
+  if (!ADS1115sentReq[Chip])
+  {
+    Wire1.beginTransmission(address);
+    Wire1.write(0b00000001);
+    Wire1.write(0b11000001 | (ADS1115channelCounter[Chip] << 4) | gain << 1);
+    Wire1.write(0b00000011 | (rate << 5));
+    Wire1.endTransmission();
+
+    ADS1115sentReq[Chip] = true;
+  }
+
+  if (ADS1115sentReq[Chip])
+  {
+    Wire1.requestFrom(address, 2);
+    int convStatus = (Wire1.read()>>7);
+    if (convStatus == 1)
+    {
+      Wire1.beginTransmission(address);
+      Wire1.write(0b00000000);
+      Wire1.endTransmission();
+
+      uint8_t valAddress = (4*Chip)+ADS1115channelCounter[Chip];
+      
+      Wire1.requestFrom(address, 2);
+      ADS1115value[valAddress]= Wire1.read()<<8;
+      ADS1115value[valAddress] |= Wire1.read();
+      if (ADS1115value[valAddress] > 32767)
+      {
+        ADS1115value[valAddress] = 0;
+      }
+      ADS1115sentReq[Chip] = false;
+
+      ADS1115channelCounter[Chip] ++;
+
+      if (ADS1115channelCounter[Chip] >= channelCount)
+      {
+        ADS1115channelCounter[Chip] = 0;
+      }
+    }
+  }
 #endif
+
 
 
 #if (USING_ADS1115 == 1)

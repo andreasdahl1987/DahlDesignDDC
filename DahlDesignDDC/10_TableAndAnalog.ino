@@ -1,3 +1,5 @@
+#if(USING_CB1 == 0)
+
 //-----------------------------------------
 //------------TABLE VARIABLES-------------
 //-----------------------------------------
@@ -37,3 +39,7 @@ uint8_t analogButtonNumber[analogSwitchCount] =         //ANALOG BUTTONS 1
 
 uint8_t analogButtonNumberIncMode[analogSwitchCount] =  //ANALOG BUTTONS 2
 { 0 };
+
+
+
+#endif
