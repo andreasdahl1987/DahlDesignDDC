@@ -155,7 +155,7 @@ void ADC1_CB1(int alertPin)
     sentReq1 = true;
   }
 
-  if (sentReq1 && digitalRead(alertPin]) == 0)
+  if (sentReq1 && digitalRead(alertPin) == 0)
   {
     Wire1.beginTransmission(0x48);
     Wire1.write(0b00000000);
@@ -163,65 +163,152 @@ void ADC1_CB1(int alertPin)
 
     uint8_t valAddress = channelCount1;
     
-    Wire1.requestFrom(address, 2);
+    Wire1.requestFrom(0x48, 2);
     ADS1115value[valAddress]= Wire1.read()<<8;
     ADS1115value[valAddress] |= Wire1.read();
     if (ADS1115value[valAddress] > 32767)
     {
       ADS1115value[valAddress] = 0;
     }
-    ADS1115sentReq[Chip] = false;
+    sentReq1 = false;
 
-    ADS1115channelCounter[Chip] ++;
+    channelCount1 ++;
 
-    if (ADS1115channelCounter[Chip] >= channelCount)
+    if (channelCount1 >= CB1_ADC1_CHANNELS)
     {
-      ADS1115channelCounter[Chip] = 0;
+      channelCount1 = 0;
     }
   }
 
   #else
 
-  if (!ADS1115sentReq[Chip])
+  if (!sentReq1)
   {
-    Wire1.beginTransmission(address);
+    Wire1.beginTransmission(0x48);
     Wire1.write(0b00000001);
-    Wire1.write(0b11000001 | (ADS1115channelCounter[Chip] << 4) | gain << 1);
-    Wire1.write(0b00000011 | (rate << 5));
+    Wire1.write(0b11000001 | (channelCount1 << 4) | CB1_ADC1_GAIN << 1);
+    Wire1.write(0b00000011 | (CB1_ADC1_RATE << 5));
     Wire1.endTransmission();
 
-    ADS1115sentReq[Chip] = true;
+    sentReq1 = true;
   }
 
-  if (ADS1115sentReq[Chip])
+  if (sentReq1)
   {
-    Wire1.requestFrom(address, 2);
+    Wire1.requestFrom(0x48, 2);
     int convStatus = (Wire1.read()>>7);
     if (convStatus == 1)
     {
-      Wire1.beginTransmission(address);
+      Wire1.beginTransmission(0x48);
       Wire1.write(0b00000000);
       Wire1.endTransmission();
 
-      uint8_t valAddress = (4*Chip)+ADS1115channelCounter[Chip];
+      uint8_t valAddress = channelCount1;
       
-      Wire1.requestFrom(address, 2);
+      Wire1.requestFrom(0x48, 2);
       ADS1115value[valAddress]= Wire1.read()<<8;
       ADS1115value[valAddress] |= Wire1.read();
       if (ADS1115value[valAddress] > 32767)
       {
         ADS1115value[valAddress] = 0;
       }
-      ADS1115sentReq[Chip] = false;
+      sentReq1 = false;
 
-      ADS1115channelCounter[Chip] ++;
+      channelCount1 ++;
 
-      if (ADS1115channelCounter[Chip] >= channelCount)
+      if (channelCount1 >= CB1_ADC1_CHANNELS)
       {
-        ADS1115channelCounter[Chip] = 0;
+        channelCount1 = 0;
       }
     }
   }
+  #endif
+}
+
+void ADC2_CB1(int alertPin)
+{
+#if (DISABLE_ALERT_PINS == 0)
+    
+  if (!sentReq2)
+  {
+    Wire1.beginTransmission(0x49);
+    Wire1.write(0b00000001);
+    Wire1.write(0b11000001 | (channelCount2 << 4) | CB1_ADC2_GAIN << 1);
+    Wire1.write(0b00000100 | (CB1_ADC2_RATE << 5));
+    Wire1.endTransmission();
+
+    sentReq2 = true;
+  }
+
+  if (sentReq2 && digitalRead(alertPin) == 0)
+  {
+    Wire1.beginTransmission(0x49);
+    Wire1.write(0b00000000);
+    Wire1.endTransmission();
+
+    uint8_t valAddress = 4 + channelCount2;
+    
+    Wire1.requestFrom(0x49, 2);
+    ADS1115value[valAddress]= Wire1.read()<<8;
+    ADS1115value[valAddress] |= Wire1.read();
+    if (ADS1115value[valAddress] > 32767)
+    {
+      ADS1115value[valAddress] = 0;
+    }
+    sentReq2 = false;
+
+    channelCount2 ++;
+
+    if (channelCount2 >= CB1_ADC2_CHANNELS)
+    {
+      channelCount2 = 0;
+    }
+  }
+
+  #else
+
+  if (!sentReq2)
+  {
+    Wire1.beginTransmission(0x49);
+    Wire1.write(0b00000001);
+    Wire1.write(0b11000001 | (channelCount2 << 4) | CB1_ADC2_GAIN << 1);
+    Wire1.write(0b00000011 | (CB1_ADC2_RATE << 5));
+    Wire1.endTransmission();
+
+    sentReq2 = true;
+  }
+
+  if (sentReq2)
+  {
+    Wire1.requestFrom(0x49, 2);
+    int convStatus = (Wire1.read()>>7);
+    if (convStatus == 1)
+    {
+      Wire1.beginTransmission(0x49);
+      Wire1.write(0b00000000);
+      Wire1.endTransmission();
+
+      uint8_t valAddress = 4+channelCount2;
+      
+      Wire1.requestFrom(0x49, 2);
+      ADS1115value[valAddress]= Wire1.read()<<8;
+      ADS1115value[valAddress] |= Wire1.read();
+      if (ADS1115value[valAddress] > 32767)
+      {
+        ADS1115value[valAddress] = 0;
+      }
+      sentReq2 = false;
+
+      channelCount2 ++;
+
+      if (channelCount2 >= CB1_ADC2_CHANNELS)
+      {
+        channelCount2 = 0;
+      }
+    }
+  }
+  #endif
+}
 #endif
 
 

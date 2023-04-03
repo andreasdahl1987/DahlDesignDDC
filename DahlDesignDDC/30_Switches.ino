@@ -2,8 +2,14 @@
   //---------SWITCHES START HERE----------
   //--------------------------------------
 
-
-
+checkValue(ADC1);
+checkValue(ADC2);
+checkValue(ADC3);
+checkValue(ADC4);
+checkValue(ADC5);
+checkValue(ADC6);
+checkValue(ADC7);
+checkValue(ADC8);
   //--------------------------------------
   //---------SWITCHES END HERE------------
   //--------------------------------------

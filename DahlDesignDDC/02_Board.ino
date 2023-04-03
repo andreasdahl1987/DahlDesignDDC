@@ -41,7 +41,7 @@
 #define ROW6_ACTIVE 1
 
 //ROW8 setup
-#define DISABLE_ALERT_PINS 0  //Gives access to COL2 and COL3. Disables ALERT pins for the ADCs, making them heavier to run.
+#define DISABLE_ALERT_PINS 1  //Gives access to COL2 and COL3. Disables ALERT pins for the ADCs, making them heavier to run.
 #define DISABLE_ANALOG 0      //Gives access to COL4 - COL 7 by using A0-A3.
 #define DISABLE_LED_PIN 0     //Gives access to COL8 by using the LED pin.
 

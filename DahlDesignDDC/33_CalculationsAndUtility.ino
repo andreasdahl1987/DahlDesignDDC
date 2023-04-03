@@ -80,6 +80,15 @@ void checkValue(int pin)
     Serial.print(" reading: ");
     Serial.println(analogRead(pin));
   }
+  #if (USING_CB1 == 1 || USING_ADS1115 == 1)
+  else
+  {
+    Serial.print("ADC ");
+    Serial.print(String(pin+1-ADC_CORR));
+    Serial.print(" reading: ");
+    Serial.println(ADS1115value[pin-ADC_CORR]);
+  }
+  #endif
 }
 
 void refreshRate()
