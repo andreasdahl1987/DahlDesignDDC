@@ -19,7 +19,7 @@
 //---------DAHL DESIGN----------
 //------------------------------
 
-#define USING_CB1 1
+#define USING_CB1 0
 
 //ADC setup
 #define CB1_ADC1 1
