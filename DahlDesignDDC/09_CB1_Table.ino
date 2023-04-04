@@ -44,7 +44,7 @@ uint8_t analogButtonNumberIncMode[analogSwitchCount] =  //ANALOG BUTTONS 2
 
 //PINS FOR PULLUP
 int row5Pins [8] = {19,17,20,18,21,22,24,23};
-int row6Pins [8] = {14,15,12,13,10,11,9,3};
+int row6Pins [8] = {12,13,10,11,9,3,1,2};
 
 //ADC
 bool sentReq1 = false;

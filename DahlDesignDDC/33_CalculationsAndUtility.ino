@@ -93,8 +93,13 @@ void checkValue(int pin)
 
 void refreshRate()
 {
-  Serial.print("Refresh rate: ");
-  Serial.print(1000000/(micros()-counter));
-  Serial.println(" Hz");
-  counter = micros();
+  if(globalCounter == 100)
+  {
+    Serial.print("Refresh rate: ");
+    Serial.print(100000000/(micros()-globalTimer));
+    Serial.println(" Hz");
+    globalTimer = micros();
+    globalCounter = 0;
+  }
+
 }

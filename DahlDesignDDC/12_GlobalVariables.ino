@@ -2,7 +2,8 @@
 //--------OTHER VARIABLES-------
 //------------------------------
 
-long counter = 0;
+long globalTimer = 0;
+uint8_t globalCounter = 0;
 
 //Handbrake
 bool handbrake = false;

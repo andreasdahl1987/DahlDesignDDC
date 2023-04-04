@@ -36,4 +36,7 @@ void loop()
     PCA9555CB1(0x20, 8, 3);
     ADC1_CB1(0);
     ADC2_CB1(0);
+    CB1switchTable();
   #endif
+
+  globalCounter ++;

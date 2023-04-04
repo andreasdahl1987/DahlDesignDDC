@@ -19,13 +19,17 @@ if (ROW6_ACTIVE == 1)
   }
 }
 
+//ROW 8 COL 1
+
+  pinMode(0, INPUT_PULLUP);
+
 //PE interrupt pins
   pinMode(8, INPUT_PULLUP);
   pinMode(16, INPUT_PULLUP);
 
 //ADC alert pins
-  pinMode(2, INPUT_PULLUP);
-  pinMode(0, INPUT_PULLUP);
+  pinMode(14, INPUT_PULLUP);
+  pinMode(15, INPUT_PULLUP);
 
 //I2C setup
   Wire.setSDA(4);

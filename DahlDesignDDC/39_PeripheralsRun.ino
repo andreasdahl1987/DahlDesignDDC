@@ -354,6 +354,34 @@ void CB1switchTable()
       }
     }
   }
+
+  //ROW 8 COL 1
+  rawState[7][0] = !digitalRead(0);
+
+  //LED pin
+
+  if(DISABLE_LED_PIN == 1)
+  {
+    rawState[7][7] = !digitalRead(25);
+  }
+
+  //Analog pins
+
+  if(DISABLE_ANALOG == 1)
+  {
+    rawState[7][3] = !digitalRead(A0);
+    rawState[7][4] = !digitalRead(A1);
+    rawState[7][5] = !digitalRead(A2);
+    rawState[7][6] = !digitalRead(A3);
+  }
+
+  //ALERT pins
+
+  if (DISABLE_ALERT_PINS == 1)
+  {
+    rawState[7][1] = !digitalRead(14);
+    rawState[7][2] = !digitalRead(15);
+  }
   
 }
 
