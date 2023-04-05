@@ -44,6 +44,9 @@ void setup()
       CB1Setup();
       startI2C();
       CB1Alert();
+      oversamples.setBuffers(4,512);
+      oversamples.setFrequency(200000);
+      oversamples.begin();
     #else
     
       #if (USING_ADS1115 == 1)

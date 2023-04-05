@@ -19,22 +19,22 @@
 //---------DAHL DESIGN----------
 //------------------------------
 
-#define USING_CB1 0
+#define USING_CB1 1
 
 //ADC setup
-#define CB1_ADC1 1
+#define CB1_ADC1 0
 #define CB1_ADC1_CHANNELS 4
 #define CB1_ADC1_RATE 7
 #define CB1_ADC1_GAIN 1
 
-#define CB1_ADC2 1
+#define CB1_ADC2 0
 #define CB1_ADC2_CHANNELS 4
 #define CB1_ADC2_RATE 7
 #define CB1_ADC2_GAIN 1
 
 //Port expander setup
-#define CB1_PE1 1
-#define CB1_PE2 1
+#define CB1_PE1 0
+#define CB1_PE2 0
 
 //ROW5 and ROW6
 #define ROW5_ACTIVE 1
@@ -76,8 +76,10 @@ bool wire1Init = false;
 bool wire0Init = false;
 
 #if(USING_CB1 == 1)
+  #include <ADCInput.h>
+  ADCInput oversamples (A0, A1, A2, A3);
   bool ADS1115sentReq[2] = {false, false};
-  uint16_t ADS1115value[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+  long ADS1115value[12] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
   uint8_t ADS1115channelCounter[2] = {0,0};  
 #elif(ADS1115_CHIPS > 0)
   bool ADS1115sentReq[ADS1115_CHIPS];

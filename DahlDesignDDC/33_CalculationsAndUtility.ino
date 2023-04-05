@@ -101,5 +101,24 @@ void refreshRate()
     globalTimer = micros();
     globalCounter = 0;
   }
-
 }
+
+#if (USING_CB1 == 1)
+void CB1Oversampling()
+{
+  if(oversamples.available() == 1024)
+  {
+    for(int i = 0; i < 256; i++)
+    {
+      ADS1115value[8] += oversamples.read();
+      ADS1115value[9] += oversamples.read();
+      ADS1115value[10] += oversamples.read();
+      ADS1115value[11] += oversamples.read();
+    }
+    ADS1115value[8] /= 256;  
+    ADS1115value[9] /= 256;
+    ADS1115value[10] /= 256;
+    ADS1115value[11] /= 256;
+  } 
+}
+#endif
