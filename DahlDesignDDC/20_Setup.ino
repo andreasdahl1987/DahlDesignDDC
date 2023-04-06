@@ -44,9 +44,6 @@ void setup()
       CB1Setup();
       startI2C();
       CB1Alert();
-      oversamples.setBuffers(4,512);
-      oversamples.setFrequency(200000);
-      oversamples.begin();
     #else
     
       #if (USING_ADS1115 == 1)
@@ -146,6 +143,12 @@ void setup()
     #if (LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT > 0)
     setupLeds();
     LEDStartup();
+    #endif
+
+    #if(USING_CB1 == 1)
+      oversamples.setBuffers(4,512);
+      oversamples.setFrequency(200000);
+      oversamples.begin();
     #endif
 }
 #endif

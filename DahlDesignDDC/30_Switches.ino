@@ -9,6 +9,10 @@ modButton(1,1);
 
 dualClutch(ADC11,1,4500,0,ADC12, 2, 4500, 0, true);
 
+
+pushButton(7,1);
+
+
   //--------------------------------------
   //---------SWITCHES END HERE------------
   //--------------------------------------
@@ -26,5 +30,8 @@ dualClutch(ADC11,1,4500,0,ADC12, 2, 4500, 0, true);
 	#if (LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT > 0)
 		processCommands();
 	#endif
+  #if(USING_CB1 == 1)
+    //CB1Oversampling();
+  #endif
   }
 #endif

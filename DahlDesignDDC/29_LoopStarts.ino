@@ -45,7 +45,6 @@ void loop()
     ADC2_CB1(0);
     #endif
     CB1switchTable();
-    CB1Oversampling();
   #endif
   
   globalCounter ++;

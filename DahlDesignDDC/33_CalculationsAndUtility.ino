@@ -108,18 +108,21 @@ void CB1Oversampling()
 {
   if(oversamples.available() == 1024)
   {
+    long val1 = 0;
+    long val2 = 0;
+    long val3 = 0;
+    long val4 = 0;
     for(int i = 0; i < 256; i++)
     {
-      ADS1115value[8] += oversamples.read();
-      ADS1115value[9] += oversamples.read();
-      ADS1115value[10] += oversamples.read();
-      ADS1115value[11] += oversamples.read();
+      val1 += oversamples.read();
+      val2 += oversamples.read();
+      val3 += oversamples.read();
+      val4 += oversamples.read();
     }
-    //Produce 15-bit value
-    ADS1115value[8] /= 32;  
-    ADS1115value[9] /= 32;
-    ADS1115value[10] /= 32;
-    ADS1115value[11] /= 32;
+    ADS1115value[8] = val1 / 32;  
+    ADS1115value[9] = val2 / 32;
+    ADS1115value[10] = val3 / 32;
+    ADS1115value[11] = val4 / 32;
   } 
 }
 #endif
