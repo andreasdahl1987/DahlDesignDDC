@@ -93,10 +93,10 @@ void checkValue(int pin)
 
 void refreshRate()
 {
-  if(globalCounter == 100)
+  if(globalCounter == 10)
   {
     Serial.print("Refresh rate: ");
-    Serial.print(100000000/(micros()-globalTimer));
+    Serial.print(10000000/(micros()-globalTimer));
     Serial.println(" Hz");
     globalTimer = micros();
     globalCounter = 0;
@@ -115,10 +115,11 @@ void CB1Oversampling()
       ADS1115value[10] += oversamples.read();
       ADS1115value[11] += oversamples.read();
     }
-    ADS1115value[8] /= 256;  
-    ADS1115value[9] /= 256;
-    ADS1115value[10] /= 256;
-    ADS1115value[11] /= 256;
+    //Produce 15-bit value
+    ADS1115value[8] /= 32;  
+    ADS1115value[9] /= 32;
+    ADS1115value[10] /= 32;
+    ADS1115value[11] /= 32;
   } 
 }
 #endif

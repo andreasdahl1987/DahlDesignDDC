@@ -1,7 +1,7 @@
 
 void singleClutch(int analogPin, int switchNumber, int releasedValue, int fullyPressedValue)
 {
-    #if(USING_ADS1115 == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
 
     int pinValue;
     if (analogPin > 49)

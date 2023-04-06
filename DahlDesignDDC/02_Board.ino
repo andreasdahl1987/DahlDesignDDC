@@ -22,19 +22,19 @@
 #define USING_CB1 1
 
 //ADC setup
-#define CB1_ADC1 0
+#define CB1_ADC1 1
 #define CB1_ADC1_CHANNELS 4
 #define CB1_ADC1_RATE 7
 #define CB1_ADC1_GAIN 1
 
-#define CB1_ADC2 0
+#define CB1_ADC2 1
 #define CB1_ADC2_CHANNELS 4
 #define CB1_ADC2_RATE 7
 #define CB1_ADC2_GAIN 1
 
 //Port expander setup
-#define CB1_PE1 0
-#define CB1_PE2 0
+#define CB1_PE1 1
+#define CB1_PE2 1
 
 //ROW5 and ROW6
 #define ROW5_ACTIVE 1

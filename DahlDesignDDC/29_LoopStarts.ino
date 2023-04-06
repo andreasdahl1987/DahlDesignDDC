@@ -32,12 +32,20 @@ void loop()
   runningPresets();
 
   #if (USING_CB1 == 1)
+    #if (CB1_PE1 == 1)
     PCA9555CB1(0x21, 16, 1);
+    #endif
+    #if (CB1_PE2 == 1)
     PCA9555CB1(0x20, 8, 3);
+    #endif
+    #if (CB1_ADC1 == 1)
     ADC1_CB1(0);
+    #endif
+    #if (CB1_ADC2 == 2)
     ADC2_CB1(0);
+    #endif
     CB1switchTable();
-    //CB1Oversampling();
+    CB1Oversampling();
   #endif
-
+  
   globalCounter ++;
