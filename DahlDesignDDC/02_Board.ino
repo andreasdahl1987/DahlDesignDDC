@@ -6,7 +6,7 @@
 //-----------BOARD------------
 //----------------------------
 
-#define BOARDTYPE 2
+#define BOARDTYPE 0
 
 // 0 -> Atmel 32U4 based boards. (Leonardo, Pro Micro, Feather, Teensy 2.0, etc) SAM3X based boards. (Due)
 
@@ -16,7 +16,7 @@
 
 
 //------------------------------
-//---------DAHL DESIGN----------
+//-------DAHL DESIGN CB1--------
 //------------------------------
 
 #define USING_CB1 1
@@ -42,17 +42,17 @@
 
 //ROW8 setup
 #define DISABLE_ALERT_PINS 1  //Gives access to COL2 and COL3. Disables ALERT pins for the ADCs, making them heavier to run.
-#define DISABLE_ANALOG 0      //Gives access to COL4 - COL 7 by using A0-A3.
-#define DISABLE_LED_PIN 0     //Gives access to COL8 by using the LED pin.
+#define DISABLE_ANALOG 0      //Gives access to COL4 - COL 7 by using (and disabling analog function of) ADC9 - ADC12 pins. 
+#define DISABLE_LED_PIN 0     //Gives access to COL8, use the dedicated 8-8 pin. The LED pin will no longer work. 
 
 //------------------------------
 //---------I2C DEVICES----------
 //------------------------------
+
 #define SDA0PIN 0
 #define SCL0PIN 1
 #define SDA1PIN 2
 #define SCL1PIN 3
-
 
 //PORT EXPANDER PCA9555
 #define USING_PCA9555 0
