@@ -183,6 +183,7 @@ void processCommands() {
 	// Read data
 	if (Serial.available()) 
 	{
+		LEDlock = true;
 		LEDSerialDropout = globalClock;
 
 		char c = (char)Serial.read();
@@ -225,5 +226,7 @@ void processCommands() {
 			command = "";
 			messageend = 0;
 		}
+		delay(1); //Stability between cores
+		LEDlock = false;
 	}
 }

@@ -19,7 +19,10 @@ void loop()
       #if(BOARDTYPE == 0)
         processCommands();
       #endif
-    LEDTop();
+    if(BOARDTYPE == 0 || (BOARDTYPE == 2 && !LEDlock ))
+    {
+      LEDTop();
+    }
   #endif
 
   rotaryField = 0;
