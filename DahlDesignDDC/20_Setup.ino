@@ -40,6 +40,31 @@ void setup()
         shiftRegisterSetup();
     }
 
+    #if (USING_CB1 == 1)
+      CB1Setup();
+      startI2C();
+      CB1Alert();
+    #else
+    
+      #if (USING_ADS1115 == 1)
+        ADS1115Setup();
+      #endif
+      
+      #if (USING_PCA9555 == 1)
+        PCA9555Setup();
+      #endif
+      
+      #if (USING_ADS1115 == 1 || USING_PCA9555 == 1)
+      startI2C();
+      #endif
+
+      //I2C that required .begin first
+      #if (USING_ADS1115 == 1 && ADS1115_ALERT == 1)
+        ADS1115Alert();
+      #endif
+      
+    #endif
+
     //Filling some arrays
     for (int i = 0; i < rowCount; i++)
     {
@@ -75,6 +100,7 @@ void setup()
 
 
     //Ready the matrix
+    #if (USING_CB1 == 0)
     for (int i = 0; i < colCount; i++)
     { //  All pins pulled up unless told otherwise
         if (col[i] != 99)
@@ -101,7 +127,8 @@ void setup()
             pinMode(directPins[i], INPUT_PULLUP);
         }
     }
-
+    #endif
+    
     presets(0); //Start up in preset 1. 
 
     Joystick.begin(0); //Start joystick library magic
@@ -116,6 +143,12 @@ void setup()
     #if (LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT > 0)
     setupLeds();
     LEDStartup();
+    #endif
+
+    #if(USING_CB1 == 1)
+      oversamples.setBuffers(4,512);
+      oversamples.setFrequency(200000);
+      oversamples.begin();
     #endif
 }
 #endif

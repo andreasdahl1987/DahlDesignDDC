@@ -4,7 +4,24 @@ void dualClutch(int masterPin, int masterSwitchNumber, int masterReleasedValue, 
     //---Master paddle calculations----
     //--------------------------------
 
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+
+    int masterValue;
+    if (masterPin > 49)
+    {
+      masterValue = ADS1115value[masterPin - ADC_CORR];
+    }
+    else
+    {
+      masterValue = analogRead(masterPin);
+    }
+    
+    #else
+
     int masterValue = analogRead(masterPin);
+    
+    #endif
+
     int M = masterSwitchNumber - 1;
     float masterNormalized = 0;
     int FieldPlacement = 7;
@@ -58,7 +75,24 @@ void dualClutch(int masterPin, int masterSwitchNumber, int masterReleasedValue, 
     //---Slave paddle calculations----
     //--------------------------------
 
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+
+    int slaveValue;
+    if (slavePin > 49)
+    {
+      slaveValue = ADS1115value[slavePin - ADC_CORR];
+    }
+    else
+    {
+      slaveValue = analogRead(slavePin);
+    }
+    
+    #else
+
     int slaveValue = analogRead(slavePin);
+    
+    #endif
+    
     int S = slaveSwitchNumber - 1;
     float slaveNormalized = 0;
 

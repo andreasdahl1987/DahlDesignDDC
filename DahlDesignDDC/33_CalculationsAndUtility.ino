@@ -70,3 +70,59 @@ float curveFilter(int input, int releasedValue, int pressedValue, int curvePush,
 
     return Input;
 }
+
+void checkValue(int pin)
+{
+  if(pin < 50)
+  {
+    Serial.print("Pin ");
+    Serial.print(String(pin));
+    Serial.print(" reading: ");
+    Serial.println(analogRead(pin));
+  }
+  #if (USING_CB1 == 1 || USING_ADS1115 == 1)
+  else
+  {
+    Serial.print("ADC ");
+    Serial.print(String(pin+1-ADC_CORR));
+    Serial.print(" reading: ");
+    Serial.println(ADS1115value[pin-ADC_CORR]);
+  }
+  #endif
+}
+
+void refreshRate()
+{
+  if(globalCounter == 10)
+  {
+    Serial.print("Refresh rate: ");
+    Serial.print(10000000/(micros()-globalTimer));
+    Serial.println(" Hz");
+    globalTimer = micros();
+    globalCounter = 0;
+  }
+}
+
+#if (USING_CB1 == 1)
+void CB1Oversampling()
+{
+  if(oversamples.available() == 1024)
+  {
+    long val1 = 0;
+    long val2 = 0;
+    long val3 = 0;
+    long val4 = 0;
+    for(int i = 0; i < 256; i++)
+    {
+      val1 += oversamples.read();
+      val2 += oversamples.read();
+      val3 += oversamples.read();
+      val4 += oversamples.read();
+    }
+    ADS1115value[8] = val1 / 32;  
+    ADS1115value[9] = val2 / 32;
+    ADS1115value[10] = val3 / 32;
+    ADS1115value[11] = val4 / 32;
+  } 
+}
+#endif

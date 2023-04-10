@@ -12,7 +12,7 @@
 //----------------------------------------------------------------------------
 
 #define LED1COUNT 0
-#define LED1PIN 2  
+#define LED1PIN 2 
 #define LED1TYPE NEO_GRB + NEO_KHZ800
 #define LED1REVERSE 0
 #define LED1PRIVATE 0

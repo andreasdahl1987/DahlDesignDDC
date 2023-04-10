@@ -307,7 +307,6 @@ void rotaryAnalogSimple(int analogPin, int switchNumber, int pos1, int pos2, int
 
 void rotaryAnalog2Mode(int analogPin, int switchNumber, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
 {
-    int Pin = analogPin;
     int Pos1 = pos1;
     int Pos2 = pos2;
     int Pos3 = pos3;
@@ -331,7 +330,23 @@ void rotaryAnalog2Mode(int analogPin, int switchNumber, int fieldPlacement, int 
     int maxPos = 12;
 
 
-    int value = analogRead(Pin);
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+
+    int value;
+    if (analogPin > 49)
+    {
+      value = ADS1115value[analogPin - ADC_CORR];
+    }
+    else
+    {
+      value = analogRead(analogPin);
+    }
+    
+    #else
+
+    int value = analogRead(analogPin);
+    
+    #endif
 
     int positions[12] = { Pos1, Pos2, Pos3, Pos4, Pos5, Pos6, Pos7, Pos8, Pos9, Pos10, Pos11, Pos12 };
 
