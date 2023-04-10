@@ -19,7 +19,7 @@
 //-------DAHL DESIGN CB1--------
 //------------------------------
 
-#define USING_CB1 1
+#define USING_CB1 0
 
 //ADC setup
 #define CB1_ADC1 1
@@ -41,7 +41,7 @@
 #define ROW6_ACTIVE 1
 
 //ROW8 setup
-#define DISABLE_ALERT_PINS 1  //Gives access to COL2 and COL3. Disables ALERT pins for the ADCs, making them heavier to run.
+#define DISABLE_ALERT_PINS 0  //Gives access to COL2 and COL3. Disables ALERT pins for the ADCs, making them heavier to run.
 #define DISABLE_ANALOG 0      //Gives access to COL4 - COL 7 by using (and disabling analog function of) ADC9 - ADC12 pins. 
 #define DISABLE_LED_PIN 0     //Gives access to COL8, use the dedicated 8-8 pin. The LED pin will no longer work. 
 
