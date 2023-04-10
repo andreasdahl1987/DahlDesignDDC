@@ -23,7 +23,7 @@
 		processCommands();
 	#endif
   #if(USING_CB1 == 1)
-    //CB1Oversampling();
+  CB1Oversampling();
   #endif
   }
 #endif
