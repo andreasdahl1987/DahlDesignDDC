@@ -226,8 +226,8 @@ void processCommands() {
 			command = "";
 			messageend = 0;
 		}
-		#if (BOARDTYPE == 2 && USING_CB1 == 0)
-		delay(1); //Stability between cores on RP2040. The oversampling of ADCs on CB1 in it self will slow down the core enough to avoid using delay
+		#if (BOARDTYPE == 2)
+		delay(1); //Stability between cores on RP2040.
 		#endif
 		LEDlock = false;
 	}
