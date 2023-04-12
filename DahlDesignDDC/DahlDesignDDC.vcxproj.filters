@@ -15,49 +15,66 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="DahlDesignDDC.ino" />
     <None Include="src\arduino folders read me.txt">
       <Filter>Misc Files</Filter>
     </None>
-    <None Include="10_MatrixAndAnalog.ino" />
-    <None Include="11_Bitfields.ino" />
-    <None Include="12_GlobalVariables.ino" />
-    <None Include="13_SwitchVariables.ino" />
-    <None Include="20_Setup.ino" />
-    <None Include="30_Switches.ino" />
-    <None Include="40_Matrix.ino" />
-    <None Include="50_Pushbuttons.ino" />
-    <None Include="51_Toggle.ino" />
-    <None Include="52_FunctionButtons.ino" />
-    <None Include="60_Rotary4Bit.ino" />
-    <None Include="62_Rotary2Bit.ino" />
-    <None Include="64_RotaryAnalog.ino" />
-    <None Include="70_FunkyPush.ino" />
-    <None Include="71_FunkyDirections.ino" />
-    <None Include="74_FunkyRotary.ino" />
-    <None Include="80_SingleClutch.ino" />
-    <None Include="98_PresetSwitch.ino" />
-    <None Include="66_MultiComplex.ino" />
-    <None Include="63_RotaryPEC11.ino" />
-    <None Include="56_SW1BiteRotary.ino" />
-    <None Include="41_Presets.ino" />
-    <None Include="54_Shifter.ino" />
-    <None Include="55_QuickSwitch.ino" />
-    <None Include="57_SW1PresetRotary.ino" />
-    <None Include="93_BrakeMagic.ino" />
-    <None Include="94_ThrottleHold.ino" />
-    <None Include="42_MatrixInject.ino" />
-    <None Include="65_QuickRotary.ino" />
-    <None Include="31_RunningPresets.ino" />
-    <None Include="92_Handbrake.ino" />
-    <None Include="72_FunkyHat.ino" />
-    <None Include="85_BitePot.ino" />
-    <None Include="83_Brake.ino" />
-    <None Include="82_Throttle.ino" />
-    <None Include="39_Calculations.ino" />
-    <None Include="81_DualClutch.ino" />
-    <None Include="61_RotaryPulse.ino" />
-    <None Include="53_Launch.ino" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="01_ColorPalette.ino" />
+    <ClCompile Include="02_Board.ino" />
+    <ClCompile Include="04_USB.ino" />
+    <ClCompile Include="08_Joystick.ino" />
+    <ClCompile Include="10_TableAndAnalog.ino" />
+    <ClCompile Include="11_ShiftRegisters.ino" />
+    <ClCompile Include="12_GlobalVariables.ino" />
+    <ClCompile Include="13_SwitchVariables.ino" />
+    <ClCompile Include="14_LEDsetup.ino" />
+    <ClCompile Include="15_LEDFunctions.ino" />
+    <ClCompile Include="19_Bitfields.ino" />
+    <ClCompile Include="20_Setup.ino" />
+    <ClCompile Include="29_LoopStarts.ino" />
+    <ClCompile Include="30_Switches.ino" />
+    <ClCompile Include="31_RunningPresets.ino" />
+    <ClCompile Include="34_LEDStartup.ino" />
+    <ClCompile Include="35_LEDBottom.ino" />
+    <ClCompile Include="36_LEDTop.ino" />
+    <ClCompile Include="40_Matrix.ino" />
+    <ClCompile Include="32_Presets.ino" />
+    <ClCompile Include="42_Inject.ino" />
+    <ClCompile Include="50_Pushbuttons.ino" />
+    <ClCompile Include="51_Toggle.ino" />
+    <ClCompile Include="52_FunctionButtons.ino" />
+    <ClCompile Include="53_Launch.ino" />
+    <ClCompile Include="54_Shifter.ino" />
+    <ClCompile Include="55_QuickSwitch.ino" />
+    <ClCompile Include="57_SW1PresetRotary.ino" />
+    <ClCompile Include="60_Rotary4Bit.ino" />
+    <ClCompile Include="61_RotaryPulse.ino" />
+    <ClCompile Include="62_Rotary2Bit.ino" />
+    <ClCompile Include="63_RotaryPEC11.ino" />
+    <ClCompile Include="64_RotaryAnalog.ino" />
+    <ClCompile Include="65_QuickRotary.ino" />
+    <ClCompile Include="66_MultiComplex.ino" />
+    <ClCompile Include="56_SW1BiteRotary.ino" />
+    <ClCompile Include="70_FunkyPush.ino" />
+    <ClCompile Include="71_FunkyDirections.ino" />
+    <ClCompile Include="72_FunkyHat.ino" />
+    <ClCompile Include="74_FunkyRotary.ino" />
+    <ClCompile Include="80_SingleClutch.ino" />
+    <ClCompile Include="81_DualClutch.ino" />
+    <ClCompile Include="83_Brake.ino" />
+    <ClCompile Include="82_Throttle.ino" />
+    <ClCompile Include="85_BitePot.ino" />
+    <ClCompile Include="92_Handbrake.ino" />
+    <ClCompile Include="93_BrakeMagic.ino" />
+    <ClCompile Include="94_ThrottleHold.ino" />
+    <ClCompile Include="98_PresetSwitch.ino" />
+    <ClCompile Include="DahlDesignDDC.ino" />
+    <ClCompile Include="09_CB1_Table.ino" />
+    <ClCompile Include="33_CalculationsAndUtility.ino" />
+    <ClCompile Include="38_PeripheralsSetup.ino" />
+    <ClCompile Include="37_TriggersAndEditors.ino" />
+    <ClCompile Include="39_PeripheralsRun.ino" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.DahlDesignDDC.vsarduino.h">
