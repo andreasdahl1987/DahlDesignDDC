@@ -71,6 +71,11 @@ uint8_t ADS1115_chipAddress [] = {0x48};
 uint8_t ADS1115_alertPins [] = {8};
 #endif
 
+//EEPROM CAT24C512
+#define USING_CAT24C512 1
+#define CAT24C512_I2C_NUMBER 0
+#define CAT24C512_ADDRESS 0x50
+
 //VARIABLES
 bool wire1Init = false;
 bool wire0Init = false;
@@ -99,6 +104,6 @@ bool wire0Init = false;
   #include <DDCPI.h>
 #endif
 
-#if (USING_CB1 == 1 || USING_PCA9555 == 1 || USING_ADS1115 == 1)
+#if (USING_CB1 == 1 || USING_PCA9555 == 1 || USING_ADS1115 == 1 || USING_CAT24C512 == 1)
   #include <Wire.h>
 #endif

@@ -75,6 +75,8 @@
     <ClCompile Include="38_PeripheralsSetup.ino" />
     <ClCompile Include="37_TriggersAndEditors.ino" />
     <ClCompile Include="39_PeripheralsRun.ino" />
+    <ClCompile Include="44_EEPROMFunctions.ino" />
+    <ClCompile Include="03_EEPROM.ino" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.DahlDesignDDC.vsarduino.h">
