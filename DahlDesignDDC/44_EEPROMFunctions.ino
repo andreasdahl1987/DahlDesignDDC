@@ -43,8 +43,13 @@ uint16_t read16bitFromEEPROM(int page, int line)
 
     Wire.requestFrom(CAT24C512_ADDRESS, 2);
     value = Wire.read();
+    Serial.print(value);
+    Serial.print("    ");
     value = value << 8;
+    Serial.print(value);
+    Serial.print("    ");
     value |= Wire.read();
+    Serial.println(value);
 
     return value;
 #endif
