@@ -43,15 +43,39 @@ uint16_t read16bitFromEEPROM(int page, int line)
 
     Wire.requestFrom(CAT24C512_ADDRESS, 2);
     value = Wire.read();
-    Serial.print(value);
-    Serial.print("    ");
     value = value << 8;
-    Serial.print(value);
-    Serial.print("    ");
     value |= Wire.read();
-    Serial.println(value);
+
 
     return value;
+#endif
+}
+
+void EEPROMfirst()
+{
+#if (USING_CAT24C512 == 1)
+    uint8_t virgin = read16bitFromEEPROM(UTIL, UTIL_INIT);
+    if (virgin == 1)
+    {
+        write16bitToEEPROM(UTIL, UTIL_INIT, 0);
+        write16bitToEEPROM(PRESET, 0x00, 0);
+        write16bitToEEPROM(BITEPOINT, 0x00, 300);
+        write16bitToEEPROM(BITEPOINT, 0x01, 300);
+        write16bitToEEPROM(BITEPOINT, 0x02, 300);
+        write16bitToEEPROM(BITEPOINT, 0x03, 300);
+        write16bitToEEPROM(BITEPOINT, 0x04, 300);
+        write16bitToEEPROM(BITEPOINT, 0x05, 300);
+        write16bitToEEPROM(BITEPOINT, 0x06, 300);
+        write16bitToEEPROM(BITEPOINT, 0x07, 300);
+        write16bitToEEPROM(BITEPOINT, 0x08, 300);
+        write16bitToEEPROM(BITEPOINT, 0x09, 300);
+        write16bitToEEPROM(BITEPOINT, 0x0a, 300);
+        write16bitToEEPROM(BITEPOINT, 0x0b, 300);
+        write16bitToEEPROM(BITEPOINT, 0x0c, 300);
+        write16bitToEEPROM(BITEPOINT, 0x0d, 300);
+        write16bitToEEPROM(BITEPOINT, 0x0e, 300);
+        write16bitToEEPROM(BITEPOINT, 0x0f, 300);
+    }
 #endif
 }
 

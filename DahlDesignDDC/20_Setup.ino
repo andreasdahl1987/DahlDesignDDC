@@ -128,7 +128,7 @@ void setup()
         }
     }
     #endif
-    
+    EEPROMfirst();
     EEPROMinit(); //Fetch values from EEPROM
     presets(switchPreset); //Preset startup
 

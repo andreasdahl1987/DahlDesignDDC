@@ -46,7 +46,7 @@ bool launchButtonLatch = false;
 uint8_t first = 0;
 uint8_t second = 0;
 
-int8_t switchPreset = 0;
+uint8_t switchPreset = 0;
 bool bootPreset = true;
 
 //Clock and counter

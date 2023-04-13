@@ -5,7 +5,7 @@
 biteButton(3,1);
 rotary2Bite(3,2,false);
 
-
+Serial.println(switchPreset);
   //--------------------------------------
   //---------SWITCHES END HERE------------
   //--------------------------------------
