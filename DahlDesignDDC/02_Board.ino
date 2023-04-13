@@ -6,19 +6,20 @@
 //-----------BOARD MCU----------
 //------------------------------
 
-#define BOARDTYPE 0
+#define BOARDTYPE 2
 
 // 0 -> Atmel 32U4 based boards. (Leonardo, Pro Micro, Feather, Teensy 2.0, etc) SAM3X based boards. (Due)
 
 // 1 -> SAMD21 or SAMD51 based boards. (Arduino Zero and many more)
 
-// 2 -> RP2040 based boards. (Raspberry Pi Pico, Pico W, Pro Micro RP2040, and many more)
+// 2 -> RP2040 based boards. (Dahl Design CB1, Raspberry Pi Pico, Pico W, Pro Micro RP2040, and many more)
 
 
 //------------------------------
 //-------DAHL DESIGN CB1--------
 //------------------------------
 
+//Enable CB1 board
 #define USING_CB1 0
 
 //ADC setup

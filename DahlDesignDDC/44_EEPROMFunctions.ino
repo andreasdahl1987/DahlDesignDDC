@@ -49,3 +49,34 @@ uint16_t read16bitFromEEPROM(int page, int line)
     return value;
 #endif
 }
+
+void EEPROMinit()
+{
+#if (USING_CAT24C512 == 1)
+    oldPreset = read16bitFromEEPROM(PRESET, 0x00);
+    switchPreset = read16bitFromEEPROM(PRESET, 0x00);
+    oldBitePoint = read16bitFromEEPROM(BITEPOINT, switchPreset);
+    bitePoint = read16bitFromEEPROM(BITEPOINT, switchPreset);
+#endif
+}
+
+void EEPROMchanges()
+{
+#if (USING_CAT24C512 == 1)
+
+    //Bite point
+    if (pushState[biteButtonRow - 1][biteButtonCol - 1] == 0 && (biteButtonBit1 + biteButtonBit2 == 0) && oldBitePoint != bitePoint)
+    {
+        oldBitePoint = bitePoint;
+        write16bitToEEPROM(BITEPOINT, switchPreset<<1, bitePoint);
+    }
+
+    //Preset
+    if (oldPreset != switchPreset)
+    {
+        oldPreset = switchPreset;
+        write16bitToEEPROM(PRESET, 0x00, switchPreset);
+    }
+
+#endif
+}
