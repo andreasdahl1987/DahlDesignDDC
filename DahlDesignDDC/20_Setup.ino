@@ -128,10 +128,13 @@ void setup()
         }
     }
     #endif
+    
+    
     EEPROMfirst();
     EEPROMinit(); //Fetch values from EEPROM
     presets(switchPreset); //Preset startup
 
+    
     Joystick.begin(0); //Start joystick library magic
 
     Joystick.setZAxisRange(-32768, 32767); //Making bit fields 16 bit

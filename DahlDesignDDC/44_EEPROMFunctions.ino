@@ -1,7 +1,7 @@
 void write16bitToEEPROM(int page, int line, uint16_t value)
 {
 #if (USING_CAT24C512 == 1)
-    int16_t location = 0;
+    uint16_t location = 0;
     location |= (page << 7);
     location |= line;
 
@@ -25,7 +25,7 @@ uint16_t read16bitFromEEPROM(int page, int line)
 {
 #if (USING_CAT24C512 == 1)
 
-    int16_t location = 0;
+    uint16_t location = 0;
     location |= (page << 7);
     location |= line;
 
@@ -46,7 +46,6 @@ uint16_t read16bitFromEEPROM(int page, int line)
     value = value << 8;
     value |= Wire.read();
 
-
     return value;
 #endif
 }
@@ -60,21 +59,21 @@ void EEPROMfirst()
         write16bitToEEPROM(UTIL, UTIL_INIT, 0);
         write16bitToEEPROM(PRESET, 0x00, 0);
         write16bitToEEPROM(BITEPOINT, 0x00, 300);
-        write16bitToEEPROM(BITEPOINT, 0x01, 300);
         write16bitToEEPROM(BITEPOINT, 0x02, 300);
-        write16bitToEEPROM(BITEPOINT, 0x03, 300);
         write16bitToEEPROM(BITEPOINT, 0x04, 300);
-        write16bitToEEPROM(BITEPOINT, 0x05, 300);
         write16bitToEEPROM(BITEPOINT, 0x06, 300);
-        write16bitToEEPROM(BITEPOINT, 0x07, 300);
         write16bitToEEPROM(BITEPOINT, 0x08, 300);
-        write16bitToEEPROM(BITEPOINT, 0x09, 300);
         write16bitToEEPROM(BITEPOINT, 0x0a, 300);
-        write16bitToEEPROM(BITEPOINT, 0x0b, 300);
         write16bitToEEPROM(BITEPOINT, 0x0c, 300);
-        write16bitToEEPROM(BITEPOINT, 0x0d, 300);
         write16bitToEEPROM(BITEPOINT, 0x0e, 300);
-        write16bitToEEPROM(BITEPOINT, 0x0f, 300);
+        write16bitToEEPROM(BITEPOINT, 0x10, 300);
+        write16bitToEEPROM(BITEPOINT, 0x12, 300);
+        write16bitToEEPROM(BITEPOINT, 0x14, 300);
+        write16bitToEEPROM(BITEPOINT, 0x16, 300);
+        write16bitToEEPROM(BITEPOINT, 0x18, 300);
+        write16bitToEEPROM(BITEPOINT, 0x1a, 300);
+        write16bitToEEPROM(BITEPOINT, 0x1c, 300);
+        write16bitToEEPROM(BITEPOINT, 0x1e, 300);
     }
 #endif
 }
@@ -82,10 +81,10 @@ void EEPROMfirst()
 void EEPROMinit()
 {
 #if (USING_CAT24C512 == 1)
-    oldPreset = read16bitFromEEPROM(PRESET, 0x00);
     switchPreset = read16bitFromEEPROM(PRESET, 0x00);
-    oldBitePoint = read16bitFromEEPROM(BITEPOINT, switchPreset);
-    bitePoint = read16bitFromEEPROM(BITEPOINT, switchPreset);
+    oldPreset = switchPreset;
+    bitePoint = read16bitFromEEPROM(BITEPOINT, switchPreset<<1);
+    oldBitePoint = bitePoint;
 #endif
 }
 

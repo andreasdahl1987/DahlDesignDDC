@@ -1,11 +1,18 @@
   //--------------------------------------
   //---------SWITCHES START HERE----------
   //--------------------------------------
+checkValue(ADC1);
+checkValue(ADC2);
+checkValue(ADC3);
+checkValue(ADC4);
+checkValue(ADC5);
+checkValue(ADC6);
+checkValue(ADC7);
+checkValue(ADC8);
+  biteButton(3,3);
+  modButton(7,5);
+  preset2Bit(3,1,false);
 
-biteButton(3,1);
-rotary2Bite(3,2,false);
-
-Serial.println(switchPreset);
   //--------------------------------------
   //---------SWITCHES END HERE------------
   //--------------------------------------
