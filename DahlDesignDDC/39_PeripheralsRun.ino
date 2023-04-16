@@ -329,7 +329,7 @@ void CB1switchTable()
   {
     for (int i = 0; i<CB1_ADC1_CHANNELS; i++)
     {
-      if (ADS1115value[i] < 2)
+      if (ADS1115value[i] < GROUND_CALIBRATION)
       {
         rawState[6][i] = 1;
       }
@@ -344,7 +344,7 @@ void CB1switchTable()
   {
     for (int i = 4; i<4+CB1_ADC2_CHANNELS; i++)
     {
-      if (ADS1115value[i] < 2)
+      if (ADS1115value[i] < GROUND_CALIBRATION)
       {
         rawState[6][i] = 1;
       }

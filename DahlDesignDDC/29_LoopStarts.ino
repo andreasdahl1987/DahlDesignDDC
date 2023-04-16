@@ -47,7 +47,7 @@ void loop()
     #if (CB1_ADC1 == 1)
     ADC1_CB1(0);
     #endif
-    #if (CB1_ADC2 == 2)
+    #if (CB1_ADC2 == 1)
     ADC2_CB1(0);
     #endif
     CB1switchTable();

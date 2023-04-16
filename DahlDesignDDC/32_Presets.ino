@@ -25,13 +25,19 @@ void presets(int8_t presetNumber)
     //-----------GLOBAL VALUES----------------
     //----------------------------------------
 
-    //bitePoint = 300;
+    bitePoint = 300;
     brakeMagicValue = 50;
     throttleHoldValue = 1000;
     quickValue4 = 11;
     quickValue3 = 11;
     quickValue2 = 11;
     quickValue1 = 11;
+
+    //----------------------------------------
+    //-----------EEPROM UPDATES---------------
+    //----------------------------------------
+
+    EEPROMpresetChange();
 
     //----------------------------------------
     //---------INDIVIDUAL VALUES--------------

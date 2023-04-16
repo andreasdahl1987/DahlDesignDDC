@@ -105,6 +105,10 @@ void EEPROMchanges()
         oldPreset = switchPreset;
         write16bitToEEPROM(PRESET, 0x00, switchPreset);
     }
-
 #endif
+}
+
+void EEPROMpresetChange()
+{
+    bitePoint = read16bitFromEEPROM(BITEPOINT, switchPreset<<1);
 }

@@ -21,7 +21,6 @@ void singleClutch(int analogPin, int switchNumber, int releasedValue, int fullyP
     
     int N = switchNumber - 1;
     float normalized = 0;
-
     
     if (fullyPressedValue > releasedValue)
     {
