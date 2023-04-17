@@ -57,7 +57,7 @@
 //PORT EXPANDER PCA9555
 #define USING_PCA9555 0
 #define PCA9555_I2C_NUMBER 0
-uint8_t PCA9555interruptPins [] = {0};
+uint8_t PCA9555interruptPins [] = {99};
 
 //16-BIT ADC ADS1115
 #define USING_ADS1115 0
@@ -68,7 +68,7 @@ uint8_t ADS1115_chipAddress [] = {0x48};
 #define ADS1115_ALERT 0
 
 #if (ADS1115_ALERT == 1)
-uint8_t ADS1115_alertPins [] = {8};
+uint8_t ADS1115_alertPins [] = {99};
 #endif
 
 //VARIABLES
