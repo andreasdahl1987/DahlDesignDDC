@@ -1,6 +1,6 @@
-//-------------------------
-// ------- DEFINES & Vars
-//-------------------------
+//-----------------------------------
+// ------- DEFINES AND VARIABLES-----
+//-----------------------------------
 #include <DDCLEDGEN.h>
 
 #define PROTOCOLVERSION "SIMHUB_1.0"
@@ -24,18 +24,17 @@ Adafruit_NeoPixel LED4(LED4COUNT, LED4PIN, LED4TYPE);
 int messageend = 0;
 String command = "";
 
-/// <summary>
-/// Wait for data to be available and reads one byte.
-/// </summary>
-/// <returns></returns>
-int WaitAndReadOneByte() {
+
+int WaitAndReadOneByte() 
+{
 	while (!Serial.available()) {}
 	return Serial.read();
 }
 
 /// <summary>
 
-void setupLeds(){
+void setupLeds()
+{
 	#if(LED1COUNT > 0)
     LED1.begin(); 
 	#endif
@@ -51,7 +50,8 @@ void setupLeds(){
 }
 
 
-void readStrip() {
+void readStrip() 
+{
 	uint8_t r, g, b;
 
 	#if(LED1COUNT > 0 && LED1PRIVATE == 0)
@@ -109,7 +109,8 @@ void readStrip() {
 	#endif
 
 	#if(LED4COUNT > 0 && LED4PRIVATE == 0)
-	for (uint16_t i = 0; i < LED4COUNT; i++) {
+	for (uint16_t i = 0; i < LED4COUNT; i++) 
+	{
 		r = WaitAndReadOneByte();
 		g = WaitAndReadOneByte();
 		b = WaitAndReadOneByte();
@@ -144,9 +145,6 @@ void readLeds() {
 	}
 }
 
-/// <summary>
-/// Sends leds count to the serial port.
-/// </summary>
 void getLedsCount() 
 {
 	uint8_t ledTotal = LED1COUNT+LED2COUNT+LED3COUNT+LED4COUNT;
@@ -167,18 +165,15 @@ void getLedsCount()
 	Serial.println(ledTotal);
 }
 
-/// <summary>
-/// Sends the protocol version.
-/// </summary>
-void getProtocolVersion() {
+
+void getProtocolVersion() 
+{
 	Serial.println(PROTOCOLVERSION);
 }
 
 
-/// <summary>
-/// Read commands from serial port.
-/// </summary>
-void processCommands() {
+void processCommands() 
+{
 
 	// Read data
 	if (Serial.available()) 
