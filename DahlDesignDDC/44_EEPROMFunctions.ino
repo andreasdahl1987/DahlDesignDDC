@@ -47,11 +47,10 @@ uint16_t read16bitFromEEPROM(uint16_t location)
 void EEPROMfirst()
 {
 #if (USING_CAT24C512 == 1)
-    uint8_t virgin = read16bitFromEEPROM(UTIL, UTIL_INIT);
+    uint8_t virgin = read16bitFromEEPROM(UTIL);
     if (virgin == 1)
     {
         write16bitToEEPROM(UTIL, 0);
-        write16bitToEEPROM(PRESET, 0);
         for(int i = 0; i < 12; i++)
         {
             write16bitToEEPROM(BITEPOINT+(2 * i), 300);         
@@ -63,8 +62,6 @@ void EEPROMfirst()
 void EEPROMinit()
 {
 #if (USING_CAT24C512 == 1)
-    switchPreset = read16bitFromEEPROM(PRESET);
-    oldPreset = switchPreset;
     bitePoint = read16bitFromEEPROM(BITEPOINT+(switchPreset*2));
     oldBitePoint = bitePoint;
 #endif
@@ -81,12 +78,6 @@ void EEPROMchanges()
         write16bitToEEPROM(BITEPOINT+(switchPreset * 2), bitePoint);
     }
 
-    //Preset
-    if (oldPreset != switchPreset)
-    {
-        oldPreset = switchPreset;
-        write16bitToEEPROM(PRESET, switchPreset);
-    }
 #endif
 }
 
