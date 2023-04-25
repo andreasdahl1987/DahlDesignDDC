@@ -8,16 +8,10 @@
 
 //PAGE NUMBERS
 
-#define UTIL 0x00
+#define UTIL 0
+#define BITEPOINT 100
+#define PRESET 200
 
-#define BITEPOINT 0x01
-#define PRESET 0x02
-
-
-
-//LINE NUMBERS
-
-#define UTIL_INIT 0x00
 
 //Variables
 #if (USING_CAT24C512 == 1)
