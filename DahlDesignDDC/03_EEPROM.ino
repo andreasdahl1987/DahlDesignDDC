@@ -15,8 +15,7 @@
 #define BRAKESLOT 384
 #define THROTTLESLOT 512
 
-//Variables
-#if (USING_CAT24C512 == 1)
+#if (USING_CAT24C512 == 1 || USING_32U4EEPROM == 1)
 int oldBitePoint;
 int oldLED;
 int oldBrake;
