@@ -118,3 +118,8 @@ bool wire0Init = false;
 #if (USING_CB1 == 1 || USING_PCA9555 == 1 || USING_ADS1115 == 1 || USING_CAT24C512 == 1)
   #include <Wire.h>
 #endif
+
+#if (USING_32U4EEPROM == 1)
+{
+  #include <EEPROM.h>
+}
