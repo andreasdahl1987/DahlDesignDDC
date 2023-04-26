@@ -53,7 +53,10 @@ void EEPROMfirst()
         write16bitToEEPROM(UTIL, 0);
         for(int i = 0; i < 12; i++)
         {
-            write16bitToEEPROM(BITEPOINT+(2 * i), 300);         
+            write16bitToEEPROM(BITEPOINT+(2 * i), 300);
+            write16bitToEEPROM(LEDSLOT, 25);
+            write16bitToEEPROM(BRAKESLOT, 50);
+            write16bitToEEPROM(THROTTLESLOT, 1000);
         }
     }
 #endif
@@ -63,7 +66,14 @@ void EEPROMinit()
 {
 #if (USING_CAT24C512 == 1)
     bitePoint = read16bitFromEEPROM(BITEPOINT+(switchPreset*2));
+    LEDBrightness = read16bitFromEEPROM(LEDSLOT+(switchPreset*2));
+    brakeMagicValue = read16bitFromEEPROM(BRAKESLOT+(switchPreset*2));
+    throttleHoldValue = read16bitFromEEPROM(THROTTLESLOT+(switchPreset*2));
+    
     oldBitePoint = bitePoint;
+    oldLED = LEDBrightness;
+    oldBrake = brakeMagicValue;
+    oldThrottle = throttleHoldValue;
 #endif
 }
 
@@ -77,6 +87,21 @@ void EEPROMchanges()
         oldBitePoint = bitePoint;
         write16bitToEEPROM(BITEPOINT+(switchPreset * 2), bitePoint);
     }
+    if (oldLED != LEDBrightness)
+    {
+      oldLED = LEDBrightness;
+      write16bitToEEPROM(LEDSLOT+(switchPreset * 2), LEDBrightness);
+    }
+    if (oldBrake != brakeMagicValue)
+    {
+      oldBrake = brakeMagicValue;
+      write16bitToEEPROM(BRAKESLOT+(switchPreset * 2), brakeMagicValue);
+    }
+    if (oldThrottle != throttleHoldValue)
+    {
+      oldThrottle = throttleHoldValue;
+      write16bitToEEPROM(THROTTLESLOT+(switchPreset * 2), throttleHoldValue);
+    }    
 
 #endif
 }
@@ -84,4 +109,7 @@ void EEPROMchanges()
 void EEPROMpresetChange()
 {
     bitePoint = read16bitFromEEPROM(BITEPOINT + switchPreset * 2);
+    LEDBrightness = read16bitFromEEPROM(LEDSLOT + switchPreset * 2);
+    brakeMagicValue = read16bitFromEEPROM(BRAKESLOT + switchPreset * 2);
+    throttleHoldValue = read16bitFromEEPROM(THROTTLESLOT + switchPreset * 2);
 }

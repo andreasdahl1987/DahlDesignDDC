@@ -29,8 +29,23 @@ void rotaryAnalog(int analogPin, int switchNumber, int fieldPlacement, int hybri
 
     int maxPos = max(12, HyPos);
 
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
 
-    int value = analogRead(Pin);
+    int value;
+    if (analogPin > 49)
+    {
+      value = ADS1115value[analogPin - ADC_CORR];
+    }
+    else
+    {
+      value = analogRead(analogPin);
+    }
+    
+    #else
+
+    int value = analogRead(analogPin);
+    
+    #endif
 
     int positions[12] = { Pos1, Pos2, Pos3, Pos4, Pos5, Pos6, Pos7, Pos8, Pos9, Pos10, Pos11, Pos12 };
 
@@ -241,7 +256,23 @@ void rotaryAnalogSimple(int analogPin, int switchNumber, int pos1, int pos2, int
 
     int Number = analogButtonNumber[N];
 
-    int value = analogRead(Pin);
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+
+    int value;
+    if (analogPin > 49)
+    {
+      value = ADS1115value[analogPin - ADC_CORR];
+    }
+    else
+    {
+      value = analogRead(analogPin);
+    }
+    
+    #else
+
+    int value = analogRead(analogPin);
+    
+    #endif
 
     int positions[12] = { Pos1, Pos2, Pos3, Pos4, Pos5, Pos6, Pos7, Pos8, Pos9, Pos10, Pos11, Pos12 };
 
@@ -575,7 +606,23 @@ void DDSanalog(int analogPin, int switchNumber, int pos1, int pos2, int pos3, in
         Number = Number + 12;
     }
 
-    int value = analogRead(Pin);
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+
+    int value;
+    if (analogPin > 49)
+    {
+      value = ADS1115value[analogPin - ADC_CORR];
+    }
+    else
+    {
+      value = analogRead(analogPin);
+    }
+    
+    #else
+
+    int value = analogRead(analogPin);
+    
+    #endif
 
     int positions[12] = { Pos1, Pos2, Pos3, Pos4, Pos5, Pos6, Pos7, Pos8, Pos9, Pos10, Pos11, Pos12 };
 

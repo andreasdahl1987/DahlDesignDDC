@@ -14,6 +14,12 @@
 
 // 2 -> RP2040 based boards. (Dahl Design CB1, Raspberry Pi Pico, Pico W, Pro Micro RP2040, and many more)
 
+//------------------------------
+//-----------EEPROM-------------
+//------------------------------
+
+#define RESET_EEPROM 1
+#define USING_32U4EEPROM 0
 
 //------------------------------
 //-------DAHL DESIGN CB1--------

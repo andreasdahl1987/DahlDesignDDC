@@ -23,8 +23,23 @@ void quickRotary1bite(int analogPin, int switchNumber, int fieldPlacement, int p
 
     int maxPos = 12;
 
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
 
-    int value = analogRead(Pin);
+    int value;
+    if (analogPin > 49)
+    {
+      value = ADS1115value[analogPin - ADC_CORR];
+    }
+    else
+    {
+      value = analogRead(analogPin);
+    }
+    
+    #else
+
+    int value = analogRead(analogPin);
+    
+    #endif
 
     int positions[12] = { Pos1, Pos2, Pos3, Pos4, Pos5, Pos6, Pos7, Pos8, Pos9, Pos10, Pos11, Pos12 };
 
@@ -257,8 +272,23 @@ void quickRotary2(int analogPin, int switchNumber, int fieldPlacement, int pos1,
 
     int maxPos = 12;
 
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
 
-    int value = analogRead(Pin);
+    int value;
+    if (analogPin > 49)
+    {
+      value = ADS1115value[analogPin - ADC_CORR];
+    }
+    else
+    {
+      value = analogRead(analogPin);
+    }
+    
+    #else
+
+    int value = analogRead(analogPin);
+    
+    #endif
 
     int positions[12] = { Pos1, Pos2, Pos3, Pos4, Pos5, Pos6, Pos7, Pos8, Pos9, Pos10, Pos11, Pos12 };
 
@@ -408,8 +438,23 @@ void quickRotary3(int analogPin, int switchNumber, int fieldPlacement, int pos1,
 
     int maxPos = 12;
 
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
 
-    int value = analogRead(Pin);
+    int value;
+    if (analogPin > 49)
+    {
+      value = ADS1115value[analogPin - ADC_CORR];
+    }
+    else
+    {
+      value = analogRead(analogPin);
+    }
+    
+    #else
+
+    int value = analogRead(analogPin);
+    
+    #endif
 
     int positions[12] = { Pos1, Pos2, Pos3, Pos4, Pos5, Pos6, Pos7, Pos8, Pos9, Pos10, Pos11, Pos12 };
 
@@ -559,8 +604,23 @@ void quickRotary4(int analogPin, int switchNumber, int fieldPlacement, int pos1,
 
     int maxPos = 12;
 
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
 
-    int value = analogRead(Pin);
+    int value;
+    if (analogPin > 49)
+    {
+      value = ADS1115value[analogPin - ADC_CORR];
+    }
+    else
+    {
+      value = analogRead(analogPin);
+    }
+    
+    #else
+
+    int value = analogRead(analogPin);
+    
+    #endif
 
     int positions[12] = { Pos1, Pos2, Pos3, Pos4, Pos5, Pos6, Pos7, Pos8, Pos9, Pos10, Pos11, Pos12 };
 

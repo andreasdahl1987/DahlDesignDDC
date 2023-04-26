@@ -75,7 +75,7 @@ unsigned long globalClock;
 
 //LED setup
 bool LEDlock = false;
-int8_t LEDBrightness = 100;
+int8_t LEDBrightness = 25;
 long LEDSerialDropout = 0;
 #define DROPOUTTIMER 1000
 #define SHCOOLDOWN 4
