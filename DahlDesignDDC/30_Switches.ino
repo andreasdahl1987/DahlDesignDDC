@@ -2,11 +2,16 @@
   //---------SWITCHES START HERE----------
   //--------------------------------------
 
-  biteButton(7,5);
-  modButton(7,4);
+  launchButton(7,3,1);
+  biteButton(7,4);
+  modButton(3,5);
+  toggleP(3,6);
   preset2Bit(3,1,false);
-  DDSfunky(7,1,2);
+  funkyRotary(7,1,2, false);
 
+  singleClutch(ADC7,1,11550,6850);
+  rotaryAnalogSimple(ADC10,2, 490, 3450,6300, 9270, 12200, 15000, 18000, 20900, 23900, 26800,29700,32600,false);
+  rotaryAnalogSimple(ADC11,3, 490, 3450,6300, 9270, 12200, 15000, 18000, 20900, 23900, 26800,29700,32600,false);
 
   //--------------------------------------
   //---------SWITCHES END HERE------------

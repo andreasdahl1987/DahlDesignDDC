@@ -14,10 +14,12 @@
 #define LEDSLOT 256
 #define BRAKESLOT 384
 #define THROTTLESLOT 512
+#define PRESETSLOT 640
 
 #if (USING_CAT24C512 == 1 || USING_32U4EEPROM == 1)
 int oldBitePoint;
 int oldLED;
 int oldBrake;
 int oldThrottle;
+int oldPreset;
 #endif

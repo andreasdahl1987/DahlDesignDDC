@@ -227,7 +227,7 @@ void processCommands() {
 			messageend = 0;
 		}
 		#if (BOARDTYPE == 2)
-		delay(1); //Stability between cores on RP2040.
+		delayMicroseconds(100); //Stability between cores on RP2040.
 		#endif
 		LEDlock = false;
 	}

@@ -18,7 +18,7 @@
 //-----------EEPROM-------------
 //------------------------------
 
-#define RESET_EEPROM 1
+#define RESET_EEPROM 0
 #define USING_32U4EEPROM 0
 
 //------------------------------
@@ -123,3 +123,4 @@ bool wire0Init = false;
 {
   #include <EEPROM.h>
 }
+#endif

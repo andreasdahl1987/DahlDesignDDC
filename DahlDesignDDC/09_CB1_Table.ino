@@ -14,7 +14,7 @@ uint8_t buttonNumber[rowCount][colCount] =
 
   { 8, 9, 10, 11, 12, 13, 14, 15 },       //ROW 2, COLUMN 1-8
 
-  { 16, 17, 18, 19, 20, 21, 22, 23 },     //ROW 3, COLUMN 1-8
+  { 16, 17, 18, 19, 24, 25, 22, 23 },     //ROW 3, COLUMN 1-8
 
   { 24, 25, 26, 27, 28, 29, 30, 31 },     //ROW 4, COLUMN 1-8
 
@@ -36,7 +36,7 @@ uint8_t buttonNumber[rowCount][colCount] =
 #define analogSwitchCount 12
 
 uint8_t analogButtonNumber[analogSwitchCount] =         //ANALOG BUTTONS 1
-{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+{ 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
 uint8_t analogButtonNumberIncMode[analogSwitchCount] =  //ANALOG BUTTONS 2
 { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
