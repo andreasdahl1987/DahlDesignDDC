@@ -809,8 +809,9 @@ void biteLED2 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t bi
  
 }
 
-void rotaryLED2 (uint8_t switchNumber, uint8_t startLED, uint8_t positions, uint32_t color, uint8_t brightness, uint8_t offset, bool reverse)
+void rotaryLED2 (uint8_t switchNumber, uint8_t startLED, uint8_t positions, uint32_t color, uint8_t brightness, uint8_t offset, bool reverse, uint32_t backgroundColor = 0x000000, uint8_t backgroundBrightness = 25)
 {
+  //Position
   int R = (color & 0xFF0000) >> 16;
   R = R * brightness / 100;
   R = R * LEDBrightness / 100;
@@ -822,6 +823,19 @@ void rotaryLED2 (uint8_t switchNumber, uint8_t startLED, uint8_t positions, uint
   int B = color & 0x0000FF;
   B = B * brightness / 100;
   B = B * LEDBrightness / 100;
+
+  //Background
+  int bR = (backgroundColor & 0xFF0000) >> 16;
+  bR = bR * backgroundBrightness / 100;
+  bR = bR * LEDBrightness / 100;
+
+  int bG = (backgroundColor & 0x00FF00) >> 8;
+  bG = bG * backgroundBrightness / 100;
+  bG = bG * LEDBrightness / 100;
+
+  int bB = backgroundColor & 0x0000FF;
+  bB = bB * backgroundBrightness / 100;
+  bB = bB * LEDBrightness / 100;
 
   uint8_t reference = analogLastCounter[switchNumber-1] + offset;
   if (reference > positions - 1)
@@ -841,7 +855,7 @@ void rotaryLED2 (uint8_t switchNumber, uint8_t startLED, uint8_t positions, uint
     }
     else
     {
-      LED2.setPixelColor(i, 0, 0, 0);
+      LED2.setPixelColor(i, bR, bG, bB);
     }
   }
 }
@@ -1227,8 +1241,9 @@ void biteLED3 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t bi
  
 }
 
-void rotaryLED3 (uint8_t switchNumber, uint8_t startLED, uint8_t positions, uint32_t color, uint8_t brightness, uint8_t offset, bool reverse)
+void rotaryLED3 (uint8_t switchNumber, uint8_t startLED, uint8_t positions, uint32_t color, uint8_t brightness, uint8_t offset, bool reverse, uint32_t backgroundColor = 0x000000, uint8_t backgroundBrightness = 25)
 {
+  //Position
   int R = (color & 0xFF0000) >> 16;
   R = R * brightness / 100;
   R = R * LEDBrightness / 100;
@@ -1240,6 +1255,19 @@ void rotaryLED3 (uint8_t switchNumber, uint8_t startLED, uint8_t positions, uint
   int B = color & 0x0000FF;
   B = B * brightness / 100;
   B = B * LEDBrightness / 100;
+
+  //Background
+  int bR = (backgroundColor & 0xFF0000) >> 16;
+  bR = bR * backgroundBrightness / 100;
+  bR = bR * LEDBrightness / 100;
+
+  int bG = (backgroundColor & 0x00FF00) >> 8;
+  bG = bG * backgroundBrightness / 100;
+  bG = bG * LEDBrightness / 100;
+
+  int bB = backgroundColor & 0x0000FF;
+  bB = bB * backgroundBrightness / 100;
+  bB = bB * LEDBrightness / 100;
 
   uint8_t reference = analogLastCounter[switchNumber-1] + offset;
   if (reference > positions - 1)
@@ -1259,7 +1287,7 @@ void rotaryLED3 (uint8_t switchNumber, uint8_t startLED, uint8_t positions, uint
     }
     else
     {
-      LED3.setPixelColor(i, 0, 0, 0);
+      LED3.setPixelColor(i, bR, bG, bB);
     }
   }
 }
@@ -1645,8 +1673,9 @@ void biteLED4 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t bi
  
 }
 
-void rotaryLED4 (uint8_t switchNumber, uint8_t startLED, uint8_t positions, uint32_t color, uint8_t brightness, uint8_t offset, bool reverse)
+void rotaryLED4 (uint8_t switchNumber, uint8_t startLED, uint8_t positions, uint32_t color, uint8_t brightness, uint8_t offset, bool reverse, uint32_t backgroundColor = 0x000000, uint8_t backgroundBrightness = 25)
 {
+  //Position
   int R = (color & 0xFF0000) >> 16;
   R = R * brightness / 100;
   R = R * LEDBrightness / 100;
@@ -1658,6 +1687,19 @@ void rotaryLED4 (uint8_t switchNumber, uint8_t startLED, uint8_t positions, uint
   int B = color & 0x0000FF;
   B = B * brightness / 100;
   B = B * LEDBrightness / 100;
+
+  //Background
+  int bR = (backgroundColor & 0xFF0000) >> 16;
+  bR = bR * backgroundBrightness / 100;
+  bR = bR * LEDBrightness / 100;
+
+  int bG = (backgroundColor & 0x00FF00) >> 8;
+  bG = bG * backgroundBrightness / 100;
+  bG = bG * LEDBrightness / 100;
+
+  int bB = backgroundColor & 0x0000FF;
+  bB = bB * backgroundBrightness / 100;
+  bB = bB * LEDBrightness / 100;
 
   uint8_t reference = analogLastCounter[switchNumber-1] + offset;
   if (reference > positions - 1)
@@ -1677,7 +1719,7 @@ void rotaryLED4 (uint8_t switchNumber, uint8_t startLED, uint8_t positions, uint
     }
     else
     {
-      LED4.setPixelColor(i, 0, 0, 0);
+      LED4.setPixelColor(i, bR, bG, bB);
     }
   }
 }
