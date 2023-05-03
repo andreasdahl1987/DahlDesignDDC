@@ -150,8 +150,8 @@ void setup()
     #endif
 
     #if(USING_CB1 == 1)
-      oversamples.setBuffers(4,512);
-      oversamples.setFrequency(200000);
+      oversamples.setBuffers(4,2048);
+      oversamples.setFrequency(400000);
       oversamples.begin();
     #endif
 }
