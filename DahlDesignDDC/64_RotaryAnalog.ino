@@ -336,6 +336,88 @@ void rotaryAnalogSimple(int analogPin, int switchNumber, int pos1, int pos2, int
     }
 }
 
+void rotaryMute(int analogPin, int switchNumber, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
+{
+    int Pin = analogPin;
+    int Pos1 = pos1;
+    int Pos2 = pos2;
+    int Pos3 = pos3;
+    int Pos4 = pos4;
+    int Pos5 = pos5;
+    int Pos6 = pos6;
+    int Pos7 = pos7;
+    int Pos8 = pos8;
+    int Pos9 = pos9;
+    int Pos10 = pos10;
+    int Pos11 = pos11;
+    int Pos12 = pos12;
+
+    bool Reverse = reverse;
+
+    int N = switchNumber - 1;
+
+    int Number = analogButtonNumber[N];
+
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+
+    int value;
+    if (analogPin > 49)
+    {
+      value = ADS1115value[analogPin - ADC_CORR];
+    }
+    else
+    {
+      value = analogRead(analogPin);
+    }
+    
+    #else
+
+    int value = analogRead(analogPin);
+    
+    #endif
+
+    int positions[12] = { Pos1, Pos2, Pos3, Pos4, Pos5, Pos6, Pos7, Pos8, Pos9, Pos10, Pos11, Pos12 };
+
+    int differ = 0;
+    int result = 0;
+    for (int i = 0; i < 12; i++)
+    {
+        if (i == 0 || abs(positions[i] - value) < differ)
+        {
+            result++;
+            differ = abs(positions[i] - value);
+        }
+    }
+
+    result--;
+
+    if (Reverse)
+    {
+        result = 11 - result;
+    }
+
+    //Short debouncer on switch rotation
+
+    if (analogLastCounter[N] != result)
+    {
+        if (globalClock - analogTimer1[N] > analogPulse)
+        {
+            analogTimer1[N] = globalClock;
+        }
+        else if (globalClock - analogTimer1[N] > analogWait)
+        {
+          //Engage encoder pulse timer
+          analogTimer2[N] = globalClock;
+
+          //Update difference, storing the value in pushState on pin 2
+          analogTempState[N] = result - analogLastCounter[N];
+
+          //Give new value to pushState
+          analogLastCounter[N] = result;
+        }
+    }
+}
+
 void rotaryAnalog2Mode(int analogPin, int switchNumber, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
 {
     int Pos1 = pos1;

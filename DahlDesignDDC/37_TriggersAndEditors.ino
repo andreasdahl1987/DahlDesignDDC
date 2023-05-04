@@ -37,9 +37,9 @@
     return pushState[modButtonRow-1][modButtonCol-1];
  }
 
- bool rotaryPosition(int switchNumber, int switchPositioin)
+ bool rotaryPosition(int switchNumber, int switchPosition)
  {
-    return analogLastCounter[switchNumber-1] + 1 == switchNumber;
+    return analogLastCounter[switchNumber-1] + 1 == switchPosition;
  }
 
 

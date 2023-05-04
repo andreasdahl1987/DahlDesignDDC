@@ -68,3 +68,8 @@ void analogInjectSingle(int8_t pin, int8_t row, int8_t column, int startValue, i
     }
   }
 }
+
+void rotaryInject(int8_t switchNumber, int8_t switchPosition, int8_t row, int8_t column)
+{
+    rawState[row-1][column-1] = (analogLastCounter[switchNumber-1] + 1 == switchPosition);
+}
