@@ -197,15 +197,23 @@ void ADS1115Setup()
 #endif
 
 
-#if (USING_CB1 == 1 || USING_PCA9555 == 1 || USING_ADS1115 == 1)
+#if (USING_CB1 == 1 || USING_PCA9555 == 1 || USING_ADS1115 == 1 || USING_CAT24C512 == 1)
 void startI2C()
 {
 #if(BOARDTYPE == 2)
+  if (USING_CAT24C512 == 1 && CAT24C512_I2C_NUMBER == 1) //Start up is using external EEPROM
+  {
+     wire1Init = true;
+  }
   if (wire1Init)
   {
     Wire1.begin();
   }
 #endif
+  if (USING_CAT24C512 == 1 && CAT24C512_I2C_NUMBER == 0) //Start up is using external EEPROM
+  {
+     wire0Init = true;
+  }
   if (wire0Init)
   {
     Wire.begin();

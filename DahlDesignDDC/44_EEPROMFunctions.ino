@@ -1,12 +1,11 @@
 void write16bitToEEPROM(uint16_t location, uint16_t value)
 {
-#if (USING_CAT24C512 == 1 || USING_CB1 == 1 || USING_32U4EEPROM == 1)
+#if ((USING_CAT24C512 == 1 && CAT24C512_I2C_NUMBER == 0) || USING_CB1 == 1 || USING_32U4EEPROM == 1)
 
     uint8_t reg1 = location >> 8;
     uint8_t reg2 = location & 0xff;
 
     Wire.beginTransmission(CAT24C512_ADDRESS);
-    
     delayMicroseconds(200);
     
     Wire.write(reg1);
@@ -17,26 +16,40 @@ void write16bitToEEPROM(uint16_t location, uint16_t value)
     Wire.write(firstByte);
     Wire.write(lastByte);
     Wire.endTransmission();
-
     delayMicroseconds(200);
     
+#elif (USING_CAT24C512 == 1 && CAT24C512_I2C_NUMBER == 1)
+  
+    uint8_t reg1 = location >> 8;
+    uint8_t reg2 = location & 0xff;
+
+    Wire1.beginTransmission(CAT24C512_ADDRESS);
+    delayMicroseconds(200);
+    
+    Wire1.write(reg1);
+    Wire1.write(reg2); 
+
+    uint8_t firstByte = value >> 8;
+    uint8_t lastByte = value & 0xff;
+    Wire1.write(firstByte);
+    Wire1.write(lastByte);
+    Wire1.endTransmission();
+    delayMicroseconds(200);   
 #endif
  }
 
 uint16_t read16bitFromEEPROM(uint16_t location)
 {
-#if (USING_CAT24C512 == 1 || USING_CB1 == 1 || USING_32U4EEPROM == 1)
+#if ((USING_CAT24C512 == 1 && CAT24C512_I2C_NUMBER == 0) || USING_CB1 == 1 || USING_32U4EEPROM == 1)
 
     uint8_t reg1 = location >> 8;
     uint8_t reg2 = location & 0xff;
 
     Wire.beginTransmission(CAT24C512_ADDRESS);
-
     delayMicroseconds(200);
     
     Wire.write(reg1);
     Wire.write(reg2);
-
     Wire.endTransmission();
 
     uint16_t value = 0;
@@ -45,10 +58,32 @@ uint16_t read16bitFromEEPROM(uint16_t location)
     value = Wire.read();
     value = value << 8;
     value |= Wire.read();
-
     delayMicroseconds(200);
     
     return value;
+
+#elif (USING_CAT24C512 == 1 && CAT24C512_I2C_NUMBER == 1)
+
+    uint8_t reg1 = location >> 8;
+    uint8_t reg2 = location & 0xff;
+
+    Wire1.beginTransmission(CAT24C512_ADDRESS);
+    delayMicroseconds(200);
+    
+    Wire1.write(reg1);
+    Wire1.write(reg2);
+    Wire1.endTransmission();
+
+    uint16_t value = 0;
+
+    Wire1.requestFrom(CAT24C512_ADDRESS, 2);
+    value = Wire1.read();
+    value = value << 8;
+    value |= Wire1.read();
+    delayMicroseconds(200);
+    
+    return value;
+
 #endif
 }
 
