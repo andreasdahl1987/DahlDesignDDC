@@ -14,7 +14,7 @@ uint8_t buttonNumber[rowCount][colCount] =
 
   { 8, 9, 10, 11, 12, 13, 14, 15 },       //ROW 2, COLUMN 1-8
 
-  { 16, 17, 18, 19, 24, 25, 22, 23 },     //ROW 3, COLUMN 1-8
+  { 16, 17, 18, 19, 20, 21, 22, 23 },     //ROW 3, COLUMN 1-8
 
   { 24, 25, 26, 27, 28, 29, 30, 31 },     //ROW 4, COLUMN 1-8
 
