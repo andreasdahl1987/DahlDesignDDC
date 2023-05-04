@@ -16,7 +16,7 @@
 #define THROTTLESLOT 512
 #define PRESETSLOT 640
 
-#if (USING_CAT24C512 == 1 || USING_32U4EEPROM == 1)
+#if (USING_CAT24C512 == 1 || USING_32U4EEPROM == 1 || USING_CB1 == 1)
 int oldBitePoint;
 int oldLED;
 int oldBrake;
