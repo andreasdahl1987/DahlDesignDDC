@@ -2,8 +2,24 @@ void bitePot(int analogPin, int switchNumber, int startValue, int endValue)
 {
     Joystick.setRyAxisRange(0, 1000);
 
-    int inputPin = analogPin;
-    int pinValue = analogRead(inputPin);
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+
+    int pinValue;
+    if (analogPin > 49)
+    {
+      pinValue = ADS1115value[analogPin - ADC_CORR];
+    }
+    else
+    {
+      pinValue = analogRead(analogPin);
+    }
+    
+    #else
+
+    int pinValue = analogRead(analogPin);
+    
+    #endif
+    
     int N = switchNumber - 1;
     float normalized = 0;
 
@@ -62,9 +78,25 @@ void bitePot(int analogPin, int switchNumber, int startValue, int endValue)
 void filteredBitePot(int analogPin, int8_t switchNumber, int startValue, int endValue, int curvePush, float expFactor)
 {
     Joystick.setRyAxisRange(0, 1000);
+    
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
 
-    int inputPin = analogPin;
-    int raw = analogRead(inputPin);
+    int raw;
+    if (analogPin > 49)
+    {
+      raw = ADS1115value[analogPin - ADC_CORR];
+    }
+    else
+    {
+      raw = analogRead(analogPin);
+    }
+    
+    #else
+
+    int raw = analogRead(analogPin);
+    
+    #endif
+    
     int N = switchNumber - 1;
     float normalized = 0;
     float EndValue = curveFilter(endValue, startValue, endValue, curvePush, expFactor);

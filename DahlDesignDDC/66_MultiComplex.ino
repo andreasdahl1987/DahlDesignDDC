@@ -23,7 +23,23 @@ void multiFunction2Bit24(int analogPin, int switchNumber, int row, int column, b
 
     //READ POSITION OF 12-POS ANALOG SWITCH
 
-    int value = analogRead(Pin);
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+
+    int value;
+    if (analogPin > 49)
+    {
+      value = ADS1115value[analogPin - ADC_CORR];
+    }
+    else
+    {
+      value = analogRead(analogPin);
+    }
+    
+    #else
+
+    int value = analogRead(analogPin);
+    
+    #endif
 
     int positions[12] = { Pos1, Pos2, Pos3, Pos4, Pos5, Pos6, Pos7, Pos8, Pos9, Pos10, Pos11, Pos12 };
 
@@ -154,7 +170,23 @@ void multiFunction2Bit36(int analogPin, int switchNumber, int row, int column, b
 
     //READ POSITION OF 12-POS ANALOG SWITCH
 
-    int value = analogRead(Pin);
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+
+    int value;
+    if (analogPin > 49)
+    {
+      value = ADS1115value[analogPin - ADC_CORR];
+    }
+    else
+    {
+      value = analogRead(analogPin);
+    }
+    
+    #else
+
+    int value = analogRead(analogPin);
+    
+    #endif
 
     int positions[12] = { Pos1, Pos2, Pos3, Pos4, Pos5, Pos6, Pos7, Pos8, Pos9, Pos10, Pos11, Pos12 };
 
@@ -301,7 +333,23 @@ void multiFunction2Button24(int analogPin, int switchNumber, int rowButton1, int
 
     //READ POSITION OF 12-POS ANALOG SWITCH
 
-    int value = analogRead(Pin);
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+
+    int value;
+    if (analogPin > 49)
+    {
+      value = ADS1115value[analogPin - ADC_CORR];
+    }
+    else
+    {
+      value = analogRead(analogPin);
+    }
+    
+    #else
+
+    int value = analogRead(analogPin);
+    
+    #endif
 
     int positions[12] = { Pos1, Pos2, Pos3, Pos4, Pos5, Pos6, Pos7, Pos8, Pos9, Pos10, Pos11, Pos12 };
 
@@ -387,7 +435,23 @@ void multiFunction2Button36(int analogPin, int switchNumber, int rowButton1, int
 
     //READ POSITION OF 12-POS ANALOG SWITCH
 
-    int value = analogRead(Pin);
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+
+    int value;
+    if (analogPin > 49)
+    {
+      value = ADS1115value[analogPin - ADC_CORR];
+    }
+    else
+    {
+      value = analogRead(analogPin);
+    }
+    
+    #else
+
+    int value = analogRead(analogPin);
+    
+    #endif
 
     int positions[12] = { Pos1, Pos2, Pos3, Pos4, Pos5, Pos6, Pos7, Pos8, Pos9, Pos10, Pos11, Pos12 };
 

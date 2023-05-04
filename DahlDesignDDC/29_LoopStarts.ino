@@ -13,6 +13,7 @@ void loop()
   //-----ESSENTIALS----------
   //-------------------------
   globalClock = millis();
+  globalCounter++; //Counter for refreshRate()
   
   #if (LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT > 0)
     LEDBottom();
@@ -28,11 +29,13 @@ void loop()
   rotaryField = 0;
   buttonField = 0;
   
-  shiftRegisterScan();
+  EEPROMchanges(); //Look for changes to write to EEPROM
 
-  matrix();
+  shiftRegisterScan(); //Scan shift registers if preset
 
-  runningPresets();
+  matrix(); //Scan matrix wired switches
+
+  runningPresets(); //Presets in the loop
 
   #if (USING_CB1 == 1)
     #if (CB1_PE1 == 1)
@@ -44,10 +47,10 @@ void loop()
     #if (CB1_ADC1 == 1)
     ADC1_CB1(0);
     #endif
-    #if (CB1_ADC2 == 2)
+    #if (CB1_ADC2 == 1)
     ADC2_CB1(0);
     #endif
     CB1switchTable();
   #endif
   
-  globalCounter ++;
+ 

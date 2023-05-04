@@ -46,7 +46,7 @@ bool launchButtonLatch = false;
 uint8_t first = 0;
 uint8_t second = 0;
 
-int8_t switchPreset = 0;
+uint8_t switchPreset = 0;
 bool bootPreset = true;
 
 //Clock and counter
@@ -75,7 +75,7 @@ unsigned long globalClock;
 
 //LED setup
 bool LEDlock = false;
-int8_t LEDBrightness = 100;
+int8_t LEDBrightness = 25;
 long LEDSerialDropout = 0;
 #define DROPOUTTIMER 1000
 #define SHCOOLDOWN 4

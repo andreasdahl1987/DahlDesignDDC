@@ -12,13 +12,20 @@
 
 // 1 -> SAMD21 or SAMD51 based boards. (Arduino Zero and many more)
 
-// 2 -> RP2040 based boards. (Raspberry Pi Pico, Pico W, Pro Micro RP2040, and many more)
+// 2 -> RP2040 based boards. (Dahl Design CB1, Raspberry Pi Pico, Pico W, Pro Micro RP2040, and many more)
 
+//------------------------------
+//-----------EEPROM-------------
+//------------------------------
+
+#define RESET_EEPROM 0
+#define USING_32U4EEPROM 0
 
 //------------------------------
 //-------DAHL DESIGN CB1--------
 //------------------------------
 
+//Enable CB1 board
 #define USING_CB1 0
 
 //ADC setup
@@ -39,6 +46,10 @@
 //ROW5 and ROW6
 #define ROW5_ACTIVE 1
 #define ROW6_ACTIVE 1
+
+//ROW7
+
+#define GROUND_CALIBRATION 10
 
 //ROW8 setup
 #define DISABLE_ALERT_PINS 0  //Gives access to COL2 and COL3. Disables ALERT pins for the ADCs, making them heavier to run.
@@ -71,6 +82,11 @@ uint8_t ADS1115_chipAddress [] = {0x48};
 uint8_t ADS1115_alertPins [] = {99};
 #endif
 
+//EEPROM CAT24C512
+#define USING_CAT24C512 0
+#define CAT24C512_I2C_NUMBER 0
+#define CAT24C512_ADDRESS 0x50
+
 //VARIABLES
 bool wire1Init = false;
 bool wire0Init = false;
@@ -99,6 +115,12 @@ bool wire0Init = false;
   #include <DDCPI.h>
 #endif
 
-#if (USING_CB1 == 1 || USING_PCA9555 == 1 || USING_ADS1115 == 1)
+#if (USING_CB1 == 1 || USING_PCA9555 == 1 || USING_ADS1115 == 1 || USING_CAT24C512 == 1)
   #include <Wire.h>
+#endif
+
+#if (USING_32U4EEPROM == 1)
+{
+  #include <EEPROM.h>
+}
 #endif

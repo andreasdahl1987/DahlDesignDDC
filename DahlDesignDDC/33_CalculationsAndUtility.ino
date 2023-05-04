@@ -106,7 +106,7 @@ void refreshRate()
 #if (USING_CB1 == 1)
 void CB1Oversampling()
 {
-  if(oversamples.available() == 1024)
+  if(oversamples.available() >= 512)
   {
     long val1 = 0;
     long val2 = 0;

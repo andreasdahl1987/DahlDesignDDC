@@ -1,4 +1,4 @@
-/*
+ /*
  * Welcome to DDC!
  * 
  * The manual on GitHub wil walk you through the setup in detal: https://dahl-design.gitbook.io/ddc/
@@ -9,4 +9,3 @@
  * 
  * If you find this software helpful, feel free to make a donation: https://www.paypal.com/donate?hosted_button_id=GLYWGTDZNXURJ
  */
-    

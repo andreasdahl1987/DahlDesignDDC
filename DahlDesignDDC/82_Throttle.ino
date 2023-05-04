@@ -1,7 +1,23 @@
 void throttle(int analogPin, int switchNumber, int releasedValue, int fullyPressedValue)
 {
-    int inputPin = analogPin;
-    int pinValue = analogRead(inputPin);
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+
+    int pinValue;
+    if (analogPin > 49)
+    {
+      pinValue = ADS1115value[analogPin - ADC_CORR];
+    }
+    else
+    {
+      pinValue = analogRead(analogPin);
+    }
+    
+    #else
+
+    int pinValue = analogRead(analogPin);
+    
+    #endif
+    
     int N = switchNumber - 1;
     float normalized = 0;
 
@@ -53,8 +69,24 @@ void throttle(int analogPin, int switchNumber, int releasedValue, int fullyPress
 
 void filteredThrottle(int analogPin, int8_t switchNumber, int releasedValue, int fullyPressedValue, int curvePush, float expFactor)
 {
-    int inputPin = analogPin;
-    int raw = analogRead(inputPin);
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+
+    int raw;
+    if (analogPin > 49)
+    {
+      raw = ADS1115value[analogPin - ADC_CORR];
+    }
+    else
+    {
+      raw = analogRead(analogPin);
+    }
+    
+    #else
+
+    int raw = analogRead(analogPin);
+    
+    #endif
+    
     int N = switchNumber - 1;
     float normalized = 0;
     float FullyPressedValue = curveFilter(fullyPressedValue, releasedValue, fullyPressedValue, curvePush, expFactor);

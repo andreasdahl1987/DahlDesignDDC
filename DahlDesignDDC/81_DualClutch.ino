@@ -306,7 +306,24 @@ void filteredDualClutch(int masterPin, int masterSwitchNumber, int masterRelease
     //---Master paddle calculations----
     //--------------------------------
 
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+
+    int masterRaw;
+    if (masterPin > 49)
+    {
+      masterRaw = ADS1115value[masterPin - ADC_CORR];
+    }
+    else
+    {
+      masterRaw = analogRead(masterPin);
+    }
+    
+    #else
+
     int masterRaw = analogRead(masterPin);
+    
+    #endif
+    
     int M = masterSwitchNumber - 1;
     float masterNormalized = 0;
     float MasterFullyPressedValue = curveFilter(masterFullyPressedValue, masterReleasedValue, masterFullyPressedValue, masterCurvePush, masterExpFactor);
@@ -357,7 +374,24 @@ void filteredDualClutch(int masterPin, int masterSwitchNumber, int masterRelease
     //---Slave paddle calculations----
     //--------------------------------
 
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+
+    int slaveRaw;
+    if (slavePin > 49)
+    {
+      slaveRaw = ADS1115value[slavePin - ADC_CORR];
+    }
+    else
+    {
+      slaveRaw = analogRead(slavePin);
+    }
+    
+    #else
+
     int slaveRaw = analogRead(slavePin);
+    
+    #endif
+    
     int S = slaveSwitchNumber - 1;
     float slaveNormalized = 0;
 

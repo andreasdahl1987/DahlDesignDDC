@@ -327,31 +327,37 @@ void CB1switchTable()
   //Row 7
   if(CB1_ADC1 == 1)
   {
-    for (int i = 0; i<CB1_ADC1_CHANNELS; i++)
+    if(globalClock > 500) //Preventing button pressed on boot
     {
-      if (ADS1115value[i] < 2)
+       for (int i = 0; i<CB1_ADC1_CHANNELS; i++)
       {
-        rawState[6][i] = 1;
-      }
-      else
-      {
-        rawState[6][i] = 0;
+        if (ADS1115value[i] < GROUND_CALIBRATION)
+        {
+          rawState[6][i] = 1;
+        }
+        else
+        {
+          rawState[6][i] = 0;
+        }
       }
     }
   }
   
   if(CB1_ADC2 == 1)
   {
-    for (int i = 4; i<4+CB1_ADC2_CHANNELS; i++)
+    if(globalClock > 500) //Preventing button pressed on boot
     {
-      if (ADS1115value[i] < 2)
+      for (int i = 4; i<4+CB1_ADC2_CHANNELS; i++)
       {
-        rawState[6][i] = 1;
-      }
-      else
-      {
-        rawState[6][i] = 0;
-      }
+        if (ADS1115value[i] < GROUND_CALIBRATION)
+        {
+          rawState[6][i] = 1;
+        }
+        else
+        {
+          rawState[6][i] = 0;
+        }
+      }    
     }
   }
 
@@ -386,8 +392,6 @@ void CB1switchTable()
 }
 
 #endif
-
-
 
 #if (USING_ADS1115 == 1)
 void ADS1115Run(int chipNumber, int channelCount, int rate, int gain)
