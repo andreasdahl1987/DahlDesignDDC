@@ -112,7 +112,7 @@ void colorLED (uint8_t startLED, uint8_t stopLED, uint32_t color, uint8_t bright
   
 }
 
-void biteLED (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t biteChainStartLED, uint8_t brightness, uint32_t engageColor = 0xFFA500, uint32_t step1Color = 0x40E0D0, uint32_t step2Color = 0xFF00FF, uint32_t step3Color = 0xFFA500, bool engageBlink = true)
+void biteLED (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t engageBrightness, uint8_t biteChainStartLED, uint8_t biteBrightness, uint32_t engageColor = 0xFFA500, uint32_t step1Color = 0x40E0D0, uint32_t step2Color = 0xFF00FF, uint32_t step3Color = 0xFFA500, bool engageBlink = true)
 {
 
   #if (LED1REVERSE == 1)
@@ -124,15 +124,15 @@ void biteLED (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t bit
     int timer = globalClock % 1000;
     
     int R = (engageColor & 0xFF0000) >> 16;
-    R = R * brightness / 100;
+    R = R * engageBrightness / 100;
     R = R * LEDBrightness / 100;
   
     int G = (engageColor & 0x00FF00) >> 8;
-    G = G * brightness / 100;
+    G = G * engageBrightness / 100;
     G = G * LEDBrightness / 100;
   
     int B = engageColor & 0x0000FF;
-    B = B * brightness / 100;
+    B = B * engageBrightness / 100;
     B = B * LEDBrightness / 100;
 
     if (!engageBlink || engageBlink && timer > 500)
@@ -159,15 +159,15 @@ void biteLED (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t bit
   if (biteButtonBit1 && !biteButtonBit2)
   {
     int R = (step1Color & 0xFF0000) >> 16;
-    R = R * brightness / 100;
+    R = R * biteBrightness / 100;
     R = R * LEDBrightness / 100;
   
     int G = (step1Color & 0x00FF00) >> 8;
-    G = G * brightness / 100;
+    G = G * biteBrightness / 100;
     G = G * LEDBrightness / 100;
   
     int B = step1Color & 0x0000FF;
-    B = B * brightness / 100;
+    B = B * biteBrightness / 100;
     B = B * LEDBrightness / 100;
 
     uint8_t ledCount = BitePoint/100; 
@@ -184,15 +184,15 @@ void biteLED (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t bit
   else if (!biteButtonBit1 && biteButtonBit2)
   {
     int R = (step2Color & 0xFF0000) >> 16;
-    R = R * brightness / 100;
+    R = R * biteBrightness / 100;
     R = R * LEDBrightness / 100;
   
     int G = (step2Color & 0x00FF00) >> 8;
-    G = G * brightness / 100;
+    G = G * biteBrightness / 100;
     G = G * LEDBrightness / 100;
   
     int B = step2Color & 0x0000FF;
-    B = B * brightness / 100;
+    B = B * biteBrightness / 100;
     B = B * LEDBrightness / 100;
     
     uint8_t ledCount = (BitePoint % 100)/10; 
@@ -209,15 +209,15 @@ void biteLED (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t bit
     else if (biteButtonBit1 && biteButtonBit2)
   {
     int R = (step3Color & 0xFF0000) >> 16;
-    R = R * brightness / 100;
+    R = R * biteBrightness / 100;
     R = R * LEDBrightness / 100;
   
     int G = (step3Color & 0x00FF00) >> 8;
-    G = G * brightness / 100;
+    G = G * biteBrightness / 100;
     G = G * LEDBrightness / 100;
   
     int B = step3Color & 0x0000FF;
-    B = B * brightness / 100;
+    B = B * biteBrightness / 100;
     B = B * LEDBrightness / 100;
     
     uint8_t ledCount = BitePoint % 10; 
@@ -253,15 +253,15 @@ void biteLED (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t bit
     int timer = globalClock % 1000;
     
     int R = (engageColor & 0xFF0000) >> 16;
-    R = R * brightness / 100;
+    R = R * engageBrightness / 100;
     R = R * LEDBrightness / 100;
   
     int G = (engageColor & 0x00FF00) >> 8;
-    G = G * brightness / 100;
+    G = G * engageBrightness / 100;
     G = G * LEDBrightness / 100;
   
     int B = engageColor & 0x0000FF;
-    B = B * brightness / 100;
+    B = B * engageBrightness / 100;
     B = B * LEDBrightness / 100;
 
     if (!engageBlink || engageBlink && timer > 500)
@@ -288,15 +288,15 @@ void biteLED (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t bit
   if (biteButtonBit1 && !biteButtonBit2)
   {
     int R = (step1Color & 0xFF0000) >> 16;
-    R = R * brightness / 100;
+    R = R * biteBrightness / 100;
     R = R * LEDBrightness / 100;
   
     int G = (step1Color & 0x00FF00) >> 8;
-    G = G * brightness / 100;
+    G = G * biteBrightness / 100;
     G = G * LEDBrightness / 100;
   
     int B = step1Color & 0x0000FF;
-    B = B * brightness / 100;
+    B = B * biteBrightness / 100;
     B = B * LEDBrightness / 100;
 
     uint8_t ledCount = BitePoint/100; 
@@ -313,15 +313,15 @@ void biteLED (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t bit
   else if (!biteButtonBit1 && biteButtonBit2)
   {
     int R = (step2Color & 0xFF0000) >> 16;
-    R = R * brightness / 100;
+    R = R * biteBrightness / 100;
     R = R * LEDBrightness / 100;
   
     int G = (step2Color & 0x00FF00) >> 8;
-    G = G * brightness / 100;
+    G = G * biteBrightness / 100;
     G = G * LEDBrightness / 100;
   
     int B = step2Color & 0x0000FF;
-    B = B * brightness / 100;
+    B = B * biteBrightness / 100;
     B = B * LEDBrightness / 100;
     
     uint8_t ledCount = (BitePoint % 100)/10; 
@@ -338,15 +338,15 @@ void biteLED (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t bit
     else if (biteButtonBit1 && biteButtonBit2)
   {
     int R = (step3Color & 0xFF0000) >> 16;
-    R = R * brightness / 100;
+    R = R * biteBrightness / 100;
     R = R * LEDBrightness / 100;
   
     int G = (step3Color & 0x00FF00) >> 8;
-    G = G * brightness / 100;
+    G = G * biteBrightness / 100;
     G = G * LEDBrightness / 100;
   
     int B = step3Color & 0x0000FF;
-    B = B * brightness / 100;
+    B = B * biteBrightness / 100;
     B = B * LEDBrightness / 100;
     
     uint8_t ledCount = BitePoint % 10; 
@@ -545,7 +545,7 @@ void colorLED2 (uint8_t startLED, uint8_t stopLED, uint32_t color, uint8_t brigh
   
 }
 
-void biteLED2 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t biteChainStartLED, uint8_t brightness, uint32_t engageColor = 0xFFA500, uint32_t step1Color = 0x40E0D0, uint32_t step2Color = 0xFF00FF, uint32_t step3Color = 0xFFA500, bool engageBlink = true)
+void biteLED2 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t engageBrightness, uint8_t biteChainStartLED, uint8_t biteBrightness, uint32_t engageColor = 0xFFA500, uint32_t step1Color = 0x40E0D0, uint32_t step2Color = 0xFF00FF, uint32_t step3Color = 0xFFA500, bool engageBlink = true)
 {
 
   #if (LED2REVERSE == 1)
@@ -557,15 +557,15 @@ void biteLED2 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t bi
     int timer = globalClock % 1000;
     
     int R = (engageColor & 0xFF0000) >> 16;
-    R = R * brightness / 100;
+    R = R * engageBrightness / 100;
     R = R * LEDBrightness / 100;
   
     int G = (engageColor & 0x00FF00) >> 8;
-    G = G * brightness / 100;
+    G = G * engageBrightness / 100;
     G = G * LEDBrightness / 100;
   
     int B = engageColor & 0x0000FF;
-    B = B * brightness / 100;
+    B = B * engageBrightness / 100;
     B = B * LEDBrightness / 100;
 
     if (!engageBlink || engageBlink && timer > 500)
@@ -592,15 +592,15 @@ void biteLED2 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t bi
   if (biteButtonBit1 && !biteButtonBit2)
   {
     int R = (step1Color & 0xFF0000) >> 16;
-    R = R * brightness / 100;
+    R = R * biteBrightness / 100;
     R = R * LEDBrightness / 100;
   
     int G = (step1Color & 0x00FF00) >> 8;
-    G = G * brightness / 100;
+    G = G * biteBrightness / 100;
     G = G * LEDBrightness / 100;
   
     int B = step1Color & 0x0000FF;
-    B = B * brightness / 100;
+    B = B * biteBrightness / 100;
     B = B * LEDBrightness / 100;
 
     uint8_t ledCount = BitePoint/100; 
@@ -617,15 +617,15 @@ void biteLED2 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t bi
   else if (!biteButtonBit1 && biteButtonBit2)
   {
     int R = (step2Color & 0xFF0000) >> 16;
-    R = R * brightness / 100;
+    R = R * biteBrightness / 100;
     R = R * LEDBrightness / 100;
   
     int G = (step2Color & 0x00FF00) >> 8;
-    G = G * brightness / 100;
+    G = G * biteBrightness / 100;
     G = G * LEDBrightness / 100;
   
     int B = step2Color & 0x0000FF;
-    B = B * brightness / 100;
+    B = B * biteBrightness / 100;
     B = B * LEDBrightness / 100;
     
     uint8_t ledCount = (BitePoint % 100)/10; 
@@ -642,15 +642,15 @@ void biteLED2 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t bi
     else if (biteButtonBit1 && biteButtonBit2)
   {
     int R = (step3Color & 0xFF0000) >> 16;
-    R = R * brightness / 100;
+    R = R * biteBrightness / 100;
     R = R * LEDBrightness / 100;
   
     int G = (step3Color & 0x00FF00) >> 8;
-    G = G * brightness / 100;
+    G = G * biteBrightness / 100;
     G = G * LEDBrightness / 100;
   
     int B = step3Color & 0x0000FF;
-    B = B * brightness / 100;
+    B = B * biteBrightness / 100;
     B = B * LEDBrightness / 100;
     
     uint8_t ledCount = BitePoint % 10; 
@@ -686,15 +686,15 @@ void biteLED2 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t bi
     int timer = globalClock % 1000;
     
     int R = (engageColor & 0xFF0000) >> 16;
-    R = R * brightness / 100;
+    R = R * engageBrightness / 100;
     R = R * LEDBrightness / 100;
   
     int G = (engageColor & 0x00FF00) >> 8;
-    G = G * brightness / 100;
+    G = G * engageBrightness / 100;
     G = G * LEDBrightness / 100;
   
     int B = engageColor & 0x0000FF;
-    B = B * brightness / 100;
+    B = B * engageBrightness / 100;
     B = B * LEDBrightness / 100;
 
     if (!engageBlink || engageBlink && timer > 500)
@@ -721,15 +721,15 @@ void biteLED2 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t bi
   if (biteButtonBit1 && !biteButtonBit2)
   {
     int R = (step1Color & 0xFF0000) >> 16;
-    R = R * brightness / 100;
+    R = R * biteBrightness / 100;
     R = R * LEDBrightness / 100;
   
     int G = (step1Color & 0x00FF00) >> 8;
-    G = G * brightness / 100;
+    G = G * biteBrightness / 100;
     G = G * LEDBrightness / 100;
   
     int B = step1Color & 0x0000FF;
-    B = B * brightness / 100;
+    B = B * biteBrightness / 100;
     B = B * LEDBrightness / 100;
 
     uint8_t ledCount = BitePoint/100; 
@@ -746,15 +746,15 @@ void biteLED2 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t bi
   else if (!biteButtonBit1 && biteButtonBit2)
   {
     int R = (step2Color & 0xFF0000) >> 16;
-    R = R * brightness / 100;
+    R = R * biteBrightness / 100;
     R = R * LEDBrightness / 100;
   
     int G = (step2Color & 0x00FF00) >> 8;
-    G = G * brightness / 100;
+    G = G * biteBrightness / 100;
     G = G * LEDBrightness / 100;
   
     int B = step2Color & 0x0000FF;
-    B = B * brightness / 100;
+    B = B * biteBrightness / 100;
     B = B * LEDBrightness / 100;
     
     uint8_t ledCount = (BitePoint % 100)/10; 
@@ -771,15 +771,15 @@ void biteLED2 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t bi
     else if (biteButtonBit1 && biteButtonBit2)
   {
     int R = (step3Color & 0xFF0000) >> 16;
-    R = R * brightness / 100;
+    R = R * biteBrightness / 100;
     R = R * LEDBrightness / 100;
   
     int G = (step3Color & 0x00FF00) >> 8;
-    G = G * brightness / 100;
+    G = G * biteBrightness / 100;
     G = G * LEDBrightness / 100;
   
     int B = step3Color & 0x0000FF;
-    B = B * brightness / 100;
+    B = B * biteBrightness / 100;
     B = B * LEDBrightness / 100;
     
     uint8_t ledCount = BitePoint % 10; 
@@ -977,7 +977,7 @@ void colorLED3 (uint8_t startLED, uint8_t stopLED, uint32_t color, uint8_t brigh
   
 }
 
-void biteLED3 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t biteChainStartLED, uint8_t brightness, uint32_t engageColor = 0xFFA500, uint32_t step1Color = 0x40E0D0, uint32_t step2Color = 0xFF00FF, uint32_t step3Color = 0xFFA500, bool engageBlink = true)
+void biteLED3 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t engageBrightness, uint8_t biteChainStartLED, uint8_t biteBrightness, uint32_t engageColor = 0xFFA500, uint32_t step1Color = 0x40E0D0, uint32_t step2Color = 0xFF00FF, uint32_t step3Color = 0xFFA500, bool engageBlink = true)
 {
 
   #if (LED3REVERSE == 1)
@@ -989,15 +989,15 @@ void biteLED3 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t bi
     int timer = globalClock % 1000;
     
     int R = (engageColor & 0xFF0000) >> 16;
-    R = R * brightness / 100;
+    R = R * engageBrightness / 100;
     R = R * LEDBrightness / 100;
   
     int G = (engageColor & 0x00FF00) >> 8;
-    G = G * brightness / 100;
+    G = G * engageBrightness / 100;
     G = G * LEDBrightness / 100;
   
     int B = engageColor & 0x0000FF;
-    B = B * brightness / 100;
+    B = B * engageBrightness / 100;
     B = B * LEDBrightness / 100;
 
     if (!engageBlink || engageBlink && timer > 500)
@@ -1024,15 +1024,15 @@ void biteLED3 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t bi
   if (biteButtonBit1 && !biteButtonBit2)
   {
     int R = (step1Color & 0xFF0000) >> 16;
-    R = R * brightness / 100;
+    R = R * biteBrightness / 100;
     R = R * LEDBrightness / 100;
   
     int G = (step1Color & 0x00FF00) >> 8;
-    G = G * brightness / 100;
+    G = G * biteBrightness / 100;
     G = G * LEDBrightness / 100;
   
     int B = step1Color & 0x0000FF;
-    B = B * brightness / 100;
+    B = B * biteBrightness / 100;
     B = B * LEDBrightness / 100;
 
     uint8_t ledCount = BitePoint/100; 
@@ -1049,15 +1049,15 @@ void biteLED3 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t bi
   else if (!biteButtonBit1 && biteButtonBit2)
   {
     int R = (step2Color & 0xFF0000) >> 16;
-    R = R * brightness / 100;
+    R = R * biteBrightness / 100;
     R = R * LEDBrightness / 100;
   
     int G = (step2Color & 0x00FF00) >> 8;
-    G = G * brightness / 100;
+    G = G * biteBrightness / 100;
     G = G * LEDBrightness / 100;
   
     int B = step2Color & 0x0000FF;
-    B = B * brightness / 100;
+    B = B * biteBrightness / 100;
     B = B * LEDBrightness / 100;
     
     uint8_t ledCount = (BitePoint % 100)/10; 
@@ -1074,15 +1074,15 @@ void biteLED3 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t bi
     else if (biteButtonBit1 && biteButtonBit2)
   {
     int R = (step3Color & 0xFF0000) >> 16;
-    R = R * brightness / 100;
+    R = R * biteBrightness / 100;
     R = R * LEDBrightness / 100;
   
     int G = (step3Color & 0x00FF00) >> 8;
-    G = G * brightness / 100;
+    G = G * biteBrightness / 100;
     G = G * LEDBrightness / 100;
   
     int B = step3Color & 0x0000FF;
-    B = B * brightness / 100;
+    B = B * biteBrightness / 100;
     B = B * LEDBrightness / 100;
     
     uint8_t ledCount = BitePoint % 10; 
@@ -1118,15 +1118,15 @@ void biteLED3 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t bi
     int timer = globalClock % 1000;
     
     int R = (engageColor & 0xFF0000) >> 16;
-    R = R * brightness / 100;
+    R = R * engageBrightness / 100;
     R = R * LEDBrightness / 100;
   
     int G = (engageColor & 0x00FF00) >> 8;
-    G = G * brightness / 100;
+    G = G * engageBrightness / 100;
     G = G * LEDBrightness / 100;
   
     int B = engageColor & 0x0000FF;
-    B = B * brightness / 100;
+    B = B * engageBrightness / 100;
     B = B * LEDBrightness / 100;
 
     if (!engageBlink || engageBlink && timer > 500)
@@ -1153,15 +1153,15 @@ void biteLED3 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t bi
   if (biteButtonBit1 && !biteButtonBit2)
   {
     int R = (step1Color & 0xFF0000) >> 16;
-    R = R * brightness / 100;
+    R = R * biteBrightness / 100;
     R = R * LEDBrightness / 100;
   
     int G = (step1Color & 0x00FF00) >> 8;
-    G = G * brightness / 100;
+    G = G * biteBrightness / 100;
     G = G * LEDBrightness / 100;
   
     int B = step1Color & 0x0000FF;
-    B = B * brightness / 100;
+    B = B * biteBrightness / 100;
     B = B * LEDBrightness / 100;
 
     uint8_t ledCount = BitePoint/100; 
@@ -1178,15 +1178,15 @@ void biteLED3 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t bi
   else if (!biteButtonBit1 && biteButtonBit2)
   {
     int R = (step2Color & 0xFF0000) >> 16;
-    R = R * brightness / 100;
+    R = R * biteBrightness / 100;
     R = R * LEDBrightness / 100;
   
     int G = (step2Color & 0x00FF00) >> 8;
-    G = G * brightness / 100;
+    G = G * biteBrightness / 100;
     G = G * LEDBrightness / 100;
   
     int B = step2Color & 0x0000FF;
-    B = B * brightness / 100;
+    B = B * biteBrightness / 100;
     B = B * LEDBrightness / 100;
     
     uint8_t ledCount = (BitePoint % 100)/10; 
@@ -1203,15 +1203,15 @@ void biteLED3 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t bi
     else if (biteButtonBit1 && biteButtonBit2)
   {
     int R = (step3Color & 0xFF0000) >> 16;
-    R = R * brightness / 100;
+    R = R * biteBrightness / 100;
     R = R * LEDBrightness / 100;
   
     int G = (step3Color & 0x00FF00) >> 8;
-    G = G * brightness / 100;
+    G = G * biteBrightness / 100;
     G = G * LEDBrightness / 100;
   
     int B = step3Color & 0x0000FF;
-    B = B * brightness / 100;
+    B = B * biteBrightness / 100;
     B = B * LEDBrightness / 100;
     
     uint8_t ledCount = BitePoint % 10; 
@@ -1409,7 +1409,7 @@ void colorLED4 (uint8_t startLED, uint8_t stopLED, uint32_t color, uint8_t brigh
   
 }
 
-void biteLED4 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t biteChainStartLED, uint8_t brightness, uint32_t engageColor = 0xFFA500, uint32_t step1Color = 0x40E0D0, uint32_t step2Color = 0xFF00FF, uint32_t step3Color = 0xFFA500, bool engageBlink = true)
+void biteLED4 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t engageBrightness, uint8_t biteChainStartLED, uint8_t biteBrightness, uint32_t engageColor = 0xFFA500, uint32_t step1Color = 0x40E0D0, uint32_t step2Color = 0xFF00FF, uint32_t step3Color = 0xFFA500, bool engageBlink = true)
 {
 
   #if (LED4REVERSE == 1)
@@ -1421,15 +1421,15 @@ void biteLED4 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t bi
     int timer = globalClock % 1000;
     
     int R = (engageColor & 0xFF0000) >> 16;
-    R = R * brightness / 100;
+    R = R * engageBrightness / 100;
     R = R * LEDBrightness / 100;
   
     int G = (engageColor & 0x00FF00) >> 8;
-    G = G * brightness / 100;
+    G = G * engageBrightness / 100;
     G = G * LEDBrightness / 100;
   
     int B = engageColor & 0x0000FF;
-    B = B * brightness / 100;
+    B = B * engageBrightness / 100;
     B = B * LEDBrightness / 100;
 
     if (!engageBlink || engageBlink && timer > 500)
@@ -1456,15 +1456,15 @@ void biteLED4 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t bi
   if (biteButtonBit1 && !biteButtonBit2)
   {
     int R = (step1Color & 0xFF0000) >> 16;
-    R = R * brightness / 100;
+    R = R * biteBrightness / 100;
     R = R * LEDBrightness / 100;
   
     int G = (step1Color & 0x00FF00) >> 8;
-    G = G * brightness / 100;
+    G = G * biteBrightness / 100;
     G = G * LEDBrightness / 100;
   
     int B = step1Color & 0x0000FF;
-    B = B * brightness / 100;
+    B = B * biteBrightness / 100;
     B = B * LEDBrightness / 100;
 
     uint8_t ledCount = BitePoint/100; 
@@ -1481,15 +1481,15 @@ void biteLED4 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t bi
   else if (!biteButtonBit1 && biteButtonBit2)
   {
     int R = (step2Color & 0xFF0000) >> 16;
-    R = R * brightness / 100;
+    R = R * biteBrightness / 100;
     R = R * LEDBrightness / 100;
   
     int G = (step2Color & 0x00FF00) >> 8;
-    G = G * brightness / 100;
+    G = G * biteBrightness / 100;
     G = G * LEDBrightness / 100;
   
     int B = step2Color & 0x0000FF;
-    B = B * brightness / 100;
+    B = B * biteBrightness / 100;
     B = B * LEDBrightness / 100;
     
     uint8_t ledCount = (BitePoint % 100)/10; 
@@ -1506,15 +1506,15 @@ void biteLED4 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t bi
     else if (biteButtonBit1 && biteButtonBit2)
   {
     int R = (step3Color & 0xFF0000) >> 16;
-    R = R * brightness / 100;
+    R = R * biteBrightness / 100;
     R = R * LEDBrightness / 100;
   
     int G = (step3Color & 0x00FF00) >> 8;
-    G = G * brightness / 100;
+    G = G * biteBrightness / 100;
     G = G * LEDBrightness / 100;
   
     int B = step3Color & 0x0000FF;
-    B = B * brightness / 100;
+    B = B * biteBrightness / 100;
     B = B * LEDBrightness / 100;
     
     uint8_t ledCount = BitePoint % 10; 
@@ -1550,15 +1550,15 @@ void biteLED4 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t bi
     int timer = globalClock % 1000;
     
     int R = (engageColor & 0xFF0000) >> 16;
-    R = R * brightness / 100;
+    R = R * engageBrightness / 100;
     R = R * LEDBrightness / 100;
   
     int G = (engageColor & 0x00FF00) >> 8;
-    G = G * brightness / 100;
+    G = G * engageBrightness / 100;
     G = G * LEDBrightness / 100;
   
     int B = engageColor & 0x0000FF;
-    B = B * brightness / 100;
+    B = B * engageBrightness / 100;
     B = B * LEDBrightness / 100;
 
     if (!engageBlink || engageBlink && timer > 500)
@@ -1585,15 +1585,15 @@ void biteLED4 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t bi
   if (biteButtonBit1 && !biteButtonBit2)
   {
     int R = (step1Color & 0xFF0000) >> 16;
-    R = R * brightness / 100;
+    R = R * biteBrightness / 100;
     R = R * LEDBrightness / 100;
   
     int G = (step1Color & 0x00FF00) >> 8;
-    G = G * brightness / 100;
+    G = G * biteBrightness / 100;
     G = G * LEDBrightness / 100;
   
     int B = step1Color & 0x0000FF;
-    B = B * brightness / 100;
+    B = B * biteBrightness / 100;
     B = B * LEDBrightness / 100;
 
     uint8_t ledCount = BitePoint/100; 
@@ -1610,15 +1610,15 @@ void biteLED4 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t bi
   else if (!biteButtonBit1 && biteButtonBit2)
   {
     int R = (step2Color & 0xFF0000) >> 16;
-    R = R * brightness / 100;
+    R = R * biteBrightness / 100;
     R = R * LEDBrightness / 100;
   
     int G = (step2Color & 0x00FF00) >> 8;
-    G = G * brightness / 100;
+    G = G * biteBrightness / 100;
     G = G * LEDBrightness / 100;
   
     int B = step2Color & 0x0000FF;
-    B = B * brightness / 100;
+    B = B * biteBrightness / 100;
     B = B * LEDBrightness / 100;
     
     uint8_t ledCount = (BitePoint % 100)/10; 
@@ -1635,15 +1635,15 @@ void biteLED4 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t bi
     else if (biteButtonBit1 && biteButtonBit2)
   {
     int R = (step3Color & 0xFF0000) >> 16;
-    R = R * brightness / 100;
+    R = R * biteBrightness / 100;
     R = R * LEDBrightness / 100;
   
     int G = (step3Color & 0x00FF00) >> 8;
-    G = G * brightness / 100;
+    G = G * biteBrightness / 100;
     G = G * LEDBrightness / 100;
   
     int B = step3Color & 0x0000FF;
-    B = B * brightness / 100;
+    B = B * biteBrightness / 100;
     B = B * LEDBrightness / 100;
     
     uint8_t ledCount = BitePoint % 10; 
