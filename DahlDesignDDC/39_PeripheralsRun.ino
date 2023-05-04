@@ -387,8 +387,6 @@ void CB1switchTable()
 
 #endif
 
-
-
 #if (USING_ADS1115 == 1)
 void ADS1115Run(int chipNumber, int channelCount, int rate, int gain)
 {
