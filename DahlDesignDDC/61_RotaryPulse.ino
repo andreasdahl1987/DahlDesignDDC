@@ -1,4 +1,4 @@
-void rotary2Pulse(int row, int column, bool reverse)
+void rotaryPulse(int row, int column, bool reverse)
 {
     int Row = row - 1;
     int Column = column - 1;
