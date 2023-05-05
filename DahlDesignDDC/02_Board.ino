@@ -6,7 +6,7 @@
 //-----------BOARD MCU----------
 //------------------------------
 
-#define BOARDTYPE 0
+#define BOARDTYPE 2
 
 // 0 -> Atmel 32U4 based boards. (Leonardo, Pro Micro, Feather, Teensy 2.0, etc) SAM3X based boards. (Due)
 
@@ -26,7 +26,7 @@
 //------------------------------
 
 //Enable CB1 board
-#define USING_CB1 0
+#define USING_CB1 1
 
 //ADC setup
 #define CB1_ADC1 1
@@ -52,7 +52,7 @@
 #define GROUND_CALIBRATION 10
 
 //ROW8 setup
-#define DISABLE_ALERT_PINS 0  //Gives access to COL2 and COL3. Disables ALERT pins for the ADCs, making them heavier to run.
+#define DISABLE_ALERT_PINS 1  //Gives access to COL2 and COL3. Disables ALERT pins for the ADCs, making them heavier to run.
 #define DISABLE_ANALOG 0      //Gives access to COL4 - COL 7 by using (and disabling analog function of) ADC9 - ADC12 pins. 
 #define DISABLE_LED_PIN 0     //Gives access to COL8, use the dedicated 8-8 pin. The LED pin will no longer work. 
 
