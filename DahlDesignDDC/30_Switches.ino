@@ -2,12 +2,9 @@
   //---------SWITCHES START HERE----------
   //--------------------------------------
 
-  
-  rotaryAnalog2Mode(ADC10,1,1, 490, 3450,6300, 9270, 12200, 15000, 18000, 20900, 23900, 26800,29700,32600,false);
-  //rotaryInject(1,3,1,1);
-  //rotaryInject(1,4,1,6);
-  //pushButton(1,1);
-  //pushButton(1,6);
+  rotaryAnalogSimple(ADC10,1, 490, 3450,6300, 9270, 12200, 15000, 18000, 20900, 23900, 26800,29700,32600,false);
+  analogInjectSingle(ADC10, 3, 1, 10000,14000,10);
+  pushButton(3,1);
   modButton(3,2);
   //--------------------------------------
   //---------SWITCHES END HERE------------

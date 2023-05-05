@@ -40,6 +40,12 @@ int8_t biteButtonCol;
 int8_t presetButtonRow;
 int8_t presetButtonCol;
 
+//Analog inject
+long injectMuteTimer = -20000;
+uint8_t injectMuteCounter = 0;
+bool injectMute = false;
+
+//Bite and launch
 bool biteButtonBit1 = false;
 bool biteButtonBit2 = false;
 bool launchButtonLatch = false;

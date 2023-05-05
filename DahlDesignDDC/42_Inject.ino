@@ -9,67 +9,114 @@ void switchTableInject(int8_t pin, int8_t row, int8_t column)
 
 void analogInject(int8_t pin, int8_t row, int8_t column, int startValue, int endValue, uint8_t threshold)
 {
-  int value = analogRead(pin);
-  int diff; 
+  #if(USING_ADS1115 == 1 || USING_CB1 == 1)
 
-  if (endValue > startValue)
+  int value;
+  if (pin > 49)
   {
-    diff = endValue-startValue;
-    if (value > (startValue + (diff * threshold / 100)) && value <= endValue)
-    {
-      rawState[row-1][column-1] = 1;
-    }
-    else
-    {
-      rawState[row-1][column-1] = 0;
-    }
+    value = ADS1115value[pin - ADC_CORR];
   }
   else
   {
-    diff = startValue - endValue;
-    if (value < (startValue - (diff * threshold / 100)) && value >= endValue)
+    value = analogRead(pin);
+  }
+  
+  #else
+
+  int value = analogRead(pin);
+  
+  #endif
+  
+  int diff; 
+
+  if (injectMute)
+  {
+    rawState[row-1][column-1] = 0;
+  }
+  else
+  {
+    if (endValue > startValue)
     {
-      rawState[row-1][column-1] = 1;
+      diff = endValue-startValue;
+      if (value > (startValue + (diff * threshold / 100)) && value <= endValue)
+      {
+        rawState[row-1][column-1] = 1;
+      }
+      else
+      {
+        rawState[row-1][column-1] = 0;
+      }
     }
     else
     {
-      rawState[row-1][column-1] = 0;
+      diff = startValue - endValue;
+      if (value < (startValue - (diff * threshold / 100)) && value >= endValue)
+      {
+        rawState[row-1][column-1] = 1;
+      }
+      else
+      {
+        rawState[row-1][column-1] = 0;
+      }
     }
   }
 }
 
 void analogInjectSingle(int8_t pin, int8_t row, int8_t column, int startValue, int endValue, uint8_t threshold)
 {
-  int value = analogRead(pin);
-  int diff; 
+  #if(USING_ADS1115 == 1 || USING_CB1 == 1)
 
-  if (endValue > startValue)
+  int value;
+  if (pin > 49)
   {
-    diff = endValue-startValue;
-    if (value > (startValue + (diff * threshold / 100)))
-    {
-      rawState[row-1][column-1] = 1;
-    }
-    else
-    {
-      rawState[row-1][column-1] = 0;
-    }
+    value = ADS1115value[pin - ADC_CORR];
   }
   else
   {
-    diff = startValue - endValue;
-    if (value < (startValue - (diff * threshold / 100)))
+    value = analogRead(pin);
+  }
+  
+  #else
+
+  int value = analogRead(pin);
+  
+  #endif
+  int diff; 
+
+  if (injectMute)
+  {
+    rawState[row-1][column-1] = 0;
+  }
+  else
+  {
+    if (endValue > startValue)
     {
-      rawState[row-1][column-1] = 1;
+      diff = endValue-startValue;
+      if (value > (startValue + (diff * threshold / 100)))
+      {
+        rawState[row-1][column-1] = 1;
+      }
+      else
+      {
+        rawState[row-1][column-1] = 0;
+      }
     }
     else
     {
-      rawState[row-1][column-1] = 0;
+      diff = startValue - endValue;
+      if (value < (startValue - (diff * threshold / 100)))
+      {
+        rawState[row-1][column-1] = 1;
+      }
+      else
+      {
+        rawState[row-1][column-1] = 0;
+      }
     }
-  }
+  } 
 }
 
 void rotaryInject(int8_t switchNumber, int8_t switchPosition, int8_t row, int8_t column)
 {
-    rawState[row-1][column-1] = (analogLastCounter[switchNumber-1] + 1 == switchPosition);
+    rawState[row-1][column-1] = (analogLastCounter[switchNumber-1] + 1 == switchPosition) * !injectMute;
 }
