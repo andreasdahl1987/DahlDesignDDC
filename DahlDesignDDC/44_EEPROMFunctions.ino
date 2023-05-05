@@ -96,7 +96,7 @@ void EEPROMfirst()
       write16bitToEEPROM(UTIL, 1);
     }
   
-    uint8_t virgin = read16bitFromEEPROM(UTIL);
+    uint16_t virgin = read16bitFromEEPROM(UTIL);
     if (virgin == 1)
     {
         write16bitToEEPROM(UTIL, 0);
