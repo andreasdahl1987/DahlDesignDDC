@@ -456,6 +456,74 @@ void rotaryAnalogMute(int analogPin, int switchNumber, int pos1, int pos2, int p
     }
 }
 
+void rotaryAnalogBrightness(int analogPin, int switchNumber, int startBrightness, int endBrightness, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
+{
+    int N = switchNumber - 1;
+
+    int Number = analogButtonNumber[N];
+
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+
+    int value;
+    if (analogPin > 49)
+    {
+      value = ADS1115value[analogPin - ADC_CORR];
+    }
+    else
+    {
+      value = analogRead(analogPin);
+    }
+    
+    #else
+
+    int value = analogRead(analogPin);
+    
+    #endif
+
+    int positions[12] = { pos1, pos2, pos3, pos4, pos5, pos6, pos7, pos8, pos9, pos10, pos11, pos12 };
+
+    int differ = 0;
+    int result = 0;
+    for (int i = 0; i < 12; i++)
+    {
+        if (i == 0 || abs(positions[i] - value) < differ)
+        {
+            result++;
+            differ = abs(positions[i] - value);
+        }
+    }
+
+    result--;
+
+    if (reverse)
+    {
+        result = 11 - result;
+    }
+
+    //Short debouncer on switch rotation
+
+    if (analogLastCounter[N] != result)
+    {
+        if (globalClock - analogTimer1[N] > analogPulse)
+        {
+            analogTimer1[N] = globalClock;
+        }
+        else if (globalClock - analogTimer1[N] > analogWait)
+        {
+          //Engage encoder pulse timer
+          analogTimer2[N] = globalClock;
+
+          //Update difference, storing the value in pushState on pin 2
+          analogTempState[N] = result - analogLastCounter[N];
+
+          //Give new value to pushState
+          analogLastCounter[N] = result;
+        }
+    }
+
+    LEDBrightness = startBrightness + (analogLastCounter[N] * ((100*endBrightness - 100*startBrightness)/11) / 100);
+}
+
 void rotaryAnalog2Mode(int analogPin, int switchNumber, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
 {
     int N = switchNumber - 1;
@@ -824,6 +892,7 @@ void rotaryAnalogBite(int analogPin, int switchNumber, int fieldPlacement, int p
     push = push << (FieldPlacement - 1);
     rotaryField = rotaryField | push;
 }
+
 
 void DDSanalog(int analogPin, int switchNumber, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
 {
