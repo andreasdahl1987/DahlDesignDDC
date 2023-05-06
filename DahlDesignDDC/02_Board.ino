@@ -6,7 +6,7 @@
 //-----------BOARD MCU----------
 //------------------------------
 
-#define BOARDTYPE 2
+#define BOARDTYPE 0
 
 // 0 -> Atmel 32U4 based boards. (Leonardo, Pro Micro, Feather, Teensy 2.0, etc) SAM3X based boards. (Due)
 
@@ -26,7 +26,7 @@
 //------------------------------
 
 //Enable CB1 board
-#define USING_CB1 1
+#define USING_CB1 0
 
 //ADC setup
 #define CB1_ADC1 1

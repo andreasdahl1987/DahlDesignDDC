@@ -115,3 +115,39 @@ void pushButtonL(int8_t row, int8_t column)
 
     Joystick.setButton(Number, latchState[Row][Column]);
 }
+
+
+void pulseButton(int row, int column)
+{
+    int Row = row - 1;
+    int Column = column - 1;
+    int Number = buttonNumber[Row][Column];
+
+    if (pushState[Row][Column] != rawState[Row][Column] && (globalClock - switchTimer[Row][Column]) > buttonCooldown)
+    {
+        if(rawState[Row][Column] == 1)
+        {
+          switchTimer[Row][Column] = globalClock;          
+        }
+        pushState[Row][Column] = rawState[Row][Column];
+    }
+
+    if ((globalClock - switchTimer[Row][Column]) > buttonCooldown)
+    {
+        pushState[Row][Column] = rawState[Row][Column];
+    }
+
+    if ((globalClock - switchTimer[Row][Column]) < buttonCooldown)
+    {
+        toggleTimer[Row][Column] = globalClock;
+    }
+
+    if ((globalClock - toggleTimer[Row][Column]) < togglePulse)
+    {
+        Joystick.setButton(Number, 1);
+    }
+    else
+    {
+        Joystick.setButton(Number, 0);
+    }
+}
