@@ -20,6 +20,34 @@ void modButton(int row, int column)
         pushState[Row][Column] = rawState[Row][Column];
     }
 
+    //Analog inject disable logic
+    if (pushState[Row][Column] != latchLock[Row][Column])
+    {
+      if(globalClock - toggleTimer[Row][Column] < 400)
+      {
+        injectMuteCounter++; 
+      }
+      else
+      {
+        injectMuteCounter = 0;
+      }
+      latchLock[Row][Column] = pushState[Row][Column];
+      toggleTimer[Row][Column] = globalClock;
+    }
+    if (injectMuteCounter >= 5)
+    {
+      injectMuteTimer = globalClock;
+      injectMuteCounter = 0;
+    }
+    if (globalClock - injectMuteTimer < 20000)
+    {
+      injectMute = true;
+    }
+    else
+    {
+      injectMute = false;
+    }
+
     Joystick.setButton(Number, pushState[Row][Column]);
 }
 

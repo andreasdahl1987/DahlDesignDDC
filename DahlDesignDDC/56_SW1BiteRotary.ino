@@ -1,21 +1,5 @@
 void SW1BiteRotary(int analogPin, int switchNumber, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
 {
-    int Pin = analogPin;
-    int Pos1 = pos1;
-    int Pos2 = pos2;
-    int Pos3 = pos3;
-    int Pos4 = pos4;
-    int Pos5 = pos5;
-    int Pos6 = pos6;
-    int Pos7 = pos7;
-    int Pos8 = pos8;
-    int Pos9 = pos9;
-    int Pos10 = pos10;
-    int Pos11 = pos11;
-    int Pos12 = pos12;
-
-    bool Reverse = reverse;
-
     int N = switchNumber - 1;
 
     int Number = analogButtonNumber[N];
@@ -41,7 +25,7 @@ void SW1BiteRotary(int analogPin, int switchNumber, int fieldPlacement, int pos1
     
     #endif
 
-    int positions[12] = { Pos1, Pos2, Pos3, Pos4, Pos5, Pos6, Pos7, Pos8, Pos9, Pos10, Pos11, Pos12 };
+    int positions[12] = { pos1, pos2, pos3, pos4, pos5, pos6, pos7, pos8, pos9, pos10, pos11, pos12 };
 
     int differ = 0;
     int result = 0;
@@ -56,7 +40,7 @@ void SW1BiteRotary(int analogPin, int switchNumber, int fieldPlacement, int pos1
 
     result--;
 
-    if (Reverse)
+    if (reverse)
     {
         result = 11 - result;
     }
