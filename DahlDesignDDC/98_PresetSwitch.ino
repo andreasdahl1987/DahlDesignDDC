@@ -155,6 +155,11 @@ void presetNext(int8_t row, int8_t column)
         }
         presets(switchPreset);
     }
+    //Push preset
+
+    long push = 0;
+    push = push | (switchPreset << 10);
+    buttonField = buttonField | push;
 }
 
 void presetPrevious(int8_t row, int8_t column)
@@ -188,4 +193,10 @@ void presetPrevious(int8_t row, int8_t column)
         }
         presets(switchPreset);
     }
+    
+    //Push preset
+
+    long push = 0;
+    push = push | (switchPreset << 10);
+    buttonField = buttonField | push;
 }
