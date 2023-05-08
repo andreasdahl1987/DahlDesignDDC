@@ -109,18 +109,22 @@ void EEPROMfirst()
 {
 #if (USING_CAT24C512 == 1 || USING_CB1 == 1 || USING_32U4EEPROM == 1)
 
-  
-    uint16_t virgin = read16bitFromEEPROM(UTIL);
-    if (virgin == 1 || RESET_EEPROM == 0);
+    resetEEPROM = read16bitFromEEPROM(UTIL);
+    delay(5);
+    if (resetEEPROM > 0 || RESET_EEPROM == 1)
     {
         write16bitToEEPROM(UTIL, 0);
-        
+        delay(5);
         for(int i = 0; i < 12; i++)
         {
             write16bitToEEPROM(BITEPOINT+(i*2), 300);
+            delay(5);
             write16bitToEEPROM(LEDSLOT+(i*2), 25);
+            delay(5);
             write16bitToEEPROM(BRAKESLOT+(i*2), 50);
+            delay(5);
             write16bitToEEPROM(THROTTLESLOT+(i*2), 1000);
+            delay(5);
         }
     }
 #endif
