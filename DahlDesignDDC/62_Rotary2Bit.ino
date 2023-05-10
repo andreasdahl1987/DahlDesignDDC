@@ -100,6 +100,7 @@ void rotary2Modes(int row, int column, int fieldPlacement, int hybridPositions, 
                 if ((difference > 0 && difference < 2) || difference < -2)
                 {
                     toggleTimer[Row][Column] = toggleTimer[Row][Column] + 1 - (2 * Reverse);
+                    
                 }
                 else if ((difference < 0 && difference > -2) || difference > 2)
                 {
@@ -747,6 +748,13 @@ void DDS2bit(int row, int column, bool reverse)
     int HyPos = 12;
     int Reverse = reverse;
 
+    #if (USING_CAT24C512 == 1 || USING_32U4EEPROM == 1 || USING_CB1 == 1)
+      if (DDS_s_init)
+      {
+        toggleTimer[Row][Column] = read16bitFromEEPROM(DDS_s);
+      }
+    #endif
+
     if (latchState[ddButtonRow - 1][ddButtonCol - 1] && !switchMode[Row][Column + 1])  //Jumping 
     {
         Number = Number + 12;
@@ -757,7 +765,6 @@ void DDS2bit(int row, int column, bool reverse)
                 Joystick.releaseButton(i + Number - 12);
             }
         }
-
     }
 
     //Find switch absolute position
@@ -783,7 +790,6 @@ void DDS2bit(int row, int column, bool reverse)
     int result = pos;
 
     //Short debouncer on switch rotation
-
     if (pushState[Row][Column] != result)
     {
         if (globalClock - switchTimer[Row][Column] > (encoder2Wait + encoder2Pulse + encoderCooldown))
@@ -871,12 +877,19 @@ void DDS2bit(int row, int column, bool reverse)
                         toggleTimer[Row][Column] = HyPos;
                     }
                 }
-
                 //If we're not in hybrid at all, reset counter
                 else if (switchMode[Row][Column + 1])
                 {
                     toggleTimer[Row][Column] = 0;
                 }
+                #if (USING_CAT24C512 == 1 || USING_32U4EEPROM == 1 || USING_CB1 == 1)
+                  if (DDS_s_init)
+                  {
+                    toggleTimer[Row][Column] = read16bitFromEEPROM(DDS_s);
+                    DDS_s_init = false;
+                  }
+                  write16bitToEEPROM(DDS_s, toggleTimer[Row][Column]);
+                #endif
             }
             else
             {

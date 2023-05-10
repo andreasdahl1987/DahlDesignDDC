@@ -327,7 +327,7 @@ void CB1switchTable()
   //Row 7
   if(CB1_ADC1 == 1)
   {
-    if(globalClock > 500) //Preventing button pressed on boot
+    if(globalClock > 1000) //Preventing button pressed on boot
     {
        for (int i = 0; i<CB1_ADC1_CHANNELS; i++)
       {
@@ -341,11 +341,18 @@ void CB1switchTable()
         }
       }
     }
+    else
+    {
+      for (int i = 0; i<CB1_ADC1_CHANNELS; i++)
+      {
+        rawState[6][i] = 0;
+      }
+    }
   }
   
   if(CB1_ADC2 == 1)
   {
-    if(globalClock > 500) //Preventing button pressed on boot
+    if(globalClock > 1000) //Preventing button pressed on boot
     {
       for (int i = 4; i<4+CB1_ADC2_CHANNELS; i++)
       {
@@ -358,6 +365,13 @@ void CB1switchTable()
           rawState[6][i] = 0;
         }
       }    
+    }
+    else
+    {
+      for (int i = 4; i<4+CB1_ADC2_CHANNELS; i++)
+      {
+        rawState[6][i] = 0;
+      }
     }
   }
 

@@ -126,6 +126,8 @@ void EEPROMfirst()
             write16bitToEEPROM(THROTTLESLOT+(i*2), 1000);
             delay(5);
         }
+        write16bitToEEPROM(DDS_b, 0);
+        delay(5);
     }
 #endif
 }

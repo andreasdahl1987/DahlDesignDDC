@@ -10,7 +10,8 @@
 //MEMORY POSITIONS
 
 #define UTIL 0
-#define DDS 8
+#define DDS_b 8
+#define DDS_s 10
 #define BITEPOINT 128
 #define LEDSLOT 256
 #define BRAKESLOT 384
@@ -19,7 +20,8 @@
 
 #if (USING_CAT24C512 == 1 || USING_32U4EEPROM == 1 || USING_CB1 == 1)
 uint16_t resetEEPROM = 0;
-int DDSvariables;
+bool DDS_b_init = true;
+bool DDS_s_init = true;
 int oldBitePoint;
 int oldLED;
 int oldBrake;
