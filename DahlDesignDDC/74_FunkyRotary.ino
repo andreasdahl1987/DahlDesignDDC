@@ -67,6 +67,13 @@ void DDSfunky(int Arow, int Acol, int Bcol) {
 
     int bCol = Bcol - 1;
 
+    #if (USING_CAT24C512 == 1 || USING_32U4EEPROM == 1 || USING_CB1 == 1)
+      if (DDS_s_init)
+      {
+        toggleTimer[Row][Column] = read16bitFromEEPROM(DDS_s);
+      }
+    #endif
+
     //Reading switch mode
     toggleTimer[Row][bCol] = switchMode[Row][bCol] << 1 | switchMode[Row][Column];
 
@@ -131,6 +138,19 @@ void DDSfunky(int Arow, int Acol, int Bcol) {
                 if ((!toggleTimer[Row][bCol]) == 1)
                 {
                     toggleTimer[Row][Column] --; //Counter for position switch
+                    //Keep the counters in place
+                     if (toggleTimer[Row][Column] < 0)
+                    {
+                        toggleTimer[Row][Column] = 11;
+                    }
+                    #if (USING_CAT24C512 == 1 || USING_32U4EEPROM == 1 || USING_CB1 == 1)
+                      if (DDS_s_init)
+                      {
+                        toggleTimer[Row][Column] = read16bitFromEEPROM(DDS_s);
+                        DDS_s_init = false;
+                      }
+                      write16bitToEEPROM(DDS_s, toggleTimer[Row][Column]);
+                    #endif
                 }
                 switchModeLock[Row][bCol] = !switchModeLock[Row][bCol]; //For MODE 4
                 if (pushState[modButtonRow - 1][modButtonCol - 1] == 1) //MODE CHANGE
@@ -204,6 +224,19 @@ void DDSfunky(int Arow, int Acol, int Bcol) {
                 if ((!toggleTimer[Row][bCol]) == 1)
                 {
                     toggleTimer[Row][Column] ++;
+                    //Keep the counters in place
+                    if (toggleTimer[Row][Column] > 11)
+                    {
+                        toggleTimer[Row][Column] = 0;
+                    }
+                    #if (USING_CAT24C512 == 1 || USING_32U4EEPROM == 1 || USING_CB1 == 1)
+                      if (DDS_s_init)
+                      {
+                        toggleTimer[Row][Column] = read16bitFromEEPROM(DDS_s);
+                        DDS_s_init = false;
+                      }
+                      write16bitToEEPROM(DDS_s, toggleTimer[Row][Column]);
+                    #endif
                 }
                 switchModeLock[Row][Column] = !switchModeLock[Row][Column]; //For MODE 4
                 if (pushState[modButtonRow - 1][modButtonCol - 1] == 1) //MODE CHANGE
@@ -231,15 +264,6 @@ void DDSfunky(int Arow, int Acol, int Bcol) {
         latchLock[Row][Column] = 0;
     }
 
-    //Keep the counters in place
-    if (toggleTimer[Row][Column] > 11)
-    {
-        toggleTimer[Row][Column] = 0;
-    }
-    else if (toggleTimer[Row][Column] < 0)
-    {
-        toggleTimer[Row][Column] = 11;
-    }
     if (toggleTimer[Row][bCol] > 3)
     {
         toggleTimer[Row][bCol] = 0;
