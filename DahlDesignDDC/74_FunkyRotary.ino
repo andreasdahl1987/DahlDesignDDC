@@ -2,9 +2,8 @@
 //----FUNKY ENCODER-----------
 //----------------------------
 
-
-void funkyRotary(int Arow, int Acol, int Bcol, bool reverse) {
-
+void funkyRotary(int Arow, int Acol, int Bcol, bool reverse) 
+{
     int Row = Arow - 1;
     int Column = Acol - 1;
     int Number = buttonNumber[Row][Column];
@@ -51,7 +50,144 @@ void funkyRotary(int Arow, int Acol, int Bcol, bool reverse) {
 
     Joystick.setButton(Number + reverse, (globalClock - switchTimer[Row][Column] < funkyPulse));
     Joystick.setButton(Number + 1 - reverse, (globalClock - switchTimer[Row][bCol] < funkyPulse));
+}
 
+void funkyRotaryMod(int Arow, int Acol, int Bcol, bool reverse) 
+{
+    int Row = Arow - 1;
+    int Column = Acol - 1;
+    int Number = buttonNumber[Row][Column];
+
+    if (pushState[modButtonRow - 1][modButtonCol - 1] == 1)
+    {
+      Number += 2;
+    }
+
+    int bCol = Bcol - 1;
+
+    if (!rawState[Row][Column] && !rawState[Row][bCol])
+    {
+        pushState[Row][Column] = 1;
+    }
+    else if (!rawState[Row][Column] && rawState[Row][bCol])
+    {
+        pushState[Row][Column] = 2;
+        latchLock[Row][Column] = 1; //Fetching 01
+    }
+    else if (rawState[Row][Column] && rawState[Row][bCol])
+    {
+        pushState[Row][Column] = 3;
+    }
+    else if (rawState[Row][Column] && !rawState[Row][bCol])
+    {
+        pushState[Row][Column] = 4;
+        latchLock[Row][bCol] = 1; //Fetching 10
+    }
+
+    if ((globalClock - switchTimer[Row][Column] > funkyCooldown) && (globalClock - switchTimer[Row][bCol] > funkyCooldown))
+    {
+        if ((latchLock[Row][bCol] && pushState[Row][Column] == 1) || (latchLock[Row][Column] && pushState[Row][Column] == 3))
+        {
+            switchTimer[Row][Column] = globalClock;
+        }
+
+        else if ((latchLock[Row][bCol] && pushState[Row][Column] == 3) || (latchLock[Row][Column] && pushState[Row][Column] == 1))
+        {
+            switchTimer[Row][bCol] = globalClock;
+        }
+    }
+
+    else
+    {
+        latchLock[Row][bCol] = 0;
+        latchLock[Row][Column] = 0;
+    }
+
+    Joystick.setButton(Number + reverse, (globalClock - switchTimer[Row][Column] < funkyPulse));
+    Joystick.setButton(Number + 1 - reverse, (globalClock - switchTimer[Row][bCol] < funkyPulse));
+}
+
+void funkyRotaryStack(int stackButtonRow, int stackButtonColumn, int layers, int Arow, int Acol, int Bcol, bool reverse) 
+{
+    int Row = Arow - 1;
+    int Column = Acol - 1;
+    int bCol = Bcol - 1;
+
+    int ButtonRow = stackButtonRow - 1;
+    int ButtonCol = stackButtonColumn - 1;
+
+    //Button logics
+    if (pushState[ButtonRow][ButtonCol] != rawState[ButtonRow][ButtonCol] && (globalClock - switchTimer[ButtonRow][ButtonCol]) > buttonCooldown)
+    {
+        switchTimer[ButtonRow][ButtonCol] = globalClock;
+        pushState[ButtonRow][ButtonCol] = rawState[ButtonRow][ButtonCol];
+    }
+
+    if ((globalClock - switchTimer[ButtonRow][ButtonCol]) > buttonCooldown)
+    {
+        pushState[ButtonRow][ButtonCol] = rawState[ButtonRow][ButtonCol];
+    }
+
+    if (pushState[ButtonRow][ButtonCol] == 0)
+    {
+        latchLock[ButtonRow][ButtonCol] = false;
+    }
+
+    if (pushState[ButtonRow][ButtonCol] == 1 && !latchLock[ButtonRow][ButtonCol])
+    {
+        latchLock[ButtonRow][ButtonCol] = true;
+        toggleTimer[ButtonRow][ButtonCol] ++;
+    }
+    if (toggleTimer[ButtonRow][ButtonCol] >= layers)
+    {
+      toggleTimer[ButtonRow][ButtonCol] = 0;
+    }
+    
+    //Adjust button number
+
+    int Number = buttonNumber[Row][Column] + toggleTimer[ButtonRow][ButtonCol] * 2;
+
+    //Encoder logic
+    if (!rawState[Row][Column] && !rawState[Row][bCol])
+    {
+        pushState[Row][Column] = 1;
+    }
+    else if (!rawState[Row][Column] && rawState[Row][bCol])
+    {
+        pushState[Row][Column] = 2;
+        latchLock[Row][Column] = 1; //Fetching 01
+    }
+    else if (rawState[Row][Column] && rawState[Row][bCol])
+    {
+        pushState[Row][Column] = 3;
+    }
+    else if (rawState[Row][Column] && !rawState[Row][bCol])
+    {
+        pushState[Row][Column] = 4;
+        latchLock[Row][bCol] = 1; //Fetching 10
+    }
+
+    if ((globalClock - switchTimer[Row][Column] > funkyCooldown) && (globalClock - switchTimer[Row][bCol] > funkyCooldown))
+    {
+        if ((latchLock[Row][bCol] && pushState[Row][Column] == 1) || (latchLock[Row][Column] && pushState[Row][Column] == 3))
+        {
+            switchTimer[Row][Column] = globalClock;
+        }
+
+        else if ((latchLock[Row][bCol] && pushState[Row][Column] == 3) || (latchLock[Row][Column] && pushState[Row][Column] == 1))
+        {
+            switchTimer[Row][bCol] = globalClock;
+        }
+    }
+
+    else
+    {
+        latchLock[Row][bCol] = 0;
+        latchLock[Row][Column] = 0;
+    }
+
+    Joystick.setButton(Number + reverse, (globalClock - switchTimer[Row][Column] < funkyPulse));
+    Joystick.setButton(Number + 1 - reverse, (globalClock - switchTimer[Row][bCol] < funkyPulse));
 }
 
 void DDSfunky(int Arow, int Acol, int Bcol) {
