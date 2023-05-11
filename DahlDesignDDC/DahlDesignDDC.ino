@@ -9,3 +9,8 @@
  * 
  * If you find this software helpful, feel free to make a donation: https://www.paypal.com/donate?hosted_button_id=GLYWGTDZNXURJ
  */
+
+ #define DDCID 0x02
+ #define MAJORVERSION 2
+ #define MINORVERSION 7
+ #define PATCHVERSION 0

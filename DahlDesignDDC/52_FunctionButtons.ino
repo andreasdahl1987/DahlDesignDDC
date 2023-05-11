@@ -119,6 +119,14 @@ void DDButton(int row, int column)
     int Row = row - 1;
     int Column = column - 1;
 
+    #if (USING_CAT24C512 == 1 || USING_32U4EEPROM == 1 || USING_CB1 == 1)
+    if (DDS_b_init)
+    {
+      latchState[Row][Column] = read16bitFromEEPROM(DDS_b);
+      DDS_b_init = false;
+    }
+    #endif
+
     if (pushState[Row][Column] != rawState[Row][Column] && (globalClock - switchTimer[Row][Column]) > buttonCooldown)
     {
         switchTimer[Row][Column] = globalClock;
@@ -139,5 +147,6 @@ void DDButton(int row, int column)
     {
         latchLock[Row][Column] = true;
         latchState[Row][Column] = !latchState[Row][Column];
+        write16bitToEEPROM(DDS_b, latchState[Row][Column]);
     }
 }

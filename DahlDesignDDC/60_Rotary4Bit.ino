@@ -530,6 +530,13 @@ void DDS4bit(int row, int column, bool reverse)
     int HyPos = 12;
     int Reverse = reverse;
 
+    #if (USING_CAT24C512 == 1 || USING_32U4EEPROM == 1 || USING_CB1 == 1)
+      if (DDS_s_init)
+      {
+        toggleTimer[Row][Column] = read16bitFromEEPROM(DDS_s);
+      }
+    #endif
+    
     if (latchState[ddButtonRow - 1][ddButtonCol - 1] && !switchMode[Row][Column + 1])  //Jumping 
     {
         Number = Number + 12;
@@ -540,10 +547,8 @@ void DDS4bit(int row, int column, bool reverse)
                 Joystick.releaseButton(i + Number - 12);
             }
         }
-
     }
-
-
+    
     //Find switch absolute position
 
     bool Pin1 = rawState[Row][Column];
@@ -659,6 +664,14 @@ void DDS4bit(int row, int column, bool reverse)
                 {
                     toggleTimer[Row][Column] = 0;
                 }
+                #if (USING_CAT24C512 == 1 || USING_32U4EEPROM == 1 || USING_CB1 == 1)
+                  if (DDS_s_init)
+                  {
+                    toggleTimer[Row][Column] = read16bitFromEEPROM(DDS_s);
+                    DDS_s_init = false;
+                  }
+                  write16bitToEEPROM(DDS_s, toggleTimer[Row][Column]);
+                #endif
             }
             else
             {
