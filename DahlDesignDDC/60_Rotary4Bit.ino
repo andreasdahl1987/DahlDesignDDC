@@ -268,6 +268,175 @@ void rotary4Inc(int row, int column, bool reverse)
     }
 }
 
+void rotary4Mod(int row, int column, bool reverse)
+{
+    int Row = row - 1;
+    int Column = column - 1;
+    int Number = buttonNumber[Row][Column];
+    int Reverse = reverse;
+
+    if (pushState[modButtonRow - 1][modButtonCol - 1] == 1)
+    {
+      Number += 2;
+    }
+
+    //Find switch absolute position
+
+    bool Pin1 = rawState[Row][Column];
+    bool Pin2 = rawState[Row][Column + 1];
+    bool Pin3 = rawState[Row][Column + 2];
+    bool Pin4 = rawState[Row][Column + 3];
+
+    bool array[4] = { Pin1, Pin2, Pin3, Pin4 };
+
+    int pos = 0;
+
+    for (int i = 0; i < 4; i++)
+    {
+        if (array[i])
+        {
+            pos |= (1 << i);
+        }
+    }
+
+    pos = pos ^ (pos >> 4);
+    pos = pos ^ (pos >> 2);
+    pos = pos ^ (pos >> 1);
+
+    int result = pos;
+    //Short debouncer on switch rotation
+
+    if (pushState[Row][Column] != result && (globalClock - switchTimer[Row][Column] > encoderPulse))
+    {
+        switchTimer[Row][Column] = globalClock;
+    }
+    if (globalClock - switchTimer[Row][Column] > encoderWait)
+    {
+        if (globalClock - switchTimer[Row][Column] < encoderPulse)
+        {
+            int difference = result - pushState[Row][Column];
+
+            if ((difference > 0 && difference < 6) || difference < -6)
+            {
+                Joystick.setButton(Number + Reverse, 1);
+                Joystick.setButton(Number + 1 - Reverse, 0);
+            }
+            else
+            {
+                Joystick.setButton(Number + Reverse, 0);
+                Joystick.setButton(Number + 1 - Reverse, 1);
+            }
+        }
+        else
+        {
+            Joystick.setButton(Number, 0);
+            Joystick.setButton(Number + 1, 0);
+            pushState[Row][Column] = result;
+        }
+    }
+}
+
+void rotary4Stack (int stackButtonRow, int stackButtonColumn, int fieldPlacement, int layers, int row, int column, bool reverse)
+{
+    int Row = row - 1;
+    int Column = column - 1;
+    int Reverse = reverse;
+
+    int ButtonRow = stackButtonRow - 1;
+    int ButtonCol = stackButtonColumn - 1;
+
+    //Button logics
+    if (pushState[ButtonRow][ButtonCol] != rawState[ButtonRow][ButtonCol] && (globalClock - switchTimer[ButtonRow][ButtonCol]) > buttonCooldown)
+    {
+        switchTimer[ButtonRow][ButtonCol] = globalClock;
+        pushState[ButtonRow][ButtonCol] = rawState[ButtonRow][ButtonCol];
+    }
+
+    if ((globalClock - switchTimer[ButtonRow][ButtonCol]) > buttonCooldown)
+    {
+        pushState[ButtonRow][ButtonCol] = rawState[ButtonRow][ButtonCol];
+    }
+
+    if (pushState[ButtonRow][ButtonCol] == 0)
+    {
+        latchLock[ButtonRow][ButtonCol] = false;
+    }
+
+    if (pushState[ButtonRow][ButtonCol] == 1 && !latchLock[ButtonRow][ButtonCol])
+    {
+        latchLock[ButtonRow][ButtonCol] = true;
+        toggleTimer[ButtonRow][ButtonCol] ++;
+    }
+    if (toggleTimer[ButtonRow][ButtonCol] >= layers)
+    {
+      toggleTimer[ButtonRow][ButtonCol] = 0;
+    }
+    
+    //Adjust button number
+
+    int Number = buttonNumber[Row][Column] + toggleTimer[ButtonRow][ButtonCol] * 2;  
+    //Find switch absolute position
+
+    bool Pin1 = rawState[Row][Column];
+    bool Pin2 = rawState[Row][Column + 1];
+    bool Pin3 = rawState[Row][Column + 2];
+    bool Pin4 = rawState[Row][Column + 3];
+
+    bool array[4] = { Pin1, Pin2, Pin3, Pin4 };
+
+    int pos = 0;
+
+    for (int i = 0; i < 4; i++)
+    {
+        if (array[i])
+        {
+            pos |= (1 << i);
+        }
+    }
+
+    pos = pos ^ (pos >> 4);
+    pos = pos ^ (pos >> 2);
+    pos = pos ^ (pos >> 1);
+
+    int result = pos;
+    //Short debouncer on switch rotation
+
+    if (pushState[Row][Column] != result && (globalClock - switchTimer[Row][Column] > encoderPulse))
+    {
+        switchTimer[Row][Column] = globalClock;
+    }
+    if (globalClock - switchTimer[Row][Column] > encoderWait)
+    {
+        if (globalClock - switchTimer[Row][Column] < encoderPulse)
+        {
+            int difference = result - pushState[Row][Column];
+
+            if ((difference > 0 && difference < 6) || difference < -6)
+            {
+                Joystick.setButton(Number + Reverse, 1);
+                Joystick.setButton(Number + 1 - Reverse, 0);
+            }
+            else
+            {
+                Joystick.setButton(Number + Reverse, 0);
+                Joystick.setButton(Number + 1 - Reverse, 1);
+            }
+        }
+        else
+        {
+            Joystick.setButton(Number, 0);
+            Joystick.setButton(Number + 1, 0);
+            pushState[Row][Column] = result;
+        }
+    }
+    
+    //Push stack placement
+    long push = 0;
+    push = push | toggleTimer[ButtonRow][ButtonCol];
+    push = push << (fieldPlacement - 1);
+    rotaryField = rotaryField | push;
+}
+
 void rotary4Multi(int row, int column, int positions, bool reverse)
 {
     int Row = row - 1;
