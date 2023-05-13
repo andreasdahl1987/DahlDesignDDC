@@ -49,7 +49,7 @@
 
 //ROW7
 
-#define GROUND_CALIBRATION 10
+#define GROUND_CALIBRATION 8
 
 //ROW8 setup
 #define DISABLE_ALERT_PINS 0  //Gives access to COL2 and COL3. Disables ALERT pins for the ADCs, making them heavier to run.

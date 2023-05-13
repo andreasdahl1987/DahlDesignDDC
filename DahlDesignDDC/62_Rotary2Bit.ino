@@ -294,6 +294,219 @@ void rotary2Inc(int row, int column, bool reverse)
     }
 }
 
+void rotary2Mod(int row, int column, bool reverse)
+{
+    int Row = row - 1;
+    int Column = column - 1;
+    int Number = buttonNumber[Row][Column];
+    int Reverse = reverse;
+
+    if (pushState[modButtonRow - 1][modButtonCol - 1] == 1)
+    {
+      Number += 2;
+    }
+
+    //Find switch absolute position
+
+    bool Pin1 = rawState[Row][Column];
+    bool Pin2 = rawState[Row][Column + 1];
+
+
+    bool array[2] = { Pin1, Pin2 };
+
+    int pos = 0;
+
+    for (int i = 0; i < 2; i++)
+    {
+        if (array[i])
+        {
+            pos |= (1 << i);
+        }
+    }
+
+    pos = pos ^ (pos >> 1);
+
+    int result = pos;
+
+    //Short debouncer on switch rotation
+
+    if (pushState[Row][Column] != result)
+    {
+        if (globalClock - switchTimer[Row][Column] > (encoder2Wait + encoder2Pulse + encoderCooldown))
+        {
+            switchTimer[Row][Column] = globalClock;
+            latchLock[Row][Column] = true;
+        }
+        else if ((globalClock - switchTimer[Row][Column] > encoder2Wait) && latchLock[Row][Column])
+        {
+            //Engage encoder pulse timer
+            switchTimer[Row][Column + 1] = globalClock;
+
+            //Update difference, storing the value in pushState on pin 2
+            pushState[Row][Column + 1] = result - pushState[Row][Column];
+
+            //Give new value to pushState
+            pushState[Row][Column] = result;
+
+            //Make sure we dont do this again
+            latchLock[Row][Column] = false;
+        }
+    }
+
+    int difference = pushState[Row][Column + 1];
+    if (difference != 0)
+    {
+        if (globalClock - switchTimer[Row][Column + 1] < encoder2Pulse + encoder2Wait)
+        {
+            if ((difference > 0 && difference < 2) || difference < -2)
+            {
+                Joystick.setButton(Number + Reverse, 1);
+                Joystick.setButton(Number + 1 - Reverse, 0);
+            }
+            else if ((difference < 0 && difference > -2) || difference > 2)
+            {
+                Joystick.setButton(Number + Reverse, 0);
+                Joystick.setButton(Number + 1 - Reverse, 1);
+            }
+            else
+            {
+                pushState[Row][Column + 1] = 0;
+            }
+        }
+        else
+        {
+            pushState[Row][Column + 1] = 0;
+            pushState[Row][Column] = result;
+            Joystick.setButton(Number, 0);
+            Joystick.setButton(Number + 1, 0);
+        }
+    }
+}
+
+void rotary2Stack (int stackButtonRow, int stackButtonColumn, int fieldPlacement, int layers, int row, int column, bool reverse)
+{
+    int Row = row - 1;
+    int Column = column - 1;
+    int Reverse = reverse;
+
+    int ButtonRow = stackButtonRow - 1;
+    int ButtonCol = stackButtonColumn - 1;
+
+    //Button logics
+    if (pushState[ButtonRow][ButtonCol] != rawState[ButtonRow][ButtonCol] && (globalClock - switchTimer[ButtonRow][ButtonCol]) > buttonCooldown)
+    {
+        switchTimer[ButtonRow][ButtonCol] = globalClock;
+        pushState[ButtonRow][ButtonCol] = rawState[ButtonRow][ButtonCol];
+    }
+
+    if ((globalClock - switchTimer[ButtonRow][ButtonCol]) > buttonCooldown)
+    {
+        pushState[ButtonRow][ButtonCol] = rawState[ButtonRow][ButtonCol];
+    }
+
+    if (pushState[ButtonRow][ButtonCol] == 0)
+    {
+        latchLock[ButtonRow][ButtonCol] = false;
+    }
+
+    if (pushState[ButtonRow][ButtonCol] == 1 && !latchLock[ButtonRow][ButtonCol])
+    {
+        latchLock[ButtonRow][ButtonCol] = true;
+        toggleTimer[ButtonRow][ButtonCol] ++;
+    }
+    if (toggleTimer[ButtonRow][ButtonCol] >= layers)
+    {
+      toggleTimer[ButtonRow][ButtonCol] = 0;
+    }
+    
+    //Adjust button number
+
+    int Number = buttonNumber[Row][Column] + toggleTimer[ButtonRow][ButtonCol] * 2;  
+
+    //Find switch absolute position
+
+    bool Pin1 = rawState[Row][Column];
+    bool Pin2 = rawState[Row][Column + 1];
+
+
+    bool array[2] = { Pin1, Pin2 };
+
+    int pos = 0;
+
+    for (int i = 0; i < 2; i++)
+    {
+        if (array[i])
+        {
+            pos |= (1 << i);
+        }
+    }
+
+    pos = pos ^ (pos >> 1);
+
+    int result = pos;
+
+    //Short debouncer on switch rotation
+
+    if (pushState[Row][Column] != result)
+    {
+        if (globalClock - switchTimer[Row][Column] > (encoder2Wait + encoder2Pulse + encoderCooldown))
+        {
+            switchTimer[Row][Column] = globalClock;
+            latchLock[Row][Column] = true;
+        }
+        else if ((globalClock - switchTimer[Row][Column] > encoder2Wait) && latchLock[Row][Column])
+        {
+            //Engage encoder pulse timer
+            switchTimer[Row][Column + 1] = globalClock;
+
+            //Update difference, storing the value in pushState on pin 2
+            pushState[Row][Column + 1] = result - pushState[Row][Column];
+
+            //Give new value to pushState
+            pushState[Row][Column] = result;
+
+            //Make sure we dont do this again
+            latchLock[Row][Column] = false;
+        }
+    }
+
+    int difference = pushState[Row][Column + 1];
+    if (difference != 0)
+    {
+        if (globalClock - switchTimer[Row][Column + 1] < encoder2Pulse + encoder2Wait)
+        {
+            if ((difference > 0 && difference < 2) || difference < -2)
+            {
+                Joystick.setButton(Number + Reverse, 1);
+                Joystick.setButton(Number + 1 - Reverse, 0);
+            }
+            else if ((difference < 0 && difference > -2) || difference > 2)
+            {
+                Joystick.setButton(Number + Reverse, 0);
+                Joystick.setButton(Number + 1 - Reverse, 1);
+            }
+            else
+            {
+                pushState[Row][Column + 1] = 0;
+            }
+        }
+        else
+        {
+            pushState[Row][Column + 1] = 0;
+            pushState[Row][Column] = result;
+            Joystick.setButton(Number, 0);
+            Joystick.setButton(Number + 1, 0);
+        }
+    }
+
+    //Push stack placement
+    long push = 0;
+    push = push | toggleTimer[ButtonRow][ButtonCol];
+    push = push << (fieldPlacement - 1);
+    rotaryField = rotaryField | push;
+}
+
+
 void rotary2Multi(int row, int column, int positions, bool reverse)
 {
     int Row = row - 1;
