@@ -12,6 +12,6 @@ There are different algorithms for the center push button and the directional bu
 
 When setting up a funky switch in 30\_Switches.ino, you should list the directinonal functions first, and the center push button function last:
 
-<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption><p><mark style="color:green;"><strong>Correct</strong></mark></p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (1).png" alt=""><figcaption><p><mark style="color:green;"><strong>Correct</strong></mark></p></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (7) (1).png" alt=""><figcaption><p><mark style="color:red;"><strong>Incorrect</strong></mark></p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (1) (2).png" alt=""><figcaption><p><mark style="color:red;"><strong>Incorrect</strong></mark></p></figcaption></figure>

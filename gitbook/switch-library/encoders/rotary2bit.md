@@ -53,7 +53,7 @@ The button numbers used is determined by the number written in the block for the
 
 {% tabs %}
 {% tab title="Description" %}
-Setup with several switch modes, including a [hybrid switch.](../multiswitch-complexes.md#hybrid) You can set the amount of positions of the hybrid switch to any number.&#x20;
+Setup with several switch modes, including a [hybrid switch.](../multiswitch-complexes/#hybrid) You can set the amount of positions of the hybrid switch to any number.&#x20;
 
 Modes:
 

@@ -25,7 +25,7 @@ To make LED 5 to 9 plain blue with a brightnes of 50%:
 
 `colorLED(5,9,0x0000FF,50);`
 
-``
+
 {% endtab %}
 
 {% tab title="Requirements" %}
@@ -82,7 +82,7 @@ Premade solution for using LED indication on setting the bite point, typically t
 {% endtab %}
 
 {% tab title="Example" %}
-`void biteLED(`biteEngageStartLED, biteEngageStopLED, biteChainStartLED, brightness, engageColor, step1Color , step2Color, step3Color, engageBlink)
+`void biteLED(`biteEngageStartLED, biteEngageStopLED, engageBrightness, biteChainStartLED, biteBrightness, engageColor, step1Color , step2Color, step3Color, engageBlink)
 
 `Typed out and explained:`
 
@@ -90,8 +90,9 @@ Premade solution for using LED indication on setting the bite point, typically t
 biteLED(
 3, //------------Bite setting indicator starts on LED number 3
 3, //------------Ending on LED number 3, i.e. including only LED number 3.
+25, //-----------Relative brightness of indicator set to 25%
 24, //-----------The 10-LED chain starts on LED nummber 24. Will include LEDs 24-33.
-80, //-----------Relative brightness 80%
+80, //-----------Relative brightness of bite value LEDs set to 80%
 0xFF0000, //------Bite setting indicator is red.
 0X00FF00, //------Bite value indicators are green on setting with increments of 10.
 0X0000FF, //------Bite value indicators are blue on setting with increments of 1
@@ -102,7 +103,7 @@ true);  //--------Engage indicator will blink
 
 * As a default, engageColor is set to orange, steps 1 -3 are teal - purple - orange and engageBlink is set to true. If you dont fill in anything for these values, defaults will be used:
 
-`biteLED(5,8,16,60);`
+`biteLED(5,8,30,16,60);`
 {% endtab %}
 
 {% tab title="Requirements" %}
@@ -118,9 +119,9 @@ Ties x amount of LEDs to a x-position [rotary switch](../../../../switch-library
 {% endtab %}
 
 {% tab title="Example" %}
-void rotaryLED(switchNumber, startLED,  positions, color, brightness,  offset, reverse)
+void rotaryLED(switchNumber, startLED,  positions, color, brightness,  offset, reverse, backgroundColor, backgroundBrightness)
 
-`Typed out and explained:`
+Typed out and explained:
 
 ```
 rotaryLED(
@@ -130,12 +131,16 @@ rotaryLED(
 0x0000FF //------Blue color
 80, //-----------Relative brightness 80%
 0, //------------No offset
-true); //---------Direction reversed
+true, //---------Direction reversed
+0xFF0000, //-----Background color red, optional
+40);  //---------Relative background brightness 40%, optional
+
 
 ```
 
 * The offset allows you to match the LED and the switch position. If your first LED surrounding the rotary switch is at the bottom, looping around the top - and the first switch position is at the top, you'll need some offset. Ranges from 0 to \<position -1>. So in the case above, from 0 to 11. A value of 1 will more it 1 position clockwise, a position of 11 will more it 11 positions clockwise (or 1 positions counter-clockwise).&#x20;
 * The reverse setting will allow you to change the direction of the LED loop around the rotary switch, in case you circled it the wrong way.&#x20;
+* The background color and brightness is optional to fil in, by default black and 25%.&#x20;
 {% endtab %}
 
 {% tab title="Requirements" %}

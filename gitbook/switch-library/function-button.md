@@ -5,6 +5,8 @@
 {% tabs %}
 {% tab title="Description" %}
 Momentary pushbutton, should be assigned a button number. When held, it will change the mode of switches that are pressed/rotated.
+
+It can also deactivate all [analog injects](../3.-coding/advanced/analog-inject.md) for 20 seconds by hitting the button 3 times quickly. This is to make button mapping/calibration less of a hassle with analog injects.&#x20;
 {% endtab %}
 
 {% tab title="Example" %}
@@ -67,7 +69,7 @@ In esssense this makes it possible to do a single clutch launch and a 1-handed l
 {% tab title="Example" %}
 `void launchButton(int row, int column, int switchNumberAffected)`
 
-For a switch on row 2 column 4, coupling to clutch that has been assigned[ switch# 3 ](../1.-project-planning/analog-inputs.md)on master paddle:
+For a switch on row 2 column 4, coupling to clutch that has been assigned[ switch# 3 ](../1.-project-planning/analog-inputs/)on master paddle:
 
 `launchButton(2,4,3);`
 {% endtab %}
@@ -174,4 +176,3 @@ For a switch on row 2 column 4 -> `presetButton(2,4);`
 {% endtab %}
 {% endtabs %}
 
-__

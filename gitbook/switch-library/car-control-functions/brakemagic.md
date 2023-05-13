@@ -1,8 +1,8 @@
 # BrakeMagic
 
-If you didn't know about it before, everyone got introduced to "brake magic" during the 2021 Azerbaijan Grand Prix where Lewis Hamilton accidentally left his on and locked his front wheels into T1 afer safety car restart.&#x20;
+If you didn't know about it before, everyone got introduced to "brake magic" during the 2021 Azerbaijan Grand Prix where Lewis Hamilton accidentally left his on and locked his front wheels into T1 after standing start restart.&#x20;
 
-For Lewis, the brake magic is a toggle that does a number of changes to brakes, particularily useful for keeping the front tires and brakes warm during safety car. In DDC, the brake magic is a system that applies a given percent of brake application when on. The amount can be adjusted on the fly, and can be defined in your presets.&#x20;
+For Lewis, the brake magic is a toggle that does a number of changes to brakes, particularily useful for keeping the front tires and brakes warm during safety car. In DDC, the brake magic is a system that applies a given percent of brake application when on. The amount can be adjusted on the fly, and can be defined in your presets, or stored per preset if using EEPROM.&#x20;
 
 Brake magic requires the sim to support [secondary brake ](./)inputs. &#x20;
 

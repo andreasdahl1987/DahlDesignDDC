@@ -58,7 +58,7 @@ In esssense this makes it possible to do a single clutch launch and a 1-handed l
 {% tab title="Example" %}
 `void launchButton(int row, int column, int switchNumberAffected)`
 
-For a switch on row 2 column 4, coupling to clutch that has been assigned[ switch# 3 ](../../1.-project-planning/analog-inputs.md)on master paddle:
+For a switch on row 2 column 4, coupling to clutch that has been assigned[ switch# 3 ](../../1.-project-planning/analog-inputs/)on master paddle:
 
 `launchButton(2,4,3);`
 {% endtab %}
@@ -103,11 +103,11 @@ For a switch on row 2 column 4 -> `neutralButton(2,4);`
 
 {% tabs %}
 {% tab title="Description" %}
-Set up a device that output variable voltages, typically a potentiometer, to adjust the bite point. Should be wired [like this](../../2.-wiring/analog-wiring.md).&#x20;
+Set up a device that output variable voltages, typically a potentiometer, to adjust the bite point. Should be wired [like this](../../2.-wiring/analog/analog-wiring.md).&#x20;
 
 When you add a bitePot() to the code, it will override any other bite point setting method. To prevent this, you can add a toggle or button to lock the bitePot() switch.
 
-As with all analog switches, you will need to [read out ](../../1.-project-planning/analog-inputs.md#reading-a-value)values from the outer positions of the switch.&#x20;
+As with all analog switches, you will need to [read out ](../../1.-project-planning/analog-inputs/#reading-a-value)values from the outer positions of the switch.&#x20;
 {% endtab %}
 
 {% tab title="Example" %}

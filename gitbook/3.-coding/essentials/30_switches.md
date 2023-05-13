@@ -6,7 +6,7 @@ A simple pushbutton on row 3, column 1 would be written as `pushButton(3,1);`
 
 ### Direct wiring
 
-With matrix wiring or shift register wiring, you will just use the switch table adresses in the switch functions as explained [below.](30\_switches.md#setup) However, with [direct wiring](../../2.-wiring/switches/non-matrix-wiring.md), you'll have to add some extra lines.
+With matrix wiring or shift register wiring, you will just use the switch table adresses in the switch functions as explained [below.](30\_switches.md#setup) However, with [direct wiring](../../2.-wiring/switch-inputs/non-matrix-wiring.md), you'll have to add some extra lines.
 
 * You might have asked yourself how your direct wired switches has found their way to the switch table so far. They haven't, they're still floating around. Your direct wired switches needs to have their values read and that value conveyed to a dedicated adress in the table. From there, the switch now behaves as any switch in the switch table, and allows you to use any fuction that works with a matrix wired or shift register wired button.
 * The `switchTableInject()` function shold be used for every pin on the Arduino that is used for direct wired switches.

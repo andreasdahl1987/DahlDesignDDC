@@ -4,11 +4,13 @@ Analog inject is a bridge between the two switch systems in DDC; the switch tabl
 
 It will create a virtual switch in the row/column location of your choice. You'll set up a range of values and a threshold within this range that will turn the switch on/off when crossed.
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (2).png" alt=""><figcaption></figcaption></figure>
 
 When this is set up, you can use this switch like any other switch in the firmware; set it ut as modButton(), pushButton(), pushPull() or anything else.
 
-There are two versions:
+Because these features can cause some issues when mapping or calibrating controllers in the sim, there is the option to <mark style="background-color:red;">deactivate all analog injects for 20 seconds by hitting the</mark> [<mark style="background-color:red;">modButton()</mark>](../../switch-library/function-button.md#modbutton) <mark style="background-color:red;">quickly 3 times.</mark>&#x20;
+
+There are three versions:
 
 ### analogInject()
 
@@ -40,13 +42,25 @@ In this case we're looking at a specific range in a potentiometer's rotation. Th
 
 `analogInjectSingle(int8_t pin, int8_t row, int8_t column, int startValue, int endValue, uint8_t threshold)`
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (86).png" alt=""><figcaption></figcaption></figure>
 
 analogInjectSingle() is used exactly like analogInject() above, the difference being that the function will not look at the upper limit to determine whether the switch is on or not. This function is easier to use whenever you're making a single on/off switch, and not exploiting a part of the range in the analog signal. A good usage would be for hall sensor shifters.&#x20;
 
+### rotaryInject()
+
+`rotaryInject(int8_t switchNumber, int8_t switchPosition, int8_t row, int8_t column)`
+
+While it is possible to use `analogInject()` to extract the positions of a multiposition switch and inject them into the switch table, the rotaryInject() function will make this a lot easier. The function takes the switch number of the rotary, the desired position, and where to put it in the switch table.&#x20;
+
+For instance, we could use a 12-position switch with [quickRotary1Bite()](../../switch-library/rotary-switches/quickrotary.md#quickrotary1bite) and inject the last two positions to the switch table. In this example row 6, columns 1 and 2. We'll them be using these two for [brakeMagic() ](../../switch-library/car-control-functions/brakemagic.md#brakemagic)for position 11 and [quickSwitch()](../../switch-library/car-control-functions/quickswitch.md#quickswitch) for position 12.&#x20;
+
+<figure><img src="../../.gitbook/assets/image (57).png" alt=""><figcaption></figcaption></figure>
+
+This way we can make an ABS rotary which is bound to ABS 1-9 in positions 1 to 9, ABS off in position 10, brake magic active in position 11, and position 12 a WET mode that uses the quickSwitch system to set your ABS, TC1, TC2 and engine map rotaries to predetermined values. The rotaryInject() really allows you to mix and match the features of the analog and digital switch systems to make hybrid solutions.&#x20;
+
 ### In the sketch
 
-The function is called in 30\_Switches.ino. And as with the [switchTableInject()](../essentials/30\_switches.md#direct-wiring), it is recommended to call this function before calling the switch functions that will use the virtual switch. Like this:
+These functions are called in 30\_Switches.ino. And as with the [switchTableInject()](../essentials/30\_switches.md#direct-wiring), it is recommended to call this function before calling the switch functions that will use the virtual switch. Like this:
 
 ```
 //------------------------------------
@@ -57,9 +71,11 @@ The function is called in 30\_Switches.ino. And as with the [switchTableInject()
 analogInject(A1, 5, 5, 242, 634, 25);
 pushButton(5,5);
 
+analogInjectSingle(A3, 4, 2, 242, 634, 25);
+modButton(4,2);
 
-
-
+rotaryInject(3, 12, 4, 3);
+brakeMagic(4,3);
 
 
 //------------------------------------
@@ -87,7 +103,7 @@ Joystick.sendState();
 
 ### What is it for?
 
-This function gives a lot of freedom for creative solutions. Here are some ideas:
+These features gives a lot of freedom for creative solutions. Here are some ideas:
 
 * Hall sensor button/paddle.
 * Push/pull shifter using a single hall sensor set up with two analogInject() functions.

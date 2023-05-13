@@ -200,5 +200,3 @@ So typed out in 30\_Switches.ino:
 * quickSwitch() or quickSwitch34() button to override position.
 {% endtab %}
 {% endtabs %}
-
-r

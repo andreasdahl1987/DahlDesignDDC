@@ -6,9 +6,9 @@ A DDC controller can send information about switch modes, bite point, and really
 
 [Here is the list of available properties.](https://dahl-design.gitbook.io/properties/properties/ddc)
 
-**1:** [**Download SimHub**](https://www.simhubdash.com/download-2/)****
+**1:** [**Download SimHub**](https://www.simhubdash.com/download-2/)
 
-**2:** [**Install Dahl Design Properties plugin**](https://dahl-design.gitbook.io/properties/introduction/install)****
+**2:** [**Install Dahl Design Properties plugin**](https://dahl-design.gitbook.io/properties/introduction/install)
 
 **3: Enable controller input plugin**
 

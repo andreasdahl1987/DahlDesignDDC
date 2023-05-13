@@ -5,7 +5,7 @@
 //-------JOYSTICK--------
 //-----------------------
 
-#define BUTTONCOUNT 0
+#define BUTTONCOUNT 64
 #define HATCOUNT 0
 
 Joystick_ Joystick(JOYSTICK_DEFAULT_REPORT_ID, JOYSTICK_TYPE_JOYSTICK,
@@ -26,7 +26,11 @@ Joystick_ Joystick(JOYSTICK_DEFAULT_REPORT_ID, JOYSTICK_TYPE_JOYSTICK,
 
 The **only thing** you need to think about here is setting the `BUTTONCOUNT` to the amount of buttons you controller will output and setting `HATCOUNT` to the number of hat switches you're planning to use (a typical hat switch like the Alps multi-direction switches dont have to be set up as a hat switch, it can be set up as a collection of pushbuttons if you prefer).&#x20;
 
-If you have a 12-way switch and 8 buttons that will typically be 20 buttons. But depends on how you let DDC use them. Imporant to update this if you add more button numbers, or the buttons will not be included in the controller. 128 is the maximum amount.
+The button count by default is set to 64. If not using all 64 button numbers, that's not a problem. However, your controller will be identified as a 64 button controller by windows, so there will be a bunch of buttons that are never used. Again, doesn't matter, it is just a bit untidy. Feel free to set the button count to whatever your actual count is. If you have more than 64 button numbers used and don't increase the count, those buttons are pressed out in space somewhere and will never be registered by Windows. 128 is maximum.&#x20;
+
+If you have a 12-way switch and 8 buttons that will typically be 20 buttons. But depends on how you let DDC use them. You could have the 12-way switch use 36 button numbers, and your pushbuttons not using any - just be used for features and functions. The point is, this number does not reflect how many switches you controller has, just how many button numbers is uses.&#x20;
+
+
 
 Example:&#x20;
 

@@ -106,7 +106,7 @@ else if (statement3)
 }
 </code></pre>
 
-To finish it off, we can add an _**else - statement**_** ** in the end if we feel like it:
+To finish it off, we can add an _**else - statement**_ in the end if we feel like it:
 
 ```
 if (statement1)

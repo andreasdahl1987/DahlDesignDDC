@@ -20,7 +20,7 @@ Fill in the row all the funky pins go to and then up/right/down/left, in that or
 
 `funkyHat(2,1,3,4,2,1);`
 
-``
+
 {% endtab %}
 
 {% tab title="Requirements" %}

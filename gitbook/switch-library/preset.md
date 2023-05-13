@@ -64,5 +64,3 @@ For a switch on row 3 column 5 -> `presetPrevious(3,5);`
 * None
 {% endtab %}
 {% endtabs %}
-
-#### p

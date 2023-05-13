@@ -62,4 +62,21 @@ Here the field placement is set to 1. So you'll find the mode of this switch in 
 {% endtab %}
 {% endtabs %}
 
-__
+#### pulseButton()
+
+{% tabs %}
+{% tab title="Description" %}
+A button that gives a short pulse on pressing the button. Holding the button will not give a continous button press. Releasing the button will not give a button press. The button numer is the one you set in your matrix setup.
+{% endtab %}
+
+{% tab title="Example" %}
+`void pulseButton(int row, int col)`
+
+For a switch on row 3 column 5 -> `pulseButton(3,5);`
+{% endtab %}
+
+{% tab title="Requirements" %}
+* 1 button number
+{% endtab %}
+{% endtabs %}
+

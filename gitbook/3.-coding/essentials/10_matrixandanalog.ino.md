@@ -78,7 +78,7 @@ When using direct wiring or shift registers, the rows and columns aren't actual 
 
 Any row or column that only has direct wired switches or shift registers on them, should be written as "**99**". The reason we have to use a dummy is that we need to build a matrix in the firmware with the correct size. As mentioned earlier, each switch needs a slot in the firmware matrix to get memory to store switch states, timers for debouncing, etc.&#x20;
 
-* These examples from [1. Project planning](../../1.-project-planning/switches/non-matrix-switches.md):
+* These examples from [1. Project planning](../../1.-project-planning/switch-inputs/non-matrix-switches.md):
 
 <figure><img src="../../.gitbook/assets/image (27).png" alt=""><figcaption></figcaption></figure>
 
@@ -94,7 +94,7 @@ Any row or column that only has direct wired switches or shift registers on them
 
 * A hybrid system with the first two rows reserved for direct wired switches could look like this:
 
-<figure><img src="../../.gitbook/assets/image (23).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (23) (1).png" alt=""><figcaption></figcaption></figure>
 
 `uint8_t row[] = {99,99,4,5,16};`
 

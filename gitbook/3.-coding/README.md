@@ -13,7 +13,7 @@ Here are the things you need:
 
 * You don't have to search GitHub for libraries. All libraries needed are included in the repository. They will however have to be moved over to your Arduino library folder. Usually found under documents/Arduino/libraries.&#x20;
 
-<figure><img src="../.gitbook/assets/image (24).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (24) (2).png" alt=""><figcaption></figcaption></figure>
 
 ## The sketch
 
@@ -21,7 +21,7 @@ Download the repository. The folder called `DahlDesignDDC` holds the "sketch". T
 
 To open the sketch, open the `DahlDesignDDC.ino` file, Arduino IDE will automatically include all the other files. All the files are now available as **tabs** in Arduino IDE.
 
-<figure><img src="../.gitbook/assets/image (6).png" alt=""><figcaption><p>Note the tabs at the top</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (6) (1).png" alt=""><figcaption><p>Note the tabs at the top</p></figcaption></figure>
 
 &#x20;Only some of these tabs are relevant to building your controller firmware, in fact only 4 of them are needed to get your firmware going, and a few more are optional.&#x20;
 
@@ -35,7 +35,7 @@ Before uploading any code to your controller, the IDE needs to know what board y
 * For SAMD21/51 boards, you actually need to roll back the core to an earlier version in order for it to work as a joystick. Version 1.6.19 or earlier is needed. I'm using 1.6.19. This is done in the boards manager.
 *
 
-    <figure><img src="../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (3) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 * For RP2040, the [Earle Philhower board cores](https://github.com/earlephilhower/arduino-pico) are used. Installation guide on that GitHub page. Also set the USB stack to Adafruit TinyUSB.
 
-<figure><img src="../.gitbook/assets/image (19).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (19) (2).png" alt=""><figcaption></figcaption></figure>

@@ -26,11 +26,15 @@ Check of a momentary button using a latching mode on a given row and column numb
 
 Returns true if you're in the preset in question. Example: `presetSearch(4)` will return TRUE of you're in preset 4, otherwise it returns FALSE.
 
-**modButtonPressed ()**
+#### **modButtonPressed ()**
 
 Returns TRUE if modbutton is pressed, otherwise FALSE. Doesnt require any input, simply write `modButtonPressed()`.&#x20;
 
-**rotaryPosition(int switchNumber, int switchPosition)**
+#### **rotaryPosition(int switchNumber, int switchPosition)**
 
 This function check a rotary switch for a given position. Give it the switch# assigned to your switch as well as a switch position. Will return TRUE if this switch is in that position, otherwise FALSE. Example: `rotaryPosition(3,9)` will check if the switch with switch# 3 is in position 9 or not.&#x20;
+
+#### **encoderStack(int row, int column, int layer)**
+
+This function check a stacked encoder for which layer it is currently in. Type in the row and column number for the stack button and which layer you want to check for. Stack layers start on 0.&#x20;
 

@@ -1,6 +1,6 @@
 # SimHub control
 
-For SImHub control, there isn't really any additional code to be written, but you have to set things up to allow SimHub to make contact with your controller.&#x20;
+For SimHub control, there isn't really any additional code to be written, but you have to set things up to allow SimHub to make contact with your controller.&#x20;
 
 First you'll need to[ set up a VID/PID](../../../4.-advanced-features/naming-the-controller.md) for the controller.
 
@@ -12,7 +12,7 @@ When you've [uploaded](../../upload.md) the code, you can connect to SimHub:
 
 * Select "Create oem leds test device"
 
-<figure><img src="../../../.gitbook/assets/image (14) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (14) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * Go to OEM configuration and type in the controllers VID and PID&#x20;
 

@@ -62,6 +62,5 @@ Here the field placement is set to 4. So you'll find the mode of this switch in 
 {% endtab %}
 {% endtabs %}
 
-__
 
-__
+

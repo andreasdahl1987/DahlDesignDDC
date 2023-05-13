@@ -4,7 +4,7 @@
 
 {% tabs %}
 {% tab title="Description" %}
-Set up a device that output variable voltages, typically a load cell, hall sensor or potentiometer, to controll the brake joystick axis. Should be wired [like this](../../2.-wiring/analog-wiring.md). It is considered an analog switch, and will have to be assigned a[ switch number](../../1.-project-planning/analog-inputs.md) and you'll have to[ read out](../../1.-project-planning/analog-inputs.md#reading-a-value) some values to [calibrate](./) it.&#x20;
+Set up a device that output variable voltages, typically a load cell, hall sensor or potentiometer, to controll the brake joystick axis. Should be wired [like this](../../2.-wiring/analog/analog-wiring.md). It is considered an analog switch, and will have to be assigned a[ switch number](../../1.-project-planning/analog-inputs/) and you'll have to[ read out](../../1.-project-planning/analog-inputs/#reading-a-value) some values to [calibrate](./) it.&#x20;
 
 Is also available with a [filter](filtered-curves.md).
 {% endtab %}
@@ -28,7 +28,7 @@ For a potentiometer with its center pin connected to A3, assigned switch# 4, it 
 
 {% tabs %}
 {% tab title="Description" %}
-Set up a device that output variable voltages, typically a hall sensor or potentiometer, to controll the throttle joystick axis. Should be wired [like this](../../2.-wiring/analog-wiring.md). It is considered an analog switch, and will have to be assigned a[ switch number](../../1.-project-planning/analog-inputs.md) and you'll have to[ read out](../../1.-project-planning/analog-inputs.md#reading-a-value) some values to [calibrate](./) it.&#x20;
+Set up a device that output variable voltages, typically a hall sensor or potentiometer, to controll the throttle joystick axis. Should be wired [like this](../../2.-wiring/analog/analog-wiring.md). It is considered an analog switch, and will have to be assigned a[ switch number](../../1.-project-planning/analog-inputs/) and you'll have to[ read out](../../1.-project-planning/analog-inputs/#reading-a-value) some values to [calibrate](./) it.&#x20;
 
 Is also available with a [filter](filtered-curves.md).
 {% endtab %}
