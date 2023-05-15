@@ -1,6 +1,6 @@
 # Switch table
 
-This section will explain how to plan the switch table. No matter how you chose to wire your switches to the microcontroller, they have to end up in the table in the firmware. You'll have to plan you controllers switches accordingly, and there are some rules to follow. For matrix wiring, the wiring will naturally match the firmware table. For switches that are wired [directly](non-matrix-switches.md) to the microcontroller, or through [shift registers](shift-register.md) or [port expanders](port-expander.md), there are some additional things to pay attention to.&#x20;
+This section will explain how to plan the switch table. No matter how you chose to wire your switches to the microcontroller, they have to end up in the table in the firmware. You'll have to plan your controllers switches accordingly, and there are some rules to follow. For matrix wiring, the wiring will naturally match the firmware table. For switches that are wired [directly](non-matrix-switches.md) to the microcontroller, or through [shift registers](shift-register.md) or [port expanders](port-expander.md), there are some additional things to pay attention to.&#x20;
 
 ### Planning the switch table
 
