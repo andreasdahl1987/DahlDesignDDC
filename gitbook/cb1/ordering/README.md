@@ -1,6 +1,8 @@
 # Ordering
 
-The CB1 is not sold by me. Instead, you'll have one build just for you. Everything you need to quickly order some of these boards is available for free. You can of course also copy this circuit design and put it directly into your own circuits.&#x20;
+I'm not running a store. The idea is to keep this open and free. In this manual you'll find a guide on how to order this PCB fomr a manufacturer. It is simpler than you'd migth think, gives you a whole lot of room for customization and you might learn something useful in the process!
+
+Thta being said, the CB1 has a massive setup-fee for PCB assembly, which is a fairly static fee. JLCPCB requires a minimum of 2 boards, and half the cost is the setup fee. And then comes shipping and taxes. For this reason, I'll be making some batch orders now and then if there are enough people interested. You'll be saving on both the board, the shipping and likely the taxes as well. All in all a pretty substantial reduction in cost.
 
 ### Disclaimer
 
