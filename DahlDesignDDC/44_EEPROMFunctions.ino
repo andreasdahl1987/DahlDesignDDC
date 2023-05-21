@@ -101,7 +101,11 @@ uint16_t read16bitFromEEPROM(uint16_t location)
     delayMicroseconds(200);
     
     return value;
+    
+#else
 
+  return 0;
+  
 #endif
 }
 
