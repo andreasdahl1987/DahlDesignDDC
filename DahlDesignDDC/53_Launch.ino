@@ -160,7 +160,7 @@ void neutralButton(int row, int column)
     int Column = column - 1;
     int Number = buttonNumber[Row][Column];
     int FieldPlacement = 15;
-    int ActivePlacement = 5;
+    int ActivePlacement = 8;
 
     if (pushState[Row][Column] != rawState[Row][Column] && (globalClock - switchTimer[Row][Column]) > buttonCooldown)
     {

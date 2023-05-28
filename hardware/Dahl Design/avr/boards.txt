@@ -1,0 +1,29 @@
+DahlDesignSW1.name=Dahl Design SW1
+        
+DahlDesignSW1.upload.tool=arduino:avrdude
+DahlDesignSW1.upload.protocol=avr109
+DahlDesignSW1.upload.maximum_size=28672
+DahlDesignSW1.upload.maximum_data_size=2560
+DahlDesignSW1.upload.speed=57600
+DahlDesignSW1.upload.disable_flushing=true
+DahlDesignSW1.upload.use_1200bps_touch=true
+DahlDesignSW1.upload.wait_for_upload_port=true
+DahlDesignSW1.bootloader.tool=arduino:avrdude
+DahlDesignSW1.bootloader.low_fuses=0xff
+DahlDesignSW1.bootloader.high_fuses=0xd8
+DahlDesignSW1.bootloader.extended_fuses=0xcb
+DahlDesignSW1.bootloader.file=caterina/Caterina-Leonardo.hex
+DahlDesignSW1.bootloader.unlock_bits=0x3F
+DahlDesignSW1.bootloader.lock_bits=0x2F     
+DahlDesignSW1.build.mcu=atmega32u4
+DahlDesignSW1.build.f_cpu=16000000L
+
+DahlDesignSW1.build.vid=0x35F9
+DahlDesignSW1.build.pid=0x0DDC
+DahlDesignSW1.build.usb_product="Dahl Design SW1"
+
+DahlDesignSW1.build.usb_manufacturer="Dahl Design"
+DahlDesignSW1.build.board=AVR_LEONARDO
+DahlDesignSW1.build.core=arduino:arduino
+DahlDesignSW1.build.variant=arduino:leonardo
+DahlDesignSW1.build.extra_flags={build.usb_flags}

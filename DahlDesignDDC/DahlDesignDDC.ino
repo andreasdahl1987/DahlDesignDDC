@@ -1,16 +1,14 @@
  /*
- * Welcome to DDC!
+ * Welcome to the SW1 firmware!
  * 
- * The manual on GitHub wil walk you through the setup in detal: https://dahl-design.gitbook.io/ddc/
- * 
- * For a quick setup with a Pro Micro board or similar, you only need to look through tabs 08, 10 and 30. 
+ * The firmware is built with DDC. The manual on GitHub wil walk you through the setup in detal: https://dahl-design.gitbook.io/ddc/
  * 
  * Any questions, contact me on Discord: Andreas Dahl#9514
  * 
- * If you find this software helpful, feel free to make a donation: https://www.paypal.com/donate?hosted_button_id=GLYWGTDZNXURJ
+ * If you find this project useful, feel free to make a donation: https://www.paypal.com/donate?hosted_button_id=GLYWGTDZNXURJ
  */
 
- #define DDCID 0x02
+ #define DDCID 0x00
  #define MAJORVERSION 2
- #define MINORVERSION 7
- #define PATCHVERSION 1
+ #define MINORVERSION 0
+ #define PATCHVERSION 0

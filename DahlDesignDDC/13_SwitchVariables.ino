@@ -22,7 +22,7 @@ int8_t analogSwitchMode2[analogSwitchCount];
 
 //Smoothing of analog signal
 
-#define reads 10
+#define reads 3
 int readings[analogSwitchCount][reads];        // the readings from the analog input
 int8_t readIndex[analogSwitchCount];           // the index of the current reading
 int total[analogSwitchCount];                  // the running total

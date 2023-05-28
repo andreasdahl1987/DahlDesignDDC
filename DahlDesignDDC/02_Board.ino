@@ -19,7 +19,7 @@
 //------------------------------
 
 #define RESET_EEPROM 0
-#define USING_32U4EEPROM 0
+#define USING_32U4EEPROM 1
 
 //------------------------------
 //-------DAHL DESIGN CB1--------

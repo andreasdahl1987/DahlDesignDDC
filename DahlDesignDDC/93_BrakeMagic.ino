@@ -62,7 +62,7 @@ void brakeMagic(int row, int column)
             latchState[Row][Column] = true;
 
             long push = 1;
-            push = push << 6;
+            push = push << 9;
             buttonField = buttonField | push;
         }
 
@@ -73,7 +73,7 @@ void brakeMagic(int row, int column)
             latchLock[Row][Column] = false;
 
             long push = 0;
-            push = push << 6;
+            push = push << 9;
             buttonField = buttonField | push;
         }
     }
@@ -96,4 +96,3 @@ void brakeMagic(int row, int column)
         }
     }
 }
-

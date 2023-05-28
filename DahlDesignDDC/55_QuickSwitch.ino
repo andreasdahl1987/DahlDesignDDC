@@ -31,10 +31,10 @@ void quickSwitch(int8_t row, int8_t column)
     }
 
     //Push switch mode
-    long pesh = 0;
+    int32_t pesh = 0;
     pesh = pesh | switchMode[Row][Column];
-    pesh = pesh << 7;
-    buttonField = buttonField | pesh;
+    pesh = pesh << 1;
+    rotaryField = rotaryField | pesh;
 
     //SWITCH MODE 2: MOMENTARY BUTTON
     if (switchMode[Row][Column])
@@ -60,10 +60,10 @@ void quickSwitch(int8_t row, int8_t column)
     }
 
     //Push switch active
-    long push = 0;
+    int32_t push = 0;
     push = push | quickSwitchState;
-    push = push << 8;
-    buttonField = buttonField | push;
+    push = push << 14;
+    rotaryField = rotaryField | push;
 }
 
 void quickSwitch12(int8_t row, int8_t column, int8_t fieldPlacement)
