@@ -15,10 +15,14 @@ VID/PIDs cost a lot of money. Using a random VID/PID for your private projects i
 
 Both VID and PID are 16-bit numbers. Commonly typed as a 4-digit hexadecimal number.&#x20;
 
-You're free to use the DDC VID/PID for your personal projects:
+DDC has two VID/PID's, one for the 32U4 and one for the RP2040. You're free to use the DDC VID/PIDs for your personal projects:
 
-* VID: 0x35f9
-* PID: 0xDDC
+* ATMEGA 32U4
+  * VID: 0x35f9
+  * PID: 0xDDC
+* RP2040
+  * VID: 0x2E8A
+  * PID: 0x1053
 
 SimHub uses the VID/PID to grab controllers for custom LED protocols, which is why knowing the VID/PID you give your controller is essential for LED setups. Next we'll look at how to do this for ATMEGA 32U4 boards and RP2040 boards.
 
@@ -38,7 +42,7 @@ If you fire up Arduino IDE, you'll see that these are now available as board cor
 
 <figure><img src="../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-You can either use the DDC core, or you can customize your own. In that case, lets have a look at the `boards.txt` file in the MyController folder:
+You can either use the DDC core, which will give you the DDC VID/PID straight away, and naming your controller "Dahl Design Controller". Or you can customize your own to give the controller any name and PIV/VID you want. In that case, lets have a look at the `boards.txt` file in the MyController folder:
 
 ```
 MyController.name=My Controller
@@ -94,8 +98,8 @@ Setting up name and VID/PID for RP2040 is quite simple. Go to `04_USB.ino`:
 ```
 //This only relevant for RP2040 LED support
 
-#define VID_PI 0x35f9
-#define PID_PI 0x0DDC
+#define VID_PI 0x2E8A
+#define PID_PI 0x1053
 #define MAKER "Andreas Dahl"
 #define CONTROLLER_NAME "Dahl Design Controller"
 ```

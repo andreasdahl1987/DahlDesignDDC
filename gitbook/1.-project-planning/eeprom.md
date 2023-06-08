@@ -25,7 +25,7 @@ There are some libraries that will reserve some of the flash memory of a RP2040 
 
 The solution is to add a EEPROM device to your project.
 
-### CAT12C512
+### CAT24C512
 
 DDC supports adding EEPROM in the shape of a I2C device called CAT24C512. Since it runs on I2C protocol, it will need to use the SCL and SDA pin on your microcontroller. More on this in the [wiring ](../2.-wiring/eeprom.md)section.
 
