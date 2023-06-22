@@ -4,7 +4,7 @@ void throttleHoldSW1(int8_t buttonRow, int8_t buttonCol, int8_t rotaryRow, int8_
     int8_t ButtonCol = buttonCol - 1;
     int Row = rotaryRow - 1;
     int Column = rotaryColA - 1;
-    int Number = buttonNumber[rotaryRow][rotaryColA];
+    int Number = buttonNumber[Row][Column];
 
     int bCol = rotaryColB - 1;
     
@@ -115,7 +115,7 @@ void throttleHoldSW1(int8_t buttonRow, int8_t buttonCol, int8_t rotaryRow, int8_
     }
 
     long push = pushState[ButtonRow][ButtonCol];
-    push = push << 5;
+    push = push << 8;
     buttonField = buttonField | push;
 }
 
