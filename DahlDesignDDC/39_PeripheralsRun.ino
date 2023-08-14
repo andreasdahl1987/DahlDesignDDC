@@ -599,7 +599,7 @@ void ADS1115Run(int chipNumber, int channelCount, int rate, int gain)
     Wire.endTransmission(); 
  }
 
-  void SSD1306clearPush(uint8_t screenNumber, string text, uint8_t color, float textSize, uint8_t cursorX, uint8_t cursorY, bool wait)
+  void SSD1306clearPush(uint8_t screenNumber, const char* text, uint8_t color, float textSize, uint8_t cursorX, uint8_t cursorY, bool wait)
   {
     tcaselect(screenNumber-1);
     oled.begin();
@@ -614,7 +614,7 @@ void ADS1115Run(int chipNumber, int channelCount, int rate, int gain)
     }
   }
   
-  void SSD1306push(string text, float textSize, uint8_t cursorX, uint8_t cursorY, bool wait)
+  void SSD1306push(const char* text, float textSize, uint8_t cursorX, uint8_t cursorY, bool wait)
   {
     tcaselect(screenNumber-1);
     oled.setCursor(cursorX, cursorY);
