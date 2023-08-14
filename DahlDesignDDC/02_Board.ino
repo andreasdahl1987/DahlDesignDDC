@@ -65,6 +65,23 @@
 #define SDA1PIN 2
 #define SCL1PIN 3
 
+//OLED DEVICE
+#define USING_SSD1306 0
+#define OLED_Address 0x3C
+
+#define TCAADDR 0x70 //Screen multiplexer
+
+#define SCREEN_WIDTH 128 // OLED display width
+#define SCREEN_HEIGHT 64 // OLED display height
+#define LOGO_HEIGHT   16 //Keep this for now?
+#define LOGO_WIDTH    16 //Keep this for now?
+
+#if(USING_SSD1306 == 1)
+  #include <Adafruit_GFX.h>
+  #include <Adafruit_SSD1306.h>
+  Adafruit_SSD1306 oled(1);
+#endif
+
 //PORT EXPANDER PCA9555
 #define USING_PCA9555 0
 #define PCA9555_I2C_NUMBER 0

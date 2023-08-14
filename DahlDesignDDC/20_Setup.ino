@@ -53,9 +53,13 @@ void setup()
       #if (USING_PCA9555 == 1)
         PCA9555Setup();
       #endif
-      
-      #if (USING_ADS1115 == 1 || USING_PCA9555 == 1)
-      startI2C();
+
+      #if (USING_SSD1306 == 1)
+        SSD1306setup();
+      #endif
+
+      #if (USING_ADS1115 == 1 || USING_PCA9555 == 1 || USING_SSD1306 == 1)
+        startI2C();
       #endif
 
       //I2C that required .begin first

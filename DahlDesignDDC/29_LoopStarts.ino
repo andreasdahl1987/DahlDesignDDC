@@ -37,6 +37,11 @@ void loop()
 
   runningPresets(); //Presets in the loop
 
+  OLEDrun(); //Screen commands
+  OLEDreactive(); //Screen reactions
+
+
+
   #if (USING_CB1 == 1)
     #if (CB1_PE1 == 1)
     PCA9555CB1(0x21, 16, 1);

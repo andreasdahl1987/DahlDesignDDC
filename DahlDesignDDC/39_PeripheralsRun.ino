@@ -588,3 +588,42 @@ void ADS1115Run(int chipNumber, int channelCount, int rate, int gain)
 }
 
 #endif //Using ADS1115
+
+#if (USING_SSD1306 == 1)
+
+ void tcaselect(uint8_t i) 
+ {
+    if (i > 7) return;
+    Wire.beginTransmission(TCAADDR);
+    Wire.write(1 << i);
+    Wire.endTransmission(); 
+ }
+
+  void SSD1306clearPush(uint8_t screenNumber, string text, uint8_t color, float textSize, uint8_t cursorX, uint8_t cursorY, bool wait)
+  {
+    tcaselect(screenNumber-1);
+    oled.begin();
+    oled.clearDisplay();
+    oled.setTextColor(color); //0 is black, 1 is white, 2 is inverted
+    oled.setCursor(cursorX, cursorY);
+    oled.setTextSize(textSize);
+    oled.println(text);
+    if (!wait)
+    {
+      oled.display();
+    }
+  }
+  
+  void SSD1306push(string text, float textSize, uint8_t cursorX, uint8_t cursorY, bool wait)
+  {
+    tcaselect(screenNumber-1);
+    oled.setCursor(cursorX, cursorY);
+    oled.setTextSize(textSize);
+    oled.println(text);
+    if (!wait)
+    {
+      oled.display();
+    }
+  }
+
+#endif

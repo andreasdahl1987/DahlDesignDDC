@@ -197,7 +197,7 @@ void ADS1115Setup()
 #endif
 
 
-#if (USING_CB1 == 1 || USING_PCA9555 == 1 || USING_ADS1115 == 1 || USING_CAT24C512 == 1)
+#if (USING_CB1 == 1 || USING_PCA9555 == 1 || USING_ADS1115 == 1 || USING_CAT24C512 == 1 || USING_SSD1306 == 1)
 void startI2C()
 {
 #if(BOARDTYPE == 2)
@@ -218,5 +218,16 @@ void startI2C()
   {
     Wire.begin();
   }
+}
+#endif
+
+#if(USING_SSD1306 == 1)
+void SSD1306setup()
+{
+  Wire.setSDA(SDA0PIN);
+  Wire.setSCL(SCL0PIN);
+  wire0Init = true;
+
+  oled.begin(SSD1306_SWITCHCAPVCC, OLED_Address);
 }
 #endif
