@@ -616,7 +616,6 @@ void ADS1115Run(int chipNumber, int channelCount, int rate, int gain)
   
   void SSD1306push(const char* text, float textSize, uint8_t cursorX, uint8_t cursorY, bool wait)
   {
-    tcaselect(screenNumber-1);
     oled.setCursor(cursorX, cursorY);
     oled.setTextSize(textSize);
     oled.println(text);
