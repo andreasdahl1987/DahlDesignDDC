@@ -45,10 +45,10 @@ void loop()
     PCA9555CB1(0x20, 8, 3);
     #endif
     #if (CB1_ADC1 == 1)
-    ADC1_CB1(0);
+    ADC1_CB1(14);
     #endif
     #if (CB1_ADC2 == 1)
-    ADC2_CB1(0);
+    ADC2_CB1(15);
     #endif
     CB1switchTable();
   #endif
