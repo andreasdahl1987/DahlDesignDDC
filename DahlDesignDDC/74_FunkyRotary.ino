@@ -52,6 +52,138 @@ void funkyRotary(int Arow, int Acol, int Bcol, bool reverse)
     Joystick.setButton(Number + 1 - reverse, (globalClock - switchTimer[Row][bCol] < funkyPulse));
 }
 
+void funkyBite(int Arow, int Acol, int Bcol, bool reverse) 
+{
+
+    int Row = Arow - 1;
+    int Column = Acol - 1;
+    int Number = buttonNumber[Row][Column];
+
+    int bCol = Bcol - 1;
+
+    //Reading switch mode
+    toggleTimer[Row][bCol] = switchMode[Row][bCol] << 1 | switchMode[Row][Column];
+
+    if (!rawState[Row][Column] && !rawState[Row][bCol])
+    {
+        pushState[Row][Column] = 1;
+    }
+    else if (!rawState[Row][Column] && rawState[Row][bCol])
+    {
+        pushState[Row][Column] = 2;
+        latchLock[Row][Column] = 1; //Fetching 01
+    }
+    else if (rawState[Row][Column] && rawState[Row][bCol])
+    {
+        pushState[Row][Column] = 3;
+    }
+    else if (rawState[Row][Column] && !rawState[Row][bCol])
+    {
+        pushState[Row][Column] = 4;
+        latchLock[Row][bCol] = 1; //Fetching 10
+    }
+
+    if ((globalClock - switchTimer[Row][Column] > funkyCooldown) && (globalClock - switchTimer[Row][bCol] > funkyCooldown))
+    {
+        if ((latchLock[Row][bCol] && pushState[Row][Column] == 1) || (latchLock[Row][Column] && pushState[Row][Column] == 3)) //CLOCKWIZE TURN
+        {
+            switchTimer[Row][Column] = globalClock;
+
+            if (pushState[biteButtonRow - 1][biteButtonCol - 1] && !biteButtonBit1 && !biteButtonBit2) //Engage in bite mode
+            {
+                biteButtonBit1 = true;
+            }
+            else if (!(!biteButtonBit1 && !biteButtonBit2)) //If we're in bite mode
+            {
+                if (biteButtonBit1 && !biteButtonBit2)
+                {
+                    bitePoint = bitePoint - 100;
+                    if (bitePoint < 0)
+                    {
+                        bitePoint = 1000;
+                    }
+                }
+                else if (!biteButtonBit1 && biteButtonBit2)
+                {
+                    bitePoint = bitePoint - 10;
+                    if (bitePoint < 0)
+                    {
+                        bitePoint = 1000;
+                    }
+                }
+                else if (biteButtonBit1 && biteButtonBit2)
+                {
+                    bitePoint = bitePoint - 1;
+                    if (bitePoint < 0)
+                    {
+                        bitePoint = 1000;
+                    }
+                }
+            }
+        }
+
+        else if ((latchLock[Row][bCol] && pushState[Row][Column] == 3) || (latchLock[Row][Column] && pushState[Row][Column] == 1)) //COUNTER CLOCKWIZE TURN
+        {
+            switchTimer[Row][bCol] = globalClock;
+
+            if (pushState[biteButtonRow - 1][biteButtonCol - 1] && !biteButtonBit1 && !biteButtonBit2) //Engage in bite mode
+            {
+                biteButtonBit1 = true;
+            }
+            else if (!(!biteButtonBit1 && !biteButtonBit2)) //If we're in bite mode
+            {
+                if (biteButtonBit1 && !biteButtonBit2)
+                {
+                    bitePoint = bitePoint + 100;
+                    if (bitePoint > 1000)
+                    {
+                        bitePoint = 1000;
+                    }
+                    else if (bitePoint == 1000)
+                    {
+                        bitePoint = 0;
+                    }
+                }
+                else if (!biteButtonBit1 && biteButtonBit2)
+                {
+                    bitePoint = bitePoint + 10;
+                    if (bitePoint > 1000)
+                    {
+                        bitePoint = 1000;
+                    }
+                    else if (bitePoint == 1000)
+                    {
+                        bitePoint = 0;
+                    }
+                }
+                else if (biteButtonBit1 && biteButtonBit2)
+                {
+                    bitePoint = bitePoint + 1;
+                    if (bitePoint > 1000)
+                    {
+                        bitePoint = 1000;
+                    }
+                    else if (bitePoint == 1000)
+                    {
+                        bitePoint = 0;
+                    }
+                }
+            }
+        }
+    }
+    else
+    {
+        latchLock[Row][bCol] = 0;
+        latchLock[Row][Column] = 0;
+    }
+
+    if (!biteButtonBit1 && !biteButtonBit2)
+    {
+        Joystick.setButton(Number + reverse, (globalClock - switchTimer[Row][Column] < funkyPulse));
+        Joystick.setButton(Number + 1 - reverse, (globalClock - switchTimer[Row][bCol] < funkyPulse));
+    }
+}
+
 void funkyRotaryMod(int Arow, int Acol, int Bcol, bool reverse) 
 {
     int Row = Arow - 1;
