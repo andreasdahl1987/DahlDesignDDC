@@ -9,7 +9,7 @@ int rotaryField = 0;
 
  Most significant
  16 - Unused because of bug in joystick library
- 15 
+ 15 - Bite button pressed
  14 - Dual clutches
  13 - Dual clutches
  12 - Bite point setting

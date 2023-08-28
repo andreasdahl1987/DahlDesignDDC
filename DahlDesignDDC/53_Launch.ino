@@ -8,7 +8,7 @@ void biteButton(int row, int column)
     int Row = row - 1;
     int Column = column - 1;
     int Number = buttonNumber[Row][Column];
-    int FieldPlacement = 6;
+    
     biteRefresh = false;
 
     if (pushState[Row][Column] != rawState[Row][Column] && (globalClock - switchTimer[Row][Column]) > buttonCooldown)
@@ -47,11 +47,69 @@ void biteButton(int row, int column)
             biteRefresh = true;
         }
     }
+    
+    //Push bite button state
+    long pesh = 0;
+    pesh = pesh | pushState[Row][Column] << 14;
+    rotaryField = rotaryField | pesh;
+
     //Push bite setting level
     long push = 0;
     push = push | biteButtonBit1;
     push = push | (biteButtonBit2 << 1);
-    push = push << (2 * (FieldPlacement - 1));
+    push = push << 10;
+    rotaryField = rotaryField | push;
+
+    Joystick.setRyAxis(bitePoint);
+    Joystick.setButton(Number, pushState[Row][Column]);
+}
+
+void biteButtonLatch(int row, int column)
+{
+    Joystick.setRyAxisRange(0, 1000);
+
+    biteButtonRow = row;
+    biteButtonCol = column;
+
+    int Row = row - 1;
+    int Column = column - 1;
+    int Number = buttonNumber[Row][Column];
+    int FieldPlacement = 6;
+    biteRefresh = false;
+
+    if (latchState[Row][Column] != rawState[Row][Column] && (globalClock - switchTimer[Row][Column]) > buttonCooldown)
+    {
+        switchTimer[Row][Column] = globalClock;
+        latchState[Row][Column] = rawState[Row][Column];
+    }
+
+    if ((globalClock - switchTimer[Row][Column]) > buttonCooldown)
+    {
+        latchState[Row][Column] = rawState[Row][Column];
+    }
+
+    //Scrolling through bite point setting
+    if (!latchState[Row][Column])
+    {
+        latchLock[Row][Column] = true;
+    }
+
+    if (latchState[Row][Column] && latchLock[Row][Column])
+    {
+        latchLock[Row][Column] = false;
+        pushState[Row][Column] = !pushState[Row][Column];
+    }
+
+    //Push bite button state
+    long pesh = 0;
+    pesh = pesh | pushState[Row][Column] << 14;
+    rotaryField = rotaryField | pesh;
+
+    //Push bite setting level
+    long push = 0;
+    push = push | biteButtonBit1;
+    push = push | (biteButtonBit2 << 1);
+    push = push << 10;
     rotaryField = rotaryField | push;
 
     Joystick.setRyAxis(bitePoint);
