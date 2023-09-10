@@ -227,7 +227,35 @@ void SSD1306setup()
   Wire.setSDA(SDA0PIN);
   Wire.setSCL(SCL0PIN);
   wire0Init = true;
-
-  oled.begin(SSD1306_SWITCHCAPVCC, OLED_Address);
+  
+  #if(SSD1306COUNT > 0)
+    SSD1306initiate(1);
+  #endif
+  #if(SSD1306COUNT > 1)
+    SSD1306initiate(2);
+  #endif
+  #if(SSD1306COUNT > 2)
+    SSD1306initiate(3);
+  #endif  
+  #if(SSD1306COUNT > 3)
+    SSD1306initiate(4);
+  #endif
+  #if(SSD1306COUNT > 4)
+    SSD1306initiate(5);
+  #endif
+  #if(SSD1306COUNT > 5)
+    SSD1306initiate(6);
+  #endif
+  
 }
+
+ void SSD1306initiate(int number)
+ {
+    tcaselect(number-1);
+    if(!displays[number-1].begin(SSD1306_SWITCHCAPVCC, OLED_Address)) 
+    {
+      for(;;);
+    }
+    displays[number-1].clearDisplay();
+ }
 #endif

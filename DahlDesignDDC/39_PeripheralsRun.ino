@@ -601,27 +601,29 @@ void ADS1115Run(int chipNumber, int channelCount, int rate, int gain)
 
   void SSD1306clearPush(uint8_t screenNumber, const char* text, uint8_t color, float textSize, uint8_t cursorX, uint8_t cursorY, bool wait)
   {
-    tcaselect(screenNumber-1);
-    oled.begin();
-    oled.clearDisplay();
-    oled.setTextColor(color); //0 is black, 1 is white, 2 is inverted
-    oled.setCursor(cursorX, cursorY);
-    oled.setTextSize(textSize);
-    oled.println(text);
+    int index = screenNumber-1;
+    tcaselect(index);
+    displays[index].begin();
+    displays[index].clearDisplay();
+    displays[index].setTextColor(color); //0 is black, 1 is white, 2 is inverted
+    displays[index].setCursor(cursorX, cursorY);
+    displays[index].setTextSize(textSize);
+    displays[index].println(text);
     if (!wait)
     {
-      oled.display();
+      displays[index].display();
     }
   }
   
-  void SSD1306push(const char* text, float textSize, uint8_t cursorX, uint8_t cursorY, bool wait)
+  void SSD1306push(int screenNumber, const char* text, float textSize, uint8_t cursorX, uint8_t cursorY, bool wait)
   {
-    oled.setCursor(cursorX, cursorY);
-    oled.setTextSize(textSize);
-    oled.println(text);
+    int index = screenNumber-1;
+    displays[index].setCursor(cursorX, cursorY);
+    displays[index].setTextSize(textSize);
+    displays[index].println(text);
     if (!wait)
     {
-      oled.display();
+      displays[index].display();
     }
   }
 

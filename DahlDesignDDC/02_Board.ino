@@ -67,19 +67,68 @@
 
 //OLED DEVICE
 #define USING_SSD1306 0
-#define OLED_Address 0x3C
+#define SSD1306COUNT 0
 
-#define TCAADDR 0x70 //Screen multiplexer
+#define OLED_Address 0x3C //Screen I2C address
+#define TCAADDR 0x70      //Screen multiplexer I2C address
 
-#define SCREEN_WIDTH 128 // OLED display width
-#define SCREEN_HEIGHT 64 // OLED display height
-#define LOGO_HEIGHT   16 //Keep this for now?
-#define LOGO_WIDTH    16 //Keep this for now?
+//Screen 1
+#define SCREEN_WIDTH_1 128 // OLED display width
+#define SCREEN_HEIGHT_1 64 // OLED display height
+//Screen 2
+#define SCREEN_WIDTH_2 128 // OLED display width
+#define SCREEN_HEIGHT_2 64 // OLED display height
+//Screen 3
+#define SCREEN_WIDTH_3 128 // OLED display width
+#define SCREEN_HEIGHT_3 32 // OLED display height
+//Screen 4
+#define SCREEN_WIDTH_4 128 // OLED display width
+#define SCREEN_HEIGHT_4 16 // OLED display height
+//Screen 5
+#define SCREEN_WIDTH_5 128 // OLED display width
+#define SCREEN_HEIGHT_5 16 // OLED display height
+//Screen 6
+#define SCREEN_WIDTH_6 128 // OLED display width
+#define SCREEN_HEIGHT_6 32 // OLED display height
 
 #if(USING_SSD1306 == 1)
   #include <Adafruit_GFX.h>
   #include <Adafruit_SSD1306.h>
-  Adafruit_SSD1306 oled(1);
+  
+  #if(SSD1306COUNT > 5 )
+    Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
+    Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, &Wire, -1);
+    Adafruit_SSD1306 display3(SCREEN_WIDTH_3, SCREEN_HEIGHT_3, &Wire, -1);
+    Adafruit_SSD1306 display4(SCREEN_WIDTH_4, SCREEN_HEIGHT_4, &Wire, -1);
+    Adafruit_SSD1306 display5(SCREEN_WIDTH_5, SCREEN_HEIGHT_5, &Wire, -1);
+    Adafruit_SSD1306 display6(SCREEN_WIDTH_6, SCREEN_HEIGHT_6, &Wire, -1);
+    Adafruit_SSD1306 displays[6] = {display1, display2, display3, display4, display5, display6};
+  #elif(SSD1306COUNT > 4)
+    Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
+    Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, &Wire, -1);
+    Adafruit_SSD1306 display3(SCREEN_WIDTH_3, SCREEN_HEIGHT_3, &Wire, -1);
+    Adafruit_SSD1306 display4(SCREEN_WIDTH_4, SCREEN_HEIGHT_4, &Wire, -1);
+    Adafruit_SSD1306 display5(SCREEN_WIDTH_5, SCREEN_HEIGHT_5, &Wire, -1);
+    Adafruit_SSD1306 displays[5] = {display1, display2, display3, display4, display5};
+  #elif(SSD1306COUNT > 3)
+    Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
+    Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, &Wire, -1);
+    Adafruit_SSD1306 display3(SCREEN_WIDTH_3, SCREEN_HEIGHT_3, &Wire, -1);
+    Adafruit_SSD1306 display4(SCREEN_WIDTH_4, SCREEN_HEIGHT_4, &Wire, -1);
+    Adafruit_SSD1306 displays[4] = {display1, display2, display3, display4};
+   #elif(SSD1306COUNT > 2)
+    Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
+    Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, &Wire, -1);
+    Adafruit_SSD1306 display3(SCREEN_WIDTH_3, SCREEN_HEIGHT_3, &Wire, -1);
+    Adafruit_SSD1306 displays[3] = {display1, display2, display3};
+   #elif(SSD1306COUNT > 1)
+    Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
+    Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, &Wire, -1);
+    Adafruit_SSD1306 displays[2] = {display1, display2};
+  #elif(SSD1306COUNT > 0)
+    Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
+    Adafruit_SSD1306 displays[1] = {display1};
+  #endif
 #endif
 
 //PORT EXPANDER PCA9555
