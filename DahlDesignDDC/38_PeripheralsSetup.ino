@@ -228,25 +228,34 @@ void SSD1306setup()
   Wire.setSCL(SCL0PIN);
   wire0Init = true;
   
-  #if(SSD1306COUNT > 0)
+  #if(SSD1306COUNT > 5 )
+    SSD1306initiate(1);
+    SSD1306initiate(2);
+    SSD1306initiate(3);
+    SSD1306initiate(4);
+    SSD1306initiate(5);
+    SSD1306initiate(6);
+  #elif(SSD1306COUNT > 4)
+    SSD1306initiate(1);
+    SSD1306initiate(2);
+    SSD1306initiate(3);
+    SSD1306initiate(4);
+    SSD1306initiate(5);
+  #elif(SSD1306COUNT > 3)
+    SSD1306initiate(1);
+    SSD1306initiate(2);
+    SSD1306initiate(3);
+    SSD1306initiate(4);
+   #elif(SSD1306COUNT > 2)
+    SSD1306initiate(1);
+    SSD1306initiate(2);
+    SSD1306initiate(3);
+   #elif(SSD1306COUNT > 1)
+    SSD1306initiate(1);
+    SSD1306initiate(2);
+  #elif(SSD1306COUNT > 0)
     SSD1306initiate(1);
   #endif
-  #if(SSD1306COUNT > 1)
-    SSD1306initiate(2);
-  #endif
-  #if(SSD1306COUNT > 2)
-    SSD1306initiate(3);
-  #endif  
-  #if(SSD1306COUNT > 3)
-    SSD1306initiate(4);
-  #endif
-  #if(SSD1306COUNT > 4)
-    SSD1306initiate(5);
-  #endif
-  #if(SSD1306COUNT > 5)
-    SSD1306initiate(6);
-  #endif
-  
 }
 
  void SSD1306initiate(int number)
