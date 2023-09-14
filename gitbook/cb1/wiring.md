@@ -8,7 +8,7 @@ By default it is organized like this:&#x20;
 
 <figure><img src="../.gitbook/assets/image (68).png" alt=""><figcaption></figcaption></figure>
 
-The numbers in the boxes are the corresponding button numbers. A button wired to R3C5 will have button number 20 (or 21 in Windows, since DDC starts with 0 and windows starts with 1). You can edit these button numbers, take a look at [advanced settings.](code/essentials.md#advanced-settings)
+The numbers in the boxes are the corresponding button numbers. A button wired to R3C5 will have button number 20 (or 21 in Windows, since DDC starts with 0 and windows starts with 1). You can edit these button numbers, take a look at [advanced](code/settings.md) settings.
 
 When wiring switches to these rows, you do it the same way as with [direct wiring](../2.-wiring/switch-inputs/non-matrix-wiring.md) and [shift register](../2.-wiring/switch-inputs/shift-registers.md#input-pins) wiring; for simple buttons you'll have one pin to ground and the other to a input pin. With multi-pin switches such as encoders or funky-switches, the common pins goes to ground and the rest goes to input pins.&#x20;
 

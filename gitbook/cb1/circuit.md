@@ -126,9 +126,11 @@ These two ADCs provides the board with additional 8 analog inputs, with high acc
 
 #### Port expander
 
-<figure><img src="../.gitbook/assets/image (42).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
-These two port expanders provides the board with additional 32 digital inputs. Full explaination [here.](../2.-wiring/switch-inputs/port-expander.md)
+These two port expanders provides the board with additional 32 digital inputs. Full explaination [here.](../2.-wiring/switch-inputs/port-expander.md)&#x20;
+
+Note that the pins 1-1 and 1-2 (row 1 column 1 and row 1 column 2) have access to the I2C bus via a 0 ohm resistor. These "resistors" are placed on the back side of the board, and therefore will not be assembled. Instead, the pads serve as a solder bridge; solder the pads together to access the I2C bus with these pins. If you want to use the pins for switches, leave the solder pads as they are.
 
 ### I/O
 
