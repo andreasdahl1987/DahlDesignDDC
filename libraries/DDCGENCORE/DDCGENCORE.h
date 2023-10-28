@@ -63,11 +63,23 @@ void readStrip()
 
 		if (LED1REVERSE == 1)
 		{
+			#if (BOARDTYPE == 2)
+			SH_R[LED1COUNT - 1 - i] = r;
+			SH_G[LED1COUNT - 1 - i] = g;
+			SH_B[LED1COUNT - 1 - i] = b;
+			#else
 			LED1.setPixelColor(LED1COUNT - 1 - i, LED1.Color(r, g, b));
+			#endif
 		}
 		else 
 		{
+			#if (BOARDTYPE == 2)
+			SH_R[i] = r;
+			SH_G[i] = g;
+			SH_B[i] = b;
+			#else
 			LED1.setPixelColor(i, LED1.Color(r, g, b));
+			#endif
 		}
 	}
 	#endif
@@ -140,6 +152,12 @@ void readLeds() {
 	}
 	if (valid) {
 		#if(LED1COUNT+LED2COUNT+LED3COUNT+LED4COUNT > 0)
+			#if (BOARDTYPE == 2)
+			for (uint16_t i = 0; i < LED1COUNT; i++) 
+			{
+				LED1.setPixelColor(i, LED1.Color(SH_R[i], SH_G[i], SH_B[i]));
+			}
+			#endif
 		LEDTop();
 		#endif
 	}
@@ -222,7 +240,11 @@ void processCommands()
 			messageend = 0;
 		}
 		#if (BOARDTYPE == 2)
-		delayMicroseconds(100); //Stability between cores on RP2040.
+			#if(USING_CB1 == 1)
+			delayMicroseconds(100); //Stability between cores on CB1.
+			#else
+			delayMicroseconds(500); //Stability between cores on regular RP2040 board.
+			#endif
 		#endif
 		LEDlock = false;
 	}
