@@ -1,4 +1,4 @@
-void brakeMagic(int row, int column)
+void brakeMagicT(int row, int column)
 {
     int Row = row - 1;
     int Column = column - 1;
@@ -97,3 +97,86 @@ void brakeMagic(int row, int column)
     }
 }
 
+void brakeMagicM(int row, int column)
+{
+    int Row = row - 1;
+    int Column = column - 1;
+    int Number = buttonNumber[Row][Column];
+    int FieldPlacement = 4;
+
+    if (pushState[Row][Column] != rawState[Row][Column] && (globalClock - switchTimer[Row][Column]) > buttonCooldown)
+    {
+        switchTimer[Row][Column] = globalClock;
+        pushState[Row][Column] = rawState[Row][Column];
+    }
+
+    if ((globalClock - switchTimer[Row][Column]) > buttonCooldown)
+    {
+        pushState[Row][Column] = rawState[Row][Column];
+    }
+
+    if (pushState[Row][Column] == 0)
+    {
+        latchLock[Row][Column] = false;
+    }
+
+    if (pushState[Row][Column] == 1 && !latchLock[Row][Column])
+    {
+        latchLock[Row][Column] = true;
+        latchState[Row][Column] = !latchState[Row][Column];
+    }
+
+
+    //Change switch mode
+    if (pushState[Row][Column] == 0)
+    {
+        switchModeLock[Row][Column] = false;
+    }
+
+    if (pushState[Row][Column] == 1 && pushState[modButtonRow - 1][modButtonCol - 1] == 1 && !switchModeLock[Row][Column])
+    {
+        switchModeLock[Row][Column] = true;
+        switchMode[Row][Column] = !switchMode[Row][Column];
+        latchLock[Row][Column] = false;
+        latchState[Row][Column] = false;
+        Joystick.setButton(Number, 0);
+        Joystick.setBrake(0);
+    }
+
+    //Push switch mode
+    long push = 0;
+    push = push | switchMode[Row][Column];
+    push = push << (FieldPlacement - 1);
+    buttonField = buttonField | push;
+
+    brakeMagicOn = false;
+
+    //SWITCH MODE 1: Brake magic
+    if (!switchMode[Row][Column])
+    {
+        if (latchState[Row][Column] == 1)
+        {
+            brakeMagicOn = true;
+            Joystick.setBrake(brakeMagicValue);
+
+            long push = 1;
+            push = push << 6;
+            buttonField = buttonField | push;
+        }
+        else
+        {
+            brakeMagicOn = false;
+            Joystick.setBrake(0);
+
+            long push = 0;
+            push = push << 6;
+            buttonField = buttonField | push;
+        }
+    }
+
+    //SWITCH MODE 2: Momentary button
+    if (switchMode[Row][Column])
+    {
+        Joystick.setButton(Number, pushState[Row][Column]);
+    }
+}
