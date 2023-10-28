@@ -697,8 +697,8 @@ void DDSfunky(int Arow, int Acol, int Bcol) {
 
     //Pushing switch mode
 
-    switchMode[Row][Column] = (toggleTimer[Row][bCol] & B00000001);
-    switchMode[Row][bCol] = (toggleTimer[Row][bCol] & B00000010) >> 1;
+    switchMode[Row][Column] = (toggleTimer[Row][bCol] & 0b00000001);
+    switchMode[Row][bCol] = (toggleTimer[Row][bCol] & 0b00000010) >> 1;
 
     long push = 0;
     push = push | toggleTimer[Row][bCol];

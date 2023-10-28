@@ -116,6 +116,42 @@ void pushButtonL(int8_t row, int8_t column)
     Joystick.setButton(Number, latchState[Row][Column]);
 }
 
+void repeaterButton(int row, int column, int pulseDuration, int repeats)
+{
+    int Row = row - 1;
+    int Column = column - 1;
+    int Number = buttonNumber[Row][Column];
+
+    if (pushState[Row][Column] != rawState[Row][Column] && (globalClock - switchTimer[Row][Column]) > (pulseDuration + (2 * repeats * pulseDuration)))
+    {
+        if(rawState[Row][Column] == 1)
+        {
+          switchTimer[Row][Column] = globalClock;          
+        }
+        pushState[Row][Column] = rawState[Row][Column];
+    }
+
+    if ((globalClock - switchTimer[Row][Column]) > (pulseDuration + (2 * repeats * pulseDuration)))
+    {
+        pushState[Row][Column] = rawState[Row][Column];
+    }
+
+    if ((globalClock - switchTimer[Row][Column]) < (2 * repeats * pulseDuration))
+    {
+        if(globalClock % (2*pulseDuration) < pulseDuration)
+        {
+            Joystick.setButton(Number, 1);
+        }
+        else
+        {
+            Joystick.setButton(Number, 0);
+        }
+    }
+    else
+    {
+        Joystick.setButton(Number, 0);
+    }
+}
 
 void pulseButton(int row, int column)
 {
