@@ -61,6 +61,8 @@ unsigned long globalClock;
 //Debouncing
 #define PEC11Cooldown 70
 #define PEC11Pulse 50
+#define E18Cooldown 50
+#define E18Pulse 30
 #define pulseEncCD 20
 #define pulseEncDuration 50
 #define buttonCooldown 25
