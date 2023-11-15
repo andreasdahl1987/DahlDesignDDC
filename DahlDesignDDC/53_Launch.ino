@@ -116,6 +116,55 @@ void biteButtonLatch(int row, int column)
     Joystick.setButton(Number, pushState[Row][Column]);
 }
 
+void biteAdjustButton(int row, int column, int increment)
+{
+    int Row = row - 1;
+    int Column = column - 1;
+    int Number = buttonNumber[Row][Column];
+
+    if (pushState[Row][Column] != rawState[Row][Column] && (globalClock - switchTimer[Row][Column]) > buttonCooldown)
+    {
+        switchTimer[Row][Column] = globalClock;
+        pushState[Row][Column] = rawState[Row][Column];
+        if(rawState[Row][Column] == 1)
+        {
+          latchState[Row][Column] = true;          
+        }
+    }
+
+    if ((globalClock - switchTimer[Row][Column]) > buttonCooldown)
+    {
+        pushState[Row][Column] = rawState[Row][Column];
+    }
+
+    if(latchState[Row][Column] && pushState[biteButtonRow-1][biteButtonCol-1] == 1)
+    {
+      bitePoint += increment;
+      latchState[Row][Column] = false;
+      if (bitePoint > 1000)
+      {
+        bitePoint = 1000;  
+      }
+      else if (bitePoint < 0)
+      {
+        bitePoint = 0;
+      }
+    }
+    else
+    {
+      latchState[Row][Column] = false;
+    }
+
+    if (pushState[biteButtonRow-1][biteButtonCol-1] == 0)
+    {
+        Joystick.setButton(Number, pushState[Row][Column]);
+    }
+    else
+    {
+        Joystick.setButton(Number, 0);
+    }
+}
+
 void launchButton(int row, int column, int switchNumberAffected)
 {
     int Row = row - 1;

@@ -777,3 +777,74 @@ void funkyBrightness(int Arow, int Acol, int Bcol, bool reverse) {
     Joystick.setButton(Number + 1 - reverse, (globalClock - switchTimer[Row][bCol] < funkyPulse));
     }
 }
+
+void funkyBiteAdjust(int Arow, int Acol, int Bcol, bool reverse, int increment) {
+
+    int Row = Arow - 1;
+    int Column = Acol - 1;
+    int Number = buttonNumber[Row][Column];
+
+    int bCol = Bcol - 1;
+
+    if (!rawState[Row][Column] && !rawState[Row][bCol])
+    {
+        pushState[Row][Column] = 1;
+    }
+    else if (!rawState[Row][Column] && rawState[Row][bCol])
+    {
+        pushState[Row][Column] = 2;
+        latchLock[Row][Column] = 1; //Fetching 01
+    }
+    else if (rawState[Row][Column] && rawState[Row][bCol])
+    {
+        pushState[Row][Column] = 3;
+    }
+    else if (rawState[Row][Column] && !rawState[Row][bCol])
+    {
+        pushState[Row][Column] = 4;
+        latchLock[Row][bCol] = 1; //Fetching 10
+    }
+
+    if ((globalClock - switchTimer[Row][Column] > funkyCooldown) && (globalClock - switchTimer[Row][bCol] > funkyCooldown))
+    {
+        if ((latchLock[Row][bCol] && pushState[Row][Column] == 1) || (latchLock[Row][Column] && pushState[Row][Column] == 3))
+        {
+            switchTimer[Row][Column] = globalClock;
+            if(pushState[biteButtonRow - 1][biteButtonCol - 1] == 1)
+            {
+              bitePoint = bitePoint + increment  - (reverse * 2 * increment);
+            }
+        }
+
+        else if ((latchLock[Row][bCol] && pushState[Row][Column] == 3) || (latchLock[Row][Column] && pushState[Row][Column] == 1))
+        {
+            switchTimer[Row][bCol] = globalClock;
+            if(pushState[biteButtonRow - 1][biteButtonCol - 1] == 1)
+            {
+              bitePoint = bitePoint - increment  + (reverse * 2 * increment);
+            }
+        }
+    }
+
+    else
+    {
+        latchLock[Row][bCol] = 0;
+        latchLock[Row][Column] = 0;
+    }
+
+    //Adjustment
+    if (bitePoint > 1000)
+    {
+      bitePoint = 1000;  
+    }
+    else if (bitePoint < 0)
+    {
+      bitePoint = 0;
+    }
+
+    if (pushState[biteButtonRow - 1][biteButtonCol - 1] == 0)
+    {
+    Joystick.setButton(Number + reverse, (globalClock - switchTimer[Row][Column] < funkyPulse));
+    Joystick.setButton(Number + 1 - reverse, (globalClock - switchTimer[Row][bCol] < funkyPulse));
+    }
+}
