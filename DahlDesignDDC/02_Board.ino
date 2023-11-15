@@ -27,7 +27,6 @@
 
 //Enable CB1 board
 #define USING_CB1 0
-
 //ADC setup
 #define CB1_ADC1 1
 #define CB1_ADC1_CHANNELS 4
@@ -113,6 +112,11 @@ bool wire0Init = false;
   #include <DDCSAMD.h>
 #elif (BOARDTYPE == 2)
   #include <DDCPI.h>
+  extern "C" 
+  {
+  #include "pico/bootrom.h"
+  }
+  long bootTimer = 0;
 #endif
 
 #if (USING_CB1 == 1 || USING_PCA9555 == 1 || USING_ADS1115 == 1 || USING_CAT24C512 == 1)

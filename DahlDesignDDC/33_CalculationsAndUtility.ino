@@ -103,6 +103,24 @@ void refreshRate()
   }
 }
 
+void firmwareUploadMode(int button1Row, int button1Column, int button2Row, int button2Column, int timer)
+{
+    int b1Row = button1Row - 1;
+    int b1Col = button1Column -1;
+    int b2Row = button2Row - 1;
+    int b2Col = button2Column - 1;
+    
+    if (rawState[b1Row][b1Col] == 0 || rawState[b2Row][b2Col] == 0)
+    {
+        bootTimer = globalClock;
+    }
+    
+    if (globalClock - bootTimer > timer)
+    {
+        reset_usb_boot(0,0);
+    }
+}
+
 #if (USING_CB1 == 1)
 void CB1Oversampling()
 {
