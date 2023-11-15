@@ -149,7 +149,7 @@ void setup()
     LEDStartup();
     #endif
 
-    #if(USING_CB1 == 1)
+    #if(USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
       oversamples.setBuffers(4,2048);
       oversamples.setFrequency(400000);
       oversamples.begin();

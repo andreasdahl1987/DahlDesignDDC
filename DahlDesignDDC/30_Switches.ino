@@ -4,7 +4,6 @@
 
 
 
-
   //--------------------------------------
   //---------SWITCHES END HERE------------
   //--------------------------------------
@@ -22,7 +21,7 @@
 	#if (LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT > 0)
 		processCommands();
 	#endif
-  #if(USING_CB1 == 1)
+  #if(USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
     CB1Oversampling();
   #endif
   }

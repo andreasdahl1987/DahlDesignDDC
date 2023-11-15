@@ -80,7 +80,7 @@ void checkValue(int pin)
     Serial.print(" reading: ");
     Serial.println(analogRead(pin));
   }
-  #if (USING_CB1 == 1 || USING_ADS1115 == 1)
+  #if (USING_CB1 == 1 || USING_ADS1115 == 1 || ENABLE_OVERSAMPLING == 1)
   else
   {
     Serial.print("ADC ");
@@ -121,7 +121,7 @@ void firmwareUploadMode(int button1Row, int button1Column, int button2Row, int b
     }
 }
 
-#if (USING_CB1 == 1)
+#if (USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 void CB1Oversampling()
 {
   if(oversamples.available() >= 512)

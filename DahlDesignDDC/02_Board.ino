@@ -22,6 +22,12 @@
 #define USING_32U4EEPROM 0
 
 //------------------------------
+//---RP2040 ADC OVERSAMPLING----
+//------------------------------
+
+#define ENABLE_OVERSAMPLING 1
+
+//------------------------------
 //-------DAHL DESIGN CB1--------
 //------------------------------
 
@@ -90,7 +96,7 @@ uint8_t ADS1115_alertPins [] = {99};
 bool wire1Init = false;
 bool wire0Init = false;
 
-#if(USING_CB1 == 1)
+#if(USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
   #include <ADCInput.h>
   ADCInput oversamples (A0, A1, A2, A3);
   bool ADS1115sentReq[2] = {false, false};
