@@ -434,3 +434,77 @@ void throttleHoldM(int8_t buttonRow, int8_t buttonCol, int8_t rotaryRow, int8_t 
     push = push << 5;
     buttonField = buttonField | push;
 }
+
+void throttleHoldSimpleT(int8_t buttonRow, int8_t buttonCol)
+{
+    int8_t ButtonRow = buttonRow - 1;
+    int8_t ButtonCol = buttonCol - 1;
+
+
+    //Button logics
+    if (pushState[ButtonRow][ButtonCol] != rawState[ButtonRow][ButtonCol] && (globalClock - switchTimer[ButtonRow][ButtonCol]) > buttonCooldown)
+    {
+        switchTimer[ButtonRow][ButtonCol] = globalClock;
+        pushState[ButtonRow][ButtonCol] = rawState[ButtonRow][ButtonCol];
+    }
+
+    if ((globalClock - switchTimer[ButtonRow][ButtonCol]) > buttonCooldown)
+    {
+        pushState[ButtonRow][ButtonCol] = rawState[ButtonRow][ButtonCol];
+    }
+
+    if (pushState[ButtonRow][ButtonCol] == 1)
+    {
+        Joystick.setThrottle(throttleHoldValue);
+    }
+    else
+    {
+        Joystick.setThrottle(0);
+    }
+
+    long push = pushState[ButtonRow][ButtonCol];
+    push = push << 5;
+    buttonField = buttonField | push;
+}
+
+void throttleHoldSimpleM(int8_t buttonRow, int8_t buttonCol, int8_t rotaryRow, int8_t rotaryCol, bool reverse)
+{
+    int8_t ButtonRow = buttonRow - 1;
+    int8_t ButtonCol = buttonCol - 1;
+
+    if (pushState[ButtonRow][ButtonCol] != rawState[ButtonRow][ButtonCol] && (globalClock - switchTimer[ButtonRow][ButtonCol]) > buttonCooldown)
+    {
+        switchTimer[ButtonRow][ButtonCol] = globalClock;
+        pushState[ButtonRow][ButtonCol] = rawState[ButtonRow][ButtonCol];
+    }
+
+    if ((globalClock - switchTimer[ButtonRow][ButtonCol]) > buttonCooldown)
+    {
+        pushState[ButtonRow][ButtonCol] = rawState[ButtonRow][ButtonCol];
+    }
+
+    if (pushState[ButtonRow][ButtonCol] == 0)
+    {
+        latchLock[ButtonRow][ButtonCol] = false;
+    }
+
+    if (pushState[ButtonRow][ButtonCol] == 1 && !latchLock[ButtonRow][ButtonCol])
+    {
+        latchLock[ButtonRow][ButtonCol] = true;
+        latchState[ButtonRow][ButtonCol] = !latchState[ButtonRow][ButtonCol];
+    }
+
+
+    if (latchState[ButtonRow][ButtonCol])
+    {
+        Joystick.setThrottle(throttleHoldValue);
+    }
+    else
+    {
+        Joystick.setThrottle(0);
+    }
+
+    long push = latchState[ButtonRow][ButtonCol];
+    push = push << 5;
+    buttonField = buttonField | push;
+}
