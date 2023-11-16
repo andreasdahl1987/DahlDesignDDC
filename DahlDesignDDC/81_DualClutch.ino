@@ -600,7 +600,7 @@ void dualClutchCal(int masterPin, int masterSwitchNumber, int slavePin, int slav
 
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
-    int masterValue;
+    uint16_t masterValue;
     if (masterPin > 49)
     {
       masterValue = ADS1115value[masterPin - ADC_CORR];
@@ -684,7 +684,7 @@ void dualClutchCal(int masterPin, int masterSwitchNumber, int slavePin, int slav
     #if(USING_ADS1115 == 1 || USING_CB1 == 1  || ENABLE_OVERSAMPLING == 1)
 
 
-    int slaveValue;
+    uint16_t slaveValue;
     if (slavePin > 49)
     {
       slaveValue = ADS1115value[slavePin - ADC_CORR];

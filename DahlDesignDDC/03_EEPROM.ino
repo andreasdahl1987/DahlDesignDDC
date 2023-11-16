@@ -30,7 +30,7 @@ bool DDS_b_init = true;
 bool DDS_s_init = true;
 int oldBitePoint;
 int oldLED;
-int oldBrake;
-int oldThrottle;
+float oldBrake;
+float oldThrottle;
 int oldPreset;
 #endif

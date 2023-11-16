@@ -103,6 +103,7 @@ void refreshRate()
   }
 }
 
+#if (BOARDTYPE == 2)
 void firmwareUploadMode(int button1Row, int button1Column, int button2Row, int button2Column, unsigned long timer)
 {
     int b1Row = button1Row - 1;
@@ -120,6 +121,7 @@ void firmwareUploadMode(int button1Row, int button1Column, int button2Row, int b
         reset_usb_boot(0,0);
     }
 }
+#endif
 
 #if (USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 void CB1Oversampling()
