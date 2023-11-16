@@ -99,9 +99,116 @@ void singleClutch(int analogPin, int switchNumber, int releasedValue, int fullyP
     Joystick.setXAxis(average[N]);
 }
 
-//----------------------------
-//----ANALOG CLUTCH-----------
-//----------------------------
+void singleClutchCal(int analogPin, int switchNumber)
+{
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+
+    uint16_t pinValue;
+    if (analogPin > 49)
+    {
+      pinValue = ADS1115value[analogPin - ADC_CORR];
+    }
+    else
+    {
+      pinValue = analogRead(analogPin);
+    }
+    
+    #else
+
+    uint16_t pinValue = analogRead(analogPin);
+    
+    #endif
+    
+    int M = switchNumber - 1;
+    float normalized = 0;
+    masterRaw = pinValue;
+    
+    if (MFP > MFR)
+    {
+        float gap = MFP - MFR;
+        float normFactor = 1000 / gap;
+        if (pinValue < MFR)
+        {
+          pinValue = MFR;
+        }
+        normalized = normFactor * (pinValue - MFR);
+        if (normalized < 0)
+        {
+            normalized = 0;
+        }
+    }
+
+
+    else if (MFP < MFR)
+    {
+        float gap = MFR - MFP;
+        float normFactor = 1000 / gap;
+        if (pinValue > MFR)
+        {
+          pinValue = MFR;
+        }
+        normalized = normFactor * (MFR - pinValue);
+        if (normalized < 0)
+        {
+            normalized = 0;
+        }
+    }
+
+
+    total[M] = total[M] - readings[M][readIndex[M]];
+    readings[M][readIndex[M]] = normalized;
+    total[M] = total[M] + readings[M][readIndex[M]];
+
+
+    readIndex[M]++;
+
+
+    if (readIndex[M] > (reads - 1))
+    {
+        readIndex[M] = 0;
+    }
+
+
+    average[M] = total[M] / reads;
+    if (average[M] > 1000)
+    {
+        average[M] = 1000;
+    }
+
+
+    //----SETTING BITE POINT WITH BUTTON------
+
+    if (average[M] > 0 && pushState[biteButtonRow - 1][biteButtonCol - 1] == 1)
+    {
+        bitePoint = average[M];
+    }
+
+    
+    //----------LAUNCH BUTTON------------------
+
+    if (launchButtonLatch)
+    {
+        average[M] = average[M] * bitePoint / 1000;
+    }
+
+    if (average[M] == 0)
+    {
+        analogLatchLock[M] = true;
+    }
+
+    if (average[M] == 1000 && analogLatchLock[M])
+    {
+        analogLatchLock[M] = false;
+    }
+
+    if (latchState[neutralButtonRow - 1][neutralButtonCol - 1])
+    {
+        Joystick.setXAxis(1000);
+    }
+
+    //----------------SET AXIS----------------
+    Joystick.setXAxis(average[M]);
+}
 
 void filteredSingleClutch(int analogPin, int8_t switchNumber, int releasedValue, int fullyPressedValue, int curvePush, float expFactor)
 {
