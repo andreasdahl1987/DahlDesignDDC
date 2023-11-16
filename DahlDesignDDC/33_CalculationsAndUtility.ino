@@ -103,7 +103,7 @@ void refreshRate()
   }
 }
 
-void firmwareUploadMode(int button1Row, int button1Column, int button2Row, int button2Column, int timer)
+void firmwareUploadMode(int button1Row, int button1Column, int button2Row, int button2Column, unsigned long timer)
 {
     int b1Row = button1Row - 1;
     int b1Col = button1Column -1;

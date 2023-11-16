@@ -42,7 +42,9 @@ void write16bitToEEPROM(uint16_t location, uint16_t value)
     Wire1.write(firstByte);
     Wire1.write(lastByte);
     Wire1.endTransmission();
-    delayMicroseconds(200);   
+    delayMicroseconds(200); 
+#else
+  EEPROMdump = location + value;  
 #endif
  }
 
@@ -104,7 +106,7 @@ uint16_t read16bitFromEEPROM(uint16_t location)
     
 #else
 
-  return 0;
+  return location * 0;
   
 #endif
 }

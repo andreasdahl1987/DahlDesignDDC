@@ -74,7 +74,6 @@ void biteButtonLatch(int row, int column)
     int Row = row - 1;
     int Column = column - 1;
     int Number = buttonNumber[Row][Column];
-    int FieldPlacement = 6;
     biteRefresh = false;
 
     if (latchState[Row][Column] != rawState[Row][Column] && (globalClock - switchTimer[Row][Column]) > buttonCooldown)

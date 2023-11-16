@@ -1,6 +1,5 @@
 void multiFunction2Bit24(int analogPin, int switchNumber, int row, int column, bool reverseAnalog, bool reverse2Bit, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12)
 {
-    int Pin = analogPin;
     int Pos1 = pos1;
     int Pos2 = pos2;
     int Pos3 = pos3;
@@ -23,7 +22,7 @@ void multiFunction2Bit24(int analogPin, int switchNumber, int row, int column, b
 
     //READ POSITION OF 12-POS ANALOG SWITCH
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int value;
     if (analogPin > 49)
@@ -147,7 +146,6 @@ void multiFunction2Bit24(int analogPin, int switchNumber, int row, int column, b
 }
 void multiFunction2Bit36(int analogPin, int switchNumber, int row, int column, bool reverseAnalog, bool reverse2Bit, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12)
 {
-    int Pin = analogPin;
     int Pos1 = pos1;
     int Pos2 = pos2;
     int Pos3 = pos3;
@@ -170,7 +168,7 @@ void multiFunction2Bit36(int analogPin, int switchNumber, int row, int column, b
 
     //READ POSITION OF 12-POS ANALOG SWITCH
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int value;
     if (analogPin > 49)
@@ -308,7 +306,6 @@ void multiFunction2Bit36(int analogPin, int switchNumber, int row, int column, b
 }
 void multiFunction2Button24(int analogPin, int switchNumber, int rowButton1, int columnButton1, int rowButton2, int columnButton2, bool reverse, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12)
 {
-    int Pin = analogPin;
     int Pos1 = pos1;
     int Pos2 = pos2;
     int Pos3 = pos3;
@@ -333,7 +330,7 @@ void multiFunction2Button24(int analogPin, int switchNumber, int rowButton1, int
 
     //READ POSITION OF 12-POS ANALOG SWITCH
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int value;
     if (analogPin > 49)
@@ -410,7 +407,6 @@ void multiFunction2Button24(int analogPin, int switchNumber, int rowButton1, int
 }
 void multiFunction2Button36(int analogPin, int switchNumber, int rowButton1, int columnButton1, int rowButton2, int columnButton2, bool reverse, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12)
 {
-    int Pin = analogPin;
     int Pos1 = pos1;
     int Pos2 = pos2;
     int Pos3 = pos3;
@@ -435,7 +431,7 @@ void multiFunction2Button36(int analogPin, int switchNumber, int rowButton1, int
 
     //READ POSITION OF 12-POS ANALOG SWITCH
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int value;
     if (analogPin > 49)

@@ -22,6 +22,8 @@
 #define THROTTLESLOT 512
 #define PRESETSLOT 640
 
+uint8_t EEPROMdump;
+
 #if (USING_CAT24C512 == 1 || USING_32U4EEPROM == 1 || USING_CB1 == 1)
 uint16_t resetEEPROM = 0;
 bool DDS_b_init = true;

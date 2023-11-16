@@ -167,7 +167,7 @@ void pushPull(int rightPullRow, int rightPullCol, int rightPushRow, int rightPus
     buttonField = buttonField | pesh;
 }
 
-void upshift(int8_t row, int8_t column, int cooldown)
+void upshift(int8_t row, int8_t column, unsigned long cooldown)
 {
     int8_t Row = row - 1;
     int8_t Column = column - 1;
@@ -186,4 +186,3 @@ void upshift(int8_t row, int8_t column, int cooldown)
 
     Joystick.setButton(Number, pushState[Row][Column]);
 }
-

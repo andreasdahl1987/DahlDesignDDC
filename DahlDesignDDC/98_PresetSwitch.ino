@@ -59,15 +59,26 @@ void preset2Bit(int row, int column, bool reverse)
             {
                 if ((difference > 0 && difference < 2) || difference < -2)
                 {
-                    switchPreset = switchPreset + 1 - (2 * Reverse);
+                    if(switchPreset == 0 && Reverse)
+                    {
+                      switchPreset = 11;
+                    }
+                    else
+                    {
+                      switchPreset = switchPreset + 1 - (2 * Reverse);
+                    }
+                    
                 }
                 else if ((difference < 0 && difference > -2) || difference > 2)
                 {
-                    switchPreset = switchPreset - 1 + (2 * Reverse);
-                }
-                if (switchPreset < 0)
-                {
+                  if(switchPreset == 0 && !Reverse)
+                  {
                     switchPreset = 11;
+                  }
+                  else
+                  {
+                    switchPreset = switchPreset - 1 + (2 * Reverse);
+                  }
                 }
                 if (switchPreset > 11)
                 {
@@ -186,10 +197,13 @@ void presetPrevious(int8_t row, int8_t column)
     if (pushState[Row][Column] == 1 && !latchLock[Row][Column])
     {
         latchLock[Row][Column] = true;
-        switchPreset--;
-        if (switchPreset < 0)
+        if (switchPreset == 0)
         {
           switchPreset = 11;
+        }
+        else
+        {
+          switchPreset--;
         }
         presets(switchPreset);
     }

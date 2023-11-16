@@ -116,7 +116,7 @@ void pushButtonL(int8_t row, int8_t column)
     Joystick.setButton(Number, latchState[Row][Column]);
 }
 
-void repeaterButton(int row, int column, int pulseDuration, int repeats)
+void repeaterButton(int row, int column, unsigned long pulseDuration, int repeats)
 {
     int Row = row - 1;
     int Column = column - 1;

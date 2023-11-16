@@ -394,8 +394,6 @@ void rotaryAnalogMute(int analogPin, int switchNumber, int pos1, int pos2, int p
 {
     int N = switchNumber - 1;
 
-    int Number = analogButtonNumber[N];
-
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int value;
@@ -459,8 +457,6 @@ void rotaryAnalogMute(int analogPin, int switchNumber, int pos1, int pos2, int p
 void rotaryAnalogBrightness(int analogPin, int switchNumber, int startBrightness, int endBrightness, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
 {
     int N = switchNumber - 1;
-
-    int Number = analogButtonNumber[N];
 
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
@@ -529,9 +525,6 @@ void rotaryAnalogBrightness12(int analogPin, int switchNumber, int pos1, int pos
     int N = switchNumber - 1;
 
     int Number = analogButtonNumber[N];
-
-    int maxPos = 12;
-
 
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
