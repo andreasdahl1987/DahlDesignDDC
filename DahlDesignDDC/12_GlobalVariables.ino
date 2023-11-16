@@ -40,6 +40,26 @@ int8_t biteButtonCol;
 int8_t presetButtonRow;
 int8_t presetButtonCol;
 
+//Clutch calibration
+int16_t slaveReleasedLow = 0;
+int16_t slaveReleasedHigh = 0;
+int16_t slavePressed = 0;
+int16_t slaveCompare = 0;
+int16_t masterReleasedLow = 0;
+int16_t masterReleasedHigh = 0;
+int16_t masterPressed = 0;
+int16_t masterCompare = 0;
+int16_t masterRaw = 0;
+int16_t slaveRaw = 0;
+long clutchCalibrationTimer = 0;
+bool clutchCalibrationLatch = true;
+bool clutchCalibrationState = true;
+uint8_t clutchCalibrationMode = 0;
+uint16_t MFP = 0;
+uint16_t MFR = 0;
+uint16_t SFP = 0;
+uint16_t SFR = 0;
+
 //Analog inject
 long injectMuteTimer = -20000;
 uint8_t injectMuteCounter = 0;

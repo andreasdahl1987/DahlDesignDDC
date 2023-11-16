@@ -14,7 +14,7 @@ void rotaryAnalog(int analogPin, int switchNumber, int fieldPlacement, int hybri
 
     int maxPos = max(12, HyPos);
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int value;
     if (analogPin > 49)
@@ -224,7 +224,7 @@ void rotaryAnalogPartial(int analogPin, int switchNumber, int muteStart, int mut
 
     int Number = analogButtonNumber[N];
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int value;
     if (analogPin > 49)
@@ -310,7 +310,7 @@ void rotaryAnalogSimple(int analogPin, int switchNumber, int pos1, int pos2, int
 
     int Number = analogButtonNumber[N];
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int value;
     if (analogPin > 49)
@@ -396,7 +396,7 @@ void rotaryAnalogMute(int analogPin, int switchNumber, int pos1, int pos2, int p
 
     int Number = analogButtonNumber[N];
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int value;
     if (analogPin > 49)
@@ -462,7 +462,7 @@ void rotaryAnalogBrightness(int analogPin, int switchNumber, int startBrightness
 
     int Number = analogButtonNumber[N];
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int value;
     if (analogPin > 49)
@@ -533,7 +533,7 @@ void rotaryAnalogBrightness12(int analogPin, int switchNumber, int pos1, int pos
     int maxPos = 12;
 
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int value;
     if (analogPin > 49)
@@ -650,7 +650,7 @@ void rotaryAnalog2Mode(int analogPin, int switchNumber, int fieldPlacement, int 
     int maxPos = 12;
 
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int value;
     if (analogPin > 49)
@@ -792,7 +792,7 @@ void rotaryAnalogBite(int analogPin, int switchNumber, int fieldPlacement, int p
     int maxPos = 12;
 
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int value;
     if (analogPin > 49)
@@ -1023,7 +1023,7 @@ void DDSanalog(int analogPin, int switchNumber, int pos1, int pos2, int pos3, in
         Number = Number + 12;
     }
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int value;
     if (analogPin > 49)

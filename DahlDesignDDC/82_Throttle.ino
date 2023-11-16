@@ -1,6 +1,6 @@
 void throttle(int analogPin, int switchNumber, int releasedValue, int fullyPressedValue)
 {
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int pinValue;
     if (analogPin > 49)
@@ -69,7 +69,7 @@ void throttle(int analogPin, int switchNumber, int releasedValue, int fullyPress
 
 void filteredThrottle(int analogPin, int8_t switchNumber, int releasedValue, int fullyPressedValue, int curvePush, float expFactor)
 {
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int raw;
     if (analogPin > 49)

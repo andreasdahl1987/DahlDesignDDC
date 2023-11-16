@@ -4,7 +4,7 @@ void dualClutch(int masterPin, int masterSwitchNumber, int masterReleasedValue, 
     //---Master paddle calculations----
     //--------------------------------
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1  || ENABLE_OVERSAMPLING == 1)
 
     int masterValue;
     if (masterPin > 49)
@@ -75,7 +75,7 @@ void dualClutch(int masterPin, int masterSwitchNumber, int masterReleasedValue, 
     //---Slave paddle calculations----
     //--------------------------------
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1  || ENABLE_OVERSAMPLING == 1)
 
     int slaveValue;
     if (slavePin > 49)
@@ -294,7 +294,6 @@ void dualClutch(int masterPin, int masterSwitchNumber, int masterReleasedValue, 
     push = push | (analogSwitchMode2[M] << 1);
     push = push << (2 * (FieldPlacement - 1));
     rotaryField = rotaryField | push;
-
 }
 
 void filteredDualClutch(int masterPin, int masterSwitchNumber, int masterReleasedValue, int masterFullyPressedValue, int masterCurvePush, float masterExpFactor, int slavePin, int slaveSwitchNumber, int slaveReleasedValue, int slaveFullyPressedValue, int slaveCurvePush, float slaveExpFactor, bool throttleMaster)
@@ -306,7 +305,7 @@ void filteredDualClutch(int masterPin, int masterSwitchNumber, int masterRelease
     //---Master paddle calculations----
     //--------------------------------
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1  || ENABLE_OVERSAMPLING == 1)
 
     int masterRaw;
     if (masterPin > 49)
@@ -374,7 +373,7 @@ void filteredDualClutch(int masterPin, int masterSwitchNumber, int masterRelease
     //---Slave paddle calculations----
     //--------------------------------
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1  || ENABLE_OVERSAMPLING == 1)
 
     int slaveRaw;
     if (slavePin > 49)
@@ -586,11 +585,335 @@ void filteredDualClutch(int masterPin, int masterSwitchNumber, int masterRelease
         Joystick.setXAxis(1000);
     }
 
+    long push = 0;
+    push = push | analogSwitchMode1[M];
+    push = push | (analogSwitchMode2[M] << 1);
+    push = push << (2 * (FieldPlacement - 1));
+    rotaryField = rotaryField | push;
+}
+
+void dualClutchCal(int masterPin, int masterSwitchNumber, int slavePin, int slaveSwitchNumber, bool throttleMaster)
+{
+    //--------------------------------
+    //---Master paddle calculations----
+    //--------------------------------
+
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+
+    int masterValue;
+    if (masterPin > 49)
+    {
+      masterValue = ADS1115value[masterPin - ADC_CORR];
+    }
+    else
+    {
+      masterValue = analogRead(masterPin);
+    }
+
+    #else
+
+    int masterValue = analogRead(masterPin);
+
+    #endif
+
+    int M = masterSwitchNumber - 1;
+    float masterNormalized = 0;
+    int FieldPlacement = 7;
+    bool ThrottleMaster = throttleMaster;
+    masterRaw = masterValue;
+
+
+    if (MFP > MFR)
+    {
+        float gap = MFP - MFR;
+        float normFactor = 1000 / gap;
+        if (masterValue < MFR)
+        {
+          masterValue = MFR;
+        }
+        masterNormalized = normFactor * (masterValue - MFR);
+        if (masterNormalized < 0)
+        {
+            masterNormalized = 0;
+        }
+    }
+
+
+    else if (MFP < MFR)
+    {
+        float gap = MFR - MFP;
+        float normFactor = 1000 / gap;
+        if (masterValue > MFR)
+        {
+          masterValue = MFR;
+        }
+        masterNormalized = normFactor * (MFR - masterValue);
+        if (masterNormalized < 0)
+        {
+            masterNormalized = 0;
+        }
+    }
+
+
+    total[M] = total[M] - readings[M][readIndex[M]];
+    readings[M][readIndex[M]] = masterNormalized;
+    total[M] = total[M] + readings[M][readIndex[M]];
+
+
+    readIndex[M]++;
+
+
+    if (readIndex[M] > (reads - 1))
+    {
+        readIndex[M] = 0;
+    }
+
+
+    average[M] = total[M] / reads;
+    if (average[M] > 1000)
+    {
+        average[M] = 1000;
+    }
+
+
+    //--------------------------------
+    //---Slave paddle calculations----
+    //--------------------------------
+
+
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1  || ENABLE_OVERSAMPLING == 1)
+
+
+    int slaveValue;
+    if (slavePin > 49)
+    {
+      slaveValue = ADS1115value[slavePin - ADC_CORR];
+    }
+    else
+    {
+      slaveValue = analogRead(slavePin);
+    }
+
+
+    #else
+
+
+    int slaveValue = analogRead(slavePin);
+
+
+    #endif
+
+
+    int S = slaveSwitchNumber - 1;
+    float slaveNormalized = 0;
+    slaveRaw = slaveValue;
+
+
+    if (SFP > SFR)
+    {
+        float gap = SFP - SFR;
+        float normFactor = 1000 / gap;
+        if (slaveValue < SFR)
+        {
+          slaveValue = SFR;
+        }
+        slaveNormalized = normFactor * (slaveValue - SFR);
+        if (slaveNormalized < 0)
+        {
+            slaveNormalized = 0;
+        }
+    }
+
+
+    else if (SFP < SFR)
+    {
+        float gap = SFR - SFP;
+        float normFactor = 1000 / gap;
+        if (slaveValue > SFR)
+        {
+          slaveValue = SFR;
+        }
+        slaveNormalized = normFactor * (SFR - slaveValue);
+        if (slaveNormalized < 0)
+        {
+            slaveNormalized = 0;
+        }
+    }
+
+
+    total[S] = total[S] - readings[S][readIndex[S]];
+    readings[S][readIndex[S]] = slaveNormalized;
+    total[S] = total[S] + readings[S][readIndex[S]];
+
+
+    readIndex[S]++;
+
+
+    if (readIndex[S] > (reads - 1))
+    {
+        readIndex[S] = 0;
+    }
+
+
+    average[S] = total[S] / reads;
+    if (average[S] > 1000)
+    {
+        average[S] = 1000;
+    }
+
+
+    //------------------------------------------
+    //------SETTING BITE POINT WITH BUTTON------
+    //------------------------------------------
+
+
+    if (max(average[S], average[M]) > 0 && pushState[biteButtonRow - 1][biteButtonCol - 1] == 1)
+    {
+        bitePoint = max(average[S], average[M]);
+    }
+
+    //------------------------
+    //------MODE CHANGE-------
+    //------------------------
+    int maxValue = max(average[S], average[M]);
+
+    if (maxValue == 0)
+    {
+        analogLatchLock[M] = true;
+    }
+
+    if (maxValue == 1000 && analogLatchLock[M])
+    {
+        analogLatchLock[M] = false;
+        if (pushState[modButtonRow - 1][modButtonCol - 1] == 1) //Changig clutch modes
+        {
+            if (!analogSwitchMode1[M] && !analogSwitchMode2[M])
+            {
+                analogSwitchMode1[M] = true;
+                Joystick.setXAxis(0);
+                Joystick.setThrottle(0);
+                Joystick.setBrake(0);
+            }
+            else if (analogSwitchMode1[M] && !analogSwitchMode2[M])
+            {
+                analogSwitchMode1[M] = false;
+                analogSwitchMode2[M] = true;
+                Joystick.setXAxis(0);
+                Joystick.setThrottle(0);
+                Joystick.setBrake(0);
+            }
+            else if (!analogSwitchMode1[M] && analogSwitchMode2[M])
+            {
+                analogSwitchMode1[M] = true;
+                Joystick.setXAxis(0);
+                Joystick.setThrottle(0);
+                Joystick.setBrake(0);
+            }
+            else if (analogSwitchMode1[M] && analogSwitchMode2[M])
+            {
+                analogSwitchMode1[M] = false;
+                analogSwitchMode2[M] = false;
+                Joystick.setXAxis(0);
+                Joystick.setThrottle(0);
+                Joystick.setBrake(0);
+            }
+        }
+    }
+
+
+    //------------------------
+    //------CLUTCH MODES------
+    //------------------------
+
+
+    //MODE 1: STATIC
+    if (!analogSwitchMode1[M] && !analogSwitchMode2[M])
+    {
+        average[S] = average[S] * bitePoint / 1000;
+        Joystick.setXAxis(max(average[S], average[M]));
+    }
+    //MODE 2: DYNAMIC LOW
+    else if (analogSwitchMode1[M] && !analogSwitchMode2[M])
+    {
+
+
+        if ((average[S] == 0 || average[M] == 0 || (average[S] > bitePoint && average[M] < bitePoint)) || (average[M] > bitePoint && average[S] < bitePoint))
+        {
+            average[S] = average[S] * bitePoint / 1000;
+            average[M] = average[M] * bitePoint / 1000;
+            Joystick.setXAxis(max(average[S], average[M]));
+        }
+        else if (average[M] > bitePoint && average[S] > bitePoint)
+        {
+            Joystick.setXAxis(max(average[S], average[M]));
+        }
+        else if ((average[S] == 1000 && average[M] < 1000 && average[M] > bitePoint) || (average[M] == 1000 && average[S] < 1000 && average[S] > bitePoint))
+        {
+            Joystick.setXAxis(min(average[S], average[M]));
+        }
+    }
+    //MODE 3: DYNAMIC HIGH
+    else if (!analogSwitchMode1[M] && analogSwitchMode2[M])
+    {
+        if (average[S] == 1000 && average[M] == 1000)
+        {
+            analogLatchLock[S] = true;
+        }
+        if (average[S] == 0 && average[M] == 0)
+        {
+            analogLatchLock[S] = false;
+        }
+
+
+        if (analogLatchLock[S])
+        {
+            if (average[S] == 1000 && average[M] > bitePoint)
+            {
+                Joystick.setXAxis(average[M]);
+            }
+            else if (average[M] == 1000 && average[S] > bitePoint)
+            {
+                Joystick.setXAxis(average[S]);
+            }
+            else
+            {
+                Joystick.setXAxis(max(average[S], average[M]) * bitePoint / 1000);
+            }
+        }
+        else
+        {
+            Joystick.setXAxis(max(average[S], average[M]));
+        }
+    }
+    //MODE 4: BRAKE AND THROTTLE
+    else
+    {
+        Joystick.setXAxis(0);
+        if (ThrottleMaster)
+        {
+            Joystick.setThrottle(average[M]);
+            Joystick.setBrake(average[S]);
+        }
+        else
+        {
+            Joystick.setThrottle(average[S]);
+            Joystick.setBrake(average[M]);
+        }
+    }
+
+
+    if (neutralButtonRow != -1)
+    {
+        if (latchState[neutralButtonRow - 1][neutralButtonCol - 1])
+        {
+            Joystick.setXAxis(1000);
+        }
+    }
+
 
     long push = 0;
     push = push | analogSwitchMode1[M];
     push = push | (analogSwitchMode2[M] << 1);
     push = push << (2 * (FieldPlacement - 1));
     rotaryField = rotaryField | push;
-
 }

@@ -16,7 +16,7 @@ int rotaryField = 0;
  11 - Bite point setting
  10 - DDS switch
  9 -- DDS switch
- 8
+ 8 -- Calibration active
  7
  6
  5

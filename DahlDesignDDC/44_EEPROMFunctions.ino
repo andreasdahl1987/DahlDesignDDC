@@ -144,6 +144,11 @@ void EEPROMinit()
     LEDBrightness = read16bitFromEEPROM(LEDSLOT+(switchPreset*2));
     brakeMagicValue = read16bitFromEEPROM(BRAKESLOT+(switchPreset*2));
     throttleHoldValue = read16bitFromEEPROM(THROTTLESLOT+(switchPreset*2));
+
+    MFP = read16bitFromEEPROM(MASTERPRESSED);
+    MFR = read16bitFromEEPROM(MASTERRELEASED);
+    SFP = read16bitFromEEPROM(SLAVEPRESSED);
+    SFR = read16bitFromEEPROM(SLAVERELEASED);
     
     oldBitePoint = bitePoint;
     oldLED = LEDBrightness;

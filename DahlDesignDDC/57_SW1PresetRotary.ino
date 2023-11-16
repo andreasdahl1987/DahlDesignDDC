@@ -7,7 +7,7 @@ void SW1PresetRotary(int analogPin, int switchNumber, int fieldPlacement, int po
 
     int maxPos = 12;
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int value;
     if (analogPin > 49)

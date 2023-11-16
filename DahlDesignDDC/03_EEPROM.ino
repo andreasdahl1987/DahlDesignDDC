@@ -12,6 +12,10 @@
 #define UTIL 0
 #define DDS_b 8
 #define DDS_s 10
+#define SLAVERELEASED 38
+#define SLAVEPRESSED 40
+#define MASTERRELEASED 42
+#define MASTERPRESSED 44
 #define BITEPOINT 128
 #define LEDSLOT 256
 #define BRAKESLOT 384

@@ -7,7 +7,7 @@ void quickRotary1bite(int analogPin, int switchNumber, int fieldPlacement, int p
 
     int maxPos = 12;
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int value;
     if (analogPin > 49)
@@ -240,7 +240,7 @@ void quickRotary2(int analogPin, int switchNumber, int fieldPlacement, int pos1,
 
     int maxPos = 12;
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int value;
     if (analogPin > 49)
@@ -390,7 +390,7 @@ void quickRotary3(int analogPin, int switchNumber, int fieldPlacement, int pos1,
 
     int maxPos = 12;
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int value;
     if (analogPin > 49)
@@ -540,7 +540,7 @@ void quickRotary4(int analogPin, int switchNumber, int fieldPlacement, int pos1,
 
     int maxPos = 12;
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int value;
     if (analogPin > 49)

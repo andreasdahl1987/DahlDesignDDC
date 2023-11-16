@@ -2,7 +2,7 @@ void bitePot(int analogPin, int switchNumber, int startValue, int endValue)
 {
     Joystick.setRyAxisRange(0, 1000);
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int pinValue;
     if (analogPin > 49)
@@ -79,7 +79,7 @@ void filteredBitePot(int analogPin, int8_t switchNumber, int startValue, int end
 {
     Joystick.setRyAxisRange(0, 1000);
     
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int raw;
     if (analogPin > 49)
