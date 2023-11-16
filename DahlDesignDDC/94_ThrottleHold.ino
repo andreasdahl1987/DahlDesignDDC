@@ -467,7 +467,7 @@ void throttleHoldSimpleT(int8_t buttonRow, int8_t buttonCol)
     buttonField = buttonField | push;
 }
 
-void throttleHoldSimpleM(int8_t buttonRow, int8_t buttonCol, int8_t rotaryRow, int8_t rotaryCol, bool reverse)
+void throttleHoldSimpleM(int8_t buttonRow, int8_t buttonCol)
 {
     int8_t ButtonRow = buttonRow - 1;
     int8_t ButtonCol = buttonCol - 1;

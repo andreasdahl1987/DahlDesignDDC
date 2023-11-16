@@ -612,7 +612,7 @@ void dualClutchCal(int masterPin, int masterSwitchNumber, int slavePin, int slav
 
     #else
 
-    int masterValue = analogRead(masterPin);
+    uint16_t masterValue = analogRead(masterPin);
 
     #endif
 
@@ -698,7 +698,7 @@ void dualClutchCal(int masterPin, int masterSwitchNumber, int slavePin, int slav
     #else
 
 
-    int slaveValue = analogRead(slavePin);
+    uint16_t slaveValue = analogRead(slavePin);
 
 
     #endif
