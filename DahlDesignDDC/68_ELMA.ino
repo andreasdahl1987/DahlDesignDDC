@@ -192,7 +192,7 @@ void E18BiteAdjust(int row, int col, bool reverse, int increment)
     }
 }
 
-void E18Throttle(int row, int col, bool reverse, int increment) 
+void E18Throttle(int row, int col, bool reverse) 
 {
     int Row = row - 1;
     int Column = col - 1;
@@ -297,7 +297,7 @@ void E18Throttle(int row, int col, bool reverse, int increment)
     }
 }
 
-void E18Brake(int row, int col, bool reverse, int increment) 
+void E18Brake(int row, int col, bool reverse) 
 {
     int Row = row - 1;
     int Column = col - 1;
