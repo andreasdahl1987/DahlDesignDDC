@@ -12,5 +12,5 @@
 
  #define DDCID 0x02
  #define MAJORVERSION 2
- #define MINORVERSION 7
- #define PATCHVERSION 1
+ #define MINORVERSION 8
+ #define PATCHVERSION 0

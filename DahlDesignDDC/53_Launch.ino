@@ -164,6 +164,45 @@ void biteAdjustButton(int row, int column, int increment)
     }
 }
 
+void biteAdjustButtonSolo(int row, int column, int increment)
+{
+    int Row = row - 1;
+    int Column = column - 1;
+
+    if (pushState[Row][Column] != rawState[Row][Column] && (globalClock - switchTimer[Row][Column]) > buttonCooldown)
+    {
+        switchTimer[Row][Column] = globalClock;
+        pushState[Row][Column] = rawState[Row][Column];
+        if(rawState[Row][Column] == 1)
+        {
+          latchState[Row][Column] = true;          
+        }
+    }
+
+    if ((globalClock - switchTimer[Row][Column]) > buttonCooldown)
+    {
+        pushState[Row][Column] = rawState[Row][Column];
+    }
+
+    if(latchState[Row][Column])
+    {
+      bitePoint += increment;
+      latchState[Row][Column] = false;
+      if (bitePoint > 1000)
+      {
+        bitePoint = 1000;  
+      }
+      else if (bitePoint < 0)
+      {
+        bitePoint = 0;
+      }
+    }
+    else
+    {
+      latchState[Row][Column] = false;
+    }
+}
+
 void launchButton(int row, int column, int switchNumberAffected)
 {
     int Row = row - 1;
