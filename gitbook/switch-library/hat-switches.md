@@ -4,7 +4,7 @@ These functions are designed to set up a switch with directional inputs as a hat
 
 Typical switches are the Alps RKJX - family.&#x20;
 
-Remember stating the amount of hat switches in DahlDesignDDC.ino
+Remember stating the amount of hat switches in[ 8\_Joystick](../3.-coding/essentials/08\_joystick.md), or else your hat switch wont be recognized at all.&#x20;
 
 #### funkyHat()
 

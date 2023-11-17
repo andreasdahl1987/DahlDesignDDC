@@ -14,6 +14,8 @@ With EEPROM hooked up, DDC will remember which preset you last selected, and the
 
 This will override any global values set in your [presets. ](../3.-coding/advanced/presets/41\_presets.ino.md)But adding fixed per-preset values in the firmware will again overwrite EEPROM.&#x20;
 
+Having EEPROM also allows you to use clutch functions with automatic calibration.&#x20;
+
 ### Does my board have EEPROM?
 
 * The **Atmel 32U4** (board such as Pro Micro, Leonardo, etc) natively has 1024 bytes of EEPROM available, which has built-in support from DDC. You just have to turn it on.&#x20;

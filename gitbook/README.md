@@ -12,6 +12,12 @@ To look at what's in development, send requests and bug rapports, go to the[ iss
 
 The topics that naturally fall into the manual for the [Dashboard](https://github.com/andreasdahl1987/DahlDesignDash), [LED plugin](https://github.com/andreasdahl1987/DahlDesignLED) and [Properties Plugin](https://github.com/andreasdahl1987/DahlDesignProperties) will not be covered here.
 
+
+
+**DDC is not for commectial use**.
+
+
+
 #### More content
 
 Four repositories on GitHub hold the complete Dahl Design software quadfecta, with particular attention to iRacing support.

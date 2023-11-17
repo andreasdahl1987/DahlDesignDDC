@@ -1,8 +1,10 @@
-# PEC11
+# E18
 
-Encoder functions in the PEC11 category. Information on this category [here.](./#pec11)
+Encoder functions in the elma category. Information on this category [here](./#elma).
 
-#### PEC11()
+Switches that work with funkyRotary functions will likely also work with elma functions, but not necessarily the other way around. I'd suggest always trying funkyRotary before elma, since the elma algorithm is much heavier to run - reserved for very bouncy encoders.&#x20;
+
+#### E18Inc()
 
 {% tabs %}
 {% tab title="Description" %}
@@ -10,13 +12,15 @@ Standard incremental encoder setup. Rotating CW will give a button pulse, rotati
 {% endtab %}
 
 {% tab title="Example" %}
-`void PEC11(int row, int col, bool reverse)`
+`void elmaInc(int row, int col, , bool reverse)`
 
 For an encoder with pins A and B to columns 3 and 4. Common pin to row 2:
 
-`PEC11(2, 3, false);`
+`elmaInc(2, 3, false);`
 
-The button numbers used is determined by the number written in the block for the A pin. B pin block will not be read. If button number was set to 15, the switch will use buttons 15 and 16. The `reverse` part of the function will switch the button numbers if set to `true`.
+The "reverse" input is to flip what happens on CW and CCW rotation. Here set to `false`. Set to `true` to flip.&#x20;
+
+The button numbers used is determined by the number written in the block for the A pin. B pin block will not be read. If button number was set to 15, the switch will use buttons 15 and 16.&#x20;
 {% endtab %}
 
 {% tab title="Requirements" %}
@@ -24,32 +28,7 @@ The button numbers used is determined by the number written in the block for the
 {% endtab %}
 {% endtabs %}
 
-#### <mark style="background-color:orange;">PEC11Bite()</mark>
-
-{% tabs %}
-{% tab title="Description" %}
-Standard incremental encoder setup. Rotating CW will give a button pulse, rotating CCW will give a button pulse with a button number 1 value higher.
-
-In addition, this switch can set the bite point of your clutches. Works in combination with [biteButton().](../function-button.md#bitebutton) The button presses will not trigger when setting bite point.&#x20;
-{% endtab %}
-
-{% tab title="Example" %}
-`void PEC11Bite(int row, int col, bool reverse)`
-
-For an encoder with pins A and B to columns 3 and 4. Common pin to row 2:
-
-`PEC11Bite(2, 3, false);`
-
-The button numbers used is determined by the number written in the block for the A pin. B pin block will not be read. If button number was set to 15, the switch will use buttons 15 and 16. The `reverse` part of the function will switch the button numbers and increase/decrease bite point if set to `true`.
-{% endtab %}
-
-{% tab title="Requirements" %}
-* 2 button numbers
-* biteButton() to set bite point
-{% endtab %}
-{% endtabs %}
-
-#### <mark style="background-color:orange;">PEC11BiteAdjust()</mark>
+#### <mark style="background-color:orange;">E18BiteAdjust()</mark>
 
 {% tabs %}
 {% tab title="Description" %}
@@ -57,11 +36,11 @@ Similar to rotary2Bite above, but instead of changing bitePoint by going through
 {% endtab %}
 
 {% tab title="Example" %}
-`void PEC11BiteAdjust(int row, int column, bool reverse, int increment)`
+`void E18BiteAdjust(int row, int column, bool reverse, int increment)`
 
 For an encoder with pins A and B to columns 3 and 4. Common pin to row 2:
 
-`PEC11BiteAdjust(2, 3, false, 50);`
+`E18BiteAdjust(2, 3, false, 50);`
 
 The button numbers used is determined by the number written in the block for the A pin. B pin block will not be read. If button number was set to 15, the switch will use buttons 15 and 16. The `reverse` part of the function will switch the button numbers and increase/decrease bite point if set to `true`.
 
@@ -74,7 +53,7 @@ When the biteButton() is held, this encoder will increase/decrease the bite poin
 {% endtab %}
 {% endtabs %}
 
-#### PEC11Throttle()
+#### E18Throttle()
 
 {% tabs %}
 {% tab title="Description" %}
@@ -84,11 +63,11 @@ In addition, this switch can set the throttle hold value when the [modButton()](
 {% endtab %}
 
 {% tab title="Example" %}
-`void PEC11Throttle(int row, int column, bool rev)`
+`void E18Throttle(int row, int column, bool rev)`
 
 For an encoder with pins A and B to columns 3 and 4. Common pin to row 2:
 
-`PEC11Throttle(2, 3, false);`
+`E18Throttle(2, 3, false);`
 
 The button numbers used is determined by the number written in the block for the A pin. B pin block will not be read. If button number was set to 15, the switch will use buttons 15 and 16. The `reverse` part of the function will switch the button numbers and increase/decrease bite point if set to `true`.
 
@@ -101,21 +80,21 @@ When the modButton() is held, this encoder will increase/decrease the throttle h
 {% endtab %}
 {% endtabs %}
 
-#### PEC11Brake()
+#### E18Brake()
 
 {% tabs %}
 {% tab title="Description" %}
 Standard incremental encoder setup. Rotating CW will give a button pulse, rotating CCW will give a button pulse with a button number 1 value higher.
 
-In addition, this switch can set the brake magic value when the [modButton()](../function-button.md#modbutton) is held.. The button presses will not trigger when setting brake magic value. Adjustments will be with 1% increments. &#x20;
+In addition, this switch can set the brake magic value when the [modButton()](../function-button.md#modbutton) is held.. The button presses will not trigger when setting the brake magic value. Adjustments will be with 1% increments. &#x20;
 {% endtab %}
 
 {% tab title="Example" %}
-`void PEC11Brake(int row, int column, bool rev)`
+`void E18Brake(int row, int column, bool rev)`
 
 For an encoder with pins A and B to columns 3 and 4. Common pin to row 2:
 
-`PEC11Brake(2, 3, false);`
+`E18Brake(2, 3, false);`
 
 The button numbers used is determined by the number written in the block for the A pin. B pin block will not be read. If button number was set to 15, the switch will use buttons 15 and 16. The `reverse` part of the function will switch the button numbers and increase/decrease bite point if set to `true`.
 
@@ -127,3 +106,4 @@ When the modButton() is held, this encoder will increase/decrease the brake magi
 * modButton()
 {% endtab %}
 {% endtabs %}
+

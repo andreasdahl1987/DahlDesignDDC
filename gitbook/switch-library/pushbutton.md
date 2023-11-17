@@ -80,3 +80,22 @@ For a switch on row 3 column 5 -> `pulseButton(3,5);`
 {% endtab %}
 {% endtabs %}
 
+#### repeaterButton()
+
+{% tabs %}
+{% tab title="Description" %}
+A button that gives multiple pulses on pressing the button. Holding the button will not give a continous pulses. Releasing the button will not give pulses. The button numer is the one you set in your matrix setup.
+
+The purpose of this button is mainly for adjustments of in-car settings, such as brake bias, diff setting, traction control, etc. It will allow you to adjust several steps with a single press.&#x20;
+{% endtab %}
+
+{% tab title="Example" %}
+`void repeaterButton(int row, int col, int pulseDuration, int repeats)`
+
+For a switch on row 3 column 5 with 10 pulses at 50 ms (will also have 50 ms brakes, meaning 10 pulses per second) -> `repeaterButton(3,5,50,10);`
+{% endtab %}
+
+{% tab title="Requirements" %}
+* 1 button number
+{% endtab %}
+{% endtabs %}

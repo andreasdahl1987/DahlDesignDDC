@@ -33,6 +33,8 @@ Every block is an **adress** in the table. Most switches just need 1 block. As a
   * TT Electronics EN11
   * Alps SRBM
   * Encoder on Alps RKJXT1F42001
+  * ELMA E33
+  * ELMA E18
   * Many more..
 * 3-way toggles (typically on-off-on)
 

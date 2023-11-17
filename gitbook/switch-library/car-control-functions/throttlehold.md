@@ -97,3 +97,48 @@ In this case, "reverse" is set to true, so the actions of CW and CCW rotation wi
 * 2 button numbers
 {% endtab %}
 {% endtabs %}
+
+#### throttleHoldSimpleT()
+
+{% tabs %}
+{% tab title="Description" %}
+Allows you to use a latching toggle/button to turn on/off throttle hold, that is all it does. To adjust the throttle hold value, use a encoder function such as PEC11Throttle, E18Throttle, funkyRotaryThrottle, etc.&#x20;
+
+Throttle hold % is defined by the variable `throttleHoldValue` found in 41\_Presets.ino. It defaults to all presets with 1000, which is 100%.&#x20;
+{% endtab %}
+
+{% tab title="Example" %}
+`throttleHoldSimpleT(int8_t buttonRow, int8_t buttonCol)`
+
+For a toggle on row 2 column 3:
+
+`throttleHoldSimpleT(2, 3);`
+{% endtab %}
+
+{% tab title="Requirements" %}
+* An encoder to adjust the throttle hold level, at least if you want to be able to change it. Default is 100%
+{% endtab %}
+{% endtabs %}
+
+#### throttleHoldSimpleM()
+
+{% tabs %}
+{% tab title="Description" %}
+Allows you to use a momentary toggle/button to turn on/off throttle hold, that is all it does. To adjust the throttle hold value, use a encoder function such as PEC11Throttle, E18Throttle, funkyRotaryThrottle, etc.&#x20;
+
+Throttle hold % is defined by the variable `throttleHoldValue` found in 41\_Presets.ino. It defaults to all presets with 1000, which is 100%.&#x20;
+{% endtab %}
+
+{% tab title="Example" %}
+`throttleHoldSimpleM(int8_t buttonRow, int8_t buttonCol)`
+
+For a button on row 2 column 3:
+
+`throttleHoldSimpleM(2, 3);`
+{% endtab %}
+
+{% tab title="Requirements" %}
+* An encoder to adjust the throttle hold level, at least if you want to be able to change it. Default is 100%
+{% endtab %}
+{% endtabs %}
+

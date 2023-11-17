@@ -33,6 +33,18 @@ Encoders:
 * Bourns PEC11R
 * Elma E33
 
+### E18
+
+Named after Elma E18, these functions are for encoders that move 2 steps on each detent, just like funkyRotary. Infact, the switch is mechanically very similar, but for the E18 in particular, the encoder is just way too bouncy to work with the funkyRotary algorithm. This algorithm is much stricter, and ensures 0 bouncing - but is also bit heavier on memory and processing power.
+
+* Elma E18 (16 detent)
+
+### wildEncoder
+
+These functions are for encoders with an atypical signal output pattern, which is why I chose the name "wild". Depending on how you wired the A and B pins, it either never outputs 10 or never outputs 01. It will behave much like a **funkyRotary** or **E18**, which rests on a 11 or 00 output state, and going from 11 to 00 is via 10. However, going from 00 to 11 is a direct switch without ever outputting 01. This requires a completely different algorithm to make it work, and the switch is sensitive to swapping A and B pins. That is why the algorithm also has a software pin swap included.&#x20;
+
+* Elma E18 (20 detent)
+
 ### **PEC11**
 
 These functions are for encoders that move 4 steps on each detent. They stop at 00. The 01, 11 and 10 are all in between the detents, and you'll need to wire up the encoder and use a serial monitor to find these states. Named after the first switch I tested that works like this: Bourns PEC11H.

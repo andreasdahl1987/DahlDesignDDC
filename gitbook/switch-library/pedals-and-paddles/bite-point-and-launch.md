@@ -13,15 +13,17 @@ The bite point is pushed to joystick axis Ry, so you can access it in windows/Si
 The bite point button can either:
 
 * Quickly but less accurately set the bite point by holding the clutch paddle at the desired bite point and then pressing the button.&#x20;
-* Together with a supported switch set the bite point with a 0.1% accuracy, explained below.
+* Together with a supported switch set the bite point with a 0.1% accuracy.
 
 Any switch function that requires a bite button will be <mark style="background-color:orange;">highlighted orange.</mark>
 
-Normally works as a simple pushbutton that can be used to anything in-game. In addition, when held, the controller is primed to enter bite point setting. Hold + rotate a bite point compatible rotary (a rotary using a function that includes bite point setting) to enter bite point setting mode. At this point, you can release the bite button. Further presses of the button will go through the stages of setting the bite point (mode 1-3), before in the end going out of bite point setting (back to mode 0).&#x20;
+Normally works as a simple pushbutton that can be used to anything in-game. In addition, when held, the controller is primed to enter bite point setting. Hold + rotate a bite point compatible rotary (a rotary using a function that includes bite point setting, these are named rotary2Bite, PEC11Bite, etc.) to enter bite point setting mode. At this point, you can release the bite button. Further presses of the button will go through the stages of setting the bite point (mode 1-3), before in the end going out of bite point setting (back to mode 0).&#x20;
 
 SimHub property -> \[DahlDesign.DDCbiteSetting]
 
 Defaults to bit 11 and 12 in the rotary field, you dont have to assign a field placement.&#x20;
+
+Also, the state of the biteButton itself as a property \[DahlDesign.R15].
 
 **Modes:**
 
@@ -45,6 +47,73 @@ For a switch on row 2 column 4 -> `biteButton(2,4);`
 * 1 button number
 {% endtab %}
 {% endtabs %}
+
+#### <mark style="background-color:orange;">biteButtonLatch()</mark>
+
+{% tabs %}
+{% tab title="Description" %}
+All similar to biteButton() above, but allows you to toggle the button on/off with single button presses. The advantage of this is you dont need to hold the button whilst making adjustments (some functions require you to hold the button, some dont) The downside is that it now can't be used as a regular button as well.&#x20;
+{% endtab %}
+
+{% tab title="Example" %}
+`void biteButtonLatch(int row, int col)`
+
+For a switch on row 2 column 4 -> `biteButtonLatch(2,4);`
+
+
+{% endtab %}
+
+{% tab title="Requirements" %}
+* None
+{% endtab %}
+{% endtabs %}
+
+#### <mark style="background-color:orange;">biteAdjustButton()</mark>
+
+{% tabs %}
+{% tab title="Description" %}
+A regular pushbutton that, when biteButton() is held, can adjust the bite point by a specified amount.&#x20;
+
+You will specify an increment, which can be from -1000 to 1000. For instance, an increment of 20 will increase bite point by 2.0% on each button press. An increment of -125 will decrease the bitepoint by 12.5% on each button press.&#x20;
+
+Works well together with a rotaryMute or rotaryPartial switch where different positions of the switch will change the steps of the biteAdjustButton.&#x20;
+{% endtab %}
+
+{% tab title="Example" %}
+`void biteAdjustButton(int row, int col, int increment)`
+
+For a switch on row 2 column 4 -> `biteAdjustButton(2,4,10);`
+
+This switch will increase bitepoint by 1.0% on each press while biteButton is held. If the biteButton is not held, it works like a regular button.&#x20;
+{% endtab %}
+
+{% tab title="Requirements" %}
+* 1 button number
+* Bite button
+{% endtab %}
+{% endtabs %}
+
+#### <mark style="background-color:orange;">biteAdjustButtonSolo()</mark>
+
+{% tabs %}
+{% tab title="Description" %}
+Similar to biteAdjustButton() above, but does not require biteButton to be held to adjust the bite point. On the flipside, it cant be used as a regular pushbutton as it doesnt trigger a button press.&#x20;
+{% endtab %}
+
+{% tab title="Example" %}
+`void biteAdjustButtonSolo(int row, int col, int increment)`
+
+For a switch on row 2 column 4 -> `biteAdjustButton(2,4,10);`
+
+This switch will increase bitepoint by 1.0% on each press.
+{% endtab %}
+
+{% tab title="Requirements" %}
+* Alltough technically it doesnt require a biteButton to work, you will always need a biteButton function in your code somewhere for your dualClutch() or singleClutch() functions to work properly. If you dont want to assign biteButton to any of your controllers buttons, you can create a virtual row/column and put it there.
+{% endtab %}
+{% endtabs %}
+
+
 
 #### launchButton()
 
