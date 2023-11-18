@@ -37,6 +37,8 @@ Type in the pin that reads the signal, the analog switch number you've given it,
 Example:
 
 `void singleClutch(A2, 2, 105, 799);`
+
+`void singleClutchCal(A2, 2);`
 {% endtab %}
 
 {% tab title="Requirements" %}
@@ -73,6 +75,8 @@ Type in the pin that reads the signal, the analog switch number you've given it,
 Example:
 
 `void dualClutch(A2, 1, 105, 799, A3, 2, 436, 873, true);`
+
+`void dualClutchCal(A2, 1, A3, 2, true);`
 {% endtab %}
 
 {% tab title="Requirements" %}
