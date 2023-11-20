@@ -30,6 +30,7 @@
  <h2 <p align="center"> <a href=http://dahl-design.gitbook.io/ddc/>MANUAL</a>
 </h2>
 
+<h5 align="center">Dahl Design Controller © 2022 by Andreas Dahl is licensed under CC BY-NC-SA 4.0 </h5>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
