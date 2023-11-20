@@ -8,6 +8,8 @@
  * Any questions, contact me on Discord: Andreas Dahl#9514
  * 
  * If you find this software helpful, feel free to make a donation: https://www.paypal.com/donate?hosted_button_id=GLYWGTDZNXURJ
+ *
+ * Dahl Design Controller © 2022 by Andreas Dahl is licensed under CC BY-NC-SA 4.0
  */
 
  #define DDCID 0x02
