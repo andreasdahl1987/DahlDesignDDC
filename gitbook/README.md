@@ -14,7 +14,7 @@ The topics that naturally fall into the manual for the [Dashboard](https://githu
 
 
 
-**DDC is not for commectial use**.
+**DDC is not for commercial use**.
 
 
 
