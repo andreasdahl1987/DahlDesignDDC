@@ -32,7 +32,7 @@ void rotary4Modes(int row, int column, int fieldPlacement, int hybridPositions, 
         }
     }
 
-    pos = pos ^ (pos >> 4);
+    //pos = pos ^ (pos >> 4);
     pos = pos ^ (pos >> 2);
     pos = pos ^ (pos >> 1);
 
@@ -231,7 +231,7 @@ void rotary4Inc(int row, int column, bool reverse)
         }
     }
 
-    pos = pos ^ (pos >> 4);
+    //pos = pos ^ (pos >> 4);
     pos = pos ^ (pos >> 2);
     pos = pos ^ (pos >> 1);
 
@@ -299,7 +299,7 @@ void rotary4Mod(int row, int column, bool reverse)
         }
     }
 
-    pos = pos ^ (pos >> 4);
+    //pos = pos ^ (pos >> 4);
     pos = pos ^ (pos >> 2);
     pos = pos ^ (pos >> 1);
 
@@ -371,10 +371,10 @@ void rotary4Stack (int stackButtonRow, int stackButtonColumn, int fieldPlacement
     {
       toggleTimer[ButtonRow][ButtonCol] = 0;
     }
-    
+
     //Adjust button number
 
-    int Number = buttonNumber[Row][Column] + toggleTimer[ButtonRow][ButtonCol] * 2;  
+    int Number = buttonNumber[Row][Column] + toggleTimer[ButtonRow][ButtonCol] * 2;
     //Find switch absolute position
 
     bool Pin1 = rawState[Row][Column];
@@ -394,7 +394,7 @@ void rotary4Stack (int stackButtonRow, int stackButtonColumn, int fieldPlacement
         }
     }
 
-    pos = pos ^ (pos >> 4);
+    //pos = pos ^ (pos >> 4);
     pos = pos ^ (pos >> 2);
     pos = pos ^ (pos >> 1);
 
@@ -429,7 +429,7 @@ void rotary4Stack (int stackButtonRow, int stackButtonColumn, int fieldPlacement
             pushState[Row][Column] = result;
         }
     }
-    
+
     //Push stack placement
     long push = 0;
     push = push | toggleTimer[ButtonRow][ButtonCol];
@@ -464,7 +464,7 @@ void rotary4Multi(int row, int column, int positions, bool reverse)
         }
     }
 
-    pos = pos ^ (pos >> 4);
+    //pos = pos ^ (pos >> 4);
     pos = pos ^ (pos >> 2);
     pos = pos ^ (pos >> 1);
 
@@ -503,7 +503,7 @@ void rotary4Multi(int row, int column, int positions, bool reverse)
                 pushState[Row][Column + 2] = Pos - 1;
             }
 
-            for (int i = 0; i < Pos + 1; i++)
+            for (int i = 1; i <= Pos; i++)
             {
                 int e = pushState[Row][Column + 2] % Pos;
                 if (e == 0)
@@ -552,7 +552,7 @@ void rotary4Multis(int row, int column, int fieldPlacement, int positions1, int 
         }
     }
 
-    pos = pos ^ (pos >> 4);
+    //pos = pos ^ (pos >> 4);
     pos = pos ^ (pos >> 2);
     pos = pos ^ (pos >> 1);
 
@@ -578,7 +578,7 @@ void rotary4Multis(int row, int column, int fieldPlacement, int positions1, int 
 
             if (pushState[modButtonRow - 1][modButtonCol - 1] == 1 && FieldPlacement != 0)
             {
-                for (int i = 0; i < maxPos + 1; i++) //Remove the remnants from SWITCH MODE 1
+                for (int i = 1; i <= maxPos; i++) //Remove the remnants from SWITCH MODE 1
                 {
                     Joystick.releaseButton(i - 1 + Number);
                 }
@@ -663,7 +663,7 @@ void rotary4Multis(int row, int column, int fieldPlacement, int positions1, int 
         {
             //SWITCH MODE 2-4: Multiposititon switches
 
-            for (int i = 0; i < pushState[Row][Column + 3] + 1; i++) //Col pin 4 push state holds info on how many positions on multiposition switch
+            for (int i = 1; i <= pushState[Row][Column + 3]; i++) //Col pin 4 push state holds info on how many positions on multiposition switch
             {
                 int e = pushState[Row][Column + 2] % pushState[Row][Column + 3];
                 if (e == 0)
@@ -705,8 +705,8 @@ void DDS4bit(int row, int column, bool reverse)
         toggleTimer[Row][Column] = read16bitFromEEPROM(DDS_s);
       }
     #endif
-    
-    if (latchState[ddButtonRow - 1][ddButtonCol - 1] && !switchMode[Row][Column + 1])  //Jumping 
+
+    if (latchState[ddButtonRow - 1][ddButtonCol - 1] && !switchMode[Row][Column + 1])  //Jumping
     {
         Number = Number + 12;
         if (!switchMode[Row][Column])
@@ -717,7 +717,7 @@ void DDS4bit(int row, int column, bool reverse)
             }
         }
     }
-    
+
     //Find switch absolute position
 
     bool Pin1 = rawState[Row][Column];
@@ -737,7 +737,7 @@ void DDS4bit(int row, int column, bool reverse)
         }
     }
 
-    pos = pos ^ (pos >> 4);
+    //pos = pos ^ (pos >> 4);
     pos = pos ^ (pos >> 2);
     pos = pos ^ (pos >> 1);
 
@@ -1000,7 +1000,7 @@ void DDS4bit(int row, int column, bool reverse)
         //Clearing all buttons on mode change
         if (latchLock[ddButtonRow - 1][ddButtonCol - 1] && !(switchMode[Row][Column] && !switchMode[Row][Column + 1]))
         {
-            for (int i = 0; i < 13; i++) //Remove the remnants from SWITCH MODE 1
+            for (int i = 1; i <= 13; i++) //Remove the remnants from SWITCH MODE 1
             {
                 Joystick.releaseButton(i - 1 + buttonNumber[Row][Column]);
             }

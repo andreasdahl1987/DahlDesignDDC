@@ -1,23 +1,23 @@
 void write16bitToEEPROM(uint16_t location, uint16_t value)
 {
 #if ((USING_CAT24C512 == 1 && CAT24C512_I2C_NUMBER == 0) || USING_CB1 == 1 || USING_32U4EEPROM == 1)
-  
+
   #if (USING_32U4EEPROM)
     uint8_t firstByte = value >> 8;
     uint8_t lastByte = value & 0xff;
-    EEPROM.write(location,firstByte);
+    EEPROM.update(location,firstByte);
     delay(5);
-    EEPROM.write(location+1,lastByte);
-    delay(5);   
+    EEPROM.update(location+1,lastByte);
+    delay(5);
   #else
     uint8_t reg1 = location >> 8;
     uint8_t reg2 = location & 0xff;
 
     Wire.beginTransmission(CAT24C512_ADDRESS);
     delayMicroseconds(200);
-    
+
     Wire.write(reg1);
-    Wire.write(reg2); 
+    Wire.write(reg2);
 
     uint8_t firstByte = value >> 8;
     uint8_t lastByte = value & 0xff;
@@ -25,33 +25,33 @@ void write16bitToEEPROM(uint16_t location, uint16_t value)
     Wire.write(lastByte);
     Wire.endTransmission();
     delayMicroseconds(200);
-  #endif  
+  #endif
 #elif (USING_CAT24C512 == 1 && CAT24C512_I2C_NUMBER == 1)
-  
+
     uint8_t reg1 = location >> 8;
     uint8_t reg2 = location & 0xff;
 
     Wire1.beginTransmission(CAT24C512_ADDRESS);
     delayMicroseconds(200);
-    
+
     Wire1.write(reg1);
-    Wire1.write(reg2); 
+    Wire1.write(reg2);
 
     uint8_t firstByte = value >> 8;
     uint8_t lastByte = value & 0xff;
     Wire1.write(firstByte);
     Wire1.write(lastByte);
     Wire1.endTransmission();
-    delayMicroseconds(200); 
+    delayMicroseconds(200);
 #else
-  EEPROMdump = location + value;  
+  EEPROMdump = location + value;
 #endif
  }
 
 uint16_t read16bitFromEEPROM(uint16_t location)
 {
 #if ((USING_CAT24C512 == 1 && CAT24C512_I2C_NUMBER == 0) || USING_CB1 == 1 || USING_32U4EEPROM == 1)
-  
+
   #if (USING_32U4EEPROM)
     uint16_t value = 0;
     value = EEPROM.read(location);
@@ -66,7 +66,7 @@ uint16_t read16bitFromEEPROM(uint16_t location)
 
     Wire.beginTransmission(CAT24C512_ADDRESS);
     delayMicroseconds(200);
-    
+
     Wire.write(reg1);
     Wire.write(reg2);
     Wire.endTransmission();
@@ -78,7 +78,7 @@ uint16_t read16bitFromEEPROM(uint16_t location)
     value = value << 8;
     value |= Wire.read();
     delayMicroseconds(200);
-    
+
     return value;
   #endif
 
@@ -89,7 +89,7 @@ uint16_t read16bitFromEEPROM(uint16_t location)
 
     Wire1.beginTransmission(CAT24C512_ADDRESS);
     delayMicroseconds(200);
-    
+
     Wire1.write(reg1);
     Wire1.write(reg2);
     Wire1.endTransmission();
@@ -101,13 +101,13 @@ uint16_t read16bitFromEEPROM(uint16_t location)
     value = value << 8;
     value |= Wire1.read();
     delayMicroseconds(200);
-    
+
     return value;
-    
+
 #else
 
   return location * 0;
-  
+
 #endif
 }
 
@@ -151,7 +151,7 @@ void EEPROMinit()
     MFR = read16bitFromEEPROM(MASTERRELEASED);
     SFP = read16bitFromEEPROM(SLAVEPRESSED);
     SFR = read16bitFromEEPROM(SLAVERELEASED);
-    
+
     oldBitePoint = bitePoint;
     oldLED = LEDBrightness;
     oldBrake = brakeMagicValue;
@@ -169,7 +169,7 @@ void EEPROMchanges()
       oldPreset = switchPreset;
       write16bitToEEPROM(PRESETSLOT,switchPreset);
     }
-  
+
     //BITE POINT
     if (pushState[biteButtonRow - 1][biteButtonCol - 1] == 0 && (biteButtonBit1 + biteButtonBit2 == 0) && oldBitePoint != bitePoint)
     {
@@ -193,7 +193,7 @@ void EEPROMchanges()
     {
       oldThrottle = throttleHoldValue;
       write16bitToEEPROM(THROTTLESLOT+(switchPreset * 2), throttleHoldValue);
-    }    
+    }
 
 #endif
 }
