@@ -128,7 +128,17 @@ void setup()
         }
     }
     #endif
+
+    //PWM Setup
+    #if(PWMENABLED == 1)
+    for (int i = 0; i < PWMCount; i++)
+    {
+      PWMValues[i] = 50;
+      PWMIsOff[i] = false;
+      pinMode(PWMChannelPins[i], OUTPUT);
+    }
     
+    #endif
     
     EEPROMfirst();
     EEPROMinit(); //Fetch values from EEPROM
