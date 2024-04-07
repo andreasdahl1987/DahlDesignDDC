@@ -23,7 +23,7 @@ Example: `setSwitchMode(1,1,0);` will set the mode of the switch on row 1 column
 
 #### setAnalogSwitchMode(int switchNumber, int modeBit, int modeValue)
 
-Changing the switch more for an analog switch, starts at 0. Some of the analog switch functions have more than 2 modes - using more than 1 bit. Dual clutch for instance has 4 modes (0-3), using 2 bits. So to change into clutch modes 2 and 3 you need to make two of these functions. Lets see how to set a clutch into mode 3, which is binary 11:
+Changing the switch mode for an analog switch, starts at 0. Some of the analog switch functions have more than 2 modes - using more than 1 bit. Dual clutch for instance has 4 modes (0-3), using 2 bits. So to change into clutch modes 2 and 3 you need to make two of these functions. Lets see how to set a clutch into mode 3, which is binary 11:
 
 `setAnalogSwitchMode(5,1,1);`
 

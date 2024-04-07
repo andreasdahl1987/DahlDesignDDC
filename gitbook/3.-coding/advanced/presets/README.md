@@ -8,7 +8,7 @@ There are two files related to the preset system:
 
 `31_RunningPresets.ino`, holding the `runningPresets()` function
 
-`41_Presets.ino`, holding the `presets(int presetNumber)` function
+`32_Presets.ino`, holding the `presets(int presetNumber)` function
 
 These are both relevant, and work in completely different ways.
 

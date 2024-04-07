@@ -166,7 +166,7 @@ void runningPresets()
 
 Note that to inactivate the encoder in preset 12, I just had to **not** call the encoder function.&#x20;
 
-Now that the correct **switch functions** are used in each presets, we'll have to use 41\_Presets.ino to set the correct **switch modes** in each preset. When presets(int8\_t presetNumber) is run, all switch modes are set to 0. So only the switches that needs to be in a mode other than 0 needs to be included. In this case that means only the 12-position switch in presets 9-11, where it will be in mode 1.&#x20;
+Now that the correct **switch functions** are used in each presets, we'll have to use 32\_Presets.ino to set the correct **switch modes** in each preset. When presets(int8\_t presetNumber) is run, all switch modes are set to 0. So only the switches that needs to be in a mode other than 0 needs to be included. In this case that means only the 12-position switch in presets 9-11, where it will be in mode 1.&#x20;
 
 ```
 void presets(int8_t presetNumber)

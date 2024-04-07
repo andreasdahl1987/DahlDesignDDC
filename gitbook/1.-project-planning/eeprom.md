@@ -12,7 +12,7 @@ With EEPROM hooked up, DDC will remember which preset you last selected, and the
 * Brake magic value
 * DDS switch position
 
-This will override any global values set in your [presets. ](../3.-coding/advanced/presets/41\_presets.ino.md)But adding fixed per-preset values in the firmware will again overwrite EEPROM.&#x20;
+This will override any global values set in your [presets. ](../3.-coding/advanced/presets/32\_presets.ino.md)But adding fixed per-preset values in the firmware will again overwrite EEPROM.&#x20;
 
 Having EEPROM also allows you to use clutch functions with automatic calibration.&#x20;
 
