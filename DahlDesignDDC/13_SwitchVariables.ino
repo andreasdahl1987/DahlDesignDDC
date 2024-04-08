@@ -46,3 +46,12 @@ int average[analogSwitchCount];
 #define ADC15 64
 #define ADC16 65
 #define ADC_CORR 50
+
+//PWM Control
+#if(PWMENABLED == 1)
+  const int8_t PWMCount = sizeof(PWMChannelPins) / sizeof(PWMChannelPins[0]);
+  int16_t PWMValues [PWMCount];
+  bool PWMIsOff [PWMCount];
+  uint8_t PWMStart[PWMCount];
+  uint8_t PWMEnd[PWMCount];
+#endif

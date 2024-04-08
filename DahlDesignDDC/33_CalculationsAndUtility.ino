@@ -91,6 +91,16 @@ void checkValue(int pin)
   #endif
 }
 
+#if (PWMENABLED == 1)
+void checkPWM(int PWMchannel)
+{
+    Serial.print("Channel ");
+    Serial.print(PWMchannel);
+    Serial.print(" value: ");
+    Serial.println(PWMValues[PWMchannel-1]);
+}
+#endif
+
 void refreshRate()
 {
   if(globalCounter == 10)
