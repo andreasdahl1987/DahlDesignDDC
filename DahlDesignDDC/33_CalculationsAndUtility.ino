@@ -94,10 +94,12 @@ void checkValue(int pin)
 #if (PWMENABLED == 1)
 void checkPWM(int PWMchannel)
 {
+    int PWMChannel = PWMchannel - 1;
+    int PWMValue = PWMStart[PWMChannel] + (PWMValues[PWMChannel] * (PWMEnd[PWMChannel] - PWMStart[PWMChannel]) / 100);
     Serial.print("Channel ");
     Serial.print(PWMchannel);
     Serial.print(" value: ");
-    Serial.println(PWMValues[PWMchannel-1]);
+    Serial.println(PWMValue);
 }
 #endif
 

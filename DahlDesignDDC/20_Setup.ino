@@ -133,10 +133,14 @@ void setup()
     #if(PWMENABLED == 1)
     for (int i = 0; i < PWMCount; i++)
     {
-      PWMValues[i] = 50;
-      PWMIsOff[i] = false;
+      PWMValues[i] = 25;
+      PWMIsOff[i] = true;
       pinMode(PWMChannelPins[i], OUTPUT);
+      PWMStart[i] = 0;
+      PWMEnd[i] = 255;
     }
+
+    PWMSetup();
     
     #endif
     

@@ -31,7 +31,7 @@ void PWMtoggle(int8_t row, int8_t column, int8_t PWMChannel)
     }
 }
 
-void rotary2PWM(int8_t row, int8_t col, bool reverse, int8_t PWMChannel)
+void rotary2PWM(int8_t row, int8_t col, bool reverse, int8_t PWMChannel, int8_t stepSize)
 {
     int8_t Row = row - 1;
     int8_t Column = col - 1;
@@ -88,14 +88,14 @@ void rotary2PWM(int8_t row, int8_t col, bool reverse, int8_t PWMChannel)
             {
                 if (pushState[modButtonRow-1][modButtonCol-1] == 1)
                 {
-                    PWMValues[PWMchannel] = PWMValues[PWMchannel] + 10 - (20 * reverse);
+                    PWMValues[PWMchannel] = PWMValues[PWMchannel] + stepSize - (2 * stepSize * reverse);
                 }
             }
             else if ((difference < 0 && difference > -2) || difference > 2)
             {
                 if (pushState[modButtonRow-1][modButtonCol-1] == 1)
                 {
-                    PWMValues[PWMchannel] = PWMValues[PWMchannel] - 10 + (20 * reverse);
+                    PWMValues[PWMchannel] = PWMValues[PWMchannel] - stepSize + (2 * stepSize * reverse);
                 }
             }
         }
@@ -106,9 +106,9 @@ void rotary2PWM(int8_t row, int8_t col, bool reverse, int8_t PWMChannel)
     {
       PWMValues[PWMchannel] = 0;
     }
-    else if (PWMValues[PWMchannel] > 255)
+    else if (PWMValues[PWMchannel] > 100)
     {
-      PWMValues[PWMchannel] = 255;
+      PWMValues[PWMchannel] = 100;
     }
 
     int8_t difference = pushState[Row][Column + 1];
@@ -144,19 +144,32 @@ void rotary2PWM(int8_t row, int8_t col, bool reverse, int8_t PWMChannel)
 
 //Under the hood
 
+
 void PWMrun()
 {
   for(int i = 0; i < PWMCount; i ++)
   {
+    int PWMValue = PWMStart[i] + (PWMValues[i] * (PWMEnd[i] - PWMStart[i]) / 100);
+
     if(PWMIsOff[i])
       {
         analogWrite(PWMChannelPins[i], 0);
       }
     else
       {
-        analogWrite(PWMChannelPins[i], PWMValues[i]);
+        analogWrite(PWMChannelPins[i], PWMValue);
       }
   }
+}
+
+void PWMSetup(int8_t PWMchannel, bool isOff, uint8_t minValue, uint8_t maxValue, int16_t volume)
+{
+  int8_t PWMChannel = PWMchannel - 1;
+
+  PWMStart[PWMChannel] = minValue;
+  PWMEnd[PWMChannel] = maxValue;
+  PWMIsOff[PWMChannel] = isOff;
+  PWMValues[PWMChannel] = volume;
 }
 
 
