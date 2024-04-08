@@ -135,7 +135,7 @@ void biteLED (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t eng
     B = B * engageBrightness / 100;
     B = B * LEDBrightness / 100;
 
-    if (!engageBlink || engageBlink && timer > 500)
+    if (!engageBlink || (engageBlink && timer > 500))
     {
       for(int i = biteEngageStartLED; i < biteEngageStopLED+1; i++)
       {
@@ -264,7 +264,7 @@ void biteLED (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t eng
     B = B * engageBrightness / 100;
     B = B * LEDBrightness / 100;
 
-    if (!engageBlink || engageBlink && timer > 500)
+    if (!engageBlink || (engageBlink && timer > 500))
     {
       for(int i = biteEngageStartLED; i < biteEngageStopLED+1; i++)
       {
@@ -568,7 +568,7 @@ void biteLED2 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t en
     B = B * engageBrightness / 100;
     B = B * LEDBrightness / 100;
 
-    if (!engageBlink || engageBlink && timer > 500)
+    if (!engageBlink || (engageBlink && timer > 500))
     {
       for(int i = biteEngageStartLED; i < biteEngageStopLED+1; i++)
       {
@@ -697,7 +697,7 @@ void biteLED2 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t en
     B = B * engageBrightness / 100;
     B = B * LEDBrightness / 100;
 
-    if (!engageBlink || engageBlink && timer > 500)
+    if (!engageBlink || (engageBlink && timer > 500))
     {
       for(int i = biteEngageStartLED; i < biteEngageStopLED+1; i++)
       {
@@ -1000,7 +1000,7 @@ void biteLED3 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t en
     B = B * engageBrightness / 100;
     B = B * LEDBrightness / 100;
 
-    if (!engageBlink || engageBlink && timer > 500)
+    if (!engageBlink || (engageBlink && timer > 500))
     {
       for(int i = biteEngageStartLED; i < biteEngageStopLED+1; i++)
       {
@@ -1129,7 +1129,7 @@ void biteLED3 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t en
     B = B * engageBrightness / 100;
     B = B * LEDBrightness / 100;
 
-    if (!engageBlink || engageBlink && timer > 500)
+    if (!engageBlink || (engageBlink && timer > 500))
     {
       for(int i = biteEngageStartLED; i < biteEngageStopLED+1; i++)
       {
@@ -1432,7 +1432,7 @@ void biteLED4 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t en
     B = B * engageBrightness / 100;
     B = B * LEDBrightness / 100;
 
-    if (!engageBlink || engageBlink && timer > 500)
+    if (!engageBlink || (engageBlink && timer > 500))
     {
       for(int i = biteEngageStartLED; i < biteEngageStopLED+1; i++)
       {
@@ -1561,7 +1561,7 @@ void biteLED4 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t en
     B = B * engageBrightness / 100;
     B = B * LEDBrightness / 100;
 
-    if (!engageBlink || engageBlink && timer > 500)
+    if (!engageBlink || (engageBlink && timer > 500))
     {
       for(int i = biteEngageStartLED; i < biteEngageStopLED+1; i++)
       {
