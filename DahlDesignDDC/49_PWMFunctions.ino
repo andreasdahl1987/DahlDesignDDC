@@ -4,7 +4,7 @@
 
 #if (PWMENABLED == 1)
 
-void PWMtoggle(int8_t row, int8_t column, int8_t PWMChannel)
+void PWMToggle(int8_t row, int8_t column, int8_t PWMChannel)
 {
     int8_t Row = row - 1;
     int8_t Column = column - 1;
@@ -139,6 +139,87 @@ void rotary2PWM(int8_t row, int8_t col, bool reverse, int8_t PWMChannel, int8_t 
             Joystick.setButton(Number + 1, 0);
         }
     }
+}
+
+void PWMPot(int analogPin, int switchNumber, int startValue, int endValue, int8_t PWMchannel)
+{
+
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+
+    int pinValue;
+    if (analogPin > 49)
+    {
+      pinValue = ADS1115value[analogPin - ADC_CORR];
+    }
+    else
+    {
+      pinValue = analogRead(analogPin);
+    }
+    
+    #else
+
+    int pinValue = analogRead(analogPin);
+    
+    #endif
+
+    int8_t PWMChannel = PWMchannel - 1;
+    int N = switchNumber - 1;
+    float normalized = 0;
+
+    if (endValue > startValue)
+    {
+        endValue = endValue - clutchTopDeadzone;
+        startValue = startValue + clutchBottomDeadzone;
+        float gap = endValue - startValue;
+        float normFactor = 1000 / gap;
+        normalized = normFactor * (pinValue - startValue);
+        if (normalized < 0)
+        {
+            normalized = 0;
+        }
+    }
+    else if (endValue < startValue)
+    {
+        endValue = endValue + clutchTopDeadzone;
+        startValue = startValue - clutchBottomDeadzone;
+        float gap = startValue - endValue;
+        float normFactor = 1000 / gap;
+        normalized = normFactor * (startValue - pinValue);
+        if (normalized < 0)
+        {
+            normalized = 0;
+        }
+    }
+
+    total[N] = total[N] - readings[N][readIndex[N]];
+    readings[N][readIndex[N]] = normalized;
+    total[N] = total[N] + readings[N][readIndex[N]];
+
+    readIndex[N]++;
+
+    if (readIndex[N] > (reads - 1))
+    {
+        readIndex[N] = 0;
+    }
+
+    average[N] = total[N] / reads;
+    if (average[N] > 1000)
+    {
+        average[N] = 1000;
+    }
+
+    //----------------SET PWM----------------
+    PWMValues[PWMChannel] = average[N]/10;
+}
+
+void PWMSet(int8_t PWMchannel, uint8_t value)
+{
+  int8_t PWMChannel = PWMchannel - 1;
+
+  PWMStart[PWMChannel] = 0;
+  PWMEnd[PWMChannel] = value;
+  PWMIsOff[PWMChannel] = false;
+  PWMValues[PWMChannel] = 100;
 }
 
 
