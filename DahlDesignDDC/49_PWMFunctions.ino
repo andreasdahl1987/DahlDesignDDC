@@ -222,6 +222,30 @@ void PWMSet(int8_t PWMchannel, uint8_t value)
   PWMValues[PWMChannel] = 100;
 }
 
+void triggerPWM(int8_t PWMchannel, bool condition, bool blinkEnable, int blinkOnTimer, int blinkOffTimer)
+{
+
+  int8_t PWMChannel = PWMchannel - 1;
+
+  int timer = globalClock % (blinkOnTimer + blinkOffTimer);
+
+  if(condition)
+  {
+    if (blinkEnable && timer < blinkOffTimer)
+    {
+        PWMIsOff[PWMChannel] = true;
+    }
+    if (!blinkEnable || (blinkEnable && timer > blinkOffTimer))
+    {
+        PWMIsOff[PWMChannel] = false;
+     }
+  }
+  else
+  {
+    PWMIsOff[PWMChannel] = true;
+  }
+}
+
 
 //Under the hood
 
@@ -239,6 +263,7 @@ void PWMrun()
     else
       {
         analogWrite(PWMChannelPins[i], PWMValue);
+        Serial.println(PWMValue);
       }
   }
 }
