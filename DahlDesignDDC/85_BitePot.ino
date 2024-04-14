@@ -1,4 +1,4 @@
-void bitePot(int analogPin, int switchNumber, int startValue, int endValue)
+void bitePot(int analogPin, int analogChannel, int startValue, int endValue)
 {
     Joystick.setRyAxisRange(0, 1000);
 
@@ -20,7 +20,7 @@ void bitePot(int analogPin, int switchNumber, int startValue, int endValue)
     
     #endif
     
-    int N = switchNumber - 1;
+    int N = analogChannel - 1;
     float normalized = 0;
 
     if (endValue > startValue)
@@ -75,7 +75,7 @@ void bitePot(int analogPin, int switchNumber, int startValue, int endValue)
 
 }
 
-void filteredBitePot(int analogPin, int8_t switchNumber, int startValue, int endValue, int curvePush, float expFactor)
+void filteredBitePot(int analogPin, int8_t analogChannel, int startValue, int endValue, int curvePush, float expFactor)
 {
     Joystick.setRyAxisRange(0, 1000);
     
@@ -97,7 +97,7 @@ void filteredBitePot(int analogPin, int8_t switchNumber, int startValue, int end
     
     #endif
     
-    int N = switchNumber - 1;
+    int N = analogChannel - 1;
     float normalized = 0;
     float EndValue = curveFilter(endValue, startValue, endValue, curvePush, expFactor);
     float StartValue = curveFilter(startValue, startValue, endValue, curvePush, expFactor);

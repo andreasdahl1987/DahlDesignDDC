@@ -141,7 +141,7 @@ void rotary2PWM(int8_t row, int8_t col, bool reverse, int8_t PWMChannel, int8_t 
     }
 }
 
-void PWMPot(int analogPin, int switchNumber, int startValue, int endValue, int8_t PWMchannel)
+void PWMPot(int analogPin, int analogChannel, int startValue, int endValue, int8_t PWMchannel)
 {
 
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
@@ -163,7 +163,7 @@ void PWMPot(int analogPin, int switchNumber, int startValue, int endValue, int8_
     #endif
 
     int8_t PWMChannel = PWMchannel - 1;
-    int N = switchNumber - 1;
+    int N = analogChannel - 1;
     float normalized = 0;
 
     if (endValue > startValue)
@@ -212,7 +212,7 @@ void PWMPot(int analogPin, int switchNumber, int startValue, int endValue, int8_
     PWMValues[PWMChannel] = average[N]/10;
 }
 
-void PWMSet(int8_t PWMchannel, uint8_t value)
+void setPWM(int8_t PWMchannel, uint8_t value)
 {
   int8_t PWMChannel = PWMchannel - 1;
 

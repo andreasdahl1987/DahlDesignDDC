@@ -1,4 +1,4 @@
-void throttle(int analogPin, int switchNumber, int releasedValue, int fullyPressedValue)
+void throttle(int analogPin, int analogChannel, int releasedValue, int fullyPressedValue)
 {
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
@@ -18,7 +18,7 @@ void throttle(int analogPin, int switchNumber, int releasedValue, int fullyPress
     
     #endif
     
-    int N = switchNumber - 1;
+    int N = analogChannel - 1;
     float normalized = 0;
 
     if (fullyPressedValue > releasedValue)
@@ -67,7 +67,7 @@ void throttle(int analogPin, int switchNumber, int releasedValue, int fullyPress
     Joystick.setThrottle(average[N]);
 }
 
-void filteredThrottle(int analogPin, int8_t switchNumber, int releasedValue, int fullyPressedValue, int curvePush, float expFactor)
+void filteredThrottle(int analogPin, int8_t analogChannel, int releasedValue, int fullyPressedValue, int curvePush, float expFactor)
 {
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
@@ -87,7 +87,7 @@ void filteredThrottle(int analogPin, int8_t switchNumber, int releasedValue, int
     
     #endif
     
-    int N = switchNumber - 1;
+    int N = analogChannel - 1;
     float normalized = 0;
     float FullyPressedValue = curveFilter(fullyPressedValue, releasedValue, fullyPressedValue, curvePush, expFactor);
     float ReleasedValue = curveFilter(releasedValue, releasedValue, fullyPressedValue, curvePush, expFactor);

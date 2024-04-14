@@ -1,5 +1,5 @@
 
-void singleClutch(int analogPin, int switchNumber, int releasedValue, int fullyPressedValue)
+void singleClutch(int analogPin, int analogChannel, int releasedValue, int fullyPressedValue)
 {
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
@@ -19,7 +19,7 @@ void singleClutch(int analogPin, int switchNumber, int releasedValue, int fullyP
     
     #endif
     
-    int N = switchNumber - 1;
+    int N = analogChannel - 1;
     float normalized = 0;
     
     if (fullyPressedValue > releasedValue)
@@ -99,7 +99,7 @@ void singleClutch(int analogPin, int switchNumber, int releasedValue, int fullyP
     Joystick.setXAxis(average[N]);
 }
 
-void singleClutchCal(int analogPin, int switchNumber)
+void singleClutchCal(int analogPin, int analogChannel)
 {
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
@@ -119,7 +119,7 @@ void singleClutchCal(int analogPin, int switchNumber)
     
     #endif
     
-    int M = switchNumber - 1;
+    int M = analogChannel - 1;
     float normalized = 0;
     masterRaw = pinValue;
     
@@ -210,7 +210,7 @@ void singleClutchCal(int analogPin, int switchNumber)
     Joystick.setXAxis(average[M]);
 }
 
-void filteredSingleClutch(int analogPin, int8_t switchNumber, int releasedValue, int fullyPressedValue, int curvePush, float expFactor)
+void filteredSingleClutch(int analogPin, int8_t analogChannel, int releasedValue, int fullyPressedValue, int curvePush, float expFactor)
 {
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
@@ -230,7 +230,7 @@ void filteredSingleClutch(int analogPin, int8_t switchNumber, int releasedValue,
     
     #endif
     
-    int N = switchNumber - 1;
+    int N = analogChannel - 1;
     float normalized = 0;
     float FullyPressedValue = curveFilter(fullyPressedValue, releasedValue, fullyPressedValue, curvePush, expFactor);
     float ReleasedValue = curveFilter(releasedValue, releasedValue, fullyPressedValue, curvePush, expFactor);

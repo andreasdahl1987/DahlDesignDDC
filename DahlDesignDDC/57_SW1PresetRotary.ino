@@ -1,6 +1,6 @@
-void SW1PresetRotary(int analogPin, int switchNumber, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
+void SW1PresetRotary(int analogPin, int analogChannel, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
 {
-    int N = switchNumber - 1;
+    int N = analogChannel - 1;
 
     int Number = analogButtonNumber[N];
     int FieldPlacement = fieldPlacement;

@@ -1,6 +1,6 @@
-void quickRotary1bite(int analogPin, int switchNumber, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
+void quickRotary1bite(int analogPin, int analogChannel, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
 {
-    int N = switchNumber - 1;
+    int N = analogChannel - 1;
 
     int Number = analogButtonNumber[N];
     int FieldPlacement = fieldPlacement;
@@ -231,9 +231,9 @@ void quickRotary1bite(int analogPin, int switchNumber, int fieldPlacement, int p
     rotaryField = rotaryField | push;
 }
 
-void quickRotary2(int analogPin, int switchNumber, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
+void quickRotary2(int analogPin, int analogChannel, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
 {
-    int N = switchNumber - 1;
+    int N = analogChannel - 1;
 
     int Number = analogButtonNumber[N];
     int FieldPlacement = fieldPlacement;
@@ -381,9 +381,9 @@ void quickRotary2(int analogPin, int switchNumber, int fieldPlacement, int pos1,
     rotaryField = rotaryField | push;
 }
 
-void quickRotary3(int analogPin, int switchNumber, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
+void quickRotary3(int analogPin, int analogChannel, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
 {
-    int N = switchNumber - 1;
+    int N = analogChannel - 1;
 
     int Number = analogButtonNumber[N];
     int FieldPlacement = fieldPlacement;
@@ -531,9 +531,9 @@ void quickRotary3(int analogPin, int switchNumber, int fieldPlacement, int pos1,
     rotaryField = rotaryField | push;
 }
 
-void quickRotary4(int analogPin, int switchNumber, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
+void quickRotary4(int analogPin, int analogChannel, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
 {
-    int N = switchNumber - 1;
+    int N = analogChannel - 1;
 
     int Number = analogButtonNumber[N];
     int FieldPlacement = fieldPlacement;

@@ -1,4 +1,4 @@
-void brake(int analogPin, int switchNumber, int releasedValue, int fullyPressedValue)
+void brake(int analogPin, int analogChannel, int releasedValue, int fullyPressedValue)
 {
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
@@ -18,7 +18,7 @@ void brake(int analogPin, int switchNumber, int releasedValue, int fullyPressedV
     
     #endif
     
-    int N = switchNumber - 1;
+    int N = analogChannel - 1;
     float normalized = 0;
 
     if (fullyPressedValue > releasedValue)
@@ -67,7 +67,7 @@ void brake(int analogPin, int switchNumber, int releasedValue, int fullyPressedV
     Joystick.setBrake(average[N]);
 }
 
-void filteredBrake(int analogPin, int8_t switchNumber, int releasedValue, int fullyPressedValue, int curvePush, float expFactor)
+void filteredBrake(int analogPin, int8_t analogChannel, int releasedValue, int fullyPressedValue, int curvePush, float expFactor)
 {
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
@@ -87,7 +87,7 @@ void filteredBrake(int analogPin, int8_t switchNumber, int releasedValue, int fu
     
     #endif
     
-    int N = switchNumber - 1;
+    int N = analogChannel - 1;
     float normalized = 0;
     float FullyPressedValue = curveFilter(fullyPressedValue, releasedValue, fullyPressedValue, curvePush, expFactor);
     float ReleasedValue = curveFilter(releasedValue, releasedValue, fullyPressedValue, curvePush, expFactor);

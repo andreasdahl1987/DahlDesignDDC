@@ -203,7 +203,7 @@ void biteAdjustButtonSolo(int row, int column, int increment)
     }
 }
 
-void launchButton(int row, int column, int switchNumberAffected)
+void launchButton(int row, int column, int analogChannelAffected)
 {
     int Row = row - 1;
     int Column = column - 1;
@@ -220,11 +220,11 @@ void launchButton(int row, int column, int switchNumberAffected)
         pushState[Row][Column] = rawState[Row][Column];
     }
 
-    if (!analogLatchLock[switchNumberAffected - 1] && pushState[Row][Column] == 1)
+    if (!analogLatchLock[analogChannelAffected - 1] && pushState[Row][Column] == 1)
     {
         launchButtonLatch = true;
     }
-    else if (analogLatchLock[switchNumberAffected - 1])
+    else if (analogLatchLock[analogChannelAffected - 1])
     {
         launchButtonLatch = false;
     }

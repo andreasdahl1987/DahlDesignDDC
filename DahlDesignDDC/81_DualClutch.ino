@@ -1,4 +1,4 @@
-void dualClutch(int masterPin, int masterSwitchNumber, int masterReleasedValue, int masterFullyPressedValue, int slavePin, int slaveSwitchNumber, int slaveReleasedValue, int slaveFullyPressedValue, bool throttleMaster)
+void dualClutch(int masterPin, int masterAnalogChannel, int masterReleasedValue, int masterFullyPressedValue, int slavePin, int slaveAnalogChannel, int slaveReleasedValue, int slaveFullyPressedValue, bool throttleMaster)
 {
     //--------------------------------
     //---Master paddle calculations----
@@ -22,7 +22,7 @@ void dualClutch(int masterPin, int masterSwitchNumber, int masterReleasedValue, 
     
     #endif
 
-    int M = masterSwitchNumber - 1;
+    int M = masterAnalogChannel - 1;
     float masterNormalized = 0;
     int FieldPlacement = 7;
     bool ThrottleMaster = throttleMaster;
@@ -93,7 +93,7 @@ void dualClutch(int masterPin, int masterSwitchNumber, int masterReleasedValue, 
     
     #endif
     
-    int S = slaveSwitchNumber - 1;
+    int S = slaveAnalogChannel - 1;
     float slaveNormalized = 0;
 
     if (slaveFullyPressedValue > slaveReleasedValue)
@@ -296,7 +296,7 @@ void dualClutch(int masterPin, int masterSwitchNumber, int masterReleasedValue, 
     rotaryField = rotaryField | push;
 }
 
-void filteredDualClutch(int masterPin, int masterSwitchNumber, int masterReleasedValue, int masterFullyPressedValue, int masterCurvePush, float masterExpFactor, int slavePin, int slaveSwitchNumber, int slaveReleasedValue, int slaveFullyPressedValue, int slaveCurvePush, float slaveExpFactor, bool throttleMaster)
+void filteredDualClutch(int masterPin, int masterAnalogChannel, int masterReleasedValue, int masterFullyPressedValue, int masterCurvePush, float masterExpFactor, int slavePin, int slaveAnalogChannel, int slaveReleasedValue, int slaveFullyPressedValue, int slaveCurvePush, float slaveExpFactor, bool throttleMaster)
 {
 
     int FieldPlacement = 7;
@@ -323,7 +323,7 @@ void filteredDualClutch(int masterPin, int masterSwitchNumber, int masterRelease
     
     #endif
     
-    int M = masterSwitchNumber - 1;
+    int M = masterAnalogChannel - 1;
     float masterNormalized = 0;
     float MasterFullyPressedValue = curveFilter(masterFullyPressedValue, masterReleasedValue, masterFullyPressedValue, masterCurvePush, masterExpFactor);
     float MasterReleasedValue = curveFilter(masterReleasedValue, masterReleasedValue, masterFullyPressedValue, masterCurvePush, masterExpFactor);
@@ -391,7 +391,7 @@ void filteredDualClutch(int masterPin, int masterSwitchNumber, int masterRelease
     
     #endif
     
-    int S = slaveSwitchNumber - 1;
+    int S = slaveAnalogChannel - 1;
     float slaveNormalized = 0;
 
     float SlaveFullyPressedValue = curveFilter(slaveFullyPressedValue, slaveReleasedValue, slaveFullyPressedValue, slaveCurvePush, slaveExpFactor);
@@ -592,7 +592,7 @@ void filteredDualClutch(int masterPin, int masterSwitchNumber, int masterRelease
     rotaryField = rotaryField | push;
 }
 
-void dualClutchCal(int masterPin, int masterSwitchNumber, int slavePin, int slaveSwitchNumber, bool throttleMaster)
+void dualClutchCal(int masterPin, int masterAnalogChannel, int slavePin, int slaveAnalogChannel, bool throttleMaster)
 {
     //--------------------------------
     //---Master paddle calculations----
@@ -616,7 +616,7 @@ void dualClutchCal(int masterPin, int masterSwitchNumber, int slavePin, int slav
 
     #endif
 
-    int M = masterSwitchNumber - 1;
+    int M = masterAnalogChannel - 1;
     float masterNormalized = 0;
     int FieldPlacement = 7;
     bool ThrottleMaster = throttleMaster;
@@ -704,7 +704,7 @@ void dualClutchCal(int masterPin, int masterSwitchNumber, int slavePin, int slav
     #endif
 
 
-    int S = slaveSwitchNumber - 1;
+    int S = slaveAnalogChannel - 1;
     float slaveNormalized = 0;
     slaveRaw = slaveValue;
 

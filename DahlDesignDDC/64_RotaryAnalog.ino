@@ -4,9 +4,9 @@
 //------------------------------
 
 
-void rotaryAnalog(int analogPin, int switchNumber, int fieldPlacement, int hybridPositions, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
+void rotaryAnalog(int analogPin, int analogChannel, int fieldPlacement, int hybridPositions, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
 {
-    int N = switchNumber - 1;
+    int N = analogChannel - 1;
 
     int Number = analogButtonNumber[N];
     int FieldPlacement = fieldPlacement;
@@ -218,9 +218,9 @@ void rotaryAnalog(int analogPin, int switchNumber, int fieldPlacement, int hybri
     rotaryField = rotaryField | push;
 }
 
-void rotaryAnalogPartial(int analogPin, int switchNumber, int muteStart, int muteEnd, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
+void rotaryAnalogPartial(int analogPin, int analogChannel, int muteStart, int muteEnd, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
 {
-    int N = switchNumber - 1;
+    int N = analogChannel - 1;
 
     int Number = analogButtonNumber[N];
 
@@ -304,9 +304,9 @@ void rotaryAnalogPartial(int analogPin, int switchNumber, int muteStart, int mut
     }
 }
 
-void rotaryAnalogSimple(int analogPin, int switchNumber, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
+void rotaryAnalogSimple(int analogPin, int analogChannel, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
 {
-    int N = switchNumber - 1;
+    int N = analogChannel - 1;
 
     int Number = analogButtonNumber[N];
 
@@ -390,9 +390,9 @@ void rotaryAnalogSimple(int analogPin, int switchNumber, int pos1, int pos2, int
     }
 }
 
-void rotaryAnalogMute(int analogPin, int switchNumber, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
+void rotaryAnalogMute(int analogPin, int analogChannel, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
 {
-    int N = switchNumber - 1;
+    int N = analogChannel - 1;
 
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
@@ -454,9 +454,9 @@ void rotaryAnalogMute(int analogPin, int switchNumber, int pos1, int pos2, int p
     }
 }
 
-void rotaryAnalogBrightness(int analogPin, int switchNumber, int startBrightness, int endBrightness, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
+void rotaryAnalogBrightness(int analogPin, int analogChannel, int startBrightness, int endBrightness, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
 {
-    int N = switchNumber - 1;
+    int N = analogChannel - 1;
 
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
@@ -520,9 +520,9 @@ void rotaryAnalogBrightness(int analogPin, int switchNumber, int startBrightness
     LEDBrightness = startBrightness + (analogLastCounter[N] * ((100*endBrightness - 100*startBrightness)/11) / 100);
 }
 
-void rotaryAnalogBrightness12(int analogPin, int switchNumber, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
+void rotaryAnalogBrightness12(int analogPin, int analogChannel, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
 {
-    int N = switchNumber - 1;
+    int N = analogChannel - 1;
 
     int Number = analogButtonNumber[N];
 
@@ -633,9 +633,9 @@ void rotaryAnalogBrightness12(int analogPin, int switchNumber, int pos1, int pos
     }
 }
 
-void rotaryAnalog2Mode(int analogPin, int switchNumber, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
+void rotaryAnalog2Mode(int analogPin, int analogChannel, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
 {
-    int N = switchNumber - 1;
+    int N = analogChannel - 1;
 
     int Number = analogButtonNumber[N];
     int FieldPlacement = fieldPlacement;
@@ -775,9 +775,9 @@ void rotaryAnalog2Mode(int analogPin, int switchNumber, int fieldPlacement, int 
     rotaryField = rotaryField | push;
 }
 
-void rotaryAnalogBite(int analogPin, int switchNumber, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
+void rotaryAnalogBite(int analogPin, int analogChannel, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
 {
-    int N = switchNumber - 1;
+    int N = analogChannel - 1;
 
     int Number = analogButtonNumber[N];
     int FieldPlacement = fieldPlacement;
@@ -1003,9 +1003,9 @@ void rotaryAnalogBite(int analogPin, int switchNumber, int fieldPlacement, int p
 }
 
 
-void DDSanalog(int analogPin, int switchNumber, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
+void DDSanalog(int analogPin, int analogChannel, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
 {
-    int N = switchNumber - 1;
+    int N = analogChannel - 1;
     int HyPos = 12;
 
     int Number = analogButtonNumber[N];
