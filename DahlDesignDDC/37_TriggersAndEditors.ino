@@ -42,6 +42,11 @@
     return analogLastCounter[analogChannel-1] + 1 == switchPosition;
  }
 
+ bool analogTravel(int analogChannel, int threshold)
+ {
+    return average[analogChannel-1] >= threshold*10;
+ }
+
 bool encoderStack(int row, int col, int layer)
 {
   return toggleTimer[row-1][col-1] == layer;
