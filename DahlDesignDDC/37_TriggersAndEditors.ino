@@ -12,6 +12,11 @@
     return (rotaryField >> (fieldPlacement-1))  & 0x1;
  }
 
+ bool biteSettingMode (int biteSettingMode)
+ {
+   return (biteSettingMode == (biteButtonBit1 | (biteButtonBit2 << 1)));
+ }
+
  bool buttonPressed (int row, int column)
  {
     return pushState[row-1][column-1];
