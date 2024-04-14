@@ -80,7 +80,7 @@ void setup()
         }
     }
 
-    for (int u = 0; u < analogSwitchCount; u++)
+    for (int u = 0; u < analogChannelCount; u++)
     {
         analogLastCounter[u] = 0;
         analogTempState[u] = 0;

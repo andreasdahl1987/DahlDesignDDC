@@ -11,22 +11,22 @@ bool switchMode[rowCount][colCount];
 
 //Analog variables
 
-int8_t analogLastCounter[analogSwitchCount];
-int8_t analogTempState[analogSwitchCount];
-bool analogLatchLock[analogSwitchCount];
-long analogTimer1[analogSwitchCount];
-long analogTimer2[analogSwitchCount];
-int8_t analogRotaryCount[analogSwitchCount];
-int8_t analogSwitchMode1[analogSwitchCount];
-int8_t analogSwitchMode2[analogSwitchCount];
+int8_t analogLastCounter[analogChannelCount];
+int8_t analogTempState[analogChannelCount];
+bool analogLatchLock[analogChannelCount];
+long analogTimer1[analogChannelCount];
+long analogTimer2[analogChannelCount];
+int8_t analogRotaryCount[analogChannelCount];
+int8_t analogSwitchMode1[analogChannelCount];
+int8_t analogSwitchMode2[analogChannelCount];
 
 //Smoothing of analog signal
 
 #define reads 10
-int readings[analogSwitchCount][reads];        // the readings from the analog input
-int8_t readIndex[analogSwitchCount];           // the index of the current reading
-int total[analogSwitchCount];                  // the running total
-int average[analogSwitchCount];
+int readings[analogChannelCount][reads];        // the readings from the analog input
+int8_t readIndex[analogChannelCount];           // the index of the current reading
+int total[analogChannelCount];                  // the running total
+int average[analogChannelCount];
 
 //ADC defines
 #define ADC1 50
