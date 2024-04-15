@@ -33,6 +33,7 @@
 
 //Enable CB1 board
 #define USING_CB1 0
+
 //ADC setup
 #define CB1_ADC1 1
 #define CB1_ADC1_CHANNELS 4
@@ -52,8 +53,10 @@
 #define ROW5_ACTIVE 1
 #define ROW6_ACTIVE 1
 
-//ROW7
+//ROW6 PWM
+#define ROW6_PWMCOUNT 0
 
+//ROW7
 #define GROUND_CALIBRATION 8
 
 //ROW8 setup
@@ -64,6 +67,7 @@
 //------------------------------
 //---------PWM CONTROL----------
 //------------------------------
+
 #define PWMENABLED 1
 #if (PWMENABLED == 1)
   int8_t PWMChannelPins [] = {16};

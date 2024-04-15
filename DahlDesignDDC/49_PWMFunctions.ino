@@ -141,29 +141,30 @@ void rotary2PWM(int8_t row, int8_t col, bool reverse, int8_t PWMChannel, int8_t 
     }
 }
 
-void PWMPot(int analogPin, int analogChannel, int startValue, int endValue, int8_t PWMchannel)
+void PWMPot(int analogChannel, int startValue, int endValue, int8_t PWMchannel)
 {
-
+    int N = analogChannel - 1;
+    
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int pinValue;
-    if (analogPin > 49)
+    
+    if (analogPins[N] > 49)
     {
-      pinValue = ADS1115value[analogPin - ADC_CORR];
+      pinValue = ADS1115value[analogPins[N] - ADC_CORR];
     }
     else
     {
-      pinValue = analogRead(analogPin);
+      pinValue = analogRead(analogPins[N]);
     }
     
     #else
 
-    int pinValue = analogRead(analogPin);
+    int pinValue = analogRead(analogPins[N]);
     
     #endif
 
     int8_t PWMChannel = PWMchannel - 1;
-    int N = analogChannel - 1;
     float normalized = 0;
 
     if (endValue > startValue)

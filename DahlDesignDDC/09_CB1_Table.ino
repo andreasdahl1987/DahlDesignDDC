@@ -35,6 +35,9 @@ uint8_t buttonNumber[rowCount][colCount] =
 
 #define analogChannelCount 12
 
+uint8_t analogPins[analogChannelCount] =                 //Pin number for your analog channels
+{ 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99 };
+
 uint8_t analogButtonNumber[analogChannelCount] =         //ANALOG BUTTONS 1
 { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
