@@ -48,7 +48,14 @@ int average[analogChannelCount];
 #define ADC_CORR 50
 
 //PWM Control
-#if(PWMENABLED == 1)
+#if(ROW6_PWMCOUNT > 0)
+
+  int16_t PWMValues [ROW6_PWMCOUNT];
+  bool PWMIsOff [ROW6_PWMCOUNT];
+  uint8_t PWMStart[ROW6_PWMCOUNT];
+  uint8_t PWMEnd[ROW6_PWMCOUNT];
+
+#elif(PWMENABLED == 1)
   const int8_t PWMCount = sizeof(PWMChannelPins) / sizeof(PWMChannelPins[0]);
   int16_t PWMValues [PWMCount];
   bool PWMIsOff [PWMCount];

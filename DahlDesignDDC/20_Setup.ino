@@ -130,15 +130,23 @@ void setup()
     #endif
 
     //PWM Setup
-    #if(PWMENABLED == 1)
-    for (int i = 0; i < PWMCount; i++)
-    {
-      PWMValues[i] = 25;
-      PWMIsOff[i] = true;
-      pinMode(PWMChannelPins[i], OUTPUT);
-      PWMStart[i] = 0;
-      PWMEnd[i] = 255;
-    }
+    #if (ROW6_PWMCOUNT > 0)
+      for (int i = 0; i < ROW6_PWMCOUNT; i++)
+      {
+        PWMValues[i] = 25;
+        PWMIsOff[i] = true;
+        PWMStart[i] = 0;
+        PWMEnd[i] = 255;
+      }
+    #elif(PWMENABLED == 1)
+      for (int i = 0; i < PWMCount; i++)
+      {
+        PWMValues[i] = 25;
+        PWMIsOff[i] = true;
+        pinMode(PWMChannelPins[i], OUTPUT);
+        PWMStart[i] = 0;
+        PWMEnd[i] = 255;
+      }
 
     PWMSetup();
     

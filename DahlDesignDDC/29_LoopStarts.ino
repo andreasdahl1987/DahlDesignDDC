@@ -37,7 +37,7 @@ void loop()
 
   runningPresets(); //Presets in the loop
 
-  #if (PWMENABLED) //PWM Control
+  #if (PWMENABLED == 1 || ROW6_PWMCOUNT > 0) //PWM Control
   PWMrun();
   #endif
 

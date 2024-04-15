@@ -2,7 +2,7 @@
 //------PWM FUNCTIONS----------
 //------------------------------
 
-#if (PWMENABLED == 1)
+#if (PWMEnabled == 1 || ROW6_PWMCOUNT > 0)
 
 void PWMToggle(int8_t row, int8_t column, int8_t PWMChannel)
 {
@@ -253,6 +253,25 @@ void triggerPWM(int8_t PWMchannel, bool condition, bool blinkEnable, int blinkOn
 
 void PWMrun()
 {
+  #if(ROW6_PWMCOUNT > 0)
+
+  for(int i = 0; i < ROW6_PWMCOUNT; i ++)
+  {
+    int PWMValue = PWMStart[i] + (PWMValues[i] * (PWMEnd[i] - PWMStart[i]) / 100);
+
+    if(PWMIsOff[i])
+      {
+        analogWrite(PWMChannelPins[i], 0);
+      }
+    else
+      {
+        analogWrite(PWMChannelPins[i], PWMValue);
+        Serial.println(PWMValue);
+      }
+  }
+
+  #else
+  
   for(int i = 0; i < PWMCount; i ++)
   {
     int PWMValue = PWMStart[i] + (PWMValues[i] * (PWMEnd[i] - PWMStart[i]) / 100);
@@ -267,6 +286,7 @@ void PWMrun()
         Serial.println(PWMValue);
       }
   }
+  #endif
 }
 
 void PWMSetup(int8_t PWMchannel, bool isOff, uint8_t minValue, uint8_t maxValue, int16_t volume)

@@ -13,9 +13,19 @@ void CB1Setup()
   //ROW 6
   if (ROW6_ACTIVE == 1)
   {
+    int startI = ROW6_PWMCOUNT;
+    
     for (int i = 0; i < 8; i++)
     {
       pinMode(row6Pins[i], INPUT_PULLUP);
+    }
+  }
+  if (ROW6_PWMCOUNT > 0)
+  {
+    for (int i = 0; i <ROW6_PWMCOUNT; i++)
+    {
+      pinMode(row6Pins[i], OUTPUT);
+      PWMChannelPins[i] = row6Pins[i];
     }
   }
 

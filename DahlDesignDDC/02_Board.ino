@@ -69,7 +69,10 @@
 //------------------------------
 
 #define PWMENABLED 1
-#if (PWMENABLED == 1)
+
+#if (ROW6_PWMCOUNT > 0)
+  int8_t PWMChannelPins [ROW6_PWMCOUNT];
+#elif (PWMENABLED == 1)
   int8_t PWMChannelPins [] = {16};
 #endif
 

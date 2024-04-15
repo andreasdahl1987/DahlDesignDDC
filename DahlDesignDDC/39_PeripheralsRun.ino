@@ -313,17 +313,24 @@ void ADC2_CB1(int alertPin)
 void CB1switchTable()
 {
   //Row 5 & 6
-  for(int i = 0; i < 8; i++)
+
+  if (ROW5_ACTIVE == 1)
   {
-    if (ROW5_ACTIVE == 1)
+    for(int i = 0; i < 8; i++)
     {
       rawState[4][i] = !digitalRead(row5Pins[i]);
     }
-    if (ROW6_ACTIVE == 1)
+  }
+
+  if (ROW6_ACTIVE == 1)
+  {
+    for(int i = ROW6_PWMCOUNT; i < 8; i++)
     {
       rawState[5][i] = !digitalRead(row6Pins[i]);
     }
   }
+
+  
   //Row 7
   if(CB1_ADC1 == 1)
   {
