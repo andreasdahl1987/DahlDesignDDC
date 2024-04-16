@@ -186,3 +186,92 @@ void upshift(int8_t row, int8_t column, unsigned long cooldown)
 
     Joystick.setButton(Number, pushState[Row][Column]);
 }
+
+void downshiftAndReverse(int8_t Drow, int8_t Dcolumn, int8_t Rrow, int8_t Rcolumn, int8_t fieldPlacement)
+{
+    //DOWNSHIFT BUTTON
+
+    int8_t Row = Drow - 1;
+    int8_t Column = Dcolumn - 1;
+    int8_t Number = buttonNumber[Row][Column];
+
+    if (pushState[Row][Column] != rawState[Row][Column] && (globalClock - switchTimer[Row][Column]) > buttonCooldown)
+    {
+        switchTimer[Row][Column] = globalClock;
+        pushState[Row][Column] = rawState[Row][Column];
+    }
+
+    if ((globalClock - switchTimer[Row][Column]) > buttonCooldown)
+    {
+        pushState[Row][Column] = rawState[Row][Column];
+    }
+
+    Joystick.setButton(Number, pushState[Row][Column]);
+
+
+    //REVERSE BUTTON
+
+    int RRow = Rrow - 1;
+    int RColumn = Rcolumn - 1;
+    unsigned long pulseDuration = 50;
+    int repeats = 10;
+
+    if (pushState[RRow][RColumn] != rawState[RRow][RColumn] && (globalClock - switchTimer[RRow][RColumn]) > (pulseDuration + (2 * repeats * pulseDuration)))
+    {
+        if(rawState[RRow][RColumn] == 1)
+        {
+          switchTimer[RRow][RColumn] = globalClock;          
+        }
+        pushState[RRow][RColumn] = rawState[RRow][RColumn];
+    }
+
+    if ((globalClock - switchTimer[RRow][RColumn]) > (pulseDuration + (2 * repeats * pulseDuration)))
+    {
+        pushState[RRow][RColumn] = rawState[RRow][RColumn];
+    }
+
+    //Change switch mode
+    if (pushState[RRow][RColumn] == 0)
+    {
+        switchModeLock[RRow][RColumn] = false;
+    }
+
+    if (pushState[RRow][RColumn] == 1 && pushState[modButtonRow - 1][modButtonCol - 1] == 1 && fieldPlacement != 0 && !switchModeLock[RRow][RColumn])
+    {
+        switchModeLock[RRow][RColumn] = true;
+        switchMode[RRow][RColumn] = !switchMode[RRow][RColumn];
+        latchLock[RRow][RColumn] = false;
+        latchState[RRow][RColumn] = false;
+    }
+
+    //Push switch mode
+    long push = 0;
+    push = push | switchMode[RRow][RColumn];
+    push = push << (fieldPlacement - 1);
+    buttonField = buttonField | push;
+
+
+    //SWITCH MODE 1: REVERSE BUTTON
+    if (!switchMode[RRow][RColumn])
+    {
+      if ((globalClock - switchTimer[RRow][RColumn]) < (2 * repeats * pulseDuration))
+      {
+          if(globalClock % (2*pulseDuration) < pulseDuration)
+          {
+              Joystick.setButton(Number, 1);
+          }
+          else
+          {
+              Joystick.setButton(Number, 0);
+          }
+      } 
+      else
+      {
+          Joystick.setButton(Number, 0);
+      }
+    }
+    else if (switchMode[RRow][RColumn])
+    {
+        Joystick.setButton(Number+1, pushState[RRow][RColumn]);
+    }
+}
