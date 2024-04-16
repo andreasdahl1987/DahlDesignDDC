@@ -1,4 +1,4 @@
-#if (PWMENABLED == 1)
+#if (PWMEnabled == 1 || ROW6_PWMCOUNT > 0)
 void PWMSetup()
 {
 
@@ -14,7 +14,7 @@ void PWMSetup()
    //PWM setup CALLS STARTS HERE
 
 
-  PWMSetup(1,false,0,50,60);
+  PWMSetup(1,false,0,255,60);
 
 
 
