@@ -31,6 +31,362 @@ void PWMToggle(int8_t row, int8_t column, int8_t PWMChannel)
     }
 }
 
+void funkyPWM(int Arow, int Acol, int Bcol, bool reverse, int8_t PWMChannel, int8_t stepSize) {
+
+    int Row = Arow - 1;
+    int Column = Acol - 1;
+    int Number = buttonNumber[Row][Column];
+    int8_t PWMchannel = PWMChannel -1;
+    int bCol = Bcol - 1;
+
+    if (!rawState[Row][Column] && !rawState[Row][bCol])
+    {
+        pushState[Row][Column] = 1;
+    }
+    else if (!rawState[Row][Column] && rawState[Row][bCol])
+    {
+        pushState[Row][Column] = 2;
+        latchLock[Row][Column] = 1; //Fetching 01
+    }
+    else if (rawState[Row][Column] && rawState[Row][bCol])
+    {
+        pushState[Row][Column] = 3;
+    }
+    else if (rawState[Row][Column] && !rawState[Row][bCol])
+    {
+        pushState[Row][Column] = 4;
+        latchLock[Row][bCol] = 1; //Fetching 10
+    }
+
+    if ((globalClock - switchTimer[Row][Column] > funkyCooldown) && (globalClock - switchTimer[Row][bCol] > funkyCooldown))
+    {
+        if ((latchLock[Row][bCol] && pushState[Row][Column] == 1) || (latchLock[Row][Column] && pushState[Row][Column] == 3))
+        {
+            switchTimer[Row][Column] = globalClock;
+            if(pushState[modButtonRow - 1][modButtonCol - 1] == 1)
+            {
+              PWMValues[PWMchannel] = PWMValues[PWMchannel] + stepSize - (2 * stepSize * reverse);
+            }
+        }
+
+        else if ((latchLock[Row][bCol] && pushState[Row][Column] == 3) || (latchLock[Row][Column] && pushState[Row][Column] == 1))
+        {
+            switchTimer[Row][bCol] = globalClock;
+            if(pushState[modButtonRow - 1][modButtonCol - 1] == 1)
+            {
+              PWMValues[PWMchannel] = PWMValues[PWMchannel] - stepSize + (2 * stepSize * reverse);
+            }
+        }
+    }
+
+    else
+    {
+        latchLock[Row][bCol] = 0;
+        latchLock[Row][Column] = 0;
+    }
+
+    //Adjustment
+    if (PWMValues[PWMchannel] < 0)
+    {
+      PWMValues[PWMchannel] = 0;
+    }
+    else if (PWMValues[PWMchannel] > 100)
+    {
+      PWMValues[PWMchannel] = 100;
+    }
+
+    if (pushState[modButtonRow - 1][modButtonCol - 1] == 0)
+    {
+    Joystick.setButton(Number + reverse, (globalClock - switchTimer[Row][Column] < funkyPulse));
+    Joystick.setButton(Number + 1 - reverse, (globalClock - switchTimer[Row][bCol] < funkyPulse));
+    }
+}
+
+void PEC11PWM(int row, int col, bool reverse, int8_t PWMChannel, int8_t stepSize) {
+
+    int Row = row - 1;
+    int Column = col - 1;
+    int Number = buttonNumber[Row][Column];
+    int8_t PWMchannel = PWMChannel -1;
+
+    int Reverse = reverse;
+
+    switchTimer[Row][Column + 1] = (rawState[Row][Column] | rawState[Row][Column + 1] << 1); //Assigning numbers to all switch states 0-3
+
+    if //switch has been turned and is not cooling down, and no rotation direction has been engaged
+        (switchTimer[Row][Column + 1] > 0
+            &&
+            (globalClock - switchTimer[Row][Column] > PEC11Cooldown)
+            &&
+            pushState[Row][Column] == 0
+            &&
+            pushState[Row][Column + 1] == 0)
+    {
+        switchTimer[Row][Column] = globalClock;
+        if (switchTimer[Row][Column + 1] == 2) //CW turn started
+        {
+            pushState[Row][Column] = 1;
+        }
+        else if (switchTimer[Row][Column + 1] == 1) //CCW turn started
+        {
+            pushState[Row][Column + 1] = 1;
+        }
+    }
+
+    //CW check gates
+    if (pushState[Row][Column] == 1 && rawState[Row][Column])
+    {
+        pushState[Row][Column] = 2;
+    }
+    if (pushState[Row][Column] == 2 && switchTimer[Row][Column + 1] == 0)
+    {
+        pushState[Row][Column] = 3;
+    }
+
+    //CW check gates
+    if (pushState[Row][Column + 1] == 1 && rawState[Row][Column + 1])
+    {
+        pushState[Row][Column + 1] = 2;
+    }
+    if (pushState[Row][Column + 1] == 2 && switchTimer[Row][Column + 1] == 0)
+    {
+        pushState[Row][Column + 1] = 3;
+    }
+
+    //Pushing successfully recorded rotations
+
+    if (pushState[Row][Column] == 3)
+    {
+        toggleTimer[Row][Column] = globalClock;
+        if(pushState[modButtonRow - 1][modButtonCol - 1] == 1)
+        {
+          PWMValues[PWMchannel] = PWMValues[PWMchannel] + stepSize - (2 * stepSize * reverse);
+        }
+    }
+    else if (pushState[Row][Column + 1] == 3)
+    {
+        toggleTimer[Row][Column + 1] = globalClock;
+        if(pushState[modButtonRow - 1][modButtonCol - 1] == 1)
+        {
+          PWMValues[PWMchannel] = PWMValues[PWMchannel] - stepSize + (2 * stepSize * reverse);
+        }
+    }
+
+    if (switchTimer[Row][Column + 1] == 0)
+    {
+        pushState[Row][Column + 1] = 0;
+        pushState[Row][Column] = 0;
+    }
+
+    //Adjustment
+    if (PWMValues[PWMchannel] < 0)
+    {
+      PWMValues[PWMchannel] = 0;
+    }
+    else if (PWMValues[PWMchannel] > 100)
+    {
+      PWMValues[PWMchannel] = 100;
+    }
+
+    if (pushState[modButtonRow - 1][modButtonCol - 1] == 0)
+    {
+      Joystick.setButton(Number + Reverse, (globalClock - toggleTimer[Row][Column] < PEC11Pulse));
+      Joystick.setButton(Number + 1 - Reverse, (globalClock - toggleTimer[Row][Column + 1] < PEC11Pulse));
+    }
+
+}
+
+void rotaryAnalogPWM(int analogChannel, int8_t PWMChannel, int8_t stepSize, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
+{
+    int N = analogChannel - 1;
+        
+    int8_t PWMchannel = PWMChannel -1;
+
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+
+    int value;
+    if (analogPins[N] > 49)
+    {
+      value = ADS1115value[analogPins[N] - ADC_CORR];
+    }
+    else
+    {
+      value = analogRead(analogPins[N]);
+    }
+    
+    #else
+
+    int value = analogRead(analogPins[N]);
+    
+    #endif
+
+    int positions[12] = { pos1, pos2, pos3, pos4, pos5, pos6, pos7, pos8, pos9, pos10, pos11, pos12 };
+
+    int differ = 0;
+    int result = 0;
+    for (int i = 0; i < 12; i++)
+    {
+        if (i == 0 || abs(positions[i] - value) < differ)
+        {
+            result++;
+            differ = abs(positions[i] - value);
+        }
+    }
+
+    result--;
+
+    if (reverse)
+    {
+        result = 11 - result;
+    }
+
+    //Short debouncer on switch rotation
+
+    if (analogLastCounter[N] != result)
+    {
+        if (globalClock - analogTimer1[N] > analogPulse)
+        {
+            analogTimer1[N] = globalClock;
+        }
+        else if (globalClock - analogTimer1[N] > analogWait)
+        {
+          //Engage encoder pulse timer
+          analogTimer2[N] = globalClock;
+
+          //Update difference, storing the value in pushState on pin 2
+          analogTempState[N] = result - analogLastCounter[N];
+
+          //Give new value to pushState
+          analogLastCounter[N] = result;
+        }
+    }
+
+    PWMValues[PWMchannel] = analogLastCounter[N] * 100 / 11;
+}
+
+void rotaryAnalogPWM12(int analogChannel, int8_t PWMChannel, int8_t stepSize, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
+{
+    int N = analogChannel - 1;
+    int8_t PWMchannel = PWMChannel -1;
+    int Number = analogButtonNumber[N];
+
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+
+    int value;
+    if (analogPins[N] > 49)
+    {
+      value = ADS1115value[analogPins[N] - ADC_CORR];
+    }
+    else
+    {
+      value = analogRead(analogPins[N]);
+    }
+    
+    #else
+
+    int value = analogRead(analogPins[N]);
+    
+    #endif
+
+    int positions[12] = { pos1, pos2, pos3, pos4, pos5, pos6, pos7, pos8, pos9, pos10, pos11, pos12 };
+
+    int differ = 0;
+    int result = 0;
+    for (int i = 0; i < 12; i++)
+    {
+        if (i == 0 || abs(positions[i] - value) < differ)
+        {
+            result++;
+            differ = abs(positions[i] - value);
+        }
+    }
+
+    result--;
+
+    if (reverse)
+    {
+        result = 11 - result;
+    }
+
+    //Short debouncer on switch rotation
+
+    if (analogLastCounter[N] != result)
+    {
+        if (globalClock - analogTimer1[N] > analogPulse)
+        {
+            analogTimer1[N] = globalClock;
+        }
+        else if (globalClock - analogTimer1[N] > analogWait)
+        {
+            //----------------------------------------------
+            //----------------PMW VOLUME--------------------
+            //----------------------------------------------
+
+            if (pushState[modButtonRow - 1][modButtonCol - 1] == 1)
+            {
+                //Engage encoder pulse timer
+                analogTimer2[N] = globalClock;
+
+                //Update difference, storing the value in pushState on pin 2
+                analogTempState[N] = result - analogLastCounter[N];
+
+                //Give new value to pushState
+                analogLastCounter[N] = result;
+
+                //Adjusting bite up/down
+                if ((analogTempState[N] > 0 && analogTempState[N] < 5) || analogTempState[N] < -5)
+                {
+                    PWMValues[PWMchannel] = PWMValues[PWMchannel] + stepSize;
+                }
+                else
+                {
+                    PWMValues[PWMchannel] = PWMValues[PWMchannel] - stepSize;
+                }
+            }
+            else
+            {
+                 //Engage encoder pulse timer
+                analogTimer2[N] = globalClock;
+
+                //Update difference, storing the value in pushState on pin 2
+                analogTempState[N] = result - analogLastCounter[N];
+
+                //Give new value to pushState
+                analogLastCounter[N] = result;
+            }
+        }
+    }
+    
+    //Adjusting 
+    if (PWMValues[PWMchannel] < 0)
+    {
+      PWMValues[PWMchannel] = 0;
+    }
+    else if (PWMValues[PWMchannel] > 100)
+    {
+      PWMValues[PWMchannel] = 100;
+    }
+
+    //12 - position switch
+
+    if (pushState[modButtonRow - 1][modButtonCol - 1] == 0)
+    {
+        analogTempState[N] = 0; //Refreshing encoder mode difference
+
+        for (int i = 0; i < 12; i++)
+        {
+            if (i == analogLastCounter[N])
+            {
+                Joystick.pressButton(i + Number);
+            }
+            else
+            {
+                Joystick.releaseButton(i + Number);
+            }
+        }
+    }
+}
+
 void rotary2PWM(int8_t row, int8_t col, bool reverse, int8_t PWMChannel, int8_t stepSize)
 {
     int8_t Row = row - 1;
