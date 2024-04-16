@@ -2,7 +2,7 @@
 //------PWM FUNCTIONS----------
 //------------------------------
 
-#if (PWMEnabled == 1 || ROW6_PWMCOUNT > 0)
+#if (PWMENABLED == 1 || ROW6_PWMCOUNT > 0)
 
 void PWMToggle(int8_t row, int8_t column, int8_t PWMChannel)
 {

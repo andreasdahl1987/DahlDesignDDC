@@ -91,7 +91,7 @@ void checkValue(int pin)
   #endif
 }
 
-#if (PWMEnabled == 1 || ROW6_PWMCOUNT > 0)
+#if (PWMENABLED == 1 || ROW6_PWMCOUNT > 0)
 void checkPWM(int PWMchannel)
 {
     int PWMChannel = PWMchannel - 1;
