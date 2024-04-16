@@ -1,26 +1,27 @@
-void bitePot(int analogPin, int analogChannel, int startValue, int endValue)
+void bitePot(int analogChannel, int startValue, int endValue)
 {
     Joystick.setRyAxisRange(0, 1000);
+
+    int N = analogChannel - 1;
 
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int pinValue;
-    if (analogPin > 49)
+    if (analogPins[N] > 49)
     {
-      pinValue = ADS1115value[analogPin - ADC_CORR];
+      pinValue = ADS1115value[analogPins[N] - ADC_CORR];
     }
     else
     {
-      pinValue = analogRead(analogPin);
+      pinValue = analogRead(analogPins[N]);
     }
     
     #else
 
-    int pinValue = analogRead(analogPin);
+    int pinValue = analogRead(analogPins[N]);
     
     #endif
     
-    int N = analogChannel - 1;
     float normalized = 0;
 
     if (endValue > startValue)
@@ -75,29 +76,30 @@ void bitePot(int analogPin, int analogChannel, int startValue, int endValue)
 
 }
 
-void filteredBitePot(int analogPin, int8_t analogChannel, int startValue, int endValue, int curvePush, float expFactor)
+void filteredBitePot(int8_t analogChannel, int startValue, int endValue, int curvePush, float expFactor)
 {
     Joystick.setRyAxisRange(0, 1000);
+
+    int N = analogChannel - 1;
     
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int raw;
-    if (analogPin > 49)
+    if (analogPins[N] > 49)
     {
-      raw = ADS1115value[analogPin - ADC_CORR];
+      raw = ADS1115value[analogPins[N] - ADC_CORR];
     }
     else
     {
-      raw = analogRead(analogPin);
+      raw = analogRead(analogPins[N]);
     }
     
     #else
 
-    int raw = analogRead(analogPin);
+    int raw = analogRead(analogPins[N]);
     
     #endif
     
-    int N = analogChannel - 1;
     float normalized = 0;
     float EndValue = curveFilter(endValue, startValue, endValue, curvePush, expFactor);
     float StartValue = curveFilter(startValue, startValue, endValue, curvePush, expFactor);

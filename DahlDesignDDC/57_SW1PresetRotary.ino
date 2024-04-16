@@ -1,4 +1,4 @@
-void SW1PresetRotary(int analogPin, int analogChannel, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
+void SW1PresetRotary(int analogChannel, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
 {
     int N = analogChannel - 1;
 
@@ -10,18 +10,18 @@ void SW1PresetRotary(int analogPin, int analogChannel, int fieldPlacement, int p
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int value;
-    if (analogPin > 49)
+    if (analogPins[N] > 49)
     {
-      value = ADS1115value[analogPin - ADC_CORR];
+      value = ADS1115value[analogPins[N] - ADC_CORR];
     }
     else
     {
-      value = analogRead(analogPin);
+      value = analogRead(analogPins[N]);
     }
     
     #else
 
-    int value = analogRead(analogPin);
+    int value = analogRead(analogPins[N]);
     
     #endif
 

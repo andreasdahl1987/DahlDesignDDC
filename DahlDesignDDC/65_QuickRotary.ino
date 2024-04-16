@@ -1,4 +1,4 @@
-void quickRotary1bite(int analogPin, int analogChannel, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
+void quickRotary1bite(int analogChannel, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
 {
     int N = analogChannel - 1;
 
@@ -10,18 +10,18 @@ void quickRotary1bite(int analogPin, int analogChannel, int fieldPlacement, int 
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int value;
-    if (analogPin > 49)
+    if (analogPins[N] > 49)
     {
-      value = ADS1115value[analogPin - ADC_CORR];
+      value = ADS1115value[analogPins[N] - ADC_CORR];
     }
     else
     {
-      value = analogRead(analogPin);
+      value = analogRead(analogPins[N]);
     }
     
     #else
 
-    int value = analogRead(analogPin);
+    int value = analogRead(analogPins[N]);
     
     #endif
 
@@ -231,7 +231,7 @@ void quickRotary1bite(int analogPin, int analogChannel, int fieldPlacement, int 
     rotaryField = rotaryField | push;
 }
 
-void quickRotary2(int analogPin, int analogChannel, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
+void quickRotary2(int analogChannel, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
 {
     int N = analogChannel - 1;
 
@@ -243,18 +243,18 @@ void quickRotary2(int analogPin, int analogChannel, int fieldPlacement, int pos1
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int value;
-    if (analogPin > 49)
+    if (analogPins[N] > 49)
     {
-      value = ADS1115value[analogPin - ADC_CORR];
+      value = ADS1115value[analogPins[N] - ADC_CORR];
     }
     else
     {
-      value = analogRead(analogPin);
+      value = analogRead(analogPins[N]);
     }
     
     #else
 
-    int value = analogRead(analogPin);
+    int value = analogRead(analogPins[N]);
     
     #endif
 
@@ -381,7 +381,7 @@ void quickRotary2(int analogPin, int analogChannel, int fieldPlacement, int pos1
     rotaryField = rotaryField | push;
 }
 
-void quickRotary3(int analogPin, int analogChannel, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
+void quickRotary3(int analogChannel, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
 {
     int N = analogChannel - 1;
 
@@ -393,18 +393,18 @@ void quickRotary3(int analogPin, int analogChannel, int fieldPlacement, int pos1
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int value;
-    if (analogPin > 49)
+    if (analogPins[N] > 49)
     {
-      value = ADS1115value[analogPin - ADC_CORR];
+      value = ADS1115value[analogPins[N] - ADC_CORR];
     }
     else
     {
-      value = analogRead(analogPin);
+      value = analogRead(analogPins[N]);
     }
     
     #else
 
-    int value = analogRead(analogPin);
+    int value = analogRead(analogPins[N]);
     
     #endif
 
@@ -531,7 +531,7 @@ void quickRotary3(int analogPin, int analogChannel, int fieldPlacement, int pos1
     rotaryField = rotaryField | push;
 }
 
-void quickRotary4(int analogPin, int analogChannel, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
+void quickRotary4(int analogChannel, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
 {
     int N = analogChannel - 1;
 
@@ -543,18 +543,18 @@ void quickRotary4(int analogPin, int analogChannel, int fieldPlacement, int pos1
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int value;
-    if (analogPin > 49)
+    if (analogPins[N] > 49)
     {
-      value = ADS1115value[analogPin - ADC_CORR];
+      value = ADS1115value[analogPins[N] - ADC_CORR];
     }
     else
     {
-      value = analogRead(analogPin);
+      value = analogRead(analogPins[N]);
     }
     
     #else
 
-    int value = analogRead(analogPin);
+    int value = analogRead(analogPins[N]);
     
     #endif
 
