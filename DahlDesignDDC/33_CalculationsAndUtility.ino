@@ -71,22 +71,24 @@ float curveFilter(int input, int releasedValue, int pressedValue, int curvePush,
     return Input;
 }
 
-void checkValue(int pin)
+void checkValue(int analogChannel)
 {
-  if(pin < 50)
+
+int N = analogChannel - 1;
+  if(analogPins[N] < 50)
   {
-    Serial.print("Pin ");
-    Serial.print(String(pin));
+    Serial.print("Channel ");
+    Serial.print(String(analogChannel));
     Serial.print(" reading: ");
-    Serial.println(analogRead(pin));
+    Serial.println(analogRead(analogPins[N]));
   }
   #if (USING_CB1 == 1 || USING_ADS1115 == 1 || ENABLE_OVERSAMPLING == 1)
   else
   {
-    Serial.print("ADC ");
-    Serial.print(String(pin+1-ADC_CORR));
+    Serial.print("Channel ");
+    Serial.print(String(analogChannel));
     Serial.print(" reading: ");
-    Serial.println(ADS1115value[pin-ADC_CORR]);
+    Serial.println(ADS1115value[analogPins[N]-ADC_CORR]);
   }
   #endif
 }
