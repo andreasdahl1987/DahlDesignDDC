@@ -195,6 +195,11 @@ void downshiftAndReverse(int8_t Drow, int8_t Dcolumn, int8_t Rrow, int8_t Rcolum
     int8_t Column = Dcolumn - 1;
     int8_t Number = buttonNumber[Row][Column];
 
+    int RRow = Rrow - 1;
+    int RColumn = Rcolumn - 1;
+    unsigned long pulseDuration = 50;
+    int repeats = 10;
+
     if (pushState[Row][Column] != rawState[Row][Column] && (globalClock - switchTimer[Row][Column]) > buttonCooldown)
     {
         switchTimer[Row][Column] = globalClock;
@@ -206,17 +211,25 @@ void downshiftAndReverse(int8_t Drow, int8_t Dcolumn, int8_t Rrow, int8_t Rcolum
         pushState[Row][Column] = rawState[Row][Column];
     }
 
-    Joystick.setButton(Number, pushState[Row][Column]);
-
-
+    if (!switchMode[RRow][RColumn] && pushState[Row][Column] == 1 )
+    {
+        Joystick.setButton(Number, pushState[Row][Column]);  
+    }
+    else if(switchMode[RRow][RColumn])
+    {
+        Joystick.setButton(Number, pushState[Row][Column]);
+    }
+   
+    
     //REVERSE BUTTON
+    unsigned long selectiveCD = buttonCooldown;
+    if (!switchMode[RRow][RColumn])
+    {
+      selectiveCD = (pulseDuration + (2 * repeats * pulseDuration));
+    }
+    
 
-    int RRow = Rrow - 1;
-    int RColumn = Rcolumn - 1;
-    unsigned long pulseDuration = 50;
-    int repeats = 10;
-
-    if (pushState[RRow][RColumn] != rawState[RRow][RColumn] && (globalClock - switchTimer[RRow][RColumn]) > (pulseDuration + (2 * repeats * pulseDuration)))
+    if (pushState[RRow][RColumn] != rawState[RRow][RColumn] && (globalClock - switchTimer[RRow][RColumn]) > selectiveCD)
     {
         if(rawState[RRow][RColumn] == 1)
         {
@@ -225,7 +238,7 @@ void downshiftAndReverse(int8_t Drow, int8_t Dcolumn, int8_t Rrow, int8_t Rcolum
         pushState[RRow][RColumn] = rawState[RRow][RColumn];
     }
 
-    if ((globalClock - switchTimer[RRow][RColumn]) > (pulseDuration + (2 * repeats * pulseDuration)))
+    if ((globalClock - switchTimer[RRow][RColumn]) > selectiveCD)
     {
         pushState[RRow][RColumn] = rawState[RRow][RColumn];
     }
@@ -260,16 +273,18 @@ void downshiftAndReverse(int8_t Drow, int8_t Dcolumn, int8_t Rrow, int8_t Rcolum
           {
               Joystick.setButton(Number, 1);
           }
-          else
+          else if (pushState[Row][Column] == 0)
           {
               Joystick.setButton(Number, 0);
           }
       } 
-      else
+      else if (pushState[Row][Column] == 0)
       {
           Joystick.setButton(Number, 0);
       }
     }
+
+    //SWITCH MODE 2: MOMENTARY BUTTON
     else if (switchMode[RRow][RColumn])
     {
         Joystick.setButton(Number+1, pushState[RRow][RColumn]);

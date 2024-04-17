@@ -196,7 +196,106 @@ void PEC11PWM(int row, int col, bool reverse, int8_t PWMChannel, int8_t stepSize
 
 }
 
-void rotaryAnalogPWM(int analogChannel, int8_t PWMChannel, int8_t stepSize, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
+void rotaryPulsePWM(int row, int column, bool reverse, int8_t PWMChannel, int8_t stepSize)
+{
+    int Row = row - 1;
+    int Column = column - 1;
+    int Column2 = column;
+    int Number = buttonNumber[Row][Column];
+    int Number2 = Number+1;
+
+    int8_t PWMchannel = PWMChannel -1;
+    
+    if(reverse)
+    {
+      Column = column;
+      Column2 = column - 1;
+    }
+
+    //Pulse arm 1
+    if (pushState[Row][Column] != rawState[Row][Column] && (globalClock - switchTimer[Row][Column]) > buttonCooldown)
+    {
+        if(rawState[Row][Column] == 1)
+        {
+          switchTimer[Row][Column] = globalClock;
+          if (pushState[modButtonRow-1][modButtonCol-1] == 1)
+          {
+              PWMValues[PWMchannel] = PWMValues[PWMchannel] + stepSize;
+          }          
+        }
+        pushState[Row][Column] = rawState[Row][Column];
+    }
+    if (pushState[modButtonRow-1][modButtonCol-1] == 0)
+    {
+      if ((globalClock - switchTimer[Row][Column]) > buttonCooldown)
+      {
+          pushState[Row][Column] = rawState[Row][Column];
+      }
+  
+      if ((globalClock - switchTimer[Row][Column]) < buttonCooldown)
+      {
+          toggleTimer[Row][Column] = globalClock;
+      }
+  
+      if ((globalClock - toggleTimer[Row][Column]) < pulseEncCD)
+      {
+          Joystick.setButton(Number, 1);
+      }
+      else
+      {
+          Joystick.setButton(Number, 0);
+      }
+    }
+
+    //Pulse arm 2
+    if (pushState[Row][Column2] != rawState[Row][Column2] && (globalClock - switchTimer[Row][Column2]) > buttonCooldown)
+    {
+        if(rawState[Row][Column2] == 1)
+        {
+          switchTimer[Row][Column2] = globalClock; 
+          if (pushState[modButtonRow-1][modButtonCol-1] == 1)
+          {
+              PWMValues[PWMchannel] = PWMValues[PWMchannel] - stepSize;
+          }           
+        }
+        pushState[Row][Column2] = rawState[Row][Column2];
+    }
+    
+    if (pushState[modButtonRow-1][modButtonCol-1] == 0)
+    {
+      if ((globalClock - switchTimer[Row][Column2]) > buttonCooldown)
+      {
+          pushState[Row][Column2] = rawState[Row][Column2];
+      }
+  
+      if ((globalClock - switchTimer[Row][Column2]) < buttonCooldown)
+      {
+          toggleTimer[Row][Column2] = globalClock;
+      }
+  
+      if ((globalClock - toggleTimer[Row][Column2]) < pulseEncCD)
+      {
+          Joystick.setButton(Number2, 1);
+      }
+      else
+      {
+          Joystick.setButton(Number2, 0);
+      }
+    }
+
+    //Adjustment
+    if (PWMValues[PWMchannel] < 0)
+    {
+      PWMValues[PWMchannel] = 0;
+    }
+    else if (PWMValues[PWMchannel] > 100)
+    {
+      PWMValues[PWMchannel] = 100;
+    }
+}
+
+
+void rotaryAnalogPWM(int analogChannel, int8_t PWMChannel, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
 {
     int N = analogChannel - 1;
         
