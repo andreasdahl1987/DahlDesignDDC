@@ -28,24 +28,6 @@ int8_t readIndex[analogChannelCount];           // the index of the current read
 int total[analogChannelCount];                  // the running total
 int average[analogChannelCount];
 
-//ADC defines
-#define ADC1 50
-#define ADC2 51
-#define ADC3 52
-#define ADC4 53
-#define ADC5 54
-#define ADC6 55
-#define ADC7 56
-#define ADC8 57
-#define ADC9 58
-#define ADC10 59
-#define ADC11 60
-#define ADC12 61
-#define ADC13 62
-#define ADC14 63
-#define ADC15 64
-#define ADC16 65
-#define ADC_CORR 50
 
 //PWM Control
 #if(ROW6_PWMCOUNT > 0)

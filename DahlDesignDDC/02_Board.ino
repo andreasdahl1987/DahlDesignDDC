@@ -68,12 +68,12 @@
 //---------PWM CONTROL----------
 //------------------------------
 
-#define PWMENABLED 1
+#define PWMENABLED 0
 
 #if (ROW6_PWMCOUNT > 0)
   int8_t PWMChannelPins [ROW6_PWMCOUNT];
 #elif (PWMENABLED == 1)
-  int8_t PWMChannelPins [] = {16};
+  int8_t PWMChannelPins [] = {99};
 #endif
 
 //------------------------------
@@ -122,6 +122,25 @@ bool wire0Init = false;
   uint16_t ADS1115value[4*ADS1115_CHIPS];
   uint8_t ADS1115channelCounter[ADS1115_CHIPS];
 #endif
+
+//ADC defines
+#define ADC1 50
+#define ADC2 51
+#define ADC3 52
+#define ADC4 53
+#define ADC5 54
+#define ADC6 55
+#define ADC7 56
+#define ADC8 57
+#define ADC9 58
+#define ADC10 59
+#define ADC11 60
+#define ADC12 61
+#define ADC13 62
+#define ADC14 63
+#define ADC15 64
+#define ADC16 65
+#define ADC_CORR 50
 
 //------------------------------
 //---------LIBRARIES------------

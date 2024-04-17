@@ -721,7 +721,6 @@ void PWMrun()
     else
       {
         analogWrite(PWMChannelPins[i], PWMValue);
-        Serial.println(PWMValue);
       }
   }
 
@@ -738,7 +737,6 @@ void PWMrun()
     else
       {
         analogWrite(PWMChannelPins[i], PWMValue);
-        Serial.println(PWMValue);
       }
   }
   #endif

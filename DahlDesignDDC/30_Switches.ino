@@ -3,15 +3,6 @@
   //--------------------------------------
 
 
-  switchTableInject(21,1,1);
-  switchTableInject(27,1,2);
-  switchTableInject(26,1,3);
-  switchTableInject(22,1,4);
-
-
-  pushButtonL (1,3);
-  PWMPot(1, 0, 1023, 1);
-  triggerPWM(1,analogTravel(1,50),false,100,500);
 
 
   //--------------------------------------
