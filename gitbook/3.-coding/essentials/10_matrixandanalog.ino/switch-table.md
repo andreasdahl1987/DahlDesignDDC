@@ -1,4 +1,4 @@
-# 10\_TableAndAnalog.ino
+# Switch table
 
 ```
 //-----------------------------------------
@@ -78,15 +78,15 @@ When using direct wiring or shift registers, the rows and columns aren't actual 
 
 Any row or column that only has direct wired switches or shift registers on them, should be written as "**99**". The reason we have to use a dummy is that we need to build a matrix in the firmware with the correct size. As mentioned earlier, each switch needs a slot in the firmware matrix to get memory to store switch states, timers for debouncing, etc.&#x20;
 
-* These examples from [1. Project planning](../../1.-project-planning/switch-inputs/non-matrix-switches.md):
+* These examples from [1. Project planning](../../../1.-project-planning/switch-inputs/non-matrix-switches.md):
 
-<figure><img src="../../.gitbook/assets/image (27).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (27).png" alt=""><figcaption></figcaption></figure>
 
 `uint8_t row[] = {99};`
 
 `uint8_t col[] = {99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99};`
 
-<figure><img src="../../.gitbook/assets/image (5) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (5) (2).png" alt=""><figcaption></figcaption></figure>
 
 `uint8_t row[] = {99,99,99,99};`
 
@@ -94,7 +94,7 @@ Any row or column that only has direct wired switches or shift registers on them
 
 * A hybrid system with the first two rows reserved for direct wired switches could look like this:
 
-<figure><img src="../../.gitbook/assets/image (23) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (23) (1).png" alt=""><figcaption></figcaption></figure>
 
 `uint8_t row[] = {99,99,4,5,16};`
 
@@ -104,7 +104,7 @@ The pin numbers used here are just examples.&#x20;
 
 * An extreme example with several bundles of shift registers, matrix wiring and direct wiring in the same project:
 
-<figure><img src="../../.gitbook/assets/image (4) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (4) (5).png" alt=""><figcaption></figcaption></figure>
 
 Here, the first 5 rows are dummy-rows. But also columns 5-8, since here are only shift registers and/or direct wired switches. In essence, only the matrix wired part (rows 6-8 and columns 1-4) should have real pin numbers, the rest are "99".&#x20;
 
@@ -141,20 +141,3 @@ const uint8_t buttonNumber[rowCount][colCount] =
 };
 ```
 
-#### Analog description
-
-First of all, state how many analog switches your project has. In this case 5.&#x20;
-
-`#define analogSwitchCount 5`
-
-The same way you set up the matrix button numbers, your planned analog switches goes in here:
-
-<figure><img src="../../.gitbook/assets/image (1) (5).png" alt=""><figcaption></figcaption></figure>
-
-```
-const uint8_t analogButtonNumber[analogSwitchCount] =         
-{ 69, 83, 0, 0, 97};
-
-const uint8_t analogButtonNumberIncMode[analogSwitchCount] = 
-{ 81, 95, 0, 0, 0};
-```

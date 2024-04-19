@@ -10,7 +10,7 @@ An essential part of reading button states is using pull-up resistors. For direc
 
 This is how it works:
 
-<figure><img src="../../.gitbook/assets/image (17) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (17) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * When the button is _**not pressed**_, there is no way for current to get to ground. The voltage at the level of RECIEVER, which in our case is the SR, is the same as VCC (typically +5 volt in Arduino projects).&#x20;
 * When the button is _**pressed,**_ current will flow to ground and voltage will drop from VCC before the 10K resistor to 0 at ground level. Pratically 100% of the voltage drop will be across the resistor. So measuring the voltage after the resistor, it will be essentially equal to ground.&#x20;
@@ -32,7 +32,7 @@ In the example below, the 3 buttons on D0-D2 has been replaced with an encoder w
 
 Below is an example with a funky switch. It uses 7/8 inputs, so a pushbutton is added to the 8th input. Notice the common for the pushbuttons (pin 6) and the common for the encoder (9) are both connected to ground.&#x20;
 
-<figure><img src="../../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 To make it more structured and readable, we can use net flags (words instead of wires) and resistor arrays (basically a chip that is built up of many resistors of the same size side by side).
 
@@ -62,7 +62,7 @@ PL#, SH, LD#, PE#. This pin has many names. It is referred to as **LATCH.** It i
 
 When this pin is **low** (connected to GND), the SR will read the inputs from every input port. Making up a 8-bit value. To read the input pins, the clock must toggle off/on once.
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 In this case, a button on pin D0, D1, D2, D5 and D7 is pressed. Recieving data from 8 inputs at the same time is what makes it "8-bit parallel in..."
 

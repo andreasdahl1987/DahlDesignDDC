@@ -6,7 +6,7 @@ This section will explain how to plan the switch table. No matter how you chose 
 
 I use a spreadsheet to plan the switch table for my projects, with the switches represented as **blocks**. I will refer to **blocks** for the remainder of this guide. I also give blocks different colors according to what I'm going to use the switch for; neutral button, bite point button, modifier button, etc. This is not need, it is just to get an overview.
 
-The numbers in the cells are [button numbers](../../3.-coding/essentials/10\_matrixandanalog.ino.md#button-numbers), more on this later.&#x20;
+The numbers in the cells are [button numbers](matrix.md#assigning-button-numbers), more on this later.&#x20;
 
 ![image](https://user-images.githubusercontent.com/40788634/191767001-6133685e-d7a5-4eef-9de6-aea218732961.png)
 
@@ -117,4 +117,4 @@ This 2-bit encoder will use button numbers 23 and 24, and the 4-bit encoder use 
 This 2-bit encoder has been used in a function that has a 8-position mode and an incremental mode. It will then use button numbers 23-30 in the 8-position mode and button numbers 31 and 32 in the incremental mode. If the 4-bit encoder is set up the same way, it will use button numbers 10-17 for the 8-position mode and button numbers 10 and 11 in the incremental mode.
 
 * For funky switch encoders, the same principle applies, just that the two blocks arent necessarily next to eachother.
-* Any encoder blocks that dont need a number in them must be assigned a 0.
+* Any encoder blocks that dont need a number in them can be assigned a 0, or any other number. It won't ever be used. Though, some kind of number should be there, as you'll need that when we start working on the code.

@@ -1,4 +1,4 @@
-# LED control
+# RGB LED control
 
 These functions control [LED brightness.](../3.-coding/peripherals/leds-code-and-connection/firmware-control/brightness.md)
 
@@ -112,15 +112,13 @@ Produces no button presses, but the position of the switch is still detected by 
 {% endtab %}
 
 {% tab title="Example" %}
-`void rotaryAnalogBrightness(int analogPin, int switchNumber, int startBrightness, endBrightness int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)`
+`void rotaryAnalogBrightness(int analogChannel, int startBrightness, endBrightness int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)`
 
 Switch setup with explainations:
 
-`rotaryAnalogMute(`
+`rotaryAnalogBrightness(`
 
-`A3,` <- The analog pin this switch is connected to
-
-`2,` <- The switch number this analog switch is assigned
+`2,` <- The analog channel used
 
 `5,` <- The lowest brightness setting (position 1 on the switch)
 
@@ -133,7 +131,7 @@ Switch setup with explainations:
 * This switch has "reverse" set to true, which can be a good idea if it is placed horizontally on the right side. Turning it CCW will now increase the brightness instead of reducing. \
   So typed out in 30\_Switches.ino:
 
-`rotaryAnalogBrightness(A3, 2, 5, 70, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023, false);`
+`rotaryAnalogBrightness(2, 5, 70, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023, false);`
 
 This switch will set the brightness to 5% in position 1 and 70% in position 12. The positions in between will be a gradual increase from 5 to 70%.&#x20;
 {% endtab %}
@@ -153,15 +151,13 @@ Works similar to[ rotaryAnalogSimple()](rotary-switches/rotaryanalog.md#rotaryan
 {% endtab %}
 
 {% tab title="Example" %}
-`void rotaryAnalogBrightness12(int analogPin, int switchNumber, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)`
+`void rotaryAnalogBrightness12(int analogChannel, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)`
 
 Switch setup with explainations:
 
-`rotaryAnalogMute(`
+`rotaryAnalogBrightness12(`
 
-`A3,` <- The analog pin this switch is connected to
-
-`2,` <- The switch number this analog switch is assigned
+`2,` <- The analog channel used
 
 `16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023,` <- Switch position values
 
@@ -170,7 +166,7 @@ Switch setup with explainations:
 * This switch has "reverse" set to true, which can be a good idea if it is placed horizontally on the right side. Turning it CCW will now increase the brightness instead of reducing. \
   So typed out in 30\_Switches.ino:
 
-`rotaryAnalogBrightness12(A3, 2, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023, false);`
+`rotaryAnalogBrightness12(2, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023, false);`
 {% endtab %}
 
 {% tab title="Requirements" %}
@@ -178,5 +174,3 @@ Switch setup with explainations:
 * modButton()
 {% endtab %}
 {% endtabs %}
-
-r

@@ -23,15 +23,13 @@ This switch uses the same general approach as other switches setting bite point,
 {% endtab %}
 
 {% tab title="Example" %}
-`SW1BiteRotary(int analogPin, int switchNumber, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)`
+`SW1BiteRotary(int analogChannel, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)`
 
 Switch setup with explainations:
 
 `SW1BiteRotary(`
 
-`A3,` <- The analog pin this switch is connected to
-
-`2,` <- The switch number this analog switch is assigned
+`2,` <- analog channel
 
 `1,` <- placement in rotary field
 
@@ -46,7 +44,7 @@ Switch setup with explainations:
 \
 So typed out in 30\_Switches.ino:
 
-`SW1BiteRotary(A3, 2, 1, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023, false);`
+`SW1BiteRotary(2, 1, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023, false);`
 {% endtab %}
 
 {% tab title="Requirements" %}
@@ -77,15 +75,13 @@ When powering up the controller, it will start in the preset corresponding to th
 {% endtab %}
 
 {% tab title="Example" %}
-`SW1PresetRotary(int analogPin, int switchNumber, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)`
+`SW1PresetRotary(int analogChannel, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)`
 
 Switch setup with explainations:
 
 `SW1BiteRotary(`
 
-`A3,` <- The analog pin this switch is connected to
-
-`2,` <- The switch number this analog switch is assigned
+`2,` <- analog channel
 
 `1,` <- placement in rotary field
 
@@ -100,7 +96,7 @@ Switch setup with explainations:
 \
 So typed out in 30\_Switches.ino:
 
-`SW1PresetRotary(A3, 2, 1, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023, false);`
+`SW1PresetRotary(2, 1, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023, false);`
 {% endtab %}
 
 {% tab title="Requirements" %}

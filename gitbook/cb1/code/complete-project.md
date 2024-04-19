@@ -174,15 +174,15 @@ Following the examples in the switch library, lets set up our buttons and encode
 
 #### Switch numbers
 
-Now that we've set up our buttons and encoders, we're got some analog switches left. Namely two clutches and three 12-position rotary switches. These will need a switch number each. No to be confused with button numbers, _**switch number**,_ is a unique number for each analog switch in your project. This is soft of the equivalent of the switch table for the digital switches. So I'll just number them like this:
+Now that we've set up our buttons and encoders, we're got some analog switches left. Namely two clutches and three 12-position rotary switches. Each will need an analog channel. Analog channels corresponds to the ADC pins on a CB1 board. So ADC1 is analog channel 1. We're wired them like this:
 
 * \#1: Left clutch paddle
 * \#2: Right clutch paddle
-* \#3: Left 12-position switch
-* \#4: Center 12-position switch
+* \#10: Left 12-position switch
+* \#9: Center 12-position switch
 * \#5: Right 12-position switch
 
-These switch numbers are used in the software for a bunch of internal stuff; like calculations, timings, switch modes, button numbers, etc. But they can also be used by you to refer to a switch. Such as the **launchButton()** function in this project need to know which analog switch # it should affect. I currencly affects switch #1, which is why I set the left clutch paddle as switch#1.&#x20;
+Channels used in the software for a bunch of internal stuff; like calculations, timings, switch modes, button numbers, etc. But they can also be used by you to refer to a switch. Such as the **launchButton()** function in this project need to know which analog channel it should affect. It currencly affects switch analog channel 1 to get in touch with the left clutch paddle.&#x20;
 
 #### Button numbers
 
@@ -196,13 +196,9 @@ I'd like it to be like this:
 
 At the bottom of 9\_CB1\_Table.ino you'll find the spot to put in the button numbers. We only need to add the _starting_ button number for each mode and swicth. These ones:
 
-<figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13) (1).png" alt=""><figcaption></figcaption></figure>
 
 Lets see how they fit in the code:
-
-<figure><img src="../../.gitbook/assets/image (50).png" alt=""><figcaption></figcaption></figure>
-
-The two lists of numbers represent button numbers for up to 12 analog switches. We decided earlier that the left, center and right rotary switches are switch #3-5. The two clutches are switch#1 and #2, but don't need any button number assigned.
 
 ```
 //---------------------------------------
@@ -211,13 +207,18 @@ The two lists of numbers represent button numbers for up to 12 analog switches. 
 
 #define analogSwitchCount 12
 
+uint8_t analogPins[analogChannelCount] =              
+{ ADC1, ADC2, ADC3, ADC4, ADC5, ADC6, ADC7, ADC8, ADC9, ADC10, ADC11, ADC12 };
+
 uint8_t analogButtonNumber[analogSwitchCount] =         //ANALOG BUTTONS 1
-{ 0, 0, 30, 42, 54, 0, 0, 0, 0, 0, 0, 0 };
+{ 0, 0, 0, 0, 54, 0, 0, 0, 42, 30, 0, 0 };
 
 uint8_t analogButtonNumberIncMode[analogSwitchCount] =  //ANALOG BUTTONS 2
-{ 0, 0, 24, 26, 28, 0, 0, 0, 0, 0, 0, 0 };
+{ 0, 0, 0, 0, 28, 0, 0, 0, 26, 24, 0, 0 };
 
 ```
+
+The two lists of numbers represent button numbers for up to 12 analog channels. We decided earlier that the left, center and right rotary switches are on channels 10, 9 and 5. The two clutches are on 1 and 2, but don't need any button number assigned. The unused channels can be left with 0.&#x20;
 
 #### Switch functions
 
@@ -269,11 +270,11 @@ Now we have what we need to finalize our `30_Switches` tab:
   pushButton(5,4);
   PEC11Bite(5,5,true);
   
-  dualClutch(ADC1, 1, 8530, 21530, ADC2, 2, 8510, 20950, false);
+  dualClutch(1, 8530, 21530, 2, 8510, 20950, false);
   
-  SW1PresetRotary(ADC10, 3, 1,  150, 2450, 4930, 7480, 10510, 13250, 16830, 20310, 22930, 25790, 28840, 31200, false);
-  rotaryAnalog2Mode(ADC9, 4, 2,  150, 2450, 4930, 7480, 10510, 13250, 16830, 20310, 22930, 25790, 28840, 31200, false);
-  rotaryAnalog2Mode(ADC5, 5, 3,  150, 2450, 4930, 7480, 10510, 13250, 16830, 20310, 22930, 25790, 28840, 31200, false);
+  SW1PresetRotary(10, 1,  150, 2450, 4930, 7480, 10510, 13250, 16830, 20310, 22930, 25790, 28840, 31200, false);
+  rotaryAnalog2Mode(9, 2,  150, 2450, 4930, 7480, 10510, 13250, 16830, 20310, 22930, 25790, 28840, 31200, false);
+  rotaryAnalog2Mode(5, 3,  150, 2450, 4930, 7480, 10510, 13250, 16830, 20310, 22930, 25790, 28840, 31200, false);
   
   //--------------------------------------
   //---------SWITCHES END HERE------------

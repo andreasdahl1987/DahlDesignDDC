@@ -12,7 +12,7 @@
       <figure><img src="../../.gitbook/assets/image (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
 *   There are 24 button and **36 button** variants. Really, the product of both are 24 functional buttons. The difference is that in the 36 button variant the 12-position switch is also given button numbers to reflect its position, which is useful if you want information about the switch position in SimHub for dashboard purposes.
 
-    <figure><img src="../../.gitbook/assets/image (6) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (6) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -26,7 +26,7 @@ The starting button number for the whole 24-button complex is defined by the but
 {% endtab %}
 
 {% tab title="Example" %}
-`void multiFunction2Bit24(int analogPin, int switchNumber, int row, int column, bool reverseAnalog, bool reverse2Bit, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12)`
+`void multiFunction2Bit24(int analogChannel, int row, int column, bool reverseAnalog, bool reverse2Bit, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12)`
 
 
 
@@ -34,9 +34,7 @@ Switch setup with explainations:
 
 multiFunction2Bit24(
 
-A3, <- The analog pin this switch is connected to
-
-4, <- The switch number this analog switch is assigned
+4, <- analog channel
 
 5, <- The row the encoder is connected to
 
@@ -52,7 +50,7 @@ true, <- The effect of the encoder rotation is reversed
 
 So for a 12-way connected to A3, assigned analog switch# 4 and an encoder on row 5 column 2+3 could look like:
 
-`multiFunction2Bit24(A3, 4, 5, 2, false, true, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023);`
+`multiFunction2Bit24(4, 5, 2, false, true, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023);`
 {% endtab %}
 
 {% tab title="Requirements" %}
@@ -72,7 +70,7 @@ The starting button number for the whole 36-button complex is defined by the but
 {% endtab %}
 
 {% tab title="Example" %}
-`void multiFunction2Bit36(int analogPin, int switchNumber, int row, int column, bool reverseAnalog, reverse2Bit, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12)`
+`void multiFunction2Bit36(int analogChannel, int row, int column, bool reverseAnalog, reverse2Bit, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12)`
 
 
 
@@ -80,9 +78,7 @@ Switch setup with explainations:
 
 multiFunction2Bit24(
 
-A3, <- The analog pin this switch is connected to
-
-4, <- The switch number this analog switch is assigned
+4, <- Analog channel
 
 5, <- The row the encoder is connected to
 
@@ -98,7 +94,7 @@ true, <- The effect of the encoder rotation is reversed
 
 So for a 12-way connected to A3, assigned analog switch# 4 and an encoder on row 5 column 2+3 could look like:
 
-`multiFunction2Bit36(A3, 4, 5, 2, false, true, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023);`
+`multiFunction2Bit36(4, 5, 2, false, true, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023);`
 {% endtab %}
 
 {% tab title="Requirements" %}
@@ -116,7 +112,7 @@ The starting button number for the whole 24-button complex is defined by the but
 {% endtab %}
 
 {% tab title="Example" %}
-`void multiFunction2Button24(int analogPin, int switchNumber,int rowButton1, int columnButton1, int rowButton2, int columnButton2, bool reverse, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12)`
+`void multiFunction2Button24(int analogChannel,int rowButton1, int columnButton1, int rowButton2, int columnButton2, bool reverse, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12)`
 
 
 
@@ -124,9 +120,7 @@ Switch setup with explainations:
 
 multiFunction2Bit24(
 
-A3, <- The analog pin this switch is connected to
-
-4, <- The switch number this analog switch is assigned
+4, <- Analog channel
 
 5, <- The row of button 1
 
@@ -144,7 +138,7 @@ false, <- The effect of rotary rotation is not reversed
 
 So for a 12-way connected to A3, assigned analog switch# 4 and two buttons on row5/col3 and row2/col4 could look like this:
 
-`multiFunction2Button24(A3, 4, 5, 3, 2, 4, false, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023);`
+`multiFunction2Button24(4, 5, 3, 2, 4, false, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023);`
 {% endtab %}
 
 {% tab title="Requirements" %}
@@ -162,7 +156,7 @@ The starting button number for the whole 36-button complex is defined by the but
 {% endtab %}
 
 {% tab title="Example" %}
-`void multiFunction2Button36(int analogPin, int switchNumber,int rowButton1, int columnButton1, int rowButton2, int columnButton2, bool reverse, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12)`
+`void multiFunction2Button36(int analogChannel, int rowButton1, int columnButton1, int rowButton2, int columnButton2, bool reverse, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12)`
 
 
 
@@ -170,9 +164,7 @@ Switch setup with explainations:
 
 multiFunction2Bit24(
 
-A3, <- The analog pin this switch is connected to
-
-4, <- The switch number this analog switch is assigned
+4, <- Analog channel
 
 5, <- The row of button 1
 
@@ -190,7 +182,7 @@ false, <- The effect of rotary rotation is not reversed
 
 So for a 12-way connected to A3, assigned analog switch# 4 and two buttons on row5/col3 and row2/col4 could look like this:
 
-`multiFunction2Button36(A3, 4, 5, 3, 2, 4, false, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023);`
+`multiFunction2Button36(4, 5, 3, 2, 4, false, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023);`
 {% endtab %}
 
 {% tab title="Requirements" %}

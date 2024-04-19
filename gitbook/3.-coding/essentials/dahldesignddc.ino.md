@@ -53,4 +53,4 @@ The output values will go from 0-4096 to 0-65536. However, DDC will cut this val
 
 I suggest activating oversampling for any RP2040 board, it is done by setting `ENABLE_OVERSAMPLING` from `0` to `1.`
 
-**Important to note,** when you activate oversampling, you cant refer to your analog pins as A0 to A3 anymore. They are now called ADC9 to ADC12. So if you wire a potmeter to your A0 pin and want to use bitePot(), you'll have to write something like `bitePot(ADC9, 1, 0, 32768);`
+**Important to note,** when you activate oversampling, you cant refer to your analog pins as A0 to A3 anymore. They are now called ADC9 to ADC12, respectively. Keep this in mind when setting up your analog channels in [10\_TableAndAnalog.ino](10\_matrixandanalog.ino/)

@@ -10,11 +10,11 @@ Is also available with a [filter](filtered-curves.md).
 {% endtab %}
 
 {% tab title="Example" %}
-`void brake(int analogPin, int switchNumber, int releasedValue, int fullyPressedValue)`
+`void brake(int analogChannel, int releasedValue, int fullyPressedValue)`
 
-For a potentiometer with its center pin connected to A3, assigned switch# 4, it could look like this:
+For a potentiometer on analog channel 3 it could look like this:
 
-`brake(A3, 4, 0, 1023);`
+`brake(3, 0, 1023);`
 {% endtab %}
 
 {% tab title="Requirements" %}
@@ -34,11 +34,11 @@ Is also available with a [filter](filtered-curves.md).
 {% endtab %}
 
 {% tab title="Example" %}
-`void throttle(int analogPin, int switchNumber, int releasedValue, int fullyPressedValue)`
+`void throttle(int analogChannel, int releasedValue, int fullyPressedValue)`
 
-For a potentiometer with its center pin connected to A3, assigned switch# 4, it could look like this:
+For a potentiometer on analog channel 3, it could look like this:
 
-`throttle(A3, 4, 0, 1023);`
+`throttle(3, 0, 1023);`
 {% endtab %}
 
 {% tab title="Requirements" %}

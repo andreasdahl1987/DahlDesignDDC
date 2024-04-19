@@ -8,15 +8,15 @@ When you've [uploaded](../../upload.md) the code, you can connect to SimHub:
 
 * Go to devices and add a new device.
 
-<figure><img src="../../../.gitbook/assets/image (15) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (15) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * Select "Create oem leds test device"
 
-<figure><img src="../../../.gitbook/assets/image (14) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (14) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * Go to OEM configuration and type in the controllers VID and PID&#x20;
 
-<figure><img src="../../../.gitbook/assets/image (12) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (12) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * Reboot your controller and/or SimHub for SimHub to find it, press "Edit profile" to get to the RGB editor. You're all set!
 

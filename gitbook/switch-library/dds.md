@@ -142,16 +142,14 @@ Modes:
 {% endtab %}
 
 {% tab title="Example" %}
-`void DDSanalog(int analogPin, int switchNumber, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)`
+`void DDSanalog(int analogChannel, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)`
 
 \
 Switch setup with explainations:
 
 DDSanalog(
 
-A3, <- The analog pin this switch is connected to
-
-2, <- The switch number this analog switch is assigned
+2, <- Analog channel
 
 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023, <- Switch position values
 
@@ -161,7 +159,7 @@ false); <- Direction is not reversed, so CW rotation increasese button number.
 
 So typed out in 30\_Switches.ino:
 
-`DDSanalog(A3, 2, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023,false);`
+`DDSanalog(2, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023,false);`
 {% endtab %}
 
 {% tab title="Requirements" %}

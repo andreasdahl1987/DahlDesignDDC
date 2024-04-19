@@ -31,11 +31,11 @@ Similar to[ brake()](brake-throttle.md#brake), but with added filter.
 {% endtab %}
 
 {% tab title="Example" %}
-`void filteredBrake(int analogPin, int switchNumber, int releasedValue, int fullyPressedValue, int curvePush, float expFactor)`
+`void filteredBrake(int analogChannel, int releasedValue, int fullyPressedValue, int curvePush, float expFactor)`
 
-For a load cell with its signal pin connected to A3, assigned switch# 4, it could look like this:
+For a load cell on analog channel 4, it could look like this:
 
-`filteredBrake(A3, 4, 640, 212, 1, 1.2);`
+`filteredBrake(4, 640, 212, 1, 1.2);`
 
 With a curvePush of 1, this will flatten the response curve, meaning you'll get more braking power towards the end of the travel. ExpFactor of 1.2 is a sizable flattening of the curve.&#x20;
 {% endtab %}
@@ -55,11 +55,11 @@ Similar to [throttle()](brake-throttle.md#throttle), but with added filter.
 {% endtab %}
 
 {% tab title="Example" %}
-`void filteredThrottle(int analogPin, int switchNumber, int releasedValue, int fullyPressedValue, int curvePush, float expFactor)`
+`void filteredThrottle(int analogChannel, int releasedValue, int fullyPressedValue, int curvePush, float expFactor)`
 
-For a potentiometer with its center pin connected to A3, assigned switch# 4, it could look like this:
+For a potentiometer on analog channel 4, it could look like this:
 
-`filteredThrottle(A3, 4, 0, 1023,-1,0.7);`
+`filteredThrottle(4, 0, 1023,-1,0.7);`
 
 With a curvePush of -1, this will raise the response curve, meaning you'll get more output of the throttle at the start of the paddle/pedal travel. ExpFactor of 0.7 is a moderate push of the curve.&#x20;
 {% endtab %}
@@ -79,11 +79,11 @@ Similar to bitePot(), but with added filter.
 {% endtab %}
 
 {% tab title="Example" %}
-`void filteredBitePot(int analogPin, int switchNumber, int startValue, int endValue, int curvePush, float expFactor)`
+`void filteredBitePot(int analogChannel, int startValue, int endValue, int curvePush, float expFactor)`
 
-For a potentiometer with its center pin connected to A1, assigned switch# 2, it could look like this:
+For a potentiometer on analog channel 2, it could look like this:
 
-`filteredBitePot(A1, 2, 0, 1023, -1, 0.3);`
+`filteredBitePot(2, 0, 1023, -1, 0.3);`
 
 With a curvePush of -1, this will raise the response curve, meaning you'll get more output of the potentiometer at the start of the rotation. ExpFactor of 0.3 is a small adjustment of the curve.&#x20;
 {% endtab %}
@@ -103,13 +103,13 @@ Similar to [singleClutch()](clutch.md#singleclutch), but with added filter
 {% endtab %}
 
 {% tab title="Example" %}
-`void filteredSingleClutch(int analogPin, int switchNumber, int releasedValue, int fullyPressedValue, int curvePush, float expFactor)`
+`void filteredSingleClutch(int analogChannel, int releasedValue, int fullyPressedValue, int curvePush, float expFactor)`
 
-Type in the pin that reads the signal, the analog switch number you've given it, and the values you read out from serial monitor.&#x20;
+Type in the analog channel that runs the clutch, and the values you read out from serial monitor.&#x20;
 
 Example:
 
-`void filteredSingleClutch(A2, 2, 231, 799, 1, 2.8);`
+`void filteredSingleClutch(2, 231, 799, 1, 2.8);`
 
 With a curvePush of 1, this will flatten the response curve, meaning you'll get more clutch response towards the end of the travel. ExpFactor of 2.8 is a big push to flatten the curve.&#x20;
 {% endtab %}
@@ -128,13 +128,13 @@ Similar to [dualClutch()](clutch.md#dualclutch), but with added filter.
 {% endtab %}
 
 {% tab title="Example" %}
-`void filteredDualClutch(int masterPin, int masterSwitchNumber, int masterReleasedValue, int masterFullyPressedValue, int masterCurvePush, float masterExpFactor int slavePin, int slaveSwitchNumber, int slaveReleasedValue, int slaveFullyPressedValue, int slaveCurvePush, float slaveExpFactor, bool throttleMaster)`
+`void filteredDualClutch(int masterAnalogChannel, int masterReleasedValue, int masterFullyPressedValue, int masterCurvePush, float masterExpFactor int slaveAnalogChannel, int slaveReleasedValue, int slaveFullyPressedValue, int slaveCurvePush, float slaveExpFactor, bool throttleMaster)`
 
-Type in the pin that reads the signal, the analog switch number you've given it, and the values you read out from serial monitor. This for both switches, decide which is master and slave. Lastly, throttleMaster makes master paddle throttle and slave paddle brake in mode 3. if set to `true`. Opposite if set to `false`.&#x20;
+Type in the analog channels for the clutches and the values you read out from serial monitor. This for both switches, decide which is master and slave. Lastly, throttleMaster makes master paddle throttle and slave paddle brake in mode 3. if set to `true`. Opposite if set to `false`.&#x20;
 
 Example:
 
-`void dualClutch(A2, 1, 105, 799, 1, 1.3, A3, 2, 436, 873, 1, 1.5, true);`
+`void dualClutch(1, 105, 799, 1, 1.3, 2, 436, 873, 1, 1.5, true);`
 
 In this example, both master and slave paddles have curvePush "1", which will flatten the response curve, makeing it more responsive towards the end of the paddle travel. Both have a sizable adjustment of 1.3 for the master paddle and 1.5 for the slave paddle.&#x20;
 {% endtab %}

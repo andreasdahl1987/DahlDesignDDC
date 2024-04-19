@@ -4,7 +4,7 @@ All rotaryAnalog functions are for 12-position switches. The most common are 8, 
 
 For fewer than 12 positions, simply use a dummy value for the unused positions, a value the switch will never be close to reaching. For instance:
 
-`rotaryAnalogSimple(A3, 2, 58, 209, 342, 462, 565, 680, 848, 1023, 10000, 10000, 10000, 10000, false);`\
+`rotaryAnalogSimple(2, 58, 209, 342, 462, 565, 680, 848, 1023, 10000, 10000, 10000, 10000, false);`\
 Here, a 8 position switch is used, and the last 4 positions are given the value "10 000".&#x20;
 
 #### <mark style="background-color:blue;">rotaryAnalog()</mark>
@@ -24,15 +24,13 @@ Uses the rotary field for [field placement.](../../3.-coding/advanced/field-plac
 {% endtab %}
 
 {% tab title="Example" %}
-`void rotaryAnalog(int analogPin, int switchNumber, int fieldPlacement, int hybridPositions, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)`
+`void rotaryAnalog(int analogChannel, int fieldPlacement, int hybridPositions, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)`
 
 Switch setup with explainations:
 
 `rotaryAnalog(`
 
-`A3,` <- The analog pin this switch is connected to
-
-`2,` <- The switch number this analog switch is assigned
+`2,` <- analog channel
 
 `1,` <- placement in rotary field
 
@@ -49,7 +47,7 @@ Switch setup with explainations:
 \
 So typed out in 30\_Switches.ino:
 
-`rotaryAnalog(A3, 2, 1, 7, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023, false);`
+`rotaryAnalog(2, 1, 7, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023, false);`
 {% endtab %}
 
 {% tab title="Requirements" %}
@@ -68,15 +66,13 @@ So typed out in 30\_Switches.ino:
 {% endtab %}
 
 {% tab title="Example" %}
-`void rotaryAnalogSimple(int analogPin, int switchNumber, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)`
+`void rotaryAnalogSimple(int analogChannel, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)`
 
 Switch setup with explainations:
 
 `rotaryAnalogSimple(`
 
-`A3,` <- The analog pin this switch is connected to
-
-`2,` <- The switch number this analog switch is assigned
+`2,` <- analog channel
 
 `16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023,` <- Switch position values
 
@@ -88,7 +84,7 @@ Switch setup with explainations:
 \
 So typed out in 30\_Switches.ino:
 
-`rotaryAnalogSimple(A3, 2, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023, false);`
+`rotaryAnalogSimple(2, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023, false);`
 {% endtab %}
 
 {% tab title="Requirements" %}
@@ -106,15 +102,13 @@ Produces no button presses, but the position of the switch is still detected by 
 {% endtab %}
 
 {% tab title="Example" %}
-`void rotaryAnalogMute(int analogPin, int switchNumber, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)`
+`void rotaryAnalogMute(int analogChannel, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)`
 
 Switch setup with explainations:
 
 `rotaryAnalogMute(`
 
-`A3,` <- The analog pin this switch is connected to
-
-`2,` <- The switch number this analog switch is assigned
+`2,` <- analog channel
 
 `16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023,` <- Switch position values
 
@@ -123,7 +117,7 @@ Switch setup with explainations:
 * This switch has "reverse" set to true, which can be a good idea if it is placed horizontally on the right side. Turning it CCW will now increase the count instead of reducing. \
   So typed out in 30\_Switches.ino:
 
-`rotaryAnalogMute(A3, 2, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023, false);`
+`rotaryAnalogMute(2, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023, false);`
 {% endtab %}
 
 {% tab title="Requirements" %}
@@ -141,15 +135,13 @@ Mix between rotaryAnalogSimle() and rotaryAnalogMute(). You can select a range o
 {% endtab %}
 
 {% tab title="Example" %}
-`void rotaryAnalogPartial(int analogPin, int switchNumber, int muteStart, int muteEnd, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)`
+`void rotaryAnalogPartial(int analogChannel, int muteStart, int muteEnd, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)`
 
 Switch setup with explainations:
 
 `rotaryAnalogPartial(`
 
-`A3,` <- The analog pin this switch is connected to
-
-`2,` <- The switch number this analog switch is assigned
+`2,` <- analog channel
 
 `5,` <- The first position in the muted range
 
@@ -163,7 +155,7 @@ Switch setup with explainations:
 * This switch has "reverse" set to true, which can be a good idea if it is placed horizontally on the right side. Turning it CCW will now increase the count instead of reducing. \
   So typed out in 30\_Switches.ino:
 
-`rotaryAnalogPartial(A3, 2, 5, 9, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023, false);`
+`rotaryAnalogPartial(2, 5, 9, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023, false);`
 {% endtab %}
 
 {% tab title="Requirements" %}
@@ -186,15 +178,13 @@ Uses the rotary field for [field placement.](../../3.-coding/advanced/field-plac
 {% endtab %}
 
 {% tab title="Example" %}
-`void rotaryAnalog2Mode(int analogPin, int switchNumber, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)`
+`void rotaryAnalog2Mode(int analogChannel, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)`
 
 Switch setup with explainations:
 
 `rotaryAnalog2Mode(`
 
-`A3,` <- The analog pin this switch is connected to
-
-`2,` <- The switch number this analog switch is assigned
+`2,` <- analog channel
 
 `1,` <- placement in rotary field
 
@@ -209,7 +199,7 @@ Switch setup with explainations:
 \
 So typed out in 30\_Switches.ino:
 
-`rotaryAnalog2Mode(A3, 2, 1, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023, false);`
+`rotaryAnalog2Mode(2, 1, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023, false);`
 {% endtab %}
 
 {% tab title="Requirements" %}
@@ -234,15 +224,13 @@ Uses the rotary field for [field placement.](../../3.-coding/advanced/field-plac
 {% endtab %}
 
 {% tab title="Example" %}
-`void rotaryAnalog2Mode(int analogPin, int switchNumber, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)`
+`void rotaryAnalog2Mode(int analogChannel, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)`
 
 Switch setup with explainations:
 
 `rotaryAnalog2Mode(`
 
-`A3,` <- The analog pin this switch is connected to
-
-`2,` <- The switch number this analog switch is assigned
+`2,` <- analog channel
 
 `1,` <- placement in rotary field
 
@@ -257,7 +245,7 @@ Switch setup with explainations:
 \
 So typed out in 30\_Switches.ino:
 
-`rotaryAnalog2Mode(A3, 2, 1, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023, false);`
+`rotaryAnalog2Mode(2, 1, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023, false);`
 {% endtab %}
 
 {% tab title="Requirements" %}
@@ -267,5 +255,3 @@ So typed out in 30\_Switches.ino:
 * biteButton() to set the bite point
 {% endtab %}
 {% endtabs %}
-
-r

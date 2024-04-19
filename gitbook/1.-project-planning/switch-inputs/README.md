@@ -6,6 +6,6 @@ Each slot in the table has a package of memory that will be exclusive to the swi
 
 Think of it as placing the switches in an Excel sheet. The switch in <mark style="background-color:green;">green</mark> with number "14" is on row 3, column 3. When refering to the switches in the code, you'll be using these adresses. Don't mind the numbers in these cells, more on that later.&#x20;
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption><p>A matrix, or table if you will, of switches</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1).png" alt=""><figcaption><p>A matrix, or table if you will, of switches</p></figcaption></figure>
 
 Some exeptions; switches that require an analog input are not part of the table. [Such as rotary switches.](../../switch-library/rotary-switches/)

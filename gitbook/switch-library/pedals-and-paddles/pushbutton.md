@@ -61,3 +61,34 @@ I this case, the button takes a 250 ms pause after being pushed.&#x20;
 * 1 button number
 {% endtab %}
 {% endtabs %}
+
+#### downshiftAndReverse()
+
+{% tabs %}
+{% tab title="Description" %}
+This function allows you to set up a button to pair with your downshift paddle. They will share button number, and the purpose is to use this button to set the car in reverse. It will pulse 10 button presses in 1 second.&#x20;
+
+2 modes:
+
+* 0: Reverse button mode: A regular pushbutton (your paddle) and a 10 x pulse button (your reverse button) will share button number
+* 1: Individual mode: Both buttons are regular pushbuttons with each their own button number.
+
+Hold modButton() and press the reverse button to swap modes.&#x20;
+{% endtab %}
+
+{% tab title="Example" %}
+`void downshiftAndReverse(int drow, int dcol, int rrow, int rcol, int fieldPlacement)`
+
+Example:
+
+* Paddle shifter on row 3 column 1
+* Reverse button on row 1 column 2
+* Use field bit 1 to push the switch mode to SimHub property \[DahlDesign.DDCB1]
+
+&#x20;`downshiftAndReverse(3,1,1,2,1);`
+{% endtab %}
+
+{% tab title="Requirements" %}
+* 2 button number
+{% endtab %}
+{% endtabs %}

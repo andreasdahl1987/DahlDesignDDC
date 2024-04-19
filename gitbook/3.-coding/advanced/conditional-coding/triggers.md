@@ -30,11 +30,19 @@ Returns true if you're in the preset in question. Example: `presetSearch(4)` wil
 
 Returns TRUE if modbutton is pressed, otherwise FALSE. Doesnt require any input, simply write `modButtonPressed()`.&#x20;
 
+#### **biteSettingMode (int biteSettingMode)**
+
+Returns TRUE if the current bite setting mode (0 -3) is the same as you typed in the function. Otherwise FALSE.&#x20;
+
 #### **rotaryPosition(int switchNumber, int switchPosition)**
 
-This function check a rotary switch for a given position. Give it the switch# assigned to your switch as well as a switch position. Will return TRUE if this switch is in that position, otherwise FALSE. Example: `rotaryPosition(3,9)` will check if the switch with switch# 3 is in position 9 or not.&#x20;
+This function willcheck a rotary switch for a given position. Give it the switch# assigned to your switch as well as a switch position. Will return TRUE if this switch is in that position, otherwise FALSE. Example: `rotaryPosition(3,9)` will check if the switch with switch# 3 is in position 9 or not.&#x20;
+
+#### **analogTravel(int analogChannel, int threshold)**
+
+Check if an analog switch has travled at least to the set threshold of its total travel. For instance, if you want something to happen when a clutch paddle is pressed completely, use its channel number and set threshold to 100(%). &#x20;
 
 #### **encoderStack(int row, int column, int layer)**
 
-This function check a stacked encoder for which layer it is currently in. Type in the row and column number for the stack button and which layer you want to check for. Stack layers start on 0.&#x20;
+This function will check a stacked encoder for which layer it is currently in. Type in the row and column number for the stack button and which layer you want to check for. Stack layers start on 0.&#x20;
 

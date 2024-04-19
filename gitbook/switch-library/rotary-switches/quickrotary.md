@@ -19,15 +19,13 @@ In addition, this switch can set the bite point of your clutches. Works in combi
 {% endtab %}
 
 {% tab title="Example" %}
-`void quickRotary1Bite(int analogPin, int switchNumber, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)`
+`void quickRotary1Bite(int analogChannel, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)`
 
 Switch setup with explainations:
 
 `quickRotary1Bite(`
 
-`A3,` <- The analog pin this switch is connected to
-
-`2,` <- The switch number this analog switch is assigned
+`2,` <- analog channel
 
 `1,` <- placement in rotary field
 
@@ -42,7 +40,7 @@ Switch setup with explainations:
 \
 So typed out in 30\_Switches.ino:
 
-`quickRotary1Bite(A3, 2, 1, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023, false);`
+`quickRotary1Bite(2, 1, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023, false);`
 {% endtab %}
 
 {% tab title="Requirements" %}
@@ -69,15 +67,13 @@ Uses the rotary field for [field placement.](../../3.-coding/advanced/field-plac
 {% endtab %}
 
 {% tab title="Example" %}
-`void quickRotary2(int analogPin, int switchNumber, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)`
+`void quickRotary2(int analogChannel, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)`
 
 Switch setup with explainations:
 
 `quickRotary2(`
 
-`A3,` <- The analog pin this switch is connected to
-
-`2,` <- The switch number this analog switch is assigned
+`2,` <- analog channel
 
 `1,` <- placement in rotary field
 
@@ -92,7 +88,7 @@ Switch setup with explainations:
 \
 So typed out in 30\_Switches.ino:
 
-`quickRotary2(A3, 2, 1, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023, false);`
+`quickRotary2(2, 1, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023, false);`
 {% endtab %}
 
 {% tab title="Requirements" %}
@@ -118,15 +114,13 @@ Uses the rotary field for [field placement.](../../3.-coding/advanced/field-plac
 {% endtab %}
 
 {% tab title="Example" %}
-`void quickRotary3(int analogPin, int switchNumber, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)`
+`void quickRotary3(int analogChannel, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)`
 
 Switch setup with explainations:
 
 `quickRotary3(`
 
-`A3,` <- The analog pin this switch is connected to
-
-`2,` <- The switch number this analog switch is assigned
+`2,` <- analog channel
 
 `1,` <- placement in rotary field
 
@@ -141,7 +135,7 @@ Switch setup with explainations:
 \
 So typed out in 30\_Switches.ino:
 
-`quickRotary33(A3, 2, 1, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023, false);`
+`quickRotary33(2, 1, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023, false);`
 {% endtab %}
 
 {% tab title="Requirements" %}
@@ -167,15 +161,13 @@ Uses the rotary field for [field placement.](../../3.-coding/advanced/field-plac
 {% endtab %}
 
 {% tab title="Example" %}
-`void quickRotary4(int analogPin, int switchNumber, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)`
+`void quickRotary4(int analogChannel, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)`
 
 Switch setup with explainations:
 
 `quickRotary4(`
 
-`A3,` <- The analog pin this switch is connected to
-
-`2,` <- The switch number this analog switch is assigned
+`2,` <- analog channel
 
 `1,` <- placement in rotary field
 
@@ -190,7 +182,7 @@ Switch setup with explainations:
 \
 So typed out in 30\_Switches.ino:
 
-`quickRotary4(A3, 2, 1, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023, false);`
+`quickRotary4(2, 1, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023, false);`
 {% endtab %}
 
 {% tab title="Requirements" %}

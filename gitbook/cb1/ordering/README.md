@@ -10,4 +10,4 @@ This is not a commercial product. It is a circuit and PCB design done and tested
 
 ### Important before ordering
 
-There are a few parts that are set up to be assembled, that you probably don't want to be assembled. Go through the ordering guide when making your first order. Ordering without going through the guide might offer a surprise or two.&#x20;
+Go through the ordering guide when making your first order. Ordering without going through the guide might offer a surprise or two.&#x20;

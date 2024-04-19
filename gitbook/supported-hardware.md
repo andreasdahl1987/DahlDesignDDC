@@ -19,7 +19,8 @@ If you have a switch that doesnt work with DDC, make an[ issue rapport ](https:/
 
 ### **LED**
 
-* Any RGB (not RGBW) LED that is supported by the [Adafruit Neopixel library. ](https://github.com/adafruit/Adafruit\_NeoPixel)
+* Any addressable RGB (not RGBW) LED that is supported by the [Adafruit Neopixel library. ](https://github.com/adafruit/Adafruit\_NeoPixel)
+* Analog LEDs using PWM
 
 ### Integrated circuits
 
@@ -33,6 +34,10 @@ If you have a switch that doesnt work with DDC, make an[ issue rapport ](https:/
   * ADS1115
 * EEPROM
   * CAT24C512
+
+### Circuit control
+
+* Controlling other circuits, DC motors and more using PWM.
 
 
 

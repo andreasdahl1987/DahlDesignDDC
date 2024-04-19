@@ -30,15 +30,15 @@ Can launch when coupled with launchButton()
 {% endtab %}
 
 {% tab title="Example" %}
-`void singleClutch(int analogPin, int switchNumber, int releasedValue, int fullyPressedValue)`
+`void singleClutch(int analogChannel, int releasedValue, int fullyPressedValue)`
 
-Type in the pin that reads the signal, the analog switch number you've given it, and the values you read out from serial monitor.&#x20;
+Type in the channel this clutch is running on, and the values you read out from serial monitor.&#x20;
 
 Example:
 
-`void singleClutch(A2, 2, 105, 799);`
+`void singleClutch(3, 105, 799);`
 
-`void singleClutchCal(A2, 2);`
+`void singleClutchCal(3);`
 {% endtab %}
 
 {% tab title="Requirements" %}
@@ -68,15 +68,15 @@ The function defaults to bits 13 and 14 in the rotary field. Will be returned by
 {% endtab %}
 
 {% tab title="Example" %}
-`void dualClutch(int masterPin, int masterSwitchNumber, int masterReleasedValue, int masterFullyPressedValue, int slavePin, int slaveSwitchNumber, int slaveReleasedValue, int slaveFullyPressedValue, bool throttleMaster)`
+`void dualClutch(int masterAnalogChannel, int masterReleasedValue, int masterFullyPressedValue, int slaveAnalogChannel, int slaveReleasedValue, int slaveFullyPressedValue, bool throttleMaster)`
 
-Type in the pin that reads the signal, the analog switch number you've given it, and the values you read out from serial monitor. This for both switches, decide which is master and slave. Lastly, throttleMaster makes master paddle throttle and slave paddle brake in mode 3. if set to `true`. Opposite if set to `false`.&#x20;
+Type in analog channels used and the values you read out from serial monitor. This for both switches, decide which is master and slave. Lastly, throttleMaster makes master paddle throttle and slave paddle brake in mode 3. if set to `true`. Opposite if set to `false`.&#x20;
 
 Example:
 
-`void dualClutch(A2, 1, 105, 799, A3, 2, 436, 873, true);`
+`void dualClutch(1, 105, 799, 2, 436, 873, true);`
 
-`void dualClutchCal(A2, 1, A3, 2, true);`
+`void dualClutchCal(1, 2, true);`
 {% endtab %}
 
 {% tab title="Requirements" %}

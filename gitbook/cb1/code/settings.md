@@ -31,6 +31,9 @@ These are the settings for CB1, found in `2_Board.ino`
 #define ROW5_ACTIVE 1
 #define ROW6_ACTIVE 1
 
+//ROW6 PWM
+#define ROW6_PWMCOUNT 0
+
 //ROW7
 #define GROUND_CALIBRATION 10
 
@@ -66,11 +69,17 @@ You can turn the individial chips off by settings `CB1_PE1` and `CB1_PE2` to `0`
 
 #### //ROW5 and ROW6
 
-ROW5 and ROW6 uses the RP2040 input pins directly, and are all set up with internal pullups. If you want to use these pins for anything other than digital inputs, you'll have to "disable" a row to turn off the internal pullups. After that they can be used as output pins, for PWM and more. The pin numbers are written on the back of the CB1 board.&#x20;
+ROW5 and ROW6 uses the RP2040 input pins directly, and are all set up with internal pullups. If you want to use these pins for anything other than digital inputs, you'll have to "disable" a row to turn off the internal pullups. After that they can be used however you want. The pin numbers are written on the back of the CB1 board.&#x20;
 
 Set `ROW5_ACTIVE` to `0` to disable ROW5
 
 Set `ROW6_ACTIVE` to `0` to disable ROW6.
+
+#### //ROW6 PWM
+
+ROW6 pins can be set as PWM pins, building up to 8 PWM channels. Set `ROW6_PWMCOUNT` to any number between 1 - 8 to make up to 8 PWM channels.&#x20;
+
+If you set it to 3, then ROW6, COLUMN 1-3 will be PWM channels 1-3. ROW6, COLUMN 4-8 will work like before. If ROW6 is set to not active, you will still set up PWM channels for the pins you've selected.
 
 #### //ROW7
 

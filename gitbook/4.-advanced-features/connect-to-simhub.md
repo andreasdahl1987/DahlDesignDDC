@@ -22,7 +22,7 @@ A DDC controller can send information about switch modes, bite point, and really
 
 Just the name of the controller, don't include the ending "\_". Also check for DDC Enabled, and also DDS and clutch if relevant.
 
-<figure><img src="../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (4) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 ## Known issues
 

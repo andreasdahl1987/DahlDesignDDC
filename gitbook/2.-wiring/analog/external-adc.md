@@ -55,4 +55,4 @@ Lastly, we're got the 4 inputs. Use as many of them as you need, and couple with
 
 In the example below we'll be using inptuts AIN0 to AIN2, and grounding AIN3 since we're not going to use it. We'll use AIN0 and AIN1 for some hall sensors and AIN2 for a potentiometer.&#x20;
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>

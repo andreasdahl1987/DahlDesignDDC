@@ -125,9 +125,9 @@ In esssense this makes it possible to do a single clutch launch and a 1-handed l
 {% endtab %}
 
 {% tab title="Example" %}
-`void launchButton(int row, int column, int switchNumberAffected)`
+`void launchButton(int row, int column, int analogChannelAffected)`
 
-For a switch on row 2 column 4, coupling to clutch that has been assigned[ switch# 3 ](../../1.-project-planning/analog-inputs/)on master paddle:
+For a switch on row 2 column 4, coupling to clutch that has master paddle on channel 3:
 
 `launchButton(2,4,3);`
 {% endtab %}
@@ -180,11 +180,11 @@ As with all analog switches, you will need to [read out ](../../1.-project-plann
 {% endtab %}
 
 {% tab title="Example" %}
-`void bitePot(int analogPin, int switchNumber, int startValue, int endValue)`
+`void bitePot(int analogChannel, int startValue, int endValue)`
 
-For a potentiometer with its center pin connected to A3, assigned switch# 4, it could look like this:
+For a potentiometer on analog channel 4 it could look like this:
 
-`bitePot(A3, 4, 0, 1023);`
+`bitePot(4, 0, 1023);`
 {% endtab %}
 
 {% tab title="Requirements" %}

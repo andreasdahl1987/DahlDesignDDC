@@ -24,7 +24,7 @@ To explain the flowchart above:
   * In the end the data is sent to the LEDs.&#x20;
 * SimHub doesnt sent LED data at the same frequency as your LED data is updated in the frmware. SimHub only sends LED data when there are changes. This means that most loops of LED refreshing will be without the SimHub data. That makes the LEDBottom bleed through. To fix this, DDC sets LEDBottom on a cooldown whenever new data from SimHub arrives. By default this is set to 1000 ms (1 second). The setting is called `DROPOUTTIMER.`It can be adjusted under 12\_GlobalVariables:
 
-<figure><img src="../../../../.gitbook/assets/image (14) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (14) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### 34\_LEDStartup.ino
 
