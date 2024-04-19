@@ -33,12 +33,15 @@ uint8_t buttonNumber[rowCount][colCount] =
 //--------ANALOG DESCRIPTION-------------
 //---------------------------------------
 
-#define analogSwitchCount 12
+#define analogChannelCount 12
 
-uint8_t analogButtonNumber[analogSwitchCount] =         //ANALOG BUTTONS 1
+uint8_t analogPins[analogChannelCount] =              
+{ ADC1, ADC2, ADC3, ADC4, ADC5, ADC6, ADC7, ADC8, ADC9, ADC10, ADC11, ADC12 };
+
+uint8_t analogButtonNumber[analogChannelCount] =         //ANALOG BUTTONS 1
 { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
-uint8_t analogButtonNumberIncMode[analogSwitchCount] =  //ANALOG BUTTONS 2
+uint8_t analogButtonNumberIncMode[analogChannelCount] =  //ANALOG BUTTONS 2
 { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
 

@@ -80,7 +80,7 @@ void setup()
         }
     }
 
-    for (int u = 0; u < analogSwitchCount; u++)
+    for (int u = 0; u < analogChannelCount; u++)
     {
         analogLastCounter[u] = 0;
         analogTempState[u] = 0;
@@ -128,7 +128,29 @@ void setup()
         }
     }
     #endif
+
+    //PWM Setup
+    #if (ROW6_PWMCOUNT > 0)
+      for (int i = 0; i < ROW6_PWMCOUNT; i++)
+      {
+        PWMValues[i] = 25;
+        PWMIsOff[i] = true;
+        PWMStart[i] = 0;
+        PWMEnd[i] = 255;
+      }
+    #elif(PWMENABLED == 1)
+      for (int i = 0; i < PWMCount; i++)
+      {
+        PWMValues[i] = 25;
+        PWMIsOff[i] = true;
+        pinMode(PWMChannelPins[i], OUTPUT);
+        PWMStart[i] = 0;
+        PWMEnd[i] = 255;
+      }
+
+    PWMSetup();
     
+    #endif
     
     EEPROMfirst();
     EEPROMinit(); //Fetch values from EEPROM

@@ -4,9 +4,9 @@
 //------------------------------
 
 
-void rotaryAnalog(int analogPin, int switchNumber, int fieldPlacement, int hybridPositions, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
+void rotaryAnalog(int analogChannel, int fieldPlacement, int hybridPositions, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
 {
-    int N = switchNumber - 1;
+    int N = analogChannel - 1;
 
     int Number = analogButtonNumber[N];
     int FieldPlacement = fieldPlacement;
@@ -17,18 +17,18 @@ void rotaryAnalog(int analogPin, int switchNumber, int fieldPlacement, int hybri
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int value;
-    if (analogPin > 49)
+    if (analogPins[N] > 49)
     {
-      value = ADS1115value[analogPin - ADC_CORR];
+      value = ADS1115value[analogPins[N] - ADC_CORR];
     }
     else
     {
-      value = analogRead(analogPin);
+      value = analogRead(analogPins[N]);
     }
     
     #else
 
-    int value = analogRead(analogPin);
+    int value = analogRead(analogPins[N]);
     
     #endif
 
@@ -218,27 +218,27 @@ void rotaryAnalog(int analogPin, int switchNumber, int fieldPlacement, int hybri
     rotaryField = rotaryField | push;
 }
 
-void rotaryAnalogPartial(int analogPin, int switchNumber, int muteStart, int muteEnd, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
+void rotaryAnalogPartial(int analogChannel, int muteStart, int muteEnd, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
 {
-    int N = switchNumber - 1;
+    int N = analogChannel - 1;
 
     int Number = analogButtonNumber[N];
 
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int value;
-    if (analogPin > 49)
+    if (analogPins[N] > 49)
     {
-      value = ADS1115value[analogPin - ADC_CORR];
+      value = ADS1115value[analogPins[N] - ADC_CORR];
     }
     else
     {
-      value = analogRead(analogPin);
+      value = analogRead(analogPins[N]);
     }
     
     #else
 
-    int value = analogRead(analogPin);
+    int value = analogRead(analogPins[N]);
     
     #endif
 
@@ -304,27 +304,27 @@ void rotaryAnalogPartial(int analogPin, int switchNumber, int muteStart, int mut
     }
 }
 
-void rotaryAnalogSimple(int analogPin, int switchNumber, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
+void rotaryAnalogSimple(int analogChannel, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
 {
-    int N = switchNumber - 1;
+    int N = analogChannel - 1;
 
     int Number = analogButtonNumber[N];
 
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int value;
-    if (analogPin > 49)
+    if (analogPins[N] > 49)
     {
-      value = ADS1115value[analogPin - ADC_CORR];
+      value = ADS1115value[analogPins[N] - ADC_CORR];
     }
     else
     {
-      value = analogRead(analogPin);
+      value = analogRead(analogPins[N]);
     }
     
     #else
 
-    int value = analogRead(analogPin);
+    int value = analogRead(analogPins[N]);
     
     #endif
 
@@ -390,25 +390,25 @@ void rotaryAnalogSimple(int analogPin, int switchNumber, int pos1, int pos2, int
     }
 }
 
-void rotaryAnalogMute(int analogPin, int switchNumber, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
+void rotaryAnalogMute(int analogChannel, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
 {
-    int N = switchNumber - 1;
+    int N = analogChannel - 1;
 
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int value;
-    if (analogPin > 49)
+    if (analogPins[N] > 49)
     {
-      value = ADS1115value[analogPin - ADC_CORR];
+      value = ADS1115value[analogPins[N] - ADC_CORR];
     }
     else
     {
-      value = analogRead(analogPin);
+      value = analogRead(analogPins[N]);
     }
     
     #else
 
-    int value = analogRead(analogPin);
+    int value = analogRead(analogPins[N]);
     
     #endif
 
@@ -454,25 +454,25 @@ void rotaryAnalogMute(int analogPin, int switchNumber, int pos1, int pos2, int p
     }
 }
 
-void rotaryAnalogBrightness(int analogPin, int switchNumber, int startBrightness, int endBrightness, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
+void rotaryAnalogBrightness(int analogChannel, int startBrightness, int endBrightness, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
 {
-    int N = switchNumber - 1;
+    int N = analogChannel - 1;
 
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int value;
-    if (analogPin > 49)
+    if (analogPins[N] > 49)
     {
-      value = ADS1115value[analogPin - ADC_CORR];
+      value = ADS1115value[analogPins[N] - ADC_CORR];
     }
     else
     {
-      value = analogRead(analogPin);
+      value = analogRead(analogPins[N]);
     }
     
     #else
 
-    int value = analogRead(analogPin);
+    int value = analogRead(analogPins[N]);
     
     #endif
 
@@ -520,27 +520,27 @@ void rotaryAnalogBrightness(int analogPin, int switchNumber, int startBrightness
     LEDBrightness = startBrightness + (analogLastCounter[N] * ((100*endBrightness - 100*startBrightness)/11) / 100);
 }
 
-void rotaryAnalogBrightness12(int analogPin, int switchNumber, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
+void rotaryAnalogBrightness12(int analogChannel, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
 {
-    int N = switchNumber - 1;
+    int N = analogChannel - 1;
 
     int Number = analogButtonNumber[N];
 
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int value;
-    if (analogPin > 49)
+    if (analogPins[N] > 49)
     {
-      value = ADS1115value[analogPin - ADC_CORR];
+      value = ADS1115value[analogPins[N] - ADC_CORR];
     }
     else
     {
-      value = analogRead(analogPin);
+      value = analogRead(analogPins[N]);
     }
     
     #else
 
-    int value = analogRead(analogPin);
+    int value = analogRead(analogPins[N]);
     
     #endif
 
@@ -633,9 +633,9 @@ void rotaryAnalogBrightness12(int analogPin, int switchNumber, int pos1, int pos
     }
 }
 
-void rotaryAnalog2Mode(int analogPin, int switchNumber, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
+void rotaryAnalog2Mode(int analogChannel, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
 {
-    int N = switchNumber - 1;
+    int N = analogChannel - 1;
 
     int Number = analogButtonNumber[N];
     int FieldPlacement = fieldPlacement;
@@ -646,18 +646,18 @@ void rotaryAnalog2Mode(int analogPin, int switchNumber, int fieldPlacement, int 
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int value;
-    if (analogPin > 49)
+    if (analogPins[N] > 49)
     {
-      value = ADS1115value[analogPin - ADC_CORR];
+      value = ADS1115value[analogPins[N] - ADC_CORR];
     }
     else
     {
-      value = analogRead(analogPin);
+      value = analogRead(analogPins[N]);
     }
     
     #else
 
-    int value = analogRead(analogPin);
+    int value = analogRead(analogPins[N]);
     
     #endif
 
@@ -775,9 +775,9 @@ void rotaryAnalog2Mode(int analogPin, int switchNumber, int fieldPlacement, int 
     rotaryField = rotaryField | push;
 }
 
-void rotaryAnalogBite(int analogPin, int switchNumber, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
+void rotaryAnalogBite(int analogChannel, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
 {
-    int N = switchNumber - 1;
+    int N = analogChannel - 1;
 
     int Number = analogButtonNumber[N];
     int FieldPlacement = fieldPlacement;
@@ -788,18 +788,18 @@ void rotaryAnalogBite(int analogPin, int switchNumber, int fieldPlacement, int p
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int value;
-    if (analogPin > 49)
+    if (analogPins[N] > 49)
     {
-      value = ADS1115value[analogPin - ADC_CORR];
+      value = ADS1115value[analogPins[N] - ADC_CORR];
     }
     else
     {
-      value = analogRead(analogPin);
+      value = analogRead(analogPins[N]);
     }
     
     #else
 
-    int value = analogRead(analogPin);
+    int value = analogRead(analogPins[N]);
     
     #endif
 
@@ -1003,9 +1003,9 @@ void rotaryAnalogBite(int analogPin, int switchNumber, int fieldPlacement, int p
 }
 
 
-void DDSanalog(int analogPin, int switchNumber, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
+void DDSanalog(int analogChannel, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)
 {
-    int N = switchNumber - 1;
+    int N = analogChannel - 1;
     int HyPos = 12;
 
     int Number = analogButtonNumber[N];
@@ -1019,18 +1019,18 @@ void DDSanalog(int analogPin, int switchNumber, int pos1, int pos2, int pos3, in
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int value;
-    if (analogPin > 49)
+    if (analogPins[N] > 49)
     {
-      value = ADS1115value[analogPin - ADC_CORR];
+      value = ADS1115value[analogPins[N] - ADC_CORR];
     }
     else
     {
-      value = analogRead(analogPin);
+      value = analogRead(analogPins[N]);
     }
     
     #else
 
-    int value = analogRead(analogPin);
+    int value = analogRead(analogPins[N]);
     
     #endif
 

@@ -37,6 +37,10 @@ void loop()
 
   runningPresets(); //Presets in the loop
 
+  #if (PWMENABLED == 1 || ROW6_PWMCOUNT > 0) //PWM Control
+  PWMrun();
+  #endif
+
   #if (USING_CB1 == 1)
     #if (CB1_PE1 == 1)
     PCA9555CB1(0x21, 16, 1);

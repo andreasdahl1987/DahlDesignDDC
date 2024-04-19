@@ -135,7 +135,7 @@ void biteLED (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t eng
     B = B * engageBrightness / 100;
     B = B * LEDBrightness / 100;
 
-    if (!engageBlink || engageBlink && timer > 500)
+    if (!engageBlink || (engageBlink && timer > 500))
     {
       for(int i = biteEngageStartLED; i < biteEngageStopLED+1; i++)
       {
@@ -264,7 +264,7 @@ void biteLED (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t eng
     B = B * engageBrightness / 100;
     B = B * LEDBrightness / 100;
 
-    if (!engageBlink || engageBlink && timer > 500)
+    if (!engageBlink || (engageBlink && timer > 500))
     {
       for(int i = biteEngageStartLED; i < biteEngageStopLED+1; i++)
       {
@@ -376,7 +376,7 @@ void biteLED (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t eng
  
 }
 
-void rotaryLED(uint8_t switchNumber, uint8_t startLED, uint8_t positions, uint32_t color, uint8_t brightness, uint8_t offset, bool reverse, uint32_t backgroundColor = 0x000000, uint8_t backgroundBrightness = 25)
+void rotaryLED(uint8_t analogChannel, uint8_t startLED, uint8_t positions, uint32_t color, uint8_t brightness, uint8_t offset, bool reverse, uint32_t backgroundColor = 0x000000, uint8_t backgroundBrightness = 25)
 {
 
   //Position
@@ -406,7 +406,7 @@ void rotaryLED(uint8_t switchNumber, uint8_t startLED, uint8_t positions, uint32
   bB = bB * LEDBrightness / 100;
   
 
-  uint8_t reference = analogLastCounter[switchNumber-1] + offset;
+  uint8_t reference = analogLastCounter[analogChannel-1] + offset;
   if (reference > positions - 1)
   {
     reference = reference - positions;
@@ -568,7 +568,7 @@ void biteLED2 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t en
     B = B * engageBrightness / 100;
     B = B * LEDBrightness / 100;
 
-    if (!engageBlink || engageBlink && timer > 500)
+    if (!engageBlink || (engageBlink && timer > 500))
     {
       for(int i = biteEngageStartLED; i < biteEngageStopLED+1; i++)
       {
@@ -697,7 +697,7 @@ void biteLED2 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t en
     B = B * engageBrightness / 100;
     B = B * LEDBrightness / 100;
 
-    if (!engageBlink || engageBlink && timer > 500)
+    if (!engageBlink || (engageBlink && timer > 500))
     {
       for(int i = biteEngageStartLED; i < biteEngageStopLED+1; i++)
       {
@@ -809,7 +809,7 @@ void biteLED2 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t en
  
 }
 
-void rotaryLED2 (uint8_t switchNumber, uint8_t startLED, uint8_t positions, uint32_t color, uint8_t brightness, uint8_t offset, bool reverse, uint32_t backgroundColor = 0x000000, uint8_t backgroundBrightness = 25)
+void rotaryLED2 (uint8_t analogChannel, uint8_t startLED, uint8_t positions, uint32_t color, uint8_t brightness, uint8_t offset, bool reverse, uint32_t backgroundColor = 0x000000, uint8_t backgroundBrightness = 25)
 {
   //Position
   int R = (color & 0xFF0000) >> 16;
@@ -837,7 +837,7 @@ void rotaryLED2 (uint8_t switchNumber, uint8_t startLED, uint8_t positions, uint
   bB = bB * backgroundBrightness / 100;
   bB = bB * LEDBrightness / 100;
 
-  uint8_t reference = analogLastCounter[switchNumber-1] + offset;
+  uint8_t reference = analogLastCounter[analogChannel-1] + offset;
   if (reference > positions - 1)
   {
     reference = reference - positions;
@@ -1000,7 +1000,7 @@ void biteLED3 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t en
     B = B * engageBrightness / 100;
     B = B * LEDBrightness / 100;
 
-    if (!engageBlink || engageBlink && timer > 500)
+    if (!engageBlink || (engageBlink && timer > 500))
     {
       for(int i = biteEngageStartLED; i < biteEngageStopLED+1; i++)
       {
@@ -1129,7 +1129,7 @@ void biteLED3 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t en
     B = B * engageBrightness / 100;
     B = B * LEDBrightness / 100;
 
-    if (!engageBlink || engageBlink && timer > 500)
+    if (!engageBlink || (engageBlink && timer > 500))
     {
       for(int i = biteEngageStartLED; i < biteEngageStopLED+1; i++)
       {
@@ -1241,7 +1241,7 @@ void biteLED3 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t en
  
 }
 
-void rotaryLED3 (uint8_t switchNumber, uint8_t startLED, uint8_t positions, uint32_t color, uint8_t brightness, uint8_t offset, bool reverse, uint32_t backgroundColor = 0x000000, uint8_t backgroundBrightness = 25)
+void rotaryLED3 (uint8_t analogChannel, uint8_t startLED, uint8_t positions, uint32_t color, uint8_t brightness, uint8_t offset, bool reverse, uint32_t backgroundColor = 0x000000, uint8_t backgroundBrightness = 25)
 {
   //Position
   int R = (color & 0xFF0000) >> 16;
@@ -1269,7 +1269,7 @@ void rotaryLED3 (uint8_t switchNumber, uint8_t startLED, uint8_t positions, uint
   bB = bB * backgroundBrightness / 100;
   bB = bB * LEDBrightness / 100;
 
-  uint8_t reference = analogLastCounter[switchNumber-1] + offset;
+  uint8_t reference = analogLastCounter[analogChannel-1] + offset;
   if (reference > positions - 1)
   {
     reference = reference - positions;
@@ -1432,7 +1432,7 @@ void biteLED4 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t en
     B = B * engageBrightness / 100;
     B = B * LEDBrightness / 100;
 
-    if (!engageBlink || engageBlink && timer > 500)
+    if (!engageBlink || (engageBlink && timer > 500))
     {
       for(int i = biteEngageStartLED; i < biteEngageStopLED+1; i++)
       {
@@ -1561,7 +1561,7 @@ void biteLED4 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t en
     B = B * engageBrightness / 100;
     B = B * LEDBrightness / 100;
 
-    if (!engageBlink || engageBlink && timer > 500)
+    if (!engageBlink || (engageBlink && timer > 500))
     {
       for(int i = biteEngageStartLED; i < biteEngageStopLED+1; i++)
       {
@@ -1673,7 +1673,7 @@ void biteLED4 (uint8_t biteEngageStartLED, uint8_t biteEngageStopLED, uint8_t en
  
 }
 
-void rotaryLED4 (uint8_t switchNumber, uint8_t startLED, uint8_t positions, uint32_t color, uint8_t brightness, uint8_t offset, bool reverse, uint32_t backgroundColor = 0x000000, uint8_t backgroundBrightness = 25)
+void rotaryLED4 (uint8_t analogChannel, uint8_t startLED, uint8_t positions, uint32_t color, uint8_t brightness, uint8_t offset, bool reverse, uint32_t backgroundColor = 0x000000, uint8_t backgroundBrightness = 25)
 {
   //Position
   int R = (color & 0xFF0000) >> 16;
@@ -1701,7 +1701,7 @@ void rotaryLED4 (uint8_t switchNumber, uint8_t startLED, uint8_t positions, uint
   bB = bB * backgroundBrightness / 100;
   bB = bB * LEDBrightness / 100;
 
-  uint8_t reference = analogLastCounter[switchNumber-1] + offset;
+  uint8_t reference = analogLastCounter[analogChannel-1] + offset;
   if (reference > positions - 1)
   {
     reference = reference - positions;

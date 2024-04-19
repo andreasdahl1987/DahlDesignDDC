@@ -1,24 +1,26 @@
-void throttle(int analogPin, int switchNumber, int releasedValue, int fullyPressedValue)
+void throttle(int analogChannel, int releasedValue, int fullyPressedValue)
 {
+    int N = analogChannel - 1;
+  
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int pinValue;
-    if (analogPin > 49)
+    if (analogPins[N] > 49)
     {
-      pinValue = ADS1115value[analogPin - ADC_CORR];
+      pinValue = ADS1115value[analogPins[N] - ADC_CORR];
     }
     else
     {
-      pinValue = analogRead(analogPin);
+      pinValue = analogRead(analogPins[N]);
     }
     
     #else
 
-    int pinValue = analogRead(analogPin);
+    int pinValue = analogRead(analogPins[N]);
     
     #endif
     
-    int N = switchNumber - 1;
+
     float normalized = 0;
 
     if (fullyPressedValue > releasedValue)
@@ -67,27 +69,28 @@ void throttle(int analogPin, int switchNumber, int releasedValue, int fullyPress
     Joystick.setThrottle(average[N]);
 }
 
-void filteredThrottle(int analogPin, int8_t switchNumber, int releasedValue, int fullyPressedValue, int curvePush, float expFactor)
+void filteredThrottle(int8_t analogChannel, int releasedValue, int fullyPressedValue, int curvePush, float expFactor)
 {
+    int N = analogChannel - 1;
+  
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int raw;
-    if (analogPin > 49)
+    if (analogPins[N] > 49)
     {
-      raw = ADS1115value[analogPin - ADC_CORR];
+      raw = ADS1115value[analogPins[N] - ADC_CORR];
     }
     else
     {
-      raw = analogRead(analogPin);
+      raw = analogRead(analogPins[N]);
     }
     
     #else
 
-    int raw = analogRead(analogPin);
+    int raw = analogRead(analogPins[N]);
     
     #endif
     
-    int N = switchNumber - 1;
     float normalized = 0;
     float FullyPressedValue = curveFilter(fullyPressedValue, releasedValue, fullyPressedValue, curvePush, expFactor);
     float ReleasedValue = curveFilter(releasedValue, releasedValue, fullyPressedValue, curvePush, expFactor);

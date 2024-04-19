@@ -1,28 +1,29 @@
-void dualClutch(int masterPin, int masterSwitchNumber, int masterReleasedValue, int masterFullyPressedValue, int slavePin, int slaveSwitchNumber, int slaveReleasedValue, int slaveFullyPressedValue, bool throttleMaster)
+void dualClutch(int masterAnalogChannel, int masterReleasedValue, int masterFullyPressedValue, int slaveAnalogChannel, int slaveReleasedValue, int slaveFullyPressedValue, bool throttleMaster)
 {
     //--------------------------------
     //---Master paddle calculations----
     //--------------------------------
 
+    int M = masterAnalogChannel - 1;
+
     #if(USING_ADS1115 == 1 || USING_CB1 == 1  || ENABLE_OVERSAMPLING == 1)
 
     int masterValue;
-    if (masterPin > 49)
+    if (analogPins[M] > 49)
     {
-      masterValue = ADS1115value[masterPin - ADC_CORR];
+      masterValue = ADS1115value[analogPins[M] - ADC_CORR];
     }
     else
     {
-      masterValue = analogRead(masterPin);
+      masterValue = analogRead(analogPins[M]);
     }
     
     #else
 
-    int masterValue = analogRead(masterPin);
+    int masterValue = analogRead(analogPins[M]);
     
     #endif
 
-    int M = masterSwitchNumber - 1;
     float masterNormalized = 0;
     int FieldPlacement = 7;
     bool ThrottleMaster = throttleMaster;
@@ -74,26 +75,26 @@ void dualClutch(int masterPin, int masterSwitchNumber, int masterReleasedValue, 
     //--------------------------------
     //---Slave paddle calculations----
     //--------------------------------
+    int S = slaveAnalogChannel - 1;
 
     #if(USING_ADS1115 == 1 || USING_CB1 == 1  || ENABLE_OVERSAMPLING == 1)
 
     int slaveValue;
-    if (slavePin > 49)
+    if (analogPins[S] > 49)
     {
-      slaveValue = ADS1115value[slavePin - ADC_CORR];
+      slaveValue = ADS1115value[analogPins[S] - ADC_CORR];
     }
     else
     {
-      slaveValue = analogRead(slavePin);
+      slaveValue = analogRead(analogPins[S]);
     }
     
     #else
 
-    int slaveValue = analogRead(slavePin);
+    int slaveValue = analogRead(analogPins[S]);
     
     #endif
     
-    int S = slaveSwitchNumber - 1;
     float slaveNormalized = 0;
 
     if (slaveFullyPressedValue > slaveReleasedValue)
@@ -296,7 +297,7 @@ void dualClutch(int masterPin, int masterSwitchNumber, int masterReleasedValue, 
     rotaryField = rotaryField | push;
 }
 
-void filteredDualClutch(int masterPin, int masterSwitchNumber, int masterReleasedValue, int masterFullyPressedValue, int masterCurvePush, float masterExpFactor, int slavePin, int slaveSwitchNumber, int slaveReleasedValue, int slaveFullyPressedValue, int slaveCurvePush, float slaveExpFactor, bool throttleMaster)
+void filteredDualClutch(int masterAnalogChannel, int masterReleasedValue, int masterFullyPressedValue, int masterCurvePush, float masterExpFactor, int slaveAnalogChannel, int slaveReleasedValue, int slaveFullyPressedValue, int slaveCurvePush, float slaveExpFactor, bool throttleMaster)
 {
 
     int FieldPlacement = 7;
@@ -304,26 +305,27 @@ void filteredDualClutch(int masterPin, int masterSwitchNumber, int masterRelease
     //--------------------------------
     //---Master paddle calculations----
     //--------------------------------
-
+    
+    int M = masterAnalogChannel - 1;
+    
     #if(USING_ADS1115 == 1 || USING_CB1 == 1  || ENABLE_OVERSAMPLING == 1)
 
     int masterRaw;
-    if (masterPin > 49)
+    if (analogPins[M] > 49)
     {
-      masterRaw = ADS1115value[masterPin - ADC_CORR];
+      masterRaw = ADS1115value[analogPins[M] - ADC_CORR];
     }
     else
     {
-      masterRaw = analogRead(masterPin);
+      masterRaw = analogRead(analogPins[M]);
     }
     
     #else
 
-    int masterRaw = analogRead(masterPin);
+    int masterRaw = analogRead(analogPins[M]);
     
     #endif
     
-    int M = masterSwitchNumber - 1;
     float masterNormalized = 0;
     float MasterFullyPressedValue = curveFilter(masterFullyPressedValue, masterReleasedValue, masterFullyPressedValue, masterCurvePush, masterExpFactor);
     float MasterReleasedValue = curveFilter(masterReleasedValue, masterReleasedValue, masterFullyPressedValue, masterCurvePush, masterExpFactor);
@@ -372,26 +374,26 @@ void filteredDualClutch(int masterPin, int masterSwitchNumber, int masterRelease
     //--------------------------------
     //---Slave paddle calculations----
     //--------------------------------
+    int S = slaveAnalogChannel - 1;
 
     #if(USING_ADS1115 == 1 || USING_CB1 == 1  || ENABLE_OVERSAMPLING == 1)
 
     int slaveRaw;
-    if (slavePin > 49)
+    if (analogPins[S] > 49)
     {
-      slaveRaw = ADS1115value[slavePin - ADC_CORR];
+      slaveRaw = ADS1115value[analogPins[S] - ADC_CORR];
     }
     else
     {
-      slaveRaw = analogRead(slavePin);
+      slaveRaw = analogRead(analogPins[S]);
     }
     
     #else
 
-    int slaveRaw = analogRead(slavePin);
+    int slaveRaw = analogRead(analogPins[S]);
     
     #endif
     
-    int S = slaveSwitchNumber - 1;
     float slaveNormalized = 0;
 
     float SlaveFullyPressedValue = curveFilter(slaveFullyPressedValue, slaveReleasedValue, slaveFullyPressedValue, slaveCurvePush, slaveExpFactor);
@@ -592,31 +594,32 @@ void filteredDualClutch(int masterPin, int masterSwitchNumber, int masterRelease
     rotaryField = rotaryField | push;
 }
 
-void dualClutchCal(int masterPin, int masterSwitchNumber, int slavePin, int slaveSwitchNumber, bool throttleMaster)
+void dualClutchCal(int masterAnalogChannel, int slaveAnalogChannel, bool throttleMaster)
 {
     //--------------------------------
     //---Master paddle calculations----
     //--------------------------------
 
+    int M = masterAnalogChannel - 1;
+
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     uint16_t masterValue;
-    if (masterPin > 49)
+    if (analogPins[M] > 49)
     {
-      masterValue = ADS1115value[masterPin - ADC_CORR];
+      masterValue = ADS1115value[analogPins[M] - ADC_CORR];
     }
     else
     {
-      masterValue = analogRead(masterPin);
+      masterValue = analogRead(analogPins[M]);
     }
 
     #else
 
-    uint16_t masterValue = analogRead(masterPin);
+    uint16_t masterValue = analogRead(analogPins[M]);
 
     #endif
 
-    int M = masterSwitchNumber - 1;
     float masterNormalized = 0;
     int FieldPlacement = 7;
     bool ThrottleMaster = throttleMaster;
@@ -679,32 +682,26 @@ void dualClutchCal(int masterPin, int masterSwitchNumber, int slavePin, int slav
     //--------------------------------
     //---Slave paddle calculations----
     //--------------------------------
-
+    int S = slaveAnalogChannel - 1;
 
     #if(USING_ADS1115 == 1 || USING_CB1 == 1  || ENABLE_OVERSAMPLING == 1)
 
-
     uint16_t slaveValue;
-    if (slavePin > 49)
+    if (analogPins[S] > 49)
     {
-      slaveValue = ADS1115value[slavePin - ADC_CORR];
+      slaveValue = ADS1115value[analogPins[S] - ADC_CORR];
     }
     else
     {
-      slaveValue = analogRead(slavePin);
+      slaveValue = analogRead(analogPins[S]);
     }
-
 
     #else
 
-
-    uint16_t slaveValue = analogRead(slavePin);
-
+    uint16_t slaveValue = analogRead(analogPins[S]);
 
     #endif
 
-
-    int S = slaveSwitchNumber - 1;
     float slaveNormalized = 0;
     slaveRaw = slaveValue;
 

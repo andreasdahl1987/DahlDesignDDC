@@ -1,25 +1,27 @@
 
-void singleClutch(int analogPin, int switchNumber, int releasedValue, int fullyPressedValue)
+void singleClutch(int analogChannel, int releasedValue, int fullyPressedValue)
 {
+    int N = analogChannel - 1;
+  
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int pinValue;
-    if (analogPin > 49)
+    if (analogPins[N] > 49)
     {
-      pinValue = ADS1115value[analogPin - ADC_CORR];
+      pinValue = ADS1115value[analogPins[N] - ADC_CORR];
     }
     else
     {
-      pinValue = analogRead(analogPin);
+      pinValue = analogRead(analogPins[N]);
     }
     
     #else
 
-    int pinValue = analogRead(analogPin);
+    int pinValue = analogRead(analogPins[N]);
     
     #endif
     
-    int N = switchNumber - 1;
+
     float normalized = 0;
     
     if (fullyPressedValue > releasedValue)
@@ -99,27 +101,29 @@ void singleClutch(int analogPin, int switchNumber, int releasedValue, int fullyP
     Joystick.setXAxis(average[N]);
 }
 
-void singleClutchCal(int analogPin, int switchNumber)
+void singleClutchCal(int analogChannel)
 {
+    int M = analogChannel - 1;
+  
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     uint16_t pinValue;
-    if (analogPin > 49)
+    if (analogPins[M] > 49)
     {
-      pinValue = ADS1115value[analogPin - ADC_CORR];
+      pinValue = ADS1115value[analogPins[M] - ADC_CORR];
     }
     else
     {
-      pinValue = analogRead(analogPin);
+      pinValue = analogRead(analogPins[M]);
     }
     
     #else
 
-    uint16_t pinValue = analogRead(analogPin);
+    uint16_t pinValue = analogRead(analogPins[M]);
     
     #endif
     
-    int M = switchNumber - 1;
+    
     float normalized = 0;
     masterRaw = pinValue;
     
@@ -210,27 +214,29 @@ void singleClutchCal(int analogPin, int switchNumber)
     Joystick.setXAxis(average[M]);
 }
 
-void filteredSingleClutch(int analogPin, int8_t switchNumber, int releasedValue, int fullyPressedValue, int curvePush, float expFactor)
+void filteredSingleClutch(int8_t analogChannel, int releasedValue, int fullyPressedValue, int curvePush, float expFactor)
 {
+    int N = analogChannel - 1;
+  
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int raw;
-    if (analogPin > 49)
+    if (analogPins[N] > 49)
     {
-      raw = ADS1115value[analogPin - ADC_CORR];
+      raw = ADS1115value[analogPins[N] - ADC_CORR];
     }
     else
     {
-      raw = analogRead(analogPin);
+      raw = analogRead(analogPins[N]);
     }
     
     #else
 
-    int raw = analogRead(analogPin);
+    int raw = analogRead(analogPins[N]);
     
     #endif
     
-    int N = switchNumber - 1;
+
     float normalized = 0;
     float FullyPressedValue = curveFilter(fullyPressedValue, releasedValue, fullyPressedValue, curvePush, expFactor);
     float ReleasedValue = curveFilter(releasedValue, releasedValue, fullyPressedValue, curvePush, expFactor);

@@ -33,6 +33,7 @@
 
 //Enable CB1 board
 #define USING_CB1 0
+
 //ADC setup
 #define CB1_ADC1 1
 #define CB1_ADC1_CHANNELS 4
@@ -52,14 +53,28 @@
 #define ROW5_ACTIVE 1
 #define ROW6_ACTIVE 1
 
-//ROW7
+//ROW6 PWM
+#define ROW6_PWMCOUNT 0
 
+//ROW7
 #define GROUND_CALIBRATION 8
 
 //ROW8 setup
 #define DISABLE_ALERT_PINS 0  //Gives access to COL2 and COL3. Disables ALERT pins for the ADCs, making them heavier to run.
 #define DISABLE_ANALOG 0      //Gives access to COL4 - COL 7 by using (and disabling analog function of) ADC9 - ADC12 pins. 
 #define DISABLE_LED_PIN 0     //Gives access to COL8, use the dedicated 8-8 pin. The LED pin will no longer work. 
+
+//------------------------------
+//---------PWM CONTROL----------
+//------------------------------
+
+#define PWMENABLED 0
+
+#if (ROW6_PWMCOUNT > 0)
+  int8_t PWMChannelPins [ROW6_PWMCOUNT];
+#elif (PWMENABLED == 1)
+  int8_t PWMChannelPins [] = {99};
+#endif
 
 //------------------------------
 //---------I2C DEVICES----------
@@ -107,6 +122,25 @@ bool wire0Init = false;
   uint16_t ADS1115value[4*ADS1115_CHIPS];
   uint8_t ADS1115channelCounter[ADS1115_CHIPS];
 #endif
+
+//ADC defines
+#define ADC1 50
+#define ADC2 51
+#define ADC3 52
+#define ADC4 53
+#define ADC5 54
+#define ADC6 55
+#define ADC7 56
+#define ADC8 57
+#define ADC9 58
+#define ADC10 59
+#define ADC11 60
+#define ADC12 61
+#define ADC13 62
+#define ADC14 63
+#define ADC15 64
+#define ADC16 65
+#define ADC_CORR 50
 
 //------------------------------
 //---------LIBRARIES------------

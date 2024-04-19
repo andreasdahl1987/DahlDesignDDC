@@ -1,4 +1,4 @@
-void multiFunction2Bit24(int analogPin, int switchNumber, int row, int column, bool reverseAnalog, bool reverse2Bit, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12)
+void multiFunction2Bit24(int analogChannel, int row, int column, bool reverseAnalog, bool reverse2Bit, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12)
 {
     int Pos1 = pos1;
     int Pos2 = pos2;
@@ -13,7 +13,7 @@ void multiFunction2Bit24(int analogPin, int switchNumber, int row, int column, b
     int Pos11 = pos11;
     int Pos12 = pos12;
 
-    int N = switchNumber - 1;
+    int N = analogChannel - 1;
 
     int Number;
 
@@ -25,18 +25,18 @@ void multiFunction2Bit24(int analogPin, int switchNumber, int row, int column, b
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int value;
-    if (analogPin > 49)
+    if (analogPins[N] > 49)
     {
-      value = ADS1115value[analogPin - ADC_CORR];
+      value = ADS1115value[analogPins[N] - ADC_CORR];
     }
     else
     {
-      value = analogRead(analogPin);
+      value = analogRead(analogPins[N]);
     }
     
     #else
 
-    int value = analogRead(analogPin);
+    int value = analogRead(analogPins[N]);
     
     #endif
 
@@ -144,7 +144,7 @@ void multiFunction2Bit24(int analogPin, int switchNumber, int row, int column, b
     }
 
 }
-void multiFunction2Bit36(int analogPin, int switchNumber, int row, int column, bool reverseAnalog, bool reverse2Bit, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12)
+void multiFunction2Bit36(int analogChannel, int row, int column, bool reverseAnalog, bool reverse2Bit, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12)
 {
     int Pos1 = pos1;
     int Pos2 = pos2;
@@ -159,7 +159,7 @@ void multiFunction2Bit36(int analogPin, int switchNumber, int row, int column, b
     int Pos11 = pos11;
     int Pos12 = pos12;
 
-    int N = switchNumber - 1;
+    int N = analogChannel - 1;
 
     int Number = analogButtonNumber[N];
 
@@ -171,18 +171,18 @@ void multiFunction2Bit36(int analogPin, int switchNumber, int row, int column, b
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int value;
-    if (analogPin > 49)
+    if (analogPins[N] > 49)
     {
-      value = ADS1115value[analogPin - ADC_CORR];
+      value = ADS1115value[analogPins[N] - ADC_CORR];
     }
     else
     {
-      value = analogRead(analogPin);
+      value = analogRead(analogPins[N]);
     }
     
     #else
 
-    int value = analogRead(analogPin);
+    int value = analogRead(analogPins[N]);
     
     #endif
 
@@ -304,7 +304,7 @@ void multiFunction2Bit36(int analogPin, int switchNumber, int row, int column, b
     }
 
 }
-void multiFunction2Button24(int analogPin, int switchNumber, int rowButton1, int columnButton1, int rowButton2, int columnButton2, bool reverse, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12)
+void multiFunction2Button24(int analogChannel, int rowButton1, int columnButton1, int rowButton2, int columnButton2, bool reverse, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12)
 {
     int Pos1 = pos1;
     int Pos2 = pos2;
@@ -319,7 +319,7 @@ void multiFunction2Button24(int analogPin, int switchNumber, int rowButton1, int
     int Pos11 = pos11;
     int Pos12 = pos12;
 
-    int N = switchNumber - 1;
+    int N = analogChannel - 1;
 
     int Number = analogButtonNumber[N];
 
@@ -333,18 +333,18 @@ void multiFunction2Button24(int analogPin, int switchNumber, int rowButton1, int
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int value;
-    if (analogPin > 49)
+    if (analogPins[N] > 49)
     {
-      value = ADS1115value[analogPin - ADC_CORR];
+      value = ADS1115value[analogPins[N] - ADC_CORR];
     }
     else
     {
-      value = analogRead(analogPin);
+      value = analogRead(analogPins[N]);
     }
     
     #else
 
-    int value = analogRead(analogPin);
+    int value = analogRead(analogPins[N]);
     
     #endif
 
@@ -405,7 +405,7 @@ void multiFunction2Button24(int analogPin, int switchNumber, int rowButton1, int
     Joystick.setButton(Number + 1, pushState[RowButton2][ColumnButton2]);
 
 }
-void multiFunction2Button36(int analogPin, int switchNumber, int rowButton1, int columnButton1, int rowButton2, int columnButton2, bool reverse, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12)
+void multiFunction2Button36(int analogChannel, int rowButton1, int columnButton1, int rowButton2, int columnButton2, bool reverse, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12)
 {
     int Pos1 = pos1;
     int Pos2 = pos2;
@@ -420,7 +420,7 @@ void multiFunction2Button36(int analogPin, int switchNumber, int rowButton1, int
     int Pos11 = pos11;
     int Pos12 = pos12;
 
-    int N = switchNumber - 1;
+    int N = analogChannel - 1;
 
     int Number = analogButtonNumber[N];
 
@@ -434,18 +434,18 @@ void multiFunction2Button36(int analogPin, int switchNumber, int rowButton1, int
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int value;
-    if (analogPin > 49)
+    if (analogPins[N] > 49)
     {
-      value = ADS1115value[analogPin - ADC_CORR];
+      value = ADS1115value[analogPins[N] - ADC_CORR];
     }
     else
     {
-      value = analogRead(analogPin);
+      value = analogRead(analogPins[N]);
     }
     
     #else
 
-    int value = analogRead(analogPin);
+    int value = analogRead(analogPins[N]);
     
     #endif
 

@@ -12,6 +12,11 @@
     return (rotaryField >> (fieldPlacement-1))  & 0x1;
  }
 
+ bool biteSettingMode (int biteSettingMode)
+ {
+   return (biteSettingMode == (biteButtonBit1 | (biteButtonBit2 << 1)));
+ }
+
  bool buttonPressed (int row, int column)
  {
     return pushState[row-1][column-1];
@@ -37,9 +42,14 @@
     return pushState[modButtonRow-1][modButtonCol-1];
  }
 
- bool rotaryPosition(int switchNumber, int switchPosition)
+ bool rotaryPosition(int analogChannel, int switchPosition)
  {
-    return analogLastCounter[switchNumber-1] + 1 == switchPosition;
+    return analogLastCounter[analogChannel-1] + 1 == switchPosition;
+ }
+
+ bool analogTravel(int analogChannel, int threshold)
+ {
+    return average[analogChannel-1] >= threshold*10;
  }
 
 bool encoderStack(int row, int col, int layer)
@@ -56,15 +66,15 @@ void setButtonNumber(int row, int column, int number)
     buttonNumber[row-1][column-1] = number;
 }
 
-void setAnalogButtonNumber(int switchNumber, int layer, int number)
+void setAnalogButtonNumber(int analogChannel, int layer, int number)
 {
     if (layer == 1)
     {
-      analogButtonNumber[switchNumber-1] = number;
+      analogButtonNumber[analogChannel-1] = number;
     }
     else if (layer == 2)
     {
-      analogButtonNumberIncMode[switchNumber-1] = number;
+      analogButtonNumberIncMode[analogChannel-1] = number;
     }
 }
 
@@ -73,15 +83,15 @@ void setSwitchMode(int row, int column, int mode)
     switchMode[row-1][column-1] = mode;
 }
 
-void setAnalogSwitchMode(int switchNumber, int modeBit, int modeValue)
+void setAnalogSwitchMode(int analogChannel, int modeBit, int modeValue)
 {
     if (modeBit == 1)
     {
-        analogSwitchMode1[switchNumber-1] = modeValue;
+        analogSwitchMode1[analogChannel-1] = modeValue;
     }
     else if (modeBit == 2)
     {
-        analogSwitchMode2[switchNumber-1] = modeValue;
+        analogSwitchMode2[analogChannel-1] = modeValue;
     }
 }
  
