@@ -14,7 +14,6 @@ void PWMSetup()
    //PWM setup CALLS STARTS HERE
 
 
-  PWMSetup(1,false,0,255,60);
 
 
 
