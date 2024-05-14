@@ -12,7 +12,7 @@ Lets start with a simple analog circuit using a 9V battery, an LED and a resisto
 
 <figure><img src="../.gitbook/assets/image (15).png" alt="" width="227"><figcaption></figcaption></figure>
 
-The resistor is there to limit the current through the LED. Without the the current would be too big and the LED will burn out. A bigger resistor will make the LED less bright, and an even bigger resistor will prevent the LED from lighting up at all. Typically you'll find the resistor that lights up the LED as bright as you need it to be; trial and error. Now, lets add the PWM control:
+The resistor is there to limit the current through the LED. Without it the current would be too high and the LED will burn out. A bigger resistor will make the LED less bright, and an even bigger resistor will prevent the LED from lighting up at all. Typically you'll find the resistor that lights up the LED as bright as you need it to be; trial and error. Now, lets add the PWM control:
 
 <figure><img src="../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
 

@@ -224,7 +224,7 @@ Uses the rotary field for [field placement.](../../3.-coding/advanced/field-plac
 {% endtab %}
 
 {% tab title="Example" %}
-`void rotaryAnalog2Mode(int analogChannel, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)`
+`void rotaryAnalogBite(int analogChannel, int fieldPlacement, int pos1, int pos2, int pos3, int pos4, int pos5, int pos6, int pos7, int pos8, int pos9, int pos10, int pos11, int pos12, bool reverse)`
 
 Switch setup with explainations:
 
@@ -245,7 +245,7 @@ Switch setup with explainations:
 \
 So typed out in 30\_Switches.ino:
 
-`rotaryAnalog2Mode(2, 1, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023, false);`
+`rotaryAnalogBite(2, 1, 16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023, false);`
 {% endtab %}
 
 {% tab title="Requirements" %}
