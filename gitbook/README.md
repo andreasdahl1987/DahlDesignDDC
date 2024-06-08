@@ -14,6 +14,10 @@ The topics that naturally fall into the manual for the [Dashboard](https://githu
 
 
 
+Please join the [Discord server!](https://discord.com/invite/49btqWNmCc)
+
+
+
 **DDC is not for commercial use**.
 
 

@@ -18,6 +18,8 @@
     * [Complete project](cb1/code/complete-project.md)
     * [Settings](cb1/code/settings.md)
   * [Circuit](cb1/circuit.md)
+  * [Shields](cb1/shields/README.md)
+    * [Robin](cb1/shields/robin.md)
 * [1. Project planning](1.-project-planning/README.md)
   * [Switch inputs](1.-project-planning/switch-inputs/README.md)
     * [Switch table](1.-project-planning/switch-inputs/matrix.md)
