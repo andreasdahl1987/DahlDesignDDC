@@ -117,6 +117,28 @@ void PCA9555Run(int address, int interruptPin, int row)
   }
   #endif
 }
+
+void PCA9555Output(int outputDevice)
+{
+  #if (PCA9555_I2C_NUMBER == 0)
+      uint8_t first = 0xff & PCA9555outputStatus[outputDevice - 1];
+      uint8_t second = PCA9555outputStatus[outputDevice- 1] >> 8;
+      Wire.beginTransmission(PCA9555outputAddress[outputDevice- 1]);
+      Wire.write(0x02);                            // target out register 0  
+      Wire.write(first);                           // write to outregister 0
+      Wire.write(second);                          // write to outregister 1
+      Wire.endTransmission();
+  #else
+      uint8_t first = 0xff & PCA9555outputStatus[outputDevice- 1];
+      uint8_t second = PCA9555outputStatus[outputDevice- 1] >> 8;
+      Wire1.beginTransmission(PCA9555outputAddress[outputDevice- 1]);
+      Wire1.write(0x02);                            // target out register 0  
+      Wire1.write(first);                           // write to outregister 0
+      Wire1.write(second);                          // write to outregister 1
+      Wire1.endTransmission();
+  #endif
+}
+
 #endif
 
 #if (USING_CB1 == 1)

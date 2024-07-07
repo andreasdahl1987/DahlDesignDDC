@@ -62,6 +62,9 @@ void setup()
       #if (USING_ADS1115 == 1 && ADS1115_ALERT == 1)
         ADS1115Alert();
       #endif
+      #if (USING_PCA9555 == 1)
+        PCA9555OutputSetup();
+      #endif
       
     #endif
 

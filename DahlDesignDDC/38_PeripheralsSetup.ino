@@ -146,6 +146,53 @@ void PCA9555Setup()
   wire0Init = true;
 #endif
 }
+
+void PCA9555OutputSetup()
+{
+#if (BOARDTYPE == 2 && PCA9555_I2C_NUMBER == 1 && USING_PCA9555 == 1 && PCA9555_OUTPUT == 1)
+  {  
+    for(int i = 0; i < PCA9555outputCount; i ++)
+    {
+      PCA9555outputStatus[i] = 0;
+      Wire1.beginTransmission(PCA9555outputAddress[i]);
+      Wire1.write(0x06);                            // target config register 0  
+      Wire1.write(0x00);                            // write config register 0
+      Wire1.write(0x00);                            // write config register 1
+      Wire1.endTransmission();
+    }
+
+    for(int i = 0; i < PCA9555outputCount; i ++)
+    {
+      Wire1.beginTransmission(PCA9555outputAddress[i]);
+      Wire1.write(0x02);                            // target out register 0  
+      Wire1.write(0x00);                            // write to out register 0
+      Wire1.write(0x00);                            // write to out register 1
+      Wire1.endTransmission();
+    }
+  }
+#elif (USING_PCA9555 == 1 && PCA9555_OUTPUT == 1)
+  { 
+    for(int i = 0; i < PCA9555outputCount; i ++)
+    {
+      PCA9555outputStatus[i] = 0;
+      Wire.beginTransmission(PCA9555outputAddress[i]);
+      Wire.write(0x06);                            // target config register 0  
+      Wire.write(0x00);                            // write config register 0
+      Wire.write(0x00);                            // write config register 1
+      Wire.endTransmission();
+    }
+    for(int i = 0; i < PCA9555outputCount; i ++)
+    {
+      Wire.beginTransmission(PCA9555outputAddress[i]);
+      Wire.write(0x02);                            // target out register 0  
+      Wire.write(0x00);                            // write to outregister 0
+      Wire.write(0x00);                            // write to outregister 1
+      Wire.endTransmission();
+    }
+  }
+#endif
+}
+
 #endif
 
 #if (USING_ADS1115 == 1)

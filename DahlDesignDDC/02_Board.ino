@@ -6,7 +6,7 @@
 //-----------BOARD MCU----------
 //------------------------------
 
-#define BOARDTYPE 0
+#define BOARDTYPE 2
 
 // 0 -> Atmel 32U4 based boards. (Leonardo, Pro Micro, Feather, Teensy 2.0, etc) SAM3X based boards. (Due)
 
@@ -86,9 +86,16 @@
 #define SCL1PIN 3
 
 //PORT EXPANDER PCA9555
-#define USING_PCA9555 0
+#define USING_PCA9555 1
 #define PCA9555_I2C_NUMBER 0
 uint8_t PCA9555interruptPins [] = {99};
+#define PCA9555_OUTPUT 1
+
+#if (PCA9555_OUTPUT== 1)
+uint8_t PCA9555outputAddress [] = {0x20};
+const uint8_t PCA9555outputCount = sizeof(PCA9555outputAddress) / sizeof(PCA9555outputAddress[0]);
+uint16_t PCA9555outputStatus[PCA9555outputCount];
+#endif
 
 //16-BIT ADC ADS1115
 #define USING_ADS1115 0
