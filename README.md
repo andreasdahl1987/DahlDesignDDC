@@ -30,7 +30,12 @@
  <h2 <p align="center"> <a href=http://dahl-design.gitbook.io/ddc/>MANUAL</a>
 </h2>
 
-<h5 align="center">Dahl Design Controller © 2022 by Andreas Dahl is licensed under CC BY-NC-SA 4.0 </h5>
+ <h4 <p align="left"> Non-Commercial License <br /> </h4>
+ <h5 <p align="left"> This project is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License. To view a copy of this license, visit [http://creativecommons.org/licenses/by-nc/4.0/](http://creativecommons.org/licenses/by-nc/4.0/).</h5>
+
+ <h4 <p align="left"> Commercial License <br /> </h4>
+ <h5 <p align="left">  <a href="https://soelpec.com">SOELPEC</a> has been granted exclusive commercial rights to use this firmware.</h5>
+
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
