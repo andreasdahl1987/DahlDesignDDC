@@ -139,6 +139,48 @@ void PCA9555Output(int outputDevice)
   #endif
 }
 
+void PCA9555LEDImport(uint8_t outputDevice, int8_t startLED)
+{
+  uint8_t indexCounter = 0;
+  
+  for(int i = startLED; i < LED1COUNT && i < startLED + 16; i++)
+  {
+    if (LED1.getPixelColor(i) > 0)
+    {
+      PCA9555outputStatus[outputDevice-1] |= (1 << indexCounter);
+    }
+    else
+    {
+      PCA9555outputStatus[outputDevice-1] &=  ~(1 << indexCounter);
+    }
+    indexCounter ++;
+  }
+}
+
+void triggerPCA9555(uint8_t outputDevice, int8_t pin, bool condition, bool blinkEnable, int blinkOnTimer, int blinkOffTimer)
+{
+  int8_t OutputDevice = outputDevice - 1;
+  int8_t Pin = pin - 1;
+  
+  int timer = globalClock % (blinkOnTimer + blinkOffTimer);
+
+  if(condition)
+  {
+    if (blinkEnable && timer > blinkOffTimer)
+    {
+        PCA9555outputStatus[OutputDevice] |= (1 << Pin);
+    }
+    if (!blinkEnable || (blinkEnable && timer < blinkOffTimer))
+    {
+        PCA9555outputStatus[OutputDevice] &=  ~(1 << Pin);
+     }
+  }
+  else
+  {
+    PCA9555outputStatus[OutputDevice] &=  ~(1 << Pin);
+  }
+}
+
 #endif
 
 #if (USING_CB1 == 1)

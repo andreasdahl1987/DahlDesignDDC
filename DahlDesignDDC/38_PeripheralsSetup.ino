@@ -124,7 +124,7 @@ void shiftRegisterSetup()
 #if (USING_PCA9555 == 1)
 void PCA9555Setup()
 {
-  for (int i = 0; i < sizeof(PCA9555interruptPins) / sizeof(PCA9555interruptPins[0]); i++)
+  for (uint8_t i = 0; i < sizeof(PCA9555interruptPins) / sizeof(PCA9555interruptPins[0]); i++)
   {
     pinMode(PCA9555interruptPins[i], INPUT_PULLUP);
   }
