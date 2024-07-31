@@ -29,8 +29,82 @@ void funkyPush(int row, int column, int aCol, int bCol, int cCol, int dCol)
     }
 
     Joystick.setButton(Number, pushState[Row][Column]);
-
 }
+
+void funkyPushBite(int row, int column,int aCol, int bCol, int cCol, int dCol)
+{
+    Joystick.setRyAxisRange(0, 1000);
+
+    biteButtonRow = row;
+    biteButtonCol = column;
+    
+    biteRefresh = false;
+
+    int Row = row - 1;
+    int Column = column - 1;
+    int Number = buttonNumber[Row][Column];
+
+    int Acol = aCol - 1;
+    int Bcol = bCol - 1;
+    int Ccol = cCol - 1;
+    int Dcol = dCol - 1;
+
+    if (!pushState[Row][Acol] && !pushState[Row][Bcol] && !pushState[Row][Ccol] && !pushState[Row][Dcol])
+    {
+        if (pushState[Row][Column] != rawState[Row][Column] && (globalClock - switchTimer[Row][Column]) > buttonCooldown)
+        {
+            switchTimer[Row][Column] = globalClock;
+            pushState[Row][Column] = rawState[Row][Column];
+        }
+
+        if ((globalClock - switchTimer[Row][Column]) > buttonCooldown)
+        {
+            pushState[Row][Column] = rawState[Row][Column];
+        }
+    }
+
+    //Scrolling through bite point setting
+    if (!pushState[Row][Column])
+    {
+        latchLock[Row][Column] = true;
+    }
+
+    if (pushState[Row][Column] && latchLock[Row][Column])
+    {
+        latchLock[Row][Column] = false;
+        if (biteButtonBit1 && !biteButtonBit2)
+        {
+            biteButtonBit2 = true;
+            biteButtonBit1 = false;
+        }
+        else if (!biteButtonBit1 && biteButtonBit2)
+        {
+            biteButtonBit1 = true;
+        }
+        else if (biteButtonBit1 && biteButtonBit2)
+        {
+            biteButtonBit2 = false;
+            biteButtonBit1 = false;
+            biteRefresh = true;
+        }
+    }
+    
+    //Push bite button state
+    long pesh = 0;
+    pesh = pesh | pushState[Row][Column] << 14;
+    rotaryField = rotaryField | pesh;
+
+    //Push bite setting level
+    long push = 0;
+    push = push | biteButtonBit1;
+    push = push | (biteButtonBit2 << 1);
+    push = push << 10;
+    rotaryField = rotaryField | push;
+
+    Joystick.setRyAxis(bitePoint);
+    Joystick.setButton(Number, pushState[Row][Column]);
+}
+
 
 void funkyPushM(int row, int column, int fieldPlacement, int aCol, int bCol, int cCol, int dCol)
 {
