@@ -94,7 +94,6 @@ uint8_t PCA9555interruptPins [] = {99};
 #if (PCA9555_OUTPUT== 1)
 uint8_t PCA9555outputAddress [] = {0x20};
 const uint8_t PCA9555outputCount = sizeof(PCA9555outputAddress) / sizeof(PCA9555outputAddress[0]);
-uint16_t PCA9555outputStatus[PCA9555outputCount];
 #endif
 
 //16-BIT ADC ADS1115

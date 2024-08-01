@@ -130,6 +130,9 @@ void setup()
             pinMode(directPins[i], INPUT_PULLUP);
         }
     }
+
+    //Setting up output device
+    outputPinsSetup();
     #endif
 
     //PWM Setup

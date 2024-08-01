@@ -121,16 +121,16 @@ void PCA9555Run(int address, int interruptPin, int row)
 void PCA9555Output(int outputDevice)
 {
   #if (PCA9555_I2C_NUMBER == 0)
-      uint8_t first = 0xff & PCA9555outputStatus[outputDevice - 1];
-      uint8_t second = PCA9555outputStatus[outputDevice- 1] >> 8;
+      uint8_t first = 0xff & outputStatus[outputDevice - 1];
+      uint8_t second = outputStatus[outputDevice- 1] >> 8;
       Wire.beginTransmission(PCA9555outputAddress[outputDevice- 1]);
       Wire.write(0x02);                            // target out register 0  
       Wire.write(first);                           // write to outregister 0
       Wire.write(second);                          // write to outregister 1
       Wire.endTransmission();
   #else
-      uint8_t first = 0xff & PCA9555outputStatus[outputDevice- 1];
-      uint8_t second = PCA9555outputStatus[outputDevice- 1] >> 8;
+      uint8_t first = 0xff & outputStatus[outputDevice- 1];
+      uint8_t second = outputStatus[outputDevice- 1] >> 8;
       Wire1.beginTransmission(PCA9555outputAddress[outputDevice- 1]);
       Wire1.write(0x02);                            // target out register 0  
       Wire1.write(first);                           // write to outregister 0
@@ -147,11 +147,11 @@ void PCA9555LEDImport(uint8_t outputDevice, int8_t startLED)
   {
     if (LED1.getPixelColor(i) > 0)
     {
-      PCA9555outputStatus[outputDevice-1] |= (1 << indexCounter);
+      outputStatus[outputDevice-1] |= (1 << indexCounter);
     }
     else
     {
-      PCA9555outputStatus[outputDevice-1] &=  ~(1 << indexCounter);
+      outputStatus[outputDevice-1] &=  ~(1 << indexCounter);
     }
     indexCounter ++;
   }
@@ -168,16 +168,16 @@ void triggerPCA9555(uint8_t outputDevice, int8_t pin, bool condition, bool blink
   {
     if (blinkEnable && timer > blinkOffTimer)
     {
-        PCA9555outputStatus[OutputDevice] |= (1 << Pin);
+        outputStatus[OutputDevice] |= (1 << Pin);
     }
     if (!blinkEnable || (blinkEnable && timer < blinkOffTimer))
     {
-        PCA9555outputStatus[OutputDevice] &=  ~(1 << Pin);
+        outputStatus[OutputDevice] &=  ~(1 << Pin);
      }
   }
   else
   {
-    PCA9555outputStatus[OutputDevice] &=  ~(1 << Pin);
+    outputStatus[OutputDevice] &=  ~(1 << Pin);
   }
 }
 

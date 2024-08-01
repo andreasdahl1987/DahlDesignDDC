@@ -153,7 +153,7 @@ void PCA9555OutputSetup()
   {  
     for(int i = 0; i < PCA9555outputCount; i ++)
     {
-      PCA9555outputStatus[i] = 0;
+      outputStatus[i] = 0;
       Wire1.beginTransmission(PCA9555outputAddress[i]);
       Wire1.write(0x06);                            // target config register 0  
       Wire1.write(0x00);                            // write config register 0
@@ -174,7 +174,7 @@ void PCA9555OutputSetup()
   { 
     for(int i = 0; i < PCA9555outputCount; i ++)
     {
-      PCA9555outputStatus[i] = 0;
+      outputStatus[i] = 0;
       Wire.beginTransmission(PCA9555outputAddress[i]);
       Wire.write(0x06);                            // target config register 0  
       Wire.write(0x00);                            // write config register 0
@@ -191,6 +191,18 @@ void PCA9555OutputSetup()
     }
   }
 #endif
+}
+
+void outputPinsSetup()
+{
+  if (outputPins[0] != 99)
+  {
+    for(int i = 0, i < outputPinsCount; i++)
+    {
+      pinMode(outputPins[i], OUTPUT);
+      digitalWrite(outputPins[i], LOW);
+    }
+  }
 }
 
 #endif

@@ -44,3 +44,12 @@ int average[analogChannelCount];
   uint8_t PWMStart[PWMCount];
   uint8_t PWMEnd[PWMCount];
 #endif
+
+//OUTPUT DEVICES
+#if (PCA9555_OUTPUT == 1 && outputPins[0] != 99)
+  uint16_t outputStatus[PCA9555outputCount + 1];
+#elif (PCA9555_OUTPUT == 1)
+  uint16_t outputStatus[PCA9555outputCount];
+#elif (outputPins[0] != 99)
+  uint16_t outputStatus[1];
+#endif
