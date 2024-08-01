@@ -91,6 +91,45 @@ void CB1Alert()
     Wire1.endTransmission();
   }
 }
+
+void CB1_OUTPUTSETUP1()
+{
+      outputStatus[0] = 0;
+      Wire.beginTransmission(0x21);
+      Wire.write(0x06);                            // target config register 0  
+      Wire.write(0x00);                            // write config register 0
+      Wire.write(0x00);                            // write config register 1
+      Wire.endTransmission();
+
+      Wire.beginTransmission(0x21);
+      Wire.write(0x02);                            // target out register 0  
+      Wire.write(0x00);                            // write to outregister 0
+      Wire.write(0x00);                            // write to outregister 1
+      Wire.endTransmission();
+}
+
+void CB1_OUTPUTSETUP2()
+{
+      #if (CB1_PE1_OUTPUT == 1)
+      uint8_t hub = 1;
+      #elif
+      uint8_t hub = 0;
+      #endif
+  
+      outputStatus[hub] = 0;
+      Wire.beginTransmission(0x20);
+      Wire.write(0x06);                            // target config register 0  
+      Wire.write(0x00);                            // write config register 0
+      Wire.write(0x00);                            // write config register 1
+      Wire.endTransmission();
+
+      Wire.beginTransmission(0x21);
+      Wire.write(0x02);                            // target out register 0  
+      Wire.write(0x00);                            // write to outregister 0
+      Wire.write(0x00);                            // write to outregister 1
+      Wire.endTransmission();
+}
+
 #endif
 void shiftRegisterSetup()
 {
@@ -191,18 +230,6 @@ void PCA9555OutputSetup()
     }
   }
 #endif
-}
-
-void outputPinsSetup()
-{
-  if (outputPins[0] != 99)
-  {
-    for(int i = 0, i < outputPinsCount; i++)
-    {
-      pinMode(outputPins[i], OUTPUT);
-      digitalWrite(outputPins[i], LOW);
-    }
-  }
 }
 
 #endif

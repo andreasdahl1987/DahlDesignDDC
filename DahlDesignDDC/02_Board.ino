@@ -32,7 +32,7 @@
 //------------------------------
 
 //Enable CB1 board
-#define USING_CB1 0
+#define USING_CB1 1
 
 //ADC setup
 #define CB1_ADC1 1
@@ -48,7 +48,8 @@
 //Port expander setup
 #define CB1_PE1 1
 #define CB1_PE2 1
-
+#define CB1_PE1_OUTPUT 1
+#define CB1_PE2_OUTPUT 0
 //ROW5 and ROW6
 #define ROW5_ACTIVE 1
 #define ROW6_ACTIVE 1
@@ -86,14 +87,26 @@
 #define SCL1PIN 3
 
 //PORT EXPANDER PCA9555
-#define USING_PCA9555 1
+#define USING_PCA9555 0
 #define PCA9555_I2C_NUMBER 0
 uint8_t PCA9555interruptPins [] = {99};
-#define PCA9555_OUTPUT 1
+#define PCA9555_OUTPUT 0
 
 #if (PCA9555_OUTPUT== 1)
 uint8_t PCA9555outputAddress [] = {0x20};
+
 const uint8_t PCA9555outputCount = sizeof(PCA9555outputAddress) / sizeof(PCA9555outputAddress[0]);
+#elif (USING_CB1 == 1 && (CB1_PE1_OUTPUT == 1 || CB1_PE2_OUTPUT == 1))
+  #if (CB1_PE1_OUTPUT == 1 && CB1_PE2_OUTPUT == 1)
+  uint8_t PCA9555outputAddress [] = {0x21, 0x20};
+  const uint8_t PCA9555outputCount = 2;
+  #elif (CB1_PE1_OUTPUT == 1)
+   uint8_t PCA9555outputAddress [] = {0x21};
+  const uint8_t PCA9555outputCount = 1;
+  #elif (CB1_PE2_OUTPUT == 1)
+  uint8_t PCA9555outputAddress [] = {0x20};
+  const uint8_t PCA9555outputCount = 1;
+  #endif
 #endif
 
 //16-BIT ADC ADS1115

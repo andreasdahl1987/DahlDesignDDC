@@ -36,10 +36,9 @@ const uint8_t directPinsCount = sizeof(directPins) / sizeof(directPins[0]);
 //------------OUTPUT DEVICE--------------
 //---------------------------------------
 
-
-uint8_t outputPins[] = { 17, 20, 18, 21, 22, 24, 19};
+#define enableOutput 0
+uint8_t outputPins[] = { 99};
 const uint8_t outputPinsCount = sizeof(outputPins) / sizeof(outputPins[0]);
-
 
 
 //---------------------------------------

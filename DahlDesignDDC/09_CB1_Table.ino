@@ -45,9 +45,19 @@ uint8_t analogButtonNumberIncMode[analogChannelCount] =  //ANALOG BUTTONS 2
 { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
 
+//---------------------------------------
+//------------OUTPUT DEVICE--------------
+//---------------------------------------
+
+#define enableOutput 0
+uint8_t outputPins[] = { 99};
+const uint8_t outputPinsCount = sizeof(outputPins) / sizeof(outputPins[0]);
+
+
 //PINS FOR PULLUP
 int row5Pins [8] = {19,17,20,18,21,22,24,23};
 int row6Pins [8] = {12,13,10,11,9,3,1,2};
+
 
 //ADC
 bool sentReq1 = false;

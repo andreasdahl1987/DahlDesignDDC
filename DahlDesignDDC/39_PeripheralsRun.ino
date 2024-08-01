@@ -118,48 +118,47 @@ void PCA9555Run(int address, int interruptPin, int row)
   #endif
 }
 
-void PCA9555Output(int outputDevice)
+#if (PCA9555_OUTPUT== 1)
+void PCA9555Output(int outputHub)
 {
   #if (PCA9555_I2C_NUMBER == 0)
-      uint8_t first = 0xff & outputStatus[outputDevice - 1];
-      uint8_t second = outputStatus[outputDevice- 1] >> 8;
-      Wire.beginTransmission(PCA9555outputAddress[outputDevice- 1]);
+      uint8_t first = 0xff & outputStatus[outputHub];
+      uint8_t second = outputStatus[outputHub] >> 8;
+      Wire.beginTransmission(PCA9555outputAddress[outputHub]);
       Wire.write(0x02);                            // target out register 0  
       Wire.write(first);                           // write to outregister 0
       Wire.write(second);                          // write to outregister 1
       Wire.endTransmission();
   #else
-      uint8_t first = 0xff & outputStatus[outputDevice- 1];
-      uint8_t second = outputStatus[outputDevice- 1] >> 8;
-      Wire1.beginTransmission(PCA9555outputAddress[outputDevice- 1]);
+      uint8_t first = 0xff & outputStatus[outputHub];
+      uint8_t second = outputStatus[outputHub] >> 8;
+      Wire1.beginTransmission(PCA9555outputAddress[outputHub]);
       Wire1.write(0x02);                            // target out register 0  
       Wire1.write(first);                           // write to outregister 0
       Wire1.write(second);                          // write to outregister 1
       Wire1.endTransmission();
   #endif
 }
+#endif
 
-void PCA9555LEDImport(uint8_t outputDevice, int8_t startLED)
+void setOutput(uint8_t outputHub, int8_t pin, bool value)
 {
-  uint8_t indexCounter = 0;
+  int8_t OutputHub = outputHub - 1;
+  int8_t Pin = pin - 1;
   
-  for(int i = startLED; i < LED1COUNT && i < startLED + 16; i++)
+  if(value)
   {
-    if (LED1.getPixelColor(i) > 0)
-    {
-      outputStatus[outputDevice-1] |= (1 << indexCounter);
-    }
-    else
-    {
-      outputStatus[outputDevice-1] &=  ~(1 << indexCounter);
-    }
-    indexCounter ++;
+     outputStatus[OutputHub] |= (1 << Pin);
+  }
+  else
+  {
+     outputStatus[OutputHub] &=  ~(1 << Pin);
   }
 }
 
-void triggerPCA9555(uint8_t outputDevice, int8_t pin, bool condition, bool blinkEnable, int blinkOnTimer, int blinkOffTimer)
+void triggerOutput(uint8_t outputHub, int8_t pin, bool condition, bool blinkEnable, int blinkOnTimer, int blinkOffTimer)
 {
-  int8_t OutputDevice = outputDevice - 1;
+  int8_t OutputHub = outputHub - 1;
   int8_t Pin = pin - 1;
   
   int timer = globalClock % (blinkOnTimer + blinkOffTimer);
@@ -168,20 +167,58 @@ void triggerPCA9555(uint8_t outputDevice, int8_t pin, bool condition, bool blink
   {
     if (blinkEnable && timer > blinkOffTimer)
     {
-        outputStatus[OutputDevice] |= (1 << Pin);
+        outputStatus[OutputHub] |= (1 << Pin);
     }
     if (!blinkEnable || (blinkEnable && timer < blinkOffTimer))
     {
-        outputStatus[OutputDevice] &=  ~(1 << Pin);
+        outputStatus[OutputHub] &=  ~(1 << Pin);
      }
   }
   else
   {
-    outputStatus[OutputDevice] &=  ~(1 << Pin);
+    outputStatus[OutputHub] &=  ~(1 << Pin);
   }
 }
-
 #endif
+
+#if (enableOutput == 1)
+void directOutput()
+{
+  uint8_t deviceNumber = 0;
+  #if (PCA9555_OUTPUT == 1)
+    deviceNumber += PCA9555outputCount;
+  #elif (USING_CB1 == 1 && (CB1_PE1_OUTPUT == 1 || CB1_PE2_OUTPUT == 1))
+    #if(CB1_PE1_OUTPUT == 1)
+    deviceNumber++;
+    #endif
+    #if(CB1_PE2_OUTPUT == 1)
+    deviceNumber++;
+    #endif
+  #endif
+  for(int i = 0; i < outputPinsCount; i ++)
+  {
+    digitalWrite(outputPins[i], (outputStatus[deviceNumber] >> i) & 1);
+  }
+}
+#endif
+
+void outputLEDImport(uint8_t outputHub, int8_t startLED)
+{
+  uint8_t indexCounter = 0;
+  
+  for(int i = startLED; i < LED1COUNT && i < startLED + 16; i++)
+  {
+    if (LED1.getPixelColor(i) > 0)
+    {
+      outputStatus[outputHub-1] |= (1 << indexCounter);
+    }
+    else
+    {
+      outputStatus[outputHub-1] &=  ~(1 << indexCounter);
+    }
+    indexCounter ++;
+  }
+}
 
 #if (USING_CB1 == 1)
 void PCA9555CB1(int address, int interruptPin, int row)
@@ -203,6 +240,47 @@ void PCA9555CB1(int address, int interruptPin, int row)
     }
   }
 }
+
+void CB1_OUTPUT1()
+{
+      uint8_t first = 0xff & outputStatus[0];
+      uint8_t second = outputStatus[0] >> 8;
+      uint8_t flipSecond = 0;
+      for(uint8_t i = 0; i < 8; i++)
+      {
+        flipSecond <<= 1;
+        flipSecond |= second & 1;
+        second >>= 1;
+      }
+      Wire.beginTransmission(0x21);
+      Wire.write(0x02);                            // target out register 0  
+      Wire.write(first);                           // write to outregister 0
+      Wire.write(flipSecond);                          // write to outregister 1
+      Wire.endTransmission();
+}
+void CB1_OUTPUT2()
+{
+      #if (CB1_PE1_OUTPUT == 1)
+      uint8_t hub = 1;
+      #elif
+      uint8_t hub = 0;
+      #endif
+      uint8_t first = 0xff & outputStatus[hub];
+      uint8_t second = outputStatus[hub] >> 8;
+      uint8_t flipSecond = 0;
+      for(uint8_t i = 0; i < 8; i++)
+      {
+        flipSecond <<= 1;
+        flipSecond |= second & 1;
+        second >>= 1;
+      }
+      Wire.beginTransmission(0x20);
+      Wire.write(0x02);                            // target out register 0  
+      Wire.write(first);                           // write to outregister 0
+      Wire.write(flipSecond);                          // write to outregister 1
+      Wire.endTransmission();
+}
+
 
 void ADC1_CB1(int alertPin)
 {

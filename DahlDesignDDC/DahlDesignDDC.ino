@@ -3,7 +3,7 @@
  * 
  * The manual on GitHub wil walk you through the setup in detal: https://dahl-design.gitbook.io/ddc/
  * 
- * For a quick setup with a Pro Micro board or similar, you only need to look through tabs 08, 10 and 30. 
+ * For a quick setup with a Pro Micro board or similar, you only need to look through tabs 02, 10 and 30. 
  * 
  * Any questions, contact me on Discord: Andreas Dahl#9514
  * 

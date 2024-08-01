@@ -46,10 +46,10 @@ int average[analogChannelCount];
 #endif
 
 //OUTPUT DEVICES
-#if (PCA9555_OUTPUT == 1 && outputPins[0] != 99)
+#if ((PCA9555_OUTPUT == 1 || (USING_CB1 == 1 && (CB1_PE1_OUTPUT == 1 || CB1_PE2_OUTPUT == 1))) && enableOutput == 1)
   uint16_t outputStatus[PCA9555outputCount + 1];
-#elif (PCA9555_OUTPUT == 1)
+#elif (PCA9555_OUTPUT == 1 || (USING_CB1 == 1 && (CB1_PE1_OUTPUT == 1 || CB1_PE2_OUTPUT == 1)))
   uint16_t outputStatus[PCA9555outputCount];
-#elif (outputPins[0] != 99)
+#elif (enableOutput == 1)
   uint16_t outputStatus[1];
 #endif
