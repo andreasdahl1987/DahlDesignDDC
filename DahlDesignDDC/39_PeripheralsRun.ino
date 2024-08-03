@@ -122,14 +122,20 @@ void PCA9555Run(int address, int interruptPin, int row)
 void PCA9555Output(int outputHub)
 {
   #if (PCA9555_I2C_NUMBER == 0)
-      uint8_t first = 0xff & outputStatus[outputHub];
-      uint8_t second = outputStatus[outputHub] >> 8;
-      Wire.beginTransmission(PCA9555outputAddress[outputHub]);
-      Wire.write(0x02);                            // target out register 0  
-      Wire.write(first);                           // write to outregister 0
-      Wire.write(second);                          // write to outregister 1
-      Wire.endTransmission();
+      if(outputStatus[outputHub] != outputStatusOld[outputHub])
+      {
+        uint8_t first = 0xff & outputStatus[outputHub];
+        uint8_t second = outputStatus[outputHub] >> 8;
+        Wire.beginTransmission(PCA9555outputAddress[outputHub]);
+        Wire.write(0x02);                            // target out register 0  
+        Wire.write(first);                           // write to outregister 0
+        Wire.write(second);                          // write to outregister 1
+        Wire.endTransmission();
+        outputStatusOld[outputHub] = outputStatus[outputHub]; 
+      }
   #else
+      if(outputStatus[outputHub] != outputStatusOld[outputHub])
+      {
       uint8_t first = 0xff & outputStatus[outputHub];
       uint8_t second = outputStatus[outputHub] >> 8;
       Wire1.beginTransmission(PCA9555outputAddress[outputHub]);
@@ -137,6 +143,8 @@ void PCA9555Output(int outputHub)
       Wire1.write(first);                           // write to outregister 0
       Wire1.write(second);                          // write to outregister 1
       Wire1.endTransmission();
+      outputStatusOld[outputHub] = outputStatus[outputHub]; 
+      }
   #endif
 }
 #endif
@@ -195,9 +203,13 @@ void directOutput()
     deviceNumber++;
     #endif
   #endif
-  for(int i = 0; i < outputPinsCount; i ++)
+  if(outputStatus[deviceNumber] != outputStatusOld[deviceNumber])
   {
-    digitalWrite(outputPins[i], (outputStatus[deviceNumber] >> i) & 1);
+    for(int i = 0; i < outputPinsCount; i ++)
+    {
+      digitalWrite(outputPins[i], (outputStatus[deviceNumber] >> i) & 1);
+    }
+    outputStatusOld[deviceNumber] = outputStatus[deviceNumber];
   }
 }
 #endif
@@ -243,6 +255,8 @@ void PCA9555CB1(int address, int interruptPin, int row)
 
 void CB1_OUTPUT1()
 {
+  if(outputStatus[0] != outputStatusOld[0])
+  {
       uint8_t first = 0xff & outputStatus[0];
       uint8_t second = outputStatus[0] >> 8;
       uint8_t flipSecond = 0;
@@ -257,7 +271,10 @@ void CB1_OUTPUT1()
       Wire.write(first);                           // write to outregister 0
       Wire.write(flipSecond);                          // write to outregister 1
       Wire.endTransmission();
+      outputStatusOld[0] = outputStatus[0];
+  }
 }
+#if(CB1_PE2_OUTPUT == 1)
 void CB1_OUTPUT2()
 {
       #if (CB1_PE1_OUTPUT == 1)
@@ -265,21 +282,27 @@ void CB1_OUTPUT2()
       #elif
       uint8_t hub = 0;
       #endif
-      uint8_t first = 0xff & outputStatus[hub];
-      uint8_t second = outputStatus[hub] >> 8;
-      uint8_t flipSecond = 0;
-      for(uint8_t i = 0; i < 8; i++)
+
+      if(outputStatus[hub] != outputStatusOld[hub])
       {
-        flipSecond <<= 1;
-        flipSecond |= second & 1;
-        second >>= 1;
+        uint8_t first = 0xff & outputStatus[hub];
+        uint8_t second = outputStatus[hub] >> 8;
+        uint8_t flipSecond = 0;
+        for(uint8_t i = 0; i < 8; i++)
+        {
+          flipSecond <<= 1;
+          flipSecond |= second & 1;
+          second >>= 1;
+        }
+        Wire.beginTransmission(0x20);
+        Wire.write(0x02);                            // target out register 0  
+        Wire.write(first);                           // write to outregister 0
+        Wire.write(flipSecond);                          // write to outregister 1
+        Wire.endTransmission();
+        outputStatusOld[hub] = outputStatus[hub];
       }
-      Wire.beginTransmission(0x20);
-      Wire.write(0x02);                            // target out register 0  
-      Wire.write(first);                           // write to outregister 0
-      Wire.write(flipSecond);                          // write to outregister 1
-      Wire.endTransmission();
 }
+#endif
 
 
 void ADC1_CB1(int alertPin)

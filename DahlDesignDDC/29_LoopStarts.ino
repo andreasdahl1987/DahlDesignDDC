@@ -76,6 +76,7 @@ void loop()
   #if (enableOutput == 1)
   directOutput();
   #endif
+  outputHubRun();
 
   
 

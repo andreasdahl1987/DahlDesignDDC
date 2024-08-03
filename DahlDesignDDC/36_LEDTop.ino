@@ -14,7 +14,7 @@ void LEDTop()
 
   //LED CALLS STOP HERE
 
-  #if(LED1COUNT > 0 && ENABLE_PCA9555_LED_CONTROL == 0)
+  #if(LED1COUNT > 0 && ENABLE_OUTPUT_LED_CONTROL == 0)
     LED1.show();
   #endif
   #if(LED2COUNT > 0)

@@ -50,6 +50,7 @@
 #define CB1_PE2 1
 #define CB1_PE1_OUTPUT 1
 #define CB1_PE2_OUTPUT 0
+
 //ROW5 and ROW6
 #define ROW5_ACTIVE 1
 #define ROW6_ACTIVE 1

@@ -24,7 +24,7 @@ uint8_t buttonNumber[rowCount][colCount] =
 };
 
 //---------------------------------------
-//------------DIRECT WIRING--------------
+//------------DIRECT INPUTS--------------
 //---------------------------------------
 
 
@@ -33,7 +33,7 @@ const uint8_t directPinsCount = sizeof(directPins) / sizeof(directPins[0]);
 
 
 //---------------------------------------
-//------------OUTPUT DEVICE--------------
+//------------DIRECT OUTPUTS-------------
 //---------------------------------------
 
 #define enableOutput 0

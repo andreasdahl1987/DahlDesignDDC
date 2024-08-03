@@ -46,7 +46,7 @@ uint8_t analogButtonNumberIncMode[analogChannelCount] =  //ANALOG BUTTONS 2
 
 
 //---------------------------------------
-//------------OUTPUT DEVICE--------------
+//------------DIRECT OUTPUTS-------------
 //---------------------------------------
 
 #define enableOutput 0

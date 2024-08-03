@@ -95,6 +95,7 @@ void CB1Alert()
 void CB1_OUTPUTSETUP1()
 {
       outputStatus[0] = 0;
+      outputStatusOld[0] = 0;
       Wire.beginTransmission(0x21);
       Wire.write(0x06);                            // target config register 0  
       Wire.write(0x00);                            // write config register 0
@@ -108,6 +109,7 @@ void CB1_OUTPUTSETUP1()
       Wire.endTransmission();
 }
 
+#if(CB1_PE2_OUTPUT == 1)
 void CB1_OUTPUTSETUP2()
 {
       #if (CB1_PE1_OUTPUT == 1)
@@ -117,6 +119,7 @@ void CB1_OUTPUTSETUP2()
       #endif
   
       outputStatus[hub] = 0;
+      outputStatusOld[hub] = 0;
       Wire.beginTransmission(0x20);
       Wire.write(0x06);                            // target config register 0  
       Wire.write(0x00);                            // write config register 0
@@ -129,6 +132,7 @@ void CB1_OUTPUTSETUP2()
       Wire.write(0x00);                            // write to outregister 1
       Wire.endTransmission();
 }
+#endif
 
 #endif
 void shiftRegisterSetup()
@@ -193,6 +197,7 @@ void PCA9555OutputSetup()
     for(int i = 0; i < PCA9555outputCount; i ++)
     {
       outputStatus[i] = 0;
+      outputStatusOld[i] = 0;
       Wire1.beginTransmission(PCA9555outputAddress[i]);
       Wire1.write(0x06);                            // target config register 0  
       Wire1.write(0x00);                            // write config register 0
@@ -214,6 +219,7 @@ void PCA9555OutputSetup()
     for(int i = 0; i < PCA9555outputCount; i ++)
     {
       outputStatus[i] = 0;
+      outputStatusOld[i] = 0;
       Wire.beginTransmission(PCA9555outputAddress[i]);
       Wire.write(0x06);                            // target config register 0  
       Wire.write(0x00);                            // write config register 0
