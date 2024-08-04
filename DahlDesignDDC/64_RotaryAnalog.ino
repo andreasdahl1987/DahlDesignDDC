@@ -1329,31 +1329,35 @@ void rotaryAnalog2ModeShort(int analogChannel, int fieldPlacement, bool reverse)
     int FieldPlacement = fieldPlacement;
 
     int maxPos = 12;
-
-
+    
     #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
     int value;
-    int positions[12];
+    int positions[12] = { 8, 100, 192, 285, 377, 469, 562, 654, 746, 838, 930, 1023 };
+    
     if (analogPins[N] > 49)
     {
       value = ADS1115value[analogPins[N] - ADC_CORR];
-      positions = { 100, 3200, 6144, 9120, 12064,15008, 17984, 20928, 23872, 26816, 29760, 32736 };
-    }
+      positions[0] = 100;
+      positions[1] = 3200;
+      positions[2] = 6144;
+      positions[3] = 9120;
+      positions[4] = 12064;
+      positions[5] = 15008;
+      positions[6] = 17984;
+      positions[7] = 20928;
+      positions[8] = 23872;
+      positions[9] = 26816;
+      positions[10] = 29760;
+      positions[11] = 32736;
     else
     {
       value = analogRead(analogPins[N]);
-      positions = { 8, 100, 192, 285, 377, 469, 562, 654, 746, 838, 930, 1023 };
-    }
-    
+    }    
     #else
-
     int value = analogRead(analogPins[N]);
-    positions = { 8, 100, 192, 285, 377, 469, 562, 654, 746, 838, 930, 1023 };
-    
+    int positions[12] = { 8, 100, 192, 285, 377, 469, 562, 654, 746, 838, 930, 1023 }; 
     #endif
-
-
 
     int differ = 0;
     int result = 0;

@@ -214,6 +214,7 @@ void directOutput()
 }
 #endif
 
+#if(LED1COUNT > 0 && (enableOutput == 1 || PCA9555_OUTPUT == 1 || CB1_PE1_OUTPUT == 1 || CB1_PE2_OUTPUT == 1))
 void outputLEDImport(uint8_t outputHub, int8_t startLED)
 {
   uint8_t indexCounter = 0;
@@ -230,7 +231,9 @@ void outputLEDImport(uint8_t outputHub, int8_t startLED)
     }
     indexCounter ++;
   }
+  strip1Block = true;
 }
+#endif
 
 #if (USING_CB1 == 1)
 void PCA9555CB1(int address, int interruptPin, int row)
