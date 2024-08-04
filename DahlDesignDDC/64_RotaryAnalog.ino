@@ -1350,6 +1350,7 @@ void rotaryAnalog2ModeShort(int analogChannel, int fieldPlacement, bool reverse)
       positions[9] = 26816;
       positions[10] = 29760;
       positions[11] = 32736;
+    }
     else
     {
       value = analogRead(analogPins[N]);

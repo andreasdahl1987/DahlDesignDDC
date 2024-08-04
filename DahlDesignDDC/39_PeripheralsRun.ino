@@ -147,47 +147,8 @@ void PCA9555Output(int outputHub)
       }
   #endif
 }
-#endif
-
-void setOutput(uint8_t outputHub, int8_t pin, bool value)
-{
-  int8_t OutputHub = outputHub - 1;
-  int8_t Pin = pin - 1;
-  
-  if(value)
-  {
-     outputStatus[OutputHub] |= (1 << Pin);
-  }
-  else
-  {
-     outputStatus[OutputHub] &=  ~(1 << Pin);
-  }
-}
-
-void triggerOutput(uint8_t outputHub, int8_t pin, bool condition, bool blinkEnable, int blinkOnTimer, int blinkOffTimer)
-{
-  int8_t OutputHub = outputHub - 1;
-  int8_t Pin = pin - 1;
-  
-  int timer = globalClock % (blinkOnTimer + blinkOffTimer);
-
-  if(condition)
-  {
-    if (blinkEnable && timer > blinkOffTimer)
-    {
-        outputStatus[OutputHub] |= (1 << Pin);
-    }
-    if (!blinkEnable || (blinkEnable && timer < blinkOffTimer))
-    {
-        outputStatus[OutputHub] &=  ~(1 << Pin);
-     }
-  }
-  else
-  {
-    outputStatus[OutputHub] &=  ~(1 << Pin);
-  }
-}
-#endif
+#endif //PCA9555 output
+#endif //using PCA9555
 
 #if (enableOutput == 1)
 void directOutput()
@@ -262,6 +223,7 @@ void CB1_OUTPUT1()
   {
       uint8_t first = 0xff & outputStatus[0];
       uint8_t second = outputStatus[0] >> 8;
+      
       uint8_t flipSecond = 0;
       for(uint8_t i = 0; i < 8; i++)
       {
@@ -269,6 +231,7 @@ void CB1_OUTPUT1()
         flipSecond |= second & 1;
         second >>= 1;
       }
+      
       Wire.beginTransmission(0x21);
       Wire.write(0x02);                            // target out register 0  
       Wire.write(first);                           // write to outregister 0
