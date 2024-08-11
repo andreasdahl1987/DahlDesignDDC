@@ -91,7 +91,7 @@ void CB1Alert()
     Wire1.endTransmission();
   }
 }
-
+#if(CB1_PE1_OUTPUT == 1)
 void CB1_OUTPUTSETUP1()
 {
       outputStatus[0] = 0;
@@ -108,6 +108,7 @@ void CB1_OUTPUTSETUP1()
       Wire.write(0x00);                            // write to outregister 1
       Wire.endTransmission();
 }
+#endif
 
 #if(CB1_PE2_OUTPUT == 1)
 void CB1_OUTPUTSETUP2()

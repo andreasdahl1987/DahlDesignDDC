@@ -216,7 +216,7 @@ void PCA9555CB1(int address, int interruptPin, int row)
     }
   }
 }
-
+#if(CB1_PE1_OUTPUT == 1)
 void CB1_OUTPUT1()
 {
   if(outputStatus[0] != outputStatusOld[0])
@@ -240,6 +240,8 @@ void CB1_OUTPUT1()
       outputStatusOld[0] = outputStatus[0];
   }
 }
+#endif
+
 #if(CB1_PE2_OUTPUT == 1)
 void CB1_OUTPUT2()
 {
