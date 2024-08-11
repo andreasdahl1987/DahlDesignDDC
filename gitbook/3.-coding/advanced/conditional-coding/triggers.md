@@ -12,7 +12,7 @@ Type in a field placement to check if this bit is 1. Use this to check for switc
 
 #### **buttonPressed(int row, int column)**
 
-Check if a button or toggle on a given row and column number is pressed. Example: `buttonPressed(3,4)` to check a switch on row3 column4.
+Check if a button or toggle on a given row and column number is pressed. Example: `buttonPressed(3,4)` to check a switch on row3 column4. This data is generated after debouncing algorithms, so this button needs to have a `pushButton(3,4)` or similar called in 30\_Switches.ino.&#x20;
 
 #### **switchPressed(int row, int column)**
 

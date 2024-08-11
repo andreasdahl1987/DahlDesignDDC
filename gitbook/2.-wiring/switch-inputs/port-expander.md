@@ -1,6 +1,6 @@
 # Port expander
 
-Wiring the PCA9555 is fairly straight forward. It has 24 pins. 8 of these are to make the chip work, and the remaining 16 are the input pins.
+Wiring the PCA9555 is fairly straight forward. It has 24 pins. 8 of these are to make the chip work, and the remaining 16 are the input/output pins.
 
 #### Power
 

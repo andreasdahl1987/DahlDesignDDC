@@ -68,6 +68,48 @@ Here the field placement is set to 3. So you'll find the mode of this switch in 
 {% endtab %}
 {% endtabs %}
 
+#### <mark style="background-color:orange;">funkyPushBite()</mark>
+
+{% tabs %}
+{% tab title="Description" %}
+The bite point button can either:
+
+* Quickly but less accurately set the bite point by holding the clutch paddle at the desired bite point and then pressing the button.&#x20;
+* Together with a supported switch set the bite point with a 0.1% accuracy.
+
+Any switch function that requires a bite button will be <mark style="background-color:orange;">highlighted orange.</mark>
+
+Normally works as a simple pushbutton that can be used to anything in-game. In addition, when held, the controller is primed to enter bite point setting. Hold + rotate a bite point compatible rotary (a rotary using a function that includes bite point setting, these are named rotary2Bite, PEC11Bite, etc.) to enter bite point setting mode. At this point, you can release the bite button. Further presses of the button will go through the stages of setting the bite point (mode 1-3), before in the end going out of bite point setting (back to mode 0).&#x20;
+
+SimHub property -> \[DahlDesign.DDCbiteSetting]
+
+Defaults to bit 11 and 12 in the rotary field, you dont have to assign a field placement.&#x20;
+
+Also, the state of the biteButton itself as a property \[DahlDesign.R15].
+
+**Modes:**
+
+* 0: Bite point setting inactive
+* 1: Bite point setting active. Adjust with steps of +/- 10
+* 2: Bite point setting active. Adjust with steps of +/- 1
+* 3: Bite point setting active. Adjust with steps of +/- 0.1
+
+As stated above, this button's modes are not changed by using a modButton(), but by the biteButton() itself.&#x20;
+{% endtab %}
+
+{% tab title="Example" %}
+`void funkyPushBite(int row, int column, int aCol, int bCol, int cCol, int dCol)`
+
+Fill in the row all the funky pins go to, the column for the center push button and then the columns for all the directional buttons.&#x20;
+
+`funkyPushBite(2,1,5,2,3,4);`
+{% endtab %}
+
+{% tab title="Requirements" %}
+* 1 button number
+{% endtab %}
+{% endtabs %}
+
 #### <mark style="background-color:blue;">funkyPushHybrid()</mark>
 
 {% tabs %}

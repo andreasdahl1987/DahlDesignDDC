@@ -22,7 +22,7 @@ Quick comparison between shift register and port expander:
 
 &#x20;
 
-In DDC, the default configuration for the PCA9555 is 16 input pins. If you want to use any of the pins as output pins or anything else wild and saucy - contact me and we'll figure it out.
+In DDC, the default configuration for the PCA9555 is 16 input pins. You can set up one as an [output device](../digital-outputs.md) as well, using all 16 pins as output pins - typically for controlling analog LEDs.&#x20;
 
 Every PCA9555 you add you'll get two rows with eight columns in the switch table. You can decide where in the switch table to put them yourself. Since it requres eight columns, you need to make your switch table at least eight columns wide.&#x20;
 

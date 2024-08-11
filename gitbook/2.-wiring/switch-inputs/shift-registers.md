@@ -10,7 +10,7 @@ An essential part of reading button states is using pull-up resistors. For direc
 
 This is how it works:
 
-<figure><img src="../../.gitbook/assets/image (17) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (17) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * When the button is _**not pressed**_, there is no way for current to get to ground. The voltage at the level of RECIEVER, which in our case is the SR, is the same as VCC (typically +5 volt in Arduino projects).&#x20;
 * When the button is _**pressed,**_ current will flow to ground and voltage will drop from VCC before the 10K resistor to 0 at ground level. Pratically 100% of the voltage drop will be across the resistor. So measuring the voltage after the resistor, it will be essentially equal to ground.&#x20;

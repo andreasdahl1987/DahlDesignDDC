@@ -196,7 +196,7 @@ I'd like it to be like this:
 
 At the bottom of 9\_CB1\_Table.ino you'll find the spot to put in the button numbers. We only need to add the _starting_ button number for each mode and swicth. These ones:
 
-<figure><img src="../../.gitbook/assets/image (13) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Lets see how they fit in the code:
 

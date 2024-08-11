@@ -17,7 +17,7 @@ DDC will dictate how SRs fit in the table, so it is more a matter of moving all 
 * Shift registers will always start at row 1, and use as many rows as there are shift register ICs in your project.&#x20;
   *   If you have 1 chain of 4, that will be row 1-4. Row 1 being the first in the chain - the one that is wired to the microcontroller.&#x20;
 
-      <figure><img src="../../.gitbook/assets/image (13) (1) (1).png" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../../.gitbook/assets/image (13) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
   *   If you have 1 chain of 3, 1 chain of 2 and 1 chain of 4:
 
       * Shift register chain #1 -> row 1-3

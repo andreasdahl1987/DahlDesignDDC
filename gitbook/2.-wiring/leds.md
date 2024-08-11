@@ -4,9 +4,9 @@ The LEDs supported are the ones supported by the [Adafruit Neopixel library. ](h
 
 Common for adressable RGB LEDs is that you daisy-chain them. Each LED needs power, ground and a signal in. If the chain is going to continue, you pass the signal on from this LED to the next.
 
-<figure><img src="../.gitbook/assets/image (8) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (8) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-It is common to add a 100 nF capacitor between VCC and GND next to each LED, but it is not needed for all types of LEDs. Some of them have them built-in. It is also common to add a small resistor on the data line.&#x20;
+It is common to add a 100 nF capacitor between VCC and GND next to each LED, but it is not needed for all types of LEDs. Some of them have them built-in, **check the datasheet for the LEDs you're using.** It is also common to add a small resistor on the data line.&#x20;
 
 The last LED in the chain does not need its OUT pin wired to anything.
 
@@ -24,7 +24,7 @@ This will probably work with a small amount of LEDs on a board with little volta
 
 * Power the LEDs with 5V from USB, use a pullup resistor on the LED data pin from microcontroller to pull the signal up to 5V. Though RP2040 is not rated for 5V on its GPIO pins, this has been tested with good results over time. I still wouldn't recommend this for a final design, it works well for testing/prototyping.&#x20;
 
-<figure><img src="../.gitbook/assets/image (17) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (17) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### Level shifter
 

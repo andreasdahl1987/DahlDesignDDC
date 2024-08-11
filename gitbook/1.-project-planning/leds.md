@@ -1,6 +1,6 @@
 # RGB LED
 
-<figure><img src="../.gitbook/assets/image (18) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (18) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 DDC supports full RGB LED integration with SimHub for Atmel 32U4 and RP2040 boards. You can use the RGB editor in SimHub to set up you LEDs and have them react to game telemetry. DDC also has internal LED control.
 

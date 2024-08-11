@@ -4,7 +4,7 @@ DDC supports an unlimited number of analog switches (clutches, potentiometer, mu
 
 When adding analog switches to your project (potentiometer, resistor ladder rotary, hall sensors, load cells, etc.), you'll build a channel for each switch. A channel will contain all the information related to that switch, including its analog pin, button numbers used, switch modes, readout values, cooldown timers, rotary switch position and more under-the-hood stuff to make the algorithms work.&#x20;
 
-<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption><p>How you can picture an analog channel in your head.</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (1).png" alt=""><figcaption><p>How you can picture an analog channel in your head.</p></figcaption></figure>
 
 When your switch has its own channel, you'll have the freedom of tapping into this channel for various software features, such as having values from this channel trigger RGB LEDs, PWM signal firing, or even build virtual switches in the switch table by using [analogInject. ](../../3.-coding/advanced/analog-inject.md)
 

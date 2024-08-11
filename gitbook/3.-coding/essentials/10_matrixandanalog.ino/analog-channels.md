@@ -57,7 +57,7 @@ uint8_t analogButtonNumberIncMode[analogChannelCount] =  //Button number for alt
 
 To help visualize our channels:
 
-<figure><img src="../../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (13) (1).png" alt=""><figcaption></figcaption></figure>
 
 Pin numbering is fairly straight forward. Button numbers follow the same rules as with encoders:
 

@@ -26,6 +26,8 @@ These are the settings for CB1, found in `2_Board.ino`
 //Port expander setup
 #define CB1_PE1 1
 #define CB1_PE2 1
+#define CB1_PE1_OUTPUT 0
+#define CB1_PE2_OUTPUT 0
 
 //ROW5 and ROW6
 #define ROW5_ACTIVE 1
@@ -66,6 +68,8 @@ You can adjust `CHANNELS`, `RATE` and `GAIN` as well. What these mean are explai
 #### //Port expander setup
 
 You can turn the individial chips off by settings `CB1_PE1` and `CB1_PE2` to `0`. This is important if you removed any of these in the Pick\&Place to save costs on your board.  Disabling PE1 will disable ROW1 and ROW2. Disabling PE2 will disable ROW3 and ROW4.&#x20;
+
+You can also chose to use one or both  of these as output devices by setting `CB1_PE1_OUTPUT` and/or `CB1_PE2_OUTPUT` to `1`.  Read [this on output hubs](../../3.-coding/peripherals/digital-outputs/). Your port expanders will be hubs 1 and 2 if both are used. If only one of them are set up as output device, it will be hub number 1. You can also add direct microcontroller pins as output pins in 9\_CB1\_Table.ino. The pin numbers from row 5 to 8 are listed on the back of the board.&#x20;
 
 #### //ROW5 and ROW6
 
