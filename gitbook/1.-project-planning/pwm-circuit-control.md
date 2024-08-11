@@ -2,7 +2,7 @@
 
 DDC allows you to use PWM to control analog circuits, including motors, fans, generic LEDs, buzzers, etc. You can also use it as a on/off switch for a different circuit.&#x20;
 
-<figure><img src="../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 PWM (Pulse Width Modulation) is a way for you digital microcontroller to emulate an analog signal. It can't really produce any voltages other than 0V and 5V (or 3.3V in some cases), but it can do some magic with those voltages. Switching the voltage from 0 to 5 and back again, repeatedly, really fast, will mimic something inbetween 0 and 5 volts.&#x20;
 

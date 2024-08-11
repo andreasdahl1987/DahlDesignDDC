@@ -10,16 +10,22 @@ When you've [uploaded](../../upload.md) the code, you can connect to SimHub:
 
 <figure><img src="../../../.gitbook/assets/image (15) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-* Select "Create oem leds test device"
+* Select "Create standard device"
 
-<figure><img src="../../../.gitbook/assets/image (14) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
-* Go to OEM configuration and type in the controllers VID and PID&#x20;
+* Select standard LED device
 
-<figure><img src="../../../.gitbook/assets/image (12) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
-* Reboot your controller and/or SimHub for SimHub to find it, press "Edit profile" to get to the RGB editor. You're all set!
+* Go to USB PID/VID configuration, edit the controllers VID and PID and set the correct LED count. This is all your strips combined. &#x20;
 
-<figure><img src="../../../.gitbook/assets/image (4) (4) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
-l
+* You can also rename the device and change the picture by left-clicking it.
+
+
+
+<figure><img src="../../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+
+* Reboot your controller and/or SimHub for SimHub to find it, press "Edit profile" under LEDs to start working with the RGB editor.  You're all set!

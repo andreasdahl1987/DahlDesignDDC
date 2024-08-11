@@ -9,10 +9,10 @@
   * There are no simulatneous button presses, so all kinds of sims are supported.
   *   The physical position of the switch matches the button numbers, so you can go ahead and label your controller accordingly, as below.&#x20;
 
-      <figure><img src="../../.gitbook/assets/image (4) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../../.gitbook/assets/image (4) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 *   There are 24 button and **36 button** variants. Really, the product of both are 24 functional buttons. The difference is that in the 36 button variant the 12-position switch is also given button numbers to reflect its position, which is useful if you want information about the switch position in SimHub for dashboard purposes.
 
-    <figure><img src="../../.gitbook/assets/image (6) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (6) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 

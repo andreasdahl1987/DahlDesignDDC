@@ -12,7 +12,7 @@ A DDC controller can send information about switch modes, bite point, and really
 
 **3: Enable controller input plugin**
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### 4: Find your controller name
 

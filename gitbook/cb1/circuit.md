@@ -46,7 +46,7 @@ This circuit design was made and tested by Dan Suzuki before I implemented it an
 
 The jumper J1 should be open if using VIN to avoid backwards current on USB.&#x20;
 
-<figure><img src="../.gitbook/assets/image (5) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (5) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 We're using a AMS1117 drop-down converter to produce a stable 3.3V line which powers all the ICs in this design. Overall it is very low current on the 3.3V line, so a drop-down converter is fine, and will generate litte heat. **It is rated for 1A.** Screens and LEDs will all be on 5V.&#x20;
 
