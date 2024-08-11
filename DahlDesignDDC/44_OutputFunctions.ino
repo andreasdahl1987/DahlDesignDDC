@@ -1,4 +1,4 @@
-
+#if(enableOutput == 1 || PCA9555_OUTPUT == 1 || CB1_PE1_OUTPUT == 1 || CB1_PE2_OUTPUT == 1)
 void setOutput(uint8_t outputHub, int8_t pin, bool value)
 {
   int8_t OutputHub = outputHub - 1;
@@ -38,8 +38,6 @@ void triggerOutput(uint8_t outputHub, int8_t pin, bool condition, bool blinkEnab
   }
 }
 
-
-#if(enableOutput == 1 || PCA9555_OUTPUT == 1 || CB1_PE1_OUTPUT == 1 || CB1_PE2_OUTPUT == 1)
 void rotaryOutput(uint8_t analogChannel, uint8_t hub, uint8_t startPin, uint8_t offset, uint8_t positions, bool reverse)
 {
   int StartPin = startPin - 1;

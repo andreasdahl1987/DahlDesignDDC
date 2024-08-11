@@ -11,8 +11,8 @@
 // ---------------------------- STRIP #1 SETUP -------------------------------
 //----------------------------------------------------------------------------
 
-#define LED1COUNT 16
-#define LED1PIN 2
+#define LED1COUNT 0
+#define LED1PIN 25
 #define LED1TYPE NEO_GRB + NEO_KHZ800
 #define LED1REVERSE 0
 #define LED1PRIVATE 0
@@ -21,7 +21,7 @@
 // ---------------------------- STRIP #2 SETUP -------------------------------
 //----------------------------------------------------------------------------
 
-#define LED2COUNT 100
+#define LED2COUNT 0
 #define LED2PIN 25
 #define LED2TYPE NEO_GRB + NEO_KHZ800
 #define LED2REVERSE 0
@@ -32,7 +32,7 @@
 //----------------------------------------------------------------------------
 
 #define LED3COUNT 0
-#define LED3PIN 2
+#define LED3PIN 25
 #define LED3TYPE NEO_GRB + NEO_KHZ800
 #define LED3REVERSE 0
 #define LED3PRIVATE 0
@@ -42,7 +42,7 @@
 //----------------------------------------------------------------------------
 
 #define LED4COUNT 0
-#define LED4PIN 2
+#define LED4PIN 25
 #define LED4TYPE NEO_GRB + NEO_KHZ800
 #define LED4REVERSE 0
 #define LED4PRIVATE 0
