@@ -1320,3 +1320,154 @@ void DDSanalog(int analogChannel, int pos1, int pos2, int pos3, int pos4, int po
     push = push << (2*(FieldPlacement - 1));
     rotaryField = rotaryField | push;
 }
+
+void rotaryAnalog2ModeShort(int analogChannel, int fieldPlacement, bool reverse)
+{
+    int N = analogChannel - 1;
+
+    int Number = analogButtonNumber[N];
+    int FieldPlacement = fieldPlacement;
+
+    int maxPos = 12;
+    
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+
+    int value;
+    int positions[12] = { 8, 100, 192, 285, 377, 469, 562, 654, 746, 838, 930, 1023 };
+    
+    if (analogPins[N] > 49)
+    {
+      value = ADS1115value[analogPins[N] - ADC_CORR];
+      positions[0] = 100;
+      positions[1] = 3200;
+      positions[2] = 6144;
+      positions[3] = 9120;
+      positions[4] = 12064;
+      positions[5] = 15008;
+      positions[6] = 17984;
+      positions[7] = 20928;
+      positions[8] = 23872;
+      positions[9] = 26816;
+      positions[10] = 29760;
+      positions[11] = 32736;
+    }
+    else
+    {
+      value = analogRead(analogPins[N]);
+    }    
+    #else
+    int value = analogRead(analogPins[N]);
+    int positions[12] = { 8, 100, 192, 285, 377, 469, 562, 654, 746, 838, 930, 1023 }; 
+    #endif
+
+    int differ = 0;
+    int result = 0;
+    for (int i = 0; i < 12; i++)
+    {
+        if (i == 0 || abs(positions[i] - value) < differ)
+        {
+            result++;
+            differ = abs(positions[i] - value);
+        }
+    }
+
+    result--;
+
+    if (reverse)
+    {
+        result = 11 - result;
+    }
+
+    //Short debouncer on switch rotation
+
+    if (analogLastCounter[N] != result)
+    {
+        if (globalClock - analogTimer1[N] > analogPulse)
+        {
+            analogTimer1[N] = globalClock;
+        }
+        else if (globalClock - analogTimer1[N] > analogWait)
+        {
+            //----------------------------------------------
+            //----------------MODE CHANGE-------------------
+            //----------------------------------------------
+
+            //Due to placement of this scope, mode change will only occur on switch rotation.
+            //If you want to avoid switching mode, set fieldPlacement to 0.
+
+            if (pushState[modButtonRow - 1][modButtonCol - 1] == 1 && FieldPlacement != 0)
+            {
+                for (int i = 0; i < maxPos + 1; i++) //Remove the remnants from SWITCH MODE 1
+                {
+                    Joystick.releaseButton(i - 1 + Number);
+                }
+
+                analogSwitchMode1[N] = !analogSwitchMode1[N]; //SWAP MODE
+            }
+
+            //Engage encoder pulse timer
+            analogTimer2[N] = globalClock;
+
+            //Update difference, storing the value in pushState on pin 2
+            analogTempState[N] = result - analogLastCounter[N];
+
+            //Give new value to pushState
+            analogLastCounter[N] = result;
+        }
+    }
+
+    //SWITCH MODE 1: 12 - position switch
+
+    if (!analogSwitchMode1[N])
+    {
+        analogTempState[N] = 0; //Refreshing encoder mode difference
+
+        for (int i = 0; i < 12; i++)
+        {
+            if (i == analogLastCounter[N])
+            {
+                Joystick.pressButton(i + Number);
+            }
+            else
+            {
+                Joystick.releaseButton(i + Number);
+            }
+        }
+    }
+
+    //SWITCH MODE 2/4: Incremental encoder or closed hybrid
+
+    else if (analogSwitchMode1[N])
+    {
+        Number = analogButtonNumberIncMode[N];
+        int difference = analogTempState[N];
+        if (difference != 0)
+        {
+            if (globalClock - analogTimer2[N] < encoderPulse)
+            {
+                if ((difference > 0 && difference < 5) || difference < -5)
+                {
+                    Joystick.setButton(Number, 1);
+                    Joystick.setButton(Number + 1, 0);
+                }
+                else
+                {
+                    Joystick.setButton(Number, 0);
+                    Joystick.setButton(Number + 1, 1);
+                }
+            }
+            else
+            {
+                analogTempState[N] = 0;
+                Joystick.setButton(Number, 0);
+                Joystick.setButton(Number + 1, 0);
+            }
+        }
+    }
+
+    //Push switch mode
+    long push = 0;
+    push = push | analogSwitchMode1[N];
+    push = push << (FieldPlacement - 1);
+    rotaryField = rotaryField | push;
+}

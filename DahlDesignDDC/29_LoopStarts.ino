@@ -42,10 +42,10 @@ void loop()
   #endif
 
   #if (USING_CB1 == 1)
-    #if (CB1_PE1 == 1)
+    #if (CB1_PE1 == 1 && CB1_PE1_OUTPUT == 0)
     PCA9555CB1(0x21, 16, 1);
     #endif
-    #if (CB1_PE2 == 1)
+    #if (CB1_PE2 == 1 && CB1_PE2_OUTPUT == 0)
     PCA9555CB1(0x20, 8, 3);
     #endif
     #if (CB1_ADC1 == 1)
@@ -56,5 +56,28 @@ void loop()
     #endif
     CB1switchTable();
   #endif
+
+  //OUTPUT FEED
+
+  #if (PCA9555_OUTPUT == 1)
+  for (int i = 0; i < PCA9555outputCount; i++)
+  {
+      PCA9555Output(i);
+  }
+  #elif (USING_CB1 == 1 && (CB1_PE1_OUTPUT == 1 || CB1_PE2_OUTPUT == 1))
+    #if(CB1_PE1_OUTPUT == 1)
+    CB1_OUTPUT1();
+    #endif
+    #if(CB1_PE2_OUTPUT == 1)
+    CB1_OUTPUT2();
+    #endif
+  #endif
+
+  #if (enableOutput == 1)
+  directOutput();
+  #endif
+  outputHubRun();
+
   
+
  

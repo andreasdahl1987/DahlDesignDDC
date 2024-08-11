@@ -14,7 +14,7 @@ void LEDTop()
 
   //LED CALLS STOP HERE
 
-  #if(LED1COUNT > 0)
+  #if(LED1COUNT > 0 && !strip1Block)
     LED1.show();
   #endif
   #if(LED2COUNT > 0)

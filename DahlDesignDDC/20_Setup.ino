@@ -44,6 +44,12 @@ void setup()
       CB1Setup();
       startI2C();
       CB1Alert();
+      #if(CB1_PE1_OUTPUT == 1)
+      CB1_OUTPUTSETUP1();
+      #endif
+      #if(CB1_PE2_OUTPUT == 1)
+      CB1_OUTPUTSETUP2();
+      #endif
     #else
     
       #if (USING_ADS1115 == 1)
@@ -61,6 +67,9 @@ void setup()
       //I2C that required .begin first
       #if (USING_ADS1115 == 1 && ADS1115_ALERT == 1)
         ADS1115Alert();
+      #endif
+      #if (USING_PCA9555 == 1)
+        PCA9555OutputSetup();
       #endif
       
     #endif
@@ -127,7 +136,9 @@ void setup()
             pinMode(directPins[i], INPUT_PULLUP);
         }
     }
+    
     #endif
+
 
     //PWM Setup
     #if (ROW6_PWMCOUNT > 0)
@@ -151,6 +162,9 @@ void setup()
     PWMSetup();
     
     #endif
+
+    //Setting up output device
+    outputPinsSetup();
     
     EEPROMfirst();
     EEPROMinit(); //Fetch values from EEPROM

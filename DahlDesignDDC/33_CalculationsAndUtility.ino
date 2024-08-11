@@ -160,3 +160,15 @@ void CB1Oversampling()
   } 
 }
 #endif
+
+void outputPinsSetup()
+{
+  if (outputPins[0] != 99)
+  {
+    for(int i = 0; i < outputPinsCount; i++)
+    {
+      pinMode(outputPins[i], OUTPUT);
+      digitalWrite(outputPins[i], LOW);
+    }
+  }
+}

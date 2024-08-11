@@ -28,6 +28,8 @@ int8_t readIndex[analogChannelCount];           // the index of the current read
 int total[analogChannelCount];                  // the running total
 int average[analogChannelCount];
 
+//OUTPUT
+bool strip1Block = false;
 
 //PWM Control
 #if(ROW6_PWMCOUNT > 0)
@@ -43,4 +45,16 @@ int average[analogChannelCount];
   bool PWMIsOff [PWMCount];
   uint8_t PWMStart[PWMCount];
   uint8_t PWMEnd[PWMCount];
+#endif
+
+//OUTPUT DEVICES
+#if ((PCA9555_OUTPUT == 1 || (USING_CB1 == 1 && (CB1_PE1_OUTPUT == 1 || CB1_PE2_OUTPUT == 1))) && enableOutput == 1)
+  uint16_t outputStatus[PCA9555outputCount + 1];
+  uint16_t outputStatusOld[PCA9555outputCount + 1];
+#elif (PCA9555_OUTPUT == 1 || (USING_CB1 == 1 && (CB1_PE1_OUTPUT == 1 || CB1_PE2_OUTPUT == 1)))
+  uint16_t outputStatus[PCA9555outputCount];
+  uint16_t outputStatusOld[PCA9555outputCount];
+#elif (enableOutput == 1)
+  uint16_t outputStatus[1];
+  uint16_t outputStatusOld[1];
 #endif
