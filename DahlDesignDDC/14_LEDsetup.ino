@@ -50,10 +50,8 @@
 //----------------------------------------------------------------------------
 
 #if (LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT > 0)
-    #if (BOARDTYPE == 2)
     uint8_t SH_R[LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT];
     uint8_t SH_G[LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT];
     uint8_t SH_B[LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT];
-    #endif
     #include <DDCGENCORE.h>
 #endif

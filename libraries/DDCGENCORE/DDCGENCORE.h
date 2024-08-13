@@ -63,23 +63,15 @@ void readStrip()
 
 		if (LED1REVERSE == 1)
 		{
-			#if (BOARDTYPE == 2)
 			SH_R[LED1COUNT - 1 - i] = r;
 			SH_G[LED1COUNT - 1 - i] = g;
 			SH_B[LED1COUNT - 1 - i] = b;
-			#else
-			LED1.setPixelColor(LED1COUNT - 1 - i, LED1.Color(r, g, b));
-			#endif
 		}
 		else 
 		{
-			#if (BOARDTYPE == 2)
 			SH_R[i] = r;
 			SH_G[i] = g;
 			SH_B[i] = b;
-			#else
-			LED1.setPixelColor(i, LED1.Color(r, g, b));
-			#endif
 		}
 	}
 	#endif
@@ -93,23 +85,15 @@ void readStrip()
 
 		if (LED2REVERSE == 1)
 		{	
-			#if (BOARDTYPE == 2)
 			SH_R[LED1COUNT + LED2COUNT - 1 - i] = r;
 			SH_G[LED1COUNT + LED2COUNT - 1 - i] = g;
 			SH_B[LED1COUNT + LED2COUNT - 1 - i] = b;
-			#else
-			LED2.setPixelColor(LED2COUNT - 1 - i, LED2.Color(r, g, b));
-			#endif
 		}
 		else 
 		{
-			#if (BOARDTYPE == 2)
 			SH_R[LED1COUNT + i] = r;
 			SH_G[LED1COUNT + i] = g;
 			SH_B[LED1COUNT + i] = b;
-			#else
-			LED2.setPixelColor(i, LED2.Color(r, g, b));
-			#endif
 		}
 	}
 	#endif
@@ -123,23 +107,15 @@ void readStrip()
 
 		if (LED3REVERSE == 1)
 		{
-			#if (BOARDTYPE == 2)
 			SH_R[LED1COUNT + LED2COUNT + LED3COUNT - 1 - i] = r;
 			SH_G[LED1COUNT + LED2COUNT + LED3COUNT - 1 - i] = g;
 			SH_B[LED1COUNT + LED2COUNT + LED3COUNT - 1 - i] = b;
-			#else
-			LED3.setPixelColor(LED3COUNT - 1 - i, LED3.Color(r, g, b));
-			#endif
 		}
 		else 
 		{
-			#if (BOARDTYPE == 2)
 			SH_R[LED1COUNT + LED2COUNT + i] = r;
 			SH_G[LED1COUNT + LED2COUNT + i] = g;
 			SH_B[LED1COUNT + LED2COUNT + i] = b;
-			#else
-			LED3.setPixelColor(i, LED3.Color(r, g, b));
-			#endif
 		}
 	}
 	#endif
@@ -153,23 +129,15 @@ void readStrip()
 
 		if (LED4REVERSE == 1)
 		{
-			#if (BOARDTYPE == 2)
 			SH_R[LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT - 1 - i] = r;
 			SH_G[LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT - 1 - i] = g;
 			SH_B[LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT - 1 - i] = b;
-			#else
-			LED4.setPixelColor(LED4COUNT - 1 - i, LED4.Color(r, g, b));
-			#endif
 		}
 		else 
 		{
-			#if (BOARDTYPE == 2)
 			SH_R[LED1COUNT + LED2COUNT + LED3COUNT + i] = r;
 			SH_G[LED1COUNT + LED2COUNT + LED3COUNT + i] = g;
 			SH_B[LED1COUNT + LED2COUNT + LED3COUNT + i] = b;
-			#else
-			LED4.setPixelColor(i, LED4.Color(r, g, b));
-			#endif
 		}
 	}
 	#endif
@@ -186,36 +154,9 @@ void readLeds() {
 		valid = valid && (WaitAndReadOneByte() == 0xFF - i);
 	
 	}
-	if (valid) {
-		#if(LED1COUNT+LED2COUNT+LED3COUNT+LED4COUNT > 0)
-			#if (BOARDTYPE == 2)
-				#if(LED1COUNT > 0)
-					for (uint16_t i = 0; i < LED1COUNT; i++) 
-					{
-						LED1.setPixelColor(i, LED1.Color(SH_R[i], SH_G[i], SH_B[i]));
-					}
-				#endif
-				#if(LED2COUNT > 0)
-					for (uint16_t i = 0; i < LED2COUNT; i++) 
-					{
-						LED2.setPixelColor(i, LED2.Color(SH_R[LED1COUNT+i], SH_G[LED1COUNT+i], SH_B[LED1COUNT+i]));
-					}
-				#endif
-				#if(LED3COUNT > 0)
-				for (uint16_t i = 0; i < LED3COUNT; i++) 
-				{
-					LED3.setPixelColor(i, LED3.Color(SH_R[LED1COUNT+LED2COUNT+i], SH_G[LED1COUNT+LED2COUNT+i], SH_B[LED1COUNT+LED2COUNT+i]));
-				}
-				#endif
-				#if(LED4COUNT > 0)
-					for (uint16_t i = 0; i < LED4COUNT; i++) 
-					{
-						LED4.setPixelColor(i, LED4.Color(SH_R[LED1COUNT+LED2COUNT+LED3COUNT+i], SH_G[LED1COUNT+LED2COUNT+LED3COUNT+i], SH_B[LED1COUNT+LED2COUNT+LED3COUNT+i]));
-					}
-				#endif
-			#endif
-		LEDTop();
-		#endif
+	if (valid) 
+	{
+		
 	}
 }
 
