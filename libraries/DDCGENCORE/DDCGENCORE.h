@@ -156,7 +156,12 @@ void readLeds() {
 	}
 	if (valid) 
 	{
-		
+		for(int i = 0; i < LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT; i++ )
+		{
+			SH_R_Valid[i] = SH_R[i];
+			SH_G_Valid[i] = SH_G[i];
+			SH_B_Valid[i] = SH_B[i];
+		}
 	}
 }
 
@@ -193,9 +198,6 @@ void processCommands()
 	// Read data
 	if (Serial.available()) 
 	{
-		LEDlock = true;
-		LEDSerialDropout = globalClock;
-
 		char c = (char)Serial.read();
 
 		if (messageend < 6) {
@@ -236,6 +238,7 @@ void processCommands()
 			command = "";
 			messageend = 0;
 		}
+		/*
 		#if (BOARDTYPE == 2)
 			#if(USING_CB1 == 1)
 			delayMicroseconds(100); //Stability between cores on CB1.
@@ -243,6 +246,7 @@ void processCommands()
 			delayMicroseconds(500); //Stability between cores on regular RP2040 board.
 			#endif
 		#endif
-		LEDlock = false;
+		*/
+
 	}
 }

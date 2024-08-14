@@ -102,8 +102,4 @@ unsigned long globalClock;
 #define clutchBottomDeadzone 10
 
 //LED setup
-bool LEDlock = false;
 int8_t LEDBrightness = 25;
-long LEDSerialDropout = 0;
-#define DROPOUTTIMER 1000
-#define SHCOOLDOWN 4

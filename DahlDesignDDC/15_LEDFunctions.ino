@@ -4,32 +4,30 @@
 
 void SimHubImport()
 {
-#if(LED1COUNT+LED2COUNT+LED3COUNT+LED4COUNT > 0)
   #if(LED1COUNT > 0)
     for (uint16_t i = 0; i < LED1COUNT; i++) 
     {
-      LED1.setPixelColor(i, LED1.Color(SH_R[i], SH_G[i], SH_B[i]));
+      LED1.setPixelColor(i, LED1.Color(SH_R_Valid[i], SH_G_Valid[i], SH_B_Valid[i]));
     }
   #endif
   #if(LED2COUNT > 0)
     for (uint16_t i = 0; i < LED2COUNT; i++) 
     {
-      LED2.setPixelColor(i, LED2.Color(SH_R[LED1COUNT+i], SH_G[LED1COUNT+i], SH_B[LED1COUNT+i]));
+      LED2.setPixelColor(i, LED2.Color(SH_R_Valid[LED1COUNT+i], SH_G_Valid[LED1COUNT+i], SH_B_Valid[LED1COUNT+i]));
     }
   #endif
   #if(LED3COUNT > 0)
   for (uint16_t i = 0; i < LED3COUNT; i++) 
   {
-    LED3.setPixelColor(i, LED3.Color(SH_R[LED1COUNT+LED2COUNT+i], SH_G[LED1COUNT+LED2COUNT+i], SH_B[LED1COUNT+LED2COUNT+i]));
+    LED3.setPixelColor(i, LED3.Color(SH_R_Valid[LED1COUNT+LED2COUNT+i], SH_G_Valid[LED1COUNT+LED2COUNT+i], SH_B_Valid[LED1COUNT+LED2COUNT+i]));
   }
   #endif
   #if(LED4COUNT > 0)
     for (uint16_t i = 0; i < LED4COUNT; i++) 
     {
-      LED4.setPixelColor(i, LED4.Color(SH_R[LED1COUNT+LED2COUNT+LED3COUNT+i], SH_G[LED1COUNT+LED2COUNT+LED3COUNT+i], SH_B[LED1COUNT+LED2COUNT+LED3COUNT+i]));
+      LED4.setPixelColor(i, LED4.Color(SH_R_Valid[LED1COUNT+LED2COUNT+LED3COUNT+i], SH_G_Valid[LED1COUNT+LED2COUNT+LED3COUNT+i], SH_B_Valid[LED1COUNT+LED2COUNT+LED3COUNT+i]));
     }
   #endif
-#endif
 }
 
 

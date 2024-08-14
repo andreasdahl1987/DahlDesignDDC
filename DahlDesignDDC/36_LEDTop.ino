@@ -4,11 +4,12 @@ void LEDTop()
   /*
   *Here goes LED calls that you want to refresh constantly, and will overwrite both LEDStartup and LEDBottom calls as well as SimHub LED control. 
   */
+SimHubImport();
 
   //LED CALLS STARTS HERE
 
 
-
+colorLED(8,24, 0xff00ff, 8);
 
 
 
