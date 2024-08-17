@@ -1,5 +1,5 @@
 /*
- * Chose your board. Default is to 32U4-based boards. 
+ * Chose your board. Default is to 32U4-based boards.
  */
 
 //------------------------------
@@ -63,8 +63,8 @@
 
 //ROW8 setup
 #define DISABLE_ALERT_PINS 0  //Gives access to COL2 and COL3. Disables ALERT pins for the ADCs, making them heavier to run.
-#define DISABLE_ANALOG 0      //Gives access to COL4 - COL 7 by using (and disabling analog function of) ADC9 - ADC12 pins. 
-#define DISABLE_LED_PIN 0     //Gives access to COL8, use the dedicated 8-8 pin. The LED pin will no longer work. 
+#define DISABLE_ANALOG 0      //Gives access to COL4 - COL 7 by using (and disabling analog function of) ADC9 - ADC12 pins.
+#define DISABLE_LED_PIN 0     //Gives access to COL8, use the dedicated 8-8 pin. The LED pin will no longer work.
 
 //------------------------------
 //---------PWM CONTROL----------
@@ -131,12 +131,15 @@ uint8_t ADS1115_alertPins [] = {99};
 bool wire1Init = false;
 bool wire0Init = false;
 
+//MOUSE FEATURE FOR ATMEL boards
+#define MOUSE 0
+
 #if(USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
   #include <ADCInput.h>
   ADCInput oversamples (A0, A1, A2, A3);
   bool ADS1115sentReq[2] = {false, false};
   long ADS1115value[12] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-  uint8_t ADS1115channelCounter[2] = {0,0};  
+  uint8_t ADS1115channelCounter[2] = {0,0};
 #elif(ADS1115_CHIPS > 0)
   bool ADS1115sentReq[ADS1115_CHIPS];
   uint16_t ADS1115value[4*ADS1115_CHIPS];
@@ -168,11 +171,14 @@ bool wire0Init = false;
 
 #if (BOARDTYPE == 0)
   #include <DDC32U4.h>
+  #if (MOUSE == 1)
+  #include <JoyMouse.h>
+  #endif
 #elif (BOARDTYPE == 1)
   #include <DDCSAMD.h>
 #elif (BOARDTYPE == 2)
   #include <DDCPI.h>
-  extern "C" 
+  extern "C"
   {
   #include "pico/bootrom.h"
   }
