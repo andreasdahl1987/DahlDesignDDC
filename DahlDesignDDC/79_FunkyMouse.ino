@@ -86,7 +86,7 @@ void funkyMouseButton(int row, int column, int aCol, int bCol, int cCol, int dCo
 		{
 			latchLock[Row][Column] = true;
 			latchState[Row][Column] = !latchState[Row][Column];
-			Mouse.click();
+			Mouse.click(RightClick ? MOUSE_RIGHT : MOUSE_LEFT);
 		}
 	}
 }
@@ -108,7 +108,7 @@ void funkyMouseMove(int row, int column, int pCol, int Col1, int Col2, int Col3,
 			if (pushState[Row][Column] != rawState[Row][Column])
 			{
 				switchTimer[Row][Column] = globalClock;
-				toggleTimer[Row][Column] = globalClock - 4;
+				toggleTimer[Row][Column] = globalClock - 1;
 			}
 			pushState[Row][Column] = rawState[Row][Column];
 		}
