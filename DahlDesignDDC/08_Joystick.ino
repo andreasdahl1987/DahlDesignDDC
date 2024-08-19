@@ -19,7 +19,3 @@ Joystick_ Joystick(JOYSTICK_DEFAULT_REPORT_ID, JOYSTICK_TYPE_JOYSTICK,
     false,         //Accelerator
     true,          //Brake, used for dual clutch mode 4
     false);        //Steering
-
-#if (BOARDTYPE == 0 && MOUSE == 1) 
-JoyMouse_ Mouse;
-#endif

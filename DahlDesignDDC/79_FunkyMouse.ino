@@ -1,4 +1,4 @@
-#if (BOARDTYPE == 0 && MOUSE == 1)
+#if (BOARDTYPE == 0 && ENABLE_MOUSE == 1)
 void funkyMouseScroll(int Arow, int Acol, int Bcol, bool reverse)
 {
 	int Row = Arow - 1;
@@ -35,7 +35,7 @@ void funkyMouseScroll(int Arow, int Acol, int Bcol, bool reverse)
 		else if ((latchLock[Row][bCol] && pushState[Row][Column] == 3) || (latchLock[Row][Column] && pushState[Row][Column] == 1))
 		{
 			switchTimer[Row][bCol] = globalClock;
-			Mouse.move(0, 0, reverse ? 1 : -1); // Down
+			Mouse.move(0, 0, reverse ? 1 : -1);
 		}
 	}
 	else
@@ -120,8 +120,9 @@ void funkyMouseMove(int row, int column, int pCol, int Col1, int Col2, int Col3,
 		if(globalClock < switchTimer[Row][Column] + 720)
 		{
 			float radian = ((globalClock - switchTimer[Row][Column]) << 3) / 3671.;
-			pixels *= sin(radian);
+			pixels = ceil(pixels * sin(radian));
 		}
+		pixels <<= 1;
 		Mouse.move(Right ? pixels : (Left ? -pixels : 0), Up ? -pixels : (Down ? pixels : 0));
 		toggleTimer[Row][Column] = globalClock;
 	}

@@ -132,7 +132,7 @@ bool wire1Init = false;
 bool wire0Init = false;
 
 //MOUSE FEATURE FOR ATMEL boards
-#define MOUSE 0
+#define ENABLE_MOUSE 0
 
 #if(USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
   #include <ADCInput.h>
@@ -171,8 +171,9 @@ bool wire0Init = false;
 
 #if (BOARDTYPE == 0)
   #include <DDC32U4.h>
-  #if (MOUSE == 1)
+  #if (ENABLE_MOUSE == 1)
   #include <JoyMouse.h>
+  JoyMouse_ Mouse;
   #endif
 #elif (BOARDTYPE == 1)
   #include <DDCSAMD.h>
