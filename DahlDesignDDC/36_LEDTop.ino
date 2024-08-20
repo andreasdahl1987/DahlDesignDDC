@@ -12,8 +12,9 @@ SimHubImport();
 colorLED(8,24, 0xff00ff, 8);
 
 
-
   //LED CALLS STOP HERE
+
+delayMicroseconds(200);
 
   #if(LED1COUNT > 0 && !strip1Block)
     LED1.show();
