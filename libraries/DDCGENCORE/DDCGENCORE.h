@@ -156,6 +156,7 @@ void readLeds() {
 	}
 	if (valid) 
 	{
+		simhubActive = true;
 		for(int i = 0; i < LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT; i++ )
 		{
 			SH_R_Valid[i] = SH_R[i];

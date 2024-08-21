@@ -4,7 +4,9 @@
 
 void SimHubImport()
 {
-  #if(LED1COUNT > 0)
+  if(simhubActive)
+  {
+      #if(LED1COUNT > 0)
     for (uint16_t i = 0; i < LED1COUNT; i++) 
     {
       LED1.setPixelColor(i, LED1.Color(SH_R_Valid[i], SH_G_Valid[i], SH_B_Valid[i]));
@@ -28,6 +30,7 @@ void SimHubImport()
       LED4.setPixelColor(i, LED4.Color(SH_R_Valid[LED1COUNT+LED2COUNT+LED3COUNT+i], SH_G_Valid[LED1COUNT+LED2COUNT+LED3COUNT+i], SH_B_Valid[LED1COUNT+LED2COUNT+LED3COUNT+i]));
     }
   #endif
+  }
 }
 
 
