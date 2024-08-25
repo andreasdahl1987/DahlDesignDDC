@@ -139,7 +139,7 @@ bool wire0Init = false;
   ADCInput oversamples (A0, A1, A2, A3);
   bool ADS1115sentReq[2] = {false, false};
   long ADS1115value[12] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-  uint8_t ADS1115channelCounter[2] = {0,0};
+  uint8_t ADS1115channelCounter[2] = {0,0};  
 #elif(ADS1115_CHIPS > 0)
   bool ADS1115sentReq[ADS1115_CHIPS];
   uint16_t ADS1115value[4*ADS1115_CHIPS];
