@@ -1,6 +1,8 @@
 void LEDBottom()
 {
-
+  if(LEDCounter == 0)
+  {
+    
     /*
    * These LED calls will overwrite LEDStartup, but in turn will be overwritten by SimHub LED control and again by LEDTop.
    * Whenever SimHub sends LED commands, the whole LED strip will be wiped black, not only the LEDs used by SimHub. 
@@ -19,5 +21,5 @@ void LEDBottom()
 
 
 
- 
+ }
 }

@@ -51,6 +51,10 @@
 
 #if (LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT > 0)
     bool simhubActive = false;
+    long LEDRefresh = 0;
+    uint8_t LEDCounter = 0;
+    uint8_t stripCount = 0;
+    
     uint8_t SH_R[LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT];
     uint8_t SH_R_Valid[LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT];
     uint8_t SH_G[LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT];

@@ -1,6 +1,14 @@
 // ---------------------------------------------------------------------
 // -----------------------------GLOBALS---------------------------------
 // ---------------------------------------------------------------------
+void refreshLEDcalc()
+{
+  if(globalClock-LEDRefresh > (7-stripCount))
+  {
+    LEDCounter = (LEDCounter + 1) % (stripCount + 1);
+    LEDRefresh = globalClock;
+  }
+}
 
 void SimHubImport()
 {

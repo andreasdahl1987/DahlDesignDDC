@@ -37,15 +37,19 @@ void setupLeds()
 {
 	#if(LED1COUNT > 0)
     LED1.begin(); 
+	stripCount++;
 	#endif
 	#if(LED2COUNT > 0)
     LED2.begin(); 
+	stripCount++;
 	#endif
 	#if(LED3COUNT > 0)
     LED3.begin(); 
+	stripCount++;
 	#endif
 	#if(LED4COUNT > 0)
     LED4.begin(); 
+	stripCount++;
 	#endif
 }
 
