@@ -245,6 +245,7 @@ void PCA9555OutputSetup()
 #if (ADS1115_ALERT == 1)
 void ADS1115Alert()
 {
+  #if(ADS1115_I2C_NUMBER == 0)
   for (int i = 0; i < ADS1115_CHIPS; i++)
   {
     pinMode(ADS1115_alertPins[i], INPUT_PULLUP);
@@ -261,6 +262,25 @@ void ADS1115Alert()
     Wire.write(0b00000000);
     Wire.endTransmission();
   }
+  #else
+  for (int i = 0; i < ADS1115_CHIPS; i++)
+  {
+    pinMode(ADS1115_alertPins[i], INPUT_PULLUP);
+    int addr = ADS1115_chipAddress[i];
+    Wire1.beginTransmission(addr);
+    Wire1.write(0b00000011); //Write to high threshold register
+    Wire1.write(0b10000000);
+    Wire1.write(0b00000000);
+    Wire1.endTransmission();
+
+    Wire1.beginTransmission(addr);
+    Wire1.write(0b00000010); //Write to low threshold register
+    Wire1.write(0b00000000);
+    Wire1.write(0b00000000);
+    Wire1.endTransmission();
+  }
+  #endif
+
 }
 #endif
 

@@ -153,10 +153,17 @@ void CB1Oversampling()
       val3 += oversamples.read();
       val4 += oversamples.read();
     }
+    #if (USING_CB1 == 1)
     ADS1115value[8] = val1 / 32;  
     ADS1115value[9] = val2 / 32;
     ADS1115value[10] = val3 / 32;
     ADS1115value[11] = val4 / 32;
+    #else
+    ADS1115value[0] = val1 / 32;  
+    ADS1115value[1] = val2 / 32;
+    ADS1115value[2] = val3 / 32;
+    ADS1115value[3] = val4 / 32;
+    #endif
   } 
 }
 #endif
