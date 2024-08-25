@@ -131,7 +131,7 @@ uint8_t ADS1115_alertPins [] = {99};
 bool wire1Init = false;
 bool wire0Init = false;
 
-//MOUSE FEATURE FOR ATMEL boards
+//ENABLE MOUSE FEATURE FOR ATMEL or RP2040 boards
 #define ENABLE_MOUSE 0
 
 #if(USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
@@ -183,6 +183,10 @@ bool wire0Init = false;
   {
   #include "pico/bootrom.h"
   }
+  #if (ENABLE_MOUSE == 1)
+  #include <JoyMouseRP2040.h>
+  JoyMouseRP2040_ Mouse;
+  #endif
   long bootTimer = 0;
 #endif
 

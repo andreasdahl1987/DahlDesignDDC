@@ -1,4 +1,4 @@
-#if (BOARDTYPE == 0 && ENABLE_MOUSE == 1)
+#if ((BOARDTYPE == 0 || BOARDTYPE == 2) && ENABLE_MOUSE == 1)
 void funkyMouseScroll(int Arow, int Acol, int Bcol, bool reverse)
 {
 	int Row = Arow - 1;
@@ -45,7 +45,7 @@ void funkyMouseScroll(int Arow, int Acol, int Bcol, bool reverse)
 	}
 }
 
-void funkyMouseButton(int row, int column, int aCol, int bCol, int cCol, int dCol, bool RightClick)
+void funkyMouseButton(int row, int column, int aCol, int bCol, int cCol, int dCol, uint8_t b)
 {
 	int Row = row - 1;
 	int Column = column - 1;
@@ -86,12 +86,12 @@ void funkyMouseButton(int row, int column, int aCol, int bCol, int cCol, int dCo
 		{
 			latchLock[Row][Column] = true;
 			latchState[Row][Column] = !latchState[Row][Column];
-			Mouse.click(RightClick ? MOUSE_RIGHT : MOUSE_LEFT);
+			Mouse.click(b);
 		}
 	}
 }
 
-void funkyMouseMove(int row, int column, int pCol, int Col1, int Col2, int Col3, bool Up, bool Down, bool Left, bool Right)
+void funkyMouseMove(int row, int column, int pCol, int Col1, int Col2, int Col3, uint8_t direction)
 {
 	int Row = row - 1;
 	int Column = column - 1;
@@ -122,8 +122,32 @@ void funkyMouseMove(int row, int column, int pCol, int Col1, int Col2, int Col3,
 			float radian = ((globalClock - switchTimer[Row][Column]) << 3) / 3671.;
 			pixels = ceil(pixels * sin(radian));
 		}
-		pixels <<= 1;
-		Mouse.move(Right ? pixels : (Left ? -pixels : 0), Up ? -pixels : (Down ? pixels : 0));
+		switch(masterEncoder) // Optimization for specific speeds
+		{
+			case 100:
+				break;
+			case 200:
+				pixels <<= 1;
+				break;
+			case 400:
+				pixels <<= 2;
+				break;
+			case 800:
+				pixels <<= 3;
+				break;
+			case 1600:
+				pixels <<= 4;
+				break;
+			case 3200:
+				pixels <<= 5;
+				break;
+			case 6400:
+				pixels <<= 6;
+				break;
+			default:
+				pixels *= MOUSESpeed / 100.;
+		}
+		Mouse.move(direction == 1 ? -pixels : (direction == 2 ? pixels : 0), direction == 3 ? -pixels : (direction == 4 ? pixels : 0));
 		toggleTimer[Row][Column] = globalClock;
 	}
 }
