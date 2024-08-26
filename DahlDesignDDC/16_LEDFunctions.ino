@@ -11,6 +11,12 @@ void refreshLEDcalc()
   if(globalClock-simhubDropTimer > 6000) //Simhub makes handshake every 5 seconds
   {
     simhubActive = false;
+    if(simhubCheckIn)
+    {
+      simhubCheckIn = false;
+      LEDStartup(); //Run LEDStartup once if SimHub has disconnected
+    }
+    
   }
 }
 

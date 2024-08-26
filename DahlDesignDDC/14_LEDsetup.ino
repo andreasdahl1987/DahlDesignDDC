@@ -51,6 +51,7 @@
 
 #if (LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT > 0)
     bool simhubActive = false;
+    bool simhubCheckIn = false;
     long LEDRefresh = 0;
     uint8_t LEDCounter = 0;
     unsigned long stripCount = 0;

@@ -204,6 +204,7 @@ void processCommands()
 	if (Serial.available()) 
 	{
 		simhubDropTimer = globalClock;
+		simhubCheckIn = true;
 		
 		char c = (char)Serial.read();
 
