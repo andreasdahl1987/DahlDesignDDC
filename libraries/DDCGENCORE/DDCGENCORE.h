@@ -203,6 +203,8 @@ void processCommands()
 	// Read data
 	if (Serial.available()) 
 	{
+		simhubDropTimer = globalClock;
+		
 		char c = (char)Serial.read();
 
 		if (messageend < 6) {

@@ -8,35 +8,128 @@ void refreshLEDcalc()
     LEDCounter = (LEDCounter + 1) % (stripCount + 1);
     LEDRefresh = globalClock;
   }
+  if(globalClock-simhubDropTimer > 6000) //Simhub makes handshake every 5 seconds
+  {
+    simhubActive = false;
+  }
 }
 
 void SimHubImport()
 {
   if(simhubActive)
   {
-      #if(LED1COUNT > 0)
+  #if(LED1COUNT > 0)
+    uint8_t maskIndex = 0;
     for (uint16_t i = 0; i < LED1COUNT; i++) 
     {
-      LED1.setPixelColor(i, LED1.Color(SH_R_Valid[i], SH_G_Valid[i], SH_B_Valid[i]));
+      if(SH_R_Valid[i]+SH_G_Valid[i]+SH_B_Valid[i] == 0)
+      {
+        if(LEDMask[maskIndex] != i || maskIndex >= LEDMaskCount)
+        {
+        LED1.setPixelColor(i, LED1.Color(SH_R_Valid[i], SH_G_Valid[i], SH_B_Valid[i]));
+        }
+        else
+        {
+          maskIndex++;
+        }
+      }
+      else
+      {
+        LED1.setPixelColor(i, LED1.Color(SH_R_Valid[i], SH_G_Valid[i], SH_B_Valid[i]));
+      }
     }
   #endif
+  
   #if(LED2COUNT > 0)
-    for (uint16_t i = 0; i < LED2COUNT; i++) 
+  uint8_t maskIndex2 = 0;
+  for(int i = 0, i<LEDMaskCount;i++)
+  {
+    if(LEDMask[i] < LED1Count)
+    {
+      maskIndex2++;
+    }
+  }
+  for (uint16_t i = 0; i < LED2COUNT; i++) 
+  {
+    uint8_t LEDnum = i+LED1COUNT;
+    if(SH_R_Valid[LEDnum]+SH_G_Valid[LEDnum]+SH_B_Valid[LEDnum] == 0)
+    {
+      if(LEDMask[maskIndex2] != (LED1COUNT+i) || maskIndex2 >= LEDMaskCount)
+      {
+        LED2.setPixelColor(i, LED2.Color(SH_R_Valid[LED1COUNT+i], SH_G_Valid[LED1COUNT+i], SH_B_Valid[LED1COUNT+i]));
+      }
+      else
+      {
+        maskIndex2++;
+      }
+    }
+    else
     {
       LED2.setPixelColor(i, LED2.Color(SH_R_Valid[LED1COUNT+i], SH_G_Valid[LED1COUNT+i], SH_B_Valid[LED1COUNT+i]));
     }
-  #endif
-  #if(LED3COUNT > 0)
-  for (uint16_t i = 0; i < LED3COUNT; i++) 
-  {
-    LED3.setPixelColor(i, LED3.Color(SH_R_Valid[LED1COUNT+LED2COUNT+i], SH_G_Valid[LED1COUNT+LED2COUNT+i], SH_B_Valid[LED1COUNT+LED2COUNT+i]));
   }
   #endif
-  #if(LED4COUNT > 0)
-    for (uint16_t i = 0; i < LED4COUNT; i++) 
+  
+  #if(LED3COUNT > 0)
+  uint8_t maskIndex3 = 0;
+ 
+  for(int i = 0, i<LEDMaskCount;i++)
+  {
+    if(LEDMask[i] < (LED1COUNT+LED2COUNT))
     {
-      LED4.setPixelColor(i, LED4.Color(SH_R_Valid[LED1COUNT+LED2COUNT+LED3COUNT+i], SH_G_Valid[LED1COUNT+LED2COUNT+LED3COUNT+i], SH_B_Valid[LED1COUNT+LED2COUNT+LED3COUNT+i]));
+      maskIndex3++;
     }
+  }
+  for (uint16_t i = 0; i < LED3COUNT; i++) 
+  {
+    uint8_t LEDnum = i+LED1COUNT+LED2COUNT;
+    if(SH_R_Valid[LEDnum]+SH_G_Valid[LEDnum]+SH_B_Valid[LEDnum] == 0)
+    {
+      if(LEDMask[maskIndex3] != LEDnum || maskIndex3 >= LEDMaskCount)
+      {
+        LED3.setPixelColor(i, LED3.Color(SH_R_Valid[LEDnum], SH_G_Valid[LEDnum], SH_B_Valid[LEDnum]));
+      }
+      else
+      {
+        maskIndex3++;
+      }
+    }
+    else
+    {
+      LED3.setPixelColor(i, LED3.Color(SH_R_Valid[LEDnum], SH_G_Valid[LEDnum], SH_B_Valid[LEDnum]));
+    }
+  }
+  #endif
+  
+  #if(LED4COUNT > 0)
+  uint8_t maskIndex4 = 0;
+ 
+  for(int i = 0, i<LEDMaskCount;i++)
+  {
+    if(LEDMask[i] < (LED1COUNT+LED2COUNT+LED3COUNT))
+    {
+      maskIndex4++;
+    }
+  }
+  for (uint16_t i = 0; i < LED4COUNT; i++) 
+  {
+    uint8_t LEDnum = i+LED1COUNT+LED2COUNT+LED3COUNT;
+    if(SH_R_Valid[LEDnum]+SH_G_Valid[LEDnum]+SH_B_Valid[LEDnum] == 0)
+    {
+      if(LEDMask[maskIndex4] != LEDnum || maskIndex4 >= LEDMaskCount)
+      {
+        LED4.setPixelColor(i, LED4.Color(SH_R_Valid[LEDnum], SH_G_Valid[LEDnum], SH_B_Valid[LEDnum]));
+      }
+      else
+      {
+        maskIndex4++;
+      }
+    }
+    else
+    {
+      LED4.setPixelColor(i, LED4.Color(SH_R_Valid[LEDnum], SH_G_Valid[LEDnum], SH_B_Valid[LEDnum]));
+    }
+  }
   #endif
   }
 }

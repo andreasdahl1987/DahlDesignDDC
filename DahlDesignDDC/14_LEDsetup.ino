@@ -11,7 +11,7 @@
 // ---------------------------- STRIP #1 SETUP -------------------------------
 //----------------------------------------------------------------------------
 
-#define LED1COUNT 100
+#define LED1COUNT 66
 #define LED1PIN 25
 #define LED1TYPE NEO_GRB + NEO_KHZ800
 #define LED1REVERSE 0
@@ -53,7 +53,8 @@
     bool simhubActive = false;
     long LEDRefresh = 0;
     uint8_t LEDCounter = 0;
-    uint8_t stripCount = 0;
+    unsigned long stripCount = 0;
+    long simhubDropTimer = 0;
     
     uint8_t SH_R[LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT];
     uint8_t SH_R_Valid[LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT];
