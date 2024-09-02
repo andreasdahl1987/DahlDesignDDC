@@ -32,7 +32,7 @@ void SimHubImport()
       {
         if(LEDMask[maskIndex] != i || maskIndex >= LEDMaskCount)
         {
-        LED1.setPixelColor(i, LED1.Color(SH_R_Valid[i], SH_G_Valid[i], SH_B_Valid[i]));
+        LED1.setPixelColor(i, SH_R_Valid[i], SH_G_Valid[i], SH_B_Valid[i]);
         }
         else
         {
@@ -41,7 +41,7 @@ void SimHubImport()
       }
       else
       {
-        LED1.setPixelColor(i, LED1.Color(SH_R_Valid[i], SH_G_Valid[i], SH_B_Valid[i]));
+        LED1.setPixelColor(i, SH_R_Valid[i], SH_G_Valid[i], SH_B_Valid[i]);
       }
     }
   #endif
@@ -62,7 +62,7 @@ void SimHubImport()
     {
       if(LEDMask[maskIndex2] != (LED1COUNT+i) || maskIndex2 >= LEDMaskCount)
       {
-        LED2.setPixelColor(i, LED2.Color(SH_R_Valid[LED1COUNT+i], SH_G_Valid[LED1COUNT+i], SH_B_Valid[LED1COUNT+i]));
+        LED2.setPixelColor(i, SH_R_Valid[LED1COUNT+i], SH_G_Valid[LED1COUNT+i], SH_B_Valid[LED1COUNT+i]);
       }
       else
       {
@@ -71,7 +71,7 @@ void SimHubImport()
     }
     else
     {
-      LED2.setPixelColor(i, LED2.Color(SH_R_Valid[LED1COUNT+i], SH_G_Valid[LED1COUNT+i], SH_B_Valid[LED1COUNT+i]));
+      LED2.setPixelColor(i, SH_R_Valid[LED1COUNT+i], SH_G_Valid[LED1COUNT+i], SH_B_Valid[LED1COUNT+i]);
     }
   }
   #endif
@@ -93,7 +93,7 @@ void SimHubImport()
     {
       if(LEDMask[maskIndex3] != LEDnum || maskIndex3 >= LEDMaskCount)
       {
-        LED3.setPixelColor(i, LED3.Color(SH_R_Valid[LEDnum], SH_G_Valid[LEDnum], SH_B_Valid[LEDnum]));
+        LED3.setPixelColor(i, SH_R_Valid[LEDnum], SH_G_Valid[LEDnum], SH_B_Valid[LEDnum]);
       }
       else
       {
@@ -102,7 +102,7 @@ void SimHubImport()
     }
     else
     {
-      LED3.setPixelColor(i, LED3.Color(SH_R_Valid[LEDnum], SH_G_Valid[LEDnum], SH_B_Valid[LEDnum]));
+      LED3.setPixelColor(i, SH_R_Valid[LEDnum], SH_G_Valid[LEDnum], SH_B_Valid[LEDnum]);
     }
   }
   #endif
@@ -124,7 +124,7 @@ void SimHubImport()
     {
       if(LEDMask[maskIndex4] != LEDnum || maskIndex4 >= LEDMaskCount)
       {
-        LED4.setPixelColor(i, LED4.Color(SH_R_Valid[LEDnum], SH_G_Valid[LEDnum], SH_B_Valid[LEDnum]));
+        LED4.setPixelColor(i, SH_R_Valid[LEDnum], SH_G_Valid[LEDnum], SH_B_Valid[LEDnum]);
       }
       else
       {
@@ -133,7 +133,7 @@ void SimHubImport()
     }
     else
     {
-      LED4.setPixelColor(i, LED4.Color(SH_R_Valid[LEDnum], SH_G_Valid[LEDnum], SH_B_Valid[LEDnum]));
+      LED4.setPixelColor(i, SH_R_Valid[LEDnum], SH_G_Valid[LEDnum], SH_B_Valid[LEDnum]);
     }
   }
   #endif
