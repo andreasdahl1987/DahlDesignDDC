@@ -20,7 +20,9 @@ void loop()
     #if(BOARDTYPE == 0)
       processCommands();
     #endif
+    #if(ECOLED == 0)
     LEDBottom();
+    #endif
     LEDTop();
   #endif
 

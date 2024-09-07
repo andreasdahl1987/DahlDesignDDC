@@ -1,15 +1,17 @@
 void LEDTop()
 {
-  if(LEDCounter == 0)
+#if (LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT > 0)
+  if(LEDCounter == 0 || ecoTrig)
   {
+    #if (ECOLED == 0)
     SimHubImport(); 
+    #endif
 //----------------------------------------------------------------------------
 // ------------------------ LED CALLS START HERE------------------------------
 //----------------------------------------------------------------------------
 
 
-triggerLED(0,14,modButtonPressed(),0x000000,0,false);
-triggerLED(5,9,modButtonPressed(),0xff8000,30,false,true,500,500);
+
 
 
 
@@ -19,6 +21,12 @@ triggerLED(5,9,modButtonPressed(),0xff8000,30,false,true,500,500);
 
   }
 
+  if (ecoTrig)
+  {
+    ecoTrig = false;
+  }
+#endif
+  
   #if(LED1COUNT > 0 && !strip1Block)
     if(LEDCounter == 1)
     {

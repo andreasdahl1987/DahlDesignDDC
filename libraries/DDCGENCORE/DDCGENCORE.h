@@ -67,15 +67,23 @@ void readStrip()
 
 		if (LED1REVERSE == 1)
 		{
+			#if (ECOLED == 0)
 			SH_R[LED1COUNT - 1 - i] = r;
 			SH_G[LED1COUNT - 1 - i] = g;
 			SH_B[LED1COUNT - 1 - i] = b;
+			#else
+			LED1.setPixelColor(LED1COUNT - 1 - i, r, g, b);
+			#endif
 		}
 		else 
 		{
+			#if (ECOLED == 0)
 			SH_R[i] = r;
 			SH_G[i] = g;
 			SH_B[i] = b;
+			#else
+			LED1.setPixelColor(i, r, g, b);
+			#endif
 		}
 	}
 	#endif
@@ -89,15 +97,24 @@ void readStrip()
 
 		if (LED2REVERSE == 1)
 		{	
+			#if (ECOLED == 0)
 			SH_R[LED1COUNT + LED2COUNT - 1 - i] = r;
 			SH_G[LED1COUNT + LED2COUNT - 1 - i] = g;
 			SH_B[LED1COUNT + LED2COUNT - 1 - i] = b;
+			#else
+			LED2.setPixelColor(LED2COUNT - 1 - i, r, g, b);
+			#endif
+			
 		}
 		else 
 		{
+			#if (ECOLED == 0)
 			SH_R[LED1COUNT + i] = r;
 			SH_G[LED1COUNT + i] = g;
 			SH_B[LED1COUNT + i] = b;
+			#else
+			LED2.setPixelColor(i, r, g, b);
+			#endif
 		}
 	}
 	#endif
@@ -111,15 +128,23 @@ void readStrip()
 
 		if (LED3REVERSE == 1)
 		{
+			#if(ECOLED == 0)
 			SH_R[LED1COUNT + LED2COUNT + LED3COUNT - 1 - i] = r;
 			SH_G[LED1COUNT + LED2COUNT + LED3COUNT - 1 - i] = g;
 			SH_B[LED1COUNT + LED2COUNT + LED3COUNT - 1 - i] = b;
+			#else
+			LED3.setPixelColor(LED3COUNT - 1 - i, r, g, b);
+			#endif
 		}
 		else 
 		{
+			#if(ECOLED == 0)
 			SH_R[LED1COUNT + LED2COUNT + i] = r;
 			SH_G[LED1COUNT + LED2COUNT + i] = g;
 			SH_B[LED1COUNT + LED2COUNT + i] = b;
+			#else
+			LED3.setPixelColor(i, r, g, b);
+			#endif
 		}
 	}
 	#endif
@@ -133,20 +158,29 @@ void readStrip()
 
 		if (LED4REVERSE == 1)
 		{
+			#if(ECOLED == 0)
 			SH_R[LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT - 1 - i] = r;
 			SH_G[LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT - 1 - i] = g;
 			SH_B[LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT - 1 - i] = b;
+			#else
+			LED4.setPixelColor(LED4COUNT - 1 - i, r, g, b);
+			#endif
 		}
 		else 
 		{
+			#if(ECOLED == 0)
 			SH_R[LED1COUNT + LED2COUNT + LED3COUNT + i] = r;
 			SH_G[LED1COUNT + LED2COUNT + LED3COUNT + i] = g;
 			SH_B[LED1COUNT + LED2COUNT + LED3COUNT + i] = b;
+			#else
+			LED4.setPixelColor(i, r, g, b);
+			#endif
 		}
 	}
 	#endif
 
 }
+
 
 void readLeds() {
 
@@ -160,6 +194,7 @@ void readLeds() {
 	}
 	if (valid) 
 	{
+		#if(ECOLED == 0)
 		simhubActive = true;
 		for(int i = 0; i < LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT; i++ )
 		{
@@ -167,6 +202,10 @@ void readLeds() {
 			SH_G_Valid[i] = SH_G[i];
 			SH_B_Valid[i] = SH_B[i];
 		}
+		#else
+		ecoTrig = true;
+		LEDTop();
+		#endif
 	}
 }
 

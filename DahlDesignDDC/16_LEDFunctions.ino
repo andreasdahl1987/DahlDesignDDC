@@ -1,6 +1,10 @@
 // ---------------------------------------------------------------------
 // -----------------------------GLOBALS---------------------------------
 // ---------------------------------------------------------------------
+
+
+#if (LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT > 0)
+
 void refreshLEDcalc()
 {
   if(globalClock-LEDRefresh > (7-stripCount))
@@ -20,6 +24,7 @@ void refreshLEDcalc()
   }
 }
 
+#if (ECOLED == 0)
 void SimHubImport()
 {
   if(simhubActive)
@@ -139,6 +144,9 @@ void SimHubImport()
   #endif
   }
 }
+#endif
+
+#endif
 
 
 // ---------------------------------------------------------------------
