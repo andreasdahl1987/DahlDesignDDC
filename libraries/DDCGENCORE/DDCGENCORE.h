@@ -285,15 +285,7 @@ void processCommands()
 			command = "";
 			messageend = 0;
 		}
-		/*
-		#if (BOARDTYPE == 2)
-			#if(USING_CB1 == 1)
-			delayMicroseconds(100); //Stability between cores on CB1.
-			#else
-			delayMicroseconds(500); //Stability between cores on regular RP2040 board.
-			#endif
-		#endif
-		*/
+
 
 	}
 }
