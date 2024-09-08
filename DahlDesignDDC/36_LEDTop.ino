@@ -1,30 +1,54 @@
 void LEDTop()
 {
+#if (LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT > 0)
+  if(LEDCounter == 0 || ecoTrig)
+  {
+    #if (ECOLED == 0)
+    SimHubImport(); 
+    #endif
+//----------------------------------------------------------------------------
+// ------------------------ LED CALLS START HERE------------------------------
+//----------------------------------------------------------------------------
+
+
+
+
+
+
+//----------------------------------------------------------------------------
+// ------------------------ LED CALLS END HERE--------------------------------
+//----------------------------------------------------------------------------
+
+  }
+
+  if (ecoTrig)
+  {
+    ecoTrig = false;
+  }
+#endif
   
-  /*
-  *Here goes LED calls that you want to refresh constantly, and will overwrite both LEDStartup and LEDBottom calls as well as SimHub LED control. 
-  */
-
-  //LED CALLS STARTS HERE
-
-
-
-
-
-
-  //LED CALLS STOP HERE
-
   #if(LED1COUNT > 0 && !strip1Block)
-    LED1.show();
+    if(LEDCounter == 1)
+    {
+      LED1.show();
+    }
   #endif
   #if(LED2COUNT > 0)
-    LED2.show();
+    if(LEDCounter == 2)
+    {
+      LED2.show();
+    }
   #endif
   #if(LED3COUNT > 0)
-    LED3.show();
+    if(LEDCounter == 3)
+    {
+      LED3.show();
+    }
   #endif
   #if(LED4COUNT > 0)
-    LED4.show();
+    if(LEDCounter == 4)
+    {
+      LED4.show();
+    }
   #endif
-
 }
