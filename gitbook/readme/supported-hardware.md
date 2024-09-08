@@ -20,7 +20,7 @@ If you have a switch that doesnt work with DDC, make an[ issue rapport ](https:/
 ### **LED**
 
 * Any addressable RGB (not RGBW) LED that is supported by the [Adafruit Neopixel library. ](https://github.com/adafruit/Adafruit\_NeoPixel)
-* Analog LEDs using PWM
+* Analog LEDs using PWM or digital output.
 
 ### Integrated circuits
 
@@ -38,8 +38,4 @@ If you have a switch that doesnt work with DDC, make an[ issue rapport ](https:/
 ### Circuit control
 
 * Controlling other circuits, DC motors and more using PWM.
-
-
-
-###
 

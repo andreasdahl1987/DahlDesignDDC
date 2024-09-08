@@ -1,3 +1,7 @@
+---
+icon: books
+---
+
 # Switch library
 
 ## Functions

@@ -1,52 +1,69 @@
 # Firmware control
 
-DDC offers unlimited customization of LEDs. All 24-bit colors, setting different brightness for each and every LED if you want to.&#x20;
+DDC offers a high degree customization of LEDs, working alone or in harmony with your SimHub LED profile. All 24-bit colors, setting different brightness for each and every LED if you want to. Use the [LED functions](led-functions.md) to control them.&#x20;
 
-LED commands are written in 3 different tabs:
+There are 3 layers of firmware LED control (Startup, Bottom and Top) and 2 layers of SimHub LED control (Mask and SimHub). The SimHub layers will not be active until SimHub is open and you've made [contact with the controller.](../simhub-control.md)
 
-* 34\_LEDStartup
-* 35\_LEDBottom
-* 36\_LEDTop
+_The LED system uses a fair bit of dynamic memory. In some cases too much for the 32U4-based boards to handle. You can save a lot of memory by setting `#define ECOLED` to 1 in `2_Boards.ino.` The downside being that LEDBottom() is deactivated._&#x20;
 
-Allowing you to setup LED calls on start up, LED calls that are below (overwritten by) SimHub, and LED calls above SimHub (overwrites SimHub).&#x20;
 
-This is how they relate to eachother and SimHub:
 
-<figure><img src="../../../../.gitbook/assets/image (8) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
-To explain the flowchart above:
+The 5 layers will apply one after the other, the next overwriting the former.
 
-* LEDStartup will send all its commands to your LEDs only once - on powering the controller. Never again.
-* LEDBottom and LEDTop will refresh constantly, together with input from SimHub (if connected):
-  * LEDBottom calls are made first, but no undate of LEDs
-  * If SimHub is connected, it will then clear all LEDs it has access to (can be controlled by setting strips to [PRIVATE](../#14\_ledsetup.ino)) It will update LEDs with whetever SImHub has been set up with, but still nothing is actually sent to the LEDs.
-  * LEDTop will overwrite any changes made, including what SimHub did, but only affeecting the LEDs you're making calls to.&#x20;
-  * In the end the data is sent to the LEDs.&#x20;
-* SimHub doesnt sent LED data at the same frequency as your LED data is updated in the frmware. SimHub only sends LED data when there are changes. This means that most loops of LED refreshing will be without the SimHub data. That makes the LEDBottom bleed through. To fix this, DDC sets LEDBottom on a cooldown whenever new data from SimHub arrives. By default this is set to 1000 ms (1 second). The setting is called `DROPOUTTIMER.`It can be adjusted under 12\_GlobalVariables:
+* **LEDStartup** will send all its commands to your LEDs **only once** - on booting the controller. It will also send all commands only once after SimHub is closed.&#x20;
+* **LEDBottom** update LEDs constantly, at roughly 60 Hz.
+* **Mask** join the party when SimHub is connected, and will by default turn off all LEDs, leaving a blank canvas for the SimHub layer. You can however punch holes in the mask for the layers below to shine through.
+* **SimHub** layer is built in the SimHub RGB editor and will along with the mask update at 60 Hz.&#x20;
+* **LEDTop** update LEDs constantly, at roughly 60 Hz.
 
-<figure><img src="../../../../.gitbook/assets/image (14) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+The purpose of LEDStartup over LEDBottom is that you'll be saving a lot of processing power if these LEDs don't need constant updating. A good example is a backlit button box with static colors.&#x20;
+
+Using the figure above, we'll go through the tabs where you set up firmware LED control:
+
+### 15\_LEDMask.ino
+
+```
+#if (LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT > 0)
+
+//------------------------------------------------------------------
+//--------------LIST LEDS THAT SHINE THROUGH THE MASK---------------
+//------------------------------------------------------------------
+
+
+uint8_t LEDMask[] = {0, 3, 7};
+
+
+//------------------------------------------------------------------
+//--------------LIST LEDS THAT SHINE THROUGH THE MASK---------------
+//------------------------------------------------------------------
+
+
+uint8_t LEDMaskCount = sizeof(LEDMask);
+
+#endif
+```
+
+This is where you make holes in the mask. Simply list the LED numbers that will shine through the mask. As in the figure above, there are holes in the mask for LEDs 0, 3 and 7.&#x20;
 
 ### 34\_LEDStartup.ino
 
 ```
 void LEDStartup()
 {
+//----------------------------------------------------------------------------
+// ------------------------ LED CALLS START HERE------------------------------
+//----------------------------------------------------------------------------
 
-  /*
-  *Here goes all LED calls that you only want to run on startup, or calls that only needs to be run on startup. 
-  *Best suited for completely static lighting, such as backlighting. 
-  *When connecting to SimHub, these LEDs will all be wiped black.
-  *Any LED control that is done here instead of in LEDTop or LEDBottom will save a lot of processing power.
-  */
 
-   //LED CALLS STARTS HERE
-
-  colorLED(0,5,0xFF08F0, 40);
-  colorLED(6,11,0x0000FF,45);
-  colorLED(12,17,0x08FF00,37);
+  colorLED(3, 6, 0xFFFF00, 40);
+  colorLED(7, 7, 0xADD8E6, 40);
   
 
-  //LED CALLS STOP HERE
+//----------------------------------------------------------------------------
+// ------------------------ LED CALLS END HERE--------------------------------
+//----------------------------------------------------------------------------
 
   #if(LED1COUNT > 0)
     LED1.show();
@@ -64,130 +81,79 @@ void LEDStartup()
 }
 ```
 
-It is clearly shown where the LED calls should be written. The ones written here are covered under [LED functions.](led-functions.md) LEDStartup is great for starting backlights on a controller before/without using SimHub. Keep in mind that since this is only run once, no blinking or conditional coloring is possible.&#x20;
+[LED functions](led-functions.md) are used in tab 34-36 to manipulate the RGB LEDs. To follow the example at the top of the page we're turning LEDs 3-6 yellow (hex color FFFF00) and LED 7 light blue (hex color ADD8E6). Both are set to 40% relative brightness. Keep in mind that in LEDStartup, colorLED() is the only function that will work, since it is only run once and can't react to anything like triggerLED(), rotaryLED() and biteLED().&#x20;
 
 ### 35\_LEDBottom.ino
 
 ```
 void LEDBottom()
 {
-
-    /*
-   * These LED calls will overwrite LEDStartup, but in turn will be overwritten by SimHub LED control and again by LEDTop.
-   * Whenever SimHub sends LED commands, the whole LED strip will be wiped black, not only the LEDs used by SimHub. 
-   * When SimHub hasnt send LED commands for 1 second, LEDBottom will start working again
-   */
-
+  if(LEDCounter == 0)
+  {
 //----------------------------------------------------------------------------
-// ------------------------------- STRIP #1-----------------------------------
+// ------------------------ LED CALLS START HERE------------------------------
 //----------------------------------------------------------------------------
 
-  #if(LED1COUNT > 0)
-    if ((!Serial.available() && globalClock - LEDSerialDropout > DROPOUTTIMER) || LED1PRIVATE == 1)
-    {
-    //LED CALLS STARTS HERE
 
-    triggerLED(0,4,true,0x00FF00,60,true,true,200,500);
-    triggerLED(5,5,buttonPressed(3,4),0xFF00FF,40);
+triggerLED(2, 5, true, 0x00FF00, 40, true, true, 750, 250);
 
-
-    //LED CALLS STOP HERE
-    }
-  #endif
 
 //----------------------------------------------------------------------------
-// ------------------------------- STRIP #2-----------------------------------
+// ------------------------ LED CALLS END HERE--------------------------------
 //----------------------------------------------------------------------------
-
-  #if(LED2COUNT > 0)
-    if ((!Serial.available() && globalClock - LEDSerialDropout > DROPOUTTIMER) || LED2PRIVATE == 1)
-    {
-    //LED CALLS STARTS HERE
-
-    colorLED2(0,5,0xFF08F0, 40);
-    colorLED2(6,11,0x0000FF,45);
-    colorLED2(12,17,0x08FF00,37);
-
-
-    //LED CALLS STOP HERE
-    }
-  #endif
-
-//----------------------------------------------------------------------------
-// ------------------------------- STRIP #3-----------------------------------
-//----------------------------------------------------------------------------
-
-  #if(LED3COUNT > 0)
-    if ((!Serial.available() && globalClock - LEDSerialDropout > DROPOUTTIMER) || LED3PRIVATE == 1)
-    {
-    //LED CALLS STARTS HERE
-
-
-
-
-
-    //LED CALLS STOP HERE
-    }
-  #endif
-
-//----------------------------------------------------------------------------
-// ------------------------------- STRIP #4-----------------------------------
-//----------------------------------------------------------------------------
-
-  #if(LED4COUNT > 0)
-    if ((!Serial.available() && globalClock - LEDSerialDropout > DROPOUTTIMER) || LED4PRIVATE == 1)
-    {
-    //LED CALLS STARTS HERE
-
-
-
-
-
-    //LED CALLS STOP HERE
-    }
-  #endif
+ }
 }
 ```
 
-LED\_Bottom() has a slot or every LED strip. This is related to the cooldown SimHub puts this function on, and allowing private LED strips to negate the cooldown. The LED functions written here are covered under [LED functions.](led-functions.md) One of the functions also uses a [trigger.](../../../advanced/conditional-coding/triggers.md)
-
-Out of the three, this is probably the least useful - but it's nice to have options!
+As in the figure at the top, we're lighting up LEDs 2-5 green (hex color 00FF00). In this case, we're making the LEDs blink, so we're using [triggerLED() ](led-functions.md#triggerled)instead of colorLED().&#x20;
 
 ### 36\_LEDTop.ino
 
 ```
 void LEDTop()
 {
-  
-  /*
-  *Here goes LED calls that you want to refresh constantly, and will overwrite both LEDStartup and LEDBottom calls as well as SimHub LED control. 
-  */
-
-   //LED CALLS STARTS HERE
-
-  rotaryLED(1,0,12,0xFF00F0,50,0,false);
-  rotaryLED(2,12,12,0x00FF00,50,0,false);
-  rotaryLED(3,24,12,0x0000FF,50,0,false);
-  rotaryLED(4,36,12,0x00F0FF,50,0,false);
-  rotaryLED(5,48,12,0x80F008,50,0,false);
+  if(LEDCounter == 0)
+  {
+    SimHubImport(); 
+//----------------------------------------------------------------------------
+// ------------------------ LED CALLS START HERE------------------------------
+//----------------------------------------------------------------------------
 
 
-  //LED CALLS STOP HERE
+colorLED(1, 2, 0xFF00FF, 40);
 
-  #if(LED1COUNT > 0)
-    LED1.show();
+
+//----------------------------------------------------------------------------
+// ------------------------ LED CALLS END HERE--------------------------------
+//----------------------------------------------------------------------------
+  }
+
+  #if(LED1COUNT > 0 && !strip1Block)
+    if(LEDCounter == 1)
+    {
+      LED1.show();
+    }
   #endif
   #if(LED2COUNT > 0)
-    LED2.show();
+    if(LEDCounter == 2)
+    {
+      LED2.show();
+    }
   #endif
   #if(LED3COUNT > 0)
-    LED3.show();
+    if(LEDCounter == 3)
+    {
+      LED3.show();
+    }
   #endif
   #if(LED4COUNT > 0)
-    LED4.show();
+    if(LEDCounter == 4)
+    {
+      LED4.show();
+    }
   #endif
 
 }
 ```
 
-LEDTop() is likely the most useful out of the three functions. It starts as soon as the controller is poewred up, and it will overwrite SimHub - only on the LEDs that you write functions to. Functions like triggerLED() will allow you to keep your LED call silent untill you need it, and then it will not be silenced by SimHub. The LED functions written here are covered under [LED functions.](led-functions.md)
+As in the figure at the top, we're making LEDs 1-2 purple (hex color FF00FF).&#x20;

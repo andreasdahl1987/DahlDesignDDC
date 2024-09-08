@@ -10,7 +10,7 @@ When your switch has its own channel, you'll have the freedom of tapping into th
 
 When planning your analog channels, there are 3 things you should note for each channel:
 
-* _Pin number:_ The analog pin this switch is wired to
+* _Pin number:_ The analog pin this switch is wired to.
 * _Button number:_ In case this switch needs some buttons numbers, note the starting button number. So if this is a 12-position switch and you want it to use button numbers 25-36, then **25 i**s your number.
 * _Alternate button number:_ In case your switch has several switch modes, you can use different button numbers in different modes. For instance, you can have your 12-position switch using button numbers 25-36 in 12-position mode, but when set to incremental mode it uses button number 10 and 11. As above, the starting button number is what you should note, so **10** in this case.
 
