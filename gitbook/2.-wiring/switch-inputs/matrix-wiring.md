@@ -6,7 +6,7 @@ The disadvantage is the required diodes for every switch and more complex wiring
 
 ### Find your pins
 
-DDC is built around planning a table of switches, so naturally, when wiring the switches as a matrix, you'll just follow the the way you've planned it. Lets say your swktch table consists of 4 rows and 5 columns. First thing is to determine which pins you're using. For these 4 rows and 5 columns, that's 9 pins.
+DDC is built around planning a table of switches, so naturally, when wiring the switches as a matrix, you'll just follow the the way you've planned it. Lets say your switch table consists of 4 rows and 5 columns. First thing is to determine which pins you're using. For these 4 rows and 5 columns, that's 9 pins.
 
 ![image](https://user-images.githubusercontent.com/40788634/191264509-81f46a6d-717b-4161-877f-08c584dd9ce1.png)
 
@@ -33,7 +33,7 @@ A wire goes from a column pin on the microcontroller --> to a diode --> to a swi
 
 ![image](https://user-images.githubusercontent.com/40788634/191911791-0806dfa1-8cc0-46e5-9e9a-5c34201ae337.png)
 
-* Adding switch with matrix adress (2,3) or Row 2 Column 1:
+* Adding switch with matrix adress (2,1) or Row 2 Column 1:
 
 ![image](https://user-images.githubusercontent.com/40788634/191918120-692afc6a-0ccd-4189-ba54-98712ffb21ce.png)
 
@@ -44,7 +44,7 @@ A wire goes from a column pin on the microcontroller --> to a diode --> to a swi
 
 ![image](https://user-images.githubusercontent.com/40788634/191294795-0d567703-327c-414a-9746-c89d22e52d15.png)
 
-As a general rule, all COMMON pins should go to a row. So pin A and B are on the column side (with a diode between column pin and the switch pins) and C goes to a row pin. This is why an encoder in the matrix setup take up two blocks (two columns) on the same row. And since no switches have more than one common (except encoders with pushbutton and 7-way switches, but these can also be regarded as two seperate switches), no switches can have more than one pin that goes to a row.
+As a general rule, all COMMON pins should go to a row. So pin A and B are on the column side (with a diode between microcontroller column pin and the switch column pins, facing in the switch's direction) and C goes to a row pin. This is why an encoder in the matrix setup take up two blocks (two columns) on the same row. And since no switches have more than one common (except encoders with pushbutton and 7-way switches, but these can also be regarded as two seperate switches), no switches can have more than one pin that goes to a row.
 
 ![image](https://user-images.githubusercontent.com/40788634/191298094-966a7953-8e6e-41c3-9f93-18c4c783eafe.png)
 

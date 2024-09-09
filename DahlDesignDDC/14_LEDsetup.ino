@@ -50,10 +50,24 @@
 //----------------------------------------------------------------------------
 
 #if (LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT > 0)
-    #if (BOARDTYPE == 2)
+
+    #if(ECOLED == 0)    
     uint8_t SH_R[LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT];
+    uint8_t SH_R_Valid[LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT];
     uint8_t SH_G[LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT];
+    uint8_t SH_G_Valid[LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT];
     uint8_t SH_B[LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT];
+    uint8_t SH_B_Valid[LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT];
     #endif
+    
+    bool simhubActive = false;
+    bool simhubCheckIn = false;
+        
+    long LEDRefresh = 0;
+    uint8_t LEDCounter = 0;
+    unsigned long stripCount = 0;
+    long simhubDropTimer = 0;
+
+    bool ecoTrig = false;
     #include <DDCGENCORE.h>
 #endif

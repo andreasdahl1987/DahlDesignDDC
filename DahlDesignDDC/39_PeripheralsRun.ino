@@ -572,7 +572,7 @@ void ADS1115Run(int chipNumber, int channelCount, int rate, int gain)
       Wire1.write(0b00000000);
       Wire1.endTransmission();
   
-      uint8_t valAddress = (4*Chip)+ADS1115channelCounter[Chip];
+      uint8_t valAddress = (4*(Chip+ENABLE_OVERSAMPLING))+ADS1115channelCounter[Chip];
       
       Wire1.requestFrom(address, 2);
       ADS1115value[valAddress]= Wire1.read()<<8;
@@ -614,7 +614,7 @@ void ADS1115Run(int chipNumber, int channelCount, int rate, int gain)
         Wire1.write(0b00000000);
         Wire1.endTransmission();
   
-        uint8_t valAddress = (4*Chip)+ADS1115channelCounter[Chip];
+        uint8_t valAddress = (4*(Chip+ENABLE_OVERSAMPLING))+ADS1115channelCounter[Chip];
         
         Wire1.requestFrom(address, 2);
         ADS1115value[valAddress]= Wire1.read()<<8;
@@ -655,11 +655,12 @@ void ADS1115Run(int chipNumber, int channelCount, int rate, int gain)
  
     if (ADS1115sentReq[Chip] && digitalRead(ADS1115_alertPins[Chip]) == 0)
     {
+
       Wire.beginTransmission(address);
       Wire.write(0b00000000);
       Wire.endTransmission();
   
-      uint8_t valAddress = (4*Chip)+ADS1115channelCounter[Chip];
+      uint8_t valAddress = (4*(Chip+ENABLE_OVERSAMPLING))+ADS1115channelCounter[Chip];
       
       Wire.requestFrom(address, 2);
       ADS1115value[valAddress]= Wire.read()<<8;
@@ -701,7 +702,7 @@ void ADS1115Run(int chipNumber, int channelCount, int rate, int gain)
         Wire.write(0b00000000);
         Wire.endTransmission();
   
-        uint8_t valAddress = (4*Chip)+ADS1115channelCounter[Chip];
+        uint8_t valAddress = (4*(Chip+ENABLE_OVERSAMPLING))+ADS1115channelCounter[Chip];
         
         Wire.requestFrom(address, 2);
         ADS1115value[valAddress]= Wire.read()<<8;

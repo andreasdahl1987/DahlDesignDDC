@@ -1,20 +1,19 @@
 void LEDStartup()
 {
-
-  /*
-  *Here goes all LED calls that you only want to run on startup, or calls that only needs to be run on startup. 
-  *Best suited for completely static lighting, such as backlighting. 
-  *When connecting to SimHub, these LEDs will all be wiped black.
-  *Any LED control that is done here instead of in LEDTop or LEDBottom will save a lot of processing power.
-  */
-
-   //LED CALLS STARTS HERE
+#if (LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT > 0)
+//----------------------------------------------------------------------------
+// ------------------------ LED CALLS START HERE------------------------------
+//----------------------------------------------------------------------------
 
 
 
 
+  
 
-  //LED CALLS STOP HERE
+//----------------------------------------------------------------------------
+// ------------------------ LED CALLS END HERE--------------------------------
+//----------------------------------------------------------------------------
+#endif
 
   #if(LED1COUNT > 0)
     LED1.show();

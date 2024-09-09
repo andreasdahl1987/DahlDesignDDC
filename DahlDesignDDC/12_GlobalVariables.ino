@@ -102,13 +102,9 @@ unsigned long globalClock;
 #define clutchBottomDeadzone 10
 
 //LED setup
-bool LEDlock = false;
 int8_t LEDBrightness = 25;
-long LEDSerialDropout = 0;
-#define DROPOUTTIMER 1000
-#define SHCOOLDOWN 4
 
-#if (ENABLE_MOUSE == 1)
 //Mouse setup
+#if (ENABLE_MOUSE == 1)
 uint16_t MOUSESpeed = 200; // 100 (1080p or less), 200 (1440p), 400 (4k), 800 (8k)
 #endif
