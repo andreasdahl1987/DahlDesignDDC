@@ -729,3 +729,41 @@ void ADS1115Run(int chipNumber, int channelCount, int rate, int gain)
 }
 
 #endif //Using ADS1115
+
+#if (USING_SSD1306 == 1)
+
+ void tcaselect(uint8_t i) 
+ {
+  Wire.beginTransmission(TCAADDR);  // TCA9548A address
+  Wire.write(1 << i);               // send byte to select bus
+  Wire.endTransmission();
+ }
+
+  void SSD1306clearPush(uint8_t screenNumber, const char* text, uint8_t color, float textSize, uint8_t cursorX, uint8_t cursorY, bool wait)
+  {
+    int index = screenNumber-1;
+    tcaselect(index);
+    //displays[index].clearDisplay();
+    displays[index].setTextColor(color); //0 is black, 1 is white, 2 is inverted
+    displays[index].setCursor(cursorX, cursorY);
+    displays[index].setTextSize(textSize);
+    displays[index].println(text);
+    if (!wait)
+    {
+      displays[index].display();
+    }
+  }
+
+  void SSD1306push(int screenNumber, const char* text, float textSize, uint8_t cursorX, uint8_t cursorY, bool wait)
+  {
+    int index = screenNumber-1;
+    displays[index].setCursor(cursorX, cursorY);
+    displays[index].setTextSize(textSize);
+    displays[index].println(text);
+    if (!wait)
+    {
+      displays[index].display();
+    }
+  }
+
+#endif //Using SSD1306

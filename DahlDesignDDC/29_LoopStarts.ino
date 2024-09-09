@@ -37,6 +37,11 @@ void loop()
 
   runningPresets(); //Presets in the loop
 
+  #if(USING_SSD1306 == 1)
+  OLEDrun(); //Screen commands
+  OLEDreactive(); //Screen reactions
+  #endif
+
   #if (PWMENABLED == 1 || ROW6_PWMCOUNT > 0) //PWM Control
   PWMrun();
   #endif
