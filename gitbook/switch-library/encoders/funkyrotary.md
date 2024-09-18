@@ -38,11 +38,11 @@ In addition, this switch can set the bite point of your clutches. Works in combi
 {% endtab %}
 
 {% tab title="Example" %}
-`void funkyBite(int row, int column, bool reverse)`
+`void funkyBite(int row, int Acol, int Bcol, bool reverse)`
 
 For an encoder with pins A and B to columns 3 and 4. Common pin to row 2:
 
-`funkyBite(2, 3, false);`
+`funkyBite(2, 3, 4, false);`
 
 The button numbers used is determined by the number written in the block for the A pin. B pin block will not be read. If button number was set to 15, the switch will use buttons 15 and 16. The `reverse` part of the function will switch the button numbers and increase/decrease bite point if set to `true`.
 {% endtab %}
@@ -61,11 +61,11 @@ Similar to rotary2Bite above, but instead of changing bitePoint by going through
 {% endtab %}
 
 {% tab title="Example" %}
-`void funkyBiteAdjust(int row, int column, bool reverse, int increment)`
+`void funkyBiteAdjust(int row, int Acol, int Bcol, bool reverse, int increment)`
 
 For an encoder with pins A and B to columns 3 and 4. Common pin to row 2:
 
-`funkyBiteAdjust(2, 3, false, 50);`
+`funkyBiteAdjust(2, 3, 4, false, 50);`
 
 The button numbers used is determined by the number written in the block for the A pin. B pin block will not be read. If button number was set to 15, the switch will use buttons 15 and 16. The `reverse` part of the function will switch the button numbers and increase/decrease bite point if set to `true`.
 
@@ -88,11 +88,11 @@ In addition, this switch can set the throttle hold value when the [modButton()](
 {% endtab %}
 
 {% tab title="Example" %}
-`void funkyThrottle(int row, int column, bool rev)`
+`void funkyThrottle(int row, int Acol, int Bcol, bool reverse)`
 
 For an encoder with pins A and B to columns 3 and 4. Common pin to row 2:
 
-`funkyThrottle(2, 3, false);`
+`funkyThrottle(2, 3, 4, false);`
 
 The button numbers used is determined by the number written in the block for the A pin. B pin block will not be read. If button number was set to 15, the switch will use buttons 15 and 16. The `reverse` part of the function will switch the button numbers and increase/decrease bite point if set to `true`.
 
@@ -115,11 +115,11 @@ In addition, this switch can set the brake magic value when the [modButton()](..
 {% endtab %}
 
 {% tab title="Example" %}
-`void funkyBrake(int row, int column, bool rev)`
+`void funkyBrake(int row, int Acol, int Bcol, bool reverse)`
 
 For an encoder with pins A and B to columns 3 and 4. Common pin to row 2:
 
-`funkyBrake(2, 3, false);`
+`funkyBrake(2, 3, 4, false);`
 
 The button numbers used is determined by the number written in the block for the A pin. B pin block will not be read. If button number was set to 15, the switch will use buttons 15 and 16. The `reverse` part of the function will switch the button numbers and increase/decrease bite point if set to `true`.
 
