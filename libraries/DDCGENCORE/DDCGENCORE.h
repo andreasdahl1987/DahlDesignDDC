@@ -37,15 +37,19 @@ void setupLeds()
 {
 	#if(LED1COUNT > 0)
     LED1.begin(); 
+	stripCount++;
 	#endif
 	#if(LED2COUNT > 0)
     LED2.begin(); 
+	stripCount++;
 	#endif
 	#if(LED3COUNT > 0)
     LED3.begin(); 
+	stripCount++;
 	#endif
 	#if(LED4COUNT > 0)
     LED4.begin(); 
+	stripCount++;
 	#endif
 }
 
@@ -63,22 +67,22 @@ void readStrip()
 
 		if (LED1REVERSE == 1)
 		{
-			#if (BOARDTYPE == 2)
+			#if (ECOLED == 0)
 			SH_R[LED1COUNT - 1 - i] = r;
 			SH_G[LED1COUNT - 1 - i] = g;
 			SH_B[LED1COUNT - 1 - i] = b;
 			#else
-			LED1.setPixelColor(LED1COUNT - 1 - i, LED1.Color(r, g, b));
+			LED1.setPixelColor(LED1COUNT - 1 - i, r, g, b);
 			#endif
 		}
 		else 
 		{
-			#if (BOARDTYPE == 2)
+			#if (ECOLED == 0)
 			SH_R[i] = r;
 			SH_G[i] = g;
 			SH_B[i] = b;
 			#else
-			LED1.setPixelColor(i, LED1.Color(r, g, b));
+			LED1.setPixelColor(i, r, g, b);
 			#endif
 		}
 	}
@@ -93,22 +97,23 @@ void readStrip()
 
 		if (LED2REVERSE == 1)
 		{	
-			#if (BOARDTYPE == 2)
+			#if (ECOLED == 0)
 			SH_R[LED1COUNT + LED2COUNT - 1 - i] = r;
 			SH_G[LED1COUNT + LED2COUNT - 1 - i] = g;
 			SH_B[LED1COUNT + LED2COUNT - 1 - i] = b;
 			#else
-			LED2.setPixelColor(LED2COUNT - 1 - i, LED2.Color(r, g, b));
+			LED2.setPixelColor(LED2COUNT - 1 - i, r, g, b);
 			#endif
+			
 		}
 		else 
 		{
-			#if (BOARDTYPE == 2)
+			#if (ECOLED == 0)
 			SH_R[LED1COUNT + i] = r;
 			SH_G[LED1COUNT + i] = g;
 			SH_B[LED1COUNT + i] = b;
 			#else
-			LED2.setPixelColor(i, LED2.Color(r, g, b));
+			LED2.setPixelColor(i, r, g, b);
 			#endif
 		}
 	}
@@ -123,22 +128,22 @@ void readStrip()
 
 		if (LED3REVERSE == 1)
 		{
-			#if (BOARDTYPE == 2)
+			#if(ECOLED == 0)
 			SH_R[LED1COUNT + LED2COUNT + LED3COUNT - 1 - i] = r;
 			SH_G[LED1COUNT + LED2COUNT + LED3COUNT - 1 - i] = g;
 			SH_B[LED1COUNT + LED2COUNT + LED3COUNT - 1 - i] = b;
 			#else
-			LED3.setPixelColor(LED3COUNT - 1 - i, LED3.Color(r, g, b));
+			LED3.setPixelColor(LED3COUNT - 1 - i, r, g, b);
 			#endif
 		}
 		else 
 		{
-			#if (BOARDTYPE == 2)
+			#if(ECOLED == 0)
 			SH_R[LED1COUNT + LED2COUNT + i] = r;
 			SH_G[LED1COUNT + LED2COUNT + i] = g;
 			SH_B[LED1COUNT + LED2COUNT + i] = b;
 			#else
-			LED3.setPixelColor(i, LED3.Color(r, g, b));
+			LED3.setPixelColor(i, r, g, b);
 			#endif
 		}
 	}
@@ -153,28 +158,29 @@ void readStrip()
 
 		if (LED4REVERSE == 1)
 		{
-			#if (BOARDTYPE == 2)
+			#if(ECOLED == 0)
 			SH_R[LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT - 1 - i] = r;
 			SH_G[LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT - 1 - i] = g;
 			SH_B[LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT - 1 - i] = b;
 			#else
-			LED4.setPixelColor(LED4COUNT - 1 - i, LED4.Color(r, g, b));
+			LED4.setPixelColor(LED4COUNT - 1 - i, r, g, b);
 			#endif
 		}
 		else 
 		{
-			#if (BOARDTYPE == 2)
+			#if(ECOLED == 0)
 			SH_R[LED1COUNT + LED2COUNT + LED3COUNT + i] = r;
 			SH_G[LED1COUNT + LED2COUNT + LED3COUNT + i] = g;
 			SH_B[LED1COUNT + LED2COUNT + LED3COUNT + i] = b;
 			#else
-			LED4.setPixelColor(i, LED4.Color(r, g, b));
+			LED4.setPixelColor(i, r, g, b);
 			#endif
 		}
 	}
 	#endif
 
 }
+
 
 void readLeds() {
 
@@ -186,34 +192,18 @@ void readLeds() {
 		valid = valid && (WaitAndReadOneByte() == 0xFF - i);
 	
 	}
-	if (valid) {
-		#if(LED1COUNT+LED2COUNT+LED3COUNT+LED4COUNT > 0)
-			#if (BOARDTYPE == 2)
-				#if(LED1COUNT > 0)
-					for (uint16_t i = 0; i < LED1COUNT; i++) 
-					{
-						LED1.setPixelColor(i, LED1.Color(SH_R[i], SH_G[i], SH_B[i]));
-					}
-				#endif
-				#if(LED2COUNT > 0)
-					for (uint16_t i = 0; i < LED2COUNT; i++) 
-					{
-						LED2.setPixelColor(i, LED2.Color(SH_R[LED1COUNT+i], SH_G[LED1COUNT+i], SH_B[LED1COUNT+i]));
-					}
-				#endif
-				#if(LED3COUNT > 0)
-				for (uint16_t i = 0; i < LED3COUNT; i++) 
-				{
-					LED3.setPixelColor(i, LED3.Color(SH_R[LED1COUNT+LED2COUNT+i], SH_G[LED1COUNT+LED2COUNT+i], SH_B[LED1COUNT+LED2COUNT+i]));
-				}
-				#endif
-				#if(LED4COUNT > 0)
-					for (uint16_t i = 0; i < LED4COUNT; i++) 
-					{
-						LED4.setPixelColor(i, LED4.Color(SH_R[LED1COUNT+LED2COUNT+LED3COUNT+i], SH_G[LED1COUNT+LED2COUNT+LED3COUNT+i], SH_B[LED1COUNT+LED2COUNT+LED3COUNT+i]));
-					}
-				#endif
-			#endif
+	if (valid) 
+	{
+		#if(ECOLED == 0)
+		simhubActive = true;
+		for(int i = 0; i < LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT; i++ )
+		{
+			SH_R_Valid[i] = SH_R[i];
+			SH_G_Valid[i] = SH_G[i];
+			SH_B_Valid[i] = SH_B[i];
+		}
+		#else
+		ecoTrig = true;
 		LEDTop();
 		#endif
 	}
@@ -252,9 +242,9 @@ void processCommands()
 	// Read data
 	if (Serial.available()) 
 	{
-		LEDlock = true;
-		LEDSerialDropout = globalClock;
-
+		simhubDropTimer = globalClock;
+		simhubCheckIn = true;
+		
 		char c = (char)Serial.read();
 
 		if (messageend < 6) {
@@ -295,13 +285,7 @@ void processCommands()
 			command = "";
 			messageend = 0;
 		}
-		#if (BOARDTYPE == 2)
-			#if(USING_CB1 == 1)
-			delayMicroseconds(100); //Stability between cores on CB1.
-			#else
-			delayMicroseconds(500); //Stability between cores on regular RP2040 board.
-			#endif
-		#endif
-		LEDlock = false;
+
+
 	}
 }

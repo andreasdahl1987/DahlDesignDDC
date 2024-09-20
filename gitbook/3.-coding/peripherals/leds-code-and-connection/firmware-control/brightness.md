@@ -4,7 +4,7 @@ DDC allows for full customization of LED brightness. Every LED function requires
 
 The brightness setting in SimHub will not have any effect on the brightness of LED calls from the firmware.&#x20;
 
-The global brightness is set to 100 by default, ranging from 0 to 100., meaning the controller will start with this setting on powerup.This can be changed by editing the parameter `LEDBrightness` in 12\_GlobalVariables.ino
+The global brightness is set to 100 by default, ranging from 0 to 100, meaning the controller will start with this setting on powerup.This can be changed by editing the parameter `LEDBrightness` in 12\_GlobalVariables.ino
 
 <figure><img src="../../../../.gitbook/assets/image (14) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 

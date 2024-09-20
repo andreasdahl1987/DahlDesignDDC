@@ -41,6 +41,10 @@ If you're rocking a Atmel 32U4 processor board, you can activate [EEPROM](../../
 
 For other boards; coding a peripheral EEPROM device is [done like this.](../peripherals/i2c-devices/cat24c512.md)&#x20;
 
+#### Performance
+
+`#define ECOLED` will let you set the LED system to a memory economic mode, using far less dynamic memory. This can be key for the 32U4 MCU. Setting this to 1 will enable eco-mode. The drawback is that LEDBottom() will no longer be active.&#x20;
+
 #### **Activate oversampling**
 
 For RP2040 boards, DDC can oversample the analog input readings.&#x20;
@@ -53,4 +57,4 @@ The output values will go from 0-4096 to 0-65536. However, DDC will cut this val
 
 I suggest activating oversampling for any RP2040 board, it is done by setting `ENABLE_OVERSAMPLING` from `0` to `1.`
 
-**Important to note,** when you activate oversampling, you cant refer to your analog pins as A0 to A3 anymore. They are now called ADC9 to ADC12, respectively. Keep this in mind when setting up your analog channels in [10\_TableAndAnalog.ino](10\_matrixandanalog.ino/)
+**Important to note,** when you activate oversampling, you cant refer to your analog pins as A0 to A3 anymore. You'll also have to build at least 4 analog channels to store data from these four pins. More on this in the chapter on [10\_TableAndAnalog.ino](10\_matrixandanalog.ino/)

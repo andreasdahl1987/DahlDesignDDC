@@ -16,14 +16,14 @@ void loop()
   globalCounter++; //Counter for refreshRate()
   
   #if (LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT > 0)
+    refreshLEDcalc();
+    #if(BOARDTYPE == 0)
+      processCommands();
+    #endif
+    #if(ECOLED == 0)
     LEDBottom();
-      #if(BOARDTYPE == 0)
-        processCommands();
-      #endif
-    if(BOARDTYPE == 0 || (BOARDTYPE == 2 && !LEDlock ))
-    {
-      LEDTop();
-    }
+    #endif
+    LEDTop();
   #endif
 
   rotaryField = 0;

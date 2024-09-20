@@ -27,7 +27,7 @@ You can also use an [online calculator](https://ledcalculator.net/) to find the 
 
 ### Microcontroller wiring
 
-<figure><img src="../.gitbook/assets/image (4) (1).png" alt="" width="347"><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (4) (1) (1).png" alt="" width="347"><figcaption></figcaption></figure>
 
 Here we're wiring 5 red LEDs directly to our microcontroller.&#x20;
 

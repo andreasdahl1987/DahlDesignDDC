@@ -42,11 +42,11 @@ In practice however, the voltage drop across each LED is so big (roughly 1.5V to
 
 #### Parallel
 
-<figure><img src="../.gitbook/assets/image (5) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (5) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### Series
 
-<figure><img src="../.gitbook/assets/image (6) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (6) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Note the 12V power supply; 9V would not be enough to power this chain of LEDs. The value of the resistor would have to be found either by trial and error, or calculated from the LED forward voltage found in the datasheet.&#x20;
 

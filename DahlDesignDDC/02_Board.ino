@@ -22,6 +22,12 @@
 #define USING_32U4EEPROM 0
 
 //------------------------------
+//-------PERFORMANCE------------
+//------------------------------
+
+#define ECOLED 0
+
+//------------------------------
 //---RP2040 ADC OVERSAMPLING----
 //------------------------------
 
@@ -134,9 +140,16 @@ bool wire0Init = false;
 #if(USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
   #include <ADCInput.h>
   ADCInput oversamples (A0, A1, A2, A3);
+#endif
+
+#if(USING_CB1 == 1)
   bool ADS1115sentReq[2] = {false, false};
   long ADS1115value[12] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
   uint8_t ADS1115channelCounter[2] = {0,0};  
+#elif(ADS1115_CHIPS > 0 && ENABLE_OVERSAMPLING == 1)
+  bool ADS1115sentReq[ADS1115_CHIPS];
+  uint16_t ADS1115value[4*(ADS1115_CHIPS+1)];
+  uint8_t ADS1115channelCounter[ADS1115_CHIPS];
 #elif(ADS1115_CHIPS > 0)
   bool ADS1115sentReq[ADS1115_CHIPS];
   uint16_t ADS1115value[4*ADS1115_CHIPS];
@@ -160,6 +173,10 @@ bool wire0Init = false;
 #define ADC14 63
 #define ADC15 64
 #define ADC16 65
+#define ADC17 66
+#define ADC18 67
+#define ADC19 68
+#define ADC20 69
 #define ADC_CORR 50
 
 //------------------------------
