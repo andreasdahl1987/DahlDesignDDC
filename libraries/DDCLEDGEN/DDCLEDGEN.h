@@ -392,6 +392,7 @@ protected:
   uint8_t bOffset;    ///< Index of blue byte
   uint8_t wOffset;    ///< Index of white (==rOffset if no white)
   uint32_t endTime;   ///< Latch timing reference
+  uint16_t diffs;     ///< Sum of different bits
 #ifdef __AVR__
   volatile uint8_t *port; ///< Output PORT register
   uint8_t pinMask;        ///< Output PORT bitmask
