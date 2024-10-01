@@ -1,4 +1,11 @@
 #if ((BOARDTYPE == 0 || BOARDTYPE == 2) && ENABLE_MOUSE == 1)
+#if (MOUSE_LOGCURVE == 0)
+float degree2rad(int val, int max)
+{
+    return val * M_PI / (max << 1);
+}
+#endif
+
 void funkyMouseScroll(int Arow, int Acol, int Bcol, bool reverse)
 {
 	int Row = Arow - 1;
@@ -108,7 +115,7 @@ void funkyMouseMove(int row, int column, int pCol, int Col1, int Col2, int Col3,
 			if (pushState[Row][Column] != rawState[Row][Column])
 			{
 				switchTimer[Row][Column] = globalClock;
-				toggleTimer[Row][Column] = globalClock - 1;
+				toggleTimer[Row][Column] = globalClock;
 			}
 			pushState[Row][Column] = rawState[Row][Column];
 		}
@@ -117,38 +124,39 @@ void funkyMouseMove(int row, int column, int pCol, int Col1, int Col2, int Col3,
 	if(pushState[Row][Column])
 	{
 		uint8_t pixels = (globalClock - toggleTimer[Row][Column]);
-		if(globalClock < switchTimer[Row][Column] + 720)
+		if(switchTimer[Row][Column] == globalClock) pixels = 1;
+		else if(globalClock < switchTimer[Row][Column] + MOUSE_ACCELTIME)
 		{
-			float radian = ((globalClock - switchTimer[Row][Column]) << 3) / 3671.;
-			pixels = ceil(pixels * sin(radian));
+			#if (MOUSE_LOGCURVE == 1)
+			pixels = round(pixels * log10(((globalClock - switchTimer[Row][Column]) / (MOUSE_ACCELTIME / 9.)) + 1));
+			#else
+			pixels = round(pixels * sqrt(sin(degree2rad(globalClock - switchTimer[Row][Column], MOUSE_ACCELTIME))));
+			#endif
 		}
-		switch(masterEncoder) // Optimization for specific speeds
+		if (pixels > 0)
 		{
-			case 100:
-				break;
-			case 200:
-				pixels <<= 1;
-				break;
-			case 400:
-				pixels <<= 2;
-				break;
-			case 800:
-				pixels <<= 3;
-				break;
-			case 1600:
-				pixels <<= 4;
-				break;
-			case 3200:
-				pixels <<= 5;
-				break;
-			case 6400:
-				pixels <<= 6;
-				break;
-			default:
-				pixels *= MOUSESpeed / 100.;
+			switch(MOUSESpeed) // Optimization for specific speeds
+			{
+				case 10:
+					break;
+				case 20:
+					pixels <<= 1;
+					break;
+				case 40:
+					pixels <<= 2;
+					break;
+				case 80:
+					pixels <<= 3;
+					break;
+				case 160:
+					pixels <<= 4;
+					break;
+				default:
+					pixels *= MOUSESpeed / 10.;
+			}
+			Mouse.move(direction == 1 ? -pixels : (direction == 2 ? pixels : 0), direction == 3 ? -pixels : (direction == 4 ? pixels : 0));
+			toggleTimer[Row][Column] = globalClock;
 		}
-		Mouse.move(direction == 1 ? -pixels : (direction == 2 ? pixels : 0), direction == 3 ? -pixels : (direction == 4 ? pixels : 0));
-		toggleTimer[Row][Column] = globalClock;
 	}
 }
 #endif
