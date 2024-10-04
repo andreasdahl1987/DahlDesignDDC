@@ -123,6 +123,8 @@ void EEPROMfirst()
         delay(5);
         for(int i = 0; i < 12; i++)
         {
+            write16bitToEEPROM(PRESETSLOT, 0);
+            delay(5);
             write16bitToEEPROM(BITEPOINT+(i*2), 300);
             delay(5);
             write16bitToEEPROM(LEDSLOT+(i*2), 25);
