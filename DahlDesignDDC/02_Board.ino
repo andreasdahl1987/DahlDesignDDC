@@ -1,5 +1,5 @@
 /*
- * Chose your board. Default is to 32U4-based boards. 
+ * Chose your board. Default is to 32U4-based boards.
  */
 
 //------------------------------
@@ -69,8 +69,8 @@
 
 //ROW8 setup
 #define DISABLE_ALERT_PINS 0  //Gives access to COL2 and COL3. Disables ALERT pins for the ADCs, making them heavier to run.
-#define DISABLE_ANALOG 0      //Gives access to COL4 - COL 7 by using (and disabling analog function of) ADC9 - ADC12 pins. 
-#define DISABLE_LED_PIN 0     //Gives access to COL8, use the dedicated 8-8 pin. The LED pin will no longer work. 
+#define DISABLE_ANALOG 0      //Gives access to COL4 - COL 7 by using (and disabling analog function of) ADC9 - ADC12 pins.
+#define DISABLE_LED_PIN 0     //Gives access to COL8, use the dedicated 8-8 pin. The LED pin will no longer work.
 
 //------------------------------
 //---------PWM CONTROL----------
@@ -137,6 +137,9 @@ uint8_t ADS1115_alertPins [] = {99};
 bool wire1Init = false;
 bool wire0Init = false;
 
+//ENABLE MOUSE FEATURE FOR ATMEL or RP2040 boards
+#define ENABLE_MOUSE 0
+
 #if(USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
   #include <ADCInput.h>
   ADCInput oversamples (A0, A1, A2, A3);
@@ -185,14 +188,22 @@ bool wire0Init = false;
 
 #if (BOARDTYPE == 0)
   #include <DDC32U4.h>
+  #if (ENABLE_MOUSE == 1)
+  #include <JoyMouse.h>
+  JoyMouse_ Mouse;
+  #endif
 #elif (BOARDTYPE == 1)
   #include <DDCSAMD.h>
 #elif (BOARDTYPE == 2)
   #include <DDCPI.h>
-  extern "C" 
+  extern "C"
   {
   #include "pico/bootrom.h"
   }
+  #if (ENABLE_MOUSE == 1)
+  #include <JoyMouseRP2040.h>
+  JoyMouseRP2040_ Mouse;
+  #endif
   long bootTimer = 0;
 #endif
 
