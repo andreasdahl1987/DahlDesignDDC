@@ -8,7 +8,7 @@ void setup1()
 void setup()
 {
 #endif
- 
+
     //RP2040
     #if defined(ARDUINO_ARCH_MBED) && defined(ARDUINO_ARCH_RP2040)
     // Manual begin() is required on core without built-in support for TinyUSB such as mbed rp2040
@@ -20,7 +20,7 @@ void setup()
       USBDevice.setManufacturerDescriptor(MAKER);
       USBDevice.setProductDescriptor(CONTROLLER_NAME);
     #endif
-  
+
     //LED setup
     Serial.begin(115200);
 
@@ -51,15 +51,15 @@ void setup()
       CB1_OUTPUTSETUP2();
       #endif
     #else
-    
+
       #if (USING_ADS1115 == 1)
         ADS1115Setup();
       #endif
-      
+
       #if (USING_PCA9555 == 1)
         PCA9555Setup();
       #endif
-      
+
       #if (USING_ADS1115 == 1 || USING_PCA9555 == 1)
       startI2C();
       #endif
@@ -71,7 +71,7 @@ void setup()
       #if (USING_PCA9555 == 1)
         PCA9555OutputSetup();
       #endif
-      
+
     #endif
 
     //Filling some arrays
@@ -116,7 +116,7 @@ void setup()
         {
             pinMode(col[i], INPUT_PULLUP);
         }
-        
+
     }
 
     for (int i = 0; i < rowCount; i++)
@@ -124,7 +124,7 @@ void setup()
         if (row[i] != 99)
         {
             pinMode(row[i], INPUT_PULLUP);
-        }  
+        }
     }
 
     //Pull up direct pins
@@ -136,7 +136,7 @@ void setup()
             pinMode(directPins[i], INPUT_PULLUP);
         }
     }
-    
+
     #endif
 
 
@@ -160,17 +160,17 @@ void setup()
       }
 
     PWMSetup();
-    
+
     #endif
 
     //Setting up output device
     outputPinsSetup();
-    
+
     EEPROMfirst();
     EEPROMinit(); //Fetch values from EEPROM
     presets(switchPreset); //Preset startup
 
-    
+
     Joystick.begin(0); //Start joystick library magic
 
     Joystick.setZAxisRange(-32768, 32767); //Making bit fields 16 bit
@@ -190,5 +190,9 @@ void setup()
       oversamples.setFrequency(400000);
       oversamples.begin();
     #endif
+
+	#if (ENABLE_MOUSE == 1)
+	Mouse.begin();
+	#endif
 }
 #endif
