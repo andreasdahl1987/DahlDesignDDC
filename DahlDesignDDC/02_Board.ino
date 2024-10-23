@@ -1,12 +1,12 @@
 /*
- * Chose your board. Default is to 32U4-based boards.
+ * Chose your board. Defaults to 32U4-based boards.
  */
 
 //------------------------------
 //-----------BOARD MCU----------
 //------------------------------
 
-#define BOARDTYPE 0
+#define BOARDTYPE 2
 
 // 0 -> Atmel 32U4 based boards. (Leonardo, Pro Micro, Feather, Teensy 2.0, etc) SAM3X based boards. (Due)
 
@@ -34,11 +34,17 @@
 #define ENABLE_OVERSAMPLING 0
 
 //------------------------------
+//-----MOUSE FEATURES-----------
+//------------------------------
+
+#define ENABLE_MOUSE 1
+
+//------------------------------
 //-------DAHL DESIGN CB1--------
 //------------------------------
 
 //Enable CB1 board
-#define USING_CB1 0
+#define USING_CB1 1
 
 //ADC setup
 #define CB1_ADC1 1
@@ -137,8 +143,6 @@ uint8_t ADS1115_alertPins [] = {99};
 bool wire1Init = false;
 bool wire0Init = false;
 
-//ENABLE MOUSE FEATURE FOR ATMEL or RP2040 boards
-#define ENABLE_MOUSE 0
 
 #if(USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
   #include <ADCInput.h>
@@ -189,8 +193,9 @@ bool wire0Init = false;
 #if (BOARDTYPE == 0)
   #include <DDC32U4.h>
   #if (ENABLE_MOUSE == 1)
-  #include <JoyMouse.h>
+  #include <DDCANJOMOUSE.h>
   JoyMouse_ Mouse;
+  uint8_t oldSegment = 0;
   #endif
 #elif (BOARDTYPE == 1)
   #include <DDCSAMD.h>
@@ -201,8 +206,9 @@ bool wire0Init = false;
   #include "pico/bootrom.h"
   }
   #if (ENABLE_MOUSE == 1)
-  #include <JoyMouseRP2040.h>
+  #include <DDCANJOMOUSE2040.h>
   JoyMouseRP2040_ Mouse;
+  uint8_t oldSegment = 0;
   #endif
   long bootTimer = 0;
 #endif

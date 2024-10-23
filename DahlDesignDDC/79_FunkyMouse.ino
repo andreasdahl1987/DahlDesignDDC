@@ -6,6 +6,11 @@ float degree2rad(int val, int max)
 }
 #endif
 
+void setMouseSpeed(int speed)
+{
+  MOUSESpeed = speed;
+}
+
 void funkyMouseScroll(int Arow, int Acol, int Bcol, bool reverse)
 {
 	int Row = Arow - 1;
