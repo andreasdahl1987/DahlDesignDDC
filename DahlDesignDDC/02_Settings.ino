@@ -1,10 +1,6 @@
-/*
- * Chose your board. Default is to 32U4-based boards. 
- */
-
-//------------------------------
-//-----------BOARD MCU----------
-//------------------------------
+//-------------------------------------------------------------
+//--------------------------BOARD MCU--------------------------
+//-------------------------------------------------------------
 
 #define BOARDTYPE 2
 
@@ -14,28 +10,28 @@
 
 // 2 -> RP2040 based boards. (Dahl Design CB1, Raspberry Pi Pico, Pico W, Pro Micro RP2040, and many more)
 
-//------------------------------
-//-----------EEPROM-------------
-//------------------------------
+//-------------------------------------------------------------
+//--------------------------EEPROM-----------------------------
+//-------------------------------------------------------------
 
 #define RESET_EEPROM 0
 #define USING_32U4EEPROM 0
 
-//------------------------------
-//-------PERFORMANCE------------
-//------------------------------
+//-------------------------------------------------------------
+//------------------------PERFORMANCE--------------------------
+//-------------------------------------------------------------
 
 #define ECOLED 0
 
-//------------------------------
-//---RP2040 ADC OVERSAMPLING----
-//------------------------------
+//-------------------------------------------------------------
+//-------------------RP2040 ADC OVERSAMPLING-------------------
+//-------------------------------------------------------------
 
 #define ENABLE_OVERSAMPLING 0
 
-//------------------------------
-//-------DAHL DESIGN CB1--------
-//------------------------------
+//-------------------------------------------------------------
+//--------------------DAHL DESIGN CB1 SETTINGS-----------------
+//-------------------------------------------------------------
 
 //Enable CB1 board
 #define USING_CB1 0
@@ -72,9 +68,9 @@
 #define DISABLE_ANALOG 0      //Gives access to COL4 - COL 7 by using (and disabling analog function of) ADC9 - ADC12 pins. 
 #define DISABLE_LED_PIN 0     //Gives access to COL8, use the dedicated 8-8 pin. The LED pin will no longer work. 
 
-//------------------------------
-//---------PWM CONTROL----------
-//------------------------------
+//-------------------------------------------------------------
+//-------------------------PWM CONTROL-------------------------
+//-------------------------------------------------------------
 
 #define PWMENABLED 0
 
@@ -85,18 +81,18 @@
 #endif
 
 
-//------------------------------
-//---------I2C DEVICES----------
-//------------------------------
+//-------------------------------------------------------------
+//-------------------------I2C DEVICES-------------------------
+//-------------------------------------------------------------
 
-#define SDA0PIN 0
-#define SCL0PIN 1
-#define SDA1PIN 2
-#define SCL1PIN 3
+#define SDA0PIN 4
+#define SCL0PIN 5
+#define SDA1PIN 6
+#define SCL1PIN 7
 
-//----
-//PORT EXPANDER PCA9555
-//----
+//---------------------------|
+//---PORT EXPANDER PCA9555---|
+//---------------------------|
 
 #define USING_PCA9555 0
 #define PCA9555_I2C_NUMBER 0
@@ -120,9 +116,9 @@ const uint8_t PCA9555outputCount = sizeof(PCA9555outputAddress) / sizeof(PCA9555
   #endif
 #endif
 
-//----
-//16-BIT ADC ADS1115
-//----
+//---------------------------|
+//---16-BIT ADC ADS1115------|
+//---------------------------|
 
 #define USING_ADS1115 0
 #define ADS1115_I2C_NUMBER 0
@@ -135,20 +131,20 @@ uint8_t ADS1115_chipAddress [] = {0x48};
 uint8_t ADS1115_alertPins [] = {99};
 #endif
 
-//----
-//EEPROM CAT24C512
-//----
+//---------------------------|
+//-----EEPROM CAT24C512------|
+//---------------------------|
 
 #define USING_CAT24C512 0
 #define CAT24C512_I2C_NUMBER 0
 #define CAT24C512_ADDRESS 0x50
 
-//----
-//OLED SSD1306
-//----
+//---------------------------|
+//------OLED DISPLAY---------|
+//---------------------------|
 
-#define USING_SSD1306 0
-#define SSD1306COUNT 0
+#define USING_OLED 1
+#define DISPLAYCOUNT 2
 
 #define OLED_Address 0x3C //Screen I2C address
 #define TCAADDR 0x70      //Screen multiplexer I2C address
@@ -161,27 +157,27 @@ uint8_t ADS1115_alertPins [] = {99};
 #define SCREEN_HEIGHT_2 64 // OLED display height
 //Screen 3
 #define SCREEN_WIDTH_3 128 // OLED display width
-#define SCREEN_HEIGHT_3 32 // OLED display height
+#define SCREEN_HEIGHT_3 64 // OLED display height
 //Screen 4
 #define SCREEN_WIDTH_4 128 // OLED display width
-#define SCREEN_HEIGHT_4 16 // OLED display height
+#define SCREEN_HEIGHT_4 64 // OLED display height
 //Screen 5
 #define SCREEN_WIDTH_5 128 // OLED display width
-#define SCREEN_HEIGHT_5 16 // OLED display height
+#define SCREEN_HEIGHT_5 64 // OLED display height
 //Screen 6
 #define SCREEN_WIDTH_6 128 // OLED display width
-#define SCREEN_HEIGHT_6 32 // OLED display height
+#define SCREEN_HEIGHT_6 64 // OLED display height
 //Screen 7
 #define SCREEN_WIDTH_7 128 // OLED display width
-#define SCREEN_HEIGHT_7 32 // OLED display height
+#define SCREEN_HEIGHT_7 64 // OLED display height
 //Screen 8
 #define SCREEN_WIDTH_8 128 // OLED display width
-#define SCREEN_HEIGHT_8 32 // OLED display height
+#define SCREEN_HEIGHT_8 64 // OLED display height
 
 
-//------------------------------
-//---------VARIABLES------------
-//------------------------------
+//---------------------------|
+//--------VARIABLES----------|
+//---------------------------|
 
 
 bool wire1Init = false;
@@ -229,9 +225,9 @@ bool wire0Init = false;
 #define ADC20 69
 #define ADC_CORR 50
 
-//------------------------------
-//---------LIBRARIES------------
-//------------------------------
+//---------------------------|
+//--------LIBRARIES----------|
+//---------------------------|
 
 #if (BOARDTYPE == 0)
   #include <DDC32U4.h>
@@ -256,11 +252,11 @@ bool wire0Init = false;
 
 //OLED
 
-#if(USING_SSD1306 == 1)
-  #include <Adafruit_GFX.h>
-  #include <Adafruit_SSD1306.h>
+#if(USING_OLED == 1)
+  #include <DDC_GFX.h>
+  #include <DDC_SSD1306.h>
 
-  #if(SSD1306COUNT > 7 )
+  #if(DISPLAYCOUNT > 7 )
     Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
     Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, &Wire, -1);
     Adafruit_SSD1306 display3(SCREEN_WIDTH_3, SCREEN_HEIGHT_3, &Wire, -1);
@@ -270,7 +266,12 @@ bool wire0Init = false;
     Adafruit_SSD1306 display7(SCREEN_WIDTH_7, SCREEN_HEIGHT_7, &Wire, -1);
     Adafruit_SSD1306 display8(SCREEN_WIDTH_8, SCREEN_HEIGHT_8, &Wire, -1);
     Adafruit_SSD1306 displays[8] = {display1, display2, display3, display4, display5, display6, display7, display8};
-  #elif(SSD1306COUNT > 6 )
+    bool OLEDgenLock[8] = {false, false, false, false, false, false, false, false};
+    bool OLEDcondiLock[8] = {false, false, false, false, false, false, false, false};
+    unsigned long OLEDtimer [8] = {0, 0, 0, 0, 0, 0, 0, 0};
+    int OLEDframes [8] = {0, 0, 0, 0, 0, 0, 0, 0};
+
+  #elif(DISPLAYCOUNT > 6 )
     Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
     Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, &Wire, -1);
     Adafruit_SSD1306 display3(SCREEN_WIDTH_3, SCREEN_HEIGHT_3, &Wire, -1);
@@ -279,7 +280,12 @@ bool wire0Init = false;
     Adafruit_SSD1306 display6(SCREEN_WIDTH_6, SCREEN_HEIGHT_6, &Wire, -1);
     Adafruit_SSD1306 display7(SCREEN_WIDTH_7, SCREEN_HEIGHT_7, &Wire, -1);
     Adafruit_SSD1306 displays[7] = {display1, display2, display3, display4, display5, display6, display7};
-  #elif(SSD1306COUNT > 5 )
+    bool OLEDgenLock[7] = {false, false, false, false, false, false, false};
+    bool OLEDcondiLock[7] = {false, false, false, false, false, false, false};
+    unsigned long OLEDtimer [7] = {0, 0, 0, 0, 0, 0, 0};
+    int OLEDframes [7] = {0, 0, 0, 0, 0, 0, 0};
+
+  #elif(DISPLAYCOUNT > 5 )
     Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
     Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, &Wire, -1);
     Adafruit_SSD1306 display3(SCREEN_WIDTH_3, SCREEN_HEIGHT_3, &Wire, -1);
@@ -287,30 +293,60 @@ bool wire0Init = false;
     Adafruit_SSD1306 display5(SCREEN_WIDTH_5, SCREEN_HEIGHT_5, &Wire, -1);
     Adafruit_SSD1306 display6(SCREEN_WIDTH_6, SCREEN_HEIGHT_6, &Wire, -1);
     Adafruit_SSD1306 displays[6] = {display1, display2, display3, display4, display5, display6};
-  #elif(SSD1306COUNT > 4)
+    bool OLEDgenLock[6] = {false, false, false, false, false, false};
+    bool OLEDcondiLock[6] = {false, false, false, false, false, false};
+    unsigned long OLEDtimer [6] = {0, 0, 0, 0, 0, 0};
+    int OLEDframes [6] = {0, 0, 0, 0, 0, 0};
+
+  #elif(DISPLAYCOUNT > 4)
     Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
     Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, &Wire, -1);
     Adafruit_SSD1306 display3(SCREEN_WIDTH_3, SCREEN_HEIGHT_3, &Wire, -1);
     Adafruit_SSD1306 display4(SCREEN_WIDTH_4, SCREEN_HEIGHT_4, &Wire, -1);
     Adafruit_SSD1306 display5(SCREEN_WIDTH_5, SCREEN_HEIGHT_5, &Wire, -1);
     Adafruit_SSD1306 displays[5] = {display1, display2, display3, display4, display5};
-  #elif(SSD1306COUNT > 3)
+    bool OLEDgenLock[5] = {false, false, false, false, false};
+    bool OLEDcondiLock[5] = {false, false, false, false, false};
+    unsigned long OLEDtimer [5] = {0, 0, 0, 0, 0};
+    int OLEDframes [5] = {0, 0, 0, 0, 0};
+
+  #elif(DISPLAYCOUNT > 3)
     Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
     Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, &Wire, -1);
     Adafruit_SSD1306 display3(SCREEN_WIDTH_3, SCREEN_HEIGHT_3, &Wire, -1);
     Adafruit_SSD1306 display4(SCREEN_WIDTH_4, SCREEN_HEIGHT_4, &Wire, -1);
     Adafruit_SSD1306 displays[4] = {display1, display2, display3, display4};
-   #elif(SSD1306COUNT > 2)
+    bool OLEDgenLock[4] = {false, false, false, false};
+    bool OLEDcondiLock[4] = {false, false, false, false};
+    unsigned long OLEDtimer [4] = {0, 0, 0, 0};
+    int OLEDframes [4] = {0, 0, 0, 0};
+
+   #elif(DISPLAYCOUNT > 2)
     Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
     Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, &Wire, -1);
     Adafruit_SSD1306 display3(SCREEN_WIDTH_3, SCREEN_HEIGHT_3, &Wire, -1);
     Adafruit_SSD1306 displays[3] = {display1, display2, display3};
-   #elif(SSD1306COUNT > 1)
+    bool OLEDgenLock[3] = {false, false, false};
+    bool OLEDcondiLock[3] = {false, false, false};
+    unsigned long OLEDtimer [3] = {0, 0, 0};
+    int OLEDframes [3] = {0, 0, 0};
+
+   #elif(DISPLAYCOUNT > 1)
     Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
     Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, &Wire, -1);
     Adafruit_SSD1306 displays[2] = {display1, display2};
-  #elif(SSD1306COUNT > 0)
+    bool OLEDgenLock[2] = {false, false};
+    bool OLEDcondiLock[2] = {false, false};
+    unsigned long OLEDtimer [2] = {0, 0};
+    int OLEDframes [2] = {0, 0};
+
+  #elif(DISPLAYCOUNT > 0)
     Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
     Adafruit_SSD1306 displays[1] = {display1};
+    bool OLEDgenLock[1] = {false};
+    bool OLEDcondiLock[1] = {false};
+    unsigned long OLEDtimer [1] = {0};
+    int OLEDframes [1] = {0};
+
   #endif
 #endif

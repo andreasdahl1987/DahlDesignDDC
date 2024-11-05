@@ -317,7 +317,7 @@ void ADS1115Setup()
 #endif
 
 
-#if (USING_CB1 == 1 || USING_PCA9555 == 1 || USING_ADS1115 == 1 || USING_CAT24C512 == 1 || USING_SSD1306 == 1)
+#if (USING_CB1 == 1 || USING_PCA9555 == 1 || USING_ADS1115 == 1 || USING_CAT24C512 == 1 || USING_OLED == 1)
 void startI2C()
 {
 #if(BOARDTYPE == 2)
@@ -341,14 +341,14 @@ void startI2C()
 }
 #endif
 
-#if(USING_SSD1306 == 1)
+#if(USING_OLED == 1)
 void SSD1306setup()
 {
   Wire.setSDA(SDA0PIN);
   Wire.setSCL(SCL0PIN);
   wire0Init = true;
 
-  #if(SSD1306COUNT > 7 )
+  #if(DISPLAYCOUNT > 7 )
     SSD1306initiate(1);
     SSD1306initiate(2);
     SSD1306initiate(3);
@@ -357,7 +357,7 @@ void SSD1306setup()
     SSD1306initiate(6);
     SSD1306initiate(7);
     SSD1306initiate(8);
-  #elif(SSD1306COUNT > 6 )
+  #elif(DISPLAYCOUNT > 6 )
     SSD1306initiate(1);
     SSD1306initiate(2);
     SSD1306initiate(3);
@@ -365,32 +365,32 @@ void SSD1306setup()
     SSD1306initiate(5);
     SSD1306initiate(6);
     SSD1306initiate(7);
-  #elif(SSD1306COUNT > 5 )
+  #elif(DISPLAYCOUNT > 5 )
     SSD1306initiate(1);
     SSD1306initiate(2);
     SSD1306initiate(3);
     SSD1306initiate(4);
     SSD1306initiate(5);
     SSD1306initiate(6);
-  #elif(SSD1306COUNT > 4)
+  #elif(DISPLAYCOUNT > 4)
     SSD1306initiate(1);
     SSD1306initiate(2);
     SSD1306initiate(3);
     SSD1306initiate(4);
     SSD1306initiate(5);
-  #elif(SSD1306COUNT > 3)
+  #elif(DISPLAYCOUNT > 3)
     SSD1306initiate(1);
     SSD1306initiate(2);
     SSD1306initiate(3);
     SSD1306initiate(4);
-   #elif(SSD1306COUNT > 2)
+   #elif(DISPLAYCOUNT > 2)
     SSD1306initiate(1);
     SSD1306initiate(2);
     SSD1306initiate(3);
-   #elif(SSD1306COUNT > 1)
+   #elif(DISPLAYCOUNT > 1)
     SSD1306initiate(1);
     SSD1306initiate(2);
-  #elif(SSD1306COUNT > 0)
+  #elif(DISPLAYCOUNT > 0)
     SSD1306initiate(1);
   #endif
 }
@@ -400,8 +400,9 @@ void SSD1306setup()
     tcaselect(number-1);
     if(!displays[number-1].begin(SSD1306_SWITCHCAPVCC, OLED_Address)) 
     {
-      for(;;);
+      //for(;;);
     }
-    displays[number-1].clearDisplay();
+    displays[number - 1].clearDisplay();
+    displays[number - 1].display();
  }
 #endif

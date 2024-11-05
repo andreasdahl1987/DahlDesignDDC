@@ -37,7 +37,7 @@ void loop()
 
   runningPresets(); //Presets in the loop
 
-  #if(USING_SSD1306 == 1)
+  #if(USING_OLED == 1)
   OLEDrun(); //Screen commands
   OLEDreactive(); //Screen reactions
   #endif
