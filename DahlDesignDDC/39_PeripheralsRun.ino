@@ -801,13 +801,21 @@ const unsigned char DDClogo [] = {
 	0x00, 0x00, 0x00, 0x03, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 };
 
-void SSD1306DDClogo(uint8_t screenNumber, uint8_t cursorX, uint8_t cursorY)
+void DDClogo(uint8_t screenNumber)
 {
-  int index = screenNumber-1;
-  tcaselect(index);
-  displays[index].clearDisplay();
-  displays[index].drawBitmap(cursorX, cursorY, DDClogo, 128,59,1);
-  displays[index].display();
+  if(!OLEDgenLock[index])
+  {
+    int index = screenNumber-1;
+    tcaselect(index);
+    displays[index].clearDisplay();
+    displays[index].drawBitmap(0, 3, DDClogo, 128,59,1);
+    displays[index].display();
+    OLEDcondiLock[index] = false;
+  }
+  else
+  {
+    OLEDgenLock[index] = true;
+  }
 }
 
   void backgroundWrite(uint8_t screenNumber, const char* text, uint8_t color, float textSize, uint8_t cursorX, uint8_t cursorY, bool wait)
@@ -827,20 +835,34 @@ void SSD1306DDClogo(uint8_t screenNumber, uint8_t cursorX, uint8_t cursorY)
       if (!wait)
       {
         displays[index].display();
+        OLEDgenLock[index] = true;
+        OLEDcondiLock[index] = false;
       }
     }
   }
 
-  void SSD1306add(int screenNumber, const char* text, float textSize, uint8_t cursorX, uint8_t cursorY, bool wait)
+  void condiWrite(uint8_t screenNumber, bool condition, const char* text, uint8_t color, float textSize, uint8_t cursorX, uint8_t cursorY, bool wait)
   {
     int index = screenNumber-1;
-    displays[index].setCursor(cursorX, cursorY);
-    displays[index].setTextSize(textSize);
-    displays[index].println(text);
-    if (!wait)
+
+    if(!OLEDgenLock[index])
     {
-      displays[index].display();
+      tcaselect(index);
+
+      displays[index].clearDisplay();
+
+      displays[index].setTextColor(color); //0 is black, 1 is white, 2 is inverted
+      displays[index].setCursor(cursorX, cursorY);
+      displays[index].setTextSize(textSize);
+      displays[index].println(text);
+      if (!wait)
+      {
+        displays[index].display();
+        OLEDgenLock[index] = true;
+        OLEDcondiLock[index] = false;
+      }
     }
   }
+
 
 #endif //Using SSD1306
