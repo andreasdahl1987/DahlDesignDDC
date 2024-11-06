@@ -818,51 +818,59 @@ void DDClogo(uint8_t screenNumber)
   }
 }
 
-  void backgroundWrite(uint8_t screenNumber, const char* text, uint8_t color, float textSize, uint8_t cursorX, uint8_t cursorY, bool wait)
+void backgroundWrite(uint8_t screenNumber, bool clear, bool post, const char* text, uint8_t color, float textSize, uint8_t cursorX, uint8_t cursorY)
+{
+  int index = screenNumber-1;
+
+  if(!OLEDgenLock[index])
   {
-    int index = screenNumber-1;
-
-    if(!OLEDgenLock[index])
+    tcaselect(index);
+      
+    if(clear)
     {
-      tcaselect(index);
-
       displays[index].clearDisplay();
+    }    
 
-      displays[index].setTextColor(color); //0 is black, 1 is white, 2 is inverted
-      displays[index].setCursor(cursorX, cursorY);
-      displays[index].setTextSize(textSize);
-      displays[index].println(text);
-      if (!wait)
-      {
-        displays[index].display();
-        OLEDgenLock[index] = true;
-        OLEDcondiLock[index] = false;
-      }
+    displays[index].setTextColor(color); //0 is black, 1 is white, 2 is inverted
+    displays[index].setCursor(cursorX, cursorY);
+    displays[index].setTextSize(textSize);
+    displays[index].println(text);
+    if (post)
+    {
+      displays[index].display();
+      OLEDgenLock[index] = true;
+      OLEDcondiLock[index] = false;
     }
   }
+}
 
-  void condiWrite(uint8_t screenNumber, bool condition, const char* text, uint8_t color, float textSize, uint8_t cursorX, uint8_t cursorY, bool wait)
+void condiWrite(uint8_t screenNumber, bool clear, bool post, bool condition, const char* text, uint8_t color, float textSize, uint8_t cursorX, uint8_t cursorY, bool wait)
+{
+  int index = screenNumber-1;
+   if (condition && !OLEDcondiLock[index])
   {
-    int index = screenNumber-1;
-
-    if(!OLEDgenLock[index])
+    tcaselect(index);
+    if (clear)
     {
-      tcaselect(index);
-
       displays[index].clearDisplay();
-
-      displays[index].setTextColor(color); //0 is black, 1 is white, 2 is inverted
-      displays[index].setCursor(cursorX, cursorY);
-      displays[index].setTextSize(textSize);
-      displays[index].println(text);
-      if (!wait)
-      {
-        displays[index].display();
-        OLEDgenLock[index] = true;
-        OLEDcondiLock[index] = false;
-      }
+    }
+    displays[index].setTextColor(color); //0 is black, 1 is white, 2 is inverted
+    displays[index].setCursor(cursorX, cursorY);
+    displays[index].setTextSize(textSize);
+    displays[index].println(text);
+    if (post)
+    {
+      displays[index].display();
+      OLEDcondiLock[index] = true;
     }
   }
-
+  else
+  {
+      if(OLEDcondiLock[index])
+      {
+          OLEDgenLock[index] = false;
+      }
+  }
+}
 
 #endif //Using SSD1306
