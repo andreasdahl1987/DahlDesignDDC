@@ -39,7 +39,6 @@ void loop()
 
   #if(USING_OLED == 1)
   OLEDrun(); //Screen commands
-  OLEDreactive(); //Screen reactions
   #endif
 
   #if (PWMENABLED == 1 || ROW6_PWMCOUNT > 0) //PWM Control

@@ -144,7 +144,7 @@ uint8_t ADS1115_alertPins [] = {99};
 //---------------------------|
 
 #define USING_OLED 1
-#define DISPLAYCOUNT 2
+#define DISPLAYCOUNT 1
 
 #define OLED_Address 0x3C //Screen I2C address
 #define TCAADDR 0x70      //Screen multiplexer I2C address
@@ -226,7 +226,7 @@ bool wire0Init = false;
 #define ADC_CORR 50
 
 //---------------------------|
-//--------LIBRARIES----------|
+//--LIBRARIES AND BACKGROUND-|
 //---------------------------|
 
 #if (BOARDTYPE == 0)
