@@ -144,7 +144,7 @@ uint8_t ADS1115_alertPins [] = {99};
 //---------------------------|
 
 #define USING_OLED 1
-#define DISPLAYCOUNT 1
+#define DISPLAYCOUNT 2
 
 #define OLED_Address 0x3C //Screen I2C address
 #define TCAADDR 0x70      //Screen multiplexer I2C address
@@ -255,6 +255,10 @@ bool wire0Init = false;
 #if(USING_OLED == 1)
   #include <DDC_GFX.h>
   #include <DDC_SSD1306.h>
+  uint8_t currentAniWidth = 64;
+  uint8_t currentAniHeight = 64;
+  uint16_t currentAniSize = 512;
+  uint16_t currentFrameCount = 20;
 
   #if(DISPLAYCOUNT > 7 )
     Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);

@@ -397,12 +397,10 @@ void SSD1306setup()
 
  void SSD1306initiate(int number)
  {
-    tcaselect(number-1);
-    if(!displays[number-1].begin(SSD1306_SWITCHCAPVCC, OLED_Address)) 
-    {
-      //for(;;);
-    }
-    displays[number - 1].clearDisplay();
-    displays[number - 1].display();
+    int index = number - 1;
+    tcaselect(index);
+    displays[index].begin(SSD1306_SWITCHCAPVCC, OLED_Address); 
+    displays[index].clearDisplay();
+    displays[index].display();
  }
 #endif

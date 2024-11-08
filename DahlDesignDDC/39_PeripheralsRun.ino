@@ -753,6 +753,75 @@ void DDClogo(uint8_t screenNumber)
   }
 }
 
+void backgroundImage(uint8_t screenNumber, const uint8_t image[], uint8_t imageWidth, uint8_t imageHeight, uint8_t offsetX, uint8_t offsetY)
+{
+  int index = screenNumber-1;
+
+  if(!OLEDgenLock[index])
+  {
+    tcaselect(index);
+    displays[index].clearDisplay();
+    displays[index].drawBitmap(offsetX, offsetY, image, imageWidth,imageHeight,1);
+    displays[index].display();
+    OLEDgenLock[index] = true;
+    OLEDcondiLock[index] = false;
+  }
+}
+
+void conditionalImage(uint8_t screenNumber, const uint8_t image[], bool condition, uint8_t imageWidth, uint8_t imageHeight, uint8_t offsetX, uint8_t offsetY)
+{
+  int index = screenNumber - 1;
+  if (condition && !OLEDcondiLock[index]) 
+  {
+    tcaselect(index);
+    displays[index].clearDisplay();
+    displays[index].drawBitmap(offsetX, offsetY, image, imageWidth,imageHeight,1);
+    displays[index].display();
+    OLEDcondiLock[index] = true;
+  }
+  else if(!condition)
+  {
+    if (OLEDcondiLock[index]) 
+    {
+      OLEDgenLock[index] = false;
+    }
+  }
+}
+
+void animationFrame(uint16_t frameCount, uint8_t animationWidth, uint8_t animationHeigth)
+{
+  currentAniWidth = animationWidth;
+  currentAniHeight = animationHeigth;
+  currentFrameCount = frameCount;
+}
+
+void backgroundAnimation(uint8_t screenNumber, const byte animation[][512], float speed, uint8_t offsetX, uint8_t offsetY)
+{
+  int index = screenNumber-1;
+
+  float timeBetween = speed * 50;
+
+  if(!OLEDgenLock[index] && globalClock - OLEDtimer[index] > timeBetween)
+  {
+    OLEDtimer[index] = globalClock;
+
+    tcaselect(index);
+
+    displays[index].clearDisplay();
+    displays[index].drawBitmap(offsetX, offsetY, animation[OLEDframes[index]], currentAniWidth, currentAniHeight,1);
+    displays[index].display();
+
+    OLEDframes[index] ++;
+
+    if(OLEDframes[index] >= currentFrameCount)
+    {
+      OLEDframes[index] = 0;
+    }
+
+    OLEDcondiLock[index] = false;
+  }
+}
+
 void backgroundWrite(uint8_t screenNumber, bool clear, bool post, const char* text, uint8_t color, float textSize, uint8_t cursorX, uint8_t cursorY)
 {
   int index = screenNumber-1;
