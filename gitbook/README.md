@@ -1,6 +1,6 @@
 # Welcome
 
-<figure><img src="../images/DDC.PNG" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/DahlDesign_DDC_logo_white.png" alt="" width="375"><figcaption></figcaption></figure>
 
 ## Dahl Design DDC Manual
 
