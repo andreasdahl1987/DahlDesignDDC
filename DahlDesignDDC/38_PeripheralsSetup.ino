@@ -342,65 +342,81 @@ void startI2C()
 #endif
 
 #if(USING_OLED == 1)
-void SSD1306setup()
-{
-  Wire.setSDA(SDA0PIN);
-  Wire.setSCL(SCL0PIN);
-  wire0Init = true;
 
-  #if(DISPLAYCOUNT > 7 )
-    SSD1306initiate(1);
-    SSD1306initiate(2);
-    SSD1306initiate(3);
-    SSD1306initiate(4);
-    SSD1306initiate(5);
-    SSD1306initiate(6);
-    SSD1306initiate(7);
-    SSD1306initiate(8);
-  #elif(DISPLAYCOUNT > 6 )
-    SSD1306initiate(1);
-    SSD1306initiate(2);
-    SSD1306initiate(3);
-    SSD1306initiate(4);
-    SSD1306initiate(5);
-    SSD1306initiate(6);
-    SSD1306initiate(7);
-  #elif(DISPLAYCOUNT > 5 )
-    SSD1306initiate(1);
-    SSD1306initiate(2);
-    SSD1306initiate(3);
-    SSD1306initiate(4);
-    SSD1306initiate(5);
-    SSD1306initiate(6);
-  #elif(DISPLAYCOUNT > 4)
-    SSD1306initiate(1);
-    SSD1306initiate(2);
-    SSD1306initiate(3);
-    SSD1306initiate(4);
-    SSD1306initiate(5);
-  #elif(DISPLAYCOUNT > 3)
-    SSD1306initiate(1);
-    SSD1306initiate(2);
-    SSD1306initiate(3);
-    SSD1306initiate(4);
-   #elif(DISPLAYCOUNT > 2)
-    SSD1306initiate(1);
-    SSD1306initiate(2);
-    SSD1306initiate(3);
-   #elif(DISPLAYCOUNT > 1)
-    SSD1306initiate(1);
-    SSD1306initiate(2);
-  #elif(DISPLAYCOUNT > 0)
-    SSD1306initiate(1);
-  #endif
+void OLEDSetup()
+{
+#if (BOARDTYPE == 2)
+#if (OLED_I2C_NUMBER == 1)
+  Wire1.setSDA(SDA1PIN);
+  Wire1.setSCL(SCL1PIN);
+  wire1Init = true;
+#else
+  {
+    Wire.setSDA(SDA0PIN);
+    Wire.setSCL(SCL0PIN);
+    wire0Init = true;
+  }
+#endif
+#else
+  wire0Init = true;
+#endif
 }
 
- void SSD1306initiate(int number)
- {
-    int index = number - 1;
-    tcaselect(index);
-    displays[index].begin(SSD1306_SWITCHCAPVCC, OLED_Address); 
-    displays[index].clearDisplay();
-    displays[index].display();
- }
+void OLED_Init ()
+{
+#if(DISPLAYCOUNT > 7 )
+  displayInitiate(1);
+  displayInitiate(2);
+  displayInitiate(3);
+  displayInitiate(4);
+  displayInitiate(5);
+  displayInitiate(6);
+  displayInitiate(7);
+  displayInitiate(8);
+#elif(DISPLAYCOUNT > 6 )
+  displayInitiate(1);
+  displayInitiate(2);
+  displayInitiate(3);
+  displayInitiate(4);
+  displayInitiate(5);
+  displayInitiate(6);
+  displayInitiate(7);
+#elif(DISPLAYCOUNT > 5 )
+  displayInitiate(1);
+  displayInitiate(2);
+  displayInitiate(3);
+  displayInitiate(4);
+  displayInitiate(5);
+  displayInitiate(6);
+#elif(DISPLAYCOUNT > 4)
+  displayInitiate(1);
+  displayInitiate(2);
+  displayInitiate(3);
+  displayInitiate(4);
+  displayInitiate(5);
+#elif(DISPLAYCOUNT > 3)
+  displayInitiate(1);
+  displayInitiate(2);
+  displayInitiate(3);
+  displayInitiate(4);
+  #elif(DISPLAYCOUNT > 2)
+  displayInitiate(1);
+  displayInitiate(2);
+  displayInitiate(3);
+  #elif(DISPLAYCOUNT > 1)
+  displayInitiate(1);
+  displayInitiate(2);
+#elif(DISPLAYCOUNT > 0)
+  displayInitiate(1);
 #endif
+}
+
+void displayInitiate(int number)
+{
+  int index = number - 1;
+  tcaselect(index);
+  displays[index].begin(SSD1306_SWITCHCAPVCC, OLED_Address); 
+  displays[index].clearDisplay();
+  displays[index].display();
+}
+#endif //OLED using

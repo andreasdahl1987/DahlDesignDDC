@@ -20,7 +20,7 @@ void setup()
       USBDevice.setManufacturerDescriptor(MAKER);
       USBDevice.setProductDescriptor(CONTROLLER_NAME);
     #endif
-  
+
     //LED setup
     Serial.begin(115200);
 
@@ -61,7 +61,7 @@ void setup()
       #endif
 
       #if (USING_OLED == 1)
-        SSD1306setup();
+        OLEDSetup();
       #endif
       
       #if (USING_ADS1115 == 1 || USING_PCA9555 == 1 || USING_OLED == 1)
@@ -74,6 +74,9 @@ void setup()
       #endif
       #if (USING_PCA9555 == 1)
         PCA9555OutputSetup();
+      #endif
+      #if (USING_OLED == 1)
+        OLED_Init();
       #endif
       
     #endif
