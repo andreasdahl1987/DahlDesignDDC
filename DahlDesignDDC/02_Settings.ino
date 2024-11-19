@@ -274,8 +274,10 @@ bool wire0Init = false;
     bool OLEDgenLock[8] = {false, false, false, false, false, false, false, false};
     bool backgroundSet[8] = {false, false, false, false, false, false, false, false};
     uint8_t OLEDcondiIndex[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+    uint8_t OLEDcondiForce[8] = {0, 0, 0, 0, 0, 0, 0, 0};
     unsigned long OLEDcondiLock[8] = {0, 0, 0, 0, 0, 0, 0, 0};
     bool writeToDisplay[8] = {false, false, false, false, false, false, false, false};
+    unsigned long OLEDcondiTimer [8] = {0, 0, 0, 0, 0, 0, 0, 0};
     unsigned long OLEDtimer [8] = {0, 0, 0, 0, 0, 0, 0, 0};
     int OLEDframes [8] = {0, 0, 0, 0, 0, 0, 0, 0};
 
@@ -291,8 +293,10 @@ bool wire0Init = false;
     bool OLEDgenLock[7] = {false, false, false, false, false, false, false};
     bool backgroundSet[7] = {false, false, false, false, false, false, false};
     uint8_t OLEDcondiIndex[7] = {0, 0, 0, 0, 0, 0, 0};
+    uint8_t OLEDcondiForce[7] = {0, 0, 0, 0, 0, 0, 0};
     unsigned long OLEDcondiLock[7] = {0, 0, 0, 0, 0, 0, 0};
     bool writeToDisplay[7] = {false, false, false, false, false, false, false};
+    unsigned long OLEDcondiTimer [7] = {0, 0, 0, 0, 0, 0, 0};
     unsigned long OLEDtimer [7] = {0, 0, 0, 0, 0, 0, 0};
     int OLEDframes [7] = {0, 0, 0, 0, 0, 0, 0};
 
@@ -307,8 +311,10 @@ bool wire0Init = false;
     bool OLEDgenLock[6] = {false, false, false, false, false, false};
     bool backgroundSet[6] = {false, false, false, false, false, false};
     uint8_t OLEDcondiIndex[6] = {0, 0, 0, 0, 0, 0};
+    uint8_t OLEDcondiForce[6] = {0, 0, 0, 0, 0, 0};
     unsigned long OLEDcondiLock[6] = {0, 0, 0, 0, 0, 0};
     bool writeToDisplay[6] = {false, false, false, false, false, false};
+    unsigned long OLEDcondiTimer [6] = {0, 0, 0, 0, 0, 0};
     unsigned long OLEDtimer [6] = {0, 0, 0, 0, 0, 0};
     int OLEDframes [6] = {0, 0, 0, 0, 0, 0};
 
@@ -322,8 +328,10 @@ bool wire0Init = false;
     bool OLEDgenLock[5] = {false, false, false, false, false};
     bool backgroundSet[5] = {false, false, false, false, false};
     uint8_t OLEDcondiIndex[5] = {0, 0, 0, 0, 0};
+    uint8_t OLEDcondiForce[5] = {0, 0, 0, 0, 0};
     unsigned long OLEDcondiLock[5] = {0, 0, 0, 0, 0};
     bool writeToDisplay[5] = {false, false, false, false, false};
+    unsigned long OLEDcondiTimer [5] = {0, 0, 0, 0, 0};
     unsigned long OLEDtimer [5] = {0, 0, 0, 0, 0};
     int OLEDframes [5] = {0, 0, 0, 0, 0};
 
@@ -336,8 +344,10 @@ bool wire0Init = false;
     bool OLEDgenLock[4] = {false, false, false, false};
     bool backgroundSet[4] = {false, false, false, false};
     uint8_t OLEDcondiIndex[4] = {0, 0, 0, 0};
+    uint8_t OLEDcondiForce[4] = {0, 0, 0, 0};
     unsigned long OLEDcondiLock[4] = {0, 0, 0, 0};
     bool writeToDisplay[4] = {false, false, false, false};
+    unsigned long OLEDcondiTimer [4] = {0, 0, 0, 0};
     unsigned long OLEDtimer [4] = {0, 0, 0, 0};
     int OLEDframes [4] = {0, 0, 0, 0};
 
@@ -349,8 +359,10 @@ bool wire0Init = false;
     bool OLEDgenLock[3] = {false, false, false};
     bool backgroundSet[3] = {false, false, false};
     uint8_t OLEDcondiIndex[3] = {0, 0, 0};
+    uint8_t OLEDcondiForce[3] = {0, 0, 0};
     unsigned long OLEDcondiLock[3] = {0, 0, 0};
     bool writeToDisplay[3] = {false, false, false};
+    unsigned long OLEDcondiTimer [3] = {0, 0, 0};
     unsigned long OLEDtimer [3] = {0, 0, 0};
     int OLEDframes [3] = {0, 0, 0};
 
@@ -361,8 +373,10 @@ bool wire0Init = false;
     bool OLEDgenLock[2] = {false, false};
     bool backgroundSet[2] = {false, false};
     uint8_t OLEDcondiIndex[2] = {0, 0};
+    uint8_t OLEDcondiForce[2] = {0, 0};
     unsigned long OLEDcondiLock[2] = {0, 0};
     bool writeToDisplay[2] = {false, false};
+    unsigned long OLEDcondiTimer [2] = {0, 0};
     unsigned long OLEDtimer [2] = {0, 0};
     int OLEDframes [2] = {0, 0};
 
@@ -372,8 +386,10 @@ bool wire0Init = false;
     bool OLEDgenLock[1] = {false};
     bool backgroundSet[1] = {false};
     uint8_t OLEDcondiIndex[1] = {0};
+    uint8_t OLEDcondiForce[1] = {0};
     unsigned long OLEDcondiLock[1] = {0};
     bool writeToDisplay[1] = {false};
+    unsigned long OLEDcondiTimer [1] = {0};
     unsigned long OLEDtimer [1] = {0};
     int OLEDframes [1] = {0};
 
