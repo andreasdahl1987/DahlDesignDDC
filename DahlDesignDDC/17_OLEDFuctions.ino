@@ -9,38 +9,38 @@ void tcaselect(uint8_t i)
 
 void OLEDcleanup()
 {
-for (int i = 0; i < DISPLAYCOUNT; i++)
-{
-  //Writing to displays
-  if (writeToDisplay[i])
+  for (int i = 0; i < DISPLAYCOUNT; i++)
   {
-    displays[i].display();
-    writeToDisplay[i] = false;
-    Serial.println("Printing to screen");
-  }
-  //Resetting conditional write line index
-  OLEDcondiIndex[i] = 0;
+    //Writing to displays
+    if (writeToDisplay[i])
+    {
+      displays[i].display();
+      writeToDisplay[i] = false;
+      //Serial.println("Printing to screen");
+    }
+    //Resetting conditional write line index
+    OLEDcondiIndex[i] = 0;
 
-  //Filtering out condiForce write this loop
-  OLEDcondiForce[i] = OLEDcondiForce[i] & 2;
-  //Checking if any condi lines has triggered condiForce, then setting condiForce active on 1st bit if there are still conditions that are true (active condiLocks)
-  if(OLEDcondiForce[i] == 2 && OLEDcondiLock[i] > 0)
-  {
-    OLEDcondiForce[i] = 1;
-  }
-  else
-  {
-    OLEDcondiForce[i] = 0;
+    //Filtering out condiForce write this loop
+    OLEDcondiForce[i] = OLEDcondiForce[i] & 2;
+    //Checking if any condi lines has triggered condiForce, then setting condiForce active on 1st bit if there are still conditions that are true (active condiLocks)
+    if(OLEDcondiForce[i] == 2 && OLEDcondiLock[i] > 0)
+    {
+      OLEDcondiForce[i] = 1;
+    }
+    else
+    {
+      OLEDcondiForce[i] = 0;
+    }
+
+    //Locking background from running again
+    if(backgroundSet[i])
+    {
+      OLEDgenLock[i] = true;  //Prevent writing background untill genlock is off again (from condi being met and un-met again)
+      backgroundSet[i] = false;
+    }
   }
 
-  //Locking background from running again
-  if(backgroundSet[i])
-  {
-    OLEDgenLock[i] = true;  //Prevent writing background untill genlock is off again (from condi being met and un-met again)
-    backgroundSet[i] = false;
-  }
-}
-Serial.println("");
 }
 
 void backgroundWrite(uint8_t screenNumber, const char* text, uint8_t cursorX = 0, uint8_t cursorY = 0, bool clear = true, uint8_t color = 1, float textSize = 1)
@@ -72,25 +72,7 @@ void conditionalWrite(uint8_t screenNumber, const char* text, bool condition, ui
   bool condiLock = (OLEDcondiLock[index] >> OLEDcondiIndex[index]) & 1; //Finding condiLock state for this line
   bool condiForce = OLEDcondiForce[index] & 1; //Finding an active condiForce
   
-  bool condiChanged = true; //Detecting changed timer within threshold
-  int changeTimer = ChangeTimer;
-
-  if(condition && !condiLock)
-  {
-    OLEDcondiTimer[index] = globalClock;
-  }
-
-  if (changeTimer > 0 && globalClock - OLEDcondiTimer[index] > changeTimer)
-  {
-    condiChanged = false;
-  }
-
-  Serial.print("  |  Condi line ");
-  Serial.print(OLEDcondiIndex[index]);
-  Serial.print(": ");
-  Serial.print(condiChanged);
-
-  if (condition && condiChanged && (!condiLock || condiForce)) //Write to display if lock is open, meaning first time we're seeing it open. OR if condiForce is active
+  if (condition && (!condiLock || condiForce)) //Write to display if lock is open, meaning first time we're seeing it open. OR if condiForce is active
   {
     tcaselect(index);
     if (clear) 
@@ -108,7 +90,7 @@ void conditionalWrite(uint8_t screenNumber, const char* text, bool condition, ui
     writeToDisplay[index] = true;
 
   }
-  else if((!condition || !condiChanged) && condiLock) //If condiLock is on, but condition is no longer met, this is the first time we're seeing condition not met after being met before. 
+  else if(!condition && condiLock) //If condiLock is on, but condition is no longer met, this is the first time we're seeing condition not met after being met before. 
   {
     OLEDgenLock[index] = false; //Background is ready to run again
 

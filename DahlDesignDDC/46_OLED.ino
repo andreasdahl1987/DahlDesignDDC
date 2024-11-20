@@ -10,8 +10,8 @@ backgroundWrite(2, "THIS SCREEN");
 backgroundWrite(2, "IS NICE", 0,30,false);
 
 
-conditionalWrite(2, "IT IS BETTER", buttonPressed(1,1), 0, 0, true, 5000);
-conditionalWrite(2, "LELELLEL", globalClock < 10000, 0, 30, false, 7000);
+conditionalWrite(2, "IT IS BETTER", buttonPressed(1,1));
+conditionalWrite(2, "LELELLEL", globalClock < 10000, 0, 30, false);
 conditionalWrite(2, "THIS SHOULD", false);
 conditionalWrite(2, "NEVER SHOW UP!", false, 0, 30, false);
 
