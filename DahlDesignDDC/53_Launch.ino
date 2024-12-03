@@ -231,7 +231,13 @@ void launchButton(int row, int column, int analogChannelAffected)
     if (!launchButtonLatch)
     {
         Joystick.setButton(Number, pushState[Row][Column]);
+        Joystick.setButton(Number+1, 0);
     }
+    else
+    {
+        Joystick.setButton(Number+1, pushState[Row][Column]);
+        Joystick.setButton(Number, 0);
+    {
 
 }
 
