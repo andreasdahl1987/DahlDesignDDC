@@ -179,3 +179,33 @@ void outputPinsSetup()
     }
   }
 }
+
+void versionSet()
+{
+  Joystick.setRxAxisRange(-32768, 32767);
+
+  versionField |= MAJORVERSION;
+  versionField |= (MINORVERSION << 2);
+  versionField |= (PATCHVERSION << 8);
+
+  //Set DDC ID
+  if(USING_CB1 == 1)
+  {
+    versionField |= (CB1ID << 10);
+  }
+  else if(USING_CB2 == 2)
+  {
+    versionField |= (CB2ID << 10);
+  }
+  else
+  {
+    versionField |= (DDCID << 10);
+  }
+
+  uint16_t candy = read16bitFromEEPROM(CANDY);
+  delay(5);
+
+  versionField |= (candy << 13);
+
+  Joystick.setRxAxis(versionField - 32767);
+}

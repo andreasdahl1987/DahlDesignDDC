@@ -1,6 +1,6 @@
 void write16bitToEEPROM(uint16_t location, uint16_t value)
 {
-#if ((USING_CAT24C512 == 1 && CAT24C512_I2C_NUMBER == 0) || USING_CB1 == 1 || USING_32U4EEPROM == 1)
+#if ((USING_CAT24C512 == 1 && CAT24C512_I2C_NUMBER == 0) || USING_CB1 == 1 || USING_CB2 == 1 ||  USING_32U4EEPROM == 1)
   
   #if (USING_32U4EEPROM)
     uint8_t firstByte = value >> 8;
@@ -50,7 +50,7 @@ void write16bitToEEPROM(uint16_t location, uint16_t value)
 
 uint16_t read16bitFromEEPROM(uint16_t location)
 {
-#if ((USING_CAT24C512 == 1 && CAT24C512_I2C_NUMBER == 0) || USING_CB1 == 1 || USING_32U4EEPROM == 1)
+#if ((USING_CAT24C512 == 1 && CAT24C512_I2C_NUMBER == 0) || USING_CB1 == 1 || USING_CB2 == 1 || USING_32U4EEPROM == 1)
   
   #if (USING_32U4EEPROM)
     uint16_t value = 0;
@@ -113,7 +113,7 @@ uint16_t read16bitFromEEPROM(uint16_t location)
 
 void EEPROMfirst()
 {
-#if (USING_CAT24C512 == 1 || USING_CB1 == 1 || USING_32U4EEPROM == 1)
+#if (USING_CAT24C512 == 1 || USING_CB1 == 1 || USING_CB2 == 1 || USING_32U4EEPROM == 1)
 
     resetEEPROM = read16bitFromEEPROM(UTIL);
     delay(5);
@@ -142,7 +142,7 @@ void EEPROMfirst()
 
 void EEPROMinit()
 {
-#if (USING_CAT24C512 == 1 || USING_CB1 == 1 || USING_32U4EEPROM == 1)
+#if (USING_CAT24C512 == 1 || USING_CB1 == 1 || USING_CB2 == 1 || USING_32U4EEPROM == 1)
     switchPreset = read16bitFromEEPROM(PRESETSLOT);
     bitePoint = read16bitFromEEPROM(BITEPOINT+(switchPreset*2));
     LEDBrightness = read16bitFromEEPROM(LEDSLOT+(switchPreset*2));
@@ -158,12 +158,13 @@ void EEPROMinit()
     oldLED = LEDBrightness;
     oldBrake = brakeMagicValue;
     oldThrottle = throttleHoldValue;
+
 #endif
 }
 
 void EEPROMchanges()
 {
-#if (USING_CAT24C512 == 1 || USING_CB1 == 1 || USING_32U4EEPROM == 1)
+#if (USING_CAT24C512 == 1 || USING_CB1 == 1 || USING_CB2 == 1 || USING_32U4EEPROM == 1)
 
     //PRESET
     if (oldPreset != switchPreset)
@@ -202,7 +203,7 @@ void EEPROMchanges()
 
 void EEPROMpresetChange()
 {
-    #if (USING_CAT24C512 == 1 || USING_CB1 == 1 || USING_32U4EEPROM == 1)
+    #if (USING_CAT24C512 == 1 || USING_CB1 == 1 || USING_CB2 == 1 || USING_32U4EEPROM == 1)
     bitePoint = read16bitFromEEPROM(BITEPOINT + switchPreset * 2);
     LEDBrightness = read16bitFromEEPROM(LEDSLOT + switchPreset * 2);
     brakeMagicValue = read16bitFromEEPROM(BRAKESLOT + switchPreset * 2);

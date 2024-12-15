@@ -177,6 +177,8 @@ void setup()
     
     Joystick.begin(0); //Start joystick library magic
 
+    versionSet();
+
     Joystick.setZAxisRange(-32768, 32767); //Making bit fields 16 bit
     Joystick.setYAxisRange(-32768, 32767);
 }
