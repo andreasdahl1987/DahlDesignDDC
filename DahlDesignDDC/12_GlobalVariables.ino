@@ -104,3 +104,10 @@ unsigned long globalClock;
 
 //LED setup
 int8_t LEDBrightness = 25;
+
+//Mouse setup
+#if (ENABLE_MOUSE == 1)
+#define MOUSE_LOGCURVE 1
+#define MOUSE_ACCELTIME 1000
+uint8_t MOUSESpeed = 200; // 100 (1080p or less), 200 (1440p), 400 (4k), 800 (8k)
+#endif
