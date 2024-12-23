@@ -59,8 +59,12 @@ void setup()
       #if (USING_PCA9555 == 1)
         PCA9555Setup();
       #endif
+
+      #if (USING_CAT24C512 == 1)
+        CAT24C512Setup();
+      #endif
       
-      #if (USING_ADS1115 == 1 || USING_PCA9555 == 1)
+      #if (USING_ADS1115 == 1 || USING_PCA9555 == 1  || USING_CAT24C512 == 1 )
       startI2C();
       #endif
 
@@ -172,6 +176,8 @@ void setup()
 
     
     Joystick.begin(0); //Start joystick library magic
+
+    versionSet();
 
     Joystick.setZAxisRange(-32768, 32767); //Making bit fields 16 bit
     Joystick.setYAxisRange(-32768, 32767);

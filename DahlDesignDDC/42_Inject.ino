@@ -9,7 +9,7 @@ void switchTableInject(int8_t pin, int8_t row, int8_t column)
 
 void analogInject(int8_t pin, int8_t row, int8_t column, int startValue, int endValue, uint8_t threshold)
 {
-  #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+  #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
   int value;
   if (pin > 49)
@@ -64,7 +64,7 @@ void analogInject(int8_t pin, int8_t row, int8_t column, int startValue, int end
 
 void analogInjectSingle(int8_t pin, int8_t row, int8_t column, int startValue, int endValue, uint8_t threshold)
 {
-  #if(USING_ADS1115 == 1 || USING_CB1 == 1)
+  #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
   int value;
   if (pin > 49)

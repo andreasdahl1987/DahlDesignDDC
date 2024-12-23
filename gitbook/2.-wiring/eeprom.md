@@ -31,7 +31,7 @@ The 3 pins A0-A2 offer a way for you to change the address of the EEPROM IC. An 
 
 <figure><img src="../.gitbook/assets/image (36).png" alt=""><figcaption></figcaption></figure>
 
-The 3 pins, representing the last 3 bits in the address gives you 8 possible addresses. DDC default is 1010_**000**_, but you can change this in the sketch. DDC only supports 1 EEPROM IC. I'm pretty sure you wont be needing more.&#x20;
+The 3 pins, representing the last 3 bits in the address gives you 8 possible addresses. DDC default is 101&#x30;_**000**_, but you can change this in the sketch. DDC only supports 1 EEPROM IC. I'm pretty sure you wont be needing more.&#x20;
 
 We typically write these addresses in hexadecimal format; for the CAT24C512 these are addreses 0x50 to 0x57, where 0x50 have all 3 pins grounded and 0x57 have all 3 pins connected to VCC.&#x20;
 

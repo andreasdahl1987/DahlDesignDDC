@@ -34,9 +34,9 @@ Returns TRUE if modbutton is pressed, otherwise FALSE. Doesnt require any input,
 
 Returns TRUE if the current bite setting mode (0 -3) is the same as you typed in the function. Otherwise FALSE.&#x20;
 
-#### **rotaryPosition(int switchNumber, int switchPosition)**
+#### **rotaryPosition(int analogChannelNumber, int switchPosition)**
 
-This function willcheck a rotary switch for a given position. Give it the switch# assigned to your switch as well as a switch position. Will return TRUE if this switch is in that position, otherwise FALSE. Example: `rotaryPosition(3,9)` will check if the switch with switch# 3 is in position 9 or not.&#x20;
+This function will check a rotary switch for a given position. Give it the channel number your switch is set up on, well as a switch position. Will return TRUE if this switch is in that position, otherwise FALSE. Example: `rotaryPosition(3,9)` will check if the switch on analog channel 3 is in position 9 or not.&#x20;
 
 #### **analogTravel(int analogChannel, int threshold)**
 
