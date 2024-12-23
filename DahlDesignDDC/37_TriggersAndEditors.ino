@@ -94,4 +94,14 @@ void setAnalogSwitchMode(int analogChannel, int modeBit, int modeValue)
         analogSwitchMode2[analogChannel-1] = modeValue;
     }
 }
+
+void sendToButtonField(int fieldPosition, bool condition)
+{
+  buttonField |= (condition << (fieldPosition-1));
+}
+
+void sendToRotaryField(int fieldPosition, bool condition)
+{
+  rotaryField |= (condition << (fieldPosition-1));
+}
  

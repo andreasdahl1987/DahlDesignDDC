@@ -11,8 +11,3 @@
  *
  * Dahl Design Controller © 2022 by Andreas Dahl is licensed under CC BY-NC-SA 4.0
  */
-
- #define DDCID 0x02
- #define MAJORVERSION 2
- #define MINORVERSION 11
- #define PATCHVERSION 0

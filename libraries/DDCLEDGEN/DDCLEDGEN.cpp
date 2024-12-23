@@ -131,6 +131,7 @@ void Adafruit_NeoPixel::begin(void) {
     digitalWrite(pin, LOW);
   }
   begun = true;
+  diffs = 1;
 }
 
 /*!
@@ -259,6 +260,10 @@ void Adafruit_NeoPixel::show(void) {
 
   if (!pixels)
     return;
+
+  if (diffs == 0)
+    return;
+  diffs = 0;
 
   // Data latch = 300+ microsecond pause in the output stream. Rather than
   // put a delay at the end of the function, the ending time is noted and
@@ -3086,6 +3091,9 @@ void Adafruit_NeoPixel::setPixelColor(uint16_t n, uint8_t r, uint8_t g,
       p = &pixels[n * 4];     // 4 bytes per pixel
       p[wOffset] = 0;         // But only R,G,B passed -- set W to 0
     }
+	diffs += p[rOffset] ^ r;
+	diffs += p[gOffset] ^ g;
+	diffs += p[bOffset] ^ b;
     p[rOffset] = r; // R,G,B always stored
     p[gOffset] = g;
     p[bOffset] = b;
@@ -3119,6 +3127,9 @@ void Adafruit_NeoPixel::setPixelColor(uint16_t n, uint8_t r, uint8_t g,
       p = &pixels[n * 4];     // 4 bytes per pixel
       p[wOffset] = w;         // Store W
     }
+	diffs += p[rOffset] ^ r;
+	diffs += p[gOffset] ^ g;
+	diffs += p[bOffset] ^ b;
     p[rOffset] = r; // Store R,G,B
     p[gOffset] = g;
     p[bOffset] = b;
@@ -3147,6 +3158,9 @@ void Adafruit_NeoPixel::setPixelColor(uint16_t n, uint32_t c) {
       uint8_t w = (uint8_t)(c >> 24);
       p[wOffset] = brightness ? ((w * brightness) >> 8) : w;
     }
+	diffs += p[rOffset] ^ r;
+	diffs += p[gOffset] ^ g;
+	diffs += p[bOffset] ^ b;
     p[rOffset] = r;
     p[gOffset] = g;
     p[bOffset] = b;
@@ -3380,6 +3394,7 @@ void Adafruit_NeoPixel::setBrightness(uint8_t b) {
       c = *ptr;
       *ptr++ = (c * scale) >> 8;
     }
+	diffs++;
     brightness = newBrightness;
   }
 }
@@ -3393,7 +3408,7 @@ uint8_t Adafruit_NeoPixel::getBrightness(void) const { return brightness - 1; }
 /*!
   @brief   Fill the whole NeoPixel strip with 0 / black / off.
 */
-void Adafruit_NeoPixel::clear(void) { memset(pixels, 0, numBytes); }
+void Adafruit_NeoPixel::clear(void) { memset(pixels, 0, numBytes); diffs++; }
 
 // A 32-bit variant of gamma8() that applies the same function
 // to all components of a packed RGB or WRGB value.

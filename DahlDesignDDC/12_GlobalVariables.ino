@@ -4,6 +4,7 @@
 
 long globalTimer = 0;
 uint8_t globalCounter = 0;
+uint16_t versionField = 0;
 
 //Handbrake
 bool handbrake = false;

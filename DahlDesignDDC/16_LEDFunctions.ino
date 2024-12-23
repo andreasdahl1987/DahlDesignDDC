@@ -53,9 +53,9 @@ void SimHubImport()
   
   #if(LED2COUNT > 0)
   uint8_t maskIndex2 = 0;
-  for(int i = 0, i<LEDMaskCount;i++)
+  for(int i = 0; i<LEDMaskCount;i++)
   {
-    if(LEDMask[i] < LED1Count)
+    if(LEDMask[i] < LED1COUNT)
     {
       maskIndex2++;
     }
@@ -84,7 +84,7 @@ void SimHubImport()
   #if(LED3COUNT > 0)
   uint8_t maskIndex3 = 0;
  
-  for(int i = 0, i<LEDMaskCount;i++)
+  for(int i = 0; i<LEDMaskCount;i++)
   {
     if(LEDMask[i] < (LED1COUNT+LED2COUNT))
     {
@@ -115,7 +115,7 @@ void SimHubImport()
   #if(LED4COUNT > 0)
   uint8_t maskIndex4 = 0;
  
-  for(int i = 0, i<LEDMaskCount;i++)
+  for(int i = 0; i<LEDMaskCount;i++)
   {
     if(LEDMask[i] < (LED1COUNT+LED2COUNT+LED3COUNT))
     {

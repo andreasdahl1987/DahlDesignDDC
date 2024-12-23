@@ -173,13 +173,13 @@ void PCA9555Setup()
     pinMode(PCA9555interruptPins[i], INPUT_PULLUP);
   }
 #if (BOARDTYPE == 2)
-#if (PCA9555_I2C_NUMBER == 1 && USING_PCA9555 == 1)
+#if (PCA9555_I2C_NUMBER == 1)
   {
     Wire1.setSDA(SDA1PIN);
     Wire1.setSCL(SCL1PIN);
     wire1Init = true;
   }
-#elif (USING_PCA9555 == 1)
+#else
   {
     Wire.setSDA(SDA0PIN);
     Wire.setSCL(SCL0PIN);
@@ -279,10 +279,10 @@ void ADS1115Alert()
     Wire1.write(0b00000000);
     Wire1.endTransmission();
   }
-  #endif
+  #endif //I2C number
 
 }
-#endif
+#endif //Alert
 
 void ADS1115Setup()
 {
@@ -298,21 +298,42 @@ void ADS1115Setup()
   }
 
 
-#if (BOARDTYPE == 2)
-#if (ADS1115_I2C_NUMBER == 1 && USING_ADS1115 == 1)
-  Wire1.setSDA(SDA1PIN);
-  Wire1.setSCL(SCL1PIN);
-  wire1Init = true;
-#elif(USING_ADS1115 == 1)
-  {
-    Wire.setSDA(SDA0PIN);
-    Wire.setSCL(SCL0PIN);
+  #if (BOARDTYPE == 2)
+    #if (ADS1115_I2C_NUMBER == 1)
+      Wire1.setSDA(SDA1PIN);
+      Wire1.setSCL(SCL1PIN);
+      wire1Init = true;
+    #else
+      {
+        Wire.setSDA(SDA0PIN);
+        Wire.setSCL(SCL0PIN);
+        wire0Init = true;
+      }
+    #endif
+  #else
     wire0Init = true;
-  }
-#endif
-#else
-  wire0Init = true;
-#endif
+  #endif
+}
+#endif  //USING ADS1115
+
+#if(USING_CAT24C512 == 1)
+void CAT24C512Setup()
+{
+  #if (BOARDTYPE == 2)
+    #if (CAT24C512_I2C_NUMBER == 1)
+      Wire1.setSDA(SDA1PIN);
+      Wire1.setSCL(SCL1PIN);
+      wire1Init = true;
+    #else
+      {
+        Wire.setSDA(SDA0PIN);
+        Wire.setSCL(SCL0PIN);
+        wire0Init = true;
+      }
+    #endif
+  #else
+    wire0Init = true;
+  #endif
 }
 #endif
 
@@ -321,22 +342,20 @@ void ADS1115Setup()
 void startI2C()
 {
 #if(BOARDTYPE == 2)
-  if (USING_CAT24C512 == 1 && CAT24C512_I2C_NUMBER == 1) //Start up is using external EEPROM
-  {
-     wire1Init = true;
-  }
   if (wire1Init)
   {
     Wire1.begin();
-  }
-#endif
-  if (USING_CAT24C512 == 1 && CAT24C512_I2C_NUMBER == 0) //Start up is using external EEPROM
-  {
-     wire0Init = true;
   }
   if (wire0Init)
   {
     Wire.begin();
   }
+#else
+  if (wire0Init)
+  {
+    Wire.begin();
+  }
+#endif
 }
+
 #endif

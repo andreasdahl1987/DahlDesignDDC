@@ -34,17 +34,16 @@
 #define ENABLE_OVERSAMPLING 0
 
 //------------------------------
-//-----MOUSE FEATURES-----------
+//-------DAHL DESIGN BOARDS-----
 //------------------------------
 
-#define ENABLE_MOUSE 1
-
-//------------------------------
-//-------DAHL DESIGN CB1--------
-//------------------------------
-
-//Enable CB1 board
+//Enable board
 #define USING_CB1 1
+#define USING_CB2 0
+
+//------------------------------
+//---------CB1 SETTINGS---------
+//------------------------------
 
 //ADC setup
 #define CB1_ADC1 1
@@ -185,6 +184,17 @@ bool wire0Init = false;
 #define ADC19 68
 #define ADC20 69
 #define ADC_CORR 50
+
+//DDC ID DEFINES
+#define DDCID 1
+#define CB1ID 2
+#define CB2ID 3
+
+//DDC VERSION
+
+#define MAJORVERSION 2
+#define MINORVERSION 12
+#define PATCHVERSION 0
 
 //------------------------------
 //---------LIBRARIES------------
