@@ -124,12 +124,12 @@ void firmwareUploadMode(int button1Row, int button1Column, int button2Row, int b
     int b1Col = button1Column -1;
     int b2Row = button2Row - 1;
     int b2Col = button2Column - 1;
-    
+
     if (rawState[b1Row][b1Col] == 0 || rawState[b2Row][b2Col] == 0)
     {
         bootTimer = globalClock;
     }
-    
+
     if (globalClock - bootTimer > timer)
     {
         reset_usb_boot(0,0);
@@ -154,17 +154,17 @@ void CB1Oversampling()
       val4 += oversamples.read();
     }
     #if (USING_CB1 == 1)
-    ADS1115value[8] = val1 / 32;  
+    ADS1115value[8] = val1 / 32;
     ADS1115value[9] = val2 / 32;
     ADS1115value[10] = val3 / 32;
     ADS1115value[11] = val4 / 32;
     #else
-    ADS1115value[0] = val1 / 32;  
+    ADS1115value[0] = val1 / 32;
     ADS1115value[1] = val2 / 32;
     ADS1115value[2] = val3 / 32;
     ADS1115value[3] = val4 / 32;
     #endif
-  } 
+  }
 }
 #endif
 
@@ -182,7 +182,7 @@ void outputPinsSetup()
 
 void versionSet()
 {
-  Joystick.setRxAxisRange(-32768, 32767);
+  Joystick.setRxAxisRange(0, 65535);
 
   versionField |= MAJORVERSION;
   versionField |= (MINORVERSION << 2);
@@ -207,5 +207,5 @@ void versionSet()
 
   versionField |= (candy << 13);
 
-  Joystick.setRxAxis(versionField - 32767);
+  Joystick.setRxAxis(versionField);
 }

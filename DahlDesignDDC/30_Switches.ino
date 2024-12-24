@@ -11,8 +11,8 @@
   //---------SWITCHES END HERE------------
   //--------------------------------------
 
-	Joystick.setZAxis(rotaryField - 32767);
-	Joystick.setYAxis(buttonField - 32767);
+	Joystick.setZAxis(rotaryField);
+	Joystick.setYAxis(buttonField);
 
 	Joystick.sendState();
 

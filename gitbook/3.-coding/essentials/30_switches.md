@@ -42,8 +42,8 @@ This is what the empty 30\_Switches looks like:
 //----------SWITCHES END HERE---------
 //------------------------------------
 
-Joystick.setZAxis(rotaryField - 32767);
-Joystick.setYAxis(buttonField - 32767);
+Joystick.setZAxis(rotaryField);
+Joystick.setYAxis(buttonField);
 
 Joystick.sendState();
 
@@ -150,13 +150,13 @@ Joystick.sendState();
         882,                                                          //Fully pressed value (Slave)
         true);                                                        //True = Master/Slave paddle is Throttle/Brake in mode 4. False is opposite.
 
-   
+
 //------------------------------------
 //----------SWITCHES END HERE---------
 //------------------------------------
 
-Joystick.setZAxis(rotaryField - 32767);
-Joystick.setYAxis(buttonField - 32767);
+Joystick.setZAxis(rotaryField);
+Joystick.setYAxis(buttonField);
 
 Joystick.sendState();
 
@@ -170,4 +170,3 @@ Joystick.sendState();
 #endif
 }
 ```
-

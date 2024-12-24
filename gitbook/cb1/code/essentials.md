@@ -10,7 +10,7 @@ The only thing you need to set up is in 2\_Board.ino. Have a look at the very to
 
 ```
 /*
- * Chose your board. Default is to 32U4-based boards. 
+ * Chose your board. Default is to 32U4-based boards.
  */
 
 //------------------------------
@@ -66,8 +66,8 @@ Lets say we have 4 [pushbuttons ](../../switch-library/pushbutton.md#pushbutton)
   //---------SWITCHES END HERE------------
   //--------------------------------------
 
-	Joystick.setZAxis(rotaryField - 32767);
-	Joystick.setYAxis(buttonField - 32767);
+	Joystick.setZAxis(rotaryField);
+	Joystick.setYAxis(buttonField);
 
 	Joystick.sendState();
 

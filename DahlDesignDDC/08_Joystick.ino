@@ -13,7 +13,9 @@ Joystick_ Joystick(JOYSTICK_DEFAULT_REPORT_ID, JOYSTICK_TYPE_JOYSTICK,
     true,          //Z axis, used for rotary field
     true,          //Rx axis, used for version field
     true,          //Ry axis, used for bite point posting
-    false,         //Rz axis 
+    true,          //Rz axis
+	true,          //Slider1
+	true,          //Slider2
     false,         //Rudder
     true,          //Throttle, used for dual clutch mode 4
     false,         //Accelerator
