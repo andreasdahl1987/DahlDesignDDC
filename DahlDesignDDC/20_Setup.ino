@@ -176,6 +176,7 @@ void setup()
 
 
     Joystick.begin(0); //Start joystick library magic
+	Joystick.setDICalibrationFix(true); // Dirty fix for DirectInput Axis bad calibration for axis data output, others OS will get bad data
 
     versionSet();
 

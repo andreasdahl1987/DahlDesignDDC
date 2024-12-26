@@ -369,7 +369,7 @@ Joystick_::Joystick_(
 		if (includeSlider2Axis == true) {
 			// USAGE (Slider2)
 			tempHidReportDescriptor[hidReportDescriptorSize++] = 0x09;
-			tempHidReportDescriptor[hidReportDescriptorSize++] = 0x37;
+			tempHidReportDescriptor[hidReportDescriptorSize++] = 0x36;
 		}
 
 		// INPUT (Data,Var,Abs)
@@ -619,9 +619,7 @@ void Joystick_::setHatSwitch(int8_t hatSwitchIndex, int16_t value)
 
 int Joystick_::buildAndSet16BitValue(bool includeValue, uint16_t value, uint16_t valueMinimum, uint16_t valueMaximum, uint16_t actualMinimum, uint16_t actualMaximum, uint8_t dataLocation[])
 {
-	uint16_t convertedValue;
-	uint8_t highByte;
-	uint8_t lowByte;
+	uint32_t convertedValue;
 	uint16_t realMinimum = min(valueMinimum, valueMaximum);
 	uint16_t realMaximum = max(valueMinimum, valueMaximum);
 
@@ -639,13 +637,18 @@ int Joystick_::buildAndSet16BitValue(bool includeValue, uint16_t value, uint16_t
 		value = realMaximum - value + realMinimum;
 	}
 
-	convertedValue = map(value, realMinimum, realMaximum, actualMinimum, actualMaximum);
+	if (realMinimum != actualMinimum || realMaximum != actualMaximum) {
+		convertedValue = map(value, realMinimum, realMaximum, actualMinimum, actualMaximum);
+	}
+	else {
+		// No need to map if actual and real are the same
+		convertedValue = value;
+	}
 
-	highByte = (uint8_t)(convertedValue >> 8);
-	lowByte = (uint8_t)(convertedValue & 0x00FF);
+	if (_DICalibrationFix && convertedValue >= 0x4001 && convertedValue <= 0xBFFF) convertedValue++; // Dirty fix
 
-	dataLocation[0] = lowByte;
-	dataLocation[1] = highByte;
+	*(dataLocation++) = (uint8_t)(convertedValue & 0x00FF);
+	*dataLocation = (uint8_t)(convertedValue >> 8);
 
 	return 2;
 }

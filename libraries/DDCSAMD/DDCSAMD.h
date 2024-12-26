@@ -109,6 +109,7 @@ private:
 	uint16_t                 _brakeMaximum = JOYSTICK_DEFAULT_SIMULATOR_MAXIMUM;
 	uint16_t                 _steeringMinimum = JOYSTICK_DEFAULT_SIMULATOR_MINIMUM;
 	uint16_t                 _steeringMaximum = JOYSTICK_DEFAULT_SIMULATOR_MAXIMUM;
+	bool                     _DICalibrationFix = true;
 
 	uint8_t                  _hidReportId;
 	uint8_t                  _hidReportSize;
@@ -206,6 +207,14 @@ public:
 	{
 		_steeringMinimum = minimum;
 		_steeringMaximum = maximum;
+	}
+	inline void getDICalibrationFix()
+	{
+		return _DICalibrationFix;
+	}
+	inline void setDICalibrationFix(bool enable)
+	{
+		_DICalibrationFix = enable;
 	}
 
 	// Set Axis Values
