@@ -65,7 +65,7 @@ Now, in **`9_CB1_Table.ino`** you'll find the place to update this button number
 ```
 uint8_t buttonNumber[rowCount][colCount] =
 {
-  
+
   { 0, 1, 2, 3, 4, 5, 6, 7 },             //ROW 1, COLUMN 1-8
 
   { 8, 9, 10, 11, 12, 13, 14, 15 },       //ROW 2, COLUMN 1-8
@@ -81,7 +81,7 @@ uint8_t buttonNumber[rowCount][colCount] =
   { 48, 49, 50, 51, 52, 53, 54, 55 },     //ROW 7, COLUMN 1-8
 
   { 56, 57, 58, 59, 60, 61, 62, 63 }      //ROW 8, COLUMN 1-8  
-  
+
 };
 ```
 
@@ -90,7 +90,7 @@ This table is the same as your spreadsheet table. Edit to match:
 ```
 uint8_t buttonNumber[rowCount][colCount] =
 {
-  
+
   { 3, 4, 5, 6, 7, 8, 9, 10 },             //ROW 1, COLUMN 1-8
 
   { 18, 19, 13, 14, 15, 16, 17, 0 },       //ROW 2, COLUMN 1-8
@@ -106,7 +106,7 @@ uint8_t buttonNumber[rowCount][colCount] =
   { 0, 0, 0, 0, 0, 0, 0, 0 },              //ROW 7, COLUMN 1-8
 
   { 0, 0, 0, 0, 0, 0, 0, 0 },              //ROW 8, COLUMN 1-8  
-  
+
 };
 ```
 
@@ -118,29 +118,29 @@ Following the examples in the switch library, lets set up our buttons and encode
   //--------------------------------------
   //---------SWITCHES START HERE----------
   //--------------------------------------
-  
+
   modButton(1,1);
   biteButton(1,2);
   neutralButton(1,3);
   launchButton(1,4,1);
   presetButton(1,5);
-  
+
   pushButton(1,6);
   pushButton(1,7);
   pushButton(1,8);
-  
+
   funkyRotary(2,1,2,false);
   funkyButton(2,3,7,4,5,6);
   funkyButton(2,4,7,3,5,6);
   funkyButton(2,5,7,3,4,6);
   funkyButton(2,6,7,3,4,5);
   funkyPush(2,7,3,4,5,6);
-  
+
   toggleP(3,3);
-  
+
   upshift(4,5,300);
   pushbutton(4,6);
-  
+
   pushButton(5,1);
   PEC11Brightness(5,2,false);
   pushButton(5,4);
@@ -150,8 +150,8 @@ Following the examples in the switch library, lets set up our buttons and encode
   //---------SWITCHES END HERE------------
   //--------------------------------------
 
-	Joystick.setZAxis(rotaryField - 32767);
-	Joystick.setYAxis(buttonField - 32767);
+	Joystick.setZAxis(rotaryField);
+	Joystick.setYAxis(buttonField);
 
 	Joystick.sendState();
 
@@ -242,46 +242,46 @@ Now we have what we need to finalize our `30_Switches` tab:
   //--------------------------------------
   //---------SWITCHES START HERE----------
   //--------------------------------------
-  
+
   modButton(1,1);
   biteButton(1,2);
   neutralButton(1,3);
   launchButton(1,4,1);
   presetButton(1,5);
-  
+
   pushButton(1,6);
   pushButton(1,7);
   pushButton(1,8);
-  
+
   funkyRotary(2,1,2,false);
   funkyButton(2,3,7,4,5,6);
   funkyButton(2,4,7,3,5,6);
   funkyButton(2,5,7,3,4,6);
   funkyButton(2,6,7,3,4,5);
   funkyPush(2,7,3,4,5,6);
-  
+
   toggleP(3,3);
-  
+
   upshift(4,5,300);
   pushbutton(4,6);
-  
+
   pushButton(5,1);
   PEC11Brightness(5,2,false);
   pushButton(5,4);
   PEC11Bite(5,5,true);
-  
+
   dualClutch(1, 8530, 21530, 2, 8510, 20950, false);
-  
+
   SW1PresetRotary(10, 1,  150, 2450, 4930, 7480, 10510, 13250, 16830, 20310, 22930, 25790, 28840, 31200, false);
   rotaryAnalog2Mode(9, 2,  150, 2450, 4930, 7480, 10510, 13250, 16830, 20310, 22930, 25790, 28840, 31200, false);
   rotaryAnalog2Mode(5, 3,  150, 2450, 4930, 7480, 10510, 13250, 16830, 20310, 22930, 25790, 28840, 31200, false);
-  
+
   //--------------------------------------
   //---------SWITCHES END HERE------------
   //--------------------------------------
 
-	Joystick.setZAxis(rotaryField - 32767);
-	Joystick.setYAxis(buttonField - 32767);
+	Joystick.setZAxis(rotaryField);
+	Joystick.setYAxis(buttonField);
 
 	Joystick.sendState();
 
@@ -355,7 +355,7 @@ First though, we'll need to set it up in `14_LEDSetup.ino`. As printed on the CB
 //----------------------------------------------------------------------------
 
 #define LED1COUNT 80
-#define LED1PIN 25 
+#define LED1PIN 25
 #define LED1TYPE NEO_GRB + NEO_KHZ800
 #define LED1REVERSE 0
 #define LED1PRIVATE 0
@@ -378,9 +378,9 @@ This is how `36_LEDTop.ino` ends up:
 ```
 void LEDTop()
 {
-  
+
   /*
-  *Here goes LED calls that you want to refresh constantly, and will overwrite both LEDStartup and LEDBottom calls as well as SimHub LED control. 
+  *Here goes LED calls that you want to refresh constantly, and will overwrite both LEDStartup and LEDBottom calls as well as SimHub LED control.
   */
 
    //LED CALLS STARTS HERE
@@ -389,13 +389,13 @@ void LEDTop()
   colorLED(4, 7, 0xFFA500, 100);
   colorLED(8, 11, 0x0000FF, 100);
   colorLED(12, 15, 0xFF0000, 100);
-  
+
   rotaryLED(3, 16, 12, 0x0000FF, 35, 0, false, 0xFFFFFF, 20);
   rotaryLED(4, 28, 12, 0xA020F0, 35, 0, false, 0xFFFFFF, 20);
   rotaryLED(5, 40, 12, 0xFFA500, 35, 0, false, 0xFFFFFF, 20);
-  
+
   biteLED(4, 7, 100, 56, 15);
-  
+
   //LED CALLS STOP HERE
 
   #if(LED1COUNT > 0)
@@ -419,4 +419,3 @@ void LEDTop()
 We're going to have SimHub control the warning lights (52 - 55 + 68 - 71) and rev lights (56 - 67). Follow [this guide](../../3.-coding/peripherals/leds-code-and-connection/simhub-control.md) to get SimHub hooked into your LEDs.&#x20;
 
 If you want properties from your wheel to use for dashboard graphics, follow[ these instructions.](../../4.-advanced-features/connect-to-simhub.md)
-

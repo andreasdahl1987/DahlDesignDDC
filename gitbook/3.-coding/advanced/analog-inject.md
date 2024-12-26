@@ -82,8 +82,8 @@ brakeMagic(4,3);
 //----------SWITCHES END HERE---------
 //------------------------------------
 
-Joystick.setZAxis(rotaryField - 32767);
-Joystick.setYAxis(buttonField - 32767);
+Joystick.setZAxis(rotaryField);
+Joystick.setYAxis(buttonField);
 
 Joystick.sendState();
 
@@ -115,4 +115,3 @@ These features gives a lot of freedom for creative solutions. Here are some idea
 * Use a potentiometer as a multiposition switch without detents
 * Use a slider potentiometer as a toggle swich.
 * Incorporating touch, light and temperature sensors into your rig.&#x20;
-

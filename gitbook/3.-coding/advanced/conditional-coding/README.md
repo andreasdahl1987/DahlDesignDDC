@@ -44,8 +44,8 @@ else
 //----------SWITCHES END HERE---------
 //------------------------------------
 
-Joystick.setZAxis(rotaryField - 32767);
-Joystick.setYAxis(buttonField - 32767);
+Joystick.setZAxis(rotaryField);
+Joystick.setYAxis(buttonField);
 
 Joystick.sendState();
 
@@ -125,8 +125,8 @@ else if (statement3)
 else
 {
     If all prior statements were false, we'll end up here at the bottom of the pile.
-    No statement is needed here, this will be executed as long as all prior 
-    statements were false. 
+    No statement is needed here, this will be executed as long as all prior
+    statements were false.
 }
 ```
 
@@ -163,8 +163,8 @@ rotary2Inc(1,4,false);
 //----------SWITCHES END HERE---------
 //------------------------------------
 
-Joystick.setZAxis(rotaryField - 32767);
-Joystick.setYAxis(buttonField - 32767);
+Joystick.setZAxis(rotaryField);
+Joystick.setYAxis(buttonField);
 
 Joystick.sendState();
 
@@ -213,8 +213,8 @@ neutralButton(2,2);
 //----------SWITCHES END HERE---------
 //------------------------------------
 
-Joystick.setZAxis(rotaryField - 32767);
-Joystick.setYAxis(buttonField - 32767);
+Joystick.setZAxis(rotaryField);
+Joystick.setYAxis(buttonField);
 
 Joystick.sendState();
 

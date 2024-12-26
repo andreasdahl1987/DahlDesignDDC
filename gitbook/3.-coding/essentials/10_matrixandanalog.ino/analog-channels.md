@@ -137,14 +137,14 @@ A lot of the functions handeling analog switches need some reference values, the
 
   checkValue(3);
   checkValue(4);
-  
-  
+
+
   //--------------------------------------
   //---------SWITCHES END HERE------------
   //--------------------------------------
 
-	Joystick.setZAxis(rotaryField - 32767);
-	Joystick.setYAxis(buttonField - 32767);
+	Joystick.setZAxis(rotaryField);
+	Joystick.setYAxis(buttonField);
 
 	Joystick.sendState();
 
