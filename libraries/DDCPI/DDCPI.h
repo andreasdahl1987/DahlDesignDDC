@@ -95,7 +95,7 @@ private:
 	uint16_t                 _brakeMaximum = JOYSTICK_DEFAULT_SIMULATOR_MAXIMUM;
 	uint16_t                 _steeringMinimum = JOYSTICK_DEFAULT_SIMULATOR_MINIMUM;
 	uint16_t                 _steeringMaximum = JOYSTICK_DEFAULT_SIMULATOR_MAXIMUM;
-	bool                     _DICalibrationFix = true;
+	bool                     _DICalibrationFix = false;
 
 	uint8_t                  _hidReportId;
 	uint8_t                  _hidReportSize;
