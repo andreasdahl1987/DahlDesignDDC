@@ -50,6 +50,9 @@ void setup()
       #if(CB1_PE2_OUTPUT == 1)
       CB1_OUTPUTSETUP2();
       #endif
+      #if(ROBIN_OLED == 1)
+      OLED_Init();
+      #endif
     #else
     
       #if (USING_ADS1115 == 1)

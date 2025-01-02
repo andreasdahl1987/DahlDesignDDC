@@ -37,7 +37,7 @@ void loop()
 
   runningPresets(); //Presets in the loop
 
-  #if(USING_OLED == 1)
+  #if(USING_OLED == 1 || (USING_CB1 == 1 && ROBIN_OLED == 1))
   OLEDrun(); //Screen commands
   #endif
 

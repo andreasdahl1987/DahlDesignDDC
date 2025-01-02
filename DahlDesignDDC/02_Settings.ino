@@ -34,7 +34,7 @@
 //-------------------------------------------------------------
 
 //Enable CB1 board
-#define USING_CB1 0
+#define USING_CB1 1
 
 //ADC setup
 #define CB1_ADC1 1
@@ -68,6 +68,9 @@
 #define DISABLE_ANALOG 0      //Gives access to COL4 - COL 7 by using (and disabling analog function of) ADC9 - ADC12 pins. 
 #define DISABLE_LED_PIN 0     //Gives access to COL8, use the dedicated 8-8 pin. The LED pin will no longer work. 
 
+//ROBIN SHIELD
+#define ROBIN_OLED 1
+
 //-------------------------------------------------------------
 //-------------------------PWM CONTROL-------------------------
 //-------------------------------------------------------------
@@ -85,10 +88,10 @@
 //-------------------------I2C DEVICES-------------------------
 //-------------------------------------------------------------
 
-#define SDA0PIN 4
-#define SCL0PIN 5
-#define SDA1PIN 6
-#define SCL1PIN 7
+#define SDA0PIN 0
+#define SCL0PIN 1
+#define SDA1PIN 2
+#define SCL1PIN 3
 
 //---------------------------|
 //---PORT EXPANDER PCA9555---|
@@ -143,12 +146,16 @@ uint8_t ADS1115_alertPins [] = {99};
 //------OLED DISPLAY---------|
 //---------------------------|
 
-#define USING_OLED 1
-#define DISPLAYCOUNT 2
-#define OLED_I2C_NUMBER 0
+// Select u8g2 font from here: https://github.com/olikraus/u8g2/wiki/fntlistall
 
-#define OLED_Address 0x3C //Screen I2C address
-#define TCAADDR 0x70      //Screen multiplexer I2C address
+#define USING_OLED 0
+#define OLED_I2C_NUMBER 0
+#define OLED_Address 0x3C   //Screen I2C address
+
+#define DISPLAYCOUNT 1
+
+#define USING_MUX 0
+#define TCAADDR 0x70        //Screen multiplexer I2C address
 
 //Screen 1
 #define SCREEN_WIDTH_1 128 // OLED display width
@@ -253,54 +260,18 @@ bool wire0Init = false;
 
 //OLED
 
-#if(USING_OLED == 1)
+#if(USING_OLED == 1 || (USING_CB1 == 1 && ROBIN_OLED == 1))
   #include <DDC_GFX.h>
   #include <DDC_SSD1306.h>
+  #include <DDCU8G2.h>
+  uint16_t printCounter = 0;
   uint8_t currentAniWidth = 64;
   uint8_t currentAniHeight = 64;
   uint16_t currentAniSize = 512;
   uint16_t currentFrameCount = 20;
 
-  #if(DISPLAYCOUNT > 7 )
-    Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
-    Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, &Wire, -1);
-    Adafruit_SSD1306 display3(SCREEN_WIDTH_3, SCREEN_HEIGHT_3, &Wire, -1);
-    Adafruit_SSD1306 display4(SCREEN_WIDTH_4, SCREEN_HEIGHT_4, &Wire, -1);
-    Adafruit_SSD1306 display5(SCREEN_WIDTH_5, SCREEN_HEIGHT_5, &Wire, -1);
-    Adafruit_SSD1306 display6(SCREEN_WIDTH_6, SCREEN_HEIGHT_6, &Wire, -1);
-    Adafruit_SSD1306 display7(SCREEN_WIDTH_7, SCREEN_HEIGHT_7, &Wire, -1);
-    Adafruit_SSD1306 display8(SCREEN_WIDTH_8, SCREEN_HEIGHT_8, &Wire, -1);
-    Adafruit_SSD1306 displays[8] = {display1, display2, display3, display4, display5, display6, display7, display8};
-    bool OLEDgenLock[8] = {false, false, false, false, false, false, false, false};
-    bool backgroundSet[8] = {false, false, false, false, false, false, false, false};
-    uint8_t OLEDcondiIndex[8] = {0, 0, 0, 0, 0, 0, 0, 0};
-    uint8_t OLEDcondiForce[8] = {0, 0, 0, 0, 0, 0, 0, 0};
-    unsigned long OLEDcondiLock[8] = {0, 0, 0, 0, 0, 0, 0, 0};
-    bool writeToDisplay[8] = {false, false, false, false, false, false, false, false};
-    unsigned long OLEDcondiTimer [8] = {0, 0, 0, 0, 0, 0, 0, 0};
-    unsigned long OLEDtimer [8] = {0, 0, 0, 0, 0, 0, 0, 0};
-    int OLEDframes [8] = {0, 0, 0, 0, 0, 0, 0, 0};
+  #if(USING_CB1 == 1 && ROBIN_OLED == 1)
 
-  #elif(DISPLAYCOUNT > 6 )
-    Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
-    Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, &Wire, -1);
-    Adafruit_SSD1306 display3(SCREEN_WIDTH_3, SCREEN_HEIGHT_3, &Wire, -1);
-    Adafruit_SSD1306 display4(SCREEN_WIDTH_4, SCREEN_HEIGHT_4, &Wire, -1);
-    Adafruit_SSD1306 display5(SCREEN_WIDTH_5, SCREEN_HEIGHT_5, &Wire, -1);
-    Adafruit_SSD1306 display6(SCREEN_WIDTH_6, SCREEN_HEIGHT_6, &Wire, -1);
-    Adafruit_SSD1306 display7(SCREEN_WIDTH_7, SCREEN_HEIGHT_7, &Wire, -1);
-    Adafruit_SSD1306 displays[7] = {display1, display2, display3, display4, display5, display6, display7};
-    bool OLEDgenLock[7] = {false, false, false, false, false, false, false};
-    bool backgroundSet[7] = {false, false, false, false, false, false, false};
-    uint8_t OLEDcondiIndex[7] = {0, 0, 0, 0, 0, 0, 0};
-    uint8_t OLEDcondiForce[7] = {0, 0, 0, 0, 0, 0, 0};
-    unsigned long OLEDcondiLock[7] = {0, 0, 0, 0, 0, 0, 0};
-    bool writeToDisplay[7] = {false, false, false, false, false, false, false};
-    unsigned long OLEDcondiTimer [7] = {0, 0, 0, 0, 0, 0, 0};
-    unsigned long OLEDtimer [7] = {0, 0, 0, 0, 0, 0, 0};
-    int OLEDframes [7] = {0, 0, 0, 0, 0, 0, 0};
-
-  #elif(DISPLAYCOUNT > 5 )
     Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
     Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, &Wire, -1);
     Adafruit_SSD1306 display3(SCREEN_WIDTH_3, SCREEN_HEIGHT_3, &Wire, -1);
@@ -308,6 +279,15 @@ bool wire0Init = false;
     Adafruit_SSD1306 display5(SCREEN_WIDTH_5, SCREEN_HEIGHT_5, &Wire, -1);
     Adafruit_SSD1306 display6(SCREEN_WIDTH_6, SCREEN_HEIGHT_6, &Wire, -1);
     Adafruit_SSD1306 displays[6] = {display1, display2, display3, display4, display5, display6};
+
+    U8G2_FOR_ADAFRUIT_GFX textGraphics1;
+    U8G2_FOR_ADAFRUIT_GFX textGraphics2;
+    U8G2_FOR_ADAFRUIT_GFX textGraphics3;
+    U8G2_FOR_ADAFRUIT_GFX textGraphics4;
+    U8G2_FOR_ADAFRUIT_GFX textGraphics5;
+    U8G2_FOR_ADAFRUIT_GFX textGraphics6;
+    U8G2_FOR_ADAFRUIT_GFX textGraphics[6] = {textGraphics1, textGraphics2, textGraphics3, textGraphics4, textGraphics5, textGraphics6};
+
     bool OLEDgenLock[6] = {false, false, false, false, false, false};
     bool backgroundSet[6] = {false, false, false, false, false, false};
     uint8_t OLEDcondiIndex[6] = {0, 0, 0, 0, 0, 0};
@@ -318,80 +298,216 @@ bool wire0Init = false;
     unsigned long OLEDtimer [6] = {0, 0, 0, 0, 0, 0};
     int OLEDframes [6] = {0, 0, 0, 0, 0, 0};
 
-  #elif(DISPLAYCOUNT > 4)
-    Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
-    Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, &Wire, -1);
-    Adafruit_SSD1306 display3(SCREEN_WIDTH_3, SCREEN_HEIGHT_3, &Wire, -1);
-    Adafruit_SSD1306 display4(SCREEN_WIDTH_4, SCREEN_HEIGHT_4, &Wire, -1);
-    Adafruit_SSD1306 display5(SCREEN_WIDTH_5, SCREEN_HEIGHT_5, &Wire, -1);
-    Adafruit_SSD1306 displays[5] = {display1, display2, display3, display4, display5};
-    bool OLEDgenLock[5] = {false, false, false, false, false};
-    bool backgroundSet[5] = {false, false, false, false, false};
-    uint8_t OLEDcondiIndex[5] = {0, 0, 0, 0, 0};
-    uint8_t OLEDcondiForce[5] = {0, 0, 0, 0, 0};
-    unsigned long OLEDcondiLock[5] = {0, 0, 0, 0, 0};
-    bool writeToDisplay[5] = {false, false, false, false, false};
-    unsigned long OLEDcondiTimer [5] = {0, 0, 0, 0, 0};
-    unsigned long OLEDtimer [5] = {0, 0, 0, 0, 0};
-    int OLEDframes [5] = {0, 0, 0, 0, 0};
+  #elif(USING_MUX == 1)
+    #if(DISPLAYCOUNT > 7 )
+      Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
+      Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, &Wire, -1);
+      Adafruit_SSD1306 display3(SCREEN_WIDTH_3, SCREEN_HEIGHT_3, &Wire, -1);
+      Adafruit_SSD1306 display4(SCREEN_WIDTH_4, SCREEN_HEIGHT_4, &Wire, -1);
+      Adafruit_SSD1306 display5(SCREEN_WIDTH_5, SCREEN_HEIGHT_5, &Wire, -1);
+      Adafruit_SSD1306 display6(SCREEN_WIDTH_6, SCREEN_HEIGHT_6, &Wire, -1);
+      Adafruit_SSD1306 display7(SCREEN_WIDTH_7, SCREEN_HEIGHT_7, &Wire, -1);
+      Adafruit_SSD1306 display8(SCREEN_WIDTH_8, SCREEN_HEIGHT_8, &Wire, -1);
+      Adafruit_SSD1306 displays[8] = {display1, display2, display3, display4, display5, display6, display7, display8};
 
-  #elif(DISPLAYCOUNT > 3)
-    Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
-    Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, &Wire, -1);
-    Adafruit_SSD1306 display3(SCREEN_WIDTH_3, SCREEN_HEIGHT_3, &Wire, -1);
-    Adafruit_SSD1306 display4(SCREEN_WIDTH_4, SCREEN_HEIGHT_4, &Wire, -1);
-    Adafruit_SSD1306 displays[4] = {display1, display2, display3, display4};
-    bool OLEDgenLock[4] = {false, false, false, false};
-    bool backgroundSet[4] = {false, false, false, false};
-    uint8_t OLEDcondiIndex[4] = {0, 0, 0, 0};
-    uint8_t OLEDcondiForce[4] = {0, 0, 0, 0};
-    unsigned long OLEDcondiLock[4] = {0, 0, 0, 0};
-    bool writeToDisplay[4] = {false, false, false, false};
-    unsigned long OLEDcondiTimer [4] = {0, 0, 0, 0};
-    unsigned long OLEDtimer [4] = {0, 0, 0, 0};
-    int OLEDframes [4] = {0, 0, 0, 0};
+      U8G2_FOR_ADAFRUIT_GFX textGraphics1;
+      U8G2_FOR_ADAFRUIT_GFX textGraphics2;
+      U8G2_FOR_ADAFRUIT_GFX textGraphics3;
+      U8G2_FOR_ADAFRUIT_GFX textGraphics4;
+      U8G2_FOR_ADAFRUIT_GFX textGraphics5;
+      U8G2_FOR_ADAFRUIT_GFX textGraphics6;
+      U8G2_FOR_ADAFRUIT_GFX textGraphics7;
+      U8G2_FOR_ADAFRUIT_GFX textGraphics8;
+      U8G2_FOR_ADAFRUIT_GFX textGraphics[8] = {textGraphics1, textGraphics2, textGraphics3, textGraphics4, textGraphics5, textGraphics6, textGraphics7, textGraphics8};
+    
+      bool OLEDgenLock[8] = {false, false, false, false, false, false, false, false};
+      bool backgroundSet[8] = {false, false, false, false, false, false, false, false};
+      uint8_t OLEDcondiIndex[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+      uint8_t OLEDcondiForce[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+      unsigned long OLEDcondiLock[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+      bool writeToDisplay[8] = {false, false, false, false, false, false, false, false};
+      unsigned long OLEDcondiTimer [8] = {0, 0, 0, 0, 0, 0, 0, 0};
+      unsigned long OLEDtimer [8] = {0, 0, 0, 0, 0, 0, 0, 0};
+      int OLEDframes [8] = {0, 0, 0, 0, 0, 0, 0, 0};
 
-   #elif(DISPLAYCOUNT > 2)
-    Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
-    Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, &Wire, -1);
-    Adafruit_SSD1306 display3(SCREEN_WIDTH_3, SCREEN_HEIGHT_3, &Wire, -1);
-    Adafruit_SSD1306 displays[3] = {display1, display2, display3};
-    bool OLEDgenLock[3] = {false, false, false};
-    bool backgroundSet[3] = {false, false, false};
-    uint8_t OLEDcondiIndex[3] = {0, 0, 0};
-    uint8_t OLEDcondiForce[3] = {0, 0, 0};
-    unsigned long OLEDcondiLock[3] = {0, 0, 0};
-    bool writeToDisplay[3] = {false, false, false};
-    unsigned long OLEDcondiTimer [3] = {0, 0, 0};
-    unsigned long OLEDtimer [3] = {0, 0, 0};
-    int OLEDframes [3] = {0, 0, 0};
+    #elif(DISPLAYCOUNT > 6 )
+      Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
+      Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, &Wire, -1);
+      Adafruit_SSD1306 display3(SCREEN_WIDTH_3, SCREEN_HEIGHT_3, &Wire, -1);
+      Adafruit_SSD1306 display4(SCREEN_WIDTH_4, SCREEN_HEIGHT_4, &Wire, -1);
+      Adafruit_SSD1306 display5(SCREEN_WIDTH_5, SCREEN_HEIGHT_5, &Wire, -1);
+      Adafruit_SSD1306 display6(SCREEN_WIDTH_6, SCREEN_HEIGHT_6, &Wire, -1);
+      Adafruit_SSD1306 display7(SCREEN_WIDTH_7, SCREEN_HEIGHT_7, &Wire, -1);
+      Adafruit_SSD1306 displays[7] = {display1, display2, display3, display4, display5, display6, display7};
 
-   #elif(DISPLAYCOUNT > 1)
-    Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
-    Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, &Wire, -1);
-    Adafruit_SSD1306 displays[2] = {display1, display2};
-    bool OLEDgenLock[2] = {false, false};
-    bool backgroundSet[2] = {false, false};
-    uint8_t OLEDcondiIndex[2] = {0, 0};
-    uint8_t OLEDcondiForce[2] = {0, 0};
-    unsigned long OLEDcondiLock[2] = {0, 0};
-    bool writeToDisplay[2] = {false, false};
-    unsigned long OLEDcondiTimer [2] = {0, 0};
-    unsigned long OLEDtimer [2] = {0, 0};
-    int OLEDframes [2] = {0, 0};
+      U8G2_FOR_ADAFRUIT_GFX textGraphics1;
+      U8G2_FOR_ADAFRUIT_GFX textGraphics2;
+      U8G2_FOR_ADAFRUIT_GFX textGraphics3;
+      U8G2_FOR_ADAFRUIT_GFX textGraphics4;
+      U8G2_FOR_ADAFRUIT_GFX textGraphics5;
+      U8G2_FOR_ADAFRUIT_GFX textGraphics6;
+      U8G2_FOR_ADAFRUIT_GFX textGraphics7;
+      U8G2_FOR_ADAFRUIT_GFX textGraphics[7] = {textGraphics1, textGraphics2, textGraphics3, textGraphics4, textGraphics5, textGraphics6, textGraphics7};
 
-  #elif(DISPLAYCOUNT > 0)
-    Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
-    Adafruit_SSD1306 displays[1] = {display1};
-    bool OLEDgenLock[1] = {false};
-    bool backgroundSet[1] = {false};
-    uint8_t OLEDcondiIndex[1] = {0};
-    uint8_t OLEDcondiForce[1] = {0};
-    unsigned long OLEDcondiLock[1] = {0};
-    bool writeToDisplay[1] = {false};
-    unsigned long OLEDcondiTimer [1] = {0};
-    unsigned long OLEDtimer [1] = {0};
-    int OLEDframes [1] = {0};
+      bool OLEDgenLock[7] = {false, false, false, false, false, false, false};
+      bool backgroundSet[7] = {false, false, false, false, false, false, false};
+      uint8_t OLEDcondiIndex[7] = {0, 0, 0, 0, 0, 0, 0};
+      uint8_t OLEDcondiForce[7] = {0, 0, 0, 0, 0, 0, 0};
+      unsigned long OLEDcondiLock[7] = {0, 0, 0, 0, 0, 0, 0};
+      bool writeToDisplay[7] = {false, false, false, false, false, false, false};
+      unsigned long OLEDcondiTimer [7] = {0, 0, 0, 0, 0, 0, 0};
+      unsigned long OLEDtimer [7] = {0, 0, 0, 0, 0, 0, 0};
+      int OLEDframes [7] = {0, 0, 0, 0, 0, 0, 0};
 
-  #endif
-#endif
+    #elif(DISPLAYCOUNT > 5 )
+      Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
+      Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, &Wire, -1);
+      Adafruit_SSD1306 display3(SCREEN_WIDTH_3, SCREEN_HEIGHT_3, &Wire, -1);
+      Adafruit_SSD1306 display4(SCREEN_WIDTH_4, SCREEN_HEIGHT_4, &Wire, -1);
+      Adafruit_SSD1306 display5(SCREEN_WIDTH_5, SCREEN_HEIGHT_5, &Wire, -1);
+      Adafruit_SSD1306 display6(SCREEN_WIDTH_6, SCREEN_HEIGHT_6, &Wire, -1);
+      Adafruit_SSD1306 displays[6] = {display1, display2, display3, display4, display5, display6};
+
+      U8G2_FOR_ADAFRUIT_GFX textGraphics1;
+      U8G2_FOR_ADAFRUIT_GFX textGraphics2;
+      U8G2_FOR_ADAFRUIT_GFX textGraphics3;
+      U8G2_FOR_ADAFRUIT_GFX textGraphics4;
+      U8G2_FOR_ADAFRUIT_GFX textGraphics5;
+      U8G2_FOR_ADAFRUIT_GFX textGraphics6;
+      U8G2_FOR_ADAFRUIT_GFX textGraphics[6] = {textGraphics1, textGraphics2, textGraphics3, textGraphics4, textGraphics5, textGraphics6};
+
+      bool OLEDgenLock[6] = {false, false, false, false, false, false};
+      bool backgroundSet[6] = {false, false, false, false, false, false};
+      uint8_t OLEDcondiIndex[6] = {0, 0, 0, 0, 0, 0};
+      uint8_t OLEDcondiForce[6] = {0, 0, 0, 0, 0, 0};
+      unsigned long OLEDcondiLock[6] = {0, 0, 0, 0, 0, 0};
+      bool writeToDisplay[6] = {false, false, false, false, false, false};
+      unsigned long OLEDcondiTimer [6] = {0, 0, 0, 0, 0, 0};
+      unsigned long OLEDtimer [6] = {0, 0, 0, 0, 0, 0};
+      int OLEDframes [6] = {0, 0, 0, 0, 0, 0};
+
+
+    #elif(DISPLAYCOUNT > 4)
+      Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
+      Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, &Wire, -1);
+      Adafruit_SSD1306 display3(SCREEN_WIDTH_3, SCREEN_HEIGHT_3, &Wire, -1);
+      Adafruit_SSD1306 display4(SCREEN_WIDTH_4, SCREEN_HEIGHT_4, &Wire, -1);
+      Adafruit_SSD1306 display5(SCREEN_WIDTH_5, SCREEN_HEIGHT_5, &Wire, -1);
+      Adafruit_SSD1306 displays[5] = {display1, display2, display3, display4, display5};
+
+      U8G2_FOR_ADAFRUIT_GFX textGraphics1;
+      U8G2_FOR_ADAFRUIT_GFX textGraphics2;
+      U8G2_FOR_ADAFRUIT_GFX textGraphics3;
+      U8G2_FOR_ADAFRUIT_GFX textGraphics4;
+      U8G2_FOR_ADAFRUIT_GFX textGraphics5;
+      U8G2_FOR_ADAFRUIT_GFX textGraphics[5] = {textGraphics1, textGraphics2, textGraphics3, textGraphics4, textGraphics5};
+
+      bool OLEDgenLock[5] = {false, false, false, false, false};
+      bool backgroundSet[5] = {false, false, false, false, false};
+      uint8_t OLEDcondiIndex[5] = {0, 0, 0, 0, 0};
+      uint8_t OLEDcondiForce[5] = {0, 0, 0, 0, 0};
+      unsigned long OLEDcondiLock[5] = {0, 0, 0, 0, 0};
+      bool writeToDisplay[5] = {false, false, false, false, false};
+      unsigned long OLEDcondiTimer [5] = {0, 0, 0, 0, 0};
+      unsigned long OLEDtimer [5] = {0, 0, 0, 0, 0};
+      int OLEDframes [5] = {0, 0, 0, 0, 0};
+
+    #elif(DISPLAYCOUNT > 3)
+      Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
+      Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, &Wire, -1);
+      Adafruit_SSD1306 display3(SCREEN_WIDTH_3, SCREEN_HEIGHT_3, &Wire, -1);
+      Adafruit_SSD1306 display4(SCREEN_WIDTH_4, SCREEN_HEIGHT_4, &Wire, -1);
+      Adafruit_SSD1306 displays[4] = {display1, display2, display3, display4};
+
+      U8G2_FOR_ADAFRUIT_GFX textGraphics1;
+      U8G2_FOR_ADAFRUIT_GFX textGraphics2;
+      U8G2_FOR_ADAFRUIT_GFX textGraphics3;
+      U8G2_FOR_ADAFRUIT_GFX textGraphics4;
+      U8G2_FOR_ADAFRUIT_GFX textGraphics[4] = {textGraphics1, textGraphics2, textGraphics3, textGraphics4};
+
+      bool OLEDgenLock[4] = {false, false, false, false};
+      bool backgroundSet[4] = {false, false, false, false};
+      uint8_t OLEDcondiIndex[4] = {0, 0, 0, 0};
+      uint8_t OLEDcondiForce[4] = {0, 0, 0, 0};
+      unsigned long OLEDcondiLock[4] = {0, 0, 0, 0};
+      bool writeToDisplay[4] = {false, false, false, false};
+      unsigned long OLEDcondiTimer [4] = {0, 0, 0, 0};
+      unsigned long OLEDtimer [4] = {0, 0, 0, 0};
+      int OLEDframes [4] = {0, 0, 0, 0};
+
+    #elif(DISPLAYCOUNT > 2)
+      Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
+      Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, &Wire, -1);
+      Adafruit_SSD1306 display3(SCREEN_WIDTH_3, SCREEN_HEIGHT_3, &Wire, -1);
+      Adafruit_SSD1306 displays[3] = {display1, display2, display3};
+
+      U8G2_FOR_ADAFRUIT_GFX textGraphics1;
+      U8G2_FOR_ADAFRUIT_GFX textGraphics2;
+      U8G2_FOR_ADAFRUIT_GFX textGraphics3;
+      U8G2_FOR_ADAFRUIT_GFX textGraphics[3] = {textGraphics1, textGraphics2, textGraphics3};
+
+      bool OLEDgenLock[3] = {false, false, false};
+      bool backgroundSet[3] = {false, false, false};
+      uint8_t OLEDcondiIndex[3] = {0, 0, 0};
+      uint8_t OLEDcondiForce[3] = {0, 0, 0};
+      unsigned long OLEDcondiLock[3] = {0, 0, 0};
+      bool writeToDisplay[3] = {false, false, false};
+      unsigned long OLEDcondiTimer [3] = {0, 0, 0};
+      unsigned long OLEDtimer [3] = {0, 0, 0};
+      int OLEDframes [3] = {0, 0, 0};
+
+    #elif(DISPLAYCOUNT > 1)
+      Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
+      Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, &Wire, -1);
+      Adafruit_SSD1306 displays[2] = {display1, display2};
+
+      U8G2_FOR_ADAFRUIT_GFX textGraphics1;
+      U8G2_FOR_ADAFRUIT_GFX textGraphics2;
+      U8G2_FOR_ADAFRUIT_GFX textGraphics[2] = {textGraphics1, textGraphics2};
+
+      bool OLEDgenLock[2] = {false, false};
+      bool backgroundSet[2] = {false, false};
+      uint8_t OLEDcondiIndex[2] = {0, 0};
+      uint8_t OLEDcondiForce[2] = {0, 0};
+      unsigned long OLEDcondiLock[2] = {0, 0};
+      bool writeToDisplay[2] = {false, false};
+      unsigned long OLEDcondiTimer [2] = {0, 0};
+      unsigned long OLEDtimer [2] = {0, 0};
+      int OLEDframes [2] = {0, 0};
+
+    #elif(DISPLAYCOUNT > 0)
+      Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
+      Adafruit_SSD1306 displays[1] = {display1};
+
+      U8G2_FOR_ADAFRUIT_GFX textGraphics1;
+      U8G2_FOR_ADAFRUIT_GFX textGraphics[1] = {textGraphics1};
+
+      bool OLEDgenLock[1] = {false};
+      bool backgroundSet[1] = {false};
+      uint8_t OLEDcondiIndex[1] = {0};
+      uint8_t OLEDcondiForce[1] = {0};
+      unsigned long OLEDcondiLock[1] = {0};
+      bool writeToDisplay[1] = {false};
+      unsigned long OLEDcondiTimer [1] = {0};
+      unsigned long OLEDtimer [1] = {0};
+      int OLEDframes [1] = {0};
+
+    #endif//COUNTS ON MUX
+  #else//USING MUX
+      Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
+      Adafruit_SSD1306 displays[1] = {display1};
+
+      U8G2_FOR_ADAFRUIT_GFX textGraphics1;
+      U8G2_FOR_ADAFRUIT_GFX textGraphics[1] = {textGraphics1};
+
+      bool OLEDgenLock[1] = {false};
+      bool backgroundSet[1] = {false};
+      uint8_t OLEDcondiIndex[1] = {0};
+      uint8_t OLEDcondiForce[1] = {0};
+      unsigned long OLEDcondiLock[1] = {0};
+      bool writeToDisplay[1] = {false};
+      unsigned long OLEDcondiTimer [1] = {0};
+      unsigned long OLEDtimer [1] = {0};
+      int OLEDframes [1] = {0};
+  #endif//Using MUX or not
+#endif//Using OLED
