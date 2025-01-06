@@ -100,7 +100,7 @@ void backgroundWrite(const char* text = "", bool clear = true, int16_t cursorX =
   }
 }
 
-void conditionalWrite(uint8_t screenNumber, const char* text, bool condition, bool clear = true, uint8_t cursorX = 0, uint8_t cursorY = 12, int ChangeTimer = 0) 
+void conditionalWrite(uint8_t screenNumber, const char* text, bool condition, bool clear = true, uint8_t cursorX = 0, uint8_t cursorY = 12, int changeTimer = 0, bool areaClear = false, uint8_t startX = 0, uint8_t startY = 0, uint8_t width = 0, uint8_t height = 0) 
 {
   int index = screenNumber - 1;
   bool condiLock = (OLEDcondiLock[index] >> OLEDcondiIndex[index]) & 1; //Finding condiLock state for this line
@@ -115,14 +115,24 @@ void conditionalWrite(uint8_t screenNumber, const char* text, bool condition, bo
       #endif
       displays[index].clearDisplay();
     }
-    textGraphics[index].setCursor(cursorX, cursorY);                // start writing at this position
-    textGraphics[index].print(text);
 
-    unsigned long writeMask = 1 << OLEDcondiIndex[index];
+    if(!condiLock)
+    {
+      OLEDcondiForce[index] = 2; //Setting up condiForce, forcing rewrite of all conditional lines on the next loop.
+    }
+    else
+    {
+      if(areaClear)
+      {
+        displays[index].writeFillRect(startX, startY, width, height, 0);
+      }
+      writeToDisplay[index] = true;
+      textGraphics[index].setCursor(cursorX, cursorY);                // start writing at this position
+      textGraphics[index].print(text);
+    }
+
+    unsigned long writeMask = 1 << OLEDcondiIndex[index];  //Turning on condilock
     OLEDcondiLock[index] = OLEDcondiLock[index] | writeMask;
-
-    writeToDisplay[index] = true;
-
   }
   else if(!condition && condiLock) //If condiLock is on, but condition is no longer met, this is the first time we're seeing condition not met after being met before. 
   {
@@ -146,27 +156,25 @@ void changeFont(uint8_t screenNumber, const uint8_t* font)
   textGraphics[screenNumber-1].setFont(font);
 }
 
-void clearOnChange(uint8_t screenNumber) 
+void clearOnChange(uint8_t screenNumber, bool areaClear = false, uint8_t startX = 0, uint8_t startY = 0, uint8_t width = 0, uint8_t height = 0) 
 {
   int index = screenNumber - 1;
-  bool condiLock = (OLEDcondiLock[index] >> OLEDcondiIndex[index]) & 1; //Finding condiLock state for this line
   bool condiForce = OLEDcondiForce[index] & 1; //Finding an active condiForce
   
-  if (!condiLock || condiForce) //Write to display if lock is open, meaning first time we're seeing it open. OR if condiForce is active
+  if (condiForce)//Clear to display if lock is open, meaning first time we're seeing it open. OR if condiForce is active, but not if we're doing a new background rewrite.
   {
     #if(USING_MUX == 1 || (USING_CB1 == 1 && ROBIN_OLED == 1))
     tcaselect(index);
     #endif
-    displays[index].clearDisplay();
-
-    unsigned long writeMask = 1 << OLEDcondiIndex[index];
-    OLEDcondiLock[index] = OLEDcondiLock[index] | writeMask;
-
-    writeToDisplay[index] = true;
-
+    if(areaClear)
+    {
+      displays[index].writeFillRect(startX, startY, width, height, 0);
+    }
+    else
+    {
+      displays[index].clearDisplay();
+    }
   }
-
-  OLEDcondiIndex[index]++; //Increasing condi index by one for next line. 
 }
 
 void backgroundImage(uint8_t screenNumber, const uint8_t image[], uint8_t imageWidth, uint8_t imageHeight, uint8_t offsetX, uint8_t offsetY)
