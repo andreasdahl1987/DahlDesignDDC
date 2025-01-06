@@ -224,6 +224,12 @@ class U8G2_FOR_ADAFRUIT_GFX : public Print {
 /*==========================================*/
 
 /* start font list */
+extern const uint8_t CPMono_12_Bold[] U8G2_FONT_SECTION("CPMono_12_Bold");
+extern const uint8_t CPMono_12_Plain[] U8G2_FONT_SECTION("CPMono_12_Plain");
+extern const uint8_t CPMono_18_Bold[] U8G2_FONT_SECTION("CPMono_18_Bold");
+extern const uint8_t CPMono_18_Plain[] U8G2_FONT_SECTION("CPMono_18_Plain");
+extern const uint8_t CPMono_24_Bold[] U8G2_FONT_SECTION("CPMono_24_Bold");
+extern const uint8_t CPMono_24_Plain[] U8G2_FONT_SECTION("CPMono_24_Plain");
 extern const uint8_t u8g2_font_u8glib_4_tf[] U8G2_FONT_SECTION("u8g2_font_u8glib_4_tf");
 extern const uint8_t u8g2_font_u8glib_4_tr[] U8G2_FONT_SECTION("u8g2_font_u8glib_4_tr");
 extern const uint8_t u8g2_font_u8glib_4_hf[] U8G2_FONT_SECTION("u8g2_font_u8glib_4_hf");
