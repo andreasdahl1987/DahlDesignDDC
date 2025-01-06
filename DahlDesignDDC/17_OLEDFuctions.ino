@@ -2,9 +2,15 @@
 
 void tcaselect(uint8_t i) 
 {
+  #if (OLED_I2C1 == 1)
+  Wire1.beginTransmission(TCAADDR);  // TCA9548A address
+  Wire1.write(1 << i);               // send byte to select bus
+  Wire1.endTransmission();
+  #else
   Wire.beginTransmission(TCAADDR);  // TCA9548A address
   Wire.write(1 << i);               // send byte to select bus
   Wire.endTransmission();
+  #endif 
 }
 
 void OLEDcleanup()
@@ -257,17 +263,24 @@ void DDClogo(uint8_t screenNumber)
 void OLEDSetup()
 {
 #if (BOARDTYPE == 2)
-#if (OLED_I2C_NUMBER == 1)
-  Wire1.setSDA(SDA1PIN);
-  Wire1.setSCL(SCL1PIN);
-  wire1Init = true;
-#else
-  {
+  #if (OLED_I2C1 == 1 && OLED_I2C0 == 1 && DISPLAYCOUNT == 2)
+    Wire1.setSDA(SDA1PIN);
+    Wire1.setSCL(SCL1PIN);
     Wire.setSDA(SDA0PIN);
     Wire.setSCL(SCL0PIN);
     wire0Init = true;
-  }
-#endif
+    wire1Init = true;
+  #elif (OLED_I2C1 == 1)
+    Wire1.setSDA(SDA1PIN);
+    Wire1.setSCL(SCL1PIN);
+    wire1Init = true;
+  #else
+    {
+      Wire.setSDA(SDA0PIN);
+      Wire.setSCL(SCL0PIN);
+      wire0Init = true;
+    }
+  #endif
 #else
   wire0Init = true;
 #endif
@@ -328,6 +341,9 @@ void OLED_Init ()
   #elif(DISPLAYCOUNT > 0)
     displayInitiate(1);
   #endif
+#elif (OLED_I2C1 == 1 && OLED_I2C0 == 1 && DISPLAYCOUNT == 2 && BOARDTYPE == 2)
+  displayInitiate(1);
+  displayInitiate(2);
 #else
   displayInitiate(1);
 #endif

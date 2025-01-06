@@ -34,7 +34,7 @@
 //-------------------------------------------------------------
 
 //Enable CB1 board
-#define USING_CB1 1
+#define USING_CB1 0
 
 //ADC setup
 #define CB1_ADC1 1
@@ -88,10 +88,10 @@
 //-------------------------I2C DEVICES-------------------------
 //-------------------------------------------------------------
 
-#define SDA0PIN 0
-#define SCL0PIN 1
-#define SDA1PIN 2
-#define SCL1PIN 3
+#define SDA0PIN 20
+#define SCL0PIN 21
+#define SDA1PIN 26
+#define SCL1PIN 27
 
 //---------------------------|
 //---PORT EXPANDER PCA9555---|
@@ -148,11 +148,12 @@ uint8_t ADS1115_alertPins [] = {99};
 
 // Select u8g2 font from here: https://github.com/olikraus/u8g2/wiki/fntlistall
 
-#define USING_OLED 0
-#define OLED_I2C_NUMBER 0
+#define USING_OLED 1
+#define OLED_I2C0 1
+#define OLED_I2C1 0
 #define OLED_Address 0x3C   //Screen I2C address
 
-#define DISPLAYCOUNT 1
+#define DISPLAYCOUNT 2
 
 #define USING_MUX 0
 #define TCAADDR 0x70        //Screen multiplexer I2C address
@@ -264,6 +265,11 @@ bool wire0Init = false;
   #include <DDC_GFX.h>
   #include <DDC_SSD1306.h>
   #include <DDCU8G2.h>
+
+  #define WIRE &Wire 
+  #define WIRE1 &Wire1 
+  #define GET_WIRE(NUM, BOARD) ((NUM == 1 && BOARD == 2) ? WIRE1 : WIRE)
+
   uint16_t printCounter = 0;
   uint8_t currentAniWidth = 64;
   uint8_t currentAniHeight = 64;
@@ -300,14 +306,14 @@ bool wire0Init = false;
 
   #elif(USING_MUX == 1)
     #if(DISPLAYCOUNT > 7 )
-      Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
-      Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, &Wire, -1);
-      Adafruit_SSD1306 display3(SCREEN_WIDTH_3, SCREEN_HEIGHT_3, &Wire, -1);
-      Adafruit_SSD1306 display4(SCREEN_WIDTH_4, SCREEN_HEIGHT_4, &Wire, -1);
-      Adafruit_SSD1306 display5(SCREEN_WIDTH_5, SCREEN_HEIGHT_5, &Wire, -1);
-      Adafruit_SSD1306 display6(SCREEN_WIDTH_6, SCREEN_HEIGHT_6, &Wire, -1);
-      Adafruit_SSD1306 display7(SCREEN_WIDTH_7, SCREEN_HEIGHT_7, &Wire, -1);
-      Adafruit_SSD1306 display8(SCREEN_WIDTH_8, SCREEN_HEIGHT_8, &Wire, -1);
+      Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, GET_WIRE(OLED_I2C1, -1);
+      Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, GET_WIRE(OLED_I2C1, -1);
+      Adafruit_SSD1306 display3(SCREEN_WIDTH_3, SCREEN_HEIGHT_3, GET_WIRE(OLED_I2C1, -1);
+      Adafruit_SSD1306 display4(SCREEN_WIDTH_4, SCREEN_HEIGHT_4, GET_WIRE(OLED_I2C1, -1);
+      Adafruit_SSD1306 display5(SCREEN_WIDTH_5, SCREEN_HEIGHT_5, GET_WIRE(OLED_I2C1, -1);
+      Adafruit_SSD1306 display6(SCREEN_WIDTH_6, SCREEN_HEIGHT_6, GET_WIRE(OLED_I2C1, -1);
+      Adafruit_SSD1306 display7(SCREEN_WIDTH_7, SCREEN_HEIGHT_7, GET_WIRE(OLED_I2C1, -1);
+      Adafruit_SSD1306 display8(SCREEN_WIDTH_8, SCREEN_HEIGHT_8, GET_WIRE(OLED_I2C1, -1);
       Adafruit_SSD1306 displays[8] = {display1, display2, display3, display4, display5, display6, display7, display8};
 
       U8G2_FOR_ADAFRUIT_GFX textGraphics1;
@@ -331,13 +337,13 @@ bool wire0Init = false;
       int OLEDframes [8] = {0, 0, 0, 0, 0, 0, 0, 0};
 
     #elif(DISPLAYCOUNT > 6 )
-      Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
-      Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, &Wire, -1);
-      Adafruit_SSD1306 display3(SCREEN_WIDTH_3, SCREEN_HEIGHT_3, &Wire, -1);
-      Adafruit_SSD1306 display4(SCREEN_WIDTH_4, SCREEN_HEIGHT_4, &Wire, -1);
-      Adafruit_SSD1306 display5(SCREEN_WIDTH_5, SCREEN_HEIGHT_5, &Wire, -1);
-      Adafruit_SSD1306 display6(SCREEN_WIDTH_6, SCREEN_HEIGHT_6, &Wire, -1);
-      Adafruit_SSD1306 display7(SCREEN_WIDTH_7, SCREEN_HEIGHT_7, &Wire, -1);
+      Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, GET_WIRE(OLED_I2C1, BOARDTYPE), -1);
+      Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, GET_WIRE(OLED_I2C1, BOARDTYPE), -1);
+      Adafruit_SSD1306 display3(SCREEN_WIDTH_3, SCREEN_HEIGHT_3, GET_WIRE(OLED_I2C1, BOARDTYPE), -1);
+      Adafruit_SSD1306 display4(SCREEN_WIDTH_4, SCREEN_HEIGHT_4, GET_WIRE(OLED_I2C1, BOARDTYPE), -1);
+      Adafruit_SSD1306 display5(SCREEN_WIDTH_5, SCREEN_HEIGHT_5, GET_WIRE(OLED_I2C1, BOARDTYPE), -1);
+      Adafruit_SSD1306 display6(SCREEN_WIDTH_6, SCREEN_HEIGHT_6, GET_WIRE(OLED_I2C1, BOARDTYPE), -1);
+      Adafruit_SSD1306 display7(SCREEN_WIDTH_7, SCREEN_HEIGHT_7, GET_WIRE(OLED_I2C1, BOARDTYPE), -1);
       Adafruit_SSD1306 displays[7] = {display1, display2, display3, display4, display5, display6, display7};
 
       U8G2_FOR_ADAFRUIT_GFX textGraphics1;
@@ -360,12 +366,12 @@ bool wire0Init = false;
       int OLEDframes [7] = {0, 0, 0, 0, 0, 0, 0};
 
     #elif(DISPLAYCOUNT > 5 )
-      Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
-      Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, &Wire, -1);
-      Adafruit_SSD1306 display3(SCREEN_WIDTH_3, SCREEN_HEIGHT_3, &Wire, -1);
-      Adafruit_SSD1306 display4(SCREEN_WIDTH_4, SCREEN_HEIGHT_4, &Wire, -1);
-      Adafruit_SSD1306 display5(SCREEN_WIDTH_5, SCREEN_HEIGHT_5, &Wire, -1);
-      Adafruit_SSD1306 display6(SCREEN_WIDTH_6, SCREEN_HEIGHT_6, &Wire, -1);
+      Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, GET_WIRE(OLED_I2C1, BOARDTYPE), -1);
+      Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, GET_WIRE(OLED_I2C1, BOARDTYPE), -1);
+      Adafruit_SSD1306 display3(SCREEN_WIDTH_3, SCREEN_HEIGHT_3, GET_WIRE(OLED_I2C1, BOARDTYPE), -1);
+      Adafruit_SSD1306 display4(SCREEN_WIDTH_4, SCREEN_HEIGHT_4, GET_WIRE(OLED_I2C1, BOARDTYPE), -1);
+      Adafruit_SSD1306 display5(SCREEN_WIDTH_5, SCREEN_HEIGHT_5, GET_WIRE(OLED_I2C1, BOARDTYPE), -1);
+      Adafruit_SSD1306 display6(SCREEN_WIDTH_6, SCREEN_HEIGHT_6, GET_WIRE(OLED_I2C1, BOARDTYPE), -1);
       Adafruit_SSD1306 displays[6] = {display1, display2, display3, display4, display5, display6};
 
       U8G2_FOR_ADAFRUIT_GFX textGraphics1;
@@ -388,11 +394,11 @@ bool wire0Init = false;
 
 
     #elif(DISPLAYCOUNT > 4)
-      Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
-      Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, &Wire, -1);
-      Adafruit_SSD1306 display3(SCREEN_WIDTH_3, SCREEN_HEIGHT_3, &Wire, -1);
-      Adafruit_SSD1306 display4(SCREEN_WIDTH_4, SCREEN_HEIGHT_4, &Wire, -1);
-      Adafruit_SSD1306 display5(SCREEN_WIDTH_5, SCREEN_HEIGHT_5, &Wire, -1);
+      Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, GET_WIRE(OLED_I2C1, BOARDTYPE), -1);
+      Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, GET_WIRE(OLED_I2C1, BOARDTYPE), -1);
+      Adafruit_SSD1306 display3(SCREEN_WIDTH_3, SCREEN_HEIGHT_3, GET_WIRE(OLED_I2C1, BOARDTYPE), -1);
+      Adafruit_SSD1306 display4(SCREEN_WIDTH_4, SCREEN_HEIGHT_4, GET_WIRE(OLED_I2C1, BOARDTYPE), -1);
+      Adafruit_SSD1306 display5(SCREEN_WIDTH_5, SCREEN_HEIGHT_5, GET_WIRE(OLED_I2C1, BOARDTYPE), -1);
       Adafruit_SSD1306 displays[5] = {display1, display2, display3, display4, display5};
 
       U8G2_FOR_ADAFRUIT_GFX textGraphics1;
@@ -413,10 +419,10 @@ bool wire0Init = false;
       int OLEDframes [5] = {0, 0, 0, 0, 0};
 
     #elif(DISPLAYCOUNT > 3)
-      Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
-      Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, &Wire, -1);
-      Adafruit_SSD1306 display3(SCREEN_WIDTH_3, SCREEN_HEIGHT_3, &Wire, -1);
-      Adafruit_SSD1306 display4(SCREEN_WIDTH_4, SCREEN_HEIGHT_4, &Wire, -1);
+      Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, GET_WIRE(OLED_I2C1, BOARDTYPE), -1);
+      Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, GET_WIRE(OLED_I2C1, BOARDTYPE), -1);
+      Adafruit_SSD1306 display3(SCREEN_WIDTH_3, SCREEN_HEIGHT_3, GET_WIRE(OLED_I2C1, BOARDTYPE), -1);
+      Adafruit_SSD1306 display4(SCREEN_WIDTH_4, SCREEN_HEIGHT_4, GET_WIRE(OLED_I2C1, BOARDTYPE), -1);
       Adafruit_SSD1306 displays[4] = {display1, display2, display3, display4};
 
       U8G2_FOR_ADAFRUIT_GFX textGraphics1;
@@ -436,9 +442,9 @@ bool wire0Init = false;
       int OLEDframes [4] = {0, 0, 0, 0};
 
     #elif(DISPLAYCOUNT > 2)
-      Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
-      Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, &Wire, -1);
-      Adafruit_SSD1306 display3(SCREEN_WIDTH_3, SCREEN_HEIGHT_3, &Wire, -1);
+      Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, GET_WIRE(OLED_I2C1, BOARDTYPE), -1);
+      Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, GET_WIRE(OLED_I2C1, BOARDTYPE), -1);
+      Adafruit_SSD1306 display3(SCREEN_WIDTH_3, SCREEN_HEIGHT_3, GET_WIRE(OLED_I2C1, BOARDTYPE), -1);
       Adafruit_SSD1306 displays[3] = {display1, display2, display3};
 
       U8G2_FOR_ADAFRUIT_GFX textGraphics1;
@@ -457,8 +463,8 @@ bool wire0Init = false;
       int OLEDframes [3] = {0, 0, 0};
 
     #elif(DISPLAYCOUNT > 1)
-      Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
-      Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, &Wire, -1);
+      Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, GET_WIRE(OLED_I2C1, BOARDTYPE), -1);
+      Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, GET_WIRE(OLED_I2C1, BOARDTYPE), -1);
       Adafruit_SSD1306 displays[2] = {display1, display2};
 
       U8G2_FOR_ADAFRUIT_GFX textGraphics1;
@@ -476,7 +482,7 @@ bool wire0Init = false;
       int OLEDframes [2] = {0, 0};
 
     #elif(DISPLAYCOUNT > 0)
-      Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
+      Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, GET_WIRE(OLED_I2C1, BOARDTYPE), -1);
       Adafruit_SSD1306 displays[1] = {display1};
 
       U8G2_FOR_ADAFRUIT_GFX textGraphics1;
@@ -493,8 +499,28 @@ bool wire0Init = false;
       int OLEDframes [1] = {0};
 
     #endif//COUNTS ON MUX
-  #else//USING MUX
-      Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
+  #elif (OLED_I2C1 == 1 && OLED_I2C0 == 1 && DISPLAYCOUNT == 2 && BOARDTYPE == 2)
+      
+    Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, &Wire, -1);
+    Adafruit_SSD1306 display2(SCREEN_WIDTH_2, SCREEN_HEIGHT_2, &Wire1, -1);
+    Adafruit_SSD1306 displays[2] = {display1, display2};
+
+    U8G2_FOR_ADAFRUIT_GFX textGraphics1;
+    U8G2_FOR_ADAFRUIT_GFX textGraphics2;
+    U8G2_FOR_ADAFRUIT_GFX textGraphics[2] = {textGraphics1, textGraphics2};
+
+    bool OLEDgenLock[2] = {false, false};
+    bool backgroundSet[2] = {false, false};
+    uint8_t OLEDcondiIndex[2] = {0, 0};
+    uint8_t OLEDcondiForce[2] = {0, 0};
+    unsigned long OLEDcondiLock[2] = {0, 0};
+    bool writeToDisplay[2] = {false, false};
+    unsigned long OLEDcondiTimer [2] = {0, 0};
+    unsigned long OLEDtimer [2] = {0, 0};
+    int OLEDframes [2] = {0, 0};
+
+  #else
+      Adafruit_SSD1306 display1(SCREEN_WIDTH_1, SCREEN_HEIGHT_1, GET_WIRE(OLED_I2C1, BOARDTYPE), -1);
       Adafruit_SSD1306 displays[1] = {display1};
 
       U8G2_FOR_ADAFRUIT_GFX textGraphics1;
@@ -509,5 +535,5 @@ bool wire0Init = false;
       unsigned long OLEDcondiTimer [1] = {0};
       unsigned long OLEDtimer [1] = {0};
       int OLEDframes [1] = {0};
-  #endif//Using MUX or not
+  #endif//Using MUX or both I2C etc
 #endif//Using OLED
