@@ -208,7 +208,7 @@ public:
 		_steeringMinimum = minimum;
 		_steeringMaximum = maximum;
 	}
-	inline void getDICalibrationFix()
+	inline bool getDICalibrationFix()
 	{
 		return _DICalibrationFix;
 	}
