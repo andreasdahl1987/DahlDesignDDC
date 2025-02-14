@@ -6,7 +6,7 @@
 //-----------BOARD MCU----------
 //------------------------------
 
-#define BOARDTYPE 0
+#define BOARDTYPE 2
 
 // 0 -> Atmel 32U4 based boards. (Leonardo, Pro Micro, Feather, Teensy 2.0, etc) SAM3X based boards. (Due)
 
@@ -19,6 +19,7 @@
 //------------------------------
 
 #define RESET_EEPROM 0
+#define USING_RP2040EEPROM 1
 #define USING_32U4EEPROM 0
 
 //------------------------------
@@ -38,7 +39,7 @@
 //------------------------------
 
 //Enable board
-#define USING_CB1 1
+#define USING_CB1 0
 #define USING_CB2 0
 
 //------------------------------
@@ -216,6 +217,6 @@ bool wire0Init = false;
   #include <Wire.h>
 #endif
 
-#if (USING_32U4EEPROM == 1)
+#if (USING_32U4EEPROM == 1 || USING_RP2040EEPROM == 1)
   #include <EEPROM.h>
 #endif

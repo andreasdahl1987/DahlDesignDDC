@@ -25,7 +25,7 @@
 
 uint8_t EEPROMdump;
 
-#if (USING_CAT24C512 == 1 || USING_32U4EEPROM == 1 || USING_CB1 == 1)
+#if (USING_CAT24C512 == 1 || USING_32U4EEPROM == 1 || USING_CB1 == 1 || USING_RP2040EEPROM == 1)
 uint16_t resetEEPROM = 0;
 bool DDS_b_init = true;
 bool DDS_s_init = true;
