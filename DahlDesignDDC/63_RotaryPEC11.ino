@@ -733,64 +733,6 @@ void PEC11Preset(int row, int col, bool reverse) {
         pushState[Row][Column + 1] = 3;
     }
 
-
-
-
-
-
-      if(toggleTimer[Row][Column] == 2)
-      {
-        toggleTimer[Row][Column + 1] = 0;
-        if(pushState[modButtonRow - 1][modButtonCol - 1] == 1)
-        {
-          if(switchPreset == 0 && Reverse)
-          {
-            switchPreset = 11;
-          }
-          else
-          {
-            switchPreset = switchPreset + 1 - (2 * Reverse);
-          }
-          if (switchPreset > 11)
-          {
-              switchPreset = 0;
-          }
-
-          presets(switchPreset);
-        }
-      }
-      else if(toggleTimer[Row][Column + 1] == 2)
-      {
-        toggleTimer[Row][Column] = 0;
-        if(pushState[modButtonRow - 1][modButtonCol - 1] == 1)
-        {
-          if(switchPreset == 0 && !Reverse)
-          {
-            switchPreset = 11;
-          }
-          else
-          {
-            switchPreset = switchPreset - 1 + (2 * Reverse);
-          }
-          
-          if (switchPreset > 11)
-          {
-              switchPreset = 0;
-          }
-          presets(switchPreset);
-
-
-
-
-
-
-
-
-
-
-
-
-
     //Pushing successfully recorded rotations
 
     if (pushState[Row][Column] == 3)
