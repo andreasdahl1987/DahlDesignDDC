@@ -255,12 +255,17 @@ void E18Preset(int row, int col, bool reverse)
         toggleTimer[Row][Column + 1] = 0;
         if(pushState[modButtonRow - 1][modButtonCol - 1] == 1)
         {
-          switchPreset = switchPreset + 1  - (reverse * 2);
-          
-          //Adjustment
+          if(switchPreset == 0 && Reverse)
+          {
+            switchPreset = 11;
+          }
+          else
+          {
+            switchPreset = switchPreset + 1 - (2 * Reverse);
+          }
           if (switchPreset > 11)
           {
-            switchPreset = 0;  
+              switchPreset = 0;
           }
 
           presets(switchPreset);
@@ -271,11 +276,18 @@ void E18Preset(int row, int col, bool reverse)
         toggleTimer[Row][Column] = 0;
         if(pushState[modButtonRow - 1][modButtonCol - 1] == 1)
         {
-          switchPreset = switchPreset - 1  + (reverse * 2);
-          //Adjustment
+          if(switchPreset == 0 && !Reverse)
+          {
+            switchPreset = 11;
+          }
+          else
+          {
+            switchPreset = switchPreset - 1 + (2 * Reverse);
+          }
+          
           if (switchPreset > 11)
           {
-            switchPreset = 0;  
+              switchPreset = 0;
           }
           presets(switchPreset);
         }
