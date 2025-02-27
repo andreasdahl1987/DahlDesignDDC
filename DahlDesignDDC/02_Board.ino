@@ -6,7 +6,7 @@
 //-----------BOARD MCU----------
 //------------------------------
 
-#define BOARDTYPE 2
+#define BOARDTYPE 0
 
 // 0 -> Atmel 32U4 based boards. (Leonardo, Pro Micro, Feather, Teensy 2.0, etc) SAM3X based boards. (Due)
 
@@ -19,7 +19,7 @@
 //------------------------------
 
 #define RESET_EEPROM 0
-#define USING_RP2040EEPROM 1
+#define USING_RP2040EEPROM 0
 #define USING_32U4EEPROM 0
 
 //------------------------------
