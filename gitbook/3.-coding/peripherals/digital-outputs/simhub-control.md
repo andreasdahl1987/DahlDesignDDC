@@ -98,4 +98,4 @@ In SimHub, you'll now have a chain of 94 LEDs, ordered like this:
 
 <figure><img src="../../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
 
-[Read this](../leds-code-and-connection/simhub-control.md) on making connection between SimHub and your controller.&#x20;
+[Read this](../../../4.-advanced-features/simhub-control.md) on making connection between SimHub and your controller.&#x20;

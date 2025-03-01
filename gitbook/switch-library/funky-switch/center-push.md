@@ -68,7 +68,27 @@ Here the field placement is set to 3. So you'll find the mode of this switch in 
 {% endtab %}
 {% endtabs %}
 
-#### <mark style="background-color:orange;">funkyPushBite()</mark>
+#### funkyPushModButton()
+
+{% tabs %}
+{% tab title="Description" %}
+Momentary pushbutton, should be assigned a button number. When held, it will change the mode of switches that are pressed/rotated.
+
+It can also deactivate all [analog injects](../../3.-coding/advanced/analog-inject.md) for 20 seconds by hitting the button 3 times quickly. This is to make button mapping/calibration less of a hassle with analog injects.&#x20;
+{% endtab %}
+
+{% tab title="Example" %}
+`void funkyPushModButton(int row, int col, int Acol, int Bcol, int Ccol, ing Dcol);`
+
+For a switch on row 2 column 5, with the directional inputs on columns 1-4 -> `funkyPushModButton(2,5,1,2,3,4);`
+{% endtab %}
+
+{% tab title="Requirements" %}
+* 1 button number
+{% endtab %}
+{% endtabs %}
+
+#### <mark style="background-color:orange;">'unkyPushBite()</mark>
 
 {% tabs %}
 {% tab title="Description" %}

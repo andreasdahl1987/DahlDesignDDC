@@ -6,7 +6,7 @@ DDC offers a high degree customization of LEDs, working alone or in harmony with
 
 {% embed url="https://www.youtube.com/watch?feature=youtu.be&v=dfZJv4_aeNk" %}
 
-There are 3 layers of firmware LED control (Startup, Bottom and Top) and 2 layers of SimHub LED control (Mask and SimHub). The SimHub layers will not be active until SimHub is open and you've made [contact with the controller.](../simhub-control.md)
+There are 3 layers of firmware LED control (Startup, Bottom and Top) and 2 layers of SimHub LED control (Mask and SimHub). The SimHub layers will not be active until SimHub is open and you've made [contact with the controller.](../../../../4.-advanced-features/simhub-control.md)
 
 _The LED system uses a fair bit of dynamic memory. In some cases too much for the 32U4-based boards to handle. You can save a lot of memory by setting `#define ECOLED` to 1 in `2_Boards.ino.` The downside being that LEDBottom() is deactivated._&#x20;
 

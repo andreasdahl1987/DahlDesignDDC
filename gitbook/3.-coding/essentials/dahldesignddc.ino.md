@@ -37,7 +37,9 @@ This will switch to set up DDC for a RP2040 board, such as Raspberry Pi Pico.
 
 #### Activate EEPROM
 
-If you're rocking a Atmel 32U4 processor board, you can activate [EEPROM](../../1.-project-planning/eeprom.md) by editing `USING_32U4EEPROM` from `0` to `1.` This is all you need to activate EEPROM for this board. This will take some additional storage memory and dynamic memory. So if you've activated EEPROM and is stuck using too much memory, this is a feature you could consider turning off.&#x20;
+If you're using a Atmel 32U4 processor board, you can activate [EEPROM](../../1.-project-planning/eeprom.md) by editing `USING_32U4EEPROM` from `0` to `1.` This is all you need to activate EEPROM for this board. This will take some additional storage memory and dynamic memory. So if you've activated EEPROM and is stuck using too much memory, this is a feature you could consider turning off.&#x20;
+
+If you're rocking an RP2040 processor board, you can activate [EEPROM](../../1.-project-planning/eeprom.md) by editing `USING_RP2040EEPROM` from `0` to `1.` This will reserve a tiny fraction of the board's storage memory for EEPROM purposes.&#x20;
 
 For other boards; coding a peripheral EEPROM device is [done like this.](../peripherals/i2c-devices/cat24c512.md)&#x20;
 
@@ -57,4 +59,4 @@ The output values will go from 0-4096 to 0-65536. However, DDC will cut this val
 
 I suggest activating oversampling for any RP2040 board, it is done by setting `ENABLE_OVERSAMPLING` from `0` to `1.`
 
-**Important to note,** when you activate oversampling, you cant refer to your analog pins as A0 to A3 anymore. You'll also have to build at least 4 analog channels to store data from these four pins. More on this in the chapter on [10\_TableAndAnalog.ino](10\_matrixandanalog.ino/)
+**Important to note,** when you activate oversampling, you cant refer to your analog pins as A0 to A3 anymore. You'll also have to build at least 4 analog channels to store data from these four pins. More on this in the chapter on [10\_TableAndAnalog.ino](10_matrixandanalog.ino/)

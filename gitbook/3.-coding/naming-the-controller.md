@@ -1,6 +1,6 @@
 # Naming the controller
 
-Naming the controller, or more importantly assigning a VID and PID number to it, is required for SimHub LED control to work.&#x20;
+Naming the controller, or more importantly assigning a VID and PID number to it, is required for SimHub LED control to work. It is also nice to see your computer recognize your controller as _"Ferrari 488 EVO"_ and not _"Arduino Pro Micro"_.&#x20;
 
 Currently possible for:
 
@@ -9,7 +9,7 @@ Currently possible for:
 
 #### VID/PID
 
-Vendor ID (VID) and Product ID (PID) are USB product indentifiers, where Windows already has a register to look at. If a product, such as a USB keyboard for instance, is registered with a VID/PID, Windows already knows its name when you plug it in. If your computer has never seen this VID/PID, it will take the name you have given it. If you then change the name and don't change the VID/PID, your computer will still remember it as the name you first gave it.&#x20;
+Vendor ID (VID) and Product ID (PID) are USB product indentifiers, where Windows already has a register to look at. If a product, such as a USB keyboard for instance, is registered with a VID/PID, Windows already knows its name when you plug it in. If your computer has never seen this VID/PID, it will take the name you have given it in the firmware. If you then change the name and don't change the VID/PID, your computer will still remember it as the name you first gave it.&#x20;
 
 VID/PIDs cost a lot of money. Using a random VID/PID for your private projects is fine, but if you're selling a product, you're not entirely lawful if you're using random IDs. What the risk is, I'm not sure, but I can't imagine there is a USB police sniffing out sim gear shops.&#x20;
 

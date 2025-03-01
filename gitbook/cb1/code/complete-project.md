@@ -304,7 +304,7 @@ Note that the three rotary switches are set up with [field placement ](../../3.-
 
 ### Edit button count
 
-Our controller is now using button number 0-65 for a total of 66 buttons. Default setting is 64 buttons, so we'll have to adjust. You can adjust this also if using less than the default 64 buttons, to make it match the actual button count. See [here ](../../3.-coding/essentials/08\_joystick.md)how to do it.&#x20;
+Our controller is now using button number 0-65 for a total of 66 buttons. Default setting is 64 buttons, so we'll have to adjust. You can adjust this also if using less than the default 64 buttons, to make it match the actual button count. See [here ](../../3.-coding/essentials/08_joystick.md)how to do it.&#x20;
 
 ### Edit the board name
 
@@ -416,7 +416,7 @@ void LEDTop()
 
 ### Connect to SimHub
 
-We're going to have SimHub control the warning lights (52 - 55 + 68 - 71) and rev lights (56 - 67). Follow [this guide](../../3.-coding/peripherals/leds-code-and-connection/simhub-control.md) to get SimHub hooked into your LEDs.&#x20;
+We're going to have SimHub control the warning lights (52 - 55 + 68 - 71) and rev lights (56 - 67). Follow [this guide](../../4.-advanced-features/simhub-control.md) to get SimHub hooked into your LEDs.&#x20;
 
-If you want properties from your wheel to use for dashboard graphics, follow[ these instructions.](../../4.-advanced-features/connect-to-simhub.md)
+If you want properties from your wheel to use for dashboard graphics, follow[ these instructions.](../../4.-advanced-features/connect-to-simhub/)
 
