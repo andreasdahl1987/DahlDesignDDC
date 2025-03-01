@@ -311,6 +311,10 @@ void E18Preset(int row, int col, bool reverse)
     {
       Joystick.setButton(Number + 1 - Reverse, 0);
     }
+
+    long push = 0;
+    push = push | (switchPreset << 10);
+    buttonField = buttonField | push;
 }
 
 void E18Throttle(int row, int col, bool reverse) 

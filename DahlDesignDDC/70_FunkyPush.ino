@@ -105,6 +105,65 @@ void funkyPushBite(int row, int column,int aCol, int bCol, int cCol, int dCol)
     Joystick.setButton(Number, pushState[Row][Column]);
 }
 
+void funkyPushModButton(int row, int column,int aCol, int bCol, int cCol, int dCol)
+{
+    modButtonRow = row;
+    modButtonCol = column;
+
+    int Row = row - 1;
+    int Column = column - 1;
+    int Number = buttonNumber[Row][Column];
+
+    int Acol = aCol - 1;
+    int Bcol = bCol - 1;
+    int Ccol = cCol - 1;
+    int Dcol = dCol - 1;
+
+    if (!pushState[Row][Acol] && !pushState[Row][Bcol] && !pushState[Row][Ccol] && !pushState[Row][Dcol])
+    {
+        if (pushState[Row][Column] != rawState[Row][Column] && (globalClock - switchTimer[Row][Column]) > buttonCooldown)
+        {
+            switchTimer[Row][Column] = globalClock;
+            pushState[Row][Column] = rawState[Row][Column];
+        }
+
+        if ((globalClock - switchTimer[Row][Column]) > buttonCooldown)
+        {
+            pushState[Row][Column] = rawState[Row][Column];
+        }
+    }
+
+    //Analog inject disable logic
+    if (pushState[Row][Column] != latchLock[Row][Column])
+    {
+      if(globalClock - toggleTimer[Row][Column] < 400)
+      {
+        injectMuteCounter++; 
+      }
+      else
+      {
+        injectMuteCounter = 0;
+      }
+      latchLock[Row][Column] = pushState[Row][Column];
+      toggleTimer[Row][Column] = globalClock;
+    }
+    if (injectMuteCounter >= 5)
+    {
+      injectMuteTimer = globalClock;
+      injectMuteCounter = 0;
+    }
+    if (globalClock - injectMuteTimer < 20000)
+    {
+      injectMute = true;
+    }
+    else
+    {
+      injectMute = false;
+    }
+
+    Joystick.setButton(Number, pushState[Row][Column]);
+}
+
 
 void funkyPushM(int row, int column, int fieldPlacement, int aCol, int bCol, int cCol, int dCol)
 {

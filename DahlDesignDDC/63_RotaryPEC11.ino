@@ -791,6 +791,10 @@ void PEC11Preset(int row, int col, bool reverse) {
       Joystick.setButton(Number + 1 - Reverse, (globalClock - toggleTimer[Row][Column + 1] < PEC11Pulse));
     }
 
+    long push = 0;
+    push = push | (switchPreset << 10);
+    buttonField = buttonField | push;
+
 }
 
 void PEC11BiteAdjust(int row, int col, bool reverse, int increment) 

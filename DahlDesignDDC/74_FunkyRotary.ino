@@ -934,6 +934,11 @@ void funkyPreset(int Arow, int Acol, int Bcol, bool reverse) {
     Joystick.setButton(Number + reverse, (globalClock - switchTimer[Row][Column] < funkyPulse));
     Joystick.setButton(Number + 1 - reverse, (globalClock - switchTimer[Row][bCol] < funkyPulse));
     }
+
+    long push = 0;
+    push = push | (switchPreset << 10);
+    buttonField = buttonField | push;
+
 }
 
 void funkyThrottle(int Arow, int Acol, int Bcol, bool reverse) {
