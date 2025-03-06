@@ -1,76 +1,10 @@
 # Field placement
 
-This refers to the `int fieldPlacement` that you'll find in many of the switch functions. This is a system for sending information about the controller to SimHub. The way it works:
+Some switch functions will ask you to select a field placement. These functions will send info to the DDC bit fields that will end up as properties in SimHub that you can use to build dashboard graphics and other cool things.&#x20;
 
-* Each joystick axis can hold a 16-bit value. Two of the controllers joystick axis (axis Y and Z) are used as a way of sending information about to wheel to the computer through this axis value, thus not being used as real joystick axis. In total 16 + 16 bits of information.
-* The 16 bit value is constructed by 16 1's and 0's. Basically 16 slots being on/off. In DDC, you can map things to these slots. You could say that the 4th bit represents the switch mode for one of your 12-position switches. So if the switch is in 12-position mode, the 4th bit should be 0, if it is in incremental mode the 4th bit will be 1. The algorithm takes care of this, but you have to decide which bits you are going to use for each switch. We say that this joysick axis represents a `bit field`.
-* The value of these joystick axis are read by SimHub, and then picked up by my plugin. The plugin then splits up all the 16 bits and looks which bits are 0 and which are 1. It creates properties based on this, that you can use in the dashboard editor.
+[Read up on the bit fields in DDC here.](../../4.-advanced-features/connect-to-simhub/)
 
-### `19_BitFields.ino`
-
-This file introcudes these fields into the sketch. There is no code to be written here, but you can use this file to plan/organize your switches that has modes.
-
-```
-//-------------------------------------
-//--BIT FIELDS FOR SIMHUB PROPERTIES---
-//-------------------------------------
-
-int rotaryField = 0;
-
-/*
- * First field, pushed to joysick axis Z
- Most significant
- 16 - Unused because of bug in joystick library
- 15 
- 14 - Dual clutches
- 13 - Dual clutches
- 12 - Bite point setting
- 11 - Bite point setting
- 10 - DDS switch
- 9 - DDS switch
- 8
- 7
- 6
- 5
- 4
- 3
- 2
- 1
- Least significant
- */
-
-int buttonField = 0;
-
-/*
- * Second field, pushed to joysick axis Y
- Most significant
- 16 - Unused because of joystick library bug
- 15 - Neutral mode
- 14 - Presets 4th bit
- 13 - Presets 3rd bit
- 12 - Presets 2nd bit
- 11 - Presets 1st bit
- 10 - Handbrake active
- 9 - QuickSwitch active
- 8 - QuickSwitch mode
- 7 - Magic button active
- 6 - Throttle Hold active
- 5 - Neutral active
- 4
- 3
- 2
- 1
- Least significant
- */
-```
-
-The two fields are named `rotaryField` and `buttonField`. Typically, a button switch function that asks you to decide a field placement will use the `buttonField` - and for rotary switches/encoders the `rotaryField` will be used.
-
-You can see this file is mosly just comments; a list of the available bits and what they are used for. A lot of the bits are already reserved, only bits 1-4 are available in the `buttonField` and bits 1-8 + 15 in the `rotaryField`. However, the reserved bits are for switches that you're likely to include in your project, and they have defined properties in SimHub. A reseved slot like bit 5 on `buttonField`, is presented as `DahlDesign.DDCNeutralActive`. The non-reserved bits have properties with less descriptive naming; `DahlDesign.DDCB1` to `DahlDesign.DDCB4` for the `buttonField` bits 1 - 4 and `DahlDesign.DDCR1` etc. for the `rotaryField`.
-
-The switch functions for switches which have reserved slots in the bit fields doest not require you to set a field placement. This is done automatically.&#x20;
-
-If your project is running out of bits to use, you can use the bits that are reserved for functions that are not used in your project. So if you're not using neutral button, both bit 5 and bit 15 can be used for something else. Keep in mind though, that the properties representing these bits will be _named as before_; `DahlDesign.DDCNeutralMode`, etc.
+### Examples
 
 A switch function that uses the `buttonField`:
 

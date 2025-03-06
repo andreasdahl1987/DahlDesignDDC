@@ -4,7 +4,7 @@ These are functions that goes together with your single or dual clutches. **Bite
 
 With dual clutch systems, you can have one clutch giving you clutch application only to the bite point when the paddle is completely pressed, and the other paddle gives 100% clutch application. When holding them together, you can give full throttle and then abruptly release the 100% clutch, bringing you to the optimal amount of clutch application instantly. The same can be achieved by using a [launchButton()](bite-point-and-launch.md#launchbutton) and a single clutch paddle.&#x20;
 
-The bite point is pushed to joystick axis Ry, so you can access it in windows/SimHub. If you [connect](../../4.-advanced-features/connect-to-simhub.md) you DDC controller to SimHub, you can also access the bite point by the property \[DahlDesign.DDCbitePoint].&#x20;
+The bite point is pushed to joystick axis Ry, so you can access it in windows/SimHub. If you [connect](../../4.-advanced-features/connect-to-simhub/) you DDC controller to SimHub, you can also access the bite point by the property \[DahlDesign.DDCbitePoint].&#x20;
 
 #### <mark style="background-color:orange;">biteButton()</mark>
 
@@ -119,7 +119,11 @@ This switch will increase bitepoint by 1.0% on each press.
 
 {% tabs %}
 {% tab title="Description" %}
-Momentary pushbutton, should be assigned a button number. Works like a normal pushbutton, but when you hold a clutch paddle completely pressed and hit this button, it will drop the value of the clutch output to the set bite point. The button will not work as a pushbutton untill the clutch is completely released, so you can even map a shifter paddle as launchButton(), and it wont change gears when you use it to launch with.
+Momentary pushbutton, should be assigned a button number. Works like a normal pushbutton, but when you hold a clutch paddle completely pressed and hit this button, it will drop the value of the clutch output to the set bite point.&#x20;
+
+While the clutch is pressed, this launch button press will not output its usual button number, but a button number +1 higher. Meaning this switch occupies TWO button numbers. One for normal use (lets say number 10), and one when used to launch (in that case number 11). This means you can even map a shifter paddle as launchButton(), and it wont change gears when you use it to launch with.&#x20;
+
+The reasoning behind giving a different button number output when used to launch, and not just being completely mute, is that you can use this button number to bind to traction control disable. For sims like iRacing, many cars only disables TC for a few seconds when you press to turn it off. This will turn off TC at the same time as you're doing the launch.&#x20;
 
 In esssense this makes it possible to do a single clutch launch and a 1-handed launch. Ideal for wheels with a single clutch paddle or for cars that also use handbrake on launch (rallycross and Supercar).&#x20;
 {% endtab %}
@@ -133,7 +137,7 @@ For a switch on row 2 column 4, coupling to clutch that has master paddle on cha
 {% endtab %}
 
 {% tab title="Requirements" %}
-* 1 button number
+* 2 button numbers
 * A analog switch to affect
 {% endtab %}
 {% endtabs %}

@@ -169,6 +169,11 @@ void setup()
 
     //Setting up output device
     outputPinsSetup();
+    
+    //EEPROM setup
+    #if(USING_RP2040EEPROM == 1)
+      EEPROM.begin(1024);
+    #endif
 
     EEPROMfirst();
     EEPROMinit(); //Fetch values from EEPROM

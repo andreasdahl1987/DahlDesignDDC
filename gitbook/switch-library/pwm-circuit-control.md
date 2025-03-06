@@ -47,8 +47,6 @@ Example:
 {% endtab %}
 
 {% tab title="Requirements" %}
-* 2 button numbers
-* modButton()
 * 1 PWM channel
 {% endtab %}
 {% endtabs %}

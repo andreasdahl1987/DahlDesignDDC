@@ -221,28 +221,3 @@ For a encoder on row 2 column 4+5 -> `rotary2Multis(2,4,2,8,12,18,true);`&#x20;
 {% endtab %}
 {% endtabs %}
 
-#### preset2Bit()
-
-{% tabs %}
-{% tab title="Description" %}
-Standard incremental encoder setup. Rotating CW will give a button pulse, rotating CCW will give a button pulse with a button number 1 value higher.
-
-Added function is the ability to change presets. If holding the [modButton()](../function-button.md#modbutton), rotating this switch will more to a higher/lower preset.&#x20;
-{% endtab %}
-
-{% tab title="Example" %}
-`void preset2Bit(int row, int column, bool reverse)`
-
-For an encoder with pins A and B to columns 3 and 4. Common pin to row 2:
-
-`preset2Bit(2, 3, false);`
-
-The button numbers used is determined by the number written in the block for the A pin. B pin block will not be read. If button number was set to 15, the switch will use buttons 15 and 16. The `reverse` part of the function will switch the button numbers if set to `true`.
-{% endtab %}
-
-{% tab title="Requirements" %}
-* 2 button numbers
-* modButton() to be able to change presets
-{% endtab %}
-{% endtabs %}
-

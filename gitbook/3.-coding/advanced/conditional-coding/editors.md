@@ -30,3 +30,19 @@ Changing the switch mode for an analog channel. Some of the analog switch functi
 `setAnalogSwitchMode(5,2,1);`
 
 Both act on analog channel 5. We're setting the 1st bit to 1 and the 2nd bit to 1. That would be 11, switch mode 3.&#x20;
+
+#### sendToButtonField(int fieldPosition, bool condition)
+
+Set a selected bit in buttonField (the first bit being bit 1, not 0) to 0 or 1 depending on the result of a condition. You can use triggers for conditions or write your own.
+
+`sendToButtonField(2, modButtonPressed());`&#x20;
+
+This will set bit #2 in buttonField to 1 if the mod button is pressed.&#x20;
+
+`sendToButtonField(4, rotaryPosition(2, 6));`
+
+This will set bit #4 in buttonField to 1 if the rotary switch on analog channel 2 is in position 6.
+
+#### sendToRotaryField(int fieldPosition, bool condition)
+
+Same as above, but to rotaryField instead of buttonField.&#x20;
