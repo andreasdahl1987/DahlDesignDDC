@@ -1,3 +1,84 @@
+#if(ENABLE_MOUSE == 1)
+
+void leftMouseButton(int row, int col)
+{
+  int8_t Row = row - 1;
+  int8_t Column = col - 1;
+
+  if (pushState[Row][Column] != rawState[Row][Column] && (globalClock - switchTimer[Row][Column]) > buttonCooldown)
+  {
+      switchTimer[Row][Column] = globalClock;
+      pushState[Row][Column] = rawState[Row][Column];
+  }
+
+  if ((globalClock - switchTimer[Row][Column]) > buttonCooldown)
+  {
+      pushState[Row][Column] = rawState[Row][Column];
+  }  
+
+  if(pushState[Row][Column] == 1)
+  {
+    Mouse.press(1);
+  }
+  else
+  {
+    Mouse.release(1);
+  }
+}
+
+void middleMouseButton(int row, int col)
+{
+  int8_t Row = row - 1;
+  int8_t Column = col - 1;
+
+  if (pushState[Row][Column] != rawState[Row][Column] && (globalClock - switchTimer[Row][Column]) > buttonCooldown)
+  {
+      switchTimer[Row][Column] = globalClock;
+      pushState[Row][Column] = rawState[Row][Column];
+  }
+
+  if ((globalClock - switchTimer[Row][Column]) > buttonCooldown)
+  {
+      pushState[Row][Column] = rawState[Row][Column];
+  }  
+
+  if(pushState[Row][Column] == 1)
+  {
+    Mouse.press(4);
+  }
+  else
+  {
+    Mouse.release(4);
+  }
+}
+
+void rightMouseButton(int row, int col)
+{
+  int8_t Row = row - 1;
+  int8_t Column = col - 1;
+
+  if (pushState[Row][Column] != rawState[Row][Column] && (globalClock - switchTimer[Row][Column]) > buttonCooldown)
+  {
+      switchTimer[Row][Column] = globalClock;
+      pushState[Row][Column] = rawState[Row][Column];
+  }
+
+  if ((globalClock - switchTimer[Row][Column]) > buttonCooldown)
+  {
+      pushState[Row][Column] = rawState[Row][Column];
+  }  
+
+  if(pushState[Row][Column] == 1)
+  {
+    Mouse.press(2);
+  }
+  else
+  {
+    Mouse.release(2);
+  }
+}
+
+
 void analogMouse(int xChannel, int yChannel, int xLeft, int xMiddle, int xRight, int yUp, int yMiddle, int yDown, uint8_t mouseSpeed)
 {
 
@@ -142,3 +223,5 @@ void analogMouse(int xChannel, int yChannel, int xLeft, int xMiddle, int xRight,
     oldSegment = segment;
   }
 } 
+
+#endif

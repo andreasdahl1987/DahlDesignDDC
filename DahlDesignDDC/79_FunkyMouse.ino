@@ -1,4 +1,5 @@
-#if ((BOARDTYPE == 0 || BOARDTYPE == 2) && ENABLE_MOUSE == 1)
+#if (ENABLE_MOUSE == 1)
+
 #if (MOUSE_LOGCURVE == 0)
 float degree2rad(int val, int max)
 {
@@ -103,6 +104,7 @@ void funkyMouseButton(int row, int column, int aCol, int bCol, int cCol, int dCo
 	}
 }
 
+/*
 void funkyMouseMove(int row, int column, int pCol, int Col1, int Col2, int Col3, uint8_t direction)
 {
 	int Row = row - 1;
@@ -164,4 +166,83 @@ void funkyMouseMove(int row, int column, int pCol, int Col1, int Col2, int Col3,
 		}
 	}
 }
+*/
+void funkyMouseMove(int row, int column, int pCol, int Col1, int Col2, int Col3, uint8_t direction, uint8_t mouseSpeed, uint8_t mouseSpeed2)
+{
+
+  uint8_t segment = (globalClock % 100) / 10;
+
+  if (segment != oldSegment)
+  {
+    int output = 0;
+
+    int Row = row - 1;
+	  int Column = column - 1;
+
+    int pcol = pCol - 1;
+    int col1 = Col1 - 1;
+    int col2 = Col2 - 1;
+    int col3 = Col3 - 1;
+
+    if (!pushState[Row][pcol] && !pushState[Row][col1] && !pushState[Row][col2] && !pushState[Row][col3])
+    {
+      if ((globalClock - switchTimer[Row][Column]) > buttonCooldown)
+      {
+        if (pushState[Row][Column] != rawState[Row][Column])
+        {
+          switchTimer[Row][Column] = globalClock;
+          toggleTimer[Row][Column] = globalClock;
+        }
+        pushState[Row][Column] = rawState[Row][Column];
+      }
+    }
+
+    if(!pushState[Row][Column])
+    {
+      toggleTimer[Row][Column] = globalClock;
+    }
+
+    if(globalClock - toggleTimer[Row][Column] > 2000)
+    {
+      output = 127 * pushState[Row][Column] * mouseSpeed2 /100;
+    }
+    else if(globalClock - toggleTimer[Row][Column] < 1000)
+    {
+      output = 127 * pushState[Row][Column] * mouseSpeed /100;
+    }
+    else
+    {
+      int diff = (mouseSpeed2 - mouseSpeed) * (globalClock - toggleTimer[Row][Column]) / 1000;
+      output = 127 * pushState[Row][Column] * (mouseSpeed+diff) /100;
+    }
+
+    if(output < 0)
+    {
+      output = 0;
+    }
+    if(output > 127)
+    {
+      output = 127;
+    }
+
+    switch(direction)
+    {
+      case 1: 
+        Mouse.move(output,0);
+        break;
+      case 2:
+        Mouse.move(-output,0);
+        break;
+      case 3:
+        Mouse.move(0,output);
+        break;
+      case 4:
+        Mouse.move(0,-output);
+        break;
+    }
+  
+    oldSegment = segment;
+  }
+} 
+
 #endif
