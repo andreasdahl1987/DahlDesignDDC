@@ -81,10 +81,7 @@ void rightMouseButton(int row, int col)
 
 void analogMouse(int xChannel, int yChannel, int xLeft, int xMiddle, int xRight, int yUp, int yMiddle, int yDown, uint8_t mouseSpeed)
 {
-
-  uint8_t segment = (globalClock % 100) / 10;
-
-  if (segment != oldSegment)
+  if (mouseRun)
   {
     //--------------------------------
     //-----X AXIS CALCULATIONS--------
@@ -220,8 +217,25 @@ void analogMouse(int xChannel, int yChannel, int xLeft, int xMiddle, int xRight,
 
     Mouse.move((xOutput*mouseSpeed)/100,(yOutput*mouseSpeed)/100);
 
-    oldSegment = segment;
+    mouseRan = true;
   }
 } 
+
+void mouseUpdates()
+{
+  uint8_t segment = (globalClock % 100) / 10;
+
+  if(segment != oldMouseSegment)
+  {
+    mouseRun = true;
+  }
+
+  if (mouseRan)
+  {
+    oldMouseSegment = segment;
+    mouseRun = false;
+    mouseRan = false;
+  }
+}
 
 #endif

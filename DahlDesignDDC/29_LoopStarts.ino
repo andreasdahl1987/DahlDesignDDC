@@ -37,6 +37,10 @@ void loop()
 
   runningPresets(); //Presets in the loop
 
+  #if(ENABLE_MOUSE == 1)
+  mouseUpdates();
+  #endif
+
   #if (PWMENABLED == 1 || ROW6_PWMCOUNT > 0) //PWM Control
   PWMrun();
   #endif

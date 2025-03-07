@@ -104,75 +104,9 @@ void funkyMouseButton(int row, int column, int aCol, int bCol, int cCol, int dCo
 	}
 }
 
-/*
-void funkyMouseMove(int row, int column, int pCol, int Col1, int Col2, int Col3, uint8_t direction)
-{
-	int Row = row - 1;
-	int Column = column - 1;
-
-	int pcol = pCol - 1;
-	int col1 = Col1 - 1;
-	int col2 = Col2 - 1;
-	int col3 = Col3 - 1;
-
-	if (!pushState[Row][pcol] && !pushState[Row][col1] && !pushState[Row][col2] && !pushState[Row][col3])
-	{
-		if ((globalClock - switchTimer[Row][Column]) > buttonCooldown)
-		{
-			if (pushState[Row][Column] != rawState[Row][Column])
-			{
-				switchTimer[Row][Column] = globalClock;
-				toggleTimer[Row][Column] = globalClock;
-			}
-			pushState[Row][Column] = rawState[Row][Column];
-		}
-	}
-
-	if(pushState[Row][Column])
-	{
-		uint8_t pixels = (globalClock - toggleTimer[Row][Column]);
-		if(switchTimer[Row][Column] == globalClock) pixels = 1;
-		else if(globalClock < switchTimer[Row][Column] + MOUSE_ACCELTIME)
-		{
-			#if (MOUSE_LOGCURVE == 1)
-			pixels = round(pixels * log10(((globalClock - switchTimer[Row][Column]) / (MOUSE_ACCELTIME / 9.)) + 1));
-			#else
-			pixels = round(pixels * sqrt(sin(degree2rad(globalClock - switchTimer[Row][Column], MOUSE_ACCELTIME))));
-			#endif
-		}
-		if (pixels > 0)
-		{
-			switch(MOUSESpeed) // Optimization for specific speeds
-			{
-				case 10:
-					break;
-				case 20:
-					pixels <<= 1;
-					break;
-				case 40:
-					pixels <<= 2;
-					break;
-				case 80:
-					pixels <<= 3;
-					break;
-				case 160:
-					pixels <<= 4;
-					break;
-				default:
-					pixels *= MOUSESpeed / 10.;
-			}
-			Mouse.move(direction == 1 ? -pixels : (direction == 2 ? pixels : 0), direction == 3 ? -pixels : (direction == 4 ? pixels : 0));
-			toggleTimer[Row][Column] = globalClock;
-		}
-	}
-}
-*/
 void funkyMouseMove(int row, int column, int pCol, int Col1, int Col2, int Col3, uint8_t direction, uint8_t mouseSpeed, uint8_t mouseSpeed2)
 {
-
-  uint8_t segment = (globalClock % 100) / 10;
-
-  if (segment != oldSegment)
+  if (mouseRun)
   {
     int output = 0;
 
@@ -202,17 +136,17 @@ void funkyMouseMove(int row, int column, int pCol, int Col1, int Col2, int Col3,
       toggleTimer[Row][Column] = globalClock;
     }
 
-    if(globalClock - toggleTimer[Row][Column] > 2000)
+    if(globalClock - toggleTimer[Row][Column] > 750)
     {
       output = 127 * pushState[Row][Column] * mouseSpeed2 /100;
     }
-    else if(globalClock - toggleTimer[Row][Column] < 1000)
+    else if(globalClock - toggleTimer[Row][Column] < 500)
     {
       output = 127 * pushState[Row][Column] * mouseSpeed /100;
     }
     else
     {
-      int diff = (mouseSpeed2 - mouseSpeed) * (globalClock - toggleTimer[Row][Column]) / 1000;
+      int diff = (mouseSpeed2 - mouseSpeed) * (globalClock - toggleTimer[Row][Column] - 250) / 500;
       output = 127 * pushState[Row][Column] * (mouseSpeed+diff) /100;
     }
 
@@ -241,7 +175,7 @@ void funkyMouseMove(int row, int column, int pCol, int Col1, int Col2, int Col3,
         break;
     }
   
-    oldSegment = segment;
+    mouseRan = true;
   }
 } 
 

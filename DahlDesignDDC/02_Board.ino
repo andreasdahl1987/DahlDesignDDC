@@ -46,7 +46,7 @@
 //------------------------------
 
 //Enable board
-#define USING_CB1 0
+#define USING_CB1 1
 #define USING_CB2 0
 
 //------------------------------
@@ -213,7 +213,9 @@ bool wire0Init = false;
   #if (ENABLE_MOUSE == 1)
   #include <DDCANJOMOUSE.h>
   JoyMouse_ Mouse;
-  uint8_t oldSegment = 0;
+  uint8_t oldMouseSegment = 0;
+  bool mouseRun = false;
+  bool mouseRan = false;
   #endif
 #elif (BOARDTYPE == 1)
   #include <DDCSAMD.h>
@@ -226,7 +228,9 @@ bool wire0Init = false;
   #if (ENABLE_MOUSE == 1)
   #include <DDCANJOMOUSE2040.h>
   JoyMouseRP2040_ Mouse;
-  uint8_t oldSegment = 0;
+  uint8_t oldMouseSegment = 0;
+  bool mouseRun = false;
+  bool mouseRan = false;
   #endif
   long bootTimer = 0;
 #endif
