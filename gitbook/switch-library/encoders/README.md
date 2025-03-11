@@ -53,6 +53,7 @@ Encoders:
 
 * Bourns PEC11H
 * TT Electronics EN11 (15 pulse)
+* Alps EC16
 
 ### rotaryPulse
 
@@ -61,7 +62,6 @@ These functions are for encoders that mechanically works the way that the softwa
 Encoders:
 
 * Alps SRBM
-* Alps EC16
 
 ### rotary4Bit
 
