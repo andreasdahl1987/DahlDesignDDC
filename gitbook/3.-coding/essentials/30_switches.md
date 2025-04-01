@@ -6,7 +6,7 @@ A simple pushbutton on row 3, column 1 would be written as `pushButton(3,1);`
 
 ### Direct wiring
 
-With matrix wiring or shift register wiring, you will just use the switch table adresses in the switch functions as explained [below.](30\_switches.md#setup) However, with [direct wiring](../../2.-wiring/switch-inputs/non-matrix-wiring.md), you'll have to add some extra lines.
+With matrix wiring or shift register wiring, you will just use the switch table adresses in the switch functions as explained [below.](30_switches.md#setup) However, with [direct wiring](../../2.-wiring/switch-inputs/non-matrix-wiring.md), you'll have to add some extra lines.
 
 * You might have asked yourself how your direct wired switches has found their way to the switch table so far. They haven't, they're still floating around. Your direct wired switches needs to have their values read and that value conveyed to a dedicated adress in the table. From there, the switch now behaves as any switch in the switch table, and allows you to use any fuction that works with a matrix wired or shift register wired button.
 * The `switchTableInject()` function shold be used for every pin on the Arduino that is used for direct wired switches.
@@ -126,26 +126,22 @@ Joystick.sendState();
 
 
     rotaryAnalog2Mode(
-        A3,                                                           //Analog pin to read
-        1,                                                            //Analog switch #
+        1                                                             //Analog channel
         3,                                                            //Field placement
         16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023,   //Switch position values
-        false);                                                        //Rotation direction
+        false);                                                       //Rotation direction
 
     rotaryAnalog2Mode(
-        A1,                                                           //Analog pin to read
-        2,                                                            //Analog switch #
+        2,                                                            //Analog channel
         2,                                                            //Field placement
         16, 107, 200, 291, 383, 474, 566, 657, 749, 841, 932, 1023,   //Switch position values
-        false);                                                        //Rotation direction
+        false);                                                       //Rotation direction
 
     dualClutch(
-        A2,                                                           //Analog pin to read (Master)
-        3,                                                            //Analog switch # (Master)
+        3                                                             //Analog channel (Master)
         571,                                                          //Released value (Master
         169,                                                          //Fully pressed value (Master)
-        A5,                                                           //Analog pin to read (Slave)
-        4,                                                            //Analog switch # (Slave)
+        4,                                                            //Analog channel (Slave)
         527,                                                          //Released value (Slave)
         882,                                                          //Fully pressed value (Slave)
         true);                                                        //True = Master/Slave paddle is Throttle/Brake in mode 4. False is opposite.
