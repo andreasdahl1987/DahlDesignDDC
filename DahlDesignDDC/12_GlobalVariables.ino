@@ -97,6 +97,11 @@ unsigned long globalClock;
 #define togglePulse 50
 #define funkyPulse 60
 #define funkyCooldown 70
+#define rotarySwitchZeroBounce 30
+#define rotarySwitchCooldown 20
+#define rotarySwitchUnexpected 30
+#define rotarySwitchCounterLock 150
+
 
 //Clutch deadzones
 #define clutchTopDeadzone 10
