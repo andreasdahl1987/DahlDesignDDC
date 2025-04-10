@@ -27,11 +27,6 @@ void rotarySwitch4Bit(int row, int column,bool reverse)
 
   int result = pos;
 
-  if(reverse)
-  {
-    result = 11-result;
-  }
-
   //pushState and switchTimer +1: CCW position and timer
   //pushState and switchTimer +2: CW position and timer
   //toggletimer: old value
@@ -240,11 +235,15 @@ void rotarySwitch4Bit(int row, int column,bool reverse)
     {
         if (i == pushState[Row][Column])
         {
-            Joystick.pressButton(i + Number);
+          int press = i+Number;
+          if(reverse) {press = 11 - press;}
+          Joystick.pressButton(press);
         }
         else
-        {
-            Joystick.releaseButton(i + Number);
+        {   
+          int press = i+Number;
+          if(reverse) {press = 11 - press;}
+          Joystick.releaseButton(press);
         }
     }
   }
@@ -259,13 +258,13 @@ void rotarySwitch4Bit(int row, int column,bool reverse)
 
       if ((difference > 0 && difference < 5) || difference < -5)
       {
-        Joystick.setButton(IncNumber, 1);
-        Joystick.setButton(IncNumber + 1, 0);
+        Joystick.setButton(IncNumber, 1-reverse);
+        Joystick.setButton(IncNumber + 1, reverse);
       }
       else
       {
-        Joystick.setButton(IncNumber, 0);
-        Joystick.setButton(IncNumber + 1, 1);
+        Joystick.setButton(IncNumber, reverse);
+        Joystick.setButton(IncNumber + 1, 1-reverse);
       }
     }
     else
