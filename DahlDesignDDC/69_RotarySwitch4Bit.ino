@@ -27,6 +27,11 @@ void rotarySwitch4Bit(int row, int column,bool reverse)
 
   int result = pos;
 
+  if(reverse)
+  {
+    result = 11-result;
+  }
+
   //pushState and switchTimer +1: CCW position and timer
   //pushState and switchTimer +2: CW position and timer
   //toggletimer: old value
