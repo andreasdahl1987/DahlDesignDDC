@@ -14,9 +14,9 @@ There are three versions:
 
 ### analogInject()
 
-`analogInject(int8_t pin, int8_t row, int8_t column, int startValue, int endValue, uint8_t threshold)`
+`analogInject(int8_t analogChannel, int8_t row, int8_t column, int startValue, int endValue, uint8_t threshold)`
 
-pin -> The analog pin to read
+analogChannel -> The analog channel this switch is tied to
 
 row -> The row to build the virtual switch on
 
@@ -32,7 +32,7 @@ The startValue can be higher than the endValue, that doesn't matter. The switch 
 
 An example:
 
-`analogInject(A1, 5, 5, 242, 634, 25);`
+`analogInject(2, 5, 5, 242, 634, 25);`
 
 <figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
@@ -40,7 +40,7 @@ In this case we're looking at a specific range in a potentiometer's rotation. Th
 
 ### analogInjectSingle()
 
-`analogInjectSingle(int8_t pin, int8_t row, int8_t column, int startValue, int endValue, uint8_t threshold)`
+`analogInjectSingle(int8_t analogChannel, int8_t row, int8_t column, int startValue, int endValue, uint8_t threshold)`
 
 <figure><img src="../../.gitbook/assets/image (86).png" alt=""><figcaption></figcaption></figure>
 
@@ -48,9 +48,9 @@ analogInjectSingle() is used exactly like analogInject() above, the difference b
 
 ### rotaryInject()
 
-`rotaryInject(int8_t switchNumber, int8_t switchPosition, int8_t row, int8_t column)`
+`rotaryInject(int8_t analogChannel, int8_t switchPosition, int8_t row, int8_t column)`
 
-While it is possible to use `analogInject()` to extract the positions of a multiposition switch and inject them into the switch table, the rotaryInject() function will make this a lot easier. The function takes the switch number of the rotary, the desired position, and where to put it in the switch table.&#x20;
+While it is possible to use `analogInject()` to extract the positions of a multiposition switch and inject them into the switch table, the rotaryInject() function will make this a lot easier. The function takes the analog channel number for the switch, the desired position, and where to put it in the switch table.&#x20;
 
 For instance, we could use a 12-position switch with [quickRotary1Bite()](../../switch-library/rotary-switches/quickrotary.md#quickrotary1bite) and inject the last two positions to the switch table. In this example row 6, columns 1 and 2. We'll them be using these two for [brakeMagic() ](../../switch-library/car-control-functions/brakemagic.md#brakemagic)for position 11 and [quickSwitch()](../../switch-library/car-control-functions/quickswitch.md#quickswitch) for position 12.&#x20;
 
@@ -60,7 +60,7 @@ This way we can make an ABS rotary which is bound to ABS 1-9 in positions 1 to 9
 
 ### In the sketch
 
-These functions are called in 30\_Switches.ino. And as with the [switchTableInject()](../essentials/30\_switches.md#direct-wiring), it is recommended to call this function before calling the switch functions that will use the virtual switch. Like this:
+These functions are called in 30\_Switches.ino. And as with the [switchTableInject()](../essentials/30_switches.md#direct-wiring), it is recommended to call this function before calling the switch functions that will use the virtual switch. Like this:
 
 ```
 //------------------------------------
@@ -68,13 +68,13 @@ These functions are called in 30\_Switches.ino. And as with the [switchTableInje
 //------------------------------------
 
 
-analogInject(A1, 5, 5, 242, 634, 25);
+analogInject(2, 5, 5, 242, 634, 25);
 pushButton(5,5);
 
-analogInjectSingle(A3, 4, 2, 242, 634, 25);
+analogInjectSingle(3, 4, 2, 242, 634, 25);
 modButton(4,2);
 
-rotaryInject(3, 12, 4, 3);
+rotaryInject(4, 12, 4, 3);
 brakeMagic(4,3);
 
 
