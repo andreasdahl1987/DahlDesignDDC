@@ -6,7 +6,7 @@
 //-----------BOARD MCU----------
 //------------------------------
 
-#define BOARDTYPE 0
+#define BOARDTYPE 2
 
 // 0 -> Atmel 32U4 based boards. (Leonardo, Pro Micro, Feather, Teensy 2.0, etc) SAM3X based boards. (Due)
 
@@ -201,7 +201,7 @@ bool wire0Init = false;
 
 #define MAJORVERSION 2
 #define MINORVERSION 12
-#define PATCHVERSION 0
+#define PATCHVERSION 1
 
 //------------------------------
 //---------LIBRARIES------------
