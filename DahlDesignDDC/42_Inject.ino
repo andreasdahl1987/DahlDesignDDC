@@ -7,26 +7,29 @@ void switchTableInject(int8_t pin, int8_t row, int8_t column)
 	rawState[Row][Column] = !digitalRead(Pin);
 }
 
-void analogInject(int8_t pin, int8_t row, int8_t column, int startValue, int endValue, uint8_t threshold)
+void analogInject(int8_t analogChannel, int8_t row, int8_t column, int startValue, int endValue, uint8_t threshold)
 {
+
+  int N = analogChannel - 1;
+
   #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
   int value;
-  if (pin > 49)
+  if (analogPins[N] > 49)
   {
-    value = ADS1115value[pin - ADC_CORR];
+    value = ADS1115value[analogPins[N] - ADC_CORR];
   }
   else
   {
-    value = analogRead(pin);
+    value = analogRead(analogPins[N]);
   }
   
   #else
 
-  int value = analogRead(pin);
+  int value = analogRead(analogPins[N]);
   
   #endif
-  
+
   int diff; 
 
   if (injectMute)
@@ -62,25 +65,28 @@ void analogInject(int8_t pin, int8_t row, int8_t column, int startValue, int end
   }
 }
 
-void analogInjectSingle(int8_t pin, int8_t row, int8_t column, int startValue, int endValue, uint8_t threshold)
+void analogInjectSingle(int8_t analogChannel, int8_t row, int8_t column, int startValue, int endValue, uint8_t threshold)
 {
+  int N = analogChannel - 1;
+  
   #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
 
   int value;
-  if (pin > 49)
+  if (analogPins[N] > 49)
   {
-    value = ADS1115value[pin - ADC_CORR];
+    value = ADS1115value[analogPins[N] - ADC_CORR];
   }
   else
   {
-    value = analogRead(pin);
+    value = analogRead(analogPins[N]);
   }
   
   #else
 
-  int value = analogRead(pin);
+  int value = analogRead(analogPins[N]);
   
   #endif
+  
   int diff; 
 
   if (injectMute)
