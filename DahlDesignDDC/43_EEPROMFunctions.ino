@@ -11,6 +11,7 @@ void write16bitToEEPROM(uint16_t location, uint16_t value)
     delay(5);    
     #if(USING_RP2040EEPROM == 1) 
       EEPROM.commit();
+      delay(5);
     #endif
   #else
     uint8_t reg1 = location >> 8;

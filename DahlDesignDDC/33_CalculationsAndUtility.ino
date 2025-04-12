@@ -202,8 +202,13 @@ void versionSet()
     versionField |= (DDCID << 10);
   }
 
-  uint16_t candy = read16bitFromEEPROM(CANDY);
-  delay(5);
+  uint16_t candy = 1;
+  #if ((USING_CAT24C512 == 1 && CAT24C512_I2C_NUMBER == 0) || USING_CB1 == 1 || USING_CB2 == 1 || USING_32U4EEPROM == 1 || USING_RP2040EEPROM == 1)
+    read16bitFromEEPROM(CANDY);
+    delay(5);
+    candy &= 0x01;
+  #endif
+  candy = 1 - candy;
 
   versionField |= (candy << 13);
 
