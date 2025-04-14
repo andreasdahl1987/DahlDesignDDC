@@ -41,6 +41,10 @@
 #define JOYSTICK_TYPE_GAMEPAD              0x05
 #define JOYSTICK_TYPE_MULTI_AXIS           0x08
 
+#define LED_BUFFER_SIZE 384
+extern uint8_t led_buffer[LED_BUFFER_SIZE];
+
+
 class Joystick_
 {
 private:
@@ -198,6 +202,8 @@ public:
 	void releaseButton(uint8_t button);
 
 	void setHatSwitch(int8_t hatSwitch, int16_t value);
+
+	void setSetting(uint8_t slot, uint8_t bits, uint16_t value);
 
 	void sendState();
 };

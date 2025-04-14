@@ -44,6 +44,61 @@
 
 #define USB_POLLING_RATE 1
 
+#define TOTAL_LED_COUNT 128
+#define LED_BUFFER_SIZE 384
+uint8_t led_buffer[LED_BUFFER_SIZE];  // Store full LED data
+uint8_t temp_buffer[64];              // Temporary storage for each HID report
+uint32_t DDCsettings = 0;
+
+void print_led_buffer(uint8_t start_led, uint8_t count) {
+    for (int i = 0; i < count; i++) {
+        int index = (start_led + i) * 3;
+        Serial.printf("LED %d: R=%3d G=%3d B=%3d\n",
+            start_led + i,
+            led_buffer[index],
+            led_buffer[index + 1],
+            led_buffer[index + 2]);
+    }
+}
+
+
+// TinyUSB HID OUT Report Callback
+void tud_hid_set_report_cb(uint8_t report_id, hid_report_type_t report_type, uint8_t const* buffer, uint16_t bufsize) {
+    Serial.println("WE HAVE TRIGGERED!!");
+	
+	// Only process output reports (not feature reports)
+    if (report_type != HID_REPORT_TYPE_OUTPUT) return;
+    
+    // Only process LED reports (ID 0x68)
+    if (report_id != 0x68) return;
+
+    // Minimum valid size: Report ID + 3 header bytes
+    if (bufsize < 4) return;  
+
+    // Copy the buffer into a local temp if you want, or just use it directly
+    memcpy(temp_buffer, buffer, bufsize); // Only necessary if you plan to reuse or modify
+
+   // Extract header information
+   uint8_t start_led   = buffer[1];  // Start index in LED array
+   uint8_t led_count   = buffer[2];  // Number of LEDs affected
+   uint8_t draw_flag   = buffer[3];  // 0 = store, 1 = update LEDs
+
+   // Ensure start position + led_count doesn't exceed buffer size
+   uint16_t start_pos = start_led * 3;
+   uint16_t end_pos   = start_pos + (led_count * 3);
+
+   if (end_pos <= LED_BUFFER_SIZE) {
+	   // Copy LED data into the correct position in led_buffer
+	   memcpy(&led_buffer[start_pos], &temp_buffer[4], led_count * 3);
+   }
+
+	if (draw_flag) {
+		Serial.println("Full LED buffer state:");
+		print_led_buffer(0, TOTAL_LED_COUNT);
+	}
+	
+}
+
 Joystick_::Joystick_(
 	uint8_t hidReportId,
 	uint8_t joystickType,
@@ -431,18 +486,80 @@ Joystick_::Joystick_(
 	
 	} // Simulation Controls
 
-    // END_COLLECTION
+	//DDC Settings report
+
+	// Usage Page (Vendor-defined)
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x05;
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0xFF;
+	// Usage (Generic Data)
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x09;
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x01;
+	// Logical Minimum (0)
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x15;
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x00;
+	// Logical Maximum (255)
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x26;
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0xFF;
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x00;
+	// Report Size (8 bits)
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x75;
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x08;
+	// Report Count (4 bytes)
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x95;
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x04;
+	// Input (Data, Variable, Absolute)
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x81;
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x02;
+
+	//Output report
+
+	//Usage Page (undefined)
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x06;
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x00;
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0xff;
+	//Usage (undefined)
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x09;
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x01;
+	//Collection (Physical)
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0xa1;
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x01;
+	//Report ID 0x68
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x85;
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x68;
+	//Logical minimum
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x15;
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x00;
+	//Logical maximum
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x26;
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0xff;
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x00;
+	//Report size
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x75;
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x08;
+	//Report count
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x95;
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x40;
+	//Usage (undefined)
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x09;
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x01;
+	//OUTPUT (Data, Var, Abs)
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x91;
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x02;
+	//End collection (physical)
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0xC0;
+
+
+    // END_COLLECTION (Applicatoin)
     tempHidReportDescriptor[hidReportDescriptorSize++] = 0xc0;
 
 	// Create a copy of the HID Report Descriptor template that is just the right size
 	uint8_t *customHidReportDescriptor = new uint8_t[hidReportDescriptorSize];
 	memcpy(customHidReportDescriptor, tempHidReportDescriptor, hidReportDescriptorSize);
 
-  usb_hid.setPollInterval(USB_POLLING_RATE);
-  usb_hid.setBootProtocol(HID_ITF_PROTOCOL_NONE);
-  usb_hid.enableOutEndpoint(false);
-  usb_hid.setReportDescriptor(customHidReportDescriptor, hidReportDescriptorSize);
-
+	usb_hid.setPollInterval(USB_POLLING_RATE);
+	usb_hid.setBootProtocol(HID_ITF_PROTOCOL_NONE);
+	usb_hid.enableOutEndpoint(true);
+	usb_hid.setReportDescriptor(customHidReportDescriptor, hidReportDescriptorSize);
 	
 	// Register HID Report Description
 	
@@ -460,6 +577,7 @@ Joystick_::Joystick_(
 	_hidReportSize += (_hatSwitchCount > 0);
 	_hidReportSize += (axisCount * 2);
 	_hidReportSize += (simulationCount * 2);
+	_hidReportSize += 4; //Adding 4 bytes of extra data
 	
 	// Initialize Joystick State
 	_xAxis = 0;
@@ -593,6 +711,20 @@ void Joystick_::setHatSwitch(int8_t hatSwitchIndex, int16_t value)
 	if (_autoSendState) sendState();
 }
 
+void Joystick_::setSetting(uint8_t slot, uint8_t bits, uint16_t value)
+{
+    if (slot >= 32 || bits > 16 || bits == 0) {
+        return; 
+    }
+
+    uint32_t mask = (1 << bits) - 1;  
+    uint32_t valueBits = value & mask; 
+    uint32_t shiftedMask = mask << slot;      
+    uint32_t shiftedValueBits = valueBits << slot;
+    DDCsettings &= ~shiftedMask; 
+    DDCsettings |= shiftedValueBits;
+}
+
 int Joystick_::buildAndSet16BitValue(bool includeValue, int16_t value, int16_t valueMinimum, int16_t valueMaximum, int16_t actualMinimum, int16_t actualMaximum, uint8_t dataLocation[]) 
 {
 	int16_t convertedValue;
@@ -683,7 +815,23 @@ void Joystick_::sendState()
 	index += buildAndSetSimulationValue(_includeSimulatorFlags & JOYSTICK_INCLUDE_ACCELERATOR, _accelerator, _acceleratorMinimum, _acceleratorMaximum, &(data[index]));
 	index += buildAndSetSimulationValue(_includeSimulatorFlags & JOYSTICK_INCLUDE_BRAKE, _brake, _brakeMinimum, _brakeMaximum, &(data[index]));
 	index += buildAndSetSimulationValue(_includeSimulatorFlags & JOYSTICK_INCLUDE_STEERING, _steering, _steeringMinimum, _steeringMaximum, &(data[index]));
+
+	//DDC setting
+	uint8_t push = DDCsettings & 0xFF;
+	data[index++] = push;        
+	DDCsettings >>= 8;
+	push = DDCsettings & 0xFF;
+	data[index++] = push;        
+	DDCsettings >>= 8;
+	push = DDCsettings & 0xFF;
+	data[index++] = push;        
+	DDCsettings >>= 8;
+	push = DDCsettings & 0xFF;
+	data[index++] = push; 
+
   while(!usb_hid.ready()){};
   usb_hid.sendReport(JOYSTICK_DEFAULT_REPORT_ID, data, sizeof(data));
 }
+
+
 
