@@ -2,10 +2,14 @@
   //---------SWITCHES START HERE----------
   //--------------------------------------
 
+TinyUSB_Device_Task();
 
+RPM = telemetryPack[2];
+RPM = RPM << 8;
+RPM |= telemetryPack[1];
 
-
-
+Serial.print("RPM: ");
+Serial.println(RPM);
 
   //--------------------------------------
   //---------SWITCHES END HERE------------

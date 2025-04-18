@@ -47,56 +47,40 @@
 #define TOTAL_LED_COUNT 128
 #define LED_BUFFER_SIZE 384
 uint8_t led_buffer[LED_BUFFER_SIZE];  // Store full LED data
-uint8_t temp_buffer[64];              // Temporary storage for each HID report
+uint8_t telemetryPack[64];
 uint32_t DDCsettings = 0;
-
-void print_led_buffer(uint8_t start_led, uint8_t count) {
-    for (int i = 0; i < count; i++) {
-        int index = (start_led + i) * 3;
-        Serial.printf("LED %d: R=%3d G=%3d B=%3d\n",
-            start_led + i,
-            led_buffer[index],
-            led_buffer[index + 1],
-            led_buffer[index + 2]);
-    }
-}
 
 
 // TinyUSB HID OUT Report Callback
 void tud_hid_set_report_cb(uint8_t report_id, hid_report_type_t report_type, uint8_t const* buffer, uint16_t bufsize) {
-    Serial.println("WE HAVE TRIGGERED!!");
-	
-	// Only process output reports (not feature reports)
-    if (report_type != HID_REPORT_TYPE_OUTPUT) return;
-    
-    // Only process LED reports (ID 0x68)
-    if (report_id != 0x68) return;
-
-    // Minimum valid size: Report ID + 3 header bytes
-    if (bufsize < 4) return;  
-
-    // Copy the buffer into a local temp if you want, or just use it directly
-    memcpy(temp_buffer, buffer, bufsize); // Only necessary if you plan to reuse or modify
 
    // Extract header information
-   uint8_t start_led   = buffer[1];  // Start index in LED array
-   uint8_t led_count   = buffer[2];  // Number of LEDs affected
-   uint8_t draw_flag   = buffer[3];  // 0 = store, 1 = update LEDs
+   uint8_t ID = buffer[0];
 
-   // Ensure start position + led_count doesn't exceed buffer size
-   uint16_t start_pos = start_led * 3;
-   uint16_t end_pos   = start_pos + (led_count * 3);
-
-   if (end_pos <= LED_BUFFER_SIZE) {
-	   // Copy LED data into the correct position in led_buffer
-	   memcpy(&led_buffer[start_pos], &temp_buffer[4], led_count * 3);
+   if(ID == 0x68)
+   {
+	uint8_t start_led   = buffer[1];  // Start index in LED array
+	uint8_t led_count   = buffer[2];  // Number of LEDs affected
+	uint8_t draw_flag   = buffer[3];  // 0 = store, 1 = update LEDs
+ 
+	// Ensure start position + led_count doesn't exceed buffer size
+	uint16_t start_pos = start_led * 3;
+	uint16_t end_pos   = start_pos + (led_count * 3);
+ 
+	if (end_pos <= LED_BUFFER_SIZE) {
+		// Copy LED data into the correct position in led_buffer
+		memcpy(&led_buffer[start_pos], &buffer[4], led_count * 3);
+	}
+	if (draw_flag) 
+	{
+		//Do something
+	}
+   }
+   else if(ID == 0x67)
+   {
+	memcpy(telemetryPack, buffer, sizeof(telemetryPack));
    }
 
-	if (draw_flag) {
-		Serial.println("Full LED buffer state:");
-		print_led_buffer(0, TOTAL_LED_COUNT);
-	}
-	
 }
 
 Joystick_::Joystick_(
@@ -511,7 +495,7 @@ Joystick_::Joystick_(
 	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x81;
 	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x02;
 
-	//Output report
+	//OUTPUT REPORT LED
 
 	//Usage Page (undefined)
 	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x06;
@@ -548,6 +532,43 @@ Joystick_::Joystick_(
 	//End collection (physical)
 	tempHidReportDescriptor[hidReportDescriptorSize++] = 0xC0;
 
+	//OUTPUT REPORT: TELEMETRY PACK
+
+	//Usage Page (undefined)
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x06;
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x00;
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0xff;
+	//Usage (undefined)
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x09;
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x01;
+	//Collection (Physical)
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0xa1;
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x01;
+	//Report ID 0x67
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x85;
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x67;
+	//Logical minimum
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x15;
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x00;
+	//Logical maximum
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x26;
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0xff;
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x00;
+	//Report size
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x75;
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x08;
+	//Report count
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x95;
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x40;
+	//Usage (undefined)
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x09;
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x01;
+	//OUTPUT (Data, Var, Abs)
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x91;
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0x02;
+	//End collection (physical)
+	tempHidReportDescriptor[hidReportDescriptorSize++] = 0xC0;
+
 
     // END_COLLECTION (Applicatoin)
     tempHidReportDescriptor[hidReportDescriptorSize++] = 0xc0;
@@ -560,6 +581,7 @@ Joystick_::Joystick_(
 	usb_hid.setBootProtocol(HID_ITF_PROTOCOL_NONE);
 	usb_hid.enableOutEndpoint(true);
 	usb_hid.setReportDescriptor(customHidReportDescriptor, hidReportDescriptorSize);
+	usb_hid.setReportCallback(nullptr,tud_hid_set_report_cb);
 	
 	// Register HID Report Description
 	

@@ -43,8 +43,8 @@
 
 #define LED_BUFFER_SIZE 384
 extern uint8_t led_buffer[LED_BUFFER_SIZE];
-
-
+extern uint8_t telemetryPack[64];
+void tud_hid_set_report_cb(uint8_t report_id, hid_report_type_t report_type, uint8_t const* buffer, uint16_t bufsize);
 class Joystick_
 {
 private:
@@ -97,7 +97,6 @@ private:
 	uint8_t                  _hidReportId;
 	uint8_t                  _hidReportSize;  
     Adafruit_USBD_HID usb_hid;
-
 
 protected:
 	int buildAndSet16BitValue(bool includeValue, int16_t value, int16_t valueMinimum, int16_t valueMaximum, int16_t actualMinimum, int16_t actualMaximum, uint8_t dataLocation[]);
