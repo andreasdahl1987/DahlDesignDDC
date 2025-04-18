@@ -32,13 +32,14 @@
 //---RP2040 ADC OVERSAMPLING----
 //------------------------------
 
-#define ENABLE_OVERSAMPLING 0
+#define ENABLE_OVERSAMPLING 1
 
 //------------------------------
 //-----------MOUSE--------------
 //------------------------------
 
-#define ENABLE_MOUSE 0
+#define ENABLE_MOUSE 1
+#define MOUSE_ALWAYS_ACTIVE 0
 
 //------------------------------
 //-------DAHL DESIGN BOARDS-----
@@ -100,15 +101,15 @@
 //---------I2C DEVICES----------
 //------------------------------
 
-#define SDA0PIN 0
-#define SCL0PIN 1
+#define SDA0PIN 4
+#define SCL0PIN 5
 #define SDA1PIN 2
 #define SCL1PIN 3
 
 //PORT EXPANDER PCA9555
-#define USING_PCA9555 0
+#define USING_PCA9555 1
 #define PCA9555_I2C_NUMBER 0
-uint8_t PCA9555interruptPins [] = {99};
+uint8_t PCA9555interruptPins [] = {8,16};
 #define PCA9555_OUTPUT 0
 
 #if (PCA9555_OUTPUT== 1)
@@ -141,7 +142,7 @@ uint8_t ADS1115_alertPins [] = {99};
 #endif
 
 //EEPROM CAT24C512
-#define USING_CAT24C512 0
+#define USING_CAT24C512 1
 #define CAT24C512_I2C_NUMBER 0
 #define CAT24C512_ADDRESS 0x50
 

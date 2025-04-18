@@ -4,6 +4,49 @@
 
 #if (PWMENABLED == 1 || ROW6_PWMCOUNT > 0)
 
+void PWMAdjustButtonSolo(int row, int column, int increment, int8_t PWMChannel, bool loop)
+{
+    int Row = row - 1;
+    int Column = column - 1;
+    int8_t PWMchannel = PWMChannel - 1;
+
+    if (pushState[Row][Column] != rawState[Row][Column] && (globalClock - switchTimer[Row][Column]) > buttonCooldown)
+    {
+        switchTimer[Row][Column] = globalClock;
+        pushState[Row][Column] = rawState[Row][Column];
+        if(rawState[Row][Column] == 1)
+        {
+          latchState[Row][Column] = true;          
+        }
+    }
+
+    if ((globalClock - switchTimer[Row][Column]) > buttonCooldown)
+    {
+        pushState[Row][Column] = rawState[Row][Column];
+    }
+
+
+    if(latchState[Row][Column])
+    {
+      PWMValues[PWMchannel] += increment;
+      latchState[Row][Column] = false;
+      if (PWMValues[PWMchannel] > 100)
+      {
+        if(loop){PWMValues[PWMchannel] = 0;}
+        else {PWMValues[PWMchannel] = 100;}
+      }
+      else if (PWMValues[PWMchannel] < 0)
+      {
+        if(loop){PWMValues[PWMchannel] = 100;}
+        else {PWMValues[PWMchannel] = 0;}
+      }
+    }
+    else
+    {
+      latchState[Row][Column] = false;
+    }
+}
+
 void PWMToggle(int8_t row, int8_t column, int8_t PWMChannel)
 {
     int8_t Row = row - 1;

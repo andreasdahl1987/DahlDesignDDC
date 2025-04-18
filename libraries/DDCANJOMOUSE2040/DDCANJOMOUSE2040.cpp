@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "DDCANJOMOUSE2040.h"
 
-#define USB_POLLING_RATE 2
+#define USB_POLLING_RATE 1
 
 uint8_t const _hidReportDescriptor[] = {
 	TUD_HID_REPORT_DESC_MOUSE(HID_REPORT_ID(HID_ITF_PROTOCOL_MOUSE))
