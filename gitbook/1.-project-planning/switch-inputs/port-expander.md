@@ -28,6 +28,6 @@ Every PCA9555 you add you'll get two rows with eight columns in the switch table
 
 <figure><img src="../../.gitbook/assets/image (89).png" alt=""><figcaption></figcaption></figure>
 
-In the example above, there is a 2 x 4 matrix on rows 1 and 2. The PCA9555 is placed on row 3, taking up two full rows with 8 columns. Row 1 representing input pins IO0 0-7 (in practice pins 1-8) and row 2 representing input pins IO1 0-7 (in practice pins 9-16) on the port expander. Lastly, row 5 has been used for some direct wired switches.&#x20;
+In the example above, there is a 2 x 4 matrix on rows 1 and 2. The PCA9555 is placed on row 3, taking up two full rows with 8 columns. Row 3 representing input pins IO0 0-7 (in practice pins 1-8) and row 4 representing input pins IO1 0-7 (in practice pins 9-16) on the port expander. Lastly, row 5 has been used for some direct wired switches.&#x20;
 
 You can add up to 8 port expanders to a single I2C line. If you have two I2C lines you can add another 8. However, 8 port expanders are 128 inputs, which is the maximum button count for a Windows controller. So rarely would you need more.&#x20;
