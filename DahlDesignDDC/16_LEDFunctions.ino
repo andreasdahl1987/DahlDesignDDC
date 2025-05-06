@@ -146,6 +146,15 @@ void SimHubImport()
 }
 #endif
 
+void setBrightness(uint8_t brightness)
+{
+  LEDBrightness = brightness;
+  if (LEDBrightness > 100)
+  {
+    LEDBrightness = 100;
+  }
+}
+
 #endif
 
 

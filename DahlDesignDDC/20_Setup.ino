@@ -24,11 +24,6 @@ void setup()
     //LED setup
     Serial.begin(115200);
 
-    #if (LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT > 0 && BOARDTYPE == 0)
-    setupLeds();
-    LEDStartup();
-    #endif
-
     //Set up joystick axis
     Joystick.setXAxisRange(0, 1000);
     Joystick.setThrottleRange(0, 1000);
@@ -179,6 +174,10 @@ void setup()
     EEPROMinit(); //Fetch values from EEPROM
     presets(switchPreset); //Preset startup
 
+    #if (LED1COUNT + LED2COUNT + LED3COUNT + LED4COUNT > 0 && BOARDTYPE == 0)
+    setupLeds();
+    LEDStartup();
+    #endif
 
     Joystick.begin(0); //Start joystick library magic
 
