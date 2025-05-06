@@ -1,5 +1,78 @@
 #if(ENABLE_MOUSE == 1)
 
+void mouseMove(int row, int column, uint8_t direction, uint8_t mouseSpeed, uint8_t mouseSpeed2)
+{
+  int output = 0;
+
+  int Row = row - 1;
+  int Column = column - 1;
+  int Number = buttonNumber[Row][Column];
+
+    if (pushState[Row][Column] != rawState[Row][Column] && (globalClock - switchTimer[Row][Column]) > buttonCooldown)
+    {
+        switchTimer[Row][Column] = globalClock;
+        pushState[Row][Column] = rawState[Row][Column];
+    }
+
+    if ((globalClock - switchTimer[Row][Column]) > buttonCooldown)
+    {
+        pushState[Row][Column] = rawState[Row][Column];
+    }
+
+
+  if(MOUSE_ALWAYS_ACTIVE == 0 && pushState[mouseRow-1][mouseCol-1] == 0)
+  {
+    Joystick.setButton(Number, pushState[Row][Column]);
+  }
+  else if(mouseRun)
+  {
+    if(!pushState[Row][Column])
+    {
+      toggleTimer[Row][Column] = globalClock;
+    }
+
+    if(globalClock - toggleTimer[Row][Column] > 750)
+    {
+      output = 127 * pushState[Row][Column] * mouseSpeed2 /100;
+    }
+    else if(globalClock - toggleTimer[Row][Column] < 500)
+    {
+      output = 127 * pushState[Row][Column] * mouseSpeed /100;
+    }
+    else
+    {
+      int diff = (mouseSpeed2 - mouseSpeed) * (globalClock - toggleTimer[Row][Column] - 250) / 500;
+      output = 127 * pushState[Row][Column] * (mouseSpeed+diff) /100;
+    }
+
+    if(output < 0)
+    {
+      output = 0;
+    }
+    if(output > 127)
+    {
+      output = 127;
+    }
+
+    switch(direction)
+    {
+      case MOUSE_LEFT: 
+        Mouse.move(-output,0);
+        break;
+      case MOUSE_RIGHT:
+        Mouse.move(output,0);
+        break;
+      case MOUSE_UP:
+        Mouse.move(0,-output);
+        break;
+      case MOUSE_DOWN:
+        Mouse.move(0,output);
+        break;
+    }
+    mouseRan = true;
+  }
+} 
+
 void leftMouseButton(int row, int col)
 {
   int8_t Row = row - 1;

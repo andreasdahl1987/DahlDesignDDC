@@ -160,17 +160,17 @@ void funkyMouseMove(int row, int column, int pCol, int Col1, int Col2, int Col3,
 
     switch(direction)
     {
-      case 1: 
-        Mouse.move(output,0);
-        break;
-      case 2:
+      case MOUSE_LEFT: 
         Mouse.move(-output,0);
         break;
-      case 3:
-        Mouse.move(0,output);
+      case MOUSE_RIGHT:
+        Mouse.move(output,0);
         break;
-      case 4:
+      case MOUSE_UP:
         Mouse.move(0,-output);
+        break;
+      case MOUSE_DOWN:
+        Mouse.move(0,output);
         break;
     }
     mouseRan = true;
