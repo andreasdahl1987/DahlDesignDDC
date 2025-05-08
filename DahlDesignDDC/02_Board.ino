@@ -201,8 +201,8 @@ bool wire0Init = false;
 //DDC VERSION
 
 #define MAJORVERSION 2
-#define MINORVERSION 12
-#define PATCHVERSION 1
+#define MINORVERSION 13
+#define PATCHVERSION 0
 
 //------------------------------
 //---------LIBRARIES------------

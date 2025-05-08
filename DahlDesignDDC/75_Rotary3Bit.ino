@@ -1,4 +1,4 @@
-void RS16Inc(int row, int col, bool reverse)
+void rotary3Bit(int row, int col, bool reverse)
 {
   //>>
   int Row = row - 1;
