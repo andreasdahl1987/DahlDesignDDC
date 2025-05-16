@@ -948,4 +948,281 @@ void dualClutchAndMouse(int masterAnalogChannel, int slaveAnalogChannel, bool th
     rotaryField = rotaryField | push;
 }
 
+void PEC11Scroll(int row, int col, bool reverse) 
+{
+
+    int Row = row - 1;
+    int Column = col - 1;
+    int Number = buttonNumber[Row][Column];
+
+
+    switchTimer[Row][Column + 1] = (rawState[Row][Column] | rawState[Row][Column + 1] << 1); //Assigning numbers to all switch states 0-3
+
+    if //switch has been turned and is not cooling down, and no rotation direction has been engaged
+        (switchTimer[Row][Column + 1] > 0
+            &&
+            (globalClock - switchTimer[Row][Column] > PEC11Cooldown)
+            &&
+            pushState[Row][Column] == 0
+            &&
+            pushState[Row][Column + 1] == 0)
+    {
+        switchTimer[Row][Column] = globalClock;
+        if (switchTimer[Row][Column + 1] == 2) //CW turn started
+        {
+            pushState[Row][Column] = 1;
+        }
+        else if (switchTimer[Row][Column + 1] == 1) //CCW turn started
+        {
+            pushState[Row][Column + 1] = 1;
+        }
+    }
+
+    //CW check gates
+    if (pushState[Row][Column] == 1 && rawState[Row][Column])
+    {
+        pushState[Row][Column] = 2;
+    }
+    if (pushState[Row][Column] == 2 && switchTimer[Row][Column + 1] == 0)
+    {
+        pushState[Row][Column] = 3;
+    }
+
+    //CW check gates
+    if (pushState[Row][Column + 1] == 1 && rawState[Row][Column + 1])
+    {
+        pushState[Row][Column + 1] = 2;
+    }
+    if (pushState[Row][Column + 1] == 2 && switchTimer[Row][Column + 1] == 0)
+    {
+        pushState[Row][Column + 1] = 3;
+    }
+
+    //Pushing successfully recorded rotations
+
+    if (pushState[Row][Column] == 3)
+    {
+        toggleTimer[Row][Column] = globalClock;
+        if(pushState[mouseRow - 1][mouseCol - 1] == 1 || MOUSE_ALWAYS_ACTIVE == 1)
+        {
+          Mouse.move(0, 0, reverse ? -1 : 1); 
+        }
+    }
+    else if (pushState[Row][Column + 1] == 3)
+    {
+        toggleTimer[Row][Column + 1] = globalClock;
+        if(pushState[mouseRow - 1][mouseCol - 1] == 1 || MOUSE_ALWAYS_ACTIVE == 1)
+        {
+          Mouse.move(0, 0, reverse ? 1 : -1); 
+        }
+    }
+
+    if (switchTimer[Row][Column + 1] == 0)
+    {
+        pushState[Row][Column + 1] = 0;
+        pushState[Row][Column] = 0;
+    }
+
+
+    if(pushState[mouseRow - 1][mouseCol - 1] == 0 && MOUSE_ALWAYS_ACTIVE == 0)
+    {
+      Joystick.setButton(Number + reverse, (globalClock - toggleTimer[Row][Column] < PEC11Pulse));
+      Joystick.setButton(Number + 1 - reverse, (globalClock - toggleTimer[Row][Column + 1] < PEC11Pulse));
+    }
+}
+
+void E18Scroll(int row, int col, bool reverse) 
+{
+    int Row = row - 1;
+    int Column = col - 1;
+    int Number = buttonNumber[Row][Column];
+
+    pushState[Row][Column] = (rawState[Row][Column] | rawState[Row][Column + 1] << 1); //Assigning numbers to all switch states 0-3
+
+    if(globalClock - switchTimer[Row][Column+1] > E18Pulse && !latchLock[Row][Column + 1]) //Pulse is finished, reset checkpoints
+    {
+      toggleTimer[Row][Column] = 0;
+      toggleTimer[Row][Column + 1] = 0;
+      latchLock[Row][Column + 1] = true; //Locking checkpoint resets
+    }
+
+    if(globalClock - switchTimer[Row][Column] > E18Cooldown && !latchState[Row][Column] && (toggleTimer[Row][Column] + toggleTimer[Row][Column + 1] == 0 )) //Switch has cooled down, ready to record the next steady state
+    {
+      latchState[Row][Column] = true;
+    }
+
+    if(latchState[Row][Column] && (pushState[Row][Column] == 0 || pushState[Row][Column] == 3)) //Record previous steady state when button press was not engaged. 
+    {
+      pushState[Row][Column + 1] = pushState[Row][Column]; //Record steady state
+      latchState[Row][Column+1] = true; //Ready to check for change
+    }
+
+    if(pushState[Row][Column + 1] != pushState[Row][Column] && latchState[Row][Column+1]) //Something happened and we're ready to go. 
+    {
+      latchState[Row][Column] = false; //Record marker set to false, no recording of steady state on rotation
+      latchState[Row][Column+1] = false; //Change marker set to false to prevent looking for change on rotation
+      switchTimer[Row][Column] = globalClock; //Timer starts
+
+      //Now lets look at what did change
+
+      //CW rotation: Either difference between new and old (new - old) is 2 or -2
+      if (abs(pushState[Row][Column]-pushState[Row][Column + 1]) ==  2) 
+      {
+        toggleTimer[Row][Column] = 1; //CW rotation pass step 1
+        latchLock[Row][Column] = false; //Open lock to step 2
+      }
+      else
+      //CCW rotation: Either difference between new and old is 1 or -1
+      {
+        toggleTimer[Row][Column + 1] = 1; //CW rotation pass step 1
+        latchLock[Row][Column] = false; //Open lock to step 2
+      }
+    }
+
+    if ((toggleTimer[Row][Column] + toggleTimer[Row][Column+1] > 0) && abs(pushState[Row][Column] - pushState[Row][Column + 1]) == 3 && !latchLock[Row][Column]) //Check for end of rotation rotation for going to step 2
+    {
+      latchLock[Row][Column] = true; //Locking step 2 entry
+      switchTimer[Row][Column+1] = globalClock; //Start pulse duration      
+      latchLock[Row][Column + 1] = false; //Opening for checkpoint reset after pulse;
+      toggleTimer[Row][Column] ++;
+      toggleTimer[Row][Column + 1] ++;
+
+      if(toggleTimer[Row][Column] == 2)
+      {
+        toggleTimer[Row][Column + 1] = 0;
+        if(pushState[mouseRow - 1][mouseCol - 1] == 1 || MOUSE_ALWAYS_ACTIVE == 1)
+        {
+          Mouse.move(0, 0, reverse ? -1 : 1); 
+        }
+      }
+      else if(toggleTimer[Row][Column + 1] == 2)
+      {
+        toggleTimer[Row][Column] = 0;
+        if(pushState[mouseRow - 1][mouseCol - 1] == 1 || MOUSE_ALWAYS_ACTIVE == 1)
+        {
+          Mouse.move(0, 0, reverse ? 1 : -1); 
+        }
+      }    
+    }
+
+    if (toggleTimer[Row][Column] == 2 && pushState[mouseRow - 1][mouseCol - 1] == 0 && MOUSE_ALWAYS_ACTIVE == 0)
+    {
+      Joystick.setButton(Number + reverse, 1);
+    }
+    else
+    {
+      Joystick.setButton(Number + reverse, 0);
+    }
+
+    if (toggleTimer[Row][Column + 1] == 2  && pushState[mouseRow - 1][mouseCol - 1] == 0 && MOUSE_ALWAYS_ACTIVE == 0)
+    {
+      Joystick.setButton(Number + 1 - reverse, 1);
+    }
+    else
+    {
+      Joystick.setButton(Number + 1 - reverse, 0);
+    }
+}
+
+void rotary2Scroll(int8_t row, int8_t col, bool reverse)
+{
+    int8_t Row = row - 1;
+    int8_t Column = col - 1;
+    int8_t Number = buttonNumber[Row][Column];
+
+
+    //Find switch absolute position
+
+    bool Pin1 = rawState[Row][Column];
+    bool Pin2 = rawState[Row][Column + 1];
+
+    bool array[2] = { Pin1, Pin2 };
+
+    int pos = 0;
+
+    for (int i = 0; i < 2; i++)
+    {
+        if (array[i])
+        {
+            pos |= (1 << i);
+        }
+    }
+
+    pos = pos ^ (pos >> 1);
+
+    int result = pos;
+
+    //Short debouncer on switch rotation
+
+    if (pushState[Row][Column] != result)
+    {
+        if (globalClock - switchTimer[Row][Column] > (encoder2Wait + encoder2Pulse + encoderCooldown))
+        {
+            switchTimer[Row][Column] = globalClock;
+            latchLock[Row][Column] = true;
+        }
+        else if ((globalClock - switchTimer[Row][Column] > encoder2Wait) && latchLock[Row][Column])
+        {
+            //Engage encoder pulse timer
+            switchTimer[Row][Column + 1] = globalClock;
+
+            //Update difference, storing the value in pushState on pin 2
+            pushState[Row][Column + 1] = result - pushState[Row][Column];
+
+            //Give new value to pushState
+            pushState[Row][Column] = result;
+
+            //Make sure we dont do this again
+            latchLock[Row][Column] = false;
+
+            int8_t difference = pushState[Row][Column + 1];
+            if ((difference > 0 && difference < 2) || difference < -2)
+            {
+                if (pushState[mouseRow - 1][mouseCol - 1] == 1 || MOUSE_ALWAYS_ACTIVE == 1)
+                {
+                    Mouse.move(0, 0, reverse ? -1 : 1); 
+                }
+            }
+            else if ((difference < 0 && difference > -2) || difference > 2)
+            {
+                if (pushState[mouseRow - 1][mouseCol - 1] == 1 || MOUSE_ALWAYS_ACTIVE == 1)
+                {
+                    Mouse.move(0, 0, reverse ? 1 : -1); 
+                }
+            }
+        }
+    }
+
+
+    int8_t difference = pushState[Row][Column + 1];
+    if (difference != 0 && pushState[mouseRow - 1][mouseCol - 1] == 0 && MOUSE_ALWAYS_ACTIVE == 0)
+    {
+        if (globalClock - switchTimer[Row][Column + 1] < encoder2Pulse + encoder2Wait)
+        {
+            if ((difference > 0 && difference < 2) || difference < -2)
+            {
+                Joystick.setButton(Number + reverse, 1);
+                Joystick.setButton(Number + 1 - reverse, 0);
+            }
+            else if ((difference < 0 && difference > -2) || difference > 2)
+            {
+                Joystick.setButton(Number + reverse, 0);
+                Joystick.setButton(Number + 1 - reverse, 1);
+            }
+            else
+            {
+                pushState[Row][Column + 1] = 0;
+            } 
+        }
+        else
+        {
+            pushState[Row][Column + 1] = 0;
+            pushState[Row][Column] = result;
+            Joystick.setButton(Number, 0);
+            Joystick.setButton(Number + 1, 0);
+        }
+    }
+}
+
+
 #endif
