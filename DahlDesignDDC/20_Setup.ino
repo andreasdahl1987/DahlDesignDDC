@@ -164,6 +164,11 @@ void setup()
 
     //Setting up output device
     outputPinsSetup();
+
+    //Loadcell setup
+    #if(LOADCELL_ENABLED == 1)
+    loadcellSetup();
+    #endif
     
     //EEPROM setup
     #if(USING_RP2040EEPROM == 1)

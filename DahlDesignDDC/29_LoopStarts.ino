@@ -82,6 +82,13 @@ void loop()
   #endif
   outputHubRun();
 
+  //LOADCELL
+  #if(LOADCELL_ENABLED == 1)
+  {
+    loadcellRun();
+  }
+  #endif
+
   
 
  

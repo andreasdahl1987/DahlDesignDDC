@@ -98,6 +98,15 @@
 #endif
 
 //------------------------------
+//----------LOAD CELL-----------
+//------------------------------
+
+#define LOADCELL_ENABLED 1
+#define LOADCELL_DATA_PIN 0
+#define LOADCELL_CLOCK_PIN 1
+#define LOADCELL_OVERSAMPLING 5
+
+//------------------------------
 //---------I2C DEVICES----------
 //------------------------------
 
@@ -158,16 +167,18 @@ bool wire0Init = false;
 
 #if(USING_CB1 == 1)
   bool ADS1115sentReq[2] = {false, false};
-  long ADS1115value[12] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+  long ADS1115value[12 + LOADCELL_ENABLED];
   uint8_t ADS1115channelCounter[2] = {0,0};  
 #elif(ADS1115_CHIPS > 0 && ENABLE_OVERSAMPLING == 1)
   bool ADS1115sentReq[ADS1115_CHIPS];
-  uint16_t ADS1115value[4*(ADS1115_CHIPS+1)];
+  uint16_t ADS1115value[4*(ADS1115_CHIPS+1) + LOADCELL_ENABLED];
   uint8_t ADS1115channelCounter[ADS1115_CHIPS];
 #elif(ADS1115_CHIPS > 0)
   bool ADS1115sentReq[ADS1115_CHIPS];
-  uint16_t ADS1115value[4*ADS1115_CHIPS];
+  uint16_t ADS1115value[4*ADS1115_CHIPS + LOADCELL_ENABLED];
   uint8_t ADS1115channelCounter[ADS1115_CHIPS];
+#elif(LOADCELL_ENABLED == 1)
+  uint16_t ADS1115value[LOADCELL_ENABLED];
 #endif
 
 //ADC defines
@@ -203,6 +214,14 @@ bool wire0Init = false;
 #define MAJORVERSION 2
 #define MINORVERSION 13
 #define PATCHVERSION 0
+
+//Load cell
+#if (LOADCELL_ENABLED == 1)
+  int32_t loadcellTotal = 0;
+  int32_t loadcellReadings[LOADCELL_OVERSAMPLING] = {0};
+  int32_t loadcellAverage = 0;
+  uint8_t loadcellReadIndex = 0;
+#endif
 
 //------------------------------
 //---------LIBRARIES------------

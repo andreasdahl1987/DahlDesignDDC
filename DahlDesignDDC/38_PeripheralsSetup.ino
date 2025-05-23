@@ -1,3 +1,26 @@
+#if (LOADCELL_ENABLED == 1)
+void loadcellSetup()
+{
+  pinMode(LOADCELL_DATA_PIN, INPUT_PULLUP);
+  pinMode(LOADCELL_CLOCK_PIN, OUTPUT);
+
+  //At least 60 us HIGH to power down
+  digitalWrite(LOADCELL_CLOCK_PIN, HIGH);
+  delay(1);
+
+  //Low to power up
+  digitalWrite(LOADCELL_CLOCK_PIN, LOW);
+
+  //Do 3 readings to throw away and set the sample gain correctly
+  loadcellRun();
+  delay(1);
+  loadcellRun();
+  delay(1);
+  loadcellRun();
+  delay(1);
+}
+#endif
+
 #if (USING_CB1 == 1)
 void CB1Setup()
 {

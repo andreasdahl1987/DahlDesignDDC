@@ -1,3 +1,62 @@
+#if (LOADCELL_ENABLED == 1)
+
+  void loadcellRun()
+  {
+    if(digitalRead(LOADCELL_DATA_PIN) == LOW)
+    {
+      digitalWrite(LOADCELL_CLOCK_PIN, LOW);
+
+      int32_t value = 0;
+
+      for (int i = 0; i < 24; i++) 
+      { // Read 24 bits from DOUT
+        digitalWrite(LOADCELL_CLOCK_PIN, HIGH);
+        delayMicroseconds(1);
+        value = (value << 1) | digitalRead(LOADCELL_DATA_PIN);
+        digitalWrite(LOADCELL_CLOCK_PIN, LOW);
+        delayMicroseconds(1);
+      }
+
+      // Set gain for next reading (x 128)
+      digitalWrite(LOADCELL_CLOCK_PIN, HIGH);
+      digitalWrite(LOADCELL_CLOCK_PIN, LOW);
+
+      // Convert to 32-bit signed integer
+      if (value & 0x800000)
+        value |= 0xFF000000;
+
+      loadcellTotal -= loadcellReadings[loadcellReadIndex];
+      loadcellReadings[loadcellReadIndex] = value;
+      loadcellTotal += loadcellReadings[loadcellReadIndex];
+
+      loadcellReadIndex ++;
+
+      if(loadcellReadIndex == LOADCELL_OVERSAMPLING)
+      {
+        loadcellReadIndex = 0;
+      }
+
+      loadcellAverage = loadcellTotal/LOADCELL_OVERSAMPLING;
+    }
+  }
+
+  void checkLoadcell()
+  {
+    Serial.print("Loadcell raw value: ");
+    Serial.println(loadcellAverage);
+  }
+
+  void loadcellInject(uint8_t analogChannel, int32_t minValue, int32_t maxValue)
+  {
+    int64_t corr = loadcellAverage - minValue;
+    corr *= 32767;
+    corr /= (maxValue-minValue);
+
+    ADS1115value[analogChannel-1] = corr;
+  }
+
+#endif
+
 void shiftRegisterScan()
 {
     if (SRCOUNT == 0)
