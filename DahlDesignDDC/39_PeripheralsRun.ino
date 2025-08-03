@@ -52,6 +52,11 @@
     corr *= 32767;
     corr /= (maxValue-minValue);
 
+    if(corr < 0)
+    {
+      corr = 0;
+    }
+
     ADS1115value[analogChannel-1] = corr;
   }
 

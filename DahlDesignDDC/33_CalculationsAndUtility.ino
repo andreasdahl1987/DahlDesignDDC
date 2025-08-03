@@ -82,7 +82,7 @@ int N = analogChannel - 1;
     Serial.print(" reading: ");
     Serial.println(analogRead(analogPins[N]));
   }
-  #if (USING_CB1 == 1 || USING_ADS1115 == 1 || ENABLE_OVERSAMPLING == 1)
+  #if (USING_CB1 == 1 || USING_ADS1115 == 1 || ENABLE_OVERSAMPLING == 1 || LOADCELL_ENABLED == 1)
   else
   {
     Serial.print("Channel ");
