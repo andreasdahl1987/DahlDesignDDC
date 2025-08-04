@@ -47,6 +47,11 @@
     return analogLastCounter[analogChannel-1] + 1 == switchPosition;
  }
 
+ bool rotary4BitPosition (int row, int column, int switchPosition)
+ {
+    return pushState[row-1][column-1] == switchPosition - 1;
+ }
+
  bool analogTravel(int analogChannel, int threshold)
  {
     return average[analogChannel-1] >= threshold*10;

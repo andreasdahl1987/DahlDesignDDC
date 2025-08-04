@@ -268,6 +268,51 @@ void rotary4Inc(int row, int column, bool reverse)
     }
 }
 
+void rotary4Mute(int row, int column, int positions, bool reverse)
+{
+    int Row = row - 1;
+    int Column = column - 1;
+
+    //Find switch absolute position
+
+    bool Pin1 = rawState[Row][Column];
+    bool Pin2 = rawState[Row][Column + 1];
+    bool Pin3 = rawState[Row][Column + 2];
+    bool Pin4 = rawState[Row][Column + 3];
+
+    bool array[4] = { Pin1, Pin2, Pin3, Pin4 };
+
+    int pos = 0;
+
+    for (int i = 0; i < 4; i++)
+    {
+        if (array[i])
+        {
+            pos |= (1 << i);
+        }
+    }
+
+    pos = pos ^ (pos >> 2);
+    pos = pos ^ (pos >> 1);
+
+    if (reverse)
+    {
+      pos = positions - pos - 1;
+    }
+
+    int result = pos;
+
+    if (pushState[Row][Column] != result && (globalClock - switchTimer[Row][Column] > encoderPulse))
+    {
+      switchTimer[Row][Column] = globalClock;
+    }
+
+    if (globalClock - switchTimer[Row][Column] > encoderWait)
+    {
+      pushState[Row][Column] = result;
+    }
+}
+
 void rotary4Mod(int row, int column, bool reverse)
 {
     int Row = row - 1;
