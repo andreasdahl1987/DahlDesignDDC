@@ -22,7 +22,7 @@ void multiFunction2Bit24(int analogChannel, int row, int column, bool reverseAna
 
     //READ POSITION OF 12-POS ANALOG SWITCH
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1 || LOADCELL_ENABLED == 1)
 
     int value;
     if (analogPins[N] > 49)
@@ -168,7 +168,7 @@ void multiFunction2Bit36(int analogChannel, int row, int column, bool reverseAna
 
     //READ POSITION OF 12-POS ANALOG SWITCH
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1 || LOADCELL_ENABLED == 1)
 
     int value;
     if (analogPins[N] > 49)
@@ -330,7 +330,7 @@ void multiFunction2Button24(int analogChannel, int rowButton1, int columnButton1
 
     //READ POSITION OF 12-POS ANALOG SWITCH
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1 || LOADCELL_ENABLED == 1)
 
     int value;
     if (analogPins[N] > 49)
@@ -431,7 +431,7 @@ void multiFunction2Button36(int analogChannel, int rowButton1, int columnButton1
 
     //READ POSITION OF 12-POS ANALOG SWITCH
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1 || LOADCELL_ENABLED == 1)
 
     int value;
     if (analogPins[N] > 49)

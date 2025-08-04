@@ -3,7 +3,7 @@ void singleClutch(int analogChannel, int releasedValue, int fullyPressedValue)
 {
     int N = analogChannel - 1;
   
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1 || LOADCELL_ENABLED == 1)
 
     int pinValue;
     if (analogPins[N] > 49)
@@ -105,7 +105,7 @@ void singleClutchCal(int analogChannel)
 {
     int M = analogChannel - 1;
   
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1 || LOADCELL_ENABLED == 1)
 
     uint16_t pinValue;
     if (analogPins[M] > 49)
@@ -218,7 +218,7 @@ void filteredSingleClutch(int8_t analogChannel, int releasedValue, int fullyPres
 {
     int N = analogChannel - 1;
   
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1 || LOADCELL_ENABLED == 1)
 
     int raw;
     if (analogPins[N] > 49)

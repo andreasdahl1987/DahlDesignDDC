@@ -12,7 +12,7 @@ void analogInject(int8_t analogChannel, int8_t row, int8_t column, int startValu
 
   int N = analogChannel - 1;
 
-  #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+  #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1 || LOADCELL_ENABLED == 1)
 
   int value;
   if (analogPins[N] > 49)
@@ -69,7 +69,7 @@ void analogInjectSingle(int8_t analogChannel, int8_t row, int8_t column, int sta
 {
   int N = analogChannel - 1;
   
-  #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+  #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1 || LOADCELL_ENABLED == 1)
 
   int value;
   if (analogPins[N] > 49)

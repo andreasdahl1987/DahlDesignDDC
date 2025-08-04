@@ -393,7 +393,7 @@ void rotaryAnalogPWM(int analogChannel, int8_t PWMChannel, int pos1, int pos2, i
         
     int8_t PWMchannel = PWMChannel -1;
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1 || LOADCELL_ENABLED == 1)
 
     int value;
     if (analogPins[N] > 49)
@@ -461,7 +461,7 @@ void rotaryAnalogPWM12(int analogChannel, int8_t PWMChannel, int8_t stepSize, in
     int8_t PWMchannel = PWMChannel -1;
     int Number = analogButtonNumber[N];
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1 || LOADCELL_ENABLED == 1)
 
     int value;
     if (analogPins[N] > 49)
@@ -692,7 +692,7 @@ void PWMPot(int analogChannel, int startValue, int endValue, int8_t PWMchannel)
 {
     int N = analogChannel - 1;
     
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1) || LOADCELL_ENABLED == 1)
 
     int pinValue;
     

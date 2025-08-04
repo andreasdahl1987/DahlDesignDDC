@@ -7,7 +7,7 @@ void SW1BiteRotary(int analogChannel, int fieldPlacement, int pos1, int pos2, in
 
     int maxPos = 12;
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1 || LOADCELL_ENABLED == 1)
 
     int value;
     if (analogPins[N] > 49)

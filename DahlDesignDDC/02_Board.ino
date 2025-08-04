@@ -101,7 +101,7 @@
 //----------LOAD CELL-----------
 //------------------------------
 
-#define LOADCELL_ENABLED 1
+#define LOADCELL_ENABLED 0
 #define LOADCELL_DATA_PIN 0
 #define LOADCELL_CLOCK_PIN 1
 #define LOADCELL_OVERSAMPLING 5

@@ -362,7 +362,7 @@ void analogMouse(int xChannel, int yChannel, int xLeft, int xMiddle, int xRight,
 
     int X = xChannel - 1;
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1 || LOADCELL_ENABLED == 1)
 
     int xValue;
     if (analogPins[X] > 49)
@@ -428,7 +428,7 @@ void analogMouse(int xChannel, int yChannel, int xLeft, int xMiddle, int xRight,
 
     int Y = yChannel - 1;
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1 || LOADCELL_ENABLED == 1)
 
     int yValue;
     if (analogPins[Y] > 49)
@@ -600,7 +600,7 @@ void dualClutchAndMouse(int masterAnalogChannel, int slaveAnalogChannel, bool th
 
     int M = masterAnalogChannel - 1;
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1 || LOADCELL_ENABLED == 1)
 
     uint16_t masterValue;
     if (analogPins[M] > 49)

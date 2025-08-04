@@ -7,7 +7,7 @@ void quickRotary1bite(int analogChannel, int fieldPlacement, int pos1, int pos2,
 
     int maxPos = 12;
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1 || LOADCELL_ENABLED == 1)
 
     int value;
     if (analogPins[N] > 49)
@@ -240,7 +240,7 @@ void quickRotary2(int analogChannel, int fieldPlacement, int pos1, int pos2, int
 
     int maxPos = 12;
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1 || LOADCELL_ENABLED == 1)
 
     int value;
     if (analogPins[N] > 49)
@@ -390,7 +390,7 @@ void quickRotary3(int analogChannel, int fieldPlacement, int pos1, int pos2, int
 
     int maxPos = 12;
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1 || LOADCELL_ENABLED == 1)
 
     int value;
     if (analogPins[N] > 49)
@@ -540,7 +540,7 @@ void quickRotary4(int analogChannel, int fieldPlacement, int pos1, int pos2, int
 
     int maxPos = 12;
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1 || LOADCELL_ENABLED == 1)
 
     int value;
     if (analogPins[N] > 49)

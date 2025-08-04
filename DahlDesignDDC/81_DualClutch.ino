@@ -6,7 +6,7 @@ void dualClutch(int masterAnalogChannel, int masterReleasedValue, int masterFull
 
     int M = masterAnalogChannel - 1;
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1  || ENABLE_OVERSAMPLING == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1  || ENABLE_OVERSAMPLING == 1 || LOADCELL_ENABLED == 1)
 
     int masterValue;
     if (analogPins[M] > 49)
@@ -308,7 +308,7 @@ void filteredDualClutch(int masterAnalogChannel, int masterReleasedValue, int ma
     
     int M = masterAnalogChannel - 1;
     
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1  || ENABLE_OVERSAMPLING == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1  || ENABLE_OVERSAMPLING == 1 || LOADCELL_ENABLED == 1)
 
     int masterRaw;
     if (analogPins[M] > 49)
@@ -602,7 +602,7 @@ void dualClutchCal(int masterAnalogChannel, int slaveAnalogChannel, bool throttl
 
     int M = masterAnalogChannel - 1;
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1 || LOADCELL_ENABLED == 1)
 
     uint16_t masterValue;
     if (analogPins[M] > 49)

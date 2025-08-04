@@ -2,7 +2,7 @@ void throttle(int analogChannel, int releasedValue, int fullyPressedValue)
 {
     int N = analogChannel - 1;
   
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1 || LOADCELL_ENABLED == 1)
 
     int pinValue;
     if (analogPins[N] > 49)
@@ -73,7 +73,7 @@ void filteredThrottle(int8_t analogChannel, int releasedValue, int fullyPressedV
 {
     int N = analogChannel - 1;
   
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1 || LOADCELL_ENABLED == 1)
 
     int raw;
     if (analogPins[N] > 49)

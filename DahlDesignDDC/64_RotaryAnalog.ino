@@ -14,7 +14,7 @@ void rotaryAnalog(int analogChannel, int fieldPlacement, int hybridPositions, in
 
     int maxPos = max(12, HyPos);
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1 || LOADCELL_ENABLED == 1)
 
     int value;
     if (analogPins[N] > 49)
@@ -224,7 +224,7 @@ void rotaryAnalogPartial(int analogChannel, int muteStart, int muteEnd, int pos1
 
     int Number = analogButtonNumber[N];
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1 || LOADCELL_ENABLED == 1)
 
     int value;
     if (analogPins[N] > 49)
@@ -310,7 +310,7 @@ void rotaryAnalogSimple(int analogChannel, int pos1, int pos2, int pos3, int pos
 
     int Number = analogButtonNumber[N];
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1 || LOADCELL_ENABLED == 1)
 
     int value;
     if (analogPins[N] > 49)
@@ -394,7 +394,7 @@ void rotaryAnalogMute(int analogChannel, int pos1, int pos2, int pos3, int pos4,
 {
     int N = analogChannel - 1;
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1 || LOADCELL_ENABLED == 1)
 
     int value;
     if (analogPins[N] > 49)
@@ -458,7 +458,7 @@ void rotaryAnalogBrightness(int analogChannel, int startBrightness, int endBrigh
 {
     int N = analogChannel - 1;
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1 || LOADCELL_ENABLED == 1)
 
     int value;
     if (analogPins[N] > 49)
@@ -526,7 +526,7 @@ void rotaryAnalogBrightness12(int analogChannel, int pos1, int pos2, int pos3, i
 
     int Number = analogButtonNumber[N];
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1 || LOADCELL_ENABLED == 1)
 
     int value;
     if (analogPins[N] > 49)
@@ -643,7 +643,7 @@ void rotaryAnalog2Mode(int analogChannel, int fieldPlacement, int pos1, int pos2
     int maxPos = 12;
 
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1 || LOADCELL_ENABLED == 1)
 
     int value;
     if (analogPins[N] > 49)
@@ -785,7 +785,7 @@ void rotaryAnalogBite(int analogChannel, int fieldPlacement, int pos1, int pos2,
     int maxPos = 12;
 
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1 || LOADCELL_ENABLED == 1)
 
     int value;
     if (analogPins[N] > 49)
@@ -1016,7 +1016,7 @@ void DDSanalog(int analogChannel, int pos1, int pos2, int pos3, int pos4, int po
         Number = Number + 12;
     }
 
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1 || LOADCELL_ENABLED == 1)
 
     int value;
     if (analogPins[N] > 49)
@@ -1330,7 +1330,7 @@ void rotaryAnalog2ModeShort(int analogChannel, int fieldPlacement, bool reverse)
 
     int maxPos = 12;
     
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1 || LOADCELL_ENABLED == 1)
 
     int value;
     int positions[12] = { 8, 100, 192, 285, 377, 469, 562, 654, 746, 838, 930, 1023 };

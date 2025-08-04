@@ -72,7 +72,7 @@ void filteredBrake(int8_t analogChannel, int releasedValue, int fullyPressedValu
 {
     int N = analogChannel - 1;
   
-    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1)
+    #if(USING_ADS1115 == 1 || USING_CB1 == 1 || ENABLE_OVERSAMPLING == 1 || LOADCELL_ENABLED == 1)
 
     int raw;
     if (analogPins[N] > 49)
