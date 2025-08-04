@@ -27,7 +27,7 @@ You can also use an [online calculator](https://ledcalculator.net/) to find the 
 
 ### Microcontroller wiring
 
-<figure><img src="../.gitbook/assets/image (4) (1) (1).png" alt="" width="347"><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (4) (1) (1) (1).png" alt="" width="347"><figcaption></figcaption></figure>
 
 Here we're wiring 5 red LEDs directly to our microcontroller.&#x20;
 
@@ -43,7 +43,7 @@ DDC allows you to use up to **16 microcontroller pins** as output pins, more on 
 
 ### Port expander wiring
 
-<figure><img src="../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (9) (1).png" alt=""><figcaption></figcaption></figure>
 
 Here we have 16 LEDs wired to our PCA9555 port expander. They're wired exactly like the example above with the microcontroller. Resistor size is calculated the same way.&#x20;
 

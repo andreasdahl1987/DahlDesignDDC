@@ -1,10 +1,10 @@
 # RGB LED
 
-The LEDs supported are the ones supported by the [Adafruit Neopixel library. ](https://github.com/adafruit/Adafruit\_NeoPixel) Most commonly used are WS2812, also knows as Neopixel.&#x20;
+The LEDs supported are the ones supported by the [Adafruit Neopixel library. ](https://github.com/adafruit/Adafruit_NeoPixel) Most commonly used are WS2812, also knows as Neopixel.&#x20;
 
 Common for adressable RGB LEDs is that you daisy-chain them. Each LED needs power, ground and a signal in. If the chain is going to continue, you pass the signal on from this LED to the next.
 
-<figure><img src="../.gitbook/assets/image (8) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (8) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 It is common to add a 100 nF capacitor between VCC and GND next to each LED, but it is not needed for all types of LEDs. Some of them have them built-in, **check the datasheet for the LEDs you're using.** It is also common to add a small resistor on the data line.&#x20;
 

@@ -21,6 +21,10 @@ This is a popular chip, and its selling point is its accuracy - with 16-bit reso
 
 A big effort has gone into optimizing the readouts from this ADC. The existing, popular libraries for this IC are extremely slow and memory heavy - making them not suited for DDC. Instead I've made my own algorithms, which are a lot more efficient in both processing and memory usage.&#x20;
 
+### HX711
+
+Dedicated strain gauge load cell amplifier and 24-bit ADC, covered under the load cell chapters in this manual.&#x20;
+
 
 
 

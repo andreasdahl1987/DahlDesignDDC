@@ -8,7 +8,7 @@ The bite point can be adjusted in many ways:
 * A [biteButton()](../function-button.md#bitebutton) with a supported rotary switch or encoder function
 * Using a [bitePot()](bite-point-and-launch.md)&#x20;
 * Using [presets](../../3.-coding/advanced/presets/).
-* \++
+* ++
 
 Clutches use the joystick X axis. The bite point is shown by the RY axis.&#x20;
 
@@ -65,6 +65,8 @@ A dual paddle clutch system. Has 4 modes:
 Changing modes are done by holding the modButton and pressing either paddle all the way in and releasing. If this doesnt work, it is a good indication that your clutch doesnt reach a stable 100% or rest at a stable 0% - which means you should adjust your values.&#x20;
 
 The function defaults to bits 13 and 14 in the rotary field. Will be returned by SimHub as property \[DahlDesign.DDCclutchMode].
+
+_With dualClutchCal() you'll need to set up a clutchCalibrate() button._
 {% endtab %}
 
 {% tab title="Example" %}

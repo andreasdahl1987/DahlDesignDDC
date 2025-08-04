@@ -10,4 +10,4 @@ The hub will constantly check if its output slots have had any value change, and
 
 In many ways this is similar to the [switch table](../../../1.-project-planning/switch-inputs/matrix.md). You explain your wiring to the firmware, which in return gives you a framework to control and manipulate the devices you've wired.&#x20;
 
-<figure><img src="../../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (3) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>

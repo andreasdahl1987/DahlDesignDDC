@@ -30,5 +30,5 @@ Using flash memory as EEPROM works fine for a DIY project, but this is not idea 
 
 DDC supports adding EEPROM in the shape of a I2C device called CAT24C512. Since it runs on I2C protocol, it will need to use the SCL and SDA pin on your microcontroller. More on this in the [wiring ](../2.-wiring/eeprom.md)section.
 
-<figure><img src="../.gitbook/assets/image (7) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (7) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 

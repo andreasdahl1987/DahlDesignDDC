@@ -26,7 +26,7 @@ Standard 12 MHz crystal and capacitor size calculated from crystal's load capaci
 
 USB in can arrive through the micro connector (USB\_MAIN) or through 4 wire holes (USB\_IN). The data lines go through a filter (L1) and an ESD protection device (ESD), which also has a transient voltage suppression diode for the VBUS. Resistors R17, R18, R24 and R25 are not supposed to  be assembled, but are pads for the option to bypass these filters. The filters are great, but in case of poor/long wires you might experience signal deterioration - and in that case you could bypass the filters, which also deteriorate the signal a bit. Just a "nice to have".&#x20;
 
-<figure><img src="../.gitbook/assets/image (11) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (11) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 UP\_+ and UP\_- arrives at the USB hub, which is a USB2514 from Microchip. This is a circuit largely built on the recommended setup from the datasheet, and has been built and tested by Serkan from [Soelpec](https://soelpec.com/), who uses this in his products. The circuit is a copy of his well-proven design, which has shown itself superior to the standard FE1.1s and SL2.1a hubs you'll see in DIY projects. It should be more stable and give better results with USB screens with less tearing because it is an MTT hub.&#x20;
 
@@ -46,7 +46,7 @@ This circuit design was made and tested by Dan Suzuki before I implemented it an
 
 The jumper J1 should be open if using VIN to avoid backwards current on USB.&#x20;
 
-<figure><img src="../.gitbook/assets/image (5) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (5) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 We're using a AMS1117 drop-down converter to produce a stable 3.3V line which powers all the ICs in this design. Overall it is very low current on the 3.3V line, so a drop-down converter is fine, and will generate litte heat. **It is rated for 1A.** Screens and LEDs will all be on 5V.&#x20;
 

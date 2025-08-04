@@ -14,23 +14,23 @@ Lets start with a simple analog circuit using a 9V battery, an LED and a resisto
 
 The resistor is there to limit the current through the LED. Without it the current would be too high and the LED will burn out. A bigger resistor will make the LED less bright, and an even bigger resistor will prevent the LED from lighting up at all. Typically you'll find the resistor that lights up the LED as bright as you need it to be; trial and error. Now, lets add the PWM control:
 
-<figure><img src="../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (7) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 We added a transistor (BJT, or bipolar junction transistor) to the circuit, a 2N2222, which is a very common transistor that can handle up to 800 mA, enough for most DIY applications. It has 3 pins, the **BASE**, the **COLLECTOR** and the **EMITTER.** The deal is, depending on the current applied at the **BASE,** the path from **COLLECTOR** to **EMITTER** is everything from completely closed to completely open. And the current needed to fully open the transistor is very low, so we can easily control it with PWM. Infact, we need to limit the current of our PWM line, using a sizable resistor R2. 1000 ohm works well for a 2N2222, other transistors might need other values. Here we are using pin 16 from a Pico board.&#x20;
 
 We're not completely done yet. The circuit we're controlling needs to have the same reference as our microcontroller, meaning they have to share ground connection:
 
-<figure><img src="../.gitbook/assets/image (8) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (8) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Lastly, we'll add some just-in-case; a pull-down resistor on the PWM line to make sure there is no PWM signal being sent if this pin is floating (on startup or if our code has some flaws), and a diode parallel to the resistor to prevent backwards current, typically an issue you can encounter on DC motors. Make sure you put the pull-down resistor before the series resistor on the PWM line, or else you'll be making a voltage divider and wont be able to fully open the transistor.&#x20;
 
-<figure><img src="../.gitbook/assets/image (9) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (9) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### MOSFET
 
 For higher power applications, you might want to be using a MOSFET instead. Simply putting it, the MOSFET is voltage controlled, not current controlled like the BJTs, and thus uses less power and generates less heat. It is more suited for high power and high frequency circuits. The circuit with a MOSFET will look just a little bit different. The BASE is called **GATE**, the COLLECTOR is called **DRAIN** and EMITTER is called **SOURCE.** These also often have a diode included, so you don't need to add one. You also generally don't need a big resistor in series on the PWM line, but 100 ohm is good to protect the MOSFET from spikes.&#x20;
 
-<figure><img src="../.gitbook/assets/image (10) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (10) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Multiple LEDs
 
@@ -42,11 +42,11 @@ In practice however, the voltage drop across each LED is so big (roughly 1.5V to
 
 #### Parallel
 
-<figure><img src="../.gitbook/assets/image (5) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (5) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### Series
 
-<figure><img src="../.gitbook/assets/image (6) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (6) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Note the 12V power supply; 9V would not be enough to power this chain of LEDs. The value of the resistor would have to be found either by trial and error, or calculated from the LED forward voltage found in the datasheet.&#x20;
 

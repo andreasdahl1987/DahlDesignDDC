@@ -4,7 +4,7 @@
 
 {% tabs %}
 {% tab title="Description" %}
-A simple, momentary pushbutton. The button numer is the one you set in your matrix setup.
+A simple, momentary pushbutton. The button numer is the one you set in your switch table setup.
 {% endtab %}
 
 {% tab title="Example" %}
@@ -24,7 +24,7 @@ Fill in the row all the funky pins go to, the column of the one you're making th
 
 {% tabs %}
 {% tab title="Description" %}
-A simple, latching pushbutton. The button numer is the one you set in your matrix setup.
+A simple, latching pushbutton. The button numer is the one you set in your switch table setup.
 {% endtab %}
 
 {% tab title="Example" %}

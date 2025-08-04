@@ -4,7 +4,7 @@ icon: microchip
 
 # CB1
 
-<figure><img src="../.gitbook/assets/image (4) (1) (1) (1) (1).png" alt=""><figcaption><p>CB1 version 1.0</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (4) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>CB1 version 1.0</p></figcaption></figure>
 
 The Dahl Design CB1 board is an all-in-one microcontroller board designed for simple to complex projects. It is extremely compact with all its features, is flexible in layout and connectivity, and has build-in support for DDC to make it easy to set up.&#x20;
 

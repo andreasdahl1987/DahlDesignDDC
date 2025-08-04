@@ -38,6 +38,10 @@ Returns TRUE if the current bite setting mode (0 -3) is the same as you typed in
 
 This function will check a rotary switch for a given position. Give it the channel number your switch is set up on, well as a switch position. Will return TRUE if this switch is in that position, otherwise FALSE. Example: `rotaryPosition(3,9)` will check if the switch on analog channel 3 is in position 9 or not.&#x20;
 
+#### **rotary4BitPosition(int row, int column, int switchPosition)**
+
+This function will check a 4 bit absolute encoder switch for a given position. Give it the row and column your switch is set up on, well as a switch position. Will return TRUE if this switch is in that position, otherwise FALSE. Example: `rotary4BitPosition(2,1,9)` will check if the switch on row 2 column 1 is in position 9 or not.&#x20;
+
 #### **analogTravel(int analogChannel, int threshold)**
 
 Check if an analog switch has travled at least to the set threshold of its total travel. For instance, if you want something to happen when a clutch paddle is pressed completely, use its channel number and set threshold to 100(%). &#x20;

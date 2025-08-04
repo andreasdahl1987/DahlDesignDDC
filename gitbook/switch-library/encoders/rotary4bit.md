@@ -114,3 +114,25 @@ For a encoder on row 2 column 2-5 -> `rotary4Multis(2,2,2,8,12,18,true);`&#x20;
 * Two slots in the rotary field.
 {% endtab %}
 {% endtabs %}
+
+#### rotary4Mute()
+
+{% tabs %}
+{% tab title="Description" %}
+This switch will not output any button numbers, and is always in absolute encoder mode.&#x20;
+
+Can be used together with the trigger rotary4BitPosition() to make this a multi function switch, changing what other switches do depending on its position.
+{% endtab %}
+
+{% tab title="Example" %}
+`void rotary4Mute(int row, int column, int positions, bool reverse)`
+
+For a encoder on row 2 column 2-5 with 8 positions -> `rotary4Mute(2,2,8,false);`&#x20;
+
+* Reverse is set to "false". To flip the direction of rotation to increase/decrease switch position indicator, set it to true.&#x20;
+{% endtab %}
+
+{% tab title="Requirements" %}
+* None
+{% endtab %}
+{% endtabs %}

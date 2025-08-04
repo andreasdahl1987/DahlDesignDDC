@@ -27,6 +27,64 @@ Example:
 {% endtab %}
 {% endtabs %}
 
+#### PWMAdjustButton()
+
+{% tabs %}
+{% tab title="Description" %}
+Use a button to increase/decrease the volume of a PWM channel.&#x20;
+
+When holding a modButton() it will affect the PWM channel, when not it will work like a normal button.&#x20;
+{% endtab %}
+
+{% tab title="Example" %}
+`void PWMAdjustButton(int row, int column, int increment, int PWMChannel, bool loop)`
+
+Example:
+
+* A button on row 4 column 2.
+* Controlling PWM channel 3.&#x20;
+* Decreases volume by -5% on press
+* `loop` set to `true`, which means if the channel volume goes below 0 it will loop back up to 100.&#x20;
+
+`PWMAdjustButton(4, 2, -5, 3, true);`
+{% endtab %}
+
+{% tab title="Requirements" %}
+* 1 PWM channel
+* 1 button number
+* modButton
+{% endtab %}
+{% endtabs %}
+
+#### PWMAdjustButtonSolo()
+
+{% tabs %}
+{% tab title="Description" %}
+Use a button to increase/decrease the volume of a PWM channel.&#x20;
+
+This button does not output any button press.&#x20;
+{% endtab %}
+
+{% tab title="Example" %}
+`void PWMAdjustButtonSolo(int row, int column, int increment, int PWMChannel, bool loop)`
+
+Example:
+
+* A button on row 4 column 2.
+* Controlling PWM channel 3.&#x20;
+* Decreases volume by -5% on press
+* `loop` set to `true`, which means if the channel volume goes below 0 it will loop back up to 100.&#x20;
+
+`PWMAdjustButtonSolo(4, 2, -5, 3, true);`
+{% endtab %}
+
+{% tab title="Requirements" %}
+* 1 PWM channel
+{% endtab %}
+{% endtabs %}
+
+
+
 #### PWMPot()
 
 {% tabs %}

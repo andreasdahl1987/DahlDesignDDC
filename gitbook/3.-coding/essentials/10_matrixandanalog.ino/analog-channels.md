@@ -75,7 +75,7 @@ In these cases, we'll use the keyword **"ADC",** which makes all the functions f
 
 #### Oversampling
 
-When oversampling is enabled, you need to add a minimum of 4 analog channels, one for each pin (A0 - A3). Even if you're not using all 4 pins, you should still add 4 analog channels, since the process of oversampling requires some place to store the data - which would be in an analog channel. As mentioned above, we'll be using the keyword **"ADC":**
+When oversampling is enabled, you need to add a minimum of 4 analog channels, one for each pin (A0 - A3). Even if you're not using all 4 pins, you should still add 4 analog channels, since the process of oversampling requires some place to store the data - which would be in an analog channel. As mentioned above, we'll be using the keyword **"ADC" and a number that indicates the number of the analog channel.** And when oversampling the RP2040 ADC ports, they will always be directed to analog channels 1-&#x34;**:**
 
 * A0 -> ADC1
 * A1  -> ADC2
@@ -128,7 +128,7 @@ Now, if you have **enabled oversamling** as well, the first 4 channels will be r
 
 ### Reading a value
 
-A lot of the functions handeling analog switches need some reference values, these will have to be read from the switch. DDC has a function to read a value from an analog pin or an external ADC channel, `checkValue()`. If you have a pair of dual clutches on analog channels 3 and 4, just the readouts to 30\_Switches.ino like this:
+A lot of the functions handeling analog switches need some reference values, these will have to be read from the switch. DDC has a function to read a value from an analog channel, `checkValue()`. If you have a pair of dual clutches on analog channels 3 and 4,  set it up in 30\_Switches.ino like this:
 
 ```
   //--------------------------------------
@@ -166,5 +166,3 @@ A lot of the functions handeling analog switches need some reference values, the
 Upload the code and check the serial monitor for the values.&#x20;
 
 _Remember to remove `checkValue()` from your code when you're finishing the project, it can interfere a lot with the controllers communication with the computer._
-
-With all this set up, you can start using your analog channels in 30\_Switches.ino.

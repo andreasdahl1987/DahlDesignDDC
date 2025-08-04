@@ -12,7 +12,7 @@ _The LED system uses a fair bit of dynamic memory. In some cases too much for th
 
 
 
-<figure><img src="../../../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 The 5 layers will apply one after the other, the next overwriting the former.
 

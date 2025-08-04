@@ -34,7 +34,7 @@ An example:
 
 `analogInject(2, 5, 5, 242, 634, 25);`
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 In this case we're looking at a specific range in a potentiometer's rotation. The maximum and minimum values from the potmeter are 1022 and 3, respectively.  The function will place the switch on row 5 column 5, as in the top figure on this page. The values will be read from pin A1.&#x20;
 

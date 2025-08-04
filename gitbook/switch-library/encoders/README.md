@@ -69,10 +69,20 @@ These functions are for 4-bit encoders. The way they work are identical to the r
 
 All rotary4Bit() functions are for 16-position switches, but can be modified for 4-bit switches that have 8, 10 and 12 positions. With less than 16 positions, some of the 4-bit combinations are simply skipped. To go from 16 to 12 positions, the switch might skip 0100, 0010, 1110 and 0111, as an example.&#x20;
 
-The main advantage of these switches is that they are absolute, so you can label the switch on your controller. In addition, they generally have a heavier detent feel to them. The disadvantage is the space they take in the matrix; 4 blocks.&#x20;
+The main advantage of these switches is that they are absolute, so you can label the switch on your controller. In addition, they generally have a heavier detent feel to them. The disadvantage is the space they take in the switch table; 4 blocks.&#x20;
 
 Encoders:
 
 * Bourns PAC18R
 * Grayhill 26 series
 * Panasonic EVQV9
+
+### rotary3Bit
+
+These functions are for incremental encoders with 3 pins. Specifically the RS16 encoder from Dongguan Fanrui Electronic Technology, which is an incredibly good encoder with a very competitive pricing. It uses 3 pin to do the same thing as the 2 pin encoders, but with a different electromechanical design. It scrolls through logic states 001, 010 and 100 instead of 00, 10, 11 and 01. This system makes the switch very reliable, and doesn't require any software or hardware debouncing.  The obvious downside being the extra digital pin required.&#x20;
+
+While regular 2 bit encoders label the encoder pins A, B and C (common), this switch has pin labels 1, 2, 3 and C (common).&#x20;
+
+Encoders:
+
+* Fanrui RS16

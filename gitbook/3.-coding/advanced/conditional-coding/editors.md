@@ -46,3 +46,7 @@ This will set bit #4 in buttonField to 1 if the rotary switch on analog channel 
 #### sendToRotaryField(int fieldPosition, bool condition)
 
 Same as above, but to rotaryField instead of buttonField.&#x20;
+
+#### setBrightness(int brightness)
+
+Set the master volume of LED brightness for firmware LED control to a value of 1 to 100.&#x20;

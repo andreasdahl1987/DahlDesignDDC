@@ -4,7 +4,7 @@ The EEPROM IC that is supported is CAT24C512, which is cheap and has good stock 
 
 #### Power
 
-<figure><img src="../.gitbook/assets/image (10) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (10) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * First of all, this thing needs power and ground connection, as well as a 100 nF decoupling cap.&#x20;
 * It can be powered with 1.8 - 5.5 V.&#x20;
@@ -21,7 +21,7 @@ The EEPROM IC that is supported is CAT24C512, which is cheap and has good stock 
 
 * The WP pin allows you to lock/unlock the IC for writing. DDC doesn't use this, the code itself has a software lock to ensure it is not being used when not needed. This pin is set to GND to leave it always open for writing.&#x20;
 
-<figure><img src="../.gitbook/assets/image (3) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (3) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### I2C Address
 

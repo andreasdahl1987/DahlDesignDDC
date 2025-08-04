@@ -12,21 +12,21 @@ When you've [uploaded](../3.-coding/upload.md) the firmware to your controller, 
 
 * Select "Create standard device"
 
-<figure><img src="../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
 
 * Select standard LED device
 
-<figure><img src="../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * Go to USB PID/VID configuration, edit the controllers VID and PID and set the correct LED count. This is all your strips combined. &#x20;
 
-<figure><img src="../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * You can also rename the device and change the picture by left-clicking it.
 
 
 
-<figure><img src="../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (5) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * Reboot your controller and/or SimHub for SimHub to find it, press "Edit profile" under LEDs to start working with the RGB editor.  Remember that Arduino IDE can block SimHub from getting contact, so also close down Arduino IDE.&#x20;
 

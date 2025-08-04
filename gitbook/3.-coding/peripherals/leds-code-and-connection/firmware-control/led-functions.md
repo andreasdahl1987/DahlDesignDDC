@@ -9,7 +9,7 @@ These two alone will give you the freedom to do pretty much anything. The more t
 
 **There are specific functions that act on specific LED strips. colorLED() works on strip one. colorLED3() work on strip 3. triggerLED2() works on strip 2, etc.**&#x20;
 
-Besides from the functions included in DDC, you can address the LED strips with commands from the Neopixel library as well. The LED strips are named LED1, LED2, LED3 and LED4. See list of commands [here.](https://github.com/adafruit/Adafruit\_NeoPixel#functions)&#x20;
+Besides from the functions included in DDC, you can address the LED strips with commands from the Neopixel library as well. The LED strips are named LED1, LED2, LED3 and LED4. See list of commands [here.](https://github.com/adafruit/Adafruit_NeoPixel#functions)&#x20;
 
 #### colorLED()
 
@@ -23,9 +23,7 @@ Allows you to set the color and brightness of one or more LEDs.&#x20;
 
 To make LED 5 to 9 plain blue with a brightnes of 50%:
 
-`colorLED(5,9,0x0000FF,50);`
-
-
+`colorLED(5,9,0x0000FF,50);` or `colorLED(5,9,BLUE,50);`
 {% endtab %}
 
 {% tab title="Requirements" %}
@@ -61,9 +59,11 @@ true,  //--------Will blink
 ```
 
 * If you want the function to be always active, simply write `true` for the condition.&#x20;
-* As default, clearLEDs and blinkEnable is set to true. blinkOnTime and blinkOffTimer is set to 500 ms. If you dont fill in anything for these values, defaults will be used:
+* As default, brightness is set to 100, clearLEDs and blinkEnable is set to true. blinkOnTime and blinkOffTimer is set to 500 ms. If you dont fill in anything for these values, defaults will be used.&#x20;
 
-`triggerLED(7,10,true,0x803580, 85);`
+So in case you want LEDs 7-10 turn magenta with 100% relative brightness when modButton is pressed:&#x20;
+
+`triggerLED(7,10,modButtonPressed(),MAGENTA);`
 {% endtab %}
 
 {% tab title="Requirements" %}
@@ -147,6 +147,3 @@ true, //---------Direction reversed
 * As many LEDs as positions on your switch.
 {% endtab %}
 {% endtabs %}
-
-
-
