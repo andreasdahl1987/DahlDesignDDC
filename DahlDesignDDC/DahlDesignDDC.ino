@@ -1,13 +1,11 @@
  /*
  * Welcome to DDC!
  * 
- * The manual on GitHub wil walk you through the setup in detal: https://dahl-design.gitbook.io/ddc/
+ * The manual on GitHub wil walk you through the setup in detail: https://dahl-design.gitbook.io/ddc/
  * 
- * For a quick setup with a Pro Micro board or similar, you only need to look through tabs 02, 10 and 30. 
- * 
- * Any questions, contact me on Discord: Andreas Dahl#9514
+ * Visit the Discord server! https://discord.gg/dj3j7mwb
  * 
  * If you find this software helpful, feel free to make a donation: https://www.paypal.com/donate?hosted_button_id=GLYWGTDZNXURJ
  *
- * Dahl Design Controller © 2022 by Andreas Dahl is licensed under CC BY-NC-SA 4.0
+ * Dahl Design Controller © 2026 by Andreas Dahl (Dahl Design AS) is under MIT License (https://opensource.org/licenses/MIT)
  */

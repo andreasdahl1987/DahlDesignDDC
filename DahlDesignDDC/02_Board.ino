@@ -213,7 +213,7 @@ bool wire0Init = false;
 
 #define MAJORVERSION 2
 #define MINORVERSION 13
-#define PATCHVERSION 0
+#define PATCHVERSION 1
 
 //Load cell
 #if (LOADCELL_ENABLED == 1)

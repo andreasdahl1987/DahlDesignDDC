@@ -26,15 +26,14 @@
     <a href="https://github.com/andreasdahl1987/DahlDesignDDC">DDC</a>
   </p>
 </div>
-  <h5 align="center">Welcome to the repository!  <br /> I highly recommend checking out the manual.</h5>
- <h2 <p align="center"> <a href=http://dahl-design.gitbook.io/ddc/>MANUAL</a>
-</h2>
+<h4 align="left">License</h4>
 
- <h4 <p align="left"> Non-Commercial License <br /> </h4>
- <h5 <p align="left"> This project is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License. To view a copy of this license, visit [http://creativecommons.org/licenses/by-nc/4.0/](http://creativecommons.org/licenses/by-nc/4.0/).</h5>
-
- <h4 <p align="left"> Commercial License <br /> </h4>
- <h5 <p align="left">  <a href="https://soelpec.com">SOELPEC</a> has been granted exclusive commercial rights to use this firmware.</h5>
+<h5 align="left">
+This project is released under the MIT License.<br />
+Permission is granted to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of this firmware.<br />
+The only requirement is that the original copyright notice and license text are included in all copies or substantial portions of the software.<br />
+See the <b>LICENSE</b> file for details.
+</h5>
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
