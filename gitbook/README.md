@@ -18,7 +18,7 @@ Please join the [Discord server!](https://discord.com/invite/49btqWNmCc)
 
 
 
-**DDC is not for commercial use**.
+**DDC is open to use for commercial products.**&#x20;
 
 
 
