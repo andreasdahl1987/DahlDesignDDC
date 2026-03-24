@@ -26,6 +26,12 @@
     <a href="https://github.com/andreasdahl1987/DahlDesignDDC">DDC</a>
   </p>
 </div>
+
+
+<h5 align="center">Welcome to the repository!  <br /> <br />  I highly recommend checking out the manual.</h5>
+<h2 <p align="center"> <a href=http://dahl-design.gitbook.io/ddc/>MANUAL</a>
+</h2>
+    
 <h4 align="left">License</h4>
 
 <h5 align="left">
